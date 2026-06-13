@@ -1,0 +1,508 @@
+erDiagram
+    Asset {
+        BIGINT assetId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) assetUniqueCode
+        VARCHAR(200) assetNameAr
+        VARCHAR(200) assetNameEn
+        VARCHAR(200) assetTag
+        INT serialNumber
+        INT modelNumber
+        VARCHAR more__fields "+31 fields"
+    }
+    AssetCategory {
+        BIGINT categoryId "PK"
+        BIGINT schoolId "FK"
+        BIGINT parentCategoryId "FK"
+        VARCHAR(50) categoryCode
+        VARCHAR(50) categoryNameAr
+        VARCHAR(50) categoryNameEn
+        VARCHAR(50) categoryLevel
+        VARCHAR(200) fullPath
+        VARCHAR more__fields "+16 fields"
+    }
+    AssetLocation {
+        BIGINT locationId "PK"
+        BIGINT schoolId "FK"
+        BIGINT parentLocationId "FK"
+        VARCHAR(50) locationCode
+        VARCHAR(200) locationNameAr
+        VARCHAR(200) locationNameEn
+        VARCHAR(50) locationType
+        VARCHAR(200) buildingName
+        VARCHAR more__fields "+17 fields"
+    }
+    AssetStatus {
+        BIGINT statusId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) statusCode
+        VARCHAR(50) statusNameAr
+        VARCHAR(50) statusNameEn
+        VARCHAR(50) statusType
+        BOOLEAN isOperational
+        BOOLEAN isAvailableForAssignment
+        VARCHAR more__fields "+13 fields"
+    }
+    AssetWarrantyContract {
+        BIGINT contractId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) contractType
+        INT contractNumber
+        VARCHAR(200) contractName
+        VARCHAR(200) providerName
+        VARCHAR(20) providerContact
+        DATE startDate
+        VARCHAR more__fields "+20 fields"
+    }
+    AssetDocument {
+        BIGINT documentId "PK"
+        BIGINT assetId "FK"
+        BIGINT contractId "FK"
+        VARCHAR(50) docType
+        VARCHAR(50) docCode
+        VARCHAR(200) docName
+        TEXT description
+        VARCHAR(200) fileName
+        VARCHAR more__fields "+12 fields"
+    }
+    AssetRequirementRequest {
+        BIGINT requestId "PK"
+        BIGINT schoolId "FK"
+        INT requestNumber
+        VARCHAR(50) requestType
+        VARCHAR(50) assetType
+        BIGINT assetCategoryId "FK"
+        INT quantity
+        DECIMAL(15,2) estimatedUnitCost
+        VARCHAR more__fields "+28 fields"
+    }
+    TechnicalSpecifications {
+        BIGINT specId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) specCode
+        VARCHAR(200) specNameAr
+        VARCHAR(200) specNameEn
+        BIGINT assetCategoryId "FK"
+        VARCHAR(50) assetType
+        TEXT technicalDetails
+        VARCHAR more__fields "+18 fields"
+    }
+    FeasibilityRiskAnalysis {
+        BIGINT analysisId "PK"
+        BIGINT schoolId "FK"
+        BIGINT requestId "FK"
+        INT analysisNumber
+        DATE analysisDate
+        BIGINT analystUserId "FK"
+        TEXT operationalRisks
+        TEXT financialRisks
+        VARCHAR more__fields "+20 fields"
+    }
+    AssetBudgetAllocation {
+        BIGINT allocationId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) fiscalYear
+        VARCHAR(50) budgetType
+        BIGINT assetCategoryId "FK"
+        BIGINT departmentId "FK"
+        DECIMAL(15,2) allocatedAmount
+        DECIMAL(15,2) spentAmount
+        VARCHAR more__fields "+9 fields"
+    }
+    PurchaseOrders {
+        BIGINT purchaseOrderId "PK"
+        BIGINT schoolId "FK"
+        INT poNumber
+        DATE poDate
+        BIGINT requestId "FK"
+        VARCHAR(200) supplierName
+        VARCHAR(200) supplierContact
+        VARCHAR(200) supplierAddress
+        VARCHAR more__fields "+21 fields"
+    }
+    AssetReceiving {
+        BIGINT receivingId "PK"
+        BIGINT schoolId "FK"
+        BIGINT purchaseOrderId "FK"
+        INT receivingNumber
+        DATE receivedDate
+        BIGINT receivedByUserId "FK"
+        BIGINT inspectorUserId "FK"
+        INT deliveryNoteNumber
+        VARCHAR more__fields "+22 fields"
+    }
+    AssetUsageLog {
+        BIGINT usageLogId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) usageType
+        DATETIME startDateTime
+        DATETIME endDateTime
+        DATETIME durationMinutes
+        VARCHAR(200) purpose
+        VARCHAR more__fields "+11 fields"
+    }
+    MaintenanceTickets {
+        BIGINT ticketId "PK"
+        BIGINT schoolId "FK"
+        INT ticketNumber
+        BIGINT assetId "FK"
+        BIGINT reportedByUserId "FK"
+        DATETIME reportDate
+        BOOLEAN issueType
+        VARCHAR(50) severityLevel
+        VARCHAR more__fields "+24 fields"
+    }
+    PreventiveMaintenanceSchedule {
+        BIGINT scheduleId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) scheduleCode
+        BIGINT assetId "FK"
+        BIGINT assetCategoryId "FK"
+        VARCHAR(200) taskNameAr
+        VARCHAR(200) taskNameEn
+        VARCHAR(50) maintenanceType
+        VARCHAR more__fields "+21 fields"
+    }
+    MaintenanceExecution {
+        BIGINT executionId "PK"
+        BIGINT schoolId "FK"
+        INT executionNumber
+        BIGINT ticketId "FK"
+        BIGINT scheduleId "FK"
+        BIGINT assetId "FK"
+        VARCHAR(50) executionType
+        DATE startDateTime
+        VARCHAR more__fields "+16 fields"
+    }
+    MaintenanceSpareParts {
+        BIGINT partId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) partCode
+        VARCHAR(200) partNameAr
+        VARCHAR(200) partNameEn
+        VARCHAR(50) partCategory
+        VARCHAR(200) manufacturer
+        VARCHAR(200) compatibleAssets
+        VARCHAR more__fields "+19 fields"
+    }
+    AssetSuspensionRequests {
+        BIGINT suspensionId "PK"
+        BIGINT schoolId "FK"
+        INT requestNumber
+        BIGINT assetId "FK"
+        BIGINT requestedByUserId "FK"
+        DATE requestDate
+        VARCHAR(200) reason
+        TEXT reasonDetails
+        VARCHAR more__fields "+20 fields"
+    }
+    MaintenanceNotifications {
+        BIGINT notificationId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) relatedEntityType
+        BIGINT relatedEntityId "FK"
+        VARCHAR(50) notificationType
+        VARCHAR(200) title
+        VARCHAR(200) messageContent
+        BIGINT recipientUserId "FK"
+        VARCHAR more__fields "+11 fields"
+    }
+    UsageViolations {
+        BIGINT violationId "PK"
+        BIGINT schoolId "FK"
+        BIGINT assetId "FK"
+        VARCHAR(50) violationType
+        DATE violationDate
+        BIGINT reportedByUserId "FK"
+        DATE reportedDate
+        BIGINT violatingUserId "FK"
+        VARCHAR more__fields "+16 fields"
+    }
+    AssetFinancials {
+        BIGINT financialsId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        DECIMAL(15,2) purchasePrice
+        DECIMAL(15,2) shippingCosts
+        DECIMAL(15,2) customsFees
+        DECIMAL(15,2) installationCosts
+        DECIMAL(15,2) otherCosts
+        VARCHAR more__fields "+12 fields"
+    }
+    AssetDepreciation {
+        BIGINT depreciationId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) methodType
+        VARCHAR(200) usefulLifeYears
+        VARCHAR(200) usefulLifeUnits
+        DECIMAL(5,2) depreciationRate
+        VARCHAR(200) currentBookValue
+        VARCHAR more__fields "+12 fields"
+    }
+    DepreciationTransactions {
+        BIGINT transactionId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        BIGINT depreciationId "FK"
+        VARCHAR(200) periodStart
+        VARCHAR(200) periodEnd
+        VARCHAR(50) periodType
+        VARCHAR(200) fiscalYear
+        VARCHAR more__fields "+13 fields"
+    }
+    RevaluationImpairment {
+        BIGINT revaluationId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) type
+        DATE effectiveDate
+        VARCHAR(200) oldBookValue
+        VARCHAR(200) oldAccumulatedDepreciation
+        VARCHAR(200) oldNetBookValue
+        VARCHAR more__fields "+20 fields"
+    }
+    AssetExpenses {
+        BIGINT expenseId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) expenseType
+        DATE expenseDate
+        DECIMAL(15,2) amount
+        VARCHAR(200) currency
+        TEXT description
+        VARCHAR more__fields "+13 fields"
+    }
+    FeasibilityComparison {
+        BIGINT comparisonId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        DATE comparisonDate
+        DECIMAL(15,2) repairEstimate
+        DECIMAL(15,2) repairEstimateBreakdown
+        BIGINT replacementAssetId "FK"
+        DECIMAL(15,2) replacementCost
+        VARCHAR more__fields "+13 fields"
+    }
+    FinancialAuditArchive {
+        BIGINT archiveId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) reportType
+        VARCHAR(200) fiscalYear
+        VARCHAR(200) periodStart
+        VARCHAR(200) periodEnd
+        DATE generationDate
+        DATE archivedDate
+        VARCHAR more__fields "+8 fields"
+    }
+    FinancialSummaryReports {
+        BIGINT summaryId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) fiscalYear
+        DATE reportDate
+        VARCHAR(50) reportType
+        BIGINT assetCategoryId "FK"
+        VARCHAR(200) totalBookValue
+        VARCHAR(200) totalDepreciation
+        VARCHAR more__fields "+17 fields"
+    }
+    AssetAssignment {
+        BIGINT assignmentId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) assigneeType
+        BIGINT assigneeId "FK"
+        VARCHAR(200) assigneeName
+        BIGINT assignerUserId "FK"
+        DATE assignmentDate
+        VARCHAR more__fields "+21 fields"
+    }
+    AssetLoans {
+        BIGINT loanId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) borrowerType
+        BIGINT borrowerId "FK"
+        VARCHAR(200) borrowerName
+        VARCHAR(20) borrowerContact
+        DATE loanDate
+        VARCHAR more__fields "+18 fields"
+    }
+    AssetTransferRequests {
+        BIGINT transferRequestId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        INT requestNumber
+        VARCHAR(50) fromEntityType
+        BIGINT fromEntityId "FK"
+        VARCHAR(50) toEntityType
+        BIGINT toEntityId "FK"
+        VARCHAR more__fields "+18 fields"
+    }
+    AssetInspectionLog {
+        BIGINT inspectionId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) relatedTransactionType
+        BIGINT relatedTransactionId "FK"
+        VARCHAR(50) inspectionType
+        DATE inspectionDate
+        BIGINT inspectorUserId "FK"
+        VARCHAR more__fields "+14 fields"
+    }
+    AssetMovementHistory {
+        BIGINT historyId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) actionType
+        TEXT actionDescription
+        VARCHAR(200) oldValue
+        VARCHAR(200) newValue
+        VARCHAR(50) relatedEntityType
+        VARCHAR more__fields "+6 fields"
+    }
+    LoanTrackingAlerts {
+        BIGINT alertId "PK"
+        BIGINT loanId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) alertType
+        DATE alertDate
+        VARCHAR(200) alertMessage
+        VARCHAR(100) deliveryMethod
+        BOOLEAN isSent
+        VARCHAR more__fields "+9 fields"
+    }
+    InventoryPlans {
+        BIGINT planId "PK"
+        BIGINT schoolId "FK"
+        INT planNumber
+        VARCHAR(200) planName
+        VARCHAR(50) inventoryType
+        VARCHAR(50) scopeType
+        VARCHAR(200) scopeValue
+        DATE startDate
+        VARCHAR more__fields "+13 fields"
+    }
+    FieldInventoryLog {
+        BIGINT logId "PK"
+        BIGINT planId "FK"
+        BIGINT schoolId "FK"
+        BIGINT scannerUserId "FK"
+        DATE scanTimestamp
+        VARCHAR(50) scannedCode
+        BIGINT assetId "FK"
+        VARCHAR(200) physicalLocation "FK"
+        VARCHAR more__fields "+13 fields"
+    }
+    InventoryReconciliation {
+        BIGINT reconciliationId "PK"
+        BIGINT planId "FK"
+        BIGINT schoolId "FK"
+        BIGINT assetId "FK"
+        VARCHAR(50) discrepancyType
+        BIGINT systemLocationId "FK"
+        BIGINT actualLocationId "FK"
+        VARCHAR(200) systemCondition
+        VARCHAR more__fields "+16 fields"
+    }
+    ComplianceAudit {
+        BIGINT auditId "PK"
+        BIGINT schoolId "FK"
+        INT auditNumber
+        DATE auditDate
+        VARCHAR(50) auditType
+        VARCHAR(50) standardType
+        VARCHAR(200) standardVersion
+        BIGINT auditedByUserId "FK"
+        VARCHAR more__fields "+18 fields"
+    }
+    FinalApprovalAudit {
+        BIGINT finalApprovalId "PK"
+        BIGINT schoolId "FK"
+        BIGINT planId "FK"
+        BIGINT auditId "FK"
+        VARCHAR(50) approvalType
+        DATE approvalDate
+        BIGINT approvedByUserId "FK"
+        VARCHAR(200) approvalDocPath
+        VARCHAR more__fields "+10 fields"
+    }
+    FacilityDepartmentAssignment {
+        BIGINT assignmentId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) facilityType
+        BIGINT facilityId "FK"
+        BIGINT departmentId "FK"
+        BIGINT responsibleUserId "FK"
+        VARCHAR(50) assignmentType
+        DATE startDate
+        VARCHAR more__fields "+12 fields"
+    }
+    EducationalConsumablesTracking {
+        BIGINT consumptionId "PK"
+        BIGINT schoolId "FK"
+        BIGINT consumableId "FK"
+        VARCHAR(200) consumableName
+        VARCHAR(50) consumableCode
+        VARCHAR(50) category
+        INT quantityConsumed
+        VARCHAR(200) unitOfMeasure
+        VARCHAR more__fields "+15 fields"
+    }
+    AssetCategory ||--o{ Asset : "assetCategoryId"
+    AssetStatus ||--o{ Asset : "assetStatusId"
+    AssetLocation ||--o{ Asset : "assetLocationId"
+    PurchaseOrders ||--o{ Asset : "purchaseOrderReference"
+    AssetWarrantyContract ||--o{ Asset : "warrantyContractId"
+    AssetCategory ||--o{ AssetCategory : "parentCategoryId"
+    AssetLocation ||--o{ AssetLocation : "parentLocationId"
+    Asset ||--o{ AssetDocument : "assetId"
+    AssetWarrantyContract ||--o{ AssetDocument : "contractId"
+    AssetCategory ||--o{ AssetRequirementRequest : "assetCategoryId"
+    Asset ||--o{ AssetRequirementRequest : "assetToReplaceId"
+    PurchaseOrders ||--o{ AssetRequirementRequest : "purchaseOrderId"
+    AssetCategory ||--o{ TechnicalSpecifications : "assetCategoryId"
+    AssetRequirementRequest ||--o{ FeasibilityRiskAnalysis : "requestId"
+    AssetCategory ||--o{ AssetBudgetAllocation : "assetCategoryId"
+    AssetRequirementRequest ||--o{ PurchaseOrders : "requestId"
+    AssetBudgetAllocation ||--o{ PurchaseOrders : "budgetAllocationId"
+    PurchaseOrders ||--o{ AssetReceiving : "purchaseOrderId"
+    Asset ||--o{ AssetUsageLog : "assetId"
+    AssetLocation ||--o{ AssetUsageLog : "locationId"
+    Asset ||--o{ MaintenanceTickets : "assetId"
+    AssetLocation ||--o{ MaintenanceTickets : "reportedLocation"
+    MaintenanceExecution ||--o{ MaintenanceTickets : "relatedExecutionId"
+    Asset ||--o{ PreventiveMaintenanceSchedule : "assetId"
+    AssetCategory ||--o{ PreventiveMaintenanceSchedule : "assetCategoryId"
+    AssetWarrantyContract ||--o{ PreventiveMaintenanceSchedule : "contractId"
+    MaintenanceTickets ||--o{ MaintenanceExecution : "ticketId"
+    PreventiveMaintenanceSchedule ||--o{ MaintenanceExecution : "scheduleId"
+    Asset ||--o{ MaintenanceExecution : "assetId"
+    AssetStatus ||--o{ MaintenanceExecution : "newAssetStatusId"
+    Asset ||--o{ AssetSuspensionRequests : "assetId"
+    Asset ||--o{ UsageViolations : "assetId"
+    Asset ||--o{ AssetFinancials : "assetId"
+    Asset ||--o{ AssetDepreciation : "assetId"
+    Asset ||--o{ DepreciationTransactions : "assetId"
+    AssetDepreciation ||--o{ DepreciationTransactions : "depreciationId"
+    Asset ||--o{ RevaluationImpairment : "assetId"
+    Asset ||--o{ AssetExpenses : "assetId"
+    MaintenanceExecution ||--o{ AssetExpenses : "relatedExecutionId"
+    Asset ||--o{ FeasibilityComparison : "assetId"
+    Asset ||--o{ FeasibilityComparison : "replacementAssetId"
+    AssetCategory ||--o{ FinancialSummaryReports : "assetCategoryId"
+    Asset ||--o{ AssetAssignment : "assetId"
+    Asset ||--o{ AssetLoans : "assetId"
+    Asset ||--o{ AssetTransferRequests : "assetId"
+    Asset ||--o{ AssetInspectionLog : "assetId"
+    Asset ||--o{ AssetMovementHistory : "assetId"
+    AssetLoans ||--o{ LoanTrackingAlerts : "loanId"
+    UsageViolations ||--o{ LoanTrackingAlerts : "violationId"
+    InventoryPlans ||--o{ FieldInventoryLog : "planId"
+    Asset ||--o{ FieldInventoryLog : "assetId"
+    AssetLocation ||--o{ FieldInventoryLog : "physicalLocation"
+    InventoryPlans ||--o{ InventoryReconciliation : "planId"
+    Asset ||--o{ InventoryReconciliation : "assetId"
+    InventoryPlans ||--o{ FinalApprovalAudit : "planId"
+    ComplianceAudit ||--o{ FinalApprovalAudit : "auditId"

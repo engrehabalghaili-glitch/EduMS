@@ -1,0 +1,22 @@
+sequenceDiagram
+    actor OF
+    participant API
+    participant DB
+    participant TASK as Tasks Engine
+    actor SA
+    actor EMP as الموظف المعني
+    
+    OF->>API: نشر تعميم + مهلة
+    API->>DB: INSERT ReceivedCircular
+    API->>SA: إشعار
+    SA->>API: تسجيل + التوزيع
+    API->>DB: INSERT CircularsInternalDistribution
+    API->>TASK: توليد مهام
+    TASK->>EMP: إشعار مهمة
+    EMP->>API: تنفيذ + إثبات
+    API->>DB: UPDATE CircularsImplementationStatus
+    SA->>API: رفع الإفادة
+    API->>DB: INSERT CircularsImplementationReports
+    API->>OF: إخطار
+    OF->>API: قبول
+    API->>DB: UPDATE status='Closed'

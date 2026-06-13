@@ -1,0 +1,24 @@
+sequenceDiagram
+    actor PR as موظف المشتريات
+    participant UI
+    participant API
+    participant DB
+    participant BC as Barcode Service
+    participant PRT as Printer
+    
+    PR->>UI: استلام من المورد
+    UI->>API: POST /assets {type, source}
+    API->>DB: INSERT Asset(Inactive)
+    DB-->>API: AST-0001
+    API->>BC: توليد QR Code
+    BC-->>API: PNG URL
+    API->>DB: UPDATE Asset.barcode_url
+    API-->>UI: assetId + barcode
+    PR->>UI: طباعة
+    UI->>PRT: PRINT
+    PR->>UI: ربط بالغرفة/القسم
+    UI->>API: PUT /assets/{id}
+    API->>DB: UPDATE + INSERT MovementHistory
+    PR->>UI: تفعيل
+    UI->>API: POST /assets/{id}/activate
+    API->>DB: UPDATE status='Active'

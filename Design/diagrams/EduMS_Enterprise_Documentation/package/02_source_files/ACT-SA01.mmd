@@ -1,0 +1,27 @@
+flowchart TD
+    Start([بدء العام]) --> D[إعداد مسودة]
+    D --> Fork{{Fork}}
+    Fork --> P1[خطة أكاديمية]
+    Fork --> P2[خطة إدارية]
+    Fork --> P3[خطة مالية]
+    Fork --> P4[خطة أنشطة]
+    P1 --> Join{{Join}}
+    P2 --> Join
+    P3 --> Join
+    P4 --> Join
+    Join --> Cons[توحيد الخطة]
+    Cons --> Rev[مراجعة داخلية]
+    Rev --> CI{موافقة المجلس؟}
+    CI -- لا --> D
+    CI -- نعم --> Sub[رفع للمكتب]
+    Sub --> OR[مراجعة المكتب]
+    OR --> Dec{قرار}
+    Dec -- اعتماد --> AP[معتمدة]
+    Dec -- تعديل --> Mod[ملاحظات]
+    Mod --> D
+    Dec -- رفض --> Rej[رفض نهائي]
+    AP --> Pub[نشر داخلي]
+    Pub --> Track[متابعة دورية]
+    Track --> Eval[تقييم نهاية العام]
+    Eval --> End([انتهاء])
+    Rej --> End

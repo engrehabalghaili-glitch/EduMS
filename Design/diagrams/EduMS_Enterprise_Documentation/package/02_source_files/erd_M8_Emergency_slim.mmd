@@ -1,0 +1,138 @@
+erDiagram
+    EmergencyHosting {
+        BIGINT hostingId "PK"
+        BIGINT schoolId "FK"
+        INT hostingNumber
+        VARCHAR(50) hostingType
+        DATE hostingDate
+        DATE endDate
+        DATE expectedEndDate
+        INT actualCount
+        VARCHAR more__fields "+22 fields"
+    }
+    EmergencyIncidents {
+        BIGINT incidentId "PK"
+        BIGINT schoolId "FK"
+        INT incidentNumber
+        VARCHAR(50) incidentType
+        DATE incidentDate
+        TIME incidentTime
+        VARCHAR(200) severity
+        TEXT description
+        VARCHAR more__fields "+29 fields"
+    }
+    EmergencyClosures {
+        BIGINT closureId "PK"
+        BIGINT schoolId "FK"
+        INT closureNumber
+        VARCHAR(200) closureReason
+        VARCHAR(200) authority
+        INT authorityDecisionNumber
+        DATE startDate
+        DATE endDate
+        VARCHAR more__fields "+19 fields"
+    }
+    TransportationServices {
+        BIGINT serviceId "PK"
+        BIGINT schoolId "FK"
+        BIGINT routeId "FK"
+        VARCHAR(200) routeName
+        VARCHAR(50) routeCode
+        TEXT routeDescription
+        BIGINT busId "FK"
+        INT busPlateNumber
+        VARCHAR more__fields "+26 fields"
+    }
+    SchoolMergers {
+        BIGINT mergerId "PK"
+        INT mergerNumber
+        DATE mergerDate
+        DATE effectiveDate
+        VARCHAR(200) sourceSchoolIds
+        BIGINT targetSchoolId "FK"
+        INT mergerReason
+        VARCHAR(200) decisionAuthority
+        VARCHAR more__fields "+13 fields"
+    }
+    SchoolAwards {
+        BIGINT awardId "PK"
+        BIGINT schoolId "FK"
+        INT awardNumber
+        VARCHAR(200) awardName
+        VARCHAR(50) awardCategory
+        VARCHAR(50) level
+        BOOLEAN issuingBody
+        BOOLEAN issuingBodyType
+        VARCHAR more__fields "+17 fields"
+    }
+    ExternalParticipations {
+        BIGINT participationId "PK"
+        BIGINT schoolId "FK"
+        INT participationNumber
+        VARCHAR(200) eventName
+        VARCHAR(50) eventType
+        VARCHAR(200) organizer
+        VARCHAR(50) organizerType
+        VARCHAR(200) location
+        VARCHAR more__fields "+18 fields"
+    }
+    CommunityPartnerships {
+        BIGINT partnershipId "PK"
+        BIGINT schoolId "FK"
+        INT partnershipNumber
+        VARCHAR(200) partnerName
+        VARCHAR(50) partnerType
+        VARCHAR(50) supportType
+        DATE agreementDate
+        DATE startDate
+        VARCHAR more__fields "+19 fields"
+    }
+    SafetySecurityReports {
+        BIGINT reportId "PK"
+        BIGINT schoolId "FK"
+        INT reportNumber
+        DATE reportDate
+        VARCHAR(200) reportPeriod
+        VARCHAR(50) safetyLevel
+        DATE extinguisherExp
+        INT extinguishersCount
+        VARCHAR more__fields "+29 fields"
+    }
+    SchoolDeficit {
+        BIGINT deficitId "PK"
+        BIGINT schoolId "FK"
+        INT deficitNumber
+        VARCHAR(50) deficitType
+        VARCHAR(50) deficitCategory
+        DECIMAL(15,2) deficitAmount
+        DECIMAL(15,2) requiredAmount
+        DECIMAL(15,2) availableAmount
+        VARCHAR more__fields "+21 fields"
+    }
+    SchoolSurplus {
+        BIGINT surplusId "PK"
+        BIGINT schoolId "FK"
+        INT surplusNumber
+        VARCHAR(50) surplusType
+        VARCHAR(50) surplusCategory
+        DECIMAL(15,2) surplusAmount
+        DECIMAL(15,2) availableAmount
+        DECIMAL(15,2) requiredAmount
+        VARCHAR more__fields "+20 fields"
+    }
+    RemediationPlan {
+        BIGINT planId "PK"
+        BIGINT schoolId "FK"
+        INT planNumber
+        VARCHAR(200) planName
+        BIGINT relatedDeficitId "FK"
+        BIGINT relatedSurplusId "FK"
+        VARCHAR(50) planType
+        VARCHAR(200) selectedOption
+        VARCHAR more__fields "+25 fields"
+    }
+    RemediationPlan ||--o{ EmergencyClosures : "compensationPlanId"
+    RemediationPlan ||--o{ SchoolDeficit : "relatedRemediationPlanId"
+    RemediationPlan ||--o{ SchoolSurplus : "relatedRemediationPlanId"
+    SchoolDeficit ||--o{ RemediationPlan : "relatedDeficitId"
+    SchoolSurplus ||--o{ RemediationPlan : "relatedSurplusId"

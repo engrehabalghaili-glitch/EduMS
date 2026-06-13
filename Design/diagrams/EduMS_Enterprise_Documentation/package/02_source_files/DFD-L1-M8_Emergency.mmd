@@ -1,0 +1,33 @@
+flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P8_1((8.1<br/>رصد الحالات الطارئة)):::proc
+    P8_2((8.2<br/>تفعيل خطط الاستجابة)):::proc
+    P8_3((8.3<br/>تقييم الأضرار)):::proc
+    P8_4((8.4<br/>خطط التعويض)):::proc
+    P8_5((8.5<br/>تسجيل الجوائز)):::proc
+    P8_6((8.6<br/>توثيق الإنجازات)):::proc
+
+    DS_EmergencyEvent[("EmergencyEvent")]:::ds
+    DS_ResponsePlan[("ResponsePlan")]:::ds
+    DS_DamageAssessment[("DamageAssessment")]:::ds
+    DS_RemediationPlan[("RemediationPlan")]:::ds
+    DS_Award[("Award")]:::ds
+    DS_Achievement[("Achievement")]:::ds
+
+    Ext1 --> P8_1
+    P8_1 --> P8_2
+    P8_2 --> P8_3
+    P8_3 --> P8_4
+    P8_4 --> P8_5
+    P8_5 --> P8_6
+    P8_1 <--> DS_EmergencyEvent
+    P8_2 <--> DS_ResponsePlan
+    P8_3 <--> DS_DamageAssessment
+    P8_4 <--> DS_RemediationPlan
+    P8_5 <--> DS_Award
+    P8_6 <--> DS_Achievement

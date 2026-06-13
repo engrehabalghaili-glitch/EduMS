@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - المستخدمين</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=300;400;500;600;700;800;900&family=Tajawal:wght=300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item"><span class="icon">📊</span><span>لوحة التحكم</span></a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">الأمن والصلاحيات</div>
+                    <a href="index.html" class="nav-item"><span class="icon">🔐</span><span>لوحة التحكم</span></a>
+                    <a href="users.html" class="nav-item active"><span class="icon">👥</span><span>المستخدمين</span></a>
+                    <a href="roles.html" class="nav-item"><span class="icon">🔑</span><span>الأدوار والصلاحيات</span></a>
+                    <a href="permissions.html" class="nav-item"><span class="icon">🛡️</span><span>الصلاحيات</span></a>
+                    <a href="audit.html" class="nav-item"><span class="icon">📜</span><span>سجل النشاط</span></a>
+                    <a href="security.html" class="nav-item"><span class="icon">🔒</span><span>إعدادات الأمان</span></a>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left"><h2>الأمن والصلاحيات والمستخدمين</h2></div>
+                <div class="header-right">
+                    <div class="header-actions"><button class="header-btn">🔔<span class="badge">3</span></button></div>
+                    <div class="user-profile"><div class="user-avatar">م</div><div class="user-info"><h4>مدير المدرسة</h4><p>الإدارة</p></div></div>
+                </div>
+            </header>
+            <div class="content-area">
+                <div class="page-header">
+                    <h1 class="page-title">👥 المستخدمين</h1>
+                    <div class="page-breadcrumb"><a href="../../index.html">الرئيسية</a><span>/</span><a href="index.html">الأمن والصلاحيات</a><span>/</span><span>المستخدمين</span></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">قائمة المستخدمين</h3>
+                        <button class="btn btn-primary" onclick="openModal('addUserModal')">➕ إضافة مستخدم</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr><th>رقم المستخدم</th><th>الاسم</th><th>البريد الإلكتروني</th><th>الدور</th><th>الحالة</th><th>الإجراءات</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">USR-001</code></td><td style="font-weight: 600;">مدير المدرسة</td><td>admin@school.edu</td><td>مدير</td><td><span class="badge-status active">نشط</span></td><td><div class="table-actions"><button class="action-btn view">👁️</button><a href="edit-user.html" class="action-btn edit" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">✏️</a><button class="action-btn delete">🗑️</button></div></td></tr>
+                                    <tr><td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">USR-002</code></td><td style="font-weight: 600;">أمين المدرسة</td><td>secretary@school.edu</td><td>أمين</td><td><span class="badge-status active">نشط</span></td><td><div class="table-actions"><button class="action-btn view">👁️</button><a href="edit-user.html" class="action-btn edit" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">✏️</a><button class="action-btn delete">🗑️</button></div></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="addUserModal"><div class="modal"><div class="modal-header"><h3>إضافة مستخدم جديد</h3><button class="close-btn" onclick="closeModal('addUserModal')">&times;</button></div><div class="modal-body"><form class="form-group"><label>الاسم</label><input type="text" class="form-input" placeholder="الاسم الكامل"><label>البريد الإلكتروني</label><input type="email" class="form-input" placeholder="البريد الإلكتروني"><label>الدور</label><select class="form-input"><option>مدير</option><option>أمين</option><option>أستاذ</option></select></form></div><div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('addUserModal')">إلغاء</button><button class="btn btn-primary">حفظ</button></div></div></div>
+    <script>function openModal(id){document.getElementById(id).classList.add('active');}function closeModal(id){document.getElementById(id).classList.remove('active');}</script>
+</body>
+</html>

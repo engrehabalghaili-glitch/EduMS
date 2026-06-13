@@ -1,0 +1,238 @@
+classDiagram
+    direction TB
+    class EmergencyHosting {
+        +hostingId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +hostingNumber : INT
+        +hostingType : VARCHAR(50)
+        +hostingDate : DATE
+        +endDate : DATE
+        +expectedEndDate : DATE
+        +actualCount : INT
+        +maxCapacity : VARCHAR(200)
+        +utilizationPercentage : DECIMAL(5,2)
+        +...(20 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +declare()
+        +resolve()
+        +escalate()
+    }
+    class EmergencyIncidents {
+        +incidentId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +incidentNumber : INT
+        +incidentType : VARCHAR(50)
+        +incidentDate : DATE
+        +incidentTime : TIME
+        +severity : VARCHAR(200)
+        +description : TEXT
+        +location : VARCHAR(200)
+        +reportedByUserId : BIGINT «FK»
+        +...(27 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +declare()
+        +resolve()
+        +escalate()
+    }
+    class EmergencyClosures {
+        +closureId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +closureNumber : INT
+        +closureReason : VARCHAR(200)
+        +authority : VARCHAR(200)
+        +authorityDecisionNumber : INT
+        +startDate : DATE
+        +endDate : DATE
+        +actualEndDate : DATE
+        +totalClosureDays : INT
+        +...(17 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +declare()
+        +resolve()
+        +escalate()
+    }
+    class TransportationServices {
+        +serviceId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +routeId : BIGINT «FK»
+        +routeName : VARCHAR(200)
+        +routeCode : VARCHAR(50)
+        +routeDescription : TEXT
+        +busId : BIGINT «FK»
+        +busPlateNumber : INT
+        +busCapacity : INT
+        +busModel : VARCHAR(200)
+        +...(24 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class SchoolMergers {
+        +mergerId : BIGINT «PK»
+        +mergerNumber : INT
+        +mergerDate : DATE
+        +effectiveDate : DATE
+        +sourceSchoolIds : VARCHAR(200)
+        +targetSchoolId : BIGINT «FK»
+        +mergerReason : INT
+        +decisionAuthority : VARCHAR(200)
+        +decisionDocumentPath : VARCHAR(200)
+        +studentsTransferStatus : VARCHAR(50)
+        +...(11 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class SchoolAwards {
+        +awardId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +awardNumber : INT
+        +awardName : VARCHAR(200)
+        +awardCategory : VARCHAR(50)
+        +level : VARCHAR(50)
+        +issuingBody : BOOLEAN
+        +issuingBodyType : BOOLEAN
+        +awardDate : DATE
+        +awardPlace : VARCHAR(200)
+        +...(15 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +nominate()
+        +grant()
+    }
+    class ExternalParticipations {
+        +participationId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +participationNumber : INT
+        +eventName : VARCHAR(200)
+        +eventType : VARCHAR(50)
+        +organizer : VARCHAR(200)
+        +organizerType : VARCHAR(50)
+        +location : VARCHAR(200)
+        +startDate : DATE
+        +endDate : DATE
+        +...(16 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class CommunityPartnerships {
+        +partnershipId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +partnershipNumber : INT
+        +partnerName : VARCHAR(200)
+        +partnerType : VARCHAR(50)
+        +supportType : VARCHAR(50)
+        +agreementDate : DATE
+        +startDate : DATE
+        +endDate : DATE
+        +isRenewable : BOOLEAN
+        +...(17 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class SafetySecurityReports {
+        +reportId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +reportNumber : INT
+        +reportDate : DATE
+        +reportPeriod : VARCHAR(200)
+        +safetyLevel : VARCHAR(50)
+        +extinguisherExp : DATE
+        +extinguishersCount : INT
+        +extinguishersLastInspection : DATE
+        +extinguishersNextInspection : DATE
+        +...(27 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +generate()
+    }
+    class SchoolDeficit {
+        +deficitId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +deficitNumber : INT
+        +deficitType : VARCHAR(50)
+        +deficitCategory : VARCHAR(50)
+        +deficitAmount : DECIMAL(15,2)
+        +requiredAmount : DECIMAL(15,2)
+        +availableAmount : DECIMAL(15,2)
+        +deficitDescription : TEXT
+        +educationalImpact : TEXT
+        +...(19 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class SchoolSurplus {
+        +surplusId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +surplusNumber : INT
+        +surplusType : VARCHAR(50)
+        +surplusCategory : VARCHAR(50)
+        +surplusAmount : DECIMAL(15,2)
+        +availableAmount : DECIMAL(15,2)
+        +requiredAmount : DECIMAL(15,2)
+        +surplusDescription : TEXT
+        +utilizationPlan : VARCHAR(200)
+        +...(18 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class RemediationPlan {
+        +planId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +planNumber : INT
+        +planName : VARCHAR(200)
+        +relatedDeficitId : BIGINT «FK»
+        +relatedSurplusId : BIGINT «FK»
+        +planType : VARCHAR(50)
+        +selectedOption : VARCHAR(200)
+        +optionDetails : TEXT
+        +objectives : VARCHAR(200)
+        +...(23 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +draft()
+    }
+    RemediationPlan "1" --o "0..*" EmergencyClosures : compensationPlanId
+    RemediationPlan "1" --o "0..*" SchoolDeficit : relatedRemediationPlanId
+    RemediationPlan "1" --o "0..*" SchoolSurplus : relatedRemediationPlanId
+    SchoolDeficit "1" --o "0..*" RemediationPlan : relatedDeficitId
+    SchoolSurplus "1" --o "0..*" RemediationPlan : relatedSurplusId

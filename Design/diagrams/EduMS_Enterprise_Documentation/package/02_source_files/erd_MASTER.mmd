@@ -1,0 +1,402 @@
+erDiagram
+    Office {
+        BIGINT officeId "PK"
+        VARCHAR(50) officeCode
+        VARCHAR(200) officeNameAr
+        VARCHAR(200) officeNameEn
+    }
+    School {
+        BIGINT schoolId "PK"
+        VARCHAR(50) schoolCode
+        VARCHAR(50) institutionalCode
+        VARCHAR(200) schoolNameAr
+    }
+    SchoolAcademicYear {
+        BIGINT academicYearId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) yearCode
+        VARCHAR(200) yearNameAr
+    }
+    SchoolDepartment {
+        BIGINT deptId "PK"
+        BIGINT schoolId "FK"
+        BIGINT structureId "FK"
+        VARCHAR(50) deptCode
+    }
+    Workflow {
+        BIGINT workflowId "PK"
+        VARCHAR(200) workflowName
+        TEXT description
+        VARCHAR(200) entityName
+    }
+    ApprovedPlan {
+        BIGINT approvedPlanId "PK"
+        BIGINT submittedPlanId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+    }
+    ReceivedCirculars {
+        BIGINT circularId "PK"
+        BIGINT schoolId "FK"
+        BIGINT officeId "FK"
+        INT circularNumber
+    }
+    AnnualComprehensiveReport {
+        BIGINT reportId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT reportNumber
+    }
+    Application {
+        BIGINT applicationId "PK"
+        BIGINT ParentId "FK"
+        BIGINT schoolId "FK"
+        DATE birthDate
+    }
+    Student {
+        INT schoolStudentNumber
+        BIGINT nationalId "PK"
+        VARCHAR(200) fullNameAr
+        VARCHAR(200) fullNameEn
+    }
+    Guardian {
+        BIGINT nationalId "FK"
+        VARCHAR(200) fullNameAr
+        VARCHAR(200) relationship
+        VARCHAR(20) phonePrimary
+    }
+    Enrollment {
+        VARCHAR(50) enrollmentType
+        DATE enrollmentDate
+        INT enrollmentNumber
+        VARCHAR(50) enrollmentStatus
+    }
+    Course {
+        BIGINT courseId "PK"
+        BIGINT schoolId "FK"
+        BIGINT curriculumId "FK"
+        BIGINT departmentId "FK"
+    }
+    ClassSection {
+        BIGINT sectionId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+    }
+    Grade {
+        BIGINT gradeId "PK"
+        BIGINT registrationId "FK"
+        BIGINT studentId "FK"
+        BIGINT courseId "FK"
+    }
+    Attendance {
+        BIGINT attendanceId "PK"
+        BIGINT studentId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+    }
+    Discipline {
+        BIGINT disciplineId "PK"
+        BIGINT studentId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+    }
+    SchoolActivity {
+        BIGINT activityId "PK"
+        VARCHAR(50) activityCode
+        VARCHAR(200) activityNameAr
+        VARCHAR(200) activityNameEn
+    }
+    Employee {
+        BIGINT employeeId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) employeeCode
+        BIGINT nationalId "FK"
+    }
+    AppointmentDecision {
+        BIGINT decisionId "PK"
+        BIGINT employeeId "FK"
+        INT decisionNumber
+        DATE decisionDate
+    }
+    EmployeePayroll {
+        BIGINT payrollId "PK"
+        BIGINT employeeId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) payrollMonth
+    }
+    EmployeeLeave {
+        BIGINT leaveId "PK"
+        BIGINT employeeId "FK"
+        DECIMAL(15,2) leaveType
+        VARCHAR(50) leaveSubType
+    }
+    PerformanceReview {
+        BIGINT reviewId "PK"
+        BIGINT employeeId "FK"
+        BIGINT reviewerId "FK"
+        BIGINT academicYearId "FK"
+    }
+    VacantPosition {
+        BIGINT positionId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) positionCode
+        VARCHAR(200) jobTitle
+    }
+    EmployeeTermination {
+        BIGINT terminationId "PK"
+        BIGINT employeeId "FK"
+        VARCHAR(50) terminationType
+        INT terminationNumber
+    }
+    Asset {
+        BIGINT assetId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) assetUniqueCode
+        VARCHAR(200) assetNameAr
+    }
+    AssetCategory {
+        BIGINT categoryId "PK"
+        BIGINT schoolId "FK"
+        BIGINT parentCategoryId "FK"
+        VARCHAR(50) categoryCode
+    }
+    AssetLocation {
+        BIGINT locationId "PK"
+        BIGINT schoolId "FK"
+        BIGINT parentLocationId "FK"
+        VARCHAR(50) locationCode
+    }
+    PurchaseOrders {
+        BIGINT purchaseOrderId "PK"
+        BIGINT schoolId "FK"
+        INT poNumber
+        DATE poDate
+    }
+    MaintenanceTickets {
+        BIGINT ticketId "PK"
+        BIGINT schoolId "FK"
+        INT ticketNumber
+        BIGINT assetId "FK"
+    }
+    AssetFinancials {
+        BIGINT financialsId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        DECIMAL(15,2) purchasePrice
+    }
+    InventoryPlans {
+        BIGINT planId "PK"
+        BIGINT schoolId "FK"
+        INT planNumber
+        VARCHAR(200) planName
+    }
+    StudentAccount {
+        BIGINT accountId "PK"
+        BIGINT studentId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+    }
+    StudentInvoice {
+        BIGINT invoiceId "PK"
+        BIGINT accountId "FK"
+        BIGINT studentId "FK"
+        BIGINT schoolId "FK"
+    }
+    Payment {
+        BIGINT paymentId "PK"
+        BIGINT accountId "FK"
+        BIGINT studentId "FK"
+        BIGINT schoolId "FK"
+    }
+    FeeType {
+        BIGINT feeTypeId "PK"
+        BIGINT schoolId "FK"
+        DECIMAL(15,2) feeCode
+        DECIMAL(15,2) feeNameAr
+    }
+    Installment {
+        BIGINT installmentId "PK"
+        BIGINT invoiceId "FK"
+        BIGINT itemId "FK"
+        BIGINT accountId "FK"
+    }
+    SchoolStatisticsDraft {
+        BIGINT draftId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+    }
+    SubmittedStatistics {
+        BIGINT submissionId "PK"
+        BIGINT draftId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+    }
+    SystemReports {
+        BIGINT reportId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) reportType
+        VARCHAR(50) reportSubType
+    }
+    ComparativeReport {
+        BIGINT comparativeId "PK"
+        BIGINT schoolId "FK"
+        INT reportNumber
+        VARCHAR(200) comparisonTitle
+    }
+    SystemUser {
+        BIGINT userId "PK"
+        BIGINT schoolId "FK"
+        BIGINT officeId "FK"
+        VARCHAR(200) username
+    }
+    UserActivityLog {
+        BIGINT logId "PK"
+        BIGINT userId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(100) activityType
+    }
+    Permission {
+        BIGINT permissionId "PK"
+        VARCHAR(200) permissionKey
+        VARCHAR(200) module
+        VARCHAR(200) subModule
+    }
+    Role {
+        BIGINT roleId "PK"
+        VARCHAR(50) roleCode
+        VARCHAR(200) roleNameAr
+        VARCHAR(200) roleNameEn
+    }
+    AuditLog {
+        BIGINT auditId "PK"
+        BIGINT schoolId "FK"
+        BIGINT userId "FK"
+        VARCHAR(200) userRoleAtExecution
+    }
+    Office ||--o{ Office : "parentOfficeId"
+    SystemUser ||--o{ Office : "createdByUserId"
+    Office ||--o{ School : "officeId"
+    SystemUser ||--o{ School : "createdByUserId"
+    School ||--o{ SchoolAcademicYear : "schoolId"
+    SchoolAcademicYear ||--o{ SchoolAcademicYear : "previousYearId"
+    SystemUser ||--o{ SchoolAcademicYear : "createdByUserId"
+    School ||--o{ SchoolDepartment : "schoolId"
+    SchoolDepartment ||--o{ SchoolDepartment : "parentDeptId"
+    Employee ||--o{ SchoolDepartment : "managerId"
+    School ||--o{ ApprovedPlan : "schoolId"
+    SchoolAcademicYear ||--o{ ApprovedPlan : "academicYearId"
+    Office ||--o{ ApprovedPlan : "approvedByOfficeId"
+    School ||--o{ ReceivedCirculars : "schoolId"
+    Office ||--o{ ReceivedCirculars : "officeId"
+    SystemUser ||--o{ ReceivedCirculars : "receivedByUserId"
+    School ||--o{ AnnualComprehensiveReport : "schoolId"
+    SchoolAcademicYear ||--o{ AnnualComprehensiveReport : "academicYearId"
+    SystemUser ||--o{ AnnualComprehensiveReport : "submittedByUserId"
+    Guardian ||--o{ Application : "ParentId"
+    School ||--o{ Application : "schoolId"
+    Student ||--o{ Application : "convertedToStudentId"
+    Student ||--o{ Guardian : "studentId"
+    Guardian ||--o{ Guardian : "guardianId"
+    Student ||--o{ Enrollment : "studentId"
+    SchoolAcademicYear ||--o{ Enrollment : "academicYearId"
+    ClassSection ||--o{ Enrollment : "classSectionId"
+    School ||--o{ Course : "schoolId"
+    SchoolDepartment ||--o{ Course : "departmentId"
+    School ||--o{ ClassSection : "schoolId"
+    SchoolAcademicYear ||--o{ ClassSection : "academicYearId"
+    Employee ||--o{ ClassSection : "homeroomTeacherId"
+    Student ||--o{ Grade : "studentId"
+    Course ||--o{ Grade : "courseId"
+    SchoolAcademicYear ||--o{ Grade : "academicYearId"
+    Student ||--o{ Attendance : "studentId"
+    SchoolAcademicYear ||--o{ Attendance : "academicYearId"
+    ClassSection ||--o{ Attendance : "classSectionId"
+    SystemUser ||--o{ Attendance : "excuseApprovedBy"
+    Student ||--o{ Discipline : "studentId"
+    SchoolAcademicYear ||--o{ Discipline : "academicYearId"
+    SystemUser ||--o{ Discipline : "reportedById"
+    Employee ||--o{ SchoolActivity : "supervisorId"
+    School ||--o{ Employee : "schoolId"
+    SchoolDepartment ||--o{ Employee : "departmentId"
+    Employee ||--o{ AppointmentDecision : "employeeId"
+    SchoolDepartment ||--o{ AppointmentDecision : "departmentId"
+    Employee ||--o{ EmployeePayroll : "employeeId"
+    School ||--o{ EmployeePayroll : "schoolId"
+    SystemUser ||--o{ EmployeePayroll : "approvedByUserId"
+    Employee ||--o{ EmployeeLeave : "employeeId"
+    SchoolAcademicYear ||--o{ EmployeeLeave : "academicYearId"
+    SystemUser ||--o{ EmployeeLeave : "reviewedByUserId"
+    Employee ||--o{ PerformanceReview : "employeeId"
+    SchoolAcademicYear ||--o{ PerformanceReview : "academicYearId"
+    SystemUser ||--o{ PerformanceReview : "approvedByUserId"
+    School ||--o{ VacantPosition : "schoolId"
+    SchoolDepartment ||--o{ VacantPosition : "departmentId"
+    Employee ||--o{ VacantPosition : "replacedEmployeeId"
+    Employee ||--o{ EmployeeTermination : "employeeId"
+    SystemUser ||--o{ EmployeeTermination : "approvedByUserId"
+    School ||--o{ Asset : "schoolId"
+    AssetCategory ||--o{ Asset : "assetCategoryId"
+    AssetLocation ||--o{ Asset : "assetLocationId"
+    PurchaseOrders ||--o{ Asset : "purchaseOrderReference"
+    SystemUser ||--o{ Asset : "createdByUserId"
+    School ||--o{ AssetCategory : "schoolId"
+    AssetCategory ||--o{ AssetCategory : "parentCategoryId"
+    SystemUser ||--o{ AssetCategory : "createdByUserId"
+    School ||--o{ AssetLocation : "schoolId"
+    AssetLocation ||--o{ AssetLocation : "parentLocationId"
+    Employee ||--o{ AssetLocation : "responsiblePersonId"
+    SystemUser ||--o{ AssetLocation : "createdByUserId"
+    School ||--o{ PurchaseOrders : "schoolId"
+    SystemUser ||--o{ PurchaseOrders : "approvedByUserId"
+    School ||--o{ MaintenanceTickets : "schoolId"
+    Asset ||--o{ MaintenanceTickets : "assetId"
+    SystemUser ||--o{ MaintenanceTickets : "reportedByUserId"
+    AssetLocation ||--o{ MaintenanceTickets : "reportedLocation"
+    Employee ||--o{ MaintenanceTickets : "assignedToUserId"
+    Asset ||--o{ AssetFinancials : "assetId"
+    School ||--o{ AssetFinancials : "schoolId"
+    SystemUser ||--o{ AssetFinancials : "createdByUserId"
+    School ||--o{ InventoryPlans : "schoolId"
+    Employee ||--o{ InventoryPlans : "assignedTeamLeaderId"
+    Student ||--o{ StudentAccount : "studentId"
+    School ||--o{ StudentAccount : "schoolId"
+    SchoolAcademicYear ||--o{ StudentAccount : "academicYearId"
+    SystemUser ||--o{ StudentAccount : "exemptionApprovedByUserId"
+    StudentAccount ||--o{ StudentInvoice : "accountId"
+    Student ||--o{ StudentInvoice : "studentId"
+    School ||--o{ StudentInvoice : "schoolId"
+    SchoolAcademicYear ||--o{ StudentInvoice : "academicYearId"
+    StudentAccount ||--o{ Payment : "accountId"
+    Student ||--o{ Payment : "studentId"
+    School ||--o{ Payment : "schoolId"
+    SchoolAcademicYear ||--o{ Payment : "academicYearId"
+    SystemUser ||--o{ Payment : "confirmedByUserId"
+    School ||--o{ FeeType : "schoolId"
+    StudentInvoice ||--o{ Installment : "invoiceId"
+    StudentAccount ||--o{ Installment : "accountId"
+    Student ||--o{ Installment : "studentId"
+    School ||--o{ Installment : "schoolId"
+    SchoolAcademicYear ||--o{ Installment : "academicYearId"
+    SystemUser ||--o{ Installment : "rescheduledByUserId"
+    School ||--o{ SchoolStatisticsDraft : "schoolId"
+    SchoolAcademicYear ||--o{ SchoolStatisticsDraft : "academicYearId"
+    SchoolStatisticsDraft ||--o{ SubmittedStatistics : "draftId"
+    School ||--o{ SubmittedStatistics : "schoolId"
+    SchoolAcademicYear ||--o{ SubmittedStatistics : "academicYearId"
+    SystemUser ||--o{ SubmittedStatistics : "submittedByUserId"
+    School ||--o{ SystemReports : "schoolId"
+    SystemUser ||--o{ SystemReports : "generatedByUserId"
+    School ||--o{ ComparativeReport : "schoolId"
+    SystemUser ||--o{ ComparativeReport : "generatedByUserId"
+    School ||--o{ SystemUser : "schoolId"
+    Office ||--o{ SystemUser : "officeId"
+    Employee ||--o{ SystemUser : "employeeId"
+    Student ||--o{ SystemUser : "studentId"
+    Guardian ||--o{ SystemUser : "guardianId"
+    SystemUser ||--o{ UserActivityLog : "userId"
+    School ||--o{ UserActivityLog : "schoolId"
+    Role ||--o{ Role : "parentRoleId"
+    School ||--o{ AuditLog : "schoolId"
+    SystemUser ||--o{ AuditLog : "userId"

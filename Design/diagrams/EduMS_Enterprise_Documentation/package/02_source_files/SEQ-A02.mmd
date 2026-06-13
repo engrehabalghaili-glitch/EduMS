@@ -1,0 +1,25 @@
+sequenceDiagram
+    actor USR as المستخدم
+    participant API
+    participant DB
+    actor TECH as الفني
+    actor MGR as مدير الصيانة
+    
+    USR->>API: بلاغ عطل + صور
+    API->>DB: INSERT MaintenanceTickets(Open)
+    API->>TECH: إشعار
+    TECH->>API: تقدير العطل
+    alt عطل بسيط
+        TECH->>API: تنفيذ مباشر
+    else عطل معقد
+        TECH->>MGR: طلب اعتماد
+        MGR->>API: اعتماد
+        API->>DB: UPDATE Ticket(Approved)
+        TECH->>API: تنفيذ
+    end
+    API->>DB: INSERT MaintenanceExecution
+    API->>DB: INSERT MaintenanceSpareParts
+    TECH->>API: اختبار ونجاح
+    API->>DB: UPDATE Ticket(Closed)
+    API->>DB: UPDATE Asset.status='Active'
+    API->>USR: إشعار

@@ -1,0 +1,347 @@
+erDiagram
+    %% =====================================================
+    %% M2_Student - ERD
+    %% Mermaid 10.9.1 Compliant - SLIM VIEW (PK + FK only)
+    %% =====================================================
+
+    Application {
+        INT applicationId PK "طلب التسجيل"
+    }
+
+    Student {
+        INT nationalId PK "الرقم الوطني/الإقامة"
+    }
+
+    Guardian {
+        INT studentGuardianId PK "رقم تعريف فريد للسجل المفتاح الرئيسي"
+        INT studentId FK "معرف الطالب FK Student.studentId"
+        INT guardianId FK "معرف ولي الأمر FK Guardian.guardianId"
+    }
+
+    Enrollment {
+        INT studentId PK "معرف الطالب FK Student.studentId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT gradeLevelId "معرف الصف الدراسي FK GradeCapacity.gradeLevelId"
+        INT classSectionId FK "معرف الشعبة FK ClassSection.sectionId - اختياري يمكن أن يكون NULL ع..."
+    }
+
+    StudentDocument {
+        INT studentId PK "معرف الطالب FK Student.studentId"
+        INT enrollmentId FK "معرف الالتحاق FK Enrollment.enrollmentId - اختياري لربط الوثيقة بسن..."
+    }
+
+    StudentHealthRecord {
+        INT studentId PK "معرف الطالب FK Student.studentId"
+    }
+
+    StudentTransportPreference {
+        INT preferenceId PK "تفضيلات النقل"
+        INT studentId FK "معرف الطالب FK Student.studentId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT preferredBusRouteId FK "معرف خط الباص المفضل FK Transportation.routeId"
+    }
+
+    StudentInventory {
+        INT inventoryId PK "عهدة الطالب"
+        INT studentId FK "معرف الطالب FK Student.studentId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+    }
+
+    Transportation {
+        INT transportId PK "المواصلات"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT driverId "معرف السائق FK Employee.employeeId"
+        INT supervisorId "معرف المشرف FK Employee.employeeId"
+        INT shiftId "معرف الفترة FK SchoolShiftSetting.shiftId"
+    }
+
+    Course {
+        INT courseId PK "المواد والمناهج الدراسية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT curriculumId FK "معرف المنهج FK Curriculum.curriculumId - اختياري"
+        INT departmentId "معرف القسم المسؤول عن المادة FK SchoolDepartment.deptId"
+        INT gradeLevelId "الصف الدراسي FK GradeCapacity.gradeLevelId"
+    }
+
+    Curriculum {
+        INT curriculumId PK "المنهج الدراسي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+    }
+
+    CoursePlan {
+        INT planId PK "الخطة الدراسية للمادة"
+        INT courseId FK "معرف المادة FK Course.courseId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId"
+        INT teacherId "معرف المعلم المسؤول FK Employee.employeeId"
+        INT gradeLevelId "الصف الدراسي FK GradeCapacity.gradeLevelId"
+    }
+
+    ClassSection {
+        INT sectionId PK "الشعب"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId - اختياري"
+        INT gradeLevelId "معرف الصف FK GradeCapacity.gradeLevelId"
+        INT shiftId "معرف الفترة صباحي مسائي FK SchoolShiftSetting.shiftId"
+        INT classroomId FK "معرف القاعة الرئيسية FK Classroom.classroomId - اختياري"
+        INT homeroomTeacherId "معرف معلم الفصل FK Employee.employeeId"
+    }
+
+    CourseRegistration {
+        INT registrationId PK "تسجيل المواد"
+        INT studentId FK "معرف الطالب FK Student.studentId"
+        INT enrollmentId FK "معرف الالتحاق FK Enrollment.enrollmentId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId"
+        INT courseId FK "معرف المادة FK Course.courseId"
+        INT sectionId FK "معرف الشعبة FK ClassSection.sectionId"
+        INT teacherId "معرف المعلم FK Employee.employeeId"
+    }
+
+    Grade {
+        INT gradeId PK "الدرجات"
+        INT registrationId FK "معرف تسجيل المادة FK CourseRegistration.registrationId"
+        INT studentId FK "معرف الطالب FK Student.studentId"
+        INT courseId FK "معرف المادة FK Course.courseId"
+        INT academicYearId "معرف السنة FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل FK SchoolSemester.semesterId"
+    }
+
+    Evaluation {
+        INT evaluationId PK "التقيمات"
+        INT courseId FK "معرف المادة FK Course.courseId"
+        INT academicYearId "معرف السنة FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل FK SchoolSemester.semesterId"
+    }
+
+    ExamResult {
+        INT examResultId PK "الاختبارات"
+        INT registrationId FK "معرف تسجيل المادة FK CourseRegistration.registrationId"
+        INT studentId FK "معرف الطالب FK Student.studentId"
+        INT courseId FK "معرف المادة FK Course.courseId"
+        INT academicYearId "معرف السنة FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل FK SchoolSemester.semesterId"
+    }
+
+    Activity {
+        INT activityId PK "الأنشطة"
+        INT courseId FK "معرف المادة FK Course.courseId - اختياري للأنشطة المرتبطة بمادة"
+        INT activityTypeId FK "معرف نوع النشاط FK ActivityType.activityTypeId"
+        INT academicYearId "معرف السنة FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل FK SchoolSemester.semesterId"
+        INT supervisorId "معرف المشرف FK Employee.employeeId"
+    }
+
+    ActivityDetail {
+        INT detailId PK "تفاصيل النشاط"
+        INT activityId FK "معرف النشاط FK Activity.activityId"
+        INT studentId FK "معرف الطالب FK Student.studentId"
+    }
+
+    ActivityType {
+        INT activityTypeId PK "نوع النشاط"
+    }
+
+    LeaveType {
+        INT leaveTypeId PK "نوع الإجازة"
+    }
+
+    Attendance {
+        INT attendanceId PK "الحضور والغياب"
+        INT studentId FK "معرف الطالب FK Student.studentId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId"
+        INT gradeLevelId "معرف الصف FK GradeCapacity.gradeLevelId"
+        INT classSectionId FK "معرف الشعبة FK ClassSection.sectionId"
+        INT excuseId FK "معرف الإجازة FK StudentLeave.leaveId - إذا كان غياباً بعذر"
+        VARCHAR excuseApprovedBy "من اعتمد العذر FK SystemUser.userId"
+        INT recordedById "معرف مسجل الحضور FK SystemUser.userId"
+    }
+
+    AttendanceDetail {
+        INT attendanceDetailId PK "التفاصيل الحصصية للحضور اليومي للطالب"
+        INT attendanceId FK "معرف الحضور اليومي FK Attendance.attendanceId"
+        INT studentId FK "معرف الطالب FK Student.studentId"
+        INT timetableSlotId FK "معرف موعد الحصة FK TimetableSlot.slotId"
+        INT periodId FK "معرف الحصة FK ClassPeriod.periodId"
+        INT courseId FK "معرف المادة FK Course.courseId"
+        INT teacherId "معرف المعلم FK Employee.employeeId"
+        INT classSectionId FK "معرف الشعبة FK ClassSection.sectionId"
+    }
+
+    StudentLeave {
+        INT leaveId PK "الإجازات"
+        INT studentId FK "معرف الطالب FK Student.studentId"
+        INT leaveTypeId FK "معرف نوع الإجازة FK LeaveType.leaveTypeId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId"
+        INT reviewedByUserId "معرف المراجع FK SystemUser.userId"
+        INT approvedByUserId "معرف المعتمد FK SystemUser.userId"
+    }
+
+    Discipline {
+        INT disciplineId PK "السجل السلوكي"
+        INT studentId FK "معرف الطالب FK Student.studentId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId"
+        INT reportedById "معرف المبلغ FK SystemUser.userId"
+        INT actionByUserId "معرف من نفذ الإجراء FK SystemUser.userId"
+    }
+
+    StudentComplaint {
+        INT complaintId PK "الشكاوي والتظلمات"
+        INT studentId FK "معرف الطالب المعني FK Student.studentId - اختياري"
+        INT guardianId FK "معرف ولي الأمر مقدم الشكوى FK Guardian.guardianId"
+        INT assignedToUserId "معرف المسؤول عن معالجة الشكوى FK SystemUser.userId"
+    }
+
+    GuidanceSession {
+        INT sessionId PK "جلسات الإرشاد"
+        INT counselorId "معرف المرشد FK Employee.employeeId"
+        INT relatedDisciplineId FK "معرف الحالة السلوكية المرتبطة FK Discipline.disciplineId"
+    }
+
+    LibraryLoan {
+        INT loanId PK "استعارة المكتبة"
+        INT resourceId "معرف المصدر FK LibraryResource.resourceId"
+        VARCHAR extensionApprovedBy "من اعتمد التمديد FK SystemUser.userId"
+        VARCHAR renewedBy "من جدد FK SystemUser.userId"
+        INT issuedById "معرف أمين المكتبة المصدر FK Employee.employeeId"
+        INT receivedById "معرف من استلم الإرجاع FK Employee.employeeId"
+    }
+
+    StudentActivityRegistration {
+        INT registrationId PK "تسجيل الطلاب في الأنشطة"
+        INT studentId FK "معرف الطالب FK Student.studentId"
+        INT activityId FK "معرف النشاط FK SchoolActivity.activityId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId"
+    }
+
+    SchoolActivity {
+        INT activityId PK "النشاط المدرسي"
+        INT activityTypeId FK "معرف نوع النشاط FK ActivityType.activityTypeId"
+        INT supervisorId "معرف المشرف الرئيسي FK Employee.employeeId"
+        INT organizerId "معرف المنظم FK Employee.employeeId"
+    }
+
+    ClassPeriod {
+        INT periodId PK "الحصة الدراسية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT shiftId "معرف الفترة صباحي مسائي FK SchoolShiftSetting.shiftId"
+    }
+
+    TimetableSlot {
+        INT slotId PK "مواعيد الجدول الدراسي"
+        INT timetableId FK "معرف الجدول لربط مجموعة من الحصص بجدول واحد"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId"
+        INT gradeLevelId "معرف الصف FK GradeCapacity.gradeLevelId"
+        INT sectionId FK "معرف الشعبة FK ClassSection.sectionId"
+        INT periodId FK "معرف الحصة FK ClassPeriod.periodId"
+        INT courseId FK "معرف المادة FK Course.courseId"
+        INT teacherId "معرف المعلم FK Employee.employeeId"
+        INT classroomId FK "معرف القاعة FK Classroom.classroomId"
+    }
+
+    ActivityAttendance {
+        INT attendanceId PK "حضور الأنشطة"
+        INT activityRegistrationId FK "معرف تسجيل الطالب في النشاط FK StudentActivityRegistration.registra..."
+        INT activityId FK "معرف النشاط FK SchoolActivity.activityId"
+        INT studentId FK "معرف الطالب FK Student.studentId"
+        INT recordedById "معرف مسجل الحضور FK SystemUser.userId"
+    }
+
+    Classroom {
+        INT classroomId PK "القاعة الدراسية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT departmentId "معرف القسم المسؤول عن القاعة FK SchoolDepartment.deptId"
+        INT responsibleUserId "معرف المسؤول عن القاعة FK Employee.employeeId"
+    }
+
+    Timetable {
+        INT timetableId PK "الجدول الدراسي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId"
+        INT gradeLevelId "معرف الصف FK GradeCapacity.gradeLevelId"
+        INT sectionId FK "معرف الشعبة FK ClassSection.sectionId"
+        INT shiftId "معرف الفترة صباحي مسائي FK SchoolShiftSetting.shiftId"
+    }
+
+    FacilityDepartmentAssignment {
+        INT assignmentId PK "تخصيص المرافق التعليمية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT facilityId FK "معرف المرفق حسب النوع - FK Classroom.classroomId أو غيره"
+        INT departmentId "معرف القسم المستفيد FK SchoolDepartment.deptId"
+        INT responsibleUserId "معرف المسؤول الرئيسي FK Employee.employeeId"
+        VARCHAR handoverAcceptedBy "مستلم العهدة FK Employee.employeeId"
+    }
+
+    AcademicAssetMapping {
+        INT mappingId PK "الربط الأكاديمي والمنهجي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId - اختياري ..."
+        INT courseId FK "معرف المادة FK Course.courseId"
+        INT curriculumId FK "معرف المنهج FK Curriculum.curriculumId - اختياري"
+        INT gradeLevelId "معرف الصف FK GradeCapacity.gradeLevelId"
+        INT semesterId "معرف الفصل FK SchoolSemester.semesterId - اختياري"
+        INT assetCategoryId "معرف فئة الأصل FK AssetCategory.categoryId - من قسم الأصول"
+    }
+
+    %% ===== Relationships =====
+    Student ||--o{ Guardian : "معرف الطالب FK Studentstu"
+    ClassSection ||--o{ Enrollment : "معرف الشعبة FK ClassSecti"
+    Enrollment ||--o{ StudentDocument : "معرف الالتحاق FK Enrollme"
+    Student ||--o{ StudentTransportPreference : "معرف الطالب FK Studentstu"
+    Transportation ||--o{ StudentTransportPreference : "معرف خط الباص المفضل FK T"
+    Student ||--o{ StudentInventory : "معرف الطالب FK Studentstu"
+    Curriculum ||--o{ Course : "معرف المنهج FK Curriculum"
+    Course ||--o{ CoursePlan : "معرف المادة FK Coursecour"
+    Classroom ||--o{ ClassSection : "معرف القاعة الرئيسية FK C"
+    Student ||--o{ CourseRegistration : "معرف الطالب FK Studentstu"
+    Enrollment ||--o{ CourseRegistration : "معرف الالتحاق FK Enrollme"
+    Course ||--o{ CourseRegistration : "معرف المادة FK Coursecour"
+    ClassSection ||--o{ CourseRegistration : "معرف الشعبة FK ClassSecti"
+    CourseRegistration ||--o{ Grade : "معرف تسجيل المادة FK Cour"
+    Student ||--o{ Grade : "معرف الطالب FK Studentstu"
+    Course ||--o{ Grade : "معرف المادة FK Coursecour"
+    Course ||--o{ Evaluation : "معرف المادة FK Coursecour"
+    CourseRegistration ||--o{ ExamResult : "معرف تسجيل المادة FK Cour"
+    Student ||--o{ ExamResult : "معرف الطالب FK Studentstu"
+    Course ||--o{ ExamResult : "معرف المادة FK Coursecour"
+    Course ||--o{ Activity : "معرف المادة FK Coursecour"
+    ActivityType ||--o{ Activity : "معرف نوع النشاط FK Activi"
+    Activity ||--o{ ActivityDetail : "معرف النشاط FK Activityac"
+    Student ||--o{ ActivityDetail : "معرف الطالب FK Studentstu"
+    Student ||--o{ Attendance : "معرف الطالب FK Studentstu"
+    ClassSection ||--o{ Attendance : "معرف الشعبة FK ClassSecti"
+    StudentLeave ||--o{ Attendance : "معرف الإجازة FK StudentLe"
+    Attendance ||--o{ AttendanceDetail : "معرف الحضور اليومي FK Att"
+    Student ||--o{ AttendanceDetail : "معرف الطالب FK Studentstu"
+    TimetableSlot ||--o{ AttendanceDetail : "معرف موعد الحصة FK Timeta"
+    ClassPeriod ||--o{ AttendanceDetail : "معرف الحصة FK ClassPeriod"
+    Course ||--o{ AttendanceDetail : "معرف المادة FK Coursecour"
+    ClassSection ||--o{ AttendanceDetail : "معرف الشعبة FK ClassSecti"
+    Student ||--o{ StudentLeave : "معرف الطالب FK Studentstu"
+    LeaveType ||--o{ StudentLeave : "معرف نوع الإجازة FK Leave"
+    Student ||--o{ Discipline : "معرف الطالب FK Studentstu"
+    Student ||--o{ StudentComplaint : "معرف الطالب المعني FK Stu"
+    Guardian ||--o{ StudentComplaint : "معرف ولي الأمر مقدم الشكو"
+    Discipline ||--o{ GuidanceSession : "معرف الحالة السلوكية المر"
+    Student ||--o{ StudentActivityRegistration : "معرف الطالب FK Studentstu"
+    SchoolActivity ||--o{ StudentActivityRegistration : "معرف النشاط FK SchoolActi"
+    ActivityType ||--o{ SchoolActivity : "معرف نوع النشاط FK Activi"
+    Timetable ||--o{ TimetableSlot : "معرف الجدول لربط مجموعة م"
+    ClassSection ||--o{ TimetableSlot : "معرف الشعبة FK ClassSecti"
+    ClassPeriod ||--o{ TimetableSlot : "معرف الحصة FK ClassPeriod"
+    Course ||--o{ TimetableSlot : "معرف المادة FK Coursecour"
+    Classroom ||--o{ TimetableSlot : "معرف القاعة FK Classroomc"
+    StudentActivityRegistration ||--o{ ActivityAttendance : "معرف تسجيل الطالب في النش"
+    SchoolActivity ||--o{ ActivityAttendance : "معرف النشاط FK SchoolActi"
+    Student ||--o{ ActivityAttendance : "معرف الطالب FK Studentstu"
+    ClassSection ||--o{ Timetable : "معرف الشعبة FK ClassSecti"
+    Classroom ||--o{ FacilityDepartmentAssignment : "معرف المرفق حسب النوع  FK"
+    Course ||--o{ AcademicAssetMapping : "معرف المادة FK Coursecour"
+    Curriculum ||--o{ AcademicAssetMapping : "معرف المنهج FK Curriculum"

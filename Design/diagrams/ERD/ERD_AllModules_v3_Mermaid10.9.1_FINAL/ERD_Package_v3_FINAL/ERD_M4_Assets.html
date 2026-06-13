@@ -1,0 +1,3269 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERD - إدارة الأصول والمرافق</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<style>
+*{box-sizing:border-box}
+body{font-family:'Cairo',sans-serif;background:#f8fafc;margin:0;padding:24px;color:#1f2937}
+.container{max-width:1500px;margin:0 auto}
+.header{background:linear-gradient(135deg,#EA580C,#EA580Cdd);color:#fff;padding:32px;border-radius:16px;margin-bottom:20px;box-shadow:0 8px 24px #EA580C33}
+.header h1{margin:0 0 8px;font-size:28px;font-weight:900;display:flex;align-items:center;gap:12px}
+.header .subtitle{opacity:.92;font-size:15px;line-height:1.7}
+.header .badges{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+.badge{background:rgba(255,255,255,.2);padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;backdrop-filter:blur(10px)}
+.compliance{background:#D1FAE5;border-right:4px solid #10B981;padding:14px 18px;border-radius:10px;margin-bottom:16px;font-size:13px;color:#065F46;line-height:1.8}
+.compliance strong{color:#064E3B}
+.compliance code{background:#fff;padding:2px 8px;border-radius:4px;font-family:'Fira Code',monospace;font-size:12px}
+.nav-back{display:inline-block;color:#1E3A8A;text-decoration:none;font-weight:700;margin-bottom:12px;font-size:14px}
+.nav-back:hover{text-decoration:underline}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:14px 0}
+.info-card{background:#fff;border-right:4px solid #EA580C;padding:14px 18px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.info-card .label{font-size:12px;color:#64748b;font-weight:600}
+.info-card .value{font-size:22px;color:#1E3A8A;font-weight:900;margin-top:4px}
+.toolbar{background:#fff;padding:14px 20px;border-radius:12px;margin-bottom:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.toolbar .group{display:flex;gap:6px;padding:4px;background:#F1F5F9;border-radius:10px}
+.toolbar .group button{background:transparent;border:none;padding:8px 14px;font-family:inherit;font-weight:600;font-size:13px;border-radius:6px;cursor:pointer;color:#475569}
+.toolbar .group button.active{background:#1E3A8A;color:#fff}
+.btn{background:#1E3A8A;color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;transition:all .2s}
+.btn:hover{background:#172554;transform:translateY(-1px)}
+.btn.outline{background:#fff;color:#1E3A8A;border:1.5px solid #1E3A8A}
+.btn.outline:hover{background:#EFF6FF}
+.diagram-card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 4px 20px rgba(0,0,0,.06);overflow:auto;min-height:400px}
+.diagram-card .mermaid{background:#fff;text-align:center}
+.view-pane{display:none}
+.view-pane.active{display:block}
+details{margin-top:18px}
+details summary{cursor:pointer;font-weight:700;color:#1E3A8A;padding:12px 16px;background:#EFF6FF;border-radius:10px;font-size:14px}
+pre.source-code{background:#0f172a;color:#e2e8f0;padding:18px;border-radius:8px;overflow-x:auto;font-family:'Fira Code',monospace;font-size:12px;line-height:1.6;max-height:520px;direction:ltr;text-align:left;margin-top:10px}
+.footer{text-align:center;padding:24px;color:#64748b;font-size:13px}
+.notice-slim{background:#FEF3C7;border-right:4px solid #D4AF37;padding:12px 16px;border-radius:8px;margin-bottom:14px;font-size:13px;color:#78350F}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a class="nav-back" href="index.html">← العودة لفهرس مخططات الأقسام</a>
+
+  <div class="header">
+    <h1>📦 ERD — إدارة الأصول والمرافق</h1>
+    <div class="subtitle">القسم الرابع — التسجيل والشراء والتشغيل والصيانة والإهلاك والجرد والتقارير</div>
+    <div class="badges">
+      <span class="badge">📁 M4_Assets</span>
+      <span class="badge">🗃️ 41 كيان</span>
+      <span class="badge">📊 984 حقل كامل</span>
+      <span class="badge">🔑 200 PK+FK</span>
+      <span class="badge">🔗 51 علاقة</span>
+      <span class="badge">✅ Mermaid 10.9.1</span>
+    </div>
+  </div>
+
+  <div class="compliance">
+    <strong>✔ متوافق مع Mermaid 10.9.1:</strong>
+    جميع الأسماء البرمجية ASCII فقط (مثال: <code>StudentAccount</code>) — كل النصوص العربية موضوعة داخل علامات تنصيص آمنة كتعليقات.
+    <br>كل قسم في مخطط <strong>مستقل تماماً</strong> دون دمج مع أقسام أخرى.
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card"><div class="label">عدد الجداول</div><div class="value">41</div></div>
+    <div class="info-card"><div class="label">الحقول الكلية</div><div class="value">984</div></div>
+    <div class="info-card"><div class="label">PK + FK فقط</div><div class="value">200</div></div>
+    <div class="info-card"><div class="label">العلاقات</div><div class="value">51</div></div>
+    <div class="info-card"><div class="label">المستوى</div><div class="value" style="font-size:14px">Module-Level</div></div>
+  </div>
+
+  <div class="toolbar">
+    <div class="group" role="tablist">
+      <button id="tab-slim" class="active" onclick="switchView('slim')">🔑 عرض مبسّط (PK + FK)</button>
+      <button id="tab-full" onclick="switchView('full')">📊 عرض كامل (جميع الحقول)</button>
+    </div>
+    <div style="flex:1"></div>
+    <button class="btn outline" onclick="copySource()">📋 نسخ كود Mermaid</button>
+    <button class="btn outline" onclick="downloadSource()">⬇ تنزيل .mmd</button>
+    <button class="btn outline" onclick="downloadSvg()">🖼 تنزيل SVG</button>
+  </div>
+
+  <div id="pane-slim" class="view-pane active">
+    <div class="notice-slim">
+      💡 <strong>العرض المبسّط</strong> — يُظهر فقط مفاتيح الجداول (PK) والمفاتيح الخارجية (FK)، مثالي لفهم العلاقات بسرعة. للحقول الكاملة، انقر على "عرض كامل".
+    </div>
+    <div class="diagram-card">
+      <div class="mermaid" id="diagram-slim">
+erDiagram
+    %% =====================================================
+    %% M4_Assets - ERD
+    %% Mermaid 10.9.1 Compliant - SLIM VIEW (PK + FK only)
+    %% =====================================================
+
+    Asset {
+        INT assetId PK "الأصول الأساسي"
+        INT schoolId "معرف المدرسة FK School.schoolId . هذا الحقل يربط كل أصل بمدرسته."
+        INT assetCategoryId FK "معرف فئة الأصل FK AssetCategory.categoryId . يربط الأصل بفئته."
+        INT assetStatusId FK "معرف حالة الأصل FK AssetStatus.statusId . يربط الأصل بحالته الحالية."
+        INT assetLocationId FK "معرف الموقع المكاني الحالي FK AssetLocation.locationId . يحدد أين ي..."
+        VARCHAR purchaseOrderReference "رقم أمر الشراء المرتبط FK PurchaseOrders.poNumber"
+        INT warrantyContractId FK "معرف عقد الضمان المرتبط FK AssetWarrantyContract.contractId"
+        INT createdByUserId "معرف المستخدم الذي أضاف الأصل FK SystemUser.userId"
+    }
+
+    AssetCategory {
+        INT categoryId PK "فئات الأصول"
+        INT schoolId "معرف المدرسة FK School.schoolId - لتمكين كل مدرسة من تخصيص تصنيفاته..."
+        INT parentCategoryId FK "معرف الفئة الأم Self FK AssetCategory.categoryId - لبناء الهيكل اله..."
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetLocation {
+        INT locationId PK "المواقع المكانية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT parentLocationId FK "معرف الموقع الأب Self FK AssetLocation.locationId - لإنشاء هيكل هرم..."
+        INT responsiblePersonId "معرف الشخص المسؤول عن هذا الموقع FK Employee.employeeId - اختياري"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetStatus {
+        INT statusId PK "حالات الأصل"
+        INT schoolId "معرف المدرسة FK School.schoolId - لتمكين كل مدرسة من إضافة حالاتها ..."
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetWarrantyContract {
+        INT contractId PK "الضمان والعقود"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetDocument {
+        INT documentId PK "وثائق الأصل"
+        INT assetId FK "معرف الأصل المرتبط FK Asset.assetId - مهم جداً هذا هو الرابط الأساسي"
+        INT contractId FK "معرف العقد المرتبط FK AssetWarrantyContract.contractId - اختياري لر..."
+        INT uploadedByUserId "معرف من قام بالرفع FK SystemUser.userId"
+    }
+
+    AssetRequirementRequest {
+        INT requestId PK "مقترحات وطلبات الاحتياج"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetCategoryId FK "معرف الفئة المقترحة FK AssetCategory.categoryId - لتسهيل التصنيف"
+        INT requestingDepartmentId "معرف القسم الطالب FK SchoolDepartment.deptId"
+        INT requestedByUserId "معرف الموظف مقدم الطلب FK Employee.employeeId"
+        INT renewalPlanId "ربط الطلب بخطة تجديد الأسطول إن وجدت FK PlanId من جدول خطط التطوير ..."
+        INT assetToReplaceId FK "معرف الأصل المطلوب استبداله FK Asset.assetId - إذا كان isReplacemen..."
+        INT approvedByUserId "معرف من اعتمد الطلب FK SystemUser.userId"
+        INT purchaseOrderId FK "معرف أمر الشراء المرتبط FK PurchaseOrders.purchaseOrderId - بعد الت..."
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    TechnicalSpecifications {
+        INT specId PK "المواصفات الفنية والمعايير"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetCategoryId FK "معرف فئة الأصل المرتبطة FK AssetCategory.categoryId"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    FeasibilityRiskAnalysis {
+        INT analysisId PK "دراسات الجدوى والمخاطر"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT requestId FK "معرف طلب الاحتياج المرتبط FK AssetRequirementRequest.requestId - ال..."
+        INT analystUserId "معرف من قام بالتحليل FK Employee.employeeId"
+        INT approvedByUserId "معرف من اعتمد التحليل FK SystemUser.userId"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetBudgetAllocation {
+        INT allocationId PK "ميزانية الأصول"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetCategoryId FK "معرف فئة الأصل FK AssetCategory.categoryId - يمكن أن يكون فارغاً لل..."
+        INT departmentId "معرف القسم FK SchoolDepartment.deptId - يمكن أن يكون فارغاً للتخصيص..."
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    PurchaseOrders {
+        INT purchaseOrderId PK "طلبات الشراء والمناقصات"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT requestId FK "معرف طلب الاحتياج المرتبط FK AssetRequirementRequest.requestId - يم..."
+        INT approvedByUserId "معرف من اعتمد الأمر FK SystemUser.userId"
+        INT budgetAllocationId FK "معرف تخصيص الميزانية المرتبط FK AssetBudgetAllocation.allocationId ..."
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetReceiving {
+        INT receivingId PK "الاستلام المبدئي وفحص الجودة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT purchaseOrderId FK "معرف أمر الشراء المرتبط FK PurchaseOrders.purchaseOrderId"
+        INT receivedByUserId "معرف من قام بالاستلام FK Employee.employeeId - عضو لجنة الاستلام"
+        INT inspectorUserId "معرف المفتش FK Employee.employeeId - عضو لجنة فحص الجودة"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetUsageLog {
+        INT usageLogId PK "سجل التشغيل والاستخدام"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId - للتكرار"
+        INT userId "معرف المستخدم الذي استخدم الأصل FK SystemUser.userId - يمكن أن يكون..."
+        INT locationId FK "معرف الموقع الذي تم فيه الاستخدام FK AssetLocation.locationId"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    MaintenanceTickets {
+        INT ticketId PK "بلاغات الأعطال"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetId FK "معرف الأصل المعطوب FK Asset.assetId"
+        INT reportedByUserId "معرف مقدم البلاغ FK SystemUser.userId"
+        VARCHAR reportedLocation "موقع العطل نص أو FK AssetLocation.locationId"
+        INT assignedToUserId "معرف الفني المسؤول عن الإصلاح FK Employee.employeeId - من قسم الموظفين"
+        INT relatedExecutionId FK "معرف سجل تنفيذ الصيانة المرتبط FK MaintenanceExecution.executionId ..."
+    }
+
+    PreventiveMaintenanceSchedule {
+        INT scheduleId PK "جدولة الصيانة الوقائية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetId FK "معرف الأصل المستهدف FK Asset.assetId - يمكن أن يكون فارغاً لتطبيق ا..."
+        INT assetCategoryId FK "معرف فئة الأصول FK AssetCategory.categoryId - يُستخدم إذا كان الجدو..."
+        VARCHAR assignedToTeam "الفريق المسؤول نص أو FK Employee.employeeId"
+        INT contractId FK "معرف عقد الصيانة الخارجي المرتبط FK AssetWarrantyContract.contractI..."
+    }
+
+    MaintenanceExecution {
+        INT executionId PK "سجل تنفيذ الصيانة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT ticketId FK "معرف تذكرة العطل المرتبطة FK MaintenanceTickets.ticketId - اختياري ..."
+        INT scheduleId FK "معرف جدول الصيانة الوقائية المرتبط FK PreventiveMaintenanceSchedule..."
+        INT assetId FK "معرف الأصل الذي تمت صيانته FK Asset.assetId"
+        INT executedByUserId "معرف الفني المنفذ FK Employee.employeeId"
+        INT newAssetStatusId FK "معرف الحالة الجديدة للأصل بعد الصيانة FK AssetStatus.statusId - مثل..."
+    }
+
+    MaintenanceSpareParts {
+        INT partId PK "قطع الغيار والمستهلكات"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+    }
+
+    AssetSuspensionRequests {
+        INT suspensionId PK "طلبات تعليق الأصل"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetId FK "معرف الأصل المراد تعليقه FK Asset.assetId"
+        INT requestedByUserId "معرف مقدم الطلب FK SystemUser.userId"
+        INT approvedByUserId "معرف المعتمد FK SystemUser.userId"
+    }
+
+    MaintenanceNotifications {
+        INT notificationId PK "إشعارات الصيانة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT recipientUserId "معرف المستخدم المستلم FK SystemUser.userId"
+    }
+
+    UsageViolations {
+        INT violationId PK "مخالفات الاستخدام"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetId FK "معرف الأصل المخالف في استخدامه FK Asset.assetId"
+        INT reportedByUserId "معرف من أبلغ عن المخالفة FK SystemUser.userId"
+        INT violatingUserId "معرف المستخدم المخالف FK SystemUser.userId - يمكن أن يكون موظفاً أو..."
+        INT approvedByUserId "معرف من اعتمد الإجراء التأديبي FK SystemUser.userId"
+    }
+
+    AssetFinancials {
+        INT financialsId PK "القيم المالية للأصل"
+        INT assetId FK "معرف الأصل المرتبط FK Asset.assetId - علاقة 1-1 أصل واحد له سجل مال..."
+        INT schoolId "معرف المدرسة FK School.schoolId - للتكرار وتسهيل التقارير"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetDepreciation {
+        INT depreciationId PK "سياسات وحسابات الإهلاك"
+        INT assetId FK "معرف الأصل FK Asset.assetId - علاقة 1-1"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+    }
+
+    DepreciationTransactions {
+        INT transactionId PK "معاملات الإهلاك الدورية"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT depreciationId FK "معرف سجل الإهلاك المرتبط FK AssetDepreciation.depreciationId"
+    }
+
+    RevaluationImpairment {
+        INT revaluationId PK "إعادة التقييم والانخفاض"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT approvedByUserId "معرف من اعتمد العملية FK SystemUser.userId"
+    }
+
+    AssetExpenses {
+        INT expenseId PK "المصروفات الرأسمالية والتشغيلية"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT relatedExecutionId FK "معرف سجل تنفيذ الصيانة المرتبط FK MaintenanceExecution.executionId ..."
+        INT approvedByUserId "معرف من اعتمد تصنيف المصروف FK SystemUser.userId"
+    }
+
+    FeasibilityComparison {
+        INT comparisonId PK "مقارنات الجدوى والاستبدال"
+        INT assetId FK "معرف الأصل المُقارَن FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT replacementAssetId FK "معرف الأصل البديل المقترح FK Asset.assetId - يمكن أن يكون أصل جديد ..."
+        INT approvedByUserId "معرف من اتخذ القرار FK SystemUser.userId"
+    }
+
+    FinancialAuditArchive {
+        INT archiveId PK "الأرشفة المالية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+    }
+
+    FinancialSummaryReports {
+        INT summaryId PK "تقارير القيمة المالية المجمعة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetCategoryId FK "معرف فئة الأصول FK AssetCategory.categoryId - يمكن أن يكون فارغاً ل..."
+    }
+
+    AssetAssignment {
+        INT assignmentId PK "تخصيص الأصول"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assignerUserId "معرف من قام بالتخصيص FK SystemUser.userId"
+        INT returnedToUserId "معرف من استلم الأصل عند الإرجاع FK SystemUser.userId"
+    }
+
+    AssetLoans {
+        INT loanId PK "إعارات الأصول"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT issuerUserId "معرف من قام بالإعارة FK SystemUser.userId"
+    }
+
+    AssetTransferRequests {
+        INT transferRequestId PK "طلبات النقل والتحويل"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT requestedByUserId "معرف مقدم الطلب FK SystemUser.userId"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+        INT executedByUserId "معرف من نفذ النقل FK SystemUser.userId"
+    }
+
+    AssetInspectionLog {
+        INT inspectionId PK "فحص الاستلام والإرجاع"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT inspectorUserId "معرف المفتش FK SystemUser.userId"
+    }
+
+    AssetMovementHistory {
+        INT historyId PK "سجل حركة الأصول التاريخي"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT performedByUserId "معرف من قام بالحركة FK SystemUser.userId"
+    }
+
+    LoanTrackingAlerts {
+        INT alertId PK "تنبيهات ومتابعة الإعارات"
+        INT loanId FK "معرف الإعارة المرتبطة FK AssetLoans.loanId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT violationId FK "معرف المخالفة المسجلة FK UsageViolations.violationId - اختياري"
+    }
+
+    InventoryPlans {
+        INT planId PK "خطط الجرد"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assignedTeamLeaderId "معرف قائد فريق الجرد FK Employee.employeeId"
+    }
+
+    FieldInventoryLog {
+        INT logId PK "الجرد الميداني"
+        INT planId FK "معرف خطة الجرد المرتبطة FK InventoryPlans.planId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT scannerUserId "معرف من قام بالمسح FK SystemUser.userId"
+        INT assetId FK "معرف الأصل الناتج عن المسح يتم البحث عنه آلياً باستخدام scannedCode"
+        VARCHAR physicalLocation "الموقع الفعلي الذي تم العثور فيه على الأصل نص أو FK AssetLocation.l..."
+        INT verifiedByUserId "معرف من تحقق FK SystemUser.userId"
+    }
+
+    InventoryReconciliation {
+        INT reconciliationId PK "مطابقة وفروقات الجرد"
+        INT planId FK "معرف خطة الجرد FK InventoryPlans.planId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetId FK "معرف الأصل من جدول Asset"
+        INT resolvedByUserId "معرف من قام بحل الفرق FK SystemUser.userId"
+        INT approvedByUserId "معرف من اعتمد نتيجة المطابقة FK SystemUser.userId"
+    }
+
+    ComplianceAudit {
+        INT auditId PK "الامتثال والرقابة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT auditedByUserId "معرف المدقق FK SystemUser.userId"
+        INT approvedByUserId "معرف من اعتمد تقرير التدقيق FK SystemUser.userId"
+    }
+
+    FinalApprovalAudit {
+        INT finalApprovalId PK "اعتماد نتائج الرقابة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT planId FK "معرف خطة الجرد المرتبطة FK InventoryPlans.planId - اختياري قد يكون ..."
+        INT auditId FK "معرف التدقيق المرتبط FK ComplianceAudit.auditId - اختياري"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+        INT statusUpdatedByUserId "معرف من قام بتحديث النظام FK SystemUser.userId"
+    }
+
+    FacilityDepartmentAssignment {
+        INT assignmentId PK "تخصيص المرافق التعليمية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT facilityId "معرف المرفق FK Classroom.classroomId أو Asset.assetId"
+        INT departmentId "معرف القسم المستفيد FK SchoolDepartment.deptId"
+        INT responsibleUserId "رئيس القسم أو أمين المختبر المسؤول FK Employee.employeeId"
+    }
+
+    EducationalConsumablesTracking {
+        INT consumptionId PK "استهلاك المواد التعليمية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT consumedByUserId "معرف من صرف المادة FK SystemUser.userId"
+        INT departmentId "معرف القسم المستهلك FK SchoolDepartment.deptId"
+        INT courseId "معرف المادة الدراسية المرتبطة بالاستهلاك FK Course.courseId - اختياري"
+        INT activityId "معرف النشاط الطلابي المرتبط بالاستهلاك FK SchoolActivity.activityId..."
+    }
+
+    %% ===== Relationships =====
+    AssetCategory ||--o{ Asset : "معرف فئة الأصل FK AssetCa"
+    AssetStatus ||--o{ Asset : "معرف حالة الأصل FK AssetS"
+    AssetLocation ||--o{ Asset : "معرف الموقع المكاني الحال"
+    AssetWarrantyContract ||--o{ Asset : "معرف عقد الضمان المرتبط F"
+    Asset ||--o{ AssetDocument : "معرف الأصل المرتبط FK Ass"
+    AssetWarrantyContract ||--o{ AssetDocument : "معرف العقد المرتبط FK Ass"
+    AssetCategory ||--o{ AssetRequirementRequest : "معرف الفئة المقترحة FK As"
+    Asset ||--o{ AssetRequirementRequest : "معرف الأصل المطلوب استبدا"
+    PurchaseOrders ||--o{ AssetRequirementRequest : "معرف أمر الشراء المرتبط F"
+    AssetCategory ||--o{ TechnicalSpecifications : "معرف فئة الأصل المرتبطة F"
+    AssetRequirementRequest ||--o{ FeasibilityRiskAnalysis : "معرف طلب الاحتياج المرتبط"
+    AssetCategory ||--o{ AssetBudgetAllocation : "معرف فئة الأصل FK AssetCa"
+    AssetRequirementRequest ||--o{ PurchaseOrders : "معرف طلب الاحتياج المرتبط"
+    AssetBudgetAllocation ||--o{ PurchaseOrders : "معرف تخصيص الميزانية المر"
+    PurchaseOrders ||--o{ AssetReceiving : "معرف أمر الشراء المرتبط F"
+    Asset ||--o{ AssetUsageLog : "معرف الأصل FK AssetassetI"
+    AssetLocation ||--o{ AssetUsageLog : "معرف الموقع الذي تم فيه ا"
+    Asset ||--o{ MaintenanceTickets : "معرف الأصل المعطوب FK Ass"
+    MaintenanceExecution ||--o{ MaintenanceTickets : "معرف سجل تنفيذ الصيانة ال"
+    Asset ||--o{ PreventiveMaintenanceSchedule : "معرف الأصل المستهدف FK As"
+    AssetCategory ||--o{ PreventiveMaintenanceSchedule : "معرف فئة الأصول FK AssetC"
+    AssetWarrantyContract ||--o{ PreventiveMaintenanceSchedule : "معرف عقد الصيانة الخارجي "
+    MaintenanceTickets ||--o{ MaintenanceExecution : "معرف تذكرة العطل المرتبطة"
+    PreventiveMaintenanceSchedule ||--o{ MaintenanceExecution : "معرف جدول الصيانة الوقائي"
+    Asset ||--o{ MaintenanceExecution : "معرف الأصل الذي تمت صيانت"
+    AssetStatus ||--o{ MaintenanceExecution : "معرف الحالة الجديدة للأصل"
+    Asset ||--o{ AssetSuspensionRequests : "معرف الأصل المراد تعليقه "
+    Asset ||--o{ UsageViolations : "معرف الأصل المخالف في است"
+    Asset ||--o{ AssetFinancials : "معرف الأصل المرتبط FK Ass"
+    Asset ||--o{ AssetDepreciation : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ DepreciationTransactions : "معرف الأصل FK AssetassetI"
+    AssetDepreciation ||--o{ DepreciationTransactions : "معرف سجل الإهلاك المرتبط "
+    Asset ||--o{ RevaluationImpairment : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetExpenses : "معرف الأصل FK AssetassetI"
+    MaintenanceExecution ||--o{ AssetExpenses : "معرف سجل تنفيذ الصيانة ال"
+    Asset ||--o{ FeasibilityComparison : "معرف الأصل المُقارَن FK A"
+    Asset ||--o{ FeasibilityComparison : "معرف الأصل البديل المقترح"
+    AssetCategory ||--o{ FinancialSummaryReports : "معرف فئة الأصول FK AssetC"
+    Asset ||--o{ AssetAssignment : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetLoans : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetTransferRequests : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetInspectionLog : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetMovementHistory : "معرف الأصل FK AssetassetI"
+    AssetLoans ||--o{ LoanTrackingAlerts : "معرف الإعارة المرتبطة FK "
+    UsageViolations ||--o{ LoanTrackingAlerts : "معرف المخالفة المسجلة FK "
+    InventoryPlans ||--o{ FieldInventoryLog : "معرف خطة الجرد المرتبطة F"
+    Asset ||--o{ FieldInventoryLog : "معرف الأصل الناتج عن المس"
+    InventoryPlans ||--o{ InventoryReconciliation : "معرف خطة الجرد FK Invento"
+    Asset ||--o{ InventoryReconciliation : "معرف الأصل من جدول Asset"
+    InventoryPlans ||--o{ FinalApprovalAudit : "معرف خطة الجرد المرتبطة F"
+    ComplianceAudit ||--o{ FinalApprovalAudit : "معرف التدقيق المرتبط FK C"
+      </div>
+    </div>
+    <details>
+      <summary>📝 كود Mermaid المصدر (Slim)</summary>
+      <pre class="source-code" id="src-slim">erDiagram
+    %% =====================================================
+    %% M4_Assets - ERD
+    %% Mermaid 10.9.1 Compliant - SLIM VIEW (PK + FK only)
+    %% =====================================================
+
+    Asset {
+        INT assetId PK "الأصول الأساسي"
+        INT schoolId "معرف المدرسة FK School.schoolId . هذا الحقل يربط كل أصل بمدرسته."
+        INT assetCategoryId FK "معرف فئة الأصل FK AssetCategory.categoryId . يربط الأصل بفئته."
+        INT assetStatusId FK "معرف حالة الأصل FK AssetStatus.statusId . يربط الأصل بحالته الحالية."
+        INT assetLocationId FK "معرف الموقع المكاني الحالي FK AssetLocation.locationId . يحدد أين ي..."
+        VARCHAR purchaseOrderReference "رقم أمر الشراء المرتبط FK PurchaseOrders.poNumber"
+        INT warrantyContractId FK "معرف عقد الضمان المرتبط FK AssetWarrantyContract.contractId"
+        INT createdByUserId "معرف المستخدم الذي أضاف الأصل FK SystemUser.userId"
+    }
+
+    AssetCategory {
+        INT categoryId PK "فئات الأصول"
+        INT schoolId "معرف المدرسة FK School.schoolId - لتمكين كل مدرسة من تخصيص تصنيفاته..."
+        INT parentCategoryId FK "معرف الفئة الأم Self FK AssetCategory.categoryId - لبناء الهيكل اله..."
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetLocation {
+        INT locationId PK "المواقع المكانية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT parentLocationId FK "معرف الموقع الأب Self FK AssetLocation.locationId - لإنشاء هيكل هرم..."
+        INT responsiblePersonId "معرف الشخص المسؤول عن هذا الموقع FK Employee.employeeId - اختياري"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetStatus {
+        INT statusId PK "حالات الأصل"
+        INT schoolId "معرف المدرسة FK School.schoolId - لتمكين كل مدرسة من إضافة حالاتها ..."
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetWarrantyContract {
+        INT contractId PK "الضمان والعقود"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetDocument {
+        INT documentId PK "وثائق الأصل"
+        INT assetId FK "معرف الأصل المرتبط FK Asset.assetId - مهم جداً هذا هو الرابط الأساسي"
+        INT contractId FK "معرف العقد المرتبط FK AssetWarrantyContract.contractId - اختياري لر..."
+        INT uploadedByUserId "معرف من قام بالرفع FK SystemUser.userId"
+    }
+
+    AssetRequirementRequest {
+        INT requestId PK "مقترحات وطلبات الاحتياج"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetCategoryId FK "معرف الفئة المقترحة FK AssetCategory.categoryId - لتسهيل التصنيف"
+        INT requestingDepartmentId "معرف القسم الطالب FK SchoolDepartment.deptId"
+        INT requestedByUserId "معرف الموظف مقدم الطلب FK Employee.employeeId"
+        INT renewalPlanId "ربط الطلب بخطة تجديد الأسطول إن وجدت FK PlanId من جدول خطط التطوير ..."
+        INT assetToReplaceId FK "معرف الأصل المطلوب استبداله FK Asset.assetId - إذا كان isReplacemen..."
+        INT approvedByUserId "معرف من اعتمد الطلب FK SystemUser.userId"
+        INT purchaseOrderId FK "معرف أمر الشراء المرتبط FK PurchaseOrders.purchaseOrderId - بعد الت..."
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    TechnicalSpecifications {
+        INT specId PK "المواصفات الفنية والمعايير"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetCategoryId FK "معرف فئة الأصل المرتبطة FK AssetCategory.categoryId"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    FeasibilityRiskAnalysis {
+        INT analysisId PK "دراسات الجدوى والمخاطر"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT requestId FK "معرف طلب الاحتياج المرتبط FK AssetRequirementRequest.requestId - ال..."
+        INT analystUserId "معرف من قام بالتحليل FK Employee.employeeId"
+        INT approvedByUserId "معرف من اعتمد التحليل FK SystemUser.userId"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetBudgetAllocation {
+        INT allocationId PK "ميزانية الأصول"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetCategoryId FK "معرف فئة الأصل FK AssetCategory.categoryId - يمكن أن يكون فارغاً لل..."
+        INT departmentId "معرف القسم FK SchoolDepartment.deptId - يمكن أن يكون فارغاً للتخصيص..."
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    PurchaseOrders {
+        INT purchaseOrderId PK "طلبات الشراء والمناقصات"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT requestId FK "معرف طلب الاحتياج المرتبط FK AssetRequirementRequest.requestId - يم..."
+        INT approvedByUserId "معرف من اعتمد الأمر FK SystemUser.userId"
+        INT budgetAllocationId FK "معرف تخصيص الميزانية المرتبط FK AssetBudgetAllocation.allocationId ..."
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetReceiving {
+        INT receivingId PK "الاستلام المبدئي وفحص الجودة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT purchaseOrderId FK "معرف أمر الشراء المرتبط FK PurchaseOrders.purchaseOrderId"
+        INT receivedByUserId "معرف من قام بالاستلام FK Employee.employeeId - عضو لجنة الاستلام"
+        INT inspectorUserId "معرف المفتش FK Employee.employeeId - عضو لجنة فحص الجودة"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetUsageLog {
+        INT usageLogId PK "سجل التشغيل والاستخدام"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId - للتكرار"
+        INT userId "معرف المستخدم الذي استخدم الأصل FK SystemUser.userId - يمكن أن يكون..."
+        INT locationId FK "معرف الموقع الذي تم فيه الاستخدام FK AssetLocation.locationId"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    MaintenanceTickets {
+        INT ticketId PK "بلاغات الأعطال"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetId FK "معرف الأصل المعطوب FK Asset.assetId"
+        INT reportedByUserId "معرف مقدم البلاغ FK SystemUser.userId"
+        VARCHAR reportedLocation "موقع العطل نص أو FK AssetLocation.locationId"
+        INT assignedToUserId "معرف الفني المسؤول عن الإصلاح FK Employee.employeeId - من قسم الموظفين"
+        INT relatedExecutionId FK "معرف سجل تنفيذ الصيانة المرتبط FK MaintenanceExecution.executionId ..."
+    }
+
+    PreventiveMaintenanceSchedule {
+        INT scheduleId PK "جدولة الصيانة الوقائية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetId FK "معرف الأصل المستهدف FK Asset.assetId - يمكن أن يكون فارغاً لتطبيق ا..."
+        INT assetCategoryId FK "معرف فئة الأصول FK AssetCategory.categoryId - يُستخدم إذا كان الجدو..."
+        VARCHAR assignedToTeam "الفريق المسؤول نص أو FK Employee.employeeId"
+        INT contractId FK "معرف عقد الصيانة الخارجي المرتبط FK AssetWarrantyContract.contractI..."
+    }
+
+    MaintenanceExecution {
+        INT executionId PK "سجل تنفيذ الصيانة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT ticketId FK "معرف تذكرة العطل المرتبطة FK MaintenanceTickets.ticketId - اختياري ..."
+        INT scheduleId FK "معرف جدول الصيانة الوقائية المرتبط FK PreventiveMaintenanceSchedule..."
+        INT assetId FK "معرف الأصل الذي تمت صيانته FK Asset.assetId"
+        INT executedByUserId "معرف الفني المنفذ FK Employee.employeeId"
+        INT newAssetStatusId FK "معرف الحالة الجديدة للأصل بعد الصيانة FK AssetStatus.statusId - مثل..."
+    }
+
+    MaintenanceSpareParts {
+        INT partId PK "قطع الغيار والمستهلكات"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+    }
+
+    AssetSuspensionRequests {
+        INT suspensionId PK "طلبات تعليق الأصل"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetId FK "معرف الأصل المراد تعليقه FK Asset.assetId"
+        INT requestedByUserId "معرف مقدم الطلب FK SystemUser.userId"
+        INT approvedByUserId "معرف المعتمد FK SystemUser.userId"
+    }
+
+    MaintenanceNotifications {
+        INT notificationId PK "إشعارات الصيانة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT recipientUserId "معرف المستخدم المستلم FK SystemUser.userId"
+    }
+
+    UsageViolations {
+        INT violationId PK "مخالفات الاستخدام"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetId FK "معرف الأصل المخالف في استخدامه FK Asset.assetId"
+        INT reportedByUserId "معرف من أبلغ عن المخالفة FK SystemUser.userId"
+        INT violatingUserId "معرف المستخدم المخالف FK SystemUser.userId - يمكن أن يكون موظفاً أو..."
+        INT approvedByUserId "معرف من اعتمد الإجراء التأديبي FK SystemUser.userId"
+    }
+
+    AssetFinancials {
+        INT financialsId PK "القيم المالية للأصل"
+        INT assetId FK "معرف الأصل المرتبط FK Asset.assetId - علاقة 1-1 أصل واحد له سجل مال..."
+        INT schoolId "معرف المدرسة FK School.schoolId - للتكرار وتسهيل التقارير"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetDepreciation {
+        INT depreciationId PK "سياسات وحسابات الإهلاك"
+        INT assetId FK "معرف الأصل FK Asset.assetId - علاقة 1-1"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+    }
+
+    DepreciationTransactions {
+        INT transactionId PK "معاملات الإهلاك الدورية"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT depreciationId FK "معرف سجل الإهلاك المرتبط FK AssetDepreciation.depreciationId"
+    }
+
+    RevaluationImpairment {
+        INT revaluationId PK "إعادة التقييم والانخفاض"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT approvedByUserId "معرف من اعتمد العملية FK SystemUser.userId"
+    }
+
+    AssetExpenses {
+        INT expenseId PK "المصروفات الرأسمالية والتشغيلية"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT relatedExecutionId FK "معرف سجل تنفيذ الصيانة المرتبط FK MaintenanceExecution.executionId ..."
+        INT approvedByUserId "معرف من اعتمد تصنيف المصروف FK SystemUser.userId"
+    }
+
+    FeasibilityComparison {
+        INT comparisonId PK "مقارنات الجدوى والاستبدال"
+        INT assetId FK "معرف الأصل المُقارَن FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT replacementAssetId FK "معرف الأصل البديل المقترح FK Asset.assetId - يمكن أن يكون أصل جديد ..."
+        INT approvedByUserId "معرف من اتخذ القرار FK SystemUser.userId"
+    }
+
+    FinancialAuditArchive {
+        INT archiveId PK "الأرشفة المالية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+    }
+
+    FinancialSummaryReports {
+        INT summaryId PK "تقارير القيمة المالية المجمعة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetCategoryId FK "معرف فئة الأصول FK AssetCategory.categoryId - يمكن أن يكون فارغاً ل..."
+    }
+
+    AssetAssignment {
+        INT assignmentId PK "تخصيص الأصول"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assignerUserId "معرف من قام بالتخصيص FK SystemUser.userId"
+        INT returnedToUserId "معرف من استلم الأصل عند الإرجاع FK SystemUser.userId"
+    }
+
+    AssetLoans {
+        INT loanId PK "إعارات الأصول"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT issuerUserId "معرف من قام بالإعارة FK SystemUser.userId"
+    }
+
+    AssetTransferRequests {
+        INT transferRequestId PK "طلبات النقل والتحويل"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT requestedByUserId "معرف مقدم الطلب FK SystemUser.userId"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+        INT executedByUserId "معرف من نفذ النقل FK SystemUser.userId"
+    }
+
+    AssetInspectionLog {
+        INT inspectionId PK "فحص الاستلام والإرجاع"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT inspectorUserId "معرف المفتش FK SystemUser.userId"
+    }
+
+    AssetMovementHistory {
+        INT historyId PK "سجل حركة الأصول التاريخي"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT performedByUserId "معرف من قام بالحركة FK SystemUser.userId"
+    }
+
+    LoanTrackingAlerts {
+        INT alertId PK "تنبيهات ومتابعة الإعارات"
+        INT loanId FK "معرف الإعارة المرتبطة FK AssetLoans.loanId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT violationId FK "معرف المخالفة المسجلة FK UsageViolations.violationId - اختياري"
+    }
+
+    InventoryPlans {
+        INT planId PK "خطط الجرد"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assignedTeamLeaderId "معرف قائد فريق الجرد FK Employee.employeeId"
+    }
+
+    FieldInventoryLog {
+        INT logId PK "الجرد الميداني"
+        INT planId FK "معرف خطة الجرد المرتبطة FK InventoryPlans.planId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT scannerUserId "معرف من قام بالمسح FK SystemUser.userId"
+        INT assetId FK "معرف الأصل الناتج عن المسح يتم البحث عنه آلياً باستخدام scannedCode"
+        VARCHAR physicalLocation "الموقع الفعلي الذي تم العثور فيه على الأصل نص أو FK AssetLocation.l..."
+        INT verifiedByUserId "معرف من تحقق FK SystemUser.userId"
+    }
+
+    InventoryReconciliation {
+        INT reconciliationId PK "مطابقة وفروقات الجرد"
+        INT planId FK "معرف خطة الجرد FK InventoryPlans.planId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetId FK "معرف الأصل من جدول Asset"
+        INT resolvedByUserId "معرف من قام بحل الفرق FK SystemUser.userId"
+        INT approvedByUserId "معرف من اعتمد نتيجة المطابقة FK SystemUser.userId"
+    }
+
+    ComplianceAudit {
+        INT auditId PK "الامتثال والرقابة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT auditedByUserId "معرف المدقق FK SystemUser.userId"
+        INT approvedByUserId "معرف من اعتمد تقرير التدقيق FK SystemUser.userId"
+    }
+
+    FinalApprovalAudit {
+        INT finalApprovalId PK "اعتماد نتائج الرقابة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT planId FK "معرف خطة الجرد المرتبطة FK InventoryPlans.planId - اختياري قد يكون ..."
+        INT auditId FK "معرف التدقيق المرتبط FK ComplianceAudit.auditId - اختياري"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+        INT statusUpdatedByUserId "معرف من قام بتحديث النظام FK SystemUser.userId"
+    }
+
+    FacilityDepartmentAssignment {
+        INT assignmentId PK "تخصيص المرافق التعليمية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT facilityId "معرف المرفق FK Classroom.classroomId أو Asset.assetId"
+        INT departmentId "معرف القسم المستفيد FK SchoolDepartment.deptId"
+        INT responsibleUserId "رئيس القسم أو أمين المختبر المسؤول FK Employee.employeeId"
+    }
+
+    EducationalConsumablesTracking {
+        INT consumptionId PK "استهلاك المواد التعليمية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT consumedByUserId "معرف من صرف المادة FK SystemUser.userId"
+        INT departmentId "معرف القسم المستهلك FK SchoolDepartment.deptId"
+        INT courseId "معرف المادة الدراسية المرتبطة بالاستهلاك FK Course.courseId - اختياري"
+        INT activityId "معرف النشاط الطلابي المرتبط بالاستهلاك FK SchoolActivity.activityId..."
+    }
+
+    %% ===== Relationships =====
+    AssetCategory ||--o{ Asset : "معرف فئة الأصل FK AssetCa"
+    AssetStatus ||--o{ Asset : "معرف حالة الأصل FK AssetS"
+    AssetLocation ||--o{ Asset : "معرف الموقع المكاني الحال"
+    AssetWarrantyContract ||--o{ Asset : "معرف عقد الضمان المرتبط F"
+    Asset ||--o{ AssetDocument : "معرف الأصل المرتبط FK Ass"
+    AssetWarrantyContract ||--o{ AssetDocument : "معرف العقد المرتبط FK Ass"
+    AssetCategory ||--o{ AssetRequirementRequest : "معرف الفئة المقترحة FK As"
+    Asset ||--o{ AssetRequirementRequest : "معرف الأصل المطلوب استبدا"
+    PurchaseOrders ||--o{ AssetRequirementRequest : "معرف أمر الشراء المرتبط F"
+    AssetCategory ||--o{ TechnicalSpecifications : "معرف فئة الأصل المرتبطة F"
+    AssetRequirementRequest ||--o{ FeasibilityRiskAnalysis : "معرف طلب الاحتياج المرتبط"
+    AssetCategory ||--o{ AssetBudgetAllocation : "معرف فئة الأصل FK AssetCa"
+    AssetRequirementRequest ||--o{ PurchaseOrders : "معرف طلب الاحتياج المرتبط"
+    AssetBudgetAllocation ||--o{ PurchaseOrders : "معرف تخصيص الميزانية المر"
+    PurchaseOrders ||--o{ AssetReceiving : "معرف أمر الشراء المرتبط F"
+    Asset ||--o{ AssetUsageLog : "معرف الأصل FK AssetassetI"
+    AssetLocation ||--o{ AssetUsageLog : "معرف الموقع الذي تم فيه ا"
+    Asset ||--o{ MaintenanceTickets : "معرف الأصل المعطوب FK Ass"
+    MaintenanceExecution ||--o{ MaintenanceTickets : "معرف سجل تنفيذ الصيانة ال"
+    Asset ||--o{ PreventiveMaintenanceSchedule : "معرف الأصل المستهدف FK As"
+    AssetCategory ||--o{ PreventiveMaintenanceSchedule : "معرف فئة الأصول FK AssetC"
+    AssetWarrantyContract ||--o{ PreventiveMaintenanceSchedule : "معرف عقد الصيانة الخارجي "
+    MaintenanceTickets ||--o{ MaintenanceExecution : "معرف تذكرة العطل المرتبطة"
+    PreventiveMaintenanceSchedule ||--o{ MaintenanceExecution : "معرف جدول الصيانة الوقائي"
+    Asset ||--o{ MaintenanceExecution : "معرف الأصل الذي تمت صيانت"
+    AssetStatus ||--o{ MaintenanceExecution : "معرف الحالة الجديدة للأصل"
+    Asset ||--o{ AssetSuspensionRequests : "معرف الأصل المراد تعليقه "
+    Asset ||--o{ UsageViolations : "معرف الأصل المخالف في است"
+    Asset ||--o{ AssetFinancials : "معرف الأصل المرتبط FK Ass"
+    Asset ||--o{ AssetDepreciation : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ DepreciationTransactions : "معرف الأصل FK AssetassetI"
+    AssetDepreciation ||--o{ DepreciationTransactions : "معرف سجل الإهلاك المرتبط "
+    Asset ||--o{ RevaluationImpairment : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetExpenses : "معرف الأصل FK AssetassetI"
+    MaintenanceExecution ||--o{ AssetExpenses : "معرف سجل تنفيذ الصيانة ال"
+    Asset ||--o{ FeasibilityComparison : "معرف الأصل المُقارَن FK A"
+    Asset ||--o{ FeasibilityComparison : "معرف الأصل البديل المقترح"
+    AssetCategory ||--o{ FinancialSummaryReports : "معرف فئة الأصول FK AssetC"
+    Asset ||--o{ AssetAssignment : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetLoans : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetTransferRequests : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetInspectionLog : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetMovementHistory : "معرف الأصل FK AssetassetI"
+    AssetLoans ||--o{ LoanTrackingAlerts : "معرف الإعارة المرتبطة FK "
+    UsageViolations ||--o{ LoanTrackingAlerts : "معرف المخالفة المسجلة FK "
+    InventoryPlans ||--o{ FieldInventoryLog : "معرف خطة الجرد المرتبطة F"
+    Asset ||--o{ FieldInventoryLog : "معرف الأصل الناتج عن المس"
+    InventoryPlans ||--o{ InventoryReconciliation : "معرف خطة الجرد FK Invento"
+    Asset ||--o{ InventoryReconciliation : "معرف الأصل من جدول Asset"
+    InventoryPlans ||--o{ FinalApprovalAudit : "معرف خطة الجرد المرتبطة F"
+    ComplianceAudit ||--o{ FinalApprovalAudit : "معرف التدقيق المرتبط FK C"</pre>
+    </details>
+  </div>
+
+  <div id="pane-full" class="view-pane">
+    <div class="notice-slim" style="background:#FEE2E2;border-right-color:#DC2626;color:#7F1D1D">
+      ⚠️ <strong>تنبيه:</strong> العرض الكامل يحوي 984 حقل وقد يأخذ بضع ثوانٍ للتصيير.
+    </div>
+    <div class="diagram-card">
+      <div class="mermaid" id="diagram-full">
+erDiagram
+    %% =====================================================
+    %% M4_Assets - ERD
+    %% Mermaid 10.9.1 Compliant - ASCII identifiers only
+    %% =====================================================
+
+    Asset {
+        INT assetId PK "الأصول الأساسي"
+        INT schoolId "معرف المدرسة FK School.schoolId . هذا الحقل يربط كل أصل بمدرسته."
+        VARCHAR assetUniqueCode "الرقم التعريفي الفريد يتم توليده آلياً. مثال - AST-2024-00001"
+        VARCHAR assetNameAr "اسم الأصل باللغة العربية مثال - جهاز حاسب آلي محمول"
+        VARCHAR assetNameEn "اسم الأصل باللغة الإنجليزية مثال - Laptop Computer"
+        VARCHAR assetTag "علامة أو ملصق الأصل رقم مختصر يكتب على ملصق يوضع على الجهاز. مثال -..."
+        INT serialNumber "الرقم التسلسلي من المصنع مهم جداً للمتابعة مع الضمان"
+        INT modelNumber "رقم الموديل"
+        VARCHAR manufacturer "الشركة المصنعة"
+        VARCHAR brand "العلامة التجارية مثل - Dell HP Samsung"
+        INT assetCategoryId FK "معرف فئة الأصل FK AssetCategory.categoryId . يربط الأصل بفئته."
+        INT assetStatusId FK "معرف حالة الأصل FK AssetStatus.statusId . يربط الأصل بحالته الحالية."
+        INT assetLocationId FK "معرف الموقع المكاني الحالي FK AssetLocation.locationId . يحدد أين ي..."
+        VARCHAR condition "حالة الأصل جديد جيد يحتاج صيانة تالف مهمل"
+        VARCHAR acquisitionType "نوع الحصول شراء هبة نقل داخلي تأجير"
+        DATE acquisitionDate "تاريخ الحصول على الأصل"
+        DECIMAL acquisitionCost "تكلفة الشراء أو القيمة عند الحصول عليها"
+        VARCHAR currency "العملة SAR USD etc."
+        VARCHAR supplierName "اسم المورد أو البائع"
+        VARCHAR purchaseOrderReference "رقم أمر الشراء المرتبط FK PurchaseOrders.poNumber"
+        INT warrantyContractId FK "معرف عقد الضمان المرتبط FK AssetWarrantyContract.contractId"
+        BOOLEAN isInsured "هل الأصل مغطى بالتأمين"
+        INT insurancePolicyNumber "رقم وثيقة التأمين"
+        DATE insuranceExpiryDate "تاريخ انتهاء التغطية التأمينية"
+        VARCHAR usefulLifeYears "العمر الإنتاجي المقدر بالسنوات يُستخدم لحساب الإهلاك"
+        DECIMAL salvageValue "القيمة التخريدية قيمة الأصل بعد انتهاء عمره الإنتاجي"
+        DECIMAL currentValue "القيمة الدفترية الحالية يتم تحديثها آلياً بواسطة نظام الإهلاك"
+        VARCHAR barcode "باركود الأصل نص أو رقم"
+        VARCHAR qrCode "رابط أو نص يمثل رمز QR"
+        VARCHAR rfidTag "رقم شريحة RFID إن وجدت"
+        BOOLEAN hasPhysicalTag "هل تم وضع ملصق فعلي على الأصل"
+        DATE physicalTagDate "تاريخ وضع الملصق"
+        TEXT notes "ملاحظات إضافية مثل وصف لأي ضرر سابق أو ملاحظة خاصة"
+        BOOLEAN isActive "هل الأصل لا يزال قيد الاستخدام ولم يتم التخلص منه"
+        BOOLEAN isDeleted "حذف منطقي لإخفاء الأصل بدلاً من حذفه نهائياً"
+        INT createdByUserId "معرف المستخدم الذي أضاف الأصل FK SystemUser.userId"
+        INT updatedByUserId "آخر من قام بتعديل بيانات الأصل"
+        DATE createdAt "تاريخ إنشاء السجل"
+        DATE updatedAt "تاريخ آخر تحديث"
+    }
+
+    AssetCategory {
+        INT categoryId PK "فئات الأصول"
+        INT schoolId "معرف المدرسة FK School.schoolId - لتمكين كل مدرسة من تخصيص تصنيفاته..."
+        INT parentCategoryId FK "معرف الفئة الأم Self FK AssetCategory.categoryId - لبناء الهيكل اله..."
+        VARCHAR categoryCode "كود الفئة فريد داخل المدرسة - مثال - IT-COMP FURN-DESK"
+        VARCHAR categoryNameAr "اسم الفئة بالعربية مثال - أجهزة إلكترونية"
+        VARCHAR categoryNameEn "اسم الفئة بالإنجليزية مثال - Electronics"
+        VARCHAR categoryLevel "مستوى الفئة في الشجرة الهرمية 1 2 3... - يُحسب آلياً"
+        VARCHAR fullPath "المسار الكامل للفئة مثال - الأصول / أجهزة إلكترونية / حواسيب / لابت..."
+        TEXT description "وصف الفئة"
+        DECIMAL depreciationRate "نسبة الإهلاك السنوية المتوقعة كنسبة مئوية مثال - 25.00"
+        VARCHAR depreciationMethod "طريقة الإهلاك الافتراضية لهذه الفئة القسط الثابت القسط المتناقص وحد..."
+        VARCHAR usefulLifeYears "العمر الإنتاجي الافتراضي بالسنوات مثال - للحواسيب 3 سنوات للأثاث 10..."
+        INT accountCode "كود الحساب المحاسبي المرتبط بهذه الفئة للتكامل مع نظام الأستاذ العام"
+        INT expenseAccountCode "كود حساب المصروف المرتبط لشراء الأصول"
+        INT accumulatedDepAccountCode "كود حساب مجمع الإهلاك"
+        BOOLEAN isActive "هل الفئة مفعلة يمكن تعطيل الفئات القديمة"
+        BOOLEAN isSystem "هل هي فئة نظامية لا يمكن حذفها أو تعديلها من قبل المستخدم"
+        VARCHAR sortOrder "ترتيب عرض الفئة للقوائم المنسدلة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetLocation {
+        INT locationId PK "المواقع المكانية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT parentLocationId FK "معرف الموقع الأب Self FK AssetLocation.locationId - لإنشاء هيكل هرم..."
+        VARCHAR locationCode "كود الموقع فريد داخل المدرسة - مثال - B1-F2-R205"
+        VARCHAR locationNameAr "اسم الموقع بالعربية مثال - المبنى الرئيسي - الدور الثاني - غرفة 205"
+        VARCHAR locationNameEn "اسم الموقع بالإنجليزية مثال - Main Building - 2nd Floor - Room 205"
+        VARCHAR locationType "نوع الموقع مبنى طابق جناح قاعة مكتب معمل مستودع خزانة"
+        VARCHAR buildingName "اسم المبنى للبحث السريع"
+        INT floorNumber "رقم الطابق"
+        INT roomNumber "رقم الغرفة"
+        VARCHAR section "القسم أو الجناح"
+        VARCHAR area "المساحة بالمتر المربع للمواقع الكبيرة مثل المباني"
+        VARCHAR capacity "السعة الاستيعابية للقاعات والمكاتب"
+        BOOLEAN isActive "هل الموقع مفعل"
+        BOOLEAN hasPhysicalSign "هل تم وضع لافتة تعريفية على الموقع"
+        INT responsiblePersonId "معرف الشخص المسؤول عن هذا الموقع FK Employee.employeeId - اختياري"
+        VARCHAR contactPhone "هاتف المسؤول عن الموقع"
+        VARCHAR mapReference "إحداثيات الموقع على خريطة المدرسة نص"
+        VARCHAR qrCode "رمز QR للموقع لتسهيل الجرد عبر التطبيق"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetStatus {
+        INT statusId PK "حالات الأصل"
+        INT schoolId "معرف المدرسة FK School.schoolId - لتمكين كل مدرسة من إضافة حالاتها ..."
+        VARCHAR statusCode "كود الحالة فريد داخل المدرسة - مثال - ACTIVE MAINT RETIRED"
+        VARCHAR statusNameAr "اسم الحالة بالعربية نشط تحت الصيانة معار مهمل تالف مستبعد مفقود في ..."
+        VARCHAR statusNameEn "اسم الحالة بالإنجليزية Active Maintenance Loaned Scrap Damaged Reti..."
+        VARCHAR statusType "نوع الحالة تشغيلي صيانة خارج الخدمة"
+        BOOLEAN isOperational "هل هذه الحالة تسمح باستخدام الأصل نعم/لا - مهم جداً لمنع تخصيص أصول..."
+        BOOLEAN isAvailableForAssignment "هل يمكن تخصيص هذا الأصل لأحد في هذه الحالة"
+        BOOLEAN requiresApproval "هل يتطلب الانتقال إلى هذه الحالة موافقة إدارية"
+        VARCHAR colorCode "رمز اللون للتمييز في الشاشات Hex code مثل 00FF00"
+        BOOLEAN isActive "هل الحالة مفعلة يمكن استخدامها"
+        BOOLEAN isSystem "هل هي حالة نظامية لا يمكن حذفها أو تعديلها"
+        VARCHAR sortOrder "ترتيب عرض الحالة في القوائم"
+        TEXT descriptionAr "وصف الحالة بالعربية"
+        TEXT descriptionEn "وصف الحالة بالإنجليزية"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetWarrantyContract {
+        INT contractId PK "الضمان والعقود"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR contractType "نوع العقد ضمان صيانة ترخيص برمجيات إيجار"
+        INT contractNumber "رقم العقد الرسمي"
+        VARCHAR contractName "اسم العقد مثال - ضمان أجهزة الحاسوب - HP"
+        VARCHAR providerName "اسم المورد أو شركة الصيانة"
+        VARCHAR providerContact "جهة اتصال المورد شخص هاتف بريد"
+        DATE startDate "تاريخ بداية التغطية"
+        DATE endDate "تاريخ نهاية التغطية"
+        INT coverageDetails "تفاصيل التغطية ما الذي يشملّه الضمان قطع غيار صيانة وقائية دعم فني"
+        INT coverageType "نوع التغطية ضمان مصنع ضمان ممتد عقد صيانة سنوي"
+        DECIMAL contractValue "قيمة العقد الإجمالية"
+        VARCHAR currency "العملة"
+        VARCHAR paymentTerms "شروط الدفع"
+        BOOLEAN hasRenewalOption "هل يوجد خيار التجديد"
+        VARCHAR renewalTerms "شروط التجديد إن وجدت"
+        BOOLEAN isActive "هل العقد ساري المفعول"
+        VARCHAR contractStatus "حالة العقد ساري منتهي ملغى مجدد"
+        VARCHAR reminderDays "عدد الأيام قبل انتهاء العقد لإرسال التذكير افتراضي 30"
+        BOOLEAN isAlertEnabled "تفعيل التنبيهات التلقائية لانتهاء الصلاحية"
+        DATE lastAlertSentDate "تاريخ آخر تنبيه تم إرساله"
+        VARCHAR attachments "مرفقات مسار ملف العقد"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetDocument {
+        INT documentId PK "وثائق الأصل"
+        INT assetId FK "معرف الأصل المرتبط FK Asset.assetId - مهم جداً هذا هو الرابط الأساسي"
+        INT contractId FK "معرف العقد المرتبط FK AssetWarrantyContract.contractId - اختياري لر..."
+        VARCHAR docType "نوع الوثيقة فاتورة كتالوج صورة شهادة ملكية دليل مستخدم عقد صيانة"
+        VARCHAR docCode "كود الوثيقة"
+        VARCHAR docName "اسم الوثيقة"
+        TEXT description "وصف الوثيقة"
+        VARCHAR fileName "اسم الملف المرفوع"
+        VARCHAR filePath "مسار التخزين في السيرفر"
+        VARCHAR fileSize "حجم الملف بايت"
+        VARCHAR mimeType "نوع الملف PDF JPG PNG DOCX"
+        DATE uploadDate "تاريخ الرفع"
+        INT uploadedByUserId "معرف من قام بالرفع FK SystemUser.userId"
+        BOOLEAN isVerified "هل تم التحقق من صحة الوثيقة"
+        INT verifiedByUserId "معرف من قام بالتحقق"
+        DATE verifiedAt "تاريخ التحقق"
+        TEXT notes "ملاحظات"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetRequirementRequest {
+        INT requestId PK "مقترحات وطلبات الاحتياج"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT requestNumber "رقم الطلب التسلسلي يُولد تلقائياً مثال - REQ-2024-001"
+        VARCHAR requestType "نوع الطلب احتياج جديد استبدال أصل تالف زيادة سعة تطوير طوارئ"
+        VARCHAR assetType "نوع الأصل المقترح طاولات حواسيب أجهزة عرض أثاث مركبات أخرى"
+        INT assetCategoryId FK "معرف الفئة المقترحة FK AssetCategory.categoryId - لتسهيل التصنيف"
+        INT quantity "الكمية المطلوبة"
+        DECIMAL estimatedUnitCost "التكلفة التقديرية للوحدة"
+        DECIMAL estimatedTotalCost "التكلفة التقديرية الإجمالية تُحسب = estimatedUnitCost quantity"
+        VARCHAR currency "العملة SAR USD"
+        VARCHAR priority "الأولوية عاجل مهم عادي منخفض"
+        TEXT urgencyReason "سبب العجلة مثل - تعطل كلي للمعدات الحالية"
+        INT requestingDepartmentId "معرف القسم الطالب FK SchoolDepartment.deptId"
+        INT requestedByUserId "معرف الموظف مقدم الطلب FK Employee.employeeId"
+        DATE requestDate "تاريخ تقديم الطلب"
+        VARCHAR justification "مبررات الاحتياج ونتائج تحليل الفجوة نص طويل"
+        VARCHAR gapAnalysisSummary "ملخص تحليل الفجوة ماذا يوجد حالياً ماذا نحتاج الفرق"
+        VARCHAR initialSpecs "المواصفات الأولية المطلوبة نص أو JSON"
+        VARCHAR suggestedSuppliers "موردون مقترحون JSON"
+        DATE requiredByDate "التاريخ المطلوب فيه توفير الأصل"
+        INT renewalPlanId "ربط الطلب بخطة تجديد الأسطول إن وجدت FK PlanId من جدول خطط التطوير ..."
+        BOOLEAN isReplacement "هل الطلب لاستبدال أصل قديم"
+        INT assetToReplaceId FK "معرف الأصل المطلوب استبداله FK Asset.assetId - إذا كان isReplacemen..."
+        TEXT replacementReason "سبب الاستبدال انتهاء العمر الافتراضي كثرة الأعطال تقادم تقني"
+        VARCHAR approvalStatus "حالة الاعتماد مسودة قيد المراجعة معتمد مرفوض محول للشراء"
+        TEXT rejectionReason "سبب الرفض في حال تم الرفض"
+        INT approvedByUserId "معرف من اعتمد الطلب FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        BOOLEAN convertedToPO "هل تم تحويل الطلب إلى أمر شراء"
+        INT purchaseOrderId FK "معرف أمر الشراء المرتبط FK PurchaseOrders.purchaseOrderId - بعد الت..."
+        TEXT notes "ملاحظات إضافية"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    TechnicalSpecifications {
+        INT specId PK "المواصفات الفنية والمعايير"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR specCode "كود المواصفة فريد مثال - TECH-LAP-2024"
+        VARCHAR specNameAr "اسم المواصفة بالعربية مثال - مواصفات حاسب آلي للمعلمين"
+        VARCHAR specNameEn "اسم المواصفة بالإنجليزية مثال - Teacher Laptop Specifications"
+        INT assetCategoryId FK "معرف فئة الأصل المرتبطة FK AssetCategory.categoryId"
+        VARCHAR assetType "نوع الأصل لابتوب طابعة مكتب كرسي ..."
+        TEXT technicalDetails "تفاصيل المواصفات المعالج الرام المادة الحجم اللون إلخ نص طويل أو JSON"
+        VARCHAR requiredCertifications "الشهادات المطلوبة مثال - شهادة الطاقة شهادة الجودة ISO JSON"
+        VARCHAR acceptanceCriteria "معايير القبول الفني عند الاستلام نص طويل"
+        VARCHAR qualityStandards "معايير الجودة ISO كود البناء المعايير السعودية JSON"
+        VARCHAR warrantyRequirements "متطلبات الضمان المطلوبة في العقد"
+        VARCHAR deliveryRequirements "متطلبات التغليف والنقل"
+        VARCHAR installationRequirements "متطلبات التركيب إن وجدت"
+        VARCHAR safetyRequirements "متطلبات السلامة"
+        BOOLEAN isActive "هل المواصفة مفعلة يمكن استخدامها"
+        DATE validFrom "تاريخ بدء صلاحية المواصفة"
+        DATE validTo "تاريخ انتهاء صلاحية المواصفة"
+        VARCHAR version "إصدار المواصفة للتعامل مع التحديثات"
+        VARCHAR attachments "مرفقات كتالوجات صور ملفات PDF JSON"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    FeasibilityRiskAnalysis {
+        INT analysisId PK "دراسات الجدوى والمخاطر"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT requestId FK "معرف طلب الاحتياج المرتبط FK AssetRequirementRequest.requestId - ال..."
+        INT analysisNumber "رقم التحليل يولد تلقائياً"
+        DATE analysisDate "تاريخ إجراء التحليل"
+        INT analystUserId "معرف من قام بالتحليل FK Employee.employeeId"
+        VARCHAR operationalRisks "وصف المخاطر التشغيلية نص طويل"
+        VARCHAR financialRisks "وصف المخاطر المالية نص طويل"
+        VARCHAR riskLevel "مستوى المخاطر منخفض متوسط مرتفع"
+        VARCHAR riskMitigationPlan "خطة تخفيف المخاطر نص"
+        VARCHAR expectedLifeSpan "العمر الافتراضي المتوقع بالسنوات"
+        DECIMAL usefulLifeEstimate "تقدير العمر الإنتاجي قد يُعبّر عنه بالسنوات أو ساعات التشغيل"
+        DECIMAL roiEstimate "العائد المتوقع من الاستثمار ROI نسبة مئوية"
+        VARCHAR paybackPeriod "فترة استرداد رأس المال بالسنوات"
+        DECIMAL npvEstimate "صافي القيمة الحالية قيمة مالية"
+        VARCHAR alternativeSolutions "الحلول البديلة نص أو JSON"
+        VARCHAR finalRecommendation "التوصية النهائية شراء رفض تأجيل بديل"
+        TEXT recommendationReason "سبب التوصية نص"
+        INT approvedByUserId "معرف من اعتمد التحليل FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        VARCHAR status "حالة التحليل مسودة معتمد"
+        VARCHAR attachments "مرفقات دراسات تقارير JSON"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetBudgetAllocation {
+        INT allocationId PK "ميزانية الأصول"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR fiscalYear "السنة المالية للميزانية مثال - 2025"
+        VARCHAR budgetType "نوع الميزانية رأسمالي - Capex تشغيلي - Opex"
+        INT assetCategoryId FK "معرف فئة الأصل FK AssetCategory.categoryId - يمكن أن يكون فارغاً لل..."
+        INT departmentId "معرف القسم FK SchoolDepartment.deptId - يمكن أن يكون فارغاً للتخصيص..."
+        DECIMAL allocatedAmount "المبلغ المخصص لهذا البند السقف المالي"
+        DECIMAL spentAmount "المبلغ الذي تم صرفه حتى الآن يتم تحديثه آلياً عند إنشاء أوامر الشراء"
+        DECIMAL remainingAmount "المبلغ المتبقي بعد الصرف يُحسب آلياً = allocatedAmount - spentAmount"
+        VARCHAR budgetLineCode "رمز بند الميزانية في النظام المالي الخارجي للتكامل"
+        TEXT notes "ملاحظات"
+        VARCHAR status "حالة تخصيص الميزانية نشط مستنفذ ملغي"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    PurchaseOrders {
+        INT purchaseOrderId PK "طلبات الشراء والمناقصات"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT poNumber "رقم أمر الشراء الرسمي فريد مهم للرجوع إليه"
+        DATE poDate "تاريخ إصدار الأمر"
+        INT requestId FK "معرف طلب الاحتياج المرتبط FK AssetRequirementRequest.requestId - يم..."
+        VARCHAR supplierName "اسم المورد"
+        VARCHAR supplierContact "جهة اتصال المورد"
+        TEXT supplierAddress "عنوان المورد"
+        DECIMAL totalAmount "القيمة الإجمالية للشراء شامل الضريبة"
+        DECIMAL taxAmount "قيمة الضريبة مثال - VAT 15"
+        INT taxRegistrationNumber "الرقم الضريبي للمورد إن وجد"
+        VARCHAR currency "العملة"
+        VARCHAR paymentTerms "شروط الدفع مثال - 30 مقدماً 70 عند الاستلام"
+        VARCHAR deliveryTerms "شروط التسليم مثال - FOB CIF تسليم باب المدرسة"
+        DATE deliveryDeadline "آخر موعد للتسليم المتفق عليه التاريخ"
+        DATE actualDeliveryDate "تاريخ الاستلام الفعلي يُعبأ عند الاستلام"
+        VARCHAR shippingMethod "طريقة الشحن"
+        INT approvedByUserId "معرف من اعتمد الأمر FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        VARCHAR poStatus "حالة أمر الشراء مسودة معتمد مرسل للمورد قيد التنفيذ تم الاستلام جزئ..."
+        BOOLEAN cancellationReason "سبب الإلغاء إن وجد"
+        INT budgetAllocationId FK "معرف تخصيص الميزانية المرتبط FK AssetBudgetAllocation.allocationId ..."
+        TEXT notes "ملاحظات"
+        VARCHAR attachments "مرفقات PDF لأمر الشراء العطاء JSON"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetReceiving {
+        INT receivingId PK "الاستلام المبدئي وفحص الجودة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT purchaseOrderId FK "معرف أمر الشراء المرتبط FK PurchaseOrders.purchaseOrderId"
+        INT receivingNumber "رقم سند الاستلام يُولد آلياً"
+        DATE receivedDate "تاريخ وصول الأصل الفعلي إلى المدرسة"
+        INT receivedByUserId "معرف من قام بالاستلام FK Employee.employeeId - عضو لجنة الاستلام"
+        INT inspectorUserId "معرف المفتش FK Employee.employeeId - عضو لجنة فحص الجودة"
+        INT deliveryNoteNumber "رقم إذن التسليم من المورد للرجوع إليه"
+        VARCHAR deliveryCompany "شركة النقل إن وجدت"
+        VARCHAR inspectionResult "نتيجة الفحص مطابق غير مطابق جزئياً مرفوض يحتاج إصلاح"
+        DATE inspectionDate "تاريخ فحص الجودة"
+        TEXT inspectionNotes "ملاحظات اللجنة الفنية عند الفحص نص طويل يوثق أي ملاحظات أو عيوب"
+        VARCHAR qualityScore "تقييم جودة الأصل 1-10 - اختياري"
+        VARCHAR deliveryStatus "حالة التسليم تم الاستلام كاملاً تأخير استلام جزئي"
+        TEXT receivedItemsDetails "تفاصيل الأصناف المستلمة JSON - يمكن أن تحتوي على قائمة بالأصناف وال..."
+        VARCHAR acceptedAssets "قائمة بالأصول التي تم قبولها سيتم تحويلها إلى سجلات في جدول Asset"
+        VARCHAR rejectedItems "الأصناف المرفوضة مع أسباب الرفض JSON"
+        BOOLEAN returnRequested "هل تم طلب إعادة الأصناف المرفوضة للمورد"
+        DATE returnDate "تاريخ إعادة الأصناف إن وجد"
+        BOOLEAN correctiveActionRequested "هل تم طلب إجراء تصحيحي من المورد"
+        TEXT correctiveActionDetails "تفاصيل الإجراء التصحيحي المطلوب"
+        VARCHAR finalDecision "القرار النهائي للجنة قبول كامل قبول جزئي مع خصم رفض كامل إعادة"
+        VARCHAR attachments "مرفقات صور الأصول تقارير الفحص JSON"
+        VARCHAR status "حالة عملية الاستلام مفتوح قيد الفحص مكتمل ملغي"
+        TEXT notes "ملاحظات عامة"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetUsageLog {
+        INT usageLogId PK "سجل التشغيل والاستخدام"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId - للتكرار"
+        INT usageType "نوع الاستخدام تشغيل عادي اختبار صيانة طارئ"
+        DATETIME startDateTime "تاريخ ووقت بدء التشغيل"
+        DATETIME endDateTime "تاريخ ووقت إيقاف التشغيل"
+        VARCHAR durationMinutes "مدة الاستخدام بالدقائق تُحسب آلياً من startDateTime و endDateTime"
+        VARCHAR purpose "الغرض من الاستخدام تعليمي إداري تدريب اجتماع صيانة أخرى"
+        TEXT purposeDetails "تفاصيل إضافية عن الغرض مثل اسم المادة الدراسية نوع النشاط"
+        INT userId "معرف المستخدم الذي استخدم الأصل FK SystemUser.userId - يمكن أن يكون..."
+        VARCHAR userType "نوع المستخدم معلم موظف طالب"
+        INT locationId FK "معرف الموقع الذي تم فيه الاستخدام FK AssetLocation.locationId"
+        INT usageStatus "حالة الاستخدام قيد الاستخدام مكتمل معلق منقطع"
+        TEXT notes "ملاحظات أثناء الاستخدام أي مشاكل طرأت كفاءة الأداء"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    MaintenanceTickets {
+        INT ticketId PK "بلاغات الأعطال"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT ticketNumber "رقم التذكرة يُولد آلياً مثال - MT-2024-001"
+        INT assetId FK "معرف الأصل المعطوب FK Asset.assetId"
+        INT reportedByUserId "معرف مقدم البلاغ FK SystemUser.userId"
+        DATETIME reportDate "تاريخ ووقت تسجيل البلاغ"
+        BOOLEAN issueType "نوع المشكلة كهربائي ميكانيكي برمجي هيكلي تسرب أخرى"
+        VARCHAR severityLevel "مستوى الخطورة منخفض متوسط عالي طارئ - يحدد أولوية الاستجابة"
+        BOOLEAN issueDescription "وصف تفصيلي للمشكلة من المبلغ"
+        VARCHAR reportedLocation "موقع العطل نص أو FK AssetLocation.locationId"
+        INT assignedToUserId "معرف الفني المسؤول عن الإصلاح FK Employee.employeeId - من قسم الموظفين"
+        DATE assignedDate "تاريخ التعيين"
+        VARCHAR diagnosis "تشخيص الفني للمشكلة نص"
+        VARCHAR requiredParts "قطع الغيار المطلوبة JSON - يمكن ربطها بجدول MaintenanceSpareParts"
+        DECIMAL estimatedCost "التكلفة التقديرية للإصلاح"
+        DATE estimatedCompletionDate "تاريخ الإنجاز المتوقع"
+        DATE actualCompletionDate "تاريخ الإنجاز الفعلي"
+        TEXT resolutionDetails "تفاصيل الإجراءات التي تمت لحل المشكلة"
+        VARCHAR resolutionSummary "ملخص الحل"
+        DECIMAL resolutionCost "التكلفة الفعلية للإصلاح"
+        VARCHAR ticketStatus "حالة التذكرة مفتوح قيد المراجعة معتمد قيد الإصلاح في انتظار قطع غيا..."
+        TEXT closureNotes "ملاحظات عند الإغلاق"
+        INT closedByUserId "معرف من أغلق التذكرة"
+        DATE closedAt "تاريخ الإغلاق"
+        INT relatedExecutionId FK "معرف سجل تنفيذ الصيانة المرتبط FK MaintenanceExecution.executionId ..."
+        VARCHAR attachments "مرفقات صور للمشكلة تقارير JSON"
+        TEXT notes "ملاحظات إضافية"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    PreventiveMaintenanceSchedule {
+        INT scheduleId PK "جدولة الصيانة الوقائية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR scheduleCode "كود جدول الصيانة فريد"
+        INT assetId FK "معرف الأصل المستهدف FK Asset.assetId - يمكن أن يكون فارغاً لتطبيق ا..."
+        INT assetCategoryId FK "معرف فئة الأصول FK AssetCategory.categoryId - يُستخدم إذا كان الجدو..."
+        VARCHAR taskNameAr "اسم مهمة الصيانة بالعربية مثال - فحص شامل لوحدة التكييف"
+        VARCHAR taskNameEn "اسم المهمة بالإنجليزية"
+        VARCHAR maintenanceType "نوع الصيانة تنظيف معايرة فحص تشحيم استبدال قطع"
+        VARCHAR frequency "التكرار أسبوعي شهري ربع سنوي سنوي حسب ساعات التشغيل"
+        DECIMAL frequencyValue "القيمة العددية للتكرار مثال - 3 أشهر 500 ساعة تشغيل"
+        VARCHAR frequencyUnit "وحدة التكرار شهر أسبوع يوم ساعة تشغيل"
+        DATE nextDueDate "موعد الصيانة القادم يُحسب آلياً بناءً على آخر تاريخ تم تنفيذه والتكرار"
+        DATE lastServiceDate "تاريخ آخر صيانة تمت يتم تحديثه عند التنفيذ"
+        VARCHAR estimatedDuration "المدة التقديرية للمهمة بالدقائق"
+        VARCHAR assignedToTeam "الفريق المسؤول نص أو FK Employee.employeeId"
+        VARCHAR instructions "تعليمات الصيانة نص طويل"
+        VARCHAR checklist "قائمة مرجعية لإجراءات الصيانة JSON"
+        VARCHAR requiredParts "قطع الغيار المطلوبة لهذه المهمة الوقائية JSON"
+        DECIMAL estimatedCost "التكلفة التقديرية"
+        INT contractId FK "معرف عقد الصيانة الخارجي المرتبط FK AssetWarrantyContract.contractI..."
+        BOOLEAN isReminderActive "تفعيل/تعطيل التنبيهات التلقائية قبل الموعد نعم/لا"
+        VARCHAR reminderDaysBefore "عدد الأيام قبل الموعد لإرسال التذكير افتراضي 7 أيام"
+        VARCHAR status "حالة الجدول نشط معلق ملغي"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    MaintenanceExecution {
+        INT executionId PK "سجل تنفيذ الصيانة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT executionNumber "رقم سجل التنفيذ يُولد آلياً"
+        INT ticketId FK "معرف تذكرة العطل المرتبطة FK MaintenanceTickets.ticketId - اختياري ..."
+        INT scheduleId FK "معرف جدول الصيانة الوقائية المرتبط FK PreventiveMaintenanceSchedule..."
+        INT assetId FK "معرف الأصل الذي تمت صيانته FK Asset.assetId"
+        VARCHAR executionType "نوع التنفيذ صيانة تفاعلية صيانة وقائية طارئ"
+        DATETIME startDateTime "وقت بدء العمل الفعلي"
+        DATETIME endDateTime "وقت الانتهاء لحساب زمن الاستجابة/التنفيذ"
+        INT executedByUserId "معرف الفني المنفذ FK Employee.employeeId"
+        VARCHAR workPerformed "وصف دقيق لما تم إنجازه من أعمال نص طويل"
+        VARCHAR sparePartsUsed "قطع الغيار المستهلكة JSON - يمكن ربطها بتفاصيل MaintenanceSpareParts"
+        DECIMAL maintenanceCost "التكلفة المالية المباشرة أجور + قطع غيار"
+        TEXT additionalNotes "ملاحظات إضافية"
+        BOOLEAN isOperationalAfter "هل عاد الأصل للخدمة بنجاح نعم/لا"
+        INT newAssetStatusId FK "معرف الحالة الجديدة للأصل بعد الصيانة FK AssetStatus.statusId - مثل..."
+        VARCHAR resolutionSummary "ملخص الإجراءات والحل"
+        VARCHAR attachments "مرفقات صور قبل وبعد الإصلاح تقارير"
+        VARCHAR status "حالة سجل التنفيذ مكتمل قيد التنفيذ ملغي"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    MaintenanceSpareParts {
+        INT partId PK "قطع الغيار والمستهلكات"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR partCode "الكود المخزني للقطعة SKU فريد"
+        VARCHAR partNameAr "اسم قطعة الغيار أو المادة بالعربية مثال - فلتر زيت"
+        VARCHAR partNameEn "الاسم بالإنجليزية"
+        VARCHAR partCategory "فئة القطعة كهربائية ميكانيكية إلكترونية استهلاكية"
+        VARCHAR manufacturer "الشركة المصنعة اختياري"
+        VARCHAR compatibleAssets "الأصول المتوافقة مع هذه القطعة JSON - قائمة بمعرفات الأصول أو الفئات"
+        VARCHAR unitOfMeasure "وحدة القياس قطعة علبة لتر متر"
+        INT currentStockQuantity "الكمية المتوفرة حالياً في المخزون"
+        VARCHAR minStockLevel "الحد الأدنى للكمية عند الوصول إليه يتم إصدار تنبيه للتزويد"
+        VARCHAR maxStockLevel "الحد الأقصى للكمية"
+        INT reorderQuantity "كمية إعادة الطلب الموصى بها متى نطلب وماذا نطلب"
+        DECIMAL unitCost "سعر الوحدة لحساب التكلفة عند الاستهلاك"
+        VARCHAR currency "العملة"
+        VARCHAR supplierName "المورد المفضل"
+        VARCHAR locationInWarehouse "موقع القطعة في المستودع رف خزانة"
+        BOOLEAN isActive "هل القطعة لا تزال مستخدمة"
+        VARCHAR status "حالة القطعة في المخزون متوفر شحيح نفذ مطلوب"
+        DATE lastRestockDate "تاريخ آخر تزويد"
+        DECIMAL totalConsumed "إجمالي الكمية المستهلكة يُحسب آلياً من استهلاكات الصيانة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetSuspensionRequests {
+        INT suspensionId PK "طلبات تعليق الأصل"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT requestNumber "رقم الطلب يُولد آلياً"
+        INT assetId FK "معرف الأصل المراد تعليقه FK Asset.assetId"
+        INT requestedByUserId "معرف مقدم الطلب FK SystemUser.userId"
+        DATE requestDate "تاريخ الطلب"
+        TEXT reason "سبب التعليق أمني فني إداري قيد التحقيق تلف كامل"
+        TEXT reasonDetails "تفاصيل السبب نص"
+        DATE startDate "تاريخ بدء التعليق المتوقع"
+        DATE expectedEndDate "التاريخ المتوقع لفك التعليق يمكن أن يكون فارغاً إذا كان دائماً"
+        VARCHAR attachments "مرفقات تقارير صور JSON"
+        VARCHAR approvalStatus "حالة الطلب قيد المراجعة معتمد مرفوض ملغي"
+        INT approvedByUserId "معرف المعتمد FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        TEXT approvalNotes "ملاحظات الاعتماد"
+        TEXT rejectionReason "سبب الرفض إن وجد"
+        BOOLEAN isRevoked "هل تم إلغاء التعليق وإعادة الأصل للخدمة"
+        DATE revokeDate "تاريخ الإلغاء"
+        TEXT revokeReason "سبب الإلغاء"
+        INT revokedByUserId "معرف من ألغى التعليق"
+        DATE actualEndDate "تاريخ الانتهاء الفعلي للتعليق"
+        VARCHAR status "حالة الطلب نشط منتهي ملغي"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    MaintenanceNotifications {
+        INT notificationId PK "إشعارات الصيانة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR relatedEntityType "نوع الكيان المرتبط MaintenanceTicket PreventiveSchedule SparePart A..."
+        INT relatedEntityId "معرف الكيان المرتبط يمكن أن يكون ticketId scheduleId partId suspens..."
+        VARCHAR notificationType "نوع الإشعار بلاغ جديد موعد صيانة قادم تحذير مخزون اكتمال صيانة تعلي..."
+        VARCHAR title "عنوان الإشعار"
+        INT messageContent "نص الرسالة التنبيهية"
+        INT recipientUserId "معرف المستخدم المستلم FK SystemUser.userId"
+        VARCHAR priority "أولوية الإشعار عادي مهم عاجل"
+        BOOLEAN isRead "هل تم الاطلاع على التنبيه"
+        DATE readAt "تاريخ القراءة"
+        DATETIME sentAt "تاريخ ووقت إرسال النظام للتنبيه"
+        VARCHAR deliveryMethod "طريقة الإرسال تطبيق بريد إلكتروني رسالة نصية"
+        VARCHAR status "حالة الإشعار مرسل مقروء ملغي"
+        INT createdByUserId "منشئ السجل غالباً النظام نفسه"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    UsageViolations {
+        INT violationId PK "مخالفات الاستخدام"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetId FK "معرف الأصل المخالف في استخدامه FK Asset.assetId"
+        VARCHAR violationType "نوع المخالفة سوء استخدام تجاوز حدود الصلاحية إهمال صيانة استخدام غي..."
+        DATE violationDate "تاريخ المخالفة"
+        INT reportedByUserId "معرف من أبلغ عن المخالفة FK SystemUser.userId"
+        DATE reportedDate "تاريخ الإبلاغ"
+        INT violatingUserId "معرف المستخدم المخالف FK SystemUser.userId - يمكن أن يكون موظفاً أو..."
+        TEXT description "وصف دقيق للمخالفة وما حدث"
+        VARCHAR evidence "أدلة JSON - مسارات ملفات صور فيديوهات"
+        VARCHAR penaltyAction "الإجراء المتخذ إنذار تعليق استخدام الأصل خصم مالي إحالة للتحقيق"
+        DECIMAL penaltyAmount "قيمة الغرامة المالية إن وجدت"
+        DECIMAL penaltyAmountCurrency "عملة الغرامة"
+        BOOLEAN deductionFromSalary "هل سيتم خصم المبلغ من راتب الموظف نعم/لا"
+        INT approvedByUserId "معرف من اعتمد الإجراء التأديبي FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        VARCHAR status "حالة المخالفة مسجلة قيد التحقيق تم اتخاذ إجراء مغلقة"
+        DATE closedAt "تاريخ إغلاق المخالفة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetFinancials {
+        INT financialsId PK "القيم المالية للأصل"
+        INT assetId FK "معرف الأصل المرتبط FK Asset.assetId - علاقة 1-1 أصل واحد له سجل مال..."
+        INT schoolId "معرف المدرسة FK School.schoolId - للتكرار وتسهيل التقارير"
+        DECIMAL purchasePrice "سعر الشراء الأساسي من الفاتورة قبل أي إضافات"
+        DECIMAL shippingCosts "تكاليف الشحن والنقل"
+        DECIMAL customsFees "الرسوم الجمركية للواردات"
+        DECIMAL installationCosts "تكاليف التركيب والتهيئة"
+        DECIMAL otherCosts "تكاليف أخرى تأمين رسوم ترخيص الخ JSON"
+        DECIMAL totalInitialCost "التكلفة الكلية تجمع آلياً = purchasePrice + shippingCosts + customs..."
+        VARCHAR currency "العملة المستخدمة SAR USD EUR GBP etc."
+        DECIMAL exchangeRateToSAR "سعر الصرف للريال السعودي لتوحيد الحسابات المالية في التقارير"
+        DECIMAL salvageValue "القيمة التخريدية الخردة المتوقعة في نهاية العمر الإنتاجي"
+        DECIMAL residualValue "القيمة المتبقية مرادف لـ salvageValue"
+        DATE residualValueLastUpdate "تاريخ آخر تحديث للقيمة التخريدية"
+        VARCHAR fiscalYear "السنة المالية للإدخال مثال - 2025"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetDepreciation {
+        INT depreciationId PK "سياسات وحسابات الإهلاك"
+        INT assetId FK "معرف الأصل FK Asset.assetId - علاقة 1-1"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR methodType "طريقة الإهلاك القسط الثابت - Straight Line القسط المتناقص - Declini..."
+        VARCHAR usefulLifeYears "العمر الإنتاجي المقدر بالسنوات - يُستخدم لحساب قسط الإهلاك السنوي ف..."
+        VARCHAR usefulLifeUnits "العمر الإنتاجي المقدر بوحدات الإنتاج ساعات تشغيل وحدات منتجة - يُست..."
+        DECIMAL depreciationRate "نسبة الإهلاك السنوية تستخدم في طريقة القسط المتناقص"
+        DECIMAL currentBookValue "القيمة الدفترية الحالية للأصل في بداية الفترة الحالية قيمة قابلة لل..."
+        DATE accumulatedDepreciation "مجمع الإهلاك المتراكم حتى تاريخه إجمالي ما تم إهلاكه من قيمة الأصل"
+        DECIMAL netBookValue "صافي القيمة الدفترية currentBookValue - accumulatedDepreciation - ق..."
+        DECIMAL depreciableAmount "القيمة القابلة للإهلاك التكلفة - الخردة"
+        DATE lastDepreciationDate "تاريخ آخر عملية إهلاك تم تسجيلها آخر قسط تم"
+        VARCHAR lastDepreciationPeriod "آخر فترة تم إهلاكها مثال - الشهر 12 من السنة 2024"
+        BOOLEAN isFullyDepreciated "هل تم إهلاك الأصل بالكامل نعم/لا"
+        TEXT notes "ملاحظات حول سياسة الإهلاك"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    DepreciationTransactions {
+        INT transactionId PK "معاملات الإهلاك الدورية"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT depreciationId FK "معرف سجل الإهلاك المرتبط FK AssetDepreciation.depreciationId"
+        VARCHAR periodStart "بداية الفترة المالية مثال - 2025-01-01"
+        VARCHAR periodEnd "نهاية الفترة المالية مثال - 2025-01-31"
+        VARCHAR periodType "نوع الفترة شهري ربع سنوي نصف سنوي سنوي"
+        VARCHAR fiscalYear "السنة المالية"
+        INT periodNumber "رقم الفترة مثال - 1 = يناير 2 = فبراير"
+        DECIMAL depreciationAmount "قيمة قسط الإهلاك لهذه الفترة المبلغ الذي تم إهلاكه"
+        VARCHAR accumulatedDepreciationAfter "مجمع الإهلاك بعد إضافة هذا القسط"
+        DECIMAL netBookValueAfter "صافي القيمة الدفترية بعد الإهلاك"
+        BOOLEAN isPostedToLedger "هل تم ترحيل القيد إلى دفتر الأستاذ العام نعم/لا"
+        VARCHAR ledgerEntryReference "رقم مرجع القيد في دفتر الأستاذ العام إن تم ترحيله"
+        DATE postedToLedgerDate "تاريخ الترحيل إلى دفتر الأستاذ"
+        INT calculatedByUserId "معرف من قام بحساب الإهلاك غالباً النظام آلياً أو مستخدم"
+        DATE calculationDate "تاريخ حساب الإهلاك"
+        TEXT notes "ملاحظات"
+        DATE createdAt "تاريخ إنشاء السجل"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    RevaluationImpairment {
+        INT revaluationId PK "إعادة التقييم والانخفاض"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        DECIMAL type "نوع العملية إعادة تقييم - Revaluation انخفاض قيمة - Impairment"
+        DATE effectiveDate "تاريخ سريان القيمة الجديدة"
+        DECIMAL oldBookValue "القيمة الدفترية قبل العملية قبل التعديل"
+        VARCHAR oldAccumulatedDepreciation "مجمع الإهلاك القديم"
+        DECIMAL oldNetBookValue "صافي القيمة الدفترية القديمة"
+        DECIMAL newValue "القيمة الجديدة المعتمدة السوقية العادلة"
+        VARCHAR newAccumulatedDepreciation "مجمع الإهلاك الجديد بعد إعادة التوزيع"
+        DECIMAL newNetBookValue "صافي القيمة الدفترية الجديد"
+        VARCHAR difference "فرق التقييم ربح أو خسارة"
+        VARCHAR differenceType "نوع الفرق ربح إعادة تقييم - يضاف لحقوق الملكية خسارة إعادة تقييم - ..."
+        VARCHAR valuationFirm "جهة التقييم المعتمدة اسم الشركة أو الخبير"
+        INT valuationReportNumber "رقم تقرير التقييم"
+        DATE valuationReportDate "تاريخ تقرير التقييم"
+        DECIMAL valuationMethod "طريقة التقييم المستخدمة السوقي التكلفة الدخل"
+        TEXT reason "سبب التقييم أو الانخفاض الجوهري نص"
+        VARCHAR attachments "مرفقات تقرير التقييم صور JSON"
+        INT approvedByUserId "معرف من اعتمد العملية FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        VARCHAR status "حالة العملية مسودة معتمدة مرحلة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetExpenses {
+        INT expenseId PK "المصروفات الرأسمالية والتشغيلية"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR expenseType "نوع المصروف رأسمالي - Capex تشغيلي - Opex"
+        DATE expenseDate "تاريخ حدوث المصروف تاريخ الفاتورة"
+        DECIMAL amount "قيمة المصروف"
+        VARCHAR currency "العملة"
+        TEXT description "تفاصيل المصروف صيانة كبرى قطع غيار تركيب تدريب الخ"
+        INT relatedExecutionId FK "معرف سجل تنفيذ الصيانة المرتبط FK MaintenanceExecution.executionId ..."
+        BOOLEAN isCapitalized "هل سيتم إضافة المصروف لقيمة الأصل رأسمالته نعم/لا - يحدد بناءً على ..."
+        DATE capitalizationDate "تاريخ إضافة المصروف لقيمة الأصل إذا isCapitalized = نعم"
+        BOOLEAN accountedInFinancials "هل تم إضافة المصروف لقيمة الأصل في جدول AssetFinancials"
+        BOOLEAN accountedInDepreciation "هل تم تعديل الإهلاك المستقبلي بسبب رأسمالة المصروف"
+        INT approvedByUserId "معرف من اعتمد تصنيف المصروف FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    FeasibilityComparison {
+        INT comparisonId PK "مقارنات الجدوى والاستبدال"
+        INT assetId FK "معرف الأصل المُقارَن FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        DATE comparisonDate "تاريخ إجراء المقارنة"
+        DECIMAL repairEstimate "تكلفة الإصلاح المقدرة مجمع - قطع غيار + أجور + مصروفات"
+        DECIMAL repairEstimateBreakdown "تفاصيل تقدير تكلفة الإصلاح JSON"
+        INT replacementAssetId FK "معرف الأصل البديل المقترح FK Asset.assetId - يمكن أن يكون أصل جديد ..."
+        DECIMAL replacementCost "تكلفة شراء أصل بديل جديد سعر الشراء + التركيب + التشغيل الأولي"
+        DECIMAL replacementCostBreakdown "تفاصيل تكلفة الاستبدال JSON"
+        DECIMAL totalCostOfOwnershipAnalysis "تحليل إجمالي تكلفة الامتلاك للبديل نص أو JSON"
+        VARCHAR recommendation "توصية اللجنة إصلاح استبدال إيقاف الخدمة تأجيل القرار"
+        TEXT recommendationReason "سبب التوصية نص مفصل"
+        VARCHAR decisionStatus "حالة القرار بانتظار القرار استمرار بإصلاح الأصل استبدال إلغاء الأصل"
+        DATE decisionDate "تاريخ القرار"
+        INT approvedByUserId "معرف من اتخذ القرار FK SystemUser.userId"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    FinancialAuditArchive {
+        INT archiveId PK "الأرشفة المالية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        DECIMAL reportType "نوع التقرير المؤرشف تقرير إهلاك تقرير قيمة دفترية تقرير إعادة تقييم..."
+        VARCHAR fiscalYear "السنة المالية للتقرير"
+        VARCHAR periodStart "بداية الفترة التي يغطيها التقرير"
+        VARCHAR periodEnd "نهاية الفترة"
+        DATE generationDate "تاريخ إصدار التقرير الأصلي"
+        DATE archivedDate "تاريخ الأرشفة نقل البيانات إلى الأرشيف"
+        DECIMAL totalAssetsValue "إجمالي قيم الأصول في هذا التقرير لقطة"
+        DECIMAL totalDepreciationValue "إجمالي الإهلاك في هذه الفترة"
+        VARCHAR filePath "مسار ملف التقرير المعتمد PDF/Excel - يمكن أن يكون ملفاً يتم إنشاؤه ..."
+        BOOLEAN isReadOnly "دائماً True لمنع أي تعديل"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل من قام بالأرشفة"
+        DATE createdAt "تاريخ الإنشاء"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    FinancialSummaryReports {
+        INT summaryId PK "تقارير القيمة المالية المجمعة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR fiscalYear "السنة المالية محل التقرير"
+        DATE reportDate "تاريخ إصدار التقرير"
+        VARCHAR reportType "نوع التقرير سنوي ربع سنوي حسب الطلب"
+        INT assetCategoryId FK "معرف فئة الأصول FK AssetCategory.categoryId - يمكن أن يكون فارغاً ل..."
+        DECIMAL totalBookValue "إجمالي القيمة الدفترية لكافة الأصول أو للفئة"
+        DECIMAL totalDepreciation "إجمالي الإهلاك المتراكم للفترة"
+        DECIMAL totalAssetsCount "عدد الأصول التي شملها التقرير المالي"
+        DATE totalAcquisitionCost "إجمالي تكلفة الشراء للأصول التكلفة التاريخية"
+        INT fullyDepreciatedAssetsCount "عدد الأصول التي تم إهلاكها بالكامل"
+        INT assetsWithImpairmentCount "عدد الأصول التي تم تسجيل انخفاض في قيمتها"
+        VARCHAR revaluationGains "إجمالي أرباح إعادة التقييم"
+        VARCHAR revaluationLosses "إجمالي خسائر إعادة التقييم"
+        VARCHAR auditStatus "حالة تدقيق التقرير غير مدقق مدقق داخلياً مدقق خارجياً تحت التدقيق"
+        VARCHAR auditFirmName "اسم شركة التدقيق إن وجد"
+        VARCHAR auditorName "اسم المدقق إن وجد"
+        DATE auditDate "تاريخ التدقيق"
+        VARCHAR auditorSignature "توقيع المدقق الإلكتروني"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetAssignment {
+        INT assignmentId PK "تخصيص الأصول"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR assigneeType "نوع المستلم موظف طالب قسم معمل أخرى"
+        INT assigneeId "معرف المستلم حسب النوع - Employee.employeeId أو Student.studentId أ..."
+        VARCHAR assigneeName "اسم المستلم نسخة احتياطية للعرض السريع"
+        INT assignerUserId "معرف من قام بالتخصيص FK SystemUser.userId"
+        DATE assignmentDate "تاريخ بدء التخصيص تاريخ التسليم"
+        DATE expectedReturnDate "تاريخ الإرجاع المتوقع نهاية العقد الدراسي نهاية السنة إلخ"
+        DATE actualReturnDate "تاريخ استرجاع الأصل الفعلي"
+        TEXT assignmentReason "سبب التخصيص وظيفة دراسة مشروع إعارة مؤقتة"
+        VARCHAR conditionAtAssignment "حالة الأصل عند التسليم جديد جيد يحتاج صيانة"
+        TEXT conditionNotesAtAssignment "ملاحظات عند التسليم"
+        VARCHAR conditionAtReturn "حالة الأصل عند الإرجاع"
+        TEXT conditionNotesAtReturn "ملاحظات عند الإرجاع"
+        INT damageNotes "ملاحظات عن أي تلف حدث أثناء فترة التخصيص"
+        DECIMAL penaltyAmount "قيمة الغرامة إن وجدت بسبب تلف أو فقدان"
+        VARCHAR penaltyStatus "حالة الغرامة مستحقة مدفوعة معفاة"
+        VARCHAR assignmentStatus "حالة التخصيص نشط ملغي مسترجع منتهي"
+        BOOLEAN isReturned "هل تم استرجاع الأصل"
+        INT returnReceiptNumber "رقم إيصال الاسترجاع إن وجد"
+        INT returnedToUserId "معرف من استلم الأصل عند الإرجاع FK SystemUser.userId"
+        DATE returnDate "تاريخ الإرجاع"
+        TEXT notes "ملاحظات إضافية"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetLoans {
+        INT loanId PK "إعارات الأصول"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR borrowerType "نوع المستعير طالب موظف زائر جهة خارجية"
+        INT borrowerId "معرف المستعير حسب النوع"
+        VARCHAR borrowerName "اسم المستعير نسخة احتياطية"
+        VARCHAR borrowerContact "جهة اتصال المستعير هاتف أو بريد"
+        DATE loanDate "تاريخ بداية الإعارة"
+        DATE expectedReturnDate "تاريخ الإرجاع المتوقع"
+        DATE actualReturnDate "تاريخ الإرجاع الفعلي"
+        VARCHAR loanPurpose "الغرض من الإعارة نشاط صفي بحث اجتماع فعالية"
+        INT issuerUserId "معرف من قام بالإعارة FK SystemUser.userId"
+        VARCHAR conditionAtLoan "حالة الأصل عند الإعارة"
+        VARCHAR conditionAtReturn "حالة الأصل عند الإرجاع"
+        BOOLEAN isOverdue "هل تأخر المستعير في الإرجاع يُحسب آلياً"
+        VARCHAR overdueDays "عدد أيام التأخير يُحسب"
+        DECIMAL fineAmount "قيمة الغرامة إن وجدت"
+        INT finePaid "هل دفعت الغرامة"
+        DATE finePaidDate "تاريخ دفع الغرامة"
+        VARCHAR loanStatus "حالة الإعارة نشطة مسترجعة متأخرة مفقودة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetTransferRequests {
+        INT transferRequestId PK "طلبات النقل والتحويل"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT requestNumber "رقم الطلب يُولد آلياً"
+        VARCHAR fromEntityType "نوع الجهة/القسم المسؤول حالياً قسم موقع مدرسة"
+        INT fromEntityId "معرف الجهة الحالية"
+        VARCHAR toEntityType "نوع الجهة/القسم المسؤول الجديد"
+        INT toEntityId "معرف الجهة الجديدة"
+        VARCHAR transferType "نوع النقل نقل مكاني تحويل إداري نقل بين المدارس"
+        TEXT requestReason "سبب النقل"
+        INT requestedByUserId "معرف مقدم الطلب FK SystemUser.userId"
+        DATE requestDate "تاريخ الطلب"
+        VARCHAR approvalStatus "حالة الموافقة قيد المراجعة معتمد مرفوض ملغي"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        TEXT approvalNotes "ملاحظات الاعتماد"
+        TEXT rejectionReason "سبب الرفض إن وجد"
+        DATE transferExecutionDate "تاريخ تنفيذ النقل الفعلي"
+        INT executedByUserId "معرف من نفذ النقل FK SystemUser.userId"
+        TEXT notes "ملاحظات"
+        VARCHAR status "حالة الطلب مفتوح معتمد منفذ ملغي"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetInspectionLog {
+        INT inspectionId PK "فحص الاستلام والإرجاع"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR relatedTransactionType "نوع العملية المرتبطة استلام من مورد إرجاع من موظف إرجاع من طالب نقل..."
+        INT relatedTransactionId "معرف العملية المرتبطة مثل assignmentId loanId receivingId transferR..."
+        VARCHAR inspectionType "نوع الفحص عند الاستلام عند الإرجاع فحص دوري"
+        DATE inspectionDate "تاريخ الفحص"
+        INT inspectorUserId "معرف المفتش FK SystemUser.userId"
+        VARCHAR physicalCondition "الحالة الفيزيائية سليم به أضرار بسيطة تالف جزئياً تالف كلياً مفقود"
+        INT damageDetails "وصف دقيق للأضرار إن وجدت"
+        INT damagePhotos "مسارات صور الأضرار JSON"
+        VARCHAR functionalStatus "الحالة الوظيفية يعمل بكفاءة يعمل بخلل لا يعمل"
+        VARCHAR missingParts "قطع غيار مفقودة JSON"
+        VARCHAR inspectionResult "نتيجة الفحص مقبول مرفوض يحتاج صيانة يحتاج استبدال"
+        DECIMAL recommendedAction "الإجراء الموصى به صيانة استبدال خصم قيمة إحالة للتحقيق"
+        DECIMAL estimatedRepairCost "تكلفة الإصلاح التقديرية إن وجدت"
+        TEXT notes "ملاحظات إضافية"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetMovementHistory {
+        INT historyId PK "سجل حركة الأصول التاريخي"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR actionType "نوع الحدث نقل تخصيص إعارة إرجاع صيانة تغيير حالة تغيير موقع شراء اس..."
+        TEXT actionDescription "وصف الإجراء المتخذ"
+        DECIMAL oldValue "القيمة القديمة قبل التغيير مثلاً الموقع القديم الحالة القديمة المسؤ..."
+        DECIMAL newValue "القيمة الجديدة بعد التغيير"
+        VARCHAR relatedEntityType "نوع الكيان المرتبط بالحدث AssetAssignment AssetLoans MaintenanceTic..."
+        INT relatedEntityId "معرف الكيان المرتبط"
+        DATETIME actionDate "تاريخ ووقت الحركة الفعلي"
+        INT performedByUserId "معرف من قام بالحركة FK SystemUser.userId"
+        TEXT notes "ملاحظات"
+        DATE createdAt "تاريخ الإنشاء نفس actionDate غالباً"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    LoanTrackingAlerts {
+        INT alertId PK "تنبيهات ومتابعة الإعارات"
+        INT loanId FK "معرف الإعارة المرتبطة FK AssetLoans.loanId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR alertType "نوع التنبيه تذكير قبل الانتهاء إشعار تأخير تنبيه غرامة"
+        DATE alertDate "تاريخ إرسال التنبيه"
+        INT alertMessage "نص التنبيه المرسل"
+        VARCHAR deliveryMethod "طريقة الإرسال بريد إلكتروني رسالة نصية إشعار تطبيق"
+        BOOLEAN isSent "هل تم إرسال التنبيه بنجاح"
+        VARCHAR sentTo "المستلم عنوان البريد أو رقم الهاتف"
+        BOOLEAN isAcknowledged "هل استلمت الجهة المستعيرة التنبيه واطّلعت عليه"
+        DATE acknowledgedAt "تاريخ الاطلاع"
+        BOOLEAN violationRecorded "هل تم تسجيل مخالفة تأخير بسبب عدم الاستجابة"
+        INT violationId FK "معرف المخالفة المسجلة FK UsageViolations.violationId - اختياري"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل النظام غالباً"
+        DATE createdAt "تاريخ الإنشاء"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    InventoryPlans {
+        INT planId PK "خطط الجرد"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT planNumber "رقم الخطة يُولد آلياً"
+        VARCHAR planName "مسمى الجرد مثال - الجرد السنوي 2025"
+        VARCHAR inventoryType "نوع الجرد دوري مفاجئ عند إخلاء طرف جزئي"
+        VARCHAR scopeType "نطاق الجرد مدرسة كاملة قسم معين فئة محددة موقع محدد"
+        DECIMAL scopeValue "قيمة النطاق مثلاً معرف القسم معرف الفئة معرف الموقع - حسب scopeType"
+        DATE startDate "تاريخ بداية أعمال الجرد الميداني"
+        DATE endDate "التاريخ المستهدف لإنهاء الجرد"
+        DATE actualEndDate "تاريخ الانتهاء الفعلي"
+        INT assignedTeamLeaderId "معرف قائد فريق الجرد FK Employee.employeeId"
+        VARCHAR assignedTeamMembers "أعضاء فريق الجرد JSON - قائمة بـ Employee.employeeId"
+        VARCHAR instructions "تعليمات للفريق"
+        VARCHAR status "حالة الخطة مسودة نشطة مكتملة ملغاة قيد المراجعة"
+        DECIMAL completionPercentage "نسبة الإنجاز يُحسب آلياً"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    FieldInventoryLog {
+        INT logId PK "الجرد الميداني"
+        INT planId FK "معرف خطة الجرد المرتبطة FK InventoryPlans.planId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT scannerUserId "معرف من قام بالمسح FK SystemUser.userId"
+        DATETIME scanTimestamp "وقت وتاريخ المسح بدقة"
+        VARCHAR scannedCode "كود الباركود/QR الذي تم قراءته عادة assetUniqueCode أو assetTag"
+        INT assetId FK "معرف الأصل الناتج عن المسح يتم البحث عنه آلياً باستخدام scannedCode"
+        VARCHAR physicalLocation "الموقع الفعلي الذي تم العثور فيه على الأصل نص أو FK AssetLocation.l..."
+        VARCHAR actualCondition "الحالة الفعلية للأصل عند الجرد سليم تالف يحتاج صيانة غير قابل للتشغيل"
+        TEXT conditionNotes "ملاحظات عن الحالة"
+        BOOLEAN found "هل تم العثور على الأصل نعم/لا"
+        TEXT foundNotes "ملاحظات إذا لم يتم العثور عليه مكان محتمل آخر شخص معروف لديه الأصل"
+        VARCHAR assetPhoto "صورة للأصل مسار ملف - اختياري"
+        VARCHAR gpsLocation "إحداثيات GPS لموقع المسح للتأكد من أن المسح تم في الموقع الصحيح"
+        BOOLEAN isVerified "هل تم التحقق من صحة المسح"
+        INT verifiedByUserId "معرف من تحقق FK SystemUser.userId"
+        DATETIME verifiedAt "وقت التحقق"
+        TEXT notes "ملاحظات إضافية"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    InventoryReconciliation {
+        INT reconciliationId PK "مطابقة وفروقات الجرد"
+        INT planId FK "معرف خطة الجرد FK InventoryPlans.planId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetId FK "معرف الأصل من جدول Asset"
+        VARCHAR discrepancyType "نوع الفرق مطابق نقص/مفقود زيادة/غير مسجل تالف اختلاف موقع اختلاف حالة"
+        INT systemLocationId "الموقع المسجل في النظام سابقاً من Asset.assetLocationId"
+        INT actualLocationId "الموقع الذي وجد فيه فعلياً من FieldInventoryLog.physicalLocation"
+        VARCHAR systemCondition "الحالة المسجلة في النظام"
+        VARCHAR actualCondition "الحالة الفعلية من FieldInventoryLog.actualCondition"
+        TEXT reasonForDiff "السبب المحتمل للفرق خطأ إدخال سرقة نقل غير موثق إعارة بدون تسجيل إه..."
+        TEXT investigationNotes "ملاحظات التحقيق إن وجدت"
+        VARCHAR correctiveAction "الإجراء التصحيحي المقترح تحديث السجلات بحث إداري إبلاغ الجهات الأمن..."
+        BOOLEAN isResolved "هل تم حل الفرق وتحديث السجلات"
+        DATE resolutionDate "تاريخ الحل"
+        INT resolvedByUserId "معرف من قام بحل الفرق FK SystemUser.userId"
+        TEXT resolutionNotes "ملاحظات الحل"
+        INT approvedByUserId "معرف من اعتمد نتيجة المطابقة FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        VARCHAR status "حالة المطابقة مفتوح قيد التحقيق محلول معتمد"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    ComplianceAudit {
+        INT auditId PK "الامتثال والرقابة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT auditNumber "رقم التدقيق يُولد آلياً"
+        DATE auditDate "تاريخ عملية الرقابة/التفتيش"
+        VARCHAR auditType "نوع التدقيق داخلي خارجي مفاجئ دوري"
+        VARCHAR standardType "المعيار المطبق ISO 55000 لائحة وزارة التربية سياسة داخلية معايير مح..."
+        VARCHAR standardVersion "إصدار المعيار"
+        INT auditedByUserId "معرف المدقق FK SystemUser.userId"
+        VARCHAR auditScope "نطاق التدقيق جميع الأصول أصول قسم معين أصول فئة معينة"
+        DECIMAL complianceScore "نسبة الامتثال المحققة من 100"
+        VARCHAR violationsFound "المخالفات أو نقاط عدم المطابقة المكتشفة نص أو JSON"
+        TEXT violationsDetails "تفاصيل المخالفات JSON"
+        VARCHAR correctiveActionsRequired "الإجراءات التصحيحية المطلوبة نص"
+        VARCHAR correctiveActionsDeadline "الموعد النهائي لتنفيذ الإجراءات التصحيحية"
+        VARCHAR correctiveActionsStatus "حالة الإجراءات التصحيحية قيد التنفيذ منجزة متأخرة"
+        DATE followUpAuditDate "تاريخ التدقيق المتابع إن وجد"
+        VARCHAR auditReportPath "مسار ملف تقرير التدقيق PDF"
+        VARCHAR status "حالة التدقيق مخطط قيد التنفيذ مكتمل ملغي"
+        INT approvedByUserId "معرف من اعتمد تقرير التدقيق FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    FinalApprovalAudit {
+        INT finalApprovalId PK "اعتماد نتائج الرقابة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT planId FK "معرف خطة الجرد المرتبطة FK InventoryPlans.planId - اختياري قد يكون ..."
+        INT auditId FK "معرف التدقيق المرتبط FK ComplianceAudit.auditId - اختياري"
+        VARCHAR approvalType "نوع الاعتماد جرد سنوي تدقيق داخلي تدقيق خارجي شطب أصول"
+        DATE approvalDate "تاريخ الاعتماد الرسمي من الإدارة العليا"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+        VARCHAR approvalDocPath "مسار ملف محضر الجرد المعتمد أو تقرير التدقيق المعتمد"
+        VARCHAR summaryOfChanges "ملخص التغييرات التي تم إجراؤها على النظام بناءً على هذا الاعتماد مث..."
+        DATE finalStatusUpdate "تأكيد تحديث كافة حالات الأصول في النظام نعم/لا"
+        DATE statusUpdateDate "تاريخ تحديث النظام"
+        INT statusUpdatedByUserId "معرف من قام بتحديث النظام FK SystemUser.userId"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    FacilityDepartmentAssignment {
+        INT assignmentId PK "تخصيص المرافق التعليمية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR facilityType "نوع المرفق قاعة معمل مكتبة صالة رياضية مخزن مكتب"
+        INT facilityId "معرف المرفق FK Classroom.classroomId أو Asset.assetId"
+        INT departmentId "معرف القسم المستفيد FK SchoolDepartment.deptId"
+        INT responsibleUserId "رئيس القسم أو أمين المختبر المسؤول FK Employee.employeeId"
+        VARCHAR assignmentType "نوع التخصيص كلي جزئي مؤقت دائم"
+        DATE startDate "تاريخ التخصيص للقسم"
+        DATE endDate "تاريخ انتهاء التخصيص إن كان مؤقتاً"
+        BOOLEAN isShared "هل المرفق مشترك بين عدة أقسام"
+        VARCHAR sharedWithDepartments "الأقسام المشاركة JSON - قائمة بـ DepartmentId"
+        VARCHAR sharingSchedule "جدول الاستخدام JSON - لتحديد أوقات استخدام كل قسم"
+        VARCHAR priority "أولوية القسم في استخدام المرفق"
+        TEXT notes "ملاحظات"
+        VARCHAR status "حالة التخصيص نشط منتهي ملغي"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    EducationalConsumablesTracking {
+        INT consumptionId PK "استهلاك المواد التعليمية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT consumableId "معرف المادة الاستهلاكية من جدول منفصل أو من Asset للمواد التي تدخل ..."
+        VARCHAR consumableName "اسم المادة المستهلكة حبر أوراق مواد كيميائية أدوات الخ"
+        VARCHAR consumableCode "كود المادة SKU"
+        VARCHAR category "فئة المادة حبر ورق كيميائيات لوازم فنية لوازم معمل"
+        INT quantityConsumed "الكمية المستهلكة"
+        VARCHAR unitOfMeasure "وحدة القياس لتر قطعة رزمة كجم"
+        DATE consumptionDate "تاريخ الاستهلاك"
+        INT consumedByUserId "معرف من صرف المادة FK SystemUser.userId"
+        INT departmentId "معرف القسم المستهلك FK SchoolDepartment.deptId"
+        INT courseId "معرف المادة الدراسية المرتبطة بالاستهلاك FK Course.courseId - اختياري"
+        INT activityId "معرف النشاط الطلابي المرتبط بالاستهلاك FK SchoolActivity.activityId..."
+        VARCHAR purpose "الغرض من الاستهلاك تجربة معملية نشاط فني اختبار طباعة الخ"
+        TEXT notes "ملاحظات"
+        DATETIME unitCost "تكلفة الوحدة في وقت الاستهلاك لحساب التكلفة الإجمالية"
+        DECIMAL totalCost "التكلفة الإجمالية quantityConsumed × unitCost"
+        VARCHAR budgetLineCode "كود بند الميزانية الذي سيتم تحميل الاستهلاك عليه"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    %% ===== Relationships =====
+    AssetCategory ||--o{ Asset : "معرف فئة الأصل FK AssetCa"
+    AssetStatus ||--o{ Asset : "معرف حالة الأصل FK AssetS"
+    AssetLocation ||--o{ Asset : "معرف الموقع المكاني الحال"
+    AssetWarrantyContract ||--o{ Asset : "معرف عقد الضمان المرتبط F"
+    Asset ||--o{ AssetDocument : "معرف الأصل المرتبط FK Ass"
+    AssetWarrantyContract ||--o{ AssetDocument : "معرف العقد المرتبط FK Ass"
+    AssetCategory ||--o{ AssetRequirementRequest : "معرف الفئة المقترحة FK As"
+    Asset ||--o{ AssetRequirementRequest : "معرف الأصل المطلوب استبدا"
+    PurchaseOrders ||--o{ AssetRequirementRequest : "معرف أمر الشراء المرتبط F"
+    AssetCategory ||--o{ TechnicalSpecifications : "معرف فئة الأصل المرتبطة F"
+    AssetRequirementRequest ||--o{ FeasibilityRiskAnalysis : "معرف طلب الاحتياج المرتبط"
+    AssetCategory ||--o{ AssetBudgetAllocation : "معرف فئة الأصل FK AssetCa"
+    AssetRequirementRequest ||--o{ PurchaseOrders : "معرف طلب الاحتياج المرتبط"
+    AssetBudgetAllocation ||--o{ PurchaseOrders : "معرف تخصيص الميزانية المر"
+    PurchaseOrders ||--o{ AssetReceiving : "معرف أمر الشراء المرتبط F"
+    Asset ||--o{ AssetUsageLog : "معرف الأصل FK AssetassetI"
+    AssetLocation ||--o{ AssetUsageLog : "معرف الموقع الذي تم فيه ا"
+    Asset ||--o{ MaintenanceTickets : "معرف الأصل المعطوب FK Ass"
+    MaintenanceExecution ||--o{ MaintenanceTickets : "معرف سجل تنفيذ الصيانة ال"
+    Asset ||--o{ PreventiveMaintenanceSchedule : "معرف الأصل المستهدف FK As"
+    AssetCategory ||--o{ PreventiveMaintenanceSchedule : "معرف فئة الأصول FK AssetC"
+    AssetWarrantyContract ||--o{ PreventiveMaintenanceSchedule : "معرف عقد الصيانة الخارجي "
+    MaintenanceTickets ||--o{ MaintenanceExecution : "معرف تذكرة العطل المرتبطة"
+    PreventiveMaintenanceSchedule ||--o{ MaintenanceExecution : "معرف جدول الصيانة الوقائي"
+    Asset ||--o{ MaintenanceExecution : "معرف الأصل الذي تمت صيانت"
+    AssetStatus ||--o{ MaintenanceExecution : "معرف الحالة الجديدة للأصل"
+    Asset ||--o{ AssetSuspensionRequests : "معرف الأصل المراد تعليقه "
+    Asset ||--o{ UsageViolations : "معرف الأصل المخالف في است"
+    Asset ||--o{ AssetFinancials : "معرف الأصل المرتبط FK Ass"
+    Asset ||--o{ AssetDepreciation : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ DepreciationTransactions : "معرف الأصل FK AssetassetI"
+    AssetDepreciation ||--o{ DepreciationTransactions : "معرف سجل الإهلاك المرتبط "
+    Asset ||--o{ RevaluationImpairment : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetExpenses : "معرف الأصل FK AssetassetI"
+    MaintenanceExecution ||--o{ AssetExpenses : "معرف سجل تنفيذ الصيانة ال"
+    Asset ||--o{ FeasibilityComparison : "معرف الأصل المُقارَن FK A"
+    Asset ||--o{ FeasibilityComparison : "معرف الأصل البديل المقترح"
+    AssetCategory ||--o{ FinancialSummaryReports : "معرف فئة الأصول FK AssetC"
+    Asset ||--o{ AssetAssignment : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetLoans : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetTransferRequests : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetInspectionLog : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetMovementHistory : "معرف الأصل FK AssetassetI"
+    AssetLoans ||--o{ LoanTrackingAlerts : "معرف الإعارة المرتبطة FK "
+    UsageViolations ||--o{ LoanTrackingAlerts : "معرف المخالفة المسجلة FK "
+    InventoryPlans ||--o{ FieldInventoryLog : "معرف خطة الجرد المرتبطة F"
+    Asset ||--o{ FieldInventoryLog : "معرف الأصل الناتج عن المس"
+    InventoryPlans ||--o{ InventoryReconciliation : "معرف خطة الجرد FK Invento"
+    Asset ||--o{ InventoryReconciliation : "معرف الأصل من جدول Asset"
+    InventoryPlans ||--o{ FinalApprovalAudit : "معرف خطة الجرد المرتبطة F"
+    ComplianceAudit ||--o{ FinalApprovalAudit : "معرف التدقيق المرتبط FK C"
+      </div>
+    </div>
+    <details>
+      <summary>📝 كود Mermaid المصدر (Full)</summary>
+      <pre class="source-code" id="src-full">erDiagram
+    %% =====================================================
+    %% M4_Assets - ERD
+    %% Mermaid 10.9.1 Compliant - ASCII identifiers only
+    %% =====================================================
+
+    Asset {
+        INT assetId PK "الأصول الأساسي"
+        INT schoolId "معرف المدرسة FK School.schoolId . هذا الحقل يربط كل أصل بمدرسته."
+        VARCHAR assetUniqueCode "الرقم التعريفي الفريد يتم توليده آلياً. مثال - AST-2024-00001"
+        VARCHAR assetNameAr "اسم الأصل باللغة العربية مثال - جهاز حاسب آلي محمول"
+        VARCHAR assetNameEn "اسم الأصل باللغة الإنجليزية مثال - Laptop Computer"
+        VARCHAR assetTag "علامة أو ملصق الأصل رقم مختصر يكتب على ملصق يوضع على الجهاز. مثال -..."
+        INT serialNumber "الرقم التسلسلي من المصنع مهم جداً للمتابعة مع الضمان"
+        INT modelNumber "رقم الموديل"
+        VARCHAR manufacturer "الشركة المصنعة"
+        VARCHAR brand "العلامة التجارية مثل - Dell HP Samsung"
+        INT assetCategoryId FK "معرف فئة الأصل FK AssetCategory.categoryId . يربط الأصل بفئته."
+        INT assetStatusId FK "معرف حالة الأصل FK AssetStatus.statusId . يربط الأصل بحالته الحالية."
+        INT assetLocationId FK "معرف الموقع المكاني الحالي FK AssetLocation.locationId . يحدد أين ي..."
+        VARCHAR condition "حالة الأصل جديد جيد يحتاج صيانة تالف مهمل"
+        VARCHAR acquisitionType "نوع الحصول شراء هبة نقل داخلي تأجير"
+        DATE acquisitionDate "تاريخ الحصول على الأصل"
+        DECIMAL acquisitionCost "تكلفة الشراء أو القيمة عند الحصول عليها"
+        VARCHAR currency "العملة SAR USD etc."
+        VARCHAR supplierName "اسم المورد أو البائع"
+        VARCHAR purchaseOrderReference "رقم أمر الشراء المرتبط FK PurchaseOrders.poNumber"
+        INT warrantyContractId FK "معرف عقد الضمان المرتبط FK AssetWarrantyContract.contractId"
+        BOOLEAN isInsured "هل الأصل مغطى بالتأمين"
+        INT insurancePolicyNumber "رقم وثيقة التأمين"
+        DATE insuranceExpiryDate "تاريخ انتهاء التغطية التأمينية"
+        VARCHAR usefulLifeYears "العمر الإنتاجي المقدر بالسنوات يُستخدم لحساب الإهلاك"
+        DECIMAL salvageValue "القيمة التخريدية قيمة الأصل بعد انتهاء عمره الإنتاجي"
+        DECIMAL currentValue "القيمة الدفترية الحالية يتم تحديثها آلياً بواسطة نظام الإهلاك"
+        VARCHAR barcode "باركود الأصل نص أو رقم"
+        VARCHAR qrCode "رابط أو نص يمثل رمز QR"
+        VARCHAR rfidTag "رقم شريحة RFID إن وجدت"
+        BOOLEAN hasPhysicalTag "هل تم وضع ملصق فعلي على الأصل"
+        DATE physicalTagDate "تاريخ وضع الملصق"
+        TEXT notes "ملاحظات إضافية مثل وصف لأي ضرر سابق أو ملاحظة خاصة"
+        BOOLEAN isActive "هل الأصل لا يزال قيد الاستخدام ولم يتم التخلص منه"
+        BOOLEAN isDeleted "حذف منطقي لإخفاء الأصل بدلاً من حذفه نهائياً"
+        INT createdByUserId "معرف المستخدم الذي أضاف الأصل FK SystemUser.userId"
+        INT updatedByUserId "آخر من قام بتعديل بيانات الأصل"
+        DATE createdAt "تاريخ إنشاء السجل"
+        DATE updatedAt "تاريخ آخر تحديث"
+    }
+
+    AssetCategory {
+        INT categoryId PK "فئات الأصول"
+        INT schoolId "معرف المدرسة FK School.schoolId - لتمكين كل مدرسة من تخصيص تصنيفاته..."
+        INT parentCategoryId FK "معرف الفئة الأم Self FK AssetCategory.categoryId - لبناء الهيكل اله..."
+        VARCHAR categoryCode "كود الفئة فريد داخل المدرسة - مثال - IT-COMP FURN-DESK"
+        VARCHAR categoryNameAr "اسم الفئة بالعربية مثال - أجهزة إلكترونية"
+        VARCHAR categoryNameEn "اسم الفئة بالإنجليزية مثال - Electronics"
+        VARCHAR categoryLevel "مستوى الفئة في الشجرة الهرمية 1 2 3... - يُحسب آلياً"
+        VARCHAR fullPath "المسار الكامل للفئة مثال - الأصول / أجهزة إلكترونية / حواسيب / لابت..."
+        TEXT description "وصف الفئة"
+        DECIMAL depreciationRate "نسبة الإهلاك السنوية المتوقعة كنسبة مئوية مثال - 25.00"
+        VARCHAR depreciationMethod "طريقة الإهلاك الافتراضية لهذه الفئة القسط الثابت القسط المتناقص وحد..."
+        VARCHAR usefulLifeYears "العمر الإنتاجي الافتراضي بالسنوات مثال - للحواسيب 3 سنوات للأثاث 10..."
+        INT accountCode "كود الحساب المحاسبي المرتبط بهذه الفئة للتكامل مع نظام الأستاذ العام"
+        INT expenseAccountCode "كود حساب المصروف المرتبط لشراء الأصول"
+        INT accumulatedDepAccountCode "كود حساب مجمع الإهلاك"
+        BOOLEAN isActive "هل الفئة مفعلة يمكن تعطيل الفئات القديمة"
+        BOOLEAN isSystem "هل هي فئة نظامية لا يمكن حذفها أو تعديلها من قبل المستخدم"
+        VARCHAR sortOrder "ترتيب عرض الفئة للقوائم المنسدلة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetLocation {
+        INT locationId PK "المواقع المكانية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT parentLocationId FK "معرف الموقع الأب Self FK AssetLocation.locationId - لإنشاء هيكل هرم..."
+        VARCHAR locationCode "كود الموقع فريد داخل المدرسة - مثال - B1-F2-R205"
+        VARCHAR locationNameAr "اسم الموقع بالعربية مثال - المبنى الرئيسي - الدور الثاني - غرفة 205"
+        VARCHAR locationNameEn "اسم الموقع بالإنجليزية مثال - Main Building - 2nd Floor - Room 205"
+        VARCHAR locationType "نوع الموقع مبنى طابق جناح قاعة مكتب معمل مستودع خزانة"
+        VARCHAR buildingName "اسم المبنى للبحث السريع"
+        INT floorNumber "رقم الطابق"
+        INT roomNumber "رقم الغرفة"
+        VARCHAR section "القسم أو الجناح"
+        VARCHAR area "المساحة بالمتر المربع للمواقع الكبيرة مثل المباني"
+        VARCHAR capacity "السعة الاستيعابية للقاعات والمكاتب"
+        BOOLEAN isActive "هل الموقع مفعل"
+        BOOLEAN hasPhysicalSign "هل تم وضع لافتة تعريفية على الموقع"
+        INT responsiblePersonId "معرف الشخص المسؤول عن هذا الموقع FK Employee.employeeId - اختياري"
+        VARCHAR contactPhone "هاتف المسؤول عن الموقع"
+        VARCHAR mapReference "إحداثيات الموقع على خريطة المدرسة نص"
+        VARCHAR qrCode "رمز QR للموقع لتسهيل الجرد عبر التطبيق"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetStatus {
+        INT statusId PK "حالات الأصل"
+        INT schoolId "معرف المدرسة FK School.schoolId - لتمكين كل مدرسة من إضافة حالاتها ..."
+        VARCHAR statusCode "كود الحالة فريد داخل المدرسة - مثال - ACTIVE MAINT RETIRED"
+        VARCHAR statusNameAr "اسم الحالة بالعربية نشط تحت الصيانة معار مهمل تالف مستبعد مفقود في ..."
+        VARCHAR statusNameEn "اسم الحالة بالإنجليزية Active Maintenance Loaned Scrap Damaged Reti..."
+        VARCHAR statusType "نوع الحالة تشغيلي صيانة خارج الخدمة"
+        BOOLEAN isOperational "هل هذه الحالة تسمح باستخدام الأصل نعم/لا - مهم جداً لمنع تخصيص أصول..."
+        BOOLEAN isAvailableForAssignment "هل يمكن تخصيص هذا الأصل لأحد في هذه الحالة"
+        BOOLEAN requiresApproval "هل يتطلب الانتقال إلى هذه الحالة موافقة إدارية"
+        VARCHAR colorCode "رمز اللون للتمييز في الشاشات Hex code مثل 00FF00"
+        BOOLEAN isActive "هل الحالة مفعلة يمكن استخدامها"
+        BOOLEAN isSystem "هل هي حالة نظامية لا يمكن حذفها أو تعديلها"
+        VARCHAR sortOrder "ترتيب عرض الحالة في القوائم"
+        TEXT descriptionAr "وصف الحالة بالعربية"
+        TEXT descriptionEn "وصف الحالة بالإنجليزية"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetWarrantyContract {
+        INT contractId PK "الضمان والعقود"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR contractType "نوع العقد ضمان صيانة ترخيص برمجيات إيجار"
+        INT contractNumber "رقم العقد الرسمي"
+        VARCHAR contractName "اسم العقد مثال - ضمان أجهزة الحاسوب - HP"
+        VARCHAR providerName "اسم المورد أو شركة الصيانة"
+        VARCHAR providerContact "جهة اتصال المورد شخص هاتف بريد"
+        DATE startDate "تاريخ بداية التغطية"
+        DATE endDate "تاريخ نهاية التغطية"
+        INT coverageDetails "تفاصيل التغطية ما الذي يشملّه الضمان قطع غيار صيانة وقائية دعم فني"
+        INT coverageType "نوع التغطية ضمان مصنع ضمان ممتد عقد صيانة سنوي"
+        DECIMAL contractValue "قيمة العقد الإجمالية"
+        VARCHAR currency "العملة"
+        VARCHAR paymentTerms "شروط الدفع"
+        BOOLEAN hasRenewalOption "هل يوجد خيار التجديد"
+        VARCHAR renewalTerms "شروط التجديد إن وجدت"
+        BOOLEAN isActive "هل العقد ساري المفعول"
+        VARCHAR contractStatus "حالة العقد ساري منتهي ملغى مجدد"
+        VARCHAR reminderDays "عدد الأيام قبل انتهاء العقد لإرسال التذكير افتراضي 30"
+        BOOLEAN isAlertEnabled "تفعيل التنبيهات التلقائية لانتهاء الصلاحية"
+        DATE lastAlertSentDate "تاريخ آخر تنبيه تم إرساله"
+        VARCHAR attachments "مرفقات مسار ملف العقد"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetDocument {
+        INT documentId PK "وثائق الأصل"
+        INT assetId FK "معرف الأصل المرتبط FK Asset.assetId - مهم جداً هذا هو الرابط الأساسي"
+        INT contractId FK "معرف العقد المرتبط FK AssetWarrantyContract.contractId - اختياري لر..."
+        VARCHAR docType "نوع الوثيقة فاتورة كتالوج صورة شهادة ملكية دليل مستخدم عقد صيانة"
+        VARCHAR docCode "كود الوثيقة"
+        VARCHAR docName "اسم الوثيقة"
+        TEXT description "وصف الوثيقة"
+        VARCHAR fileName "اسم الملف المرفوع"
+        VARCHAR filePath "مسار التخزين في السيرفر"
+        VARCHAR fileSize "حجم الملف بايت"
+        VARCHAR mimeType "نوع الملف PDF JPG PNG DOCX"
+        DATE uploadDate "تاريخ الرفع"
+        INT uploadedByUserId "معرف من قام بالرفع FK SystemUser.userId"
+        BOOLEAN isVerified "هل تم التحقق من صحة الوثيقة"
+        INT verifiedByUserId "معرف من قام بالتحقق"
+        DATE verifiedAt "تاريخ التحقق"
+        TEXT notes "ملاحظات"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetRequirementRequest {
+        INT requestId PK "مقترحات وطلبات الاحتياج"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT requestNumber "رقم الطلب التسلسلي يُولد تلقائياً مثال - REQ-2024-001"
+        VARCHAR requestType "نوع الطلب احتياج جديد استبدال أصل تالف زيادة سعة تطوير طوارئ"
+        VARCHAR assetType "نوع الأصل المقترح طاولات حواسيب أجهزة عرض أثاث مركبات أخرى"
+        INT assetCategoryId FK "معرف الفئة المقترحة FK AssetCategory.categoryId - لتسهيل التصنيف"
+        INT quantity "الكمية المطلوبة"
+        DECIMAL estimatedUnitCost "التكلفة التقديرية للوحدة"
+        DECIMAL estimatedTotalCost "التكلفة التقديرية الإجمالية تُحسب = estimatedUnitCost quantity"
+        VARCHAR currency "العملة SAR USD"
+        VARCHAR priority "الأولوية عاجل مهم عادي منخفض"
+        TEXT urgencyReason "سبب العجلة مثل - تعطل كلي للمعدات الحالية"
+        INT requestingDepartmentId "معرف القسم الطالب FK SchoolDepartment.deptId"
+        INT requestedByUserId "معرف الموظف مقدم الطلب FK Employee.employeeId"
+        DATE requestDate "تاريخ تقديم الطلب"
+        VARCHAR justification "مبررات الاحتياج ونتائج تحليل الفجوة نص طويل"
+        VARCHAR gapAnalysisSummary "ملخص تحليل الفجوة ماذا يوجد حالياً ماذا نحتاج الفرق"
+        VARCHAR initialSpecs "المواصفات الأولية المطلوبة نص أو JSON"
+        VARCHAR suggestedSuppliers "موردون مقترحون JSON"
+        DATE requiredByDate "التاريخ المطلوب فيه توفير الأصل"
+        INT renewalPlanId "ربط الطلب بخطة تجديد الأسطول إن وجدت FK PlanId من جدول خطط التطوير ..."
+        BOOLEAN isReplacement "هل الطلب لاستبدال أصل قديم"
+        INT assetToReplaceId FK "معرف الأصل المطلوب استبداله FK Asset.assetId - إذا كان isReplacemen..."
+        TEXT replacementReason "سبب الاستبدال انتهاء العمر الافتراضي كثرة الأعطال تقادم تقني"
+        VARCHAR approvalStatus "حالة الاعتماد مسودة قيد المراجعة معتمد مرفوض محول للشراء"
+        TEXT rejectionReason "سبب الرفض في حال تم الرفض"
+        INT approvedByUserId "معرف من اعتمد الطلب FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        BOOLEAN convertedToPO "هل تم تحويل الطلب إلى أمر شراء"
+        INT purchaseOrderId FK "معرف أمر الشراء المرتبط FK PurchaseOrders.purchaseOrderId - بعد الت..."
+        TEXT notes "ملاحظات إضافية"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    TechnicalSpecifications {
+        INT specId PK "المواصفات الفنية والمعايير"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR specCode "كود المواصفة فريد مثال - TECH-LAP-2024"
+        VARCHAR specNameAr "اسم المواصفة بالعربية مثال - مواصفات حاسب آلي للمعلمين"
+        VARCHAR specNameEn "اسم المواصفة بالإنجليزية مثال - Teacher Laptop Specifications"
+        INT assetCategoryId FK "معرف فئة الأصل المرتبطة FK AssetCategory.categoryId"
+        VARCHAR assetType "نوع الأصل لابتوب طابعة مكتب كرسي ..."
+        TEXT technicalDetails "تفاصيل المواصفات المعالج الرام المادة الحجم اللون إلخ نص طويل أو JSON"
+        VARCHAR requiredCertifications "الشهادات المطلوبة مثال - شهادة الطاقة شهادة الجودة ISO JSON"
+        VARCHAR acceptanceCriteria "معايير القبول الفني عند الاستلام نص طويل"
+        VARCHAR qualityStandards "معايير الجودة ISO كود البناء المعايير السعودية JSON"
+        VARCHAR warrantyRequirements "متطلبات الضمان المطلوبة في العقد"
+        VARCHAR deliveryRequirements "متطلبات التغليف والنقل"
+        VARCHAR installationRequirements "متطلبات التركيب إن وجدت"
+        VARCHAR safetyRequirements "متطلبات السلامة"
+        BOOLEAN isActive "هل المواصفة مفعلة يمكن استخدامها"
+        DATE validFrom "تاريخ بدء صلاحية المواصفة"
+        DATE validTo "تاريخ انتهاء صلاحية المواصفة"
+        VARCHAR version "إصدار المواصفة للتعامل مع التحديثات"
+        VARCHAR attachments "مرفقات كتالوجات صور ملفات PDF JSON"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    FeasibilityRiskAnalysis {
+        INT analysisId PK "دراسات الجدوى والمخاطر"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT requestId FK "معرف طلب الاحتياج المرتبط FK AssetRequirementRequest.requestId - ال..."
+        INT analysisNumber "رقم التحليل يولد تلقائياً"
+        DATE analysisDate "تاريخ إجراء التحليل"
+        INT analystUserId "معرف من قام بالتحليل FK Employee.employeeId"
+        VARCHAR operationalRisks "وصف المخاطر التشغيلية نص طويل"
+        VARCHAR financialRisks "وصف المخاطر المالية نص طويل"
+        VARCHAR riskLevel "مستوى المخاطر منخفض متوسط مرتفع"
+        VARCHAR riskMitigationPlan "خطة تخفيف المخاطر نص"
+        VARCHAR expectedLifeSpan "العمر الافتراضي المتوقع بالسنوات"
+        DECIMAL usefulLifeEstimate "تقدير العمر الإنتاجي قد يُعبّر عنه بالسنوات أو ساعات التشغيل"
+        DECIMAL roiEstimate "العائد المتوقع من الاستثمار ROI نسبة مئوية"
+        VARCHAR paybackPeriod "فترة استرداد رأس المال بالسنوات"
+        DECIMAL npvEstimate "صافي القيمة الحالية قيمة مالية"
+        VARCHAR alternativeSolutions "الحلول البديلة نص أو JSON"
+        VARCHAR finalRecommendation "التوصية النهائية شراء رفض تأجيل بديل"
+        TEXT recommendationReason "سبب التوصية نص"
+        INT approvedByUserId "معرف من اعتمد التحليل FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        VARCHAR status "حالة التحليل مسودة معتمد"
+        VARCHAR attachments "مرفقات دراسات تقارير JSON"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetBudgetAllocation {
+        INT allocationId PK "ميزانية الأصول"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR fiscalYear "السنة المالية للميزانية مثال - 2025"
+        VARCHAR budgetType "نوع الميزانية رأسمالي - Capex تشغيلي - Opex"
+        INT assetCategoryId FK "معرف فئة الأصل FK AssetCategory.categoryId - يمكن أن يكون فارغاً لل..."
+        INT departmentId "معرف القسم FK SchoolDepartment.deptId - يمكن أن يكون فارغاً للتخصيص..."
+        DECIMAL allocatedAmount "المبلغ المخصص لهذا البند السقف المالي"
+        DECIMAL spentAmount "المبلغ الذي تم صرفه حتى الآن يتم تحديثه آلياً عند إنشاء أوامر الشراء"
+        DECIMAL remainingAmount "المبلغ المتبقي بعد الصرف يُحسب آلياً = allocatedAmount - spentAmount"
+        VARCHAR budgetLineCode "رمز بند الميزانية في النظام المالي الخارجي للتكامل"
+        TEXT notes "ملاحظات"
+        VARCHAR status "حالة تخصيص الميزانية نشط مستنفذ ملغي"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    PurchaseOrders {
+        INT purchaseOrderId PK "طلبات الشراء والمناقصات"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT poNumber "رقم أمر الشراء الرسمي فريد مهم للرجوع إليه"
+        DATE poDate "تاريخ إصدار الأمر"
+        INT requestId FK "معرف طلب الاحتياج المرتبط FK AssetRequirementRequest.requestId - يم..."
+        VARCHAR supplierName "اسم المورد"
+        VARCHAR supplierContact "جهة اتصال المورد"
+        TEXT supplierAddress "عنوان المورد"
+        DECIMAL totalAmount "القيمة الإجمالية للشراء شامل الضريبة"
+        DECIMAL taxAmount "قيمة الضريبة مثال - VAT 15"
+        INT taxRegistrationNumber "الرقم الضريبي للمورد إن وجد"
+        VARCHAR currency "العملة"
+        VARCHAR paymentTerms "شروط الدفع مثال - 30 مقدماً 70 عند الاستلام"
+        VARCHAR deliveryTerms "شروط التسليم مثال - FOB CIF تسليم باب المدرسة"
+        DATE deliveryDeadline "آخر موعد للتسليم المتفق عليه التاريخ"
+        DATE actualDeliveryDate "تاريخ الاستلام الفعلي يُعبأ عند الاستلام"
+        VARCHAR shippingMethod "طريقة الشحن"
+        INT approvedByUserId "معرف من اعتمد الأمر FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        VARCHAR poStatus "حالة أمر الشراء مسودة معتمد مرسل للمورد قيد التنفيذ تم الاستلام جزئ..."
+        BOOLEAN cancellationReason "سبب الإلغاء إن وجد"
+        INT budgetAllocationId FK "معرف تخصيص الميزانية المرتبط FK AssetBudgetAllocation.allocationId ..."
+        TEXT notes "ملاحظات"
+        VARCHAR attachments "مرفقات PDF لأمر الشراء العطاء JSON"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetReceiving {
+        INT receivingId PK "الاستلام المبدئي وفحص الجودة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT purchaseOrderId FK "معرف أمر الشراء المرتبط FK PurchaseOrders.purchaseOrderId"
+        INT receivingNumber "رقم سند الاستلام يُولد آلياً"
+        DATE receivedDate "تاريخ وصول الأصل الفعلي إلى المدرسة"
+        INT receivedByUserId "معرف من قام بالاستلام FK Employee.employeeId - عضو لجنة الاستلام"
+        INT inspectorUserId "معرف المفتش FK Employee.employeeId - عضو لجنة فحص الجودة"
+        INT deliveryNoteNumber "رقم إذن التسليم من المورد للرجوع إليه"
+        VARCHAR deliveryCompany "شركة النقل إن وجدت"
+        VARCHAR inspectionResult "نتيجة الفحص مطابق غير مطابق جزئياً مرفوض يحتاج إصلاح"
+        DATE inspectionDate "تاريخ فحص الجودة"
+        TEXT inspectionNotes "ملاحظات اللجنة الفنية عند الفحص نص طويل يوثق أي ملاحظات أو عيوب"
+        VARCHAR qualityScore "تقييم جودة الأصل 1-10 - اختياري"
+        VARCHAR deliveryStatus "حالة التسليم تم الاستلام كاملاً تأخير استلام جزئي"
+        TEXT receivedItemsDetails "تفاصيل الأصناف المستلمة JSON - يمكن أن تحتوي على قائمة بالأصناف وال..."
+        VARCHAR acceptedAssets "قائمة بالأصول التي تم قبولها سيتم تحويلها إلى سجلات في جدول Asset"
+        VARCHAR rejectedItems "الأصناف المرفوضة مع أسباب الرفض JSON"
+        BOOLEAN returnRequested "هل تم طلب إعادة الأصناف المرفوضة للمورد"
+        DATE returnDate "تاريخ إعادة الأصناف إن وجد"
+        BOOLEAN correctiveActionRequested "هل تم طلب إجراء تصحيحي من المورد"
+        TEXT correctiveActionDetails "تفاصيل الإجراء التصحيحي المطلوب"
+        VARCHAR finalDecision "القرار النهائي للجنة قبول كامل قبول جزئي مع خصم رفض كامل إعادة"
+        VARCHAR attachments "مرفقات صور الأصول تقارير الفحص JSON"
+        VARCHAR status "حالة عملية الاستلام مفتوح قيد الفحص مكتمل ملغي"
+        TEXT notes "ملاحظات عامة"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetUsageLog {
+        INT usageLogId PK "سجل التشغيل والاستخدام"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId - للتكرار"
+        INT usageType "نوع الاستخدام تشغيل عادي اختبار صيانة طارئ"
+        DATETIME startDateTime "تاريخ ووقت بدء التشغيل"
+        DATETIME endDateTime "تاريخ ووقت إيقاف التشغيل"
+        VARCHAR durationMinutes "مدة الاستخدام بالدقائق تُحسب آلياً من startDateTime و endDateTime"
+        VARCHAR purpose "الغرض من الاستخدام تعليمي إداري تدريب اجتماع صيانة أخرى"
+        TEXT purposeDetails "تفاصيل إضافية عن الغرض مثل اسم المادة الدراسية نوع النشاط"
+        INT userId "معرف المستخدم الذي استخدم الأصل FK SystemUser.userId - يمكن أن يكون..."
+        VARCHAR userType "نوع المستخدم معلم موظف طالب"
+        INT locationId FK "معرف الموقع الذي تم فيه الاستخدام FK AssetLocation.locationId"
+        INT usageStatus "حالة الاستخدام قيد الاستخدام مكتمل معلق منقطع"
+        TEXT notes "ملاحظات أثناء الاستخدام أي مشاكل طرأت كفاءة الأداء"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    MaintenanceTickets {
+        INT ticketId PK "بلاغات الأعطال"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT ticketNumber "رقم التذكرة يُولد آلياً مثال - MT-2024-001"
+        INT assetId FK "معرف الأصل المعطوب FK Asset.assetId"
+        INT reportedByUserId "معرف مقدم البلاغ FK SystemUser.userId"
+        DATETIME reportDate "تاريخ ووقت تسجيل البلاغ"
+        BOOLEAN issueType "نوع المشكلة كهربائي ميكانيكي برمجي هيكلي تسرب أخرى"
+        VARCHAR severityLevel "مستوى الخطورة منخفض متوسط عالي طارئ - يحدد أولوية الاستجابة"
+        BOOLEAN issueDescription "وصف تفصيلي للمشكلة من المبلغ"
+        VARCHAR reportedLocation "موقع العطل نص أو FK AssetLocation.locationId"
+        INT assignedToUserId "معرف الفني المسؤول عن الإصلاح FK Employee.employeeId - من قسم الموظفين"
+        DATE assignedDate "تاريخ التعيين"
+        VARCHAR diagnosis "تشخيص الفني للمشكلة نص"
+        VARCHAR requiredParts "قطع الغيار المطلوبة JSON - يمكن ربطها بجدول MaintenanceSpareParts"
+        DECIMAL estimatedCost "التكلفة التقديرية للإصلاح"
+        DATE estimatedCompletionDate "تاريخ الإنجاز المتوقع"
+        DATE actualCompletionDate "تاريخ الإنجاز الفعلي"
+        TEXT resolutionDetails "تفاصيل الإجراءات التي تمت لحل المشكلة"
+        VARCHAR resolutionSummary "ملخص الحل"
+        DECIMAL resolutionCost "التكلفة الفعلية للإصلاح"
+        VARCHAR ticketStatus "حالة التذكرة مفتوح قيد المراجعة معتمد قيد الإصلاح في انتظار قطع غيا..."
+        TEXT closureNotes "ملاحظات عند الإغلاق"
+        INT closedByUserId "معرف من أغلق التذكرة"
+        DATE closedAt "تاريخ الإغلاق"
+        INT relatedExecutionId FK "معرف سجل تنفيذ الصيانة المرتبط FK MaintenanceExecution.executionId ..."
+        VARCHAR attachments "مرفقات صور للمشكلة تقارير JSON"
+        TEXT notes "ملاحظات إضافية"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    PreventiveMaintenanceSchedule {
+        INT scheduleId PK "جدولة الصيانة الوقائية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR scheduleCode "كود جدول الصيانة فريد"
+        INT assetId FK "معرف الأصل المستهدف FK Asset.assetId - يمكن أن يكون فارغاً لتطبيق ا..."
+        INT assetCategoryId FK "معرف فئة الأصول FK AssetCategory.categoryId - يُستخدم إذا كان الجدو..."
+        VARCHAR taskNameAr "اسم مهمة الصيانة بالعربية مثال - فحص شامل لوحدة التكييف"
+        VARCHAR taskNameEn "اسم المهمة بالإنجليزية"
+        VARCHAR maintenanceType "نوع الصيانة تنظيف معايرة فحص تشحيم استبدال قطع"
+        VARCHAR frequency "التكرار أسبوعي شهري ربع سنوي سنوي حسب ساعات التشغيل"
+        DECIMAL frequencyValue "القيمة العددية للتكرار مثال - 3 أشهر 500 ساعة تشغيل"
+        VARCHAR frequencyUnit "وحدة التكرار شهر أسبوع يوم ساعة تشغيل"
+        DATE nextDueDate "موعد الصيانة القادم يُحسب آلياً بناءً على آخر تاريخ تم تنفيذه والتكرار"
+        DATE lastServiceDate "تاريخ آخر صيانة تمت يتم تحديثه عند التنفيذ"
+        VARCHAR estimatedDuration "المدة التقديرية للمهمة بالدقائق"
+        VARCHAR assignedToTeam "الفريق المسؤول نص أو FK Employee.employeeId"
+        VARCHAR instructions "تعليمات الصيانة نص طويل"
+        VARCHAR checklist "قائمة مرجعية لإجراءات الصيانة JSON"
+        VARCHAR requiredParts "قطع الغيار المطلوبة لهذه المهمة الوقائية JSON"
+        DECIMAL estimatedCost "التكلفة التقديرية"
+        INT contractId FK "معرف عقد الصيانة الخارجي المرتبط FK AssetWarrantyContract.contractI..."
+        BOOLEAN isReminderActive "تفعيل/تعطيل التنبيهات التلقائية قبل الموعد نعم/لا"
+        VARCHAR reminderDaysBefore "عدد الأيام قبل الموعد لإرسال التذكير افتراضي 7 أيام"
+        VARCHAR status "حالة الجدول نشط معلق ملغي"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    MaintenanceExecution {
+        INT executionId PK "سجل تنفيذ الصيانة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT executionNumber "رقم سجل التنفيذ يُولد آلياً"
+        INT ticketId FK "معرف تذكرة العطل المرتبطة FK MaintenanceTickets.ticketId - اختياري ..."
+        INT scheduleId FK "معرف جدول الصيانة الوقائية المرتبط FK PreventiveMaintenanceSchedule..."
+        INT assetId FK "معرف الأصل الذي تمت صيانته FK Asset.assetId"
+        VARCHAR executionType "نوع التنفيذ صيانة تفاعلية صيانة وقائية طارئ"
+        DATETIME startDateTime "وقت بدء العمل الفعلي"
+        DATETIME endDateTime "وقت الانتهاء لحساب زمن الاستجابة/التنفيذ"
+        INT executedByUserId "معرف الفني المنفذ FK Employee.employeeId"
+        VARCHAR workPerformed "وصف دقيق لما تم إنجازه من أعمال نص طويل"
+        VARCHAR sparePartsUsed "قطع الغيار المستهلكة JSON - يمكن ربطها بتفاصيل MaintenanceSpareParts"
+        DECIMAL maintenanceCost "التكلفة المالية المباشرة أجور + قطع غيار"
+        TEXT additionalNotes "ملاحظات إضافية"
+        BOOLEAN isOperationalAfter "هل عاد الأصل للخدمة بنجاح نعم/لا"
+        INT newAssetStatusId FK "معرف الحالة الجديدة للأصل بعد الصيانة FK AssetStatus.statusId - مثل..."
+        VARCHAR resolutionSummary "ملخص الإجراءات والحل"
+        VARCHAR attachments "مرفقات صور قبل وبعد الإصلاح تقارير"
+        VARCHAR status "حالة سجل التنفيذ مكتمل قيد التنفيذ ملغي"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    MaintenanceSpareParts {
+        INT partId PK "قطع الغيار والمستهلكات"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR partCode "الكود المخزني للقطعة SKU فريد"
+        VARCHAR partNameAr "اسم قطعة الغيار أو المادة بالعربية مثال - فلتر زيت"
+        VARCHAR partNameEn "الاسم بالإنجليزية"
+        VARCHAR partCategory "فئة القطعة كهربائية ميكانيكية إلكترونية استهلاكية"
+        VARCHAR manufacturer "الشركة المصنعة اختياري"
+        VARCHAR compatibleAssets "الأصول المتوافقة مع هذه القطعة JSON - قائمة بمعرفات الأصول أو الفئات"
+        VARCHAR unitOfMeasure "وحدة القياس قطعة علبة لتر متر"
+        INT currentStockQuantity "الكمية المتوفرة حالياً في المخزون"
+        VARCHAR minStockLevel "الحد الأدنى للكمية عند الوصول إليه يتم إصدار تنبيه للتزويد"
+        VARCHAR maxStockLevel "الحد الأقصى للكمية"
+        INT reorderQuantity "كمية إعادة الطلب الموصى بها متى نطلب وماذا نطلب"
+        DECIMAL unitCost "سعر الوحدة لحساب التكلفة عند الاستهلاك"
+        VARCHAR currency "العملة"
+        VARCHAR supplierName "المورد المفضل"
+        VARCHAR locationInWarehouse "موقع القطعة في المستودع رف خزانة"
+        BOOLEAN isActive "هل القطعة لا تزال مستخدمة"
+        VARCHAR status "حالة القطعة في المخزون متوفر شحيح نفذ مطلوب"
+        DATE lastRestockDate "تاريخ آخر تزويد"
+        DECIMAL totalConsumed "إجمالي الكمية المستهلكة يُحسب آلياً من استهلاكات الصيانة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetSuspensionRequests {
+        INT suspensionId PK "طلبات تعليق الأصل"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT requestNumber "رقم الطلب يُولد آلياً"
+        INT assetId FK "معرف الأصل المراد تعليقه FK Asset.assetId"
+        INT requestedByUserId "معرف مقدم الطلب FK SystemUser.userId"
+        DATE requestDate "تاريخ الطلب"
+        TEXT reason "سبب التعليق أمني فني إداري قيد التحقيق تلف كامل"
+        TEXT reasonDetails "تفاصيل السبب نص"
+        DATE startDate "تاريخ بدء التعليق المتوقع"
+        DATE expectedEndDate "التاريخ المتوقع لفك التعليق يمكن أن يكون فارغاً إذا كان دائماً"
+        VARCHAR attachments "مرفقات تقارير صور JSON"
+        VARCHAR approvalStatus "حالة الطلب قيد المراجعة معتمد مرفوض ملغي"
+        INT approvedByUserId "معرف المعتمد FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        TEXT approvalNotes "ملاحظات الاعتماد"
+        TEXT rejectionReason "سبب الرفض إن وجد"
+        BOOLEAN isRevoked "هل تم إلغاء التعليق وإعادة الأصل للخدمة"
+        DATE revokeDate "تاريخ الإلغاء"
+        TEXT revokeReason "سبب الإلغاء"
+        INT revokedByUserId "معرف من ألغى التعليق"
+        DATE actualEndDate "تاريخ الانتهاء الفعلي للتعليق"
+        VARCHAR status "حالة الطلب نشط منتهي ملغي"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    MaintenanceNotifications {
+        INT notificationId PK "إشعارات الصيانة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR relatedEntityType "نوع الكيان المرتبط MaintenanceTicket PreventiveSchedule SparePart A..."
+        INT relatedEntityId "معرف الكيان المرتبط يمكن أن يكون ticketId scheduleId partId suspens..."
+        VARCHAR notificationType "نوع الإشعار بلاغ جديد موعد صيانة قادم تحذير مخزون اكتمال صيانة تعلي..."
+        VARCHAR title "عنوان الإشعار"
+        INT messageContent "نص الرسالة التنبيهية"
+        INT recipientUserId "معرف المستخدم المستلم FK SystemUser.userId"
+        VARCHAR priority "أولوية الإشعار عادي مهم عاجل"
+        BOOLEAN isRead "هل تم الاطلاع على التنبيه"
+        DATE readAt "تاريخ القراءة"
+        DATETIME sentAt "تاريخ ووقت إرسال النظام للتنبيه"
+        VARCHAR deliveryMethod "طريقة الإرسال تطبيق بريد إلكتروني رسالة نصية"
+        VARCHAR status "حالة الإشعار مرسل مقروء ملغي"
+        INT createdByUserId "منشئ السجل غالباً النظام نفسه"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    UsageViolations {
+        INT violationId PK "مخالفات الاستخدام"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetId FK "معرف الأصل المخالف في استخدامه FK Asset.assetId"
+        VARCHAR violationType "نوع المخالفة سوء استخدام تجاوز حدود الصلاحية إهمال صيانة استخدام غي..."
+        DATE violationDate "تاريخ المخالفة"
+        INT reportedByUserId "معرف من أبلغ عن المخالفة FK SystemUser.userId"
+        DATE reportedDate "تاريخ الإبلاغ"
+        INT violatingUserId "معرف المستخدم المخالف FK SystemUser.userId - يمكن أن يكون موظفاً أو..."
+        TEXT description "وصف دقيق للمخالفة وما حدث"
+        VARCHAR evidence "أدلة JSON - مسارات ملفات صور فيديوهات"
+        VARCHAR penaltyAction "الإجراء المتخذ إنذار تعليق استخدام الأصل خصم مالي إحالة للتحقيق"
+        DECIMAL penaltyAmount "قيمة الغرامة المالية إن وجدت"
+        DECIMAL penaltyAmountCurrency "عملة الغرامة"
+        BOOLEAN deductionFromSalary "هل سيتم خصم المبلغ من راتب الموظف نعم/لا"
+        INT approvedByUserId "معرف من اعتمد الإجراء التأديبي FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        VARCHAR status "حالة المخالفة مسجلة قيد التحقيق تم اتخاذ إجراء مغلقة"
+        DATE closedAt "تاريخ إغلاق المخالفة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetFinancials {
+        INT financialsId PK "القيم المالية للأصل"
+        INT assetId FK "معرف الأصل المرتبط FK Asset.assetId - علاقة 1-1 أصل واحد له سجل مال..."
+        INT schoolId "معرف المدرسة FK School.schoolId - للتكرار وتسهيل التقارير"
+        DECIMAL purchasePrice "سعر الشراء الأساسي من الفاتورة قبل أي إضافات"
+        DECIMAL shippingCosts "تكاليف الشحن والنقل"
+        DECIMAL customsFees "الرسوم الجمركية للواردات"
+        DECIMAL installationCosts "تكاليف التركيب والتهيئة"
+        DECIMAL otherCosts "تكاليف أخرى تأمين رسوم ترخيص الخ JSON"
+        DECIMAL totalInitialCost "التكلفة الكلية تجمع آلياً = purchasePrice + shippingCosts + customs..."
+        VARCHAR currency "العملة المستخدمة SAR USD EUR GBP etc."
+        DECIMAL exchangeRateToSAR "سعر الصرف للريال السعودي لتوحيد الحسابات المالية في التقارير"
+        DECIMAL salvageValue "القيمة التخريدية الخردة المتوقعة في نهاية العمر الإنتاجي"
+        DECIMAL residualValue "القيمة المتبقية مرادف لـ salvageValue"
+        DATE residualValueLastUpdate "تاريخ آخر تحديث للقيمة التخريدية"
+        VARCHAR fiscalYear "السنة المالية للإدخال مثال - 2025"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل السجل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetDepreciation {
+        INT depreciationId PK "سياسات وحسابات الإهلاك"
+        INT assetId FK "معرف الأصل FK Asset.assetId - علاقة 1-1"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR methodType "طريقة الإهلاك القسط الثابت - Straight Line القسط المتناقص - Declini..."
+        VARCHAR usefulLifeYears "العمر الإنتاجي المقدر بالسنوات - يُستخدم لحساب قسط الإهلاك السنوي ف..."
+        VARCHAR usefulLifeUnits "العمر الإنتاجي المقدر بوحدات الإنتاج ساعات تشغيل وحدات منتجة - يُست..."
+        DECIMAL depreciationRate "نسبة الإهلاك السنوية تستخدم في طريقة القسط المتناقص"
+        DECIMAL currentBookValue "القيمة الدفترية الحالية للأصل في بداية الفترة الحالية قيمة قابلة لل..."
+        DATE accumulatedDepreciation "مجمع الإهلاك المتراكم حتى تاريخه إجمالي ما تم إهلاكه من قيمة الأصل"
+        DECIMAL netBookValue "صافي القيمة الدفترية currentBookValue - accumulatedDepreciation - ق..."
+        DECIMAL depreciableAmount "القيمة القابلة للإهلاك التكلفة - الخردة"
+        DATE lastDepreciationDate "تاريخ آخر عملية إهلاك تم تسجيلها آخر قسط تم"
+        VARCHAR lastDepreciationPeriod "آخر فترة تم إهلاكها مثال - الشهر 12 من السنة 2024"
+        BOOLEAN isFullyDepreciated "هل تم إهلاك الأصل بالكامل نعم/لا"
+        TEXT notes "ملاحظات حول سياسة الإهلاك"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    DepreciationTransactions {
+        INT transactionId PK "معاملات الإهلاك الدورية"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT depreciationId FK "معرف سجل الإهلاك المرتبط FK AssetDepreciation.depreciationId"
+        VARCHAR periodStart "بداية الفترة المالية مثال - 2025-01-01"
+        VARCHAR periodEnd "نهاية الفترة المالية مثال - 2025-01-31"
+        VARCHAR periodType "نوع الفترة شهري ربع سنوي نصف سنوي سنوي"
+        VARCHAR fiscalYear "السنة المالية"
+        INT periodNumber "رقم الفترة مثال - 1 = يناير 2 = فبراير"
+        DECIMAL depreciationAmount "قيمة قسط الإهلاك لهذه الفترة المبلغ الذي تم إهلاكه"
+        VARCHAR accumulatedDepreciationAfter "مجمع الإهلاك بعد إضافة هذا القسط"
+        DECIMAL netBookValueAfter "صافي القيمة الدفترية بعد الإهلاك"
+        BOOLEAN isPostedToLedger "هل تم ترحيل القيد إلى دفتر الأستاذ العام نعم/لا"
+        VARCHAR ledgerEntryReference "رقم مرجع القيد في دفتر الأستاذ العام إن تم ترحيله"
+        DATE postedToLedgerDate "تاريخ الترحيل إلى دفتر الأستاذ"
+        INT calculatedByUserId "معرف من قام بحساب الإهلاك غالباً النظام آلياً أو مستخدم"
+        DATE calculationDate "تاريخ حساب الإهلاك"
+        TEXT notes "ملاحظات"
+        DATE createdAt "تاريخ إنشاء السجل"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    RevaluationImpairment {
+        INT revaluationId PK "إعادة التقييم والانخفاض"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        DECIMAL type "نوع العملية إعادة تقييم - Revaluation انخفاض قيمة - Impairment"
+        DATE effectiveDate "تاريخ سريان القيمة الجديدة"
+        DECIMAL oldBookValue "القيمة الدفترية قبل العملية قبل التعديل"
+        VARCHAR oldAccumulatedDepreciation "مجمع الإهلاك القديم"
+        DECIMAL oldNetBookValue "صافي القيمة الدفترية القديمة"
+        DECIMAL newValue "القيمة الجديدة المعتمدة السوقية العادلة"
+        VARCHAR newAccumulatedDepreciation "مجمع الإهلاك الجديد بعد إعادة التوزيع"
+        DECIMAL newNetBookValue "صافي القيمة الدفترية الجديد"
+        VARCHAR difference "فرق التقييم ربح أو خسارة"
+        VARCHAR differenceType "نوع الفرق ربح إعادة تقييم - يضاف لحقوق الملكية خسارة إعادة تقييم - ..."
+        VARCHAR valuationFirm "جهة التقييم المعتمدة اسم الشركة أو الخبير"
+        INT valuationReportNumber "رقم تقرير التقييم"
+        DATE valuationReportDate "تاريخ تقرير التقييم"
+        DECIMAL valuationMethod "طريقة التقييم المستخدمة السوقي التكلفة الدخل"
+        TEXT reason "سبب التقييم أو الانخفاض الجوهري نص"
+        VARCHAR attachments "مرفقات تقرير التقييم صور JSON"
+        INT approvedByUserId "معرف من اعتمد العملية FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        VARCHAR status "حالة العملية مسودة معتمدة مرحلة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetExpenses {
+        INT expenseId PK "المصروفات الرأسمالية والتشغيلية"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR expenseType "نوع المصروف رأسمالي - Capex تشغيلي - Opex"
+        DATE expenseDate "تاريخ حدوث المصروف تاريخ الفاتورة"
+        DECIMAL amount "قيمة المصروف"
+        VARCHAR currency "العملة"
+        TEXT description "تفاصيل المصروف صيانة كبرى قطع غيار تركيب تدريب الخ"
+        INT relatedExecutionId FK "معرف سجل تنفيذ الصيانة المرتبط FK MaintenanceExecution.executionId ..."
+        BOOLEAN isCapitalized "هل سيتم إضافة المصروف لقيمة الأصل رأسمالته نعم/لا - يحدد بناءً على ..."
+        DATE capitalizationDate "تاريخ إضافة المصروف لقيمة الأصل إذا isCapitalized = نعم"
+        BOOLEAN accountedInFinancials "هل تم إضافة المصروف لقيمة الأصل في جدول AssetFinancials"
+        BOOLEAN accountedInDepreciation "هل تم تعديل الإهلاك المستقبلي بسبب رأسمالة المصروف"
+        INT approvedByUserId "معرف من اعتمد تصنيف المصروف FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    FeasibilityComparison {
+        INT comparisonId PK "مقارنات الجدوى والاستبدال"
+        INT assetId FK "معرف الأصل المُقارَن FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        DATE comparisonDate "تاريخ إجراء المقارنة"
+        DECIMAL repairEstimate "تكلفة الإصلاح المقدرة مجمع - قطع غيار + أجور + مصروفات"
+        DECIMAL repairEstimateBreakdown "تفاصيل تقدير تكلفة الإصلاح JSON"
+        INT replacementAssetId FK "معرف الأصل البديل المقترح FK Asset.assetId - يمكن أن يكون أصل جديد ..."
+        DECIMAL replacementCost "تكلفة شراء أصل بديل جديد سعر الشراء + التركيب + التشغيل الأولي"
+        DECIMAL replacementCostBreakdown "تفاصيل تكلفة الاستبدال JSON"
+        DECIMAL totalCostOfOwnershipAnalysis "تحليل إجمالي تكلفة الامتلاك للبديل نص أو JSON"
+        VARCHAR recommendation "توصية اللجنة إصلاح استبدال إيقاف الخدمة تأجيل القرار"
+        TEXT recommendationReason "سبب التوصية نص مفصل"
+        VARCHAR decisionStatus "حالة القرار بانتظار القرار استمرار بإصلاح الأصل استبدال إلغاء الأصل"
+        DATE decisionDate "تاريخ القرار"
+        INT approvedByUserId "معرف من اتخذ القرار FK SystemUser.userId"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    FinancialAuditArchive {
+        INT archiveId PK "الأرشفة المالية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        DECIMAL reportType "نوع التقرير المؤرشف تقرير إهلاك تقرير قيمة دفترية تقرير إعادة تقييم..."
+        VARCHAR fiscalYear "السنة المالية للتقرير"
+        VARCHAR periodStart "بداية الفترة التي يغطيها التقرير"
+        VARCHAR periodEnd "نهاية الفترة"
+        DATE generationDate "تاريخ إصدار التقرير الأصلي"
+        DATE archivedDate "تاريخ الأرشفة نقل البيانات إلى الأرشيف"
+        DECIMAL totalAssetsValue "إجمالي قيم الأصول في هذا التقرير لقطة"
+        DECIMAL totalDepreciationValue "إجمالي الإهلاك في هذه الفترة"
+        VARCHAR filePath "مسار ملف التقرير المعتمد PDF/Excel - يمكن أن يكون ملفاً يتم إنشاؤه ..."
+        BOOLEAN isReadOnly "دائماً True لمنع أي تعديل"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل من قام بالأرشفة"
+        DATE createdAt "تاريخ الإنشاء"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    FinancialSummaryReports {
+        INT summaryId PK "تقارير القيمة المالية المجمعة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR fiscalYear "السنة المالية محل التقرير"
+        DATE reportDate "تاريخ إصدار التقرير"
+        VARCHAR reportType "نوع التقرير سنوي ربع سنوي حسب الطلب"
+        INT assetCategoryId FK "معرف فئة الأصول FK AssetCategory.categoryId - يمكن أن يكون فارغاً ل..."
+        DECIMAL totalBookValue "إجمالي القيمة الدفترية لكافة الأصول أو للفئة"
+        DECIMAL totalDepreciation "إجمالي الإهلاك المتراكم للفترة"
+        DECIMAL totalAssetsCount "عدد الأصول التي شملها التقرير المالي"
+        DATE totalAcquisitionCost "إجمالي تكلفة الشراء للأصول التكلفة التاريخية"
+        INT fullyDepreciatedAssetsCount "عدد الأصول التي تم إهلاكها بالكامل"
+        INT assetsWithImpairmentCount "عدد الأصول التي تم تسجيل انخفاض في قيمتها"
+        VARCHAR revaluationGains "إجمالي أرباح إعادة التقييم"
+        VARCHAR revaluationLosses "إجمالي خسائر إعادة التقييم"
+        VARCHAR auditStatus "حالة تدقيق التقرير غير مدقق مدقق داخلياً مدقق خارجياً تحت التدقيق"
+        VARCHAR auditFirmName "اسم شركة التدقيق إن وجد"
+        VARCHAR auditorName "اسم المدقق إن وجد"
+        DATE auditDate "تاريخ التدقيق"
+        VARCHAR auditorSignature "توقيع المدقق الإلكتروني"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetAssignment {
+        INT assignmentId PK "تخصيص الأصول"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR assigneeType "نوع المستلم موظف طالب قسم معمل أخرى"
+        INT assigneeId "معرف المستلم حسب النوع - Employee.employeeId أو Student.studentId أ..."
+        VARCHAR assigneeName "اسم المستلم نسخة احتياطية للعرض السريع"
+        INT assignerUserId "معرف من قام بالتخصيص FK SystemUser.userId"
+        DATE assignmentDate "تاريخ بدء التخصيص تاريخ التسليم"
+        DATE expectedReturnDate "تاريخ الإرجاع المتوقع نهاية العقد الدراسي نهاية السنة إلخ"
+        DATE actualReturnDate "تاريخ استرجاع الأصل الفعلي"
+        TEXT assignmentReason "سبب التخصيص وظيفة دراسة مشروع إعارة مؤقتة"
+        VARCHAR conditionAtAssignment "حالة الأصل عند التسليم جديد جيد يحتاج صيانة"
+        TEXT conditionNotesAtAssignment "ملاحظات عند التسليم"
+        VARCHAR conditionAtReturn "حالة الأصل عند الإرجاع"
+        TEXT conditionNotesAtReturn "ملاحظات عند الإرجاع"
+        INT damageNotes "ملاحظات عن أي تلف حدث أثناء فترة التخصيص"
+        DECIMAL penaltyAmount "قيمة الغرامة إن وجدت بسبب تلف أو فقدان"
+        VARCHAR penaltyStatus "حالة الغرامة مستحقة مدفوعة معفاة"
+        VARCHAR assignmentStatus "حالة التخصيص نشط ملغي مسترجع منتهي"
+        BOOLEAN isReturned "هل تم استرجاع الأصل"
+        INT returnReceiptNumber "رقم إيصال الاسترجاع إن وجد"
+        INT returnedToUserId "معرف من استلم الأصل عند الإرجاع FK SystemUser.userId"
+        DATE returnDate "تاريخ الإرجاع"
+        TEXT notes "ملاحظات إضافية"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetLoans {
+        INT loanId PK "إعارات الأصول"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR borrowerType "نوع المستعير طالب موظف زائر جهة خارجية"
+        INT borrowerId "معرف المستعير حسب النوع"
+        VARCHAR borrowerName "اسم المستعير نسخة احتياطية"
+        VARCHAR borrowerContact "جهة اتصال المستعير هاتف أو بريد"
+        DATE loanDate "تاريخ بداية الإعارة"
+        DATE expectedReturnDate "تاريخ الإرجاع المتوقع"
+        DATE actualReturnDate "تاريخ الإرجاع الفعلي"
+        VARCHAR loanPurpose "الغرض من الإعارة نشاط صفي بحث اجتماع فعالية"
+        INT issuerUserId "معرف من قام بالإعارة FK SystemUser.userId"
+        VARCHAR conditionAtLoan "حالة الأصل عند الإعارة"
+        VARCHAR conditionAtReturn "حالة الأصل عند الإرجاع"
+        BOOLEAN isOverdue "هل تأخر المستعير في الإرجاع يُحسب آلياً"
+        VARCHAR overdueDays "عدد أيام التأخير يُحسب"
+        DECIMAL fineAmount "قيمة الغرامة إن وجدت"
+        INT finePaid "هل دفعت الغرامة"
+        DATE finePaidDate "تاريخ دفع الغرامة"
+        VARCHAR loanStatus "حالة الإعارة نشطة مسترجعة متأخرة مفقودة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetTransferRequests {
+        INT transferRequestId PK "طلبات النقل والتحويل"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT requestNumber "رقم الطلب يُولد آلياً"
+        VARCHAR fromEntityType "نوع الجهة/القسم المسؤول حالياً قسم موقع مدرسة"
+        INT fromEntityId "معرف الجهة الحالية"
+        VARCHAR toEntityType "نوع الجهة/القسم المسؤول الجديد"
+        INT toEntityId "معرف الجهة الجديدة"
+        VARCHAR transferType "نوع النقل نقل مكاني تحويل إداري نقل بين المدارس"
+        TEXT requestReason "سبب النقل"
+        INT requestedByUserId "معرف مقدم الطلب FK SystemUser.userId"
+        DATE requestDate "تاريخ الطلب"
+        VARCHAR approvalStatus "حالة الموافقة قيد المراجعة معتمد مرفوض ملغي"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        TEXT approvalNotes "ملاحظات الاعتماد"
+        TEXT rejectionReason "سبب الرفض إن وجد"
+        DATE transferExecutionDate "تاريخ تنفيذ النقل الفعلي"
+        INT executedByUserId "معرف من نفذ النقل FK SystemUser.userId"
+        TEXT notes "ملاحظات"
+        VARCHAR status "حالة الطلب مفتوح معتمد منفذ ملغي"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetInspectionLog {
+        INT inspectionId PK "فحص الاستلام والإرجاع"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR relatedTransactionType "نوع العملية المرتبطة استلام من مورد إرجاع من موظف إرجاع من طالب نقل..."
+        INT relatedTransactionId "معرف العملية المرتبطة مثل assignmentId loanId receivingId transferR..."
+        VARCHAR inspectionType "نوع الفحص عند الاستلام عند الإرجاع فحص دوري"
+        DATE inspectionDate "تاريخ الفحص"
+        INT inspectorUserId "معرف المفتش FK SystemUser.userId"
+        VARCHAR physicalCondition "الحالة الفيزيائية سليم به أضرار بسيطة تالف جزئياً تالف كلياً مفقود"
+        INT damageDetails "وصف دقيق للأضرار إن وجدت"
+        INT damagePhotos "مسارات صور الأضرار JSON"
+        VARCHAR functionalStatus "الحالة الوظيفية يعمل بكفاءة يعمل بخلل لا يعمل"
+        VARCHAR missingParts "قطع غيار مفقودة JSON"
+        VARCHAR inspectionResult "نتيجة الفحص مقبول مرفوض يحتاج صيانة يحتاج استبدال"
+        DECIMAL recommendedAction "الإجراء الموصى به صيانة استبدال خصم قيمة إحالة للتحقيق"
+        DECIMAL estimatedRepairCost "تكلفة الإصلاح التقديرية إن وجدت"
+        TEXT notes "ملاحظات إضافية"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetMovementHistory {
+        INT historyId PK "سجل حركة الأصول التاريخي"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR actionType "نوع الحدث نقل تخصيص إعارة إرجاع صيانة تغيير حالة تغيير موقع شراء اس..."
+        TEXT actionDescription "وصف الإجراء المتخذ"
+        DECIMAL oldValue "القيمة القديمة قبل التغيير مثلاً الموقع القديم الحالة القديمة المسؤ..."
+        DECIMAL newValue "القيمة الجديدة بعد التغيير"
+        VARCHAR relatedEntityType "نوع الكيان المرتبط بالحدث AssetAssignment AssetLoans MaintenanceTic..."
+        INT relatedEntityId "معرف الكيان المرتبط"
+        DATETIME actionDate "تاريخ ووقت الحركة الفعلي"
+        INT performedByUserId "معرف من قام بالحركة FK SystemUser.userId"
+        TEXT notes "ملاحظات"
+        DATE createdAt "تاريخ الإنشاء نفس actionDate غالباً"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    LoanTrackingAlerts {
+        INT alertId PK "تنبيهات ومتابعة الإعارات"
+        INT loanId FK "معرف الإعارة المرتبطة FK AssetLoans.loanId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR alertType "نوع التنبيه تذكير قبل الانتهاء إشعار تأخير تنبيه غرامة"
+        DATE alertDate "تاريخ إرسال التنبيه"
+        INT alertMessage "نص التنبيه المرسل"
+        VARCHAR deliveryMethod "طريقة الإرسال بريد إلكتروني رسالة نصية إشعار تطبيق"
+        BOOLEAN isSent "هل تم إرسال التنبيه بنجاح"
+        VARCHAR sentTo "المستلم عنوان البريد أو رقم الهاتف"
+        BOOLEAN isAcknowledged "هل استلمت الجهة المستعيرة التنبيه واطّلعت عليه"
+        DATE acknowledgedAt "تاريخ الاطلاع"
+        BOOLEAN violationRecorded "هل تم تسجيل مخالفة تأخير بسبب عدم الاستجابة"
+        INT violationId FK "معرف المخالفة المسجلة FK UsageViolations.violationId - اختياري"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل النظام غالباً"
+        DATE createdAt "تاريخ الإنشاء"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    InventoryPlans {
+        INT planId PK "خطط الجرد"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT planNumber "رقم الخطة يُولد آلياً"
+        VARCHAR planName "مسمى الجرد مثال - الجرد السنوي 2025"
+        VARCHAR inventoryType "نوع الجرد دوري مفاجئ عند إخلاء طرف جزئي"
+        VARCHAR scopeType "نطاق الجرد مدرسة كاملة قسم معين فئة محددة موقع محدد"
+        DECIMAL scopeValue "قيمة النطاق مثلاً معرف القسم معرف الفئة معرف الموقع - حسب scopeType"
+        DATE startDate "تاريخ بداية أعمال الجرد الميداني"
+        DATE endDate "التاريخ المستهدف لإنهاء الجرد"
+        DATE actualEndDate "تاريخ الانتهاء الفعلي"
+        INT assignedTeamLeaderId "معرف قائد فريق الجرد FK Employee.employeeId"
+        VARCHAR assignedTeamMembers "أعضاء فريق الجرد JSON - قائمة بـ Employee.employeeId"
+        VARCHAR instructions "تعليمات للفريق"
+        VARCHAR status "حالة الخطة مسودة نشطة مكتملة ملغاة قيد المراجعة"
+        DECIMAL completionPercentage "نسبة الإنجاز يُحسب آلياً"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    FieldInventoryLog {
+        INT logId PK "الجرد الميداني"
+        INT planId FK "معرف خطة الجرد المرتبطة FK InventoryPlans.planId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT scannerUserId "معرف من قام بالمسح FK SystemUser.userId"
+        DATETIME scanTimestamp "وقت وتاريخ المسح بدقة"
+        VARCHAR scannedCode "كود الباركود/QR الذي تم قراءته عادة assetUniqueCode أو assetTag"
+        INT assetId FK "معرف الأصل الناتج عن المسح يتم البحث عنه آلياً باستخدام scannedCode"
+        VARCHAR physicalLocation "الموقع الفعلي الذي تم العثور فيه على الأصل نص أو FK AssetLocation.l..."
+        VARCHAR actualCondition "الحالة الفعلية للأصل عند الجرد سليم تالف يحتاج صيانة غير قابل للتشغيل"
+        TEXT conditionNotes "ملاحظات عن الحالة"
+        BOOLEAN found "هل تم العثور على الأصل نعم/لا"
+        TEXT foundNotes "ملاحظات إذا لم يتم العثور عليه مكان محتمل آخر شخص معروف لديه الأصل"
+        VARCHAR assetPhoto "صورة للأصل مسار ملف - اختياري"
+        VARCHAR gpsLocation "إحداثيات GPS لموقع المسح للتأكد من أن المسح تم في الموقع الصحيح"
+        BOOLEAN isVerified "هل تم التحقق من صحة المسح"
+        INT verifiedByUserId "معرف من تحقق FK SystemUser.userId"
+        DATETIME verifiedAt "وقت التحقق"
+        TEXT notes "ملاحظات إضافية"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    InventoryReconciliation {
+        INT reconciliationId PK "مطابقة وفروقات الجرد"
+        INT planId FK "معرف خطة الجرد FK InventoryPlans.planId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetId FK "معرف الأصل من جدول Asset"
+        VARCHAR discrepancyType "نوع الفرق مطابق نقص/مفقود زيادة/غير مسجل تالف اختلاف موقع اختلاف حالة"
+        INT systemLocationId "الموقع المسجل في النظام سابقاً من Asset.assetLocationId"
+        INT actualLocationId "الموقع الذي وجد فيه فعلياً من FieldInventoryLog.physicalLocation"
+        VARCHAR systemCondition "الحالة المسجلة في النظام"
+        VARCHAR actualCondition "الحالة الفعلية من FieldInventoryLog.actualCondition"
+        TEXT reasonForDiff "السبب المحتمل للفرق خطأ إدخال سرقة نقل غير موثق إعارة بدون تسجيل إه..."
+        TEXT investigationNotes "ملاحظات التحقيق إن وجدت"
+        VARCHAR correctiveAction "الإجراء التصحيحي المقترح تحديث السجلات بحث إداري إبلاغ الجهات الأمن..."
+        BOOLEAN isResolved "هل تم حل الفرق وتحديث السجلات"
+        DATE resolutionDate "تاريخ الحل"
+        INT resolvedByUserId "معرف من قام بحل الفرق FK SystemUser.userId"
+        TEXT resolutionNotes "ملاحظات الحل"
+        INT approvedByUserId "معرف من اعتمد نتيجة المطابقة FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        VARCHAR status "حالة المطابقة مفتوح قيد التحقيق محلول معتمد"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    ComplianceAudit {
+        INT auditId PK "الامتثال والرقابة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT auditNumber "رقم التدقيق يُولد آلياً"
+        DATE auditDate "تاريخ عملية الرقابة/التفتيش"
+        VARCHAR auditType "نوع التدقيق داخلي خارجي مفاجئ دوري"
+        VARCHAR standardType "المعيار المطبق ISO 55000 لائحة وزارة التربية سياسة داخلية معايير مح..."
+        VARCHAR standardVersion "إصدار المعيار"
+        INT auditedByUserId "معرف المدقق FK SystemUser.userId"
+        VARCHAR auditScope "نطاق التدقيق جميع الأصول أصول قسم معين أصول فئة معينة"
+        DECIMAL complianceScore "نسبة الامتثال المحققة من 100"
+        VARCHAR violationsFound "المخالفات أو نقاط عدم المطابقة المكتشفة نص أو JSON"
+        TEXT violationsDetails "تفاصيل المخالفات JSON"
+        VARCHAR correctiveActionsRequired "الإجراءات التصحيحية المطلوبة نص"
+        VARCHAR correctiveActionsDeadline "الموعد النهائي لتنفيذ الإجراءات التصحيحية"
+        VARCHAR correctiveActionsStatus "حالة الإجراءات التصحيحية قيد التنفيذ منجزة متأخرة"
+        DATE followUpAuditDate "تاريخ التدقيق المتابع إن وجد"
+        VARCHAR auditReportPath "مسار ملف تقرير التدقيق PDF"
+        VARCHAR status "حالة التدقيق مخطط قيد التنفيذ مكتمل ملغي"
+        INT approvedByUserId "معرف من اعتمد تقرير التدقيق FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    FinalApprovalAudit {
+        INT finalApprovalId PK "اعتماد نتائج الرقابة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT planId FK "معرف خطة الجرد المرتبطة FK InventoryPlans.planId - اختياري قد يكون ..."
+        INT auditId FK "معرف التدقيق المرتبط FK ComplianceAudit.auditId - اختياري"
+        VARCHAR approvalType "نوع الاعتماد جرد سنوي تدقيق داخلي تدقيق خارجي شطب أصول"
+        DATE approvalDate "تاريخ الاعتماد الرسمي من الإدارة العليا"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+        VARCHAR approvalDocPath "مسار ملف محضر الجرد المعتمد أو تقرير التدقيق المعتمد"
+        VARCHAR summaryOfChanges "ملخص التغييرات التي تم إجراؤها على النظام بناءً على هذا الاعتماد مث..."
+        DATE finalStatusUpdate "تأكيد تحديث كافة حالات الأصول في النظام نعم/لا"
+        DATE statusUpdateDate "تاريخ تحديث النظام"
+        INT statusUpdatedByUserId "معرف من قام بتحديث النظام FK SystemUser.userId"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    FacilityDepartmentAssignment {
+        INT assignmentId PK "تخصيص المرافق التعليمية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR facilityType "نوع المرفق قاعة معمل مكتبة صالة رياضية مخزن مكتب"
+        INT facilityId "معرف المرفق FK Classroom.classroomId أو Asset.assetId"
+        INT departmentId "معرف القسم المستفيد FK SchoolDepartment.deptId"
+        INT responsibleUserId "رئيس القسم أو أمين المختبر المسؤول FK Employee.employeeId"
+        VARCHAR assignmentType "نوع التخصيص كلي جزئي مؤقت دائم"
+        DATE startDate "تاريخ التخصيص للقسم"
+        DATE endDate "تاريخ انتهاء التخصيص إن كان مؤقتاً"
+        BOOLEAN isShared "هل المرفق مشترك بين عدة أقسام"
+        VARCHAR sharedWithDepartments "الأقسام المشاركة JSON - قائمة بـ DepartmentId"
+        VARCHAR sharingSchedule "جدول الاستخدام JSON - لتحديد أوقات استخدام كل قسم"
+        VARCHAR priority "أولوية القسم في استخدام المرفق"
+        TEXT notes "ملاحظات"
+        VARCHAR status "حالة التخصيص نشط منتهي ملغي"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    EducationalConsumablesTracking {
+        INT consumptionId PK "استهلاك المواد التعليمية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT consumableId "معرف المادة الاستهلاكية من جدول منفصل أو من Asset للمواد التي تدخل ..."
+        VARCHAR consumableName "اسم المادة المستهلكة حبر أوراق مواد كيميائية أدوات الخ"
+        VARCHAR consumableCode "كود المادة SKU"
+        VARCHAR category "فئة المادة حبر ورق كيميائيات لوازم فنية لوازم معمل"
+        INT quantityConsumed "الكمية المستهلكة"
+        VARCHAR unitOfMeasure "وحدة القياس لتر قطعة رزمة كجم"
+        DATE consumptionDate "تاريخ الاستهلاك"
+        INT consumedByUserId "معرف من صرف المادة FK SystemUser.userId"
+        INT departmentId "معرف القسم المستهلك FK SchoolDepartment.deptId"
+        INT courseId "معرف المادة الدراسية المرتبطة بالاستهلاك FK Course.courseId - اختياري"
+        INT activityId "معرف النشاط الطلابي المرتبط بالاستهلاك FK SchoolActivity.activityId..."
+        VARCHAR purpose "الغرض من الاستهلاك تجربة معملية نشاط فني اختبار طباعة الخ"
+        TEXT notes "ملاحظات"
+        DATETIME unitCost "تكلفة الوحدة في وقت الاستهلاك لحساب التكلفة الإجمالية"
+        DECIMAL totalCost "التكلفة الإجمالية quantityConsumed × unitCost"
+        VARCHAR budgetLineCode "كود بند الميزانية الذي سيتم تحميل الاستهلاك عليه"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    %% ===== Relationships =====
+    AssetCategory ||--o{ Asset : "معرف فئة الأصل FK AssetCa"
+    AssetStatus ||--o{ Asset : "معرف حالة الأصل FK AssetS"
+    AssetLocation ||--o{ Asset : "معرف الموقع المكاني الحال"
+    AssetWarrantyContract ||--o{ Asset : "معرف عقد الضمان المرتبط F"
+    Asset ||--o{ AssetDocument : "معرف الأصل المرتبط FK Ass"
+    AssetWarrantyContract ||--o{ AssetDocument : "معرف العقد المرتبط FK Ass"
+    AssetCategory ||--o{ AssetRequirementRequest : "معرف الفئة المقترحة FK As"
+    Asset ||--o{ AssetRequirementRequest : "معرف الأصل المطلوب استبدا"
+    PurchaseOrders ||--o{ AssetRequirementRequest : "معرف أمر الشراء المرتبط F"
+    AssetCategory ||--o{ TechnicalSpecifications : "معرف فئة الأصل المرتبطة F"
+    AssetRequirementRequest ||--o{ FeasibilityRiskAnalysis : "معرف طلب الاحتياج المرتبط"
+    AssetCategory ||--o{ AssetBudgetAllocation : "معرف فئة الأصل FK AssetCa"
+    AssetRequirementRequest ||--o{ PurchaseOrders : "معرف طلب الاحتياج المرتبط"
+    AssetBudgetAllocation ||--o{ PurchaseOrders : "معرف تخصيص الميزانية المر"
+    PurchaseOrders ||--o{ AssetReceiving : "معرف أمر الشراء المرتبط F"
+    Asset ||--o{ AssetUsageLog : "معرف الأصل FK AssetassetI"
+    AssetLocation ||--o{ AssetUsageLog : "معرف الموقع الذي تم فيه ا"
+    Asset ||--o{ MaintenanceTickets : "معرف الأصل المعطوب FK Ass"
+    MaintenanceExecution ||--o{ MaintenanceTickets : "معرف سجل تنفيذ الصيانة ال"
+    Asset ||--o{ PreventiveMaintenanceSchedule : "معرف الأصل المستهدف FK As"
+    AssetCategory ||--o{ PreventiveMaintenanceSchedule : "معرف فئة الأصول FK AssetC"
+    AssetWarrantyContract ||--o{ PreventiveMaintenanceSchedule : "معرف عقد الصيانة الخارجي "
+    MaintenanceTickets ||--o{ MaintenanceExecution : "معرف تذكرة العطل المرتبطة"
+    PreventiveMaintenanceSchedule ||--o{ MaintenanceExecution : "معرف جدول الصيانة الوقائي"
+    Asset ||--o{ MaintenanceExecution : "معرف الأصل الذي تمت صيانت"
+    AssetStatus ||--o{ MaintenanceExecution : "معرف الحالة الجديدة للأصل"
+    Asset ||--o{ AssetSuspensionRequests : "معرف الأصل المراد تعليقه "
+    Asset ||--o{ UsageViolations : "معرف الأصل المخالف في است"
+    Asset ||--o{ AssetFinancials : "معرف الأصل المرتبط FK Ass"
+    Asset ||--o{ AssetDepreciation : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ DepreciationTransactions : "معرف الأصل FK AssetassetI"
+    AssetDepreciation ||--o{ DepreciationTransactions : "معرف سجل الإهلاك المرتبط "
+    Asset ||--o{ RevaluationImpairment : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetExpenses : "معرف الأصل FK AssetassetI"
+    MaintenanceExecution ||--o{ AssetExpenses : "معرف سجل تنفيذ الصيانة ال"
+    Asset ||--o{ FeasibilityComparison : "معرف الأصل المُقارَن FK A"
+    Asset ||--o{ FeasibilityComparison : "معرف الأصل البديل المقترح"
+    AssetCategory ||--o{ FinancialSummaryReports : "معرف فئة الأصول FK AssetC"
+    Asset ||--o{ AssetAssignment : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetLoans : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetTransferRequests : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetInspectionLog : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetMovementHistory : "معرف الأصل FK AssetassetI"
+    AssetLoans ||--o{ LoanTrackingAlerts : "معرف الإعارة المرتبطة FK "
+    UsageViolations ||--o{ LoanTrackingAlerts : "معرف المخالفة المسجلة FK "
+    InventoryPlans ||--o{ FieldInventoryLog : "معرف خطة الجرد المرتبطة F"
+    Asset ||--o{ FieldInventoryLog : "معرف الأصل الناتج عن المس"
+    InventoryPlans ||--o{ InventoryReconciliation : "معرف خطة الجرد FK Invento"
+    Asset ||--o{ InventoryReconciliation : "معرف الأصل من جدول Asset"
+    InventoryPlans ||--o{ FinalApprovalAudit : "معرف خطة الجرد المرتبطة F"
+    ComplianceAudit ||--o{ FinalApprovalAudit : "معرف التدقيق المرتبط FK C"</pre>
+    </details>
+  </div>
+
+  <div class="footer">
+    EduMS Enterprise © 2026 • ERD M4_Assets • Mermaid 10.9.1 Strict-Compliant • Independent Per-Module Diagram
+  </div>
+
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'default',
+    securityLevel: 'loose',
+    er: { fontSize: 13, diagramPadding: 30, entityPadding: 16, minEntityWidth: 200 },
+    fontFamily: 'Cairo, "Fira Code", sans-serif'
+  });
+
+  let fullRendered = false;
+  function renderSlim() { mermaid.run({ querySelector: '#diagram-slim' }); }
+  function renderFull() {
+    if (fullRendered) return;
+    fullRendered = true;
+    mermaid.run({ querySelector: '#diagram-full' });
+  }
+  // Initial: render slim only
+  renderSlim();
+
+  function switchView(view) {
+    document.getElementById('tab-slim').classList.toggle('active', view === 'slim');
+    document.getElementById('tab-full').classList.toggle('active', view === 'full');
+    document.getElementById('pane-slim').classList.toggle('active', view === 'slim');
+    document.getElementById('pane-full').classList.toggle('active', view === 'full');
+    if (view === 'full') renderFull();
+  }
+
+  function currentSource() {
+    const active = document.querySelector('.view-pane.active');
+    return active.querySelector('.source-code').innerText;
+  }
+  function copySource() {
+    navigator.clipboard.writeText(currentSource()).then(() => alert('✓ تم نسخ كود Mermaid'));
+  }
+  function downloadSource() {
+    const view = document.getElementById('pane-slim').classList.contains('active') ? 'slim' : 'full';
+    const blob = new Blob([currentSource()], { type: 'text/plain;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'ERD_M4_Assets_' + view + '.mmd';
+    a.click();
+  }
+  function downloadSvg() {
+    const active = document.querySelector('.view-pane.active');
+    const svg = active.querySelector('.mermaid svg');
+    if (!svg) { alert('المخطط لم يُحمَّل بعد'); return; }
+    const view = document.getElementById('pane-slim').classList.contains('active') ? 'slim' : 'full';
+    const blob = new Blob([svg.outerHTML], { type: 'image/svg+xml' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'ERD_M4_Assets_' + view + '.svg';
+    a.click();
+  }
+</script>
+
+</body>
+</html>

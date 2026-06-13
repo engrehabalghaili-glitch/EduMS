@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - القاعات والمختبرات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item"><span class="icon">📊</span><span>لوحة التحكم</span></a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">إدارة المدرسة</div>
+                    <a href="index.html" class="nav-item"><span class="icon">🏫</span><span>لوحة التحكم</span></a>
+                    <a href="school-profile.html" class="nav-item"><span class="icon">📋</span><span>بيانات المدرسة</span></a>
+                    <a href="offices.html" class="nav-item"><span class="icon">🏢</span><span>مكاتب التربية</span></a>
+                    <a href="levels.html" class="nav-item"><span class="icon">📚</span><span>المراحل الدراسية</span></a>
+                    <a href="classes.html" class="nav-item"><span class="icon">🏠</span><span>الصفوف والشعب</span></a>
+                    <a href="shifts.html" class="nav-item"><span class="icon">⏰</span><span>الفترات والدوام</span></a>
+                    <a href="academic-year.html" class="nav-item"><span class="icon">📅</span><span>السنة الدراسية</span></a>
+                    <a href="semesters.html" class="nav-item"><span class="icon">📆</span><span>الفصول الدراسية</span></a>
+                    <a href="timetable.html" class="nav-item"><span class="icon">📋</span><span>الجداول الدراسية</span></a>
+                    <a href="calendar.html" class="nav-item"><span class="icon">📅</span><span>التقويم الدراسي</span></a>
+                    <a href="curriculum.html" class="nav-item"><span class="icon">📖</span><span>الخطط الدراسية</span></a>
+                    <a href="classrooms.html" class="nav-item active"><span class="icon">🏢</span><span>القاعات والمختبرات</span></a>
+                    <a href="reference-codes.html" class="nav-item"><span class="icon">🏷️</span><span>الترميز المرجعي</span></a>
+                    <a href="audit-log.html" class="nav-item"><span class="icon">📜</span><span>سجل التدقيق</span></a>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left"><h2>إدارة المدرسة والبيئة التنظيمية</h2></div>
+                <div class="header-right">
+                    <div class="header-actions"><button class="header-btn">🔔<span class="badge">5</span></button></div>
+                    <div class="user-profile"><div class="user-avatar">م</div><div class="user-info"><h4>مدير المدرسة</h4><p>الإدارة</p></div></div>
+                </div>
+            </header>
+            <div class="content-area">
+                <div class="page-header">
+                    <h1 class="page-title">🏢 القاعات والمختبرات</h1>
+                    <div class="page-breadcrumb"><a href="../../index.html">الرئيسية</a><span>/</span><a href="index.html">إدارة المدرسة</a><span>/</span><span>القاعات والمختبرات</span></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">قائمة القاعات والمختبرات</h3>
+                        <button class="btn btn-primary" onclick="openModal('addClassroomModal')">➕ إضافة قاعة</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr><th>كود القاعة</th><th>اسم القاعة</th><th>النوع</th><th>السعة</th><th>الموقع</th><th>الحالة</th><th>الإجراءات</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">ROOM-101</code></td><td style="font-weight: 600;">قاعة دراسية 101</td><td>قاعة دراسية</td><td>35</td><td>الطابق الأول</td><td><span class="badge-status active">متاحة</span></td><td><div class="table-actions"><button class="action-btn view">👁️</button><button class="action-btn edit">✏️</button><button class="action-btn delete">🗑️</button></div></td></tr>
+                                    <tr><td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">ROOM-LAB-CS</code></td><td style="font-weight: 600;">مختبر الحاسوب</td><td>مختبر</td><td>30</td><td>الطابق الثاني</td><td><span class="badge-status active">متاحة</span></td><td><div class="table-actions"><button class="action-btn view">👁️</button><button class="action-btn edit">✏️</button><button class="action-btn delete">🗑️</button></div></td></tr>
+                                    <tr><td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">ROOM-LAB-SCI</code></td><td style="font-weight: 600;">مختبر العلوم</td><td>مختبر</td><td>28</td><td>الطابق الثاني</td><td><span class="badge-status warning">تحت الصيانة</span></td><td><div class="table-actions"><button class="action-btn view">👁️</button><button class="action-btn edit">✏️</button><button class="action-btn delete">🗑️</button></div></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="modal-overlay" id="addClassroomModal"><div class="modal"><div class="modal-header"><h3>إضافة قاعة جديدة</h3><button class="close-btn" onclick="closeModal('addClassroomModal')">&times;</button></div><div class="modal-body"><form class="form-group"><label>اسم القاعة</label><input type="text" class="form-input" placeholder="اسم القاعة"><label>النوع</label><select class="form-input"><option>قاعة دراسية</option><option>مختبر</option><option>قاعة متعددة الأغراض</option></select><label>السعة</label><input type="number" class="form-input" value="35"><label>الموقع</label><input type="text" class="form-input" placeholder="الطابق الأول"></form></div><div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('addClassroomModal')">إلغاء</button><button class="btn btn-primary">حفظ</button></div></div></div>
+    <script>function openModal(id){document.getElementById(id).classList.add('active');}function closeModal(id){document.getElementById(id).classList.remove('active');}</script>
+</body>
+</html>

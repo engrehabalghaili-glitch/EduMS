@@ -1,0 +1,1216 @@
+@startuml M4_Assets
+!define PK <b><color:red>PK</color></b>
+!define FK <i><color:blue>FK</color></i>
+skinparam linetype ortho
+skinparam class {
+  BackgroundColor #FEF3C7
+  BorderColor #92400E
+  ArrowColor #1E3A8A
+}
+hide methods
+
+entity "Asset" as Asset {
+  * assetId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  assetUniqueCode : VARCHAR(50)
+  assetNameAr : VARCHAR(200)
+  assetNameEn : VARCHAR(200)
+  assetTag : VARCHAR(200)
+  serialNumber : INT
+  modelNumber : INT
+  manufacturer : VARCHAR(200)
+  brand : VARCHAR(200)
+  assetCategoryId : BIGINT <<FK>>
+  assetStatusId : BIGINT <<FK>>
+  assetLocationId : BIGINT <<FK>>
+  condition : VARCHAR(200)
+  acquisitionType : VARCHAR(50)
+  acquisitionDate : DATE
+  acquisitionCost : DECIMAL(15,2)
+  currency : VARCHAR(200)
+  supplierName : VARCHAR(200)
+  purchaseOrderReference : VARCHAR(50) <<FK>>
+  warrantyContractId : BIGINT <<FK>>
+  isInsured : BOOLEAN
+  insurancePolicyNumber : INT
+  insuranceExpiryDate : DATE
+  usefulLifeYears : VARCHAR(200)
+  salvageValue : VARCHAR(200)
+  currentValue : VARCHAR(200)
+  barcode : VARCHAR(50)
+  qrCode : VARCHAR(500)
+  rfidTag : VARCHAR(50)
+  hasPhysicalTag : BOOLEAN
+  physicalTagDate : DATE
+  notes : TEXT
+  isActive : BOOLEAN
+  isDeleted : BOOLEAN
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+}
+
+entity "AssetCategory" as AssetCategory {
+  * categoryId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  parentCategoryId : BIGINT <<FK>>
+  categoryCode : VARCHAR(50)
+  categoryNameAr : VARCHAR(50)
+  categoryNameEn : VARCHAR(50)
+  categoryLevel : VARCHAR(50)
+  fullPath : VARCHAR(200)
+  description : TEXT
+  depreciationRate : DECIMAL(5,2)
+  depreciationMethod : VARCHAR(200)
+  usefulLifeYears : VARCHAR(200)
+  accountCode : INT
+  expenseAccountCode : INT
+  accumulatedDepAccountCode : INT
+  isActive : BOOLEAN
+  isSystem : BOOLEAN
+  sortOrder : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "AssetLocation" as AssetLocation {
+  * locationId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  parentLocationId : BIGINT <<FK>>
+  locationCode : VARCHAR(50)
+  locationNameAr : VARCHAR(200)
+  locationNameEn : VARCHAR(200)
+  locationType : VARCHAR(50)
+  buildingName : VARCHAR(200)
+  floorNumber : INT
+  roomNumber : INT
+  section : VARCHAR(200)
+  area : VARCHAR(200)
+  capacity : VARCHAR(200)
+  isActive : BOOLEAN
+  hasPhysicalSign : BOOLEAN
+  responsiblePersonId : BIGINT <<FK>>
+  contactPhone : VARCHAR(20)
+  mapReference : VARCHAR(200)
+  qrCode : VARCHAR(50)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "AssetStatus" as AssetStatus {
+  * statusId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  statusCode : VARCHAR(50)
+  statusNameAr : VARCHAR(50)
+  statusNameEn : VARCHAR(50)
+  statusType : VARCHAR(50)
+  isOperational : BOOLEAN
+  isAvailableForAssignment : BOOLEAN
+  requiresApproval : BOOLEAN
+  colorCode : VARCHAR(50)
+  isActive : BOOLEAN
+  isSystem : BOOLEAN
+  sortOrder : VARCHAR(200)
+  descriptionAr : TEXT
+  descriptionEn : TEXT
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "AssetWarrantyContract" as AssetWarrantyContract {
+  * contractId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  contractType : VARCHAR(50)
+  contractNumber : INT
+  contractName : VARCHAR(200)
+  providerName : VARCHAR(200)
+  providerContact : VARCHAR(20)
+  startDate : DATE
+  endDate : DATE
+  coverageDetails : TEXT
+  coverageType : VARCHAR(50)
+  contractValue : VARCHAR(200)
+  currency : VARCHAR(200)
+  paymentTerms : VARCHAR(200)
+  hasRenewalOption : BOOLEAN
+  renewalTerms : VARCHAR(200)
+  isActive : BOOLEAN
+  contractStatus : VARCHAR(50)
+  reminderDays : INT
+  isAlertEnabled : BOOLEAN
+  lastAlertSentDate : DATE
+  attachments : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "AssetDocument" as AssetDocument {
+  * documentId : BIGINT <<PK>>
+  --
+  assetId : BIGINT <<FK>>
+  contractId : BIGINT <<FK>>
+  docType : VARCHAR(50)
+  docCode : VARCHAR(50)
+  docName : VARCHAR(200)
+  description : TEXT
+  fileName : VARCHAR(200)
+  filePath : VARCHAR(200)
+  fileSize : VARCHAR(200)
+  mimeType : VARCHAR(50)
+  uploadDate : DATE
+  uploadedByUserId : BIGINT <<FK>>
+  isVerified : BOOLEAN
+  verifiedByUserId : BIGINT <<FK>>
+  verifiedAt : DATE
+  notes : TEXT
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "AssetRequirementRequest" as AssetRequirementRequest {
+  * requestId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  requestNumber : INT
+  requestType : VARCHAR(50)
+  assetType : VARCHAR(50)
+  assetCategoryId : BIGINT <<FK>>
+  quantity : INT
+  estimatedUnitCost : DECIMAL(15,2)
+  estimatedTotalCost : DECIMAL(15,2)
+  currency : VARCHAR(200)
+  priority : VARCHAR(200)
+  urgencyReason : VARCHAR(200)
+  requestingDepartmentId : BIGINT <<FK>>
+  requestedByUserId : BIGINT <<FK>>
+  requestDate : DATE
+  justification : VARCHAR(200)
+  gapAnalysisSummary : VARCHAR(200)
+  initialSpecs : VARCHAR(200)
+  suggestedSuppliers : VARCHAR(200)
+  requiredByDate : DATE
+  renewalPlanId : BIGINT <<FK>>
+  isReplacement : BOOLEAN
+  assetToReplaceId : BIGINT <<FK>>
+  replacementReason : VARCHAR(200)
+  approvalStatus : VARCHAR(50)
+  rejectionReason : VARCHAR(200)
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  convertedToPO : BOOLEAN
+  purchaseOrderId : BIGINT <<FK>>
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "TechnicalSpecifications" as TechnicalSpecifications {
+  * specId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  specCode : VARCHAR(50)
+  specNameAr : VARCHAR(200)
+  specNameEn : VARCHAR(200)
+  assetCategoryId : BIGINT <<FK>>
+  assetType : VARCHAR(50)
+  technicalDetails : TEXT
+  requiredCertifications : VARCHAR(200)
+  acceptanceCriteria : VARCHAR(200)
+  qualityStandards : VARCHAR(50)
+  warrantyRequirements : VARCHAR(200)
+  deliveryRequirements : VARCHAR(200)
+  installationRequirements : VARCHAR(200)
+  safetyRequirements : VARCHAR(200)
+  isActive : BOOLEAN
+  validFrom : DATE
+  validTo : DATE
+  version : VARCHAR(200)
+  attachments : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "FeasibilityRiskAnalysis" as FeasibilityRiskAnalysis {
+  * analysisId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  requestId : BIGINT <<FK>>
+  analysisNumber : INT
+  analysisDate : DATE
+  analystUserId : BIGINT <<FK>>
+  operationalRisks : TEXT
+  financialRisks : TEXT
+  riskLevel : VARCHAR(50)
+  riskMitigationPlan : VARCHAR(200)
+  expectedLifeSpan : VARCHAR(200)
+  usefulLifeEstimate : DECIMAL(15,2)
+  roiEstimate : DECIMAL(5,2)
+  paybackPeriod : VARCHAR(200)
+  npvEstimate : VARCHAR(200)
+  alternativeSolutions : VARCHAR(200)
+  finalRecommendation : VARCHAR(200)
+  recommendationReason : VARCHAR(200)
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  status : VARCHAR(50)
+  attachments : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "AssetBudgetAllocation" as AssetBudgetAllocation {
+  * allocationId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  fiscalYear : VARCHAR(200)
+  budgetType : VARCHAR(50)
+  assetCategoryId : BIGINT <<FK>>
+  departmentId : BIGINT <<FK>>
+  allocatedAmount : DECIMAL(15,2)
+  spentAmount : DECIMAL(15,2)
+  remainingAmount : DECIMAL(15,2)
+  budgetLineCode : VARCHAR(50)
+  notes : TEXT
+  status : VARCHAR(50)
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "PurchaseOrders" as PurchaseOrders {
+  * purchaseOrderId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  poNumber : INT
+  poDate : DATE
+  requestId : BIGINT <<FK>>
+  supplierName : VARCHAR(200)
+  supplierContact : VARCHAR(200)
+  supplierAddress : VARCHAR(200)
+  totalAmount : DECIMAL(15,2)
+  taxAmount : DECIMAL(15,2)
+  taxRegistrationNumber : INT
+  currency : VARCHAR(200)
+  paymentTerms : VARCHAR(200)
+  deliveryTerms : VARCHAR(200)
+  deliveryDeadline : DATE
+  actualDeliveryDate : DATE
+  shippingMethod : VARCHAR(200)
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  poStatus : VARCHAR(50)
+  cancellationReason : VARCHAR(200)
+  budgetAllocationId : BIGINT <<FK>>
+  notes : TEXT
+  attachments : VARCHAR(200)
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "AssetReceiving" as AssetReceiving {
+  * receivingId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  purchaseOrderId : BIGINT <<FK>>
+  receivingNumber : INT
+  receivedDate : DATE
+  receivedByUserId : BIGINT <<FK>>
+  inspectorUserId : BIGINT <<FK>>
+  deliveryNoteNumber : INT
+  deliveryCompany : VARCHAR(200)
+  inspectionResult : VARCHAR(200)
+  inspectionDate : DATE
+  inspectionNotes : TEXT
+  qualityScore : DECIMAL(5,2)
+  deliveryStatus : VARCHAR(50)
+  receivedItemsDetails : TEXT
+  acceptedAssets : VARCHAR(200)
+  rejectedItems : VARCHAR(200)
+  returnRequested : BOOLEAN
+  returnDate : DATE
+  correctiveActionRequested : BOOLEAN
+  correctiveActionDetails : TEXT
+  finalDecision : VARCHAR(200)
+  attachments : VARCHAR(200)
+  status : VARCHAR(50)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "AssetUsageLog" as AssetUsageLog {
+  * usageLogId : BIGINT <<PK>>
+  --
+  assetId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  usageType : VARCHAR(50)
+  startDateTime : DATETIME
+  endDateTime : DATETIME
+  durationMinutes : DATETIME
+  purpose : VARCHAR(200)
+  purposeDetails : TEXT
+  userId : BIGINT <<FK>>
+  userType : VARCHAR(50)
+  locationId : BIGINT <<FK>>
+  usageStatus : VARCHAR(50)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "MaintenanceTickets" as MaintenanceTickets {
+  * ticketId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  ticketNumber : INT
+  assetId : BIGINT <<FK>>
+  reportedByUserId : BIGINT <<FK>>
+  reportDate : DATETIME
+  issueType : BOOLEAN
+  severityLevel : VARCHAR(50)
+  issueDescription : BOOLEAN
+  reportedLocation : VARCHAR(200) <<FK>>
+  assignedToUserId : BIGINT <<FK>>
+  assignedDate : DATE
+  diagnosis : VARCHAR(200)
+  requiredParts : VARCHAR(200)
+  estimatedCost : DECIMAL(15,2)
+  estimatedCompletionDate : DATE
+  actualCompletionDate : DATE
+  resolutionDetails : TEXT
+  resolutionSummary : VARCHAR(200)
+  resolutionCost : DECIMAL(15,2)
+  ticketStatus : VARCHAR(50)
+  closureNotes : TEXT
+  closedByUserId : BIGINT <<FK>>
+  closedAt : DATE
+  relatedExecutionId : BIGINT <<FK>>
+  attachments : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "PreventiveMaintenanceSchedule" as PreventiveMaintenanceSchedule {
+  * scheduleId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  scheduleCode : VARCHAR(50)
+  assetId : BIGINT <<FK>>
+  assetCategoryId : BIGINT <<FK>>
+  taskNameAr : VARCHAR(200)
+  taskNameEn : VARCHAR(200)
+  maintenanceType : VARCHAR(50)
+  frequency : VARCHAR(200)
+  frequencyValue : INT
+  frequencyUnit : VARCHAR(200)
+  nextDueDate : DATE
+  lastServiceDate : DATE
+  estimatedDuration : VARCHAR(200)
+  assignedToTeam : VARCHAR(200) <<FK>>
+  instructions : VARCHAR(200)
+  checklist : VARCHAR(200)
+  requiredParts : VARCHAR(200)
+  estimatedCost : DECIMAL(15,2)
+  contractId : BIGINT <<FK>>
+  isReminderActive : BOOLEAN
+  reminderDaysBefore : INT
+  status : VARCHAR(50)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "MaintenanceExecution" as MaintenanceExecution {
+  * executionId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  executionNumber : INT
+  ticketId : BIGINT <<FK>>
+  scheduleId : BIGINT <<FK>>
+  assetId : BIGINT <<FK>>
+  executionType : VARCHAR(50)
+  startDateTime : DATE
+  endDateTime : DATE
+  executedByUserId : BIGINT <<FK>>
+  workPerformed : TEXT
+  sparePartsUsed : TEXT
+  maintenanceCost : DECIMAL(15,2)
+  additionalNotes : TEXT
+  isOperationalAfter : BOOLEAN
+  newAssetStatusId : BIGINT <<FK>>
+  resolutionSummary : VARCHAR(200)
+  attachments : VARCHAR(200)
+  status : VARCHAR(50)
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "MaintenanceSpareParts" as MaintenanceSpareParts {
+  * partId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  partCode : VARCHAR(50)
+  partNameAr : VARCHAR(200)
+  partNameEn : VARCHAR(200)
+  partCategory : VARCHAR(50)
+  manufacturer : VARCHAR(200)
+  compatibleAssets : VARCHAR(200)
+  unitOfMeasure : VARCHAR(200)
+  currentStockQuantity : INT
+  minStockLevel : VARCHAR(50)
+  maxStockLevel : VARCHAR(50)
+  reorderQuantity : INT
+  unitCost : DECIMAL(15,2)
+  currency : VARCHAR(200)
+  supplierName : VARCHAR(200)
+  locationInWarehouse : VARCHAR(200)
+  isActive : BOOLEAN
+  status : VARCHAR(50)
+  lastRestockDate : DATE
+  totalConsumed : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "AssetSuspensionRequests" as AssetSuspensionRequests {
+  * suspensionId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  requestNumber : INT
+  assetId : BIGINT <<FK>>
+  requestedByUserId : BIGINT <<FK>>
+  requestDate : DATE
+  reason : VARCHAR(200)
+  reasonDetails : TEXT
+  startDate : DATE
+  expectedEndDate : DATE
+  attachments : VARCHAR(200)
+  approvalStatus : VARCHAR(50)
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  approvalNotes : TEXT
+  rejectionReason : VARCHAR(200)
+  isRevoked : BOOLEAN
+  revokeDate : DATE
+  revokeReason : VARCHAR(200)
+  revokedByUserId : BIGINT <<FK>>
+  actualEndDate : DATE
+  status : VARCHAR(50)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "MaintenanceNotifications" as MaintenanceNotifications {
+  * notificationId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  relatedEntityType : VARCHAR(50)
+  relatedEntityId : BIGINT <<FK>>
+  notificationType : VARCHAR(50)
+  title : VARCHAR(200)
+  messageContent : VARCHAR(200)
+  recipientUserId : BIGINT <<FK>>
+  priority : VARCHAR(200)
+  isRead : BOOLEAN
+  readAt : DATE
+  sentAt : DATETIME
+  deliveryMethod : VARCHAR(100)
+  status : VARCHAR(50)
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "UsageViolations" as UsageViolations {
+  * violationId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  assetId : BIGINT <<FK>>
+  violationType : VARCHAR(50)
+  violationDate : DATE
+  reportedByUserId : BIGINT <<FK>>
+  reportedDate : DATE
+  violatingUserId : BIGINT <<FK>>
+  description : TEXT
+  evidence : VARCHAR(200)
+  penaltyAction : VARCHAR(200)
+  penaltyAmount : DECIMAL(15,2)
+  penaltyAmountCurrency : DECIMAL(15,2)
+  deductionFromSalary : BOOLEAN
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  status : VARCHAR(50)
+  closedAt : DATE
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "AssetFinancials" as AssetFinancials {
+  * financialsId : BIGINT <<PK>>
+  --
+  assetId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  purchasePrice : DECIMAL(15,2)
+  shippingCosts : DECIMAL(15,2)
+  customsFees : DECIMAL(15,2)
+  installationCosts : DECIMAL(15,2)
+  otherCosts : DECIMAL(15,2)
+  totalInitialCost : DECIMAL(15,2)
+  currency : VARCHAR(200)
+  exchangeRateToSAR : DECIMAL(15,2)
+  salvageValue : VARCHAR(200)
+  residualValue : VARCHAR(200)
+  residualValueLastUpdate : DATE
+  fiscalYear : VARCHAR(200)
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "AssetDepreciation" as AssetDepreciation {
+  * depreciationId : BIGINT <<PK>>
+  --
+  assetId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  methodType : VARCHAR(50)
+  usefulLifeYears : VARCHAR(200)
+  usefulLifeUnits : VARCHAR(200)
+  depreciationRate : DECIMAL(5,2)
+  currentBookValue : VARCHAR(200)
+  accumulatedDepreciation : DATE
+  netBookValue : VARCHAR(200)
+  depreciableAmount : DECIMAL(15,2)
+  lastDepreciationDate : DATE
+  lastDepreciationPeriod : VARCHAR(200)
+  isFullyDepreciated : BOOLEAN
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "DepreciationTransactions" as DepreciationTransactions {
+  * transactionId : BIGINT <<PK>>
+  --
+  assetId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  depreciationId : BIGINT <<FK>>
+  periodStart : VARCHAR(200)
+  periodEnd : VARCHAR(200)
+  periodType : VARCHAR(50)
+  fiscalYear : VARCHAR(200)
+  periodNumber : INT
+  depreciationAmount : DECIMAL(15,2)
+  accumulatedDepreciationAfter : VARCHAR(200)
+  netBookValueAfter : VARCHAR(200)
+  isPostedToLedger : BOOLEAN
+  ledgerEntryReference : VARCHAR(50)
+  postedToLedgerDate : DATE
+  calculatedByUserId : BIGINT <<FK>>
+  calculationDate : DATE
+  notes : TEXT
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "RevaluationImpairment" as RevaluationImpairment {
+  * revaluationId : BIGINT <<PK>>
+  --
+  assetId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  type : VARCHAR(50)
+  effectiveDate : DATE
+  oldBookValue : VARCHAR(200)
+  oldAccumulatedDepreciation : VARCHAR(200)
+  oldNetBookValue : VARCHAR(200)
+  newValue : VARCHAR(200)
+  newAccumulatedDepreciation : VARCHAR(200)
+  newNetBookValue : VARCHAR(200)
+  difference : VARCHAR(200)
+  differenceType : VARCHAR(50)
+  valuationFirm : VARCHAR(200)
+  valuationReportNumber : INT
+  valuationReportDate : DATE
+  valuationMethod : DECIMAL(15,2)
+  reason : VARCHAR(200)
+  attachments : VARCHAR(200)
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  status : VARCHAR(50)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "AssetExpenses" as AssetExpenses {
+  * expenseId : BIGINT <<PK>>
+  --
+  assetId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  expenseType : VARCHAR(50)
+  expenseDate : DATE
+  amount : DECIMAL(15,2)
+  currency : VARCHAR(200)
+  description : TEXT
+  relatedExecutionId : BIGINT <<FK>>
+  isCapitalized : BOOLEAN
+  capitalizationDate : DATE
+  accountedInFinancials : BOOLEAN
+  accountedInDepreciation : BOOLEAN
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "FeasibilityComparison" as FeasibilityComparison {
+  * comparisonId : BIGINT <<PK>>
+  --
+  assetId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  comparisonDate : DATE
+  repairEstimate : DECIMAL(15,2)
+  repairEstimateBreakdown : DECIMAL(15,2)
+  replacementAssetId : BIGINT <<FK>>
+  replacementCost : DECIMAL(15,2)
+  replacementCostBreakdown : DECIMAL(15,2)
+  totalCostOfOwnershipAnalysis : DECIMAL(15,2)
+  recommendation : VARCHAR(200)
+  recommendationReason : VARCHAR(200)
+  decisionStatus : VARCHAR(50)
+  decisionDate : DATE
+  approvedByUserId : BIGINT <<FK>>
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "FinancialAuditArchive" as FinancialAuditArchive {
+  * archiveId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  reportType : VARCHAR(50)
+  fiscalYear : VARCHAR(200)
+  periodStart : VARCHAR(200)
+  periodEnd : VARCHAR(200)
+  generationDate : DATE
+  archivedDate : DATE
+  totalAssetsValue : VARCHAR(200)
+  totalDepreciationValue : VARCHAR(200)
+  filePath : VARCHAR(200)
+  isReadOnly : BOOLEAN
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "FinancialSummaryReports" as FinancialSummaryReports {
+  * summaryId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  fiscalYear : VARCHAR(200)
+  reportDate : DATE
+  reportType : VARCHAR(50)
+  assetCategoryId : BIGINT <<FK>>
+  totalBookValue : VARCHAR(200)
+  totalDepreciation : VARCHAR(200)
+  totalAssetsCount : INT
+  totalAcquisitionCost : DATE
+  fullyDepreciatedAssetsCount : INT
+  assetsWithImpairmentCount : INT
+  revaluationGains : VARCHAR(200)
+  revaluationLosses : VARCHAR(200)
+  auditStatus : VARCHAR(50)
+  auditFirmName : VARCHAR(200)
+  auditorName : VARCHAR(200)
+  auditDate : DATE
+  auditorSignature : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "AssetAssignment" as AssetAssignment {
+  * assignmentId : BIGINT <<PK>>
+  --
+  assetId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  assigneeType : VARCHAR(50)
+  assigneeId : BIGINT <<FK>>
+  assigneeName : VARCHAR(200)
+  assignerUserId : BIGINT <<FK>>
+  assignmentDate : DATE
+  expectedReturnDate : DATE
+  actualReturnDate : DATE
+  assignmentReason : VARCHAR(200)
+  conditionAtAssignment : VARCHAR(200)
+  conditionNotesAtAssignment : TEXT
+  conditionAtReturn : VARCHAR(200)
+  conditionNotesAtReturn : TEXT
+  damageNotes : TEXT
+  penaltyAmount : DECIMAL(15,2)
+  penaltyStatus : VARCHAR(50)
+  assignmentStatus : VARCHAR(50)
+  isReturned : BOOLEAN
+  returnReceiptNumber : INT
+  returnedToUserId : BIGINT <<FK>>
+  returnDate : DATE
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "AssetLoans" as AssetLoans {
+  * loanId : BIGINT <<PK>>
+  --
+  assetId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  borrowerType : VARCHAR(50)
+  borrowerId : BIGINT <<FK>>
+  borrowerName : VARCHAR(200)
+  borrowerContact : VARCHAR(20)
+  loanDate : DATE
+  expectedReturnDate : DATE
+  actualReturnDate : DATE
+  loanPurpose : VARCHAR(200)
+  issuerUserId : BIGINT <<FK>>
+  conditionAtLoan : VARCHAR(200)
+  conditionAtReturn : VARCHAR(200)
+  isOverdue : BOOLEAN
+  overdueDays : INT
+  fineAmount : DECIMAL(15,2)
+  finePaid : BIGINT <<FK>>
+  finePaidDate : DATE
+  loanStatus : VARCHAR(50)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "AssetTransferRequests" as AssetTransferRequests {
+  * transferRequestId : BIGINT <<PK>>
+  --
+  assetId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  requestNumber : INT
+  fromEntityType : VARCHAR(50)
+  fromEntityId : BIGINT <<FK>>
+  toEntityType : VARCHAR(50)
+  toEntityId : BIGINT <<FK>>
+  transferType : VARCHAR(50)
+  requestReason : VARCHAR(200)
+  requestedByUserId : BIGINT <<FK>>
+  requestDate : DATE
+  approvalStatus : VARCHAR(50)
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  approvalNotes : TEXT
+  rejectionReason : VARCHAR(200)
+  transferExecutionDate : DATE
+  executedByUserId : BIGINT <<FK>>
+  notes : TEXT
+  status : VARCHAR(50)
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "AssetInspectionLog" as AssetInspectionLog {
+  * inspectionId : BIGINT <<PK>>
+  --
+  assetId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  relatedTransactionType : VARCHAR(50)
+  relatedTransactionId : BIGINT <<FK>>
+  inspectionType : VARCHAR(50)
+  inspectionDate : DATE
+  inspectorUserId : BIGINT <<FK>>
+  physicalCondition : VARCHAR(200)
+  damageDetails : TEXT
+  damagePhotos : VARCHAR(200)
+  functionalStatus : VARCHAR(50)
+  missingParts : VARCHAR(200)
+  inspectionResult : VARCHAR(200)
+  recommendedAction : VARCHAR(200)
+  estimatedRepairCost : DECIMAL(15,2)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "AssetMovementHistory" as AssetMovementHistory {
+  * historyId : BIGINT <<PK>>
+  --
+  assetId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  actionType : VARCHAR(50)
+  actionDescription : TEXT
+  oldValue : VARCHAR(200)
+  newValue : VARCHAR(200)
+  relatedEntityType : VARCHAR(50)
+  relatedEntityId : BIGINT <<FK>>
+  actionDate : DATETIME
+  performedByUserId : BIGINT <<FK>>
+  notes : TEXT
+  createdAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "LoanTrackingAlerts" as LoanTrackingAlerts {
+  * alertId : BIGINT <<PK>>
+  --
+  loanId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  alertType : VARCHAR(50)
+  alertDate : DATE
+  alertMessage : VARCHAR(200)
+  deliveryMethod : VARCHAR(100)
+  isSent : BOOLEAN
+  sentTo : VARCHAR(20)
+  isAcknowledged : BOOLEAN
+  acknowledgedAt : DATE
+  violationRecorded : BOOLEAN
+  violationId : BIGINT <<FK>>
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "InventoryPlans" as InventoryPlans {
+  * planId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  planNumber : INT
+  planName : VARCHAR(200)
+  inventoryType : VARCHAR(50)
+  scopeType : VARCHAR(50)
+  scopeValue : VARCHAR(200)
+  startDate : DATE
+  endDate : DATE
+  actualEndDate : DATE
+  assignedTeamLeaderId : BIGINT <<FK>>
+  assignedTeamMembers : VARCHAR(200)
+  instructions : VARCHAR(200)
+  status : VARCHAR(50)
+  completionPercentage : DECIMAL(5,2)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "FieldInventoryLog" as FieldInventoryLog {
+  * logId : BIGINT <<PK>>
+  --
+  planId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  scannerUserId : BIGINT <<FK>>
+  scanTimestamp : DATE
+  scannedCode : VARCHAR(50)
+  assetId : BIGINT <<FK>>
+  physicalLocation : VARCHAR(200) <<FK>>
+  actualCondition : VARCHAR(200)
+  conditionNotes : TEXT
+  found : BOOLEAN
+  foundNotes : TEXT
+  assetPhoto : VARCHAR(200)
+  gpsLocation : VARCHAR(200)
+  isVerified : BOOLEAN
+  verifiedByUserId : BIGINT <<FK>>
+  verifiedAt : VARCHAR(200)
+  notes : TEXT
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "InventoryReconciliation" as InventoryReconciliation {
+  * reconciliationId : BIGINT <<PK>>
+  --
+  planId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  assetId : BIGINT <<FK>>
+  discrepancyType : VARCHAR(50)
+  systemLocationId : BIGINT <<FK>>
+  actualLocationId : BIGINT <<FK>>
+  systemCondition : VARCHAR(200)
+  actualCondition : VARCHAR(200)
+  reasonForDiff : VARCHAR(200)
+  investigationNotes : TEXT
+  correctiveAction : VARCHAR(200)
+  isResolved : BOOLEAN
+  resolutionDate : DATE
+  resolvedByUserId : BIGINT <<FK>>
+  resolutionNotes : TEXT
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  status : VARCHAR(50)
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "ComplianceAudit" as ComplianceAudit {
+  * auditId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  auditNumber : INT
+  auditDate : DATE
+  auditType : VARCHAR(50)
+  standardType : VARCHAR(50)
+  standardVersion : VARCHAR(200)
+  auditedByUserId : BIGINT <<FK>>
+  auditScope : VARCHAR(200)
+  complianceScore : DECIMAL(5,2)
+  violationsFound : VARCHAR(200)
+  violationsDetails : TEXT
+  correctiveActionsRequired : VARCHAR(200)
+  correctiveActionsDeadline : VARCHAR(200)
+  correctiveActionsStatus : VARCHAR(50)
+  followUpAuditDate : DATE
+  auditReportPath : VARCHAR(200)
+  status : VARCHAR(50)
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "FinalApprovalAudit" as FinalApprovalAudit {
+  * finalApprovalId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  planId : BIGINT <<FK>>
+  auditId : BIGINT <<FK>>
+  approvalType : VARCHAR(50)
+  approvalDate : DATE
+  approvedByUserId : BIGINT <<FK>>
+  approvalDocPath : VARCHAR(200)
+  summaryOfChanges : VARCHAR(200)
+  finalStatusUpdate : DATE
+  statusUpdateDate : DATE
+  statusUpdatedByUserId : BIGINT <<FK>>
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "FacilityDepartmentAssignment" as FacilityDepartmentAssignment {
+  * assignmentId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  facilityType : VARCHAR(50)
+  facilityId : BIGINT <<FK>>
+  departmentId : BIGINT <<FK>>
+  responsibleUserId : BIGINT <<FK>>
+  assignmentType : VARCHAR(50)
+  startDate : DATE
+  endDate : DATE
+  isShared : BOOLEAN
+  sharedWithDepartments : VARCHAR(200)
+  sharingSchedule : VARCHAR(200)
+  priority : VARCHAR(200)
+  notes : TEXT
+  status : VARCHAR(50)
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "EducationalConsumablesTracking" as EducationalConsumablesTracking {
+  * consumptionId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  consumableId : BIGINT <<FK>>
+  consumableName : VARCHAR(200)
+  consumableCode : VARCHAR(50)
+  category : VARCHAR(50)
+  quantityConsumed : INT
+  unitOfMeasure : VARCHAR(200)
+  consumptionDate : DATE
+  consumedByUserId : BIGINT <<FK>>
+  departmentId : BIGINT <<FK>>
+  courseId : BIGINT <<FK>>
+  activityId : BIGINT <<FK>>
+  purpose : VARCHAR(200)
+  notes : TEXT
+  unitCost : DECIMAL(15,2)
+  totalCost : DECIMAL(15,2)
+  budgetLineCode : VARCHAR(50)
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+AssetCategory ||--o{ Asset : "assetCategoryId"
+AssetStatus ||--o{ Asset : "assetStatusId"
+AssetLocation ||--o{ Asset : "assetLocationId"
+PurchaseOrders ||--o{ Asset : "purchaseOrderReference"
+AssetWarrantyContract ||--o{ Asset : "warrantyContractId"
+AssetCategory ||--o{ AssetCategory : "parentCategoryId"
+AssetLocation ||--o{ AssetLocation : "parentLocationId"
+Asset ||--o{ AssetDocument : "assetId"
+AssetWarrantyContract ||--o{ AssetDocument : "contractId"
+AssetCategory ||--o{ AssetRequirementRequest : "assetCategoryId"
+Asset ||--o{ AssetRequirementRequest : "assetToReplaceId"
+PurchaseOrders ||--o{ AssetRequirementRequest : "purchaseOrderId"
+AssetCategory ||--o{ TechnicalSpecifications : "assetCategoryId"
+AssetRequirementRequest ||--o{ FeasibilityRiskAnalysis : "requestId"
+AssetCategory ||--o{ AssetBudgetAllocation : "assetCategoryId"
+AssetRequirementRequest ||--o{ PurchaseOrders : "requestId"
+AssetBudgetAllocation ||--o{ PurchaseOrders : "budgetAllocationId"
+PurchaseOrders ||--o{ AssetReceiving : "purchaseOrderId"
+Asset ||--o{ AssetUsageLog : "assetId"
+AssetLocation ||--o{ AssetUsageLog : "locationId"
+Asset ||--o{ MaintenanceTickets : "assetId"
+AssetLocation ||--o{ MaintenanceTickets : "reportedLocation"
+MaintenanceExecution ||--o{ MaintenanceTickets : "relatedExecutionId"
+Asset ||--o{ PreventiveMaintenanceSchedule : "assetId"
+AssetCategory ||--o{ PreventiveMaintenanceSchedule : "assetCategoryId"
+AssetWarrantyContract ||--o{ PreventiveMaintenanceSchedule : "contractId"
+MaintenanceTickets ||--o{ MaintenanceExecution : "ticketId"
+PreventiveMaintenanceSchedule ||--o{ MaintenanceExecution : "scheduleId"
+Asset ||--o{ MaintenanceExecution : "assetId"
+AssetStatus ||--o{ MaintenanceExecution : "newAssetStatusId"
+Asset ||--o{ AssetSuspensionRequests : "assetId"
+Asset ||--o{ UsageViolations : "assetId"
+Asset ||--o{ AssetFinancials : "assetId"
+Asset ||--o{ AssetDepreciation : "assetId"
+Asset ||--o{ DepreciationTransactions : "assetId"
+AssetDepreciation ||--o{ DepreciationTransactions : "depreciationId"
+Asset ||--o{ RevaluationImpairment : "assetId"
+Asset ||--o{ AssetExpenses : "assetId"
+MaintenanceExecution ||--o{ AssetExpenses : "relatedExecutionId"
+Asset ||--o{ FeasibilityComparison : "assetId"
+Asset ||--o{ FeasibilityComparison : "replacementAssetId"
+AssetCategory ||--o{ FinancialSummaryReports : "assetCategoryId"
+Asset ||--o{ AssetAssignment : "assetId"
+Asset ||--o{ AssetLoans : "assetId"
+Asset ||--o{ AssetTransferRequests : "assetId"
+Asset ||--o{ AssetInspectionLog : "assetId"
+Asset ||--o{ AssetMovementHistory : "assetId"
+AssetLoans ||--o{ LoanTrackingAlerts : "loanId"
+UsageViolations ||--o{ LoanTrackingAlerts : "violationId"
+InventoryPlans ||--o{ FieldInventoryLog : "planId"
+Asset ||--o{ FieldInventoryLog : "assetId"
+AssetLocation ||--o{ FieldInventoryLog : "physicalLocation"
+InventoryPlans ||--o{ InventoryReconciliation : "planId"
+Asset ||--o{ InventoryReconciliation : "assetId"
+InventoryPlans ||--o{ FinalApprovalAudit : "planId"
+ComplianceAudit ||--o{ FinalApprovalAudit : "auditId"
+@enduml

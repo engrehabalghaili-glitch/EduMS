@@ -1,0 +1,63 @@
+flowchart TB
+    classDef proc fill:#3b82f6,color:#fff,stroke:#1e3a8a,stroke-width:2px,rx:30,ry:30
+    classDef ds fill:#fde68a,color:#78350f,stroke:#92400e,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d,stroke-width:2px
+
+    P1((1.0<br/>إدارة المدرسة)):::proc
+    P2((2.0<br/>إدارة الطلاب)):::proc
+    P3((3.0<br/>إدارة الموظفين)):::proc
+    P4((4.0<br/>إدارة الأصول)):::proc
+    P5((5.0<br/>الإدارة المالية)):::proc
+    P6((6.0<br/>البيانات والإحصاء)):::proc
+    P7((7.0<br/>الصلاحيات والأمن)):::proc
+    P8((8.0<br/>الطوارئ والتميز)):::proc
+
+    DS1[(D1: SchoolDB<br/>47 جدول)]:::ds
+    DS2[(D2: StudentDB<br/>37 جدول)]:::ds
+    DS3[(D3: EmployeeDB<br/>24 جدول)]:::ds
+    DS4[(D4: AssetsDB<br/>41 جدول)]:::ds
+    DS5[(D5: FinanceDB<br/>8 جدول)]:::ds
+    DS6[(D6: StatisticsDB<br/>15 جدول)]:::ds
+    DS7[(D7: AuthDB<br/>21 جدول)]:::ds
+    DS8[(D8: EmergencyDB<br/>12 جدول)]:::ds
+
+    E1[ولي الأمر/الطالب]:::ext
+    E2[الموظفون]:::ext
+    E3[مدير المدرسة]:::ext
+    E4[مكتب التربية]:::ext
+    E5[الموردون]:::ext
+    E6[الوزارة]:::ext
+
+    E3 -->|قرارات+خطط| P1
+    P1 <--> DS1
+    E1 -->|طلبات التحاق| P2
+    P2 <--> DS2
+    P2 -->|تقارير| E1
+    E2 -->|حضور+درجات| P3
+    P3 <--> DS3
+    P3 -->|كشوف رواتب| E2
+    E5 -->|أصول+فواتير| P4
+    P4 <--> DS4
+    P3 -->|مستحقات HR| P5
+    P2 -->|رسوم| P5
+    P4 -->|فواتير الأصول| P5
+    P5 <--> DS5
+    P5 -->|إيصالات| E1
+    P1 -->|بيانات| P6
+    P2 -->|بيانات| P6
+    P3 -->|بيانات| P6
+    P4 -->|بيانات| P6
+    P5 -->|بيانات| P6
+    P6 <--> DS6
+    P6 -->|تقارير مرفوعة| E4
+    P6 -->|تقارير وطنية| E6
+    E4 -->|تعاميم/اعتمادات| P1
+    P7 <--> DS7
+    P1 -.audit.-> P7
+    P2 -.audit.-> P7
+    P3 -.audit.-> P7
+    P4 -.audit.-> P7
+    P5 -.audit.-> P7
+    P8 <--> DS8
+    P1 <-->|طوارئ| P8
+    P8 -->|تقارير الحالات| E4

@@ -1,0 +1,255 @@
+erDiagram
+    StudentAccount {
+        BIGINT accountId "PK"
+        BIGINT studentId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT accountNumber
+        DECIMAL(15,2) totalDebit
+        VARCHAR(200) totalCredit
+        DECIMAL(15,2) currentBalance
+        DECIMAL(15,2) balanceType
+        DATE lastTransactionDate
+        DATE lastPaymentDate
+        DECIMAL(15,2) lastPaymentAmount
+        INT accountStatus
+        BOOLEAN isExempt
+        DECIMAL(5,2) exemptionPercentage
+        VARCHAR(200) exemptionReason
+        BIGINT exemptionApprovedByUserId "FK"
+        DATE exemptionApprovalDate
+        VARCHAR(200) exemptionDocument
+        DECIMAL(15,2) minimumPaymentRequired
+        BOOLEAN isBlockedFromRegistration
+        VARCHAR(200) blockReason
+        DATE unblockDate
+        VARCHAR(200) paymentPlan
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    StudentInvoice {
+        BIGINT invoiceId "PK"
+        BIGINT accountId "FK"
+        BIGINT studentId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        INT invoiceNumber
+        DATE invoiceDate
+        DATE dueDate
+        DATE issueDate
+        DECIMAL(15,2) totalAmount
+        DECIMAL(15,2) discountAmount
+        INT discountReason
+        DECIMAL(15,2) taxAmount
+        DECIMAL(5,2) taxRate
+        INT taxRegistrationNumber
+        DECIMAL(15,2) netAmount
+        DECIMAL(15,2) paidAmount
+        DECIMAL(15,2) remainingAmount
+        DECIMAL(15,2) invoiceType
+        VARCHAR(50) invoiceCategory
+        VARCHAR(50) paymentStatus
+        VARCHAR(50) invoiceStatus
+        VARCHAR(200) paymentMethod
+        BOOLEAN isLate
+        INT lateDays
+        DECIMAL(15,2) lateFeePercentage
+        DECIMAL(15,2) lateFeeAmount
+        VARCHAR(200) installmentPlan
+        INT installmentCount
+        VARCHAR(200) currentInstallment
+        BOOLEAN parentApprovalRequired
+        VARCHAR(50) parentApprovalStatus
+        DATE parentApprovalDate
+        BOOLEAN sentToParent
+        DATE parentNotifiedAt
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    InvoiceItem {
+        BIGINT itemId "PK"
+        BIGINT invoiceId "FK"
+        BIGINT feeTypeId "FK"
+        VARCHAR(50) itemCode
+        DECIMAL(15,2) itemDescription
+        INT quantity
+        DECIMAL(15,2) unitPrice
+        DECIMAL(15,2) totalPrice
+        INT discountPercentage
+        DECIMAL(15,2) discountAmount
+        DECIMAL(15,2) priceAfterDiscount
+        DECIMAL(5,2) taxPercentage
+        DECIMAL(15,2) taxAmount
+        DECIMAL(15,2) netAmount
+        DATE dueDate
+        BIGINT isPaid "FK"
+        DECIMAL(15,2) paidAmount
+        DECIMAL(15,2) remainingAmount
+        VARCHAR(200) paymentMethod
+        BOOLEAN isLate
+        BOOLEAN lateFeeApplied
+        DECIMAL(15,2) lateFeeAmount
+        INT installmentNumber
+        INT installmentTotal
+        BOOLEAN isWaived
+        VARCHAR(200) waiverReason
+        DATE waiverDate
+        VARCHAR(50) status
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    Payment {
+        BIGINT paymentId "PK"
+        BIGINT accountId "FK"
+        BIGINT studentId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT paymentNumber
+        DATE paymentDate
+        TIME paymentTime
+        DECIMAL(15,2) amount
+        VARCHAR(200) currency
+        DECIMAL(15,2) exchangeRate
+        DECIMAL(15,2) convertedAmount
+        VARCHAR(200) paymentMethod
+        DECIMAL(15,2) paymentType
+        VARCHAR(200) bankName
+        BIGINT bankTransactionId "FK"
+        INT checkNumber
+        VARCHAR(200) checkBank
+        DATE checkDate
+        VARCHAR(200) creditCardLast4
+        VARCHAR(50) creditCardType
+        VARCHAR(50) walletType
+        VARCHAR(200) payerName
+        VARCHAR(50) payerType
+        VARCHAR(100) payerEmail
+        INT receiptNumber
+        BOOLEAN receiptPrinted
+        BOOLEAN receiptSentToEmail
+        DATE receiptEmailSentAt
+        VARCHAR(50) paymentStatus
+        BOOLEAN isConfirmed
+        DATE confirmationDate
+        BIGINT confirmedByUserId "FK"
+        VARCHAR(200) allocatedInvoices
+        VARCHAR(200) allocatedItems
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    FeeType {
+        BIGINT feeTypeId "PK"
+        BIGINT schoolId "FK"
+        DECIMAL(15,2) feeCode
+        DECIMAL(15,2) feeNameAr
+        DECIMAL(15,2) feeNameEn
+        DECIMAL(15,2) feeCategory
+        DECIMAL(15,2) amount
+        VARCHAR(200) currency
+        VARCHAR(200) billingFrequency
+        BOOLEAN isTaxable
+        DECIMAL(5,2) taxPercentage
+        BOOLEAN isMandatory
+        BOOLEAN isOptional
+        BOOLEAN isDiscountable
+        INT discountPercentageAllowed
+        BOOLEAN isRefundable
+        DECIMAL(5,2) refundPercentage
+        DATE refundCutoffDate
+        BOOLEAN isRecurring
+        VARCHAR(50) recurrenceType
+        DECIMAL(5,2) appliesToGrades
+        DECIMAL(15,2) appliesToNationalities
+        VARCHAR(50) appliesToStudentTypes
+        BOOLEAN isActive
+        DATE validFrom
+        DATE validTo
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    Installment {
+        BIGINT installmentId "PK"
+        BIGINT invoiceId "FK"
+        BIGINT itemId "FK"
+        BIGINT accountId "FK"
+        BIGINT studentId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT installmentNumber
+        INT installmentTotal
+        DECIMAL(15,2) installmentAmount
+        VARCHAR(200) currency
+        DATE dueDate
+        DATE extendedDueDate
+        DECIMAL(15,2) paidAmount
+        DECIMAL(15,2) remainingAmount
+        DATE paymentDate
+        VARCHAR(200) paymentMethod
+        VARCHAR(50) paymentReference
+        VARCHAR(50) installmentType
+        VARCHAR(50) installmentStatus
+        BOOLEAN isLate
+        DATE lateDays
+        DECIMAL(15,2) lateFeePercentage
+        DECIMAL(15,2) lateFeeAmount
+        BIGINT lateFeePaid "FK"
+        DATE lateFeePaymentDate
+        DECIMAL(15,2) lateFeePaymentReference
+        BOOLEAN isRescheduled
+        DATE rescheduledDate
+        BIGINT rescheduledByUserId "FK"
+        VARCHAR(200) rescheduledReason
+        DATE newDueDate
+        BOOLEAN isWaived
+        VARCHAR(200) waiverReason
+        DATE waiverDate
+        BIGINT waivedByUserId "FK"
+        VARCHAR(200) waiverApprovalDocument
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AssetWarrantyContract {
+        VARCHAR(200) contractValue "PK"
+        VARCHAR(200) currency
+        VARCHAR(200) paymentTerms
+    }
+    FinancialAuditArchive {
+        VARCHAR(50) reportType "PK"
+        VARCHAR(200) fiscalYear
+        VARCHAR(200) totalAssetsValue
+        VARCHAR(200) totalDepreciationValue
+        VARCHAR(200) filePath
+        BOOLEAN isReadOnly
+    }
+    StudentAccount ||--o{ StudentInvoice : "accountId"
+    StudentInvoice ||--o{ InvoiceItem : "invoiceId"
+    FeeType ||--o{ InvoiceItem : "feeTypeId"
+    StudentAccount ||--o{ Payment : "accountId"
+    StudentInvoice ||--o{ Installment : "invoiceId"
+    InvoiceItem ||--o{ Installment : "itemId"
+    StudentAccount ||--o{ Installment : "accountId"

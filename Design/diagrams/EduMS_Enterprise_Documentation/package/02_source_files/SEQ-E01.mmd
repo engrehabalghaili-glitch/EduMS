@@ -1,0 +1,25 @@
+sequenceDiagram
+    actor App as المتقدم
+    participant Portal
+    participant API
+    participant DB
+    actor HR
+    actor OF as مكتب التربية
+    
+    HR->>API: إعلان وظيفة شاغرة
+    API->>DB: INSERT VacantPosition
+    App->>Portal: تقديم طلب توظيف
+    Portal->>API: POST /applications
+    API->>DB: INSERT JobApplicant
+    HR->>API: فرز المتقدمين
+    HR->>App: استدعاء للمقابلة
+    HR->>API: تسجيل نتائج المقابلة
+    HR->>OF: رفع التوصية
+    OF->>API: قرار التعيين
+    API->>DB: INSERT AppointmentDecision
+    API->>DB: INSERT Employee(status='Inactive')
+    HR->>API: تفعيل الموظف
+    API->>DB: UPDATE Employee.status='Active'
+    API->>DB: INSERT EmployeeDocuments
+    HR->>API: تعيين معلم مرشد
+    API->>DB: INSERT Mentor relationship

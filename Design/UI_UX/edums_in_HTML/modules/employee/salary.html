@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - الرواتب والبدلات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=300;400;500;600;700;800;900&family=Tajawal:wght=300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item"><span class="icon">📊</span><span>لوحة التحكم</span></a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">إدارة الموظفين</div>
+                    <a href="index.html" class="nav-item"><span class="icon">👨‍🏫</span><span>لوحة التحكم</span></a>
+                    <a href="employees.html" class="nav-item"><span class="icon">👥</span><span>قائمة الموظفين</span></a>
+                    <a href="recruitment.html" class="nav-item"><span class="icon">📝</span><span>التوظيف والقبول</span></a>
+                    <a href="attendance.html" class="nav-item"><span class="icon">✅</span><span>الحضور والانصراف</span></a>
+                    <a href="leave.html" class="nav-item"><span class="icon">🏖️</span><span>الإجازات</span></a>
+                    <a href="salary.html" class="nav-item active"><span class="icon">💰</span><span>الرواتب والبدلات</span></a>
+                    <a href="evaluation.html" class="nav-item"><span class="icon">⭐</span><span>التقييمات</span></a>
+                    <a href="training.html" class="nav-item"><span class="icon">📚</span><span>التدريب والتطوير</span></a>
+                    <a href="contracts.html" class="nav-item"><span class="icon">📄</span><span>العقود والوثائق</span></a>
+                    <a href="departments.html" class="nav-item"><span class="icon">🏢</span><span>الأقسام والتخصصات</span></a>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left"><h2>إدارة الموظفين والكادر التعليمي</h2></div>
+                <div class="header-right">
+                    <div class="header-actions"><button class="header-btn">🔔<span class="badge">8</span></button></div>
+                    <div class="user-profile"><div class="user-avatar">م</div><div class="user-info"><h4>مدير المدرسة</h4><p>الإدارة</p></div></div>
+                </div>
+            </header>
+            <div class="content-area">
+                <div class="page-header">
+                    <h1 class="page-title">💰 الرواتب والبدلات</h1>
+                    <div class="page-breadcrumb"><a href="../../index.html">الرئيسية</a><span>/</span><a href="index.html">إدارة الموظفين</a><span>/</span><span>الرواتب والبدلات</span></div>
+                </div>
+                <div class="filters">
+                    <div class="filter-group"><label>الشهر</label><select class="form-input"><option>مايو 2024</option><option>أبريل 2024</option></select></div>
+                    <div class="filter-group"><label>القسم</label><select class="form-input"><option>الكل</option><option>الرياضيات</option><option>اللغة العربية</option></select></div>
+                </div>
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header">
+                        <h3 class="card-title">كشوف الرواتب</h3>
+                        <button class="btn btn-primary">📊 إصدار كشوف</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr><th>الموظف</th><th>الراتب الأساسي</th><th>البدلات</th><th>الخصومات</th><th>الصافي</th><th>الحالة</th><th>الإجراءات</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td style="font-weight: 600;">أحمد محمد صالح</td><td>8,000 SAR</td><td>1,500 SAR</td><td>500 SAR</td><td style="font-weight: bold; color: #10b981;">9,000 SAR</td><td><span class="badge-status approved">مدفوع</span></td><td><div class="table-actions"><button class="action-btn view">👁️</button><button class="action-btn edit">✏️</button></div></td></tr>
+                                    <tr><td style="font-weight: 600;">فاطمة عبدالله سعيد</td><td>8,500 SAR</td><td>1,800 SAR</td><td>600 SAR</td><td style="font-weight: bold; color: #10b981;">9,700 SAR</td><td><span class="badge-status pending">قيد الدفع</span></td><td><div class="table-actions"><button class="action-btn view">👁️</button><button class="action-btn edit">✏️</button></div></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

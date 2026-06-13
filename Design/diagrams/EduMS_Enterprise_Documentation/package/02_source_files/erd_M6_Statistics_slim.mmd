@@ -1,0 +1,173 @@
+erDiagram
+    DashboardConfiguration {
+        BIGINT configId "PK"
+        BIGINT schoolId "FK"
+        DECIMAL(5,2) kpiType
+        VARCHAR(50) kpiCode
+        VARCHAR(200) kpiNameAr
+        VARCHAR(200) kpiNameEn
+        TEXT kpiDescription
+        VARCHAR(200) sourceModule
+        VARCHAR more__fields "+19 fields"
+    }
+    KPI_Metrics {
+        BIGINT metricId "PK"
+        BIGINT configId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        VARCHAR(50) periodType
+        VARCHAR(200) periodValue
+        DATE periodStartDate
+        DATE periodEndDate
+        VARCHAR more__fields "+18 fields"
+    }
+    TrendAnalysisResult {
+        BIGINT analysisId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) studyPeriod
+        VARCHAR(200) startYear
+        VARCHAR(200) endYear
+        DECIMAL(5,2) kpiType
+        VARCHAR(50) kpiCode "FK"
+        DATE historicalValues
+        VARCHAR more__fields "+21 fields"
+    }
+    SchoolStatisticsDraft {
+        BIGINT draftId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        VARCHAR(50) periodType
+        VARCHAR(200) periodValue
+        DATE periodStartDate
+        DATE periodEndDate
+        VARCHAR more__fields "+19 fields"
+    }
+    SubmittedStatistics {
+        BIGINT submissionId "PK"
+        BIGINT draftId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT submissionNumber
+        DATETIME submissionTimestamp
+        VARCHAR(100) submissionMethod
+        BIGINT submittedByUserId "FK"
+        VARCHAR more__fields "+23 fields"
+    }
+    StatisticsUpdateHistory {
+        BIGINT historyId "PK"
+        BIGINT draftId "FK"
+        BIGINT submissionId "FK"
+        BIGINT schoolId "FK"
+        INT changeType
+        VARCHAR(50) changeCategory
+        VARCHAR(200) oldValue
+        VARCHAR(200) newValue
+        VARCHAR more__fields "+13 fields"
+    }
+    StatisticsArchive {
+        BIGINT archiveId "PK"
+        BIGINT submissionId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) archivedYear
+        VARCHAR(50) periodType
+        VARCHAR(200) periodValue
+        DATE archivedAt
+        BIGINT archivedByUserId "FK"
+        VARCHAR more__fields "+14 fields"
+    }
+    SystemReports {
+        BIGINT reportId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) reportType
+        VARCHAR(50) reportSubType
+        VARCHAR(200) reportTitle
+        VARCHAR(200) reportFrequency
+        VARCHAR(200) periodStart
+        VARCHAR(200) periodEnd
+        VARCHAR more__fields "+18 fields"
+    }
+    ReportApprovals {
+        BIGINT approvalId "PK"
+        BIGINT reportId "FK"
+        BIGINT schoolId "FK"
+        DATE submissionDate
+        BIGINT submittedByUserId "FK"
+        VARCHAR(50) approvalStatus
+        BIGINT reviewerId "FK"
+        DATE reviewDate
+        VARCHAR more__fields "+15 fields"
+    }
+    ComparativeReport {
+        BIGINT comparativeId "PK"
+        BIGINT schoolId "FK"
+        INT reportNumber
+        VARCHAR(200) comparisonTitle
+        VARCHAR(200) firstPeriodLabel
+        VARCHAR(200) firstPeriodStart
+        VARCHAR(200) firstPeriodEnd
+        VARCHAR(200) secondPeriodLabel
+        VARCHAR more__fields "+21 fields"
+    }
+    FinancialSummaryReports {
+        BIGINT summaryId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) fiscalYear
+        DATE reportDate
+        VARCHAR(50) reportType
+        VARCHAR(200) totalBookValue
+        VARCHAR(200) totalDepreciation
+        INT totalAssetsCount
+        VARCHAR more__fields "+21 fields"
+    }
+    ExternalComplianceReports {
+        BIGINT reportId "PK"
+        BIGINT schoolId "FK"
+        INT reportNumber
+        VARCHAR(200) targetEntity
+        VARCHAR(50) entityType
+        VARCHAR(50) standardType
+        VARCHAR(200) standardVersion
+        VARCHAR(50) reportType
+        VARCHAR more__fields "+25 fields"
+    }
+    GapAnalysisReports {
+        BIGINT analysisId "PK"
+        BIGINT schoolId "FK"
+        INT analysisNumber
+        VARCHAR(50) analysisType
+        BIGINT assetCategoryId "FK"
+        BIGINT gradeLevelId "FK"
+        BIGINT departmentId "FK"
+        INT requiredQty
+        VARCHAR more__fields "+19 fields"
+    }
+    ReportsArchive {
+        BIGINT archiveId "PK"
+        VARCHAR(50) sourceReportType
+        BIGINT sourceReportId "FK"
+        BIGINT schoolId "FK"
+        DATE archivedAt
+        BIGINT archivedByUserId "FK"
+        VARCHAR(200) retentionPeriod
+        DATE retentionEndDate
+        VARCHAR more__fields "+13 fields"
+    }
+    ExceptionalStatistics {
+        BIGINT statisticsId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT reportNumber
+        VARCHAR(200) totalIncidents
+        VARCHAR(200) totalClosureDays
+        DECIMAL(15,2) totalDamageCost
+        INT totalAwardsCount
+        VARCHAR more__fields "+18 fields"
+    }
+    DashboardConfiguration ||--o{ KPI_Metrics : "configId"
+    DashboardConfiguration ||--o{ TrendAnalysisResult : "kpiCode"
+    SchoolStatisticsDraft ||--o{ SubmittedStatistics : "draftId"
+    SchoolStatisticsDraft ||--o{ StatisticsUpdateHistory : "draftId"
+    SubmittedStatistics ||--o{ StatisticsUpdateHistory : "submissionId"
+    SubmittedStatistics ||--o{ StatisticsArchive : "submissionId"
+    SystemReports ||--o{ ReportApprovals : "reportId"

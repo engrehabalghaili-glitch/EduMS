@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - منشئ التقارير المخصص</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">البيانات والإحصاء</div>
+                    <a href="index.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                    <a href="dashboard.html" class="nav-item">
+                        <span class="icon">📈</span>
+                        <span>لوحات التحكم</span>
+                    </a>
+                    <a href="analytics.html" class="nav-item">
+                        <span class="icon">🔍</span>
+                        <span>التحليل المتقدم</span>
+                    </a>
+                    <a href="custom-reports.html" class="nav-item active">
+                        <span class="icon">⚙️</span>
+                        <span>منشئ التقارير</span>
+                    </a>
+                    <a href="students-report.html" class="nav-item">
+                        <span class="icon">👨‍🎓</span>
+                        <span>تقارير الطلاب</span>
+                    </a>
+                    <a href="employees-report.html" class="nav-item">
+                        <span class="icon">👨‍🏫</span>
+                        <span>تقارير الموظفين</span>
+                    </a>
+                    <a href="finance-report.html" class="nav-item">
+                        <span class="icon">💰</span>
+                        <span>التقارير المالية</span>
+                    </a>
+                    <a href="attendance-report.html" class="nav-item">
+                        <span class="icon">📅</span>
+                        <span>تقارير الحضور</span>
+                    </a>
+                    <a href="integration.html" class="nav-item">
+                        <span class="icon">🌐</span>
+                        <span>التكامل الوطني</span>
+                    </a>
+                    <a href="export.html" class="nav-item">
+                        <span class="icon">📤</span>
+                        <span>تصدير البيانات</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة البيانات - منشئ التقارير المخصص</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">
+                            🔔
+                            <span class="badge">0</span>
+                        </button>
+                        <button class="header-btn">💬</button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير المدرسة</h4>
+                            <p>الإدارة</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h1 class="page-title">⚙️ منشئ التقارير المخصص (Query Builder)</h1>
+                    <div class="page-breadcrumb">
+                        <a href="../../index.html">الرئيسية</a>
+                        <span>/</span>
+                        <a href="index.html">البيانات والإحصاء</a>
+                        <span>/</span>
+                        <span>منشئ التقارير</span>
+                    </div>
+                </div>
+                
+                <!-- Report Builder UI -->
+                <div class="grid-3-1">
+                    <!-- Builder Workspace -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">إعدادات التقرير</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="builder-section">
+                                <h4>1. اختر مصدر البيانات (Module)</h4>
+                                <div class="source-selector">
+                                    <label class="source-card active"><input type="radio" name="source" checked> 👨‍🎓 الطلاب</label>
+                                    <label class="source-card"><input type="radio" name="source"> 👨‍🏫 الموظفون</label>
+                                    <label class="source-card"><input type="radio" name="source"> 💰 المالية</label>
+                                    <label class="source-card"><input type="radio" name="source"> 📦 الأصول</label>
+                                </div>
+                            </div>
+
+                            <div class="builder-section" style="margin-top: 32px;">
+                                <h4>2. اختر الحقول المطلوبة (Columns)</h4>
+                                <div class="fields-grid">
+                                    <label><input type="checkbox" checked> اسم الطالب</label>
+                                    <label><input type="checkbox" checked> الرقم الأكاديمي</label>
+                                    <label><input type="checkbox" checked> الصف</label>
+                                    <label><input type="checkbox" checked> الحالة</label>
+                                    <label><input type="checkbox"> تاريخ الميلاد</label>
+                                    <label><input type="checkbox"> العنوان</label>
+                                    <label><input type="checkbox"> هاتف ولي الأمر</label>
+                                    <label><input type="checkbox"> الجنسية</label>
+                                </div>
+                            </div>
+
+                            <div class="builder-section" style="margin-top: 32px;">
+                                <h4>3. الشروط والفلاتر (Filters)</h4>
+                                <div class="filters-list">
+                                    <div class="filter-row">
+                                        <select class="form-select"><option>الصف الدراسي</option></select>
+                                        <select class="form-select"><option>يساوي</option></select>
+                                        <select class="form-select"><option>العاشر</option></select>
+                                        <button class="btn-icon">❌</button>
+                                    </div>
+                                    <button class="btn btn-outline btn-sm" style="margin-top: 10px;">➕ إضافة شرط جديد</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer" style="padding: 20px; border-top: 1px solid #e5e7eb; display: flex; gap: 10px;">
+                            <button class="btn btn-primary">معاينة التقرير</button>
+                            <button class="btn btn-success">حفظ وتصدير</button>
+                        </div>
+                    </div>
+
+                    <!-- Saved Templates -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">قوالب محفوظة</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="template-list">
+                                <div class="template-item">
+                                    <span>قائمة المتفوقين (علمي)</span>
+                                    <button class="btn-icon">▶️</button>
+                                </div>
+                                <div class="template-item">
+                                    <span>تقرير الحالات الصحية</span>
+                                    <button class="btn-icon">▶️</button>
+                                </div>
+                                <div class="template-item">
+                                    <span>مواليد شهر مايو</span>
+                                    <button class="btn-icon">▶️</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preview Area -->
+                <div class="card" style="margin-top: 32px;">
+                    <div class="card-header">
+                        <h3 class="card-title">معاينة البيانات (أول 5 سجلات)</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>اسم الطالب</th>
+                                        <th>الرقم الأكاديمي</th>
+                                        <th>الصف</th>
+                                        <th>الحالة</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>أحمد محمد علي</td>
+                                        <td>2024001</td>
+                                        <td>العاشر - أ</td>
+                                        <td><span class="badge-status success">نشط</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>ياسر فهد منصور</td>
+                                        <td>2024005</td>
+                                        <td>العاشر - أ</td>
+                                        <td><span class="badge-status success">نشط</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <style>
+        .grid-3-1 { display: grid; grid-template-columns: 3fr 1fr; gap: 20px; }
+        .source-selector { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-top: 10px; }
+        .source-card { border: 2px solid #e5e7eb; border-radius: 12px; padding: 15px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .source-card:hover { border-color: var(--primary-light); background: #f8fafc; }
+        .source-card.active { border-color: var(--primary); background: #eff6ff; font-weight: 700; color: var(--primary); }
+        .source-card input { display: none; }
+
+        .fields-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; background: #f8fafc; padding: 20px; border-radius: 12px; }
+        .fields-grid label { display: flex; gap: 10px; align-items: center; font-size: 0.9em; cursor: pointer; }
+        
+        .filter-row { display: flex; gap: 10px; margin-bottom: 10px; }
+        
+        .template-list { display: grid; gap: 10px; }
+        .template-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f8fafc; border-radius: 8px; font-size: 0.85em; font-weight: 600; }
+        
+        .btn-icon { width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e5e7eb; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .badge-status.success { background: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 20px; font-size: 0.8em; font-weight: 700; }
+    </style>
+
+    <script>
+        // Tab logic placeholder
+    </script>
+</body>
+</html>

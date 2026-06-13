@@ -1,0 +1,43 @@
+sequenceDiagram
+    autonumber
+    actor G as ولي الأمر
+    participant UI as Web Portal
+    participant API as Backend API
+    participant AUTH as Auth Service
+    participant DB as Database
+    participant NOT as Notifications
+    actor SA as إدارة المدرسة
+    actor OF as مكتب التربية
+
+    G->>UI: فتح نموذج التسجيل
+    UI->>API: GET /enrollment/form
+    API->>AUTH: التحقق من الجلسة
+    AUTH-->>API: OK
+    API-->>UI: نموذج + الحقول
+    G->>UI: إدخال البيانات + رفع الوثائق
+    UI->>API: POST /applications
+    API->>API: التحقق من اكتمال البيانات
+    API->>DB: INSERT Application(status='Pending')
+    DB-->>API: applicationId=APP-001
+    API->>DB: INSERT StudentDocument(s)
+    API->>NOT: إشعار للمدرسة
+    NOT-->>SA: طلب جديد APP-001
+    API-->>UI: 201 Created
+    UI-->>G: رقم الطلب
+    
+    SA->>API: GET /applications/APP-001
+    API->>DB: SELECT Application + Documents
+    DB-->>API: البيانات
+    API-->>SA: عرض الطلب
+    SA->>API: POST /applications/APP-001/approve
+    API->>DB: UPDATE status='SchoolApproved'
+    API->>DB: INSERT Student(status='Pending_Office')
+    API->>NOT: إشعار للمكتب
+    NOT-->>OF: طلب اعتماد
+    
+    OF->>API: POST /applications/APP-001/office-approve
+    API->>DB: UPDATE Student.status='Registered'
+    API->>DB: INSERT Enrollment
+    API->>DB: INSERT SchoolAuditLog
+    API->>NOT: إشعار ولي الأمر
+    NOT-->>G: تم اعتماد القيد

@@ -1,0 +1,15 @@
+flowchart TD
+    Start([مدير النظام]) --> Need{ما المطلوب؟}
+    Need -- إنشاء دور --> CR[تعريف الدور]
+    CR --> CP[ربط بالصلاحيات]
+    Need -- تعديل دور --> ER[اختيار الدور]
+    ER --> EP[تعديل الصلاحيات]
+    EP --> Audit[تسجيل في AuditLog]
+    CP --> Audit
+    Need -- تعيين دور --> SU[اختيار مستخدم]
+    SU --> SR[اختيار الدور]
+    SR --> Audit
+    Need -- إلغاء دور --> RU[اختيار مستخدم+دور]
+    RU --> Confirm[تأكيد]
+    Confirm --> Audit
+    Audit --> End([انتهاء])

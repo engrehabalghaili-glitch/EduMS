@@ -1,0 +1,307 @@
+classDiagram
+    direction TB
+    class DashboardConfiguration {
+        +configId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +kpiType : DECIMAL(5,2)
+        +kpiCode : VARCHAR(50)
+        +kpiNameAr : VARCHAR(200)
+        +kpiNameEn : VARCHAR(200)
+        +kpiDescription : TEXT
+        +sourceModule : VARCHAR(200)
+        +sourceTable : VARCHAR(200)
+        +sourceField : VARCHAR(200)
+        +...(17 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class KPI_Metrics {
+        +metricId : BIGINT «PK»
+        +configId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +periodType : VARCHAR(50)
+        +periodValue : VARCHAR(200)
+        +periodStartDate : DATE
+        +periodEndDate : DATE
+        +actualValue : VARCHAR(200)
+        +targetValue : VARCHAR(200)
+        +...(16 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class TrendAnalysisResult {
+        +analysisId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +studyPeriod : VARCHAR(200)
+        +startYear : VARCHAR(200)
+        +endYear : VARCHAR(200)
+        +kpiType : DECIMAL(5,2)
+        +kpiCode : VARCHAR(50) «FK»
+        +historicalValues : DATE
+        +trendDirection : VARCHAR(200)
+        +slope : VARCHAR(200)
+        +...(19 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class SchoolStatisticsDraft {
+        +draftId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +periodType : VARCHAR(50)
+        +periodValue : VARCHAR(200)
+        +periodStartDate : DATE
+        +periodEndDate : DATE
+        +draftNumber : INT
+        +draftVersion : INT
+        +...(17 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class SubmittedStatistics {
+        +submissionId : BIGINT «PK»
+        +draftId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +submissionNumber : INT
+        +submissionTimestamp : DATETIME
+        +submissionMethod : VARCHAR(100)
+        +submittedByUserId : BIGINT «FK»
+        +directorSignature : VARCHAR(200)
+        +directorSignatureDate : DATE
+        +...(21 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +archive()
+    }
+    class StatisticsUpdateHistory {
+        +historyId : BIGINT «PK»
+        +draftId : BIGINT «FK»
+        +submissionId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +changeType : INT
+        +changeCategory : VARCHAR(50)
+        +oldValue : VARCHAR(200)
+        +newValue : VARCHAR(200)
+        +changeDate : DATE
+        +updateReason : DATE
+        +...(11 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +approve()
+        +reject(reason)
+    }
+    class StatisticsArchive {
+        +archiveId : BIGINT «PK»
+        +submissionId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +archivedYear : VARCHAR(200)
+        +periodType : VARCHAR(50)
+        +periodValue : VARCHAR(200)
+        +archivedAt : DATE
+        +archivedByUserId : BIGINT «FK»
+        +finalDataSnapshot : VARCHAR(200)
+        +studentSnapshot : VARCHAR(200)
+        +...(12 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +archive()
+    }
+    class SystemReports {
+        +reportId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +reportType : VARCHAR(50)
+        +reportSubType : VARCHAR(50)
+        +reportTitle : VARCHAR(200)
+        +reportFrequency : VARCHAR(200)
+        +periodStart : VARCHAR(200)
+        +periodEnd : VARCHAR(200)
+        +generationDate : DATETIME
+        +generatedBy : DECIMAL(5,2)
+        +...(16 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +generate()
+        +export(format)
+        +publish()
+    }
+    class ReportApprovals {
+        +approvalId : BIGINT «PK»
+        +reportId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +submissionDate : DATE
+        +submittedByUserId : BIGINT «FK»
+        +approvalStatus : VARCHAR(50)
+        +reviewerId : BIGINT «FK»
+        +reviewDate : DATE
+        +comments : TEXT
+        +rejectionReason : VARCHAR(200)
+        +...(13 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +generate()
+    }
+    class ComparativeReport {
+        +comparativeId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +reportNumber : INT
+        +comparisonTitle : VARCHAR(200)
+        +firstPeriodLabel : VARCHAR(200)
+        +firstPeriodStart : VARCHAR(200)
+        +firstPeriodEnd : VARCHAR(200)
+        +secondPeriodLabel : VARCHAR(200)
+        +secondPeriodStart : VARCHAR(200)
+        +secondPeriodEnd : VARCHAR(200)
+        +...(19 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +generate()
+        +export(format)
+        +publish()
+    }
+    class FinancialSummaryReports {
+        +summaryId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +fiscalYear : VARCHAR(200)
+        +reportDate : DATE
+        +reportType : VARCHAR(50)
+        +totalBookValue : VARCHAR(200)
+        +totalDepreciation : VARCHAR(200)
+        +totalAssetsCount : INT
+        +totalAcquisitionCost : DATE
+        +totalRevaluationGains : VARCHAR(200)
+        +...(19 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +generate()
+    }
+    class ExternalComplianceReports {
+        +reportId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +reportNumber : INT
+        +targetEntity : VARCHAR(200)
+        +entityType : VARCHAR(50)
+        +standardType : VARCHAR(50)
+        +standardVersion : VARCHAR(200)
+        +reportType : VARCHAR(50)
+        +periodStart : VARCHAR(200)
+        +periodEnd : VARCHAR(200)
+        +...(23 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +generate()
+    }
+    class GapAnalysisReports {
+        +analysisId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +analysisNumber : INT
+        +analysisType : VARCHAR(50)
+        +assetCategoryId : BIGINT «FK»
+        +gradeLevelId : BIGINT «FK»
+        +departmentId : BIGINT «FK»
+        +requiredQty : INT
+        +availableQty : INT
+        +gapValue : VARCHAR(200)
+        +...(17 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +generate()
+    }
+    class ReportsArchive {
+        +archiveId : BIGINT «PK»
+        +sourceReportType : VARCHAR(50)
+        +sourceReportId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +archivedAt : DATE
+        +archivedByUserId : BIGINT «FK»
+        +retentionPeriod : VARCHAR(200)
+        +retentionEndDate : DATE
+        +storageLocation : VARCHAR(200)
+        +filePath : VARCHAR(200)
+        +...(11 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +archive()
+        +generate()
+        +export(format)
+    }
+    class ExceptionalStatistics {
+        +statisticsId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +reportNumber : INT
+        +totalIncidents : VARCHAR(200)
+        +totalClosureDays : VARCHAR(200)
+        +totalDamageCost : DECIMAL(15,2)
+        +totalAwardsCount : INT
+        +totalParticipationsCount : INT
+        +totalDeficitCount : INT
+        +...(16 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    DashboardConfiguration "1" --o "0..*" KPI_Metrics : configId
+    DashboardConfiguration "1" --o "0..*" TrendAnalysisResult : kpiCode
+    SchoolStatisticsDraft "1" --o "0..*" SubmittedStatistics : draftId
+    SchoolStatisticsDraft "1" --o "0..*" StatisticsUpdateHistory : draftId
+    SubmittedStatistics "1" --o "0..*" StatisticsUpdateHistory : submissionId
+    SubmittedStatistics "1" --o "0..*" StatisticsArchive : submissionId
+    SystemReports "1" --o "0..*" ReportApprovals : reportId

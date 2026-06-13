@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERD - الإدارة المالية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<style>
+*{box-sizing:border-box}
+body{font-family:'Cairo',sans-serif;background:#f8fafc;margin:0;padding:24px;color:#1f2937}
+.container{max-width:1500px;margin:0 auto}
+.header{background:linear-gradient(135deg,#DC2626,#DC2626dd);color:#fff;padding:32px;border-radius:16px;margin-bottom:20px;box-shadow:0 8px 24px #DC262633}
+.header h1{margin:0 0 8px;font-size:28px;font-weight:900;display:flex;align-items:center;gap:12px}
+.header .subtitle{opacity:.92;font-size:15px;line-height:1.7}
+.header .badges{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+.badge{background:rgba(255,255,255,.2);padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;backdrop-filter:blur(10px)}
+.compliance{background:#D1FAE5;border-right:4px solid #10B981;padding:14px 18px;border-radius:10px;margin-bottom:16px;font-size:13px;color:#065F46;line-height:1.8}
+.compliance strong{color:#064E3B}
+.compliance code{background:#fff;padding:2px 8px;border-radius:4px;font-family:'Fira Code',monospace;font-size:12px}
+.nav-back{display:inline-block;color:#1E3A8A;text-decoration:none;font-weight:700;margin-bottom:12px;font-size:14px}
+.nav-back:hover{text-decoration:underline}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:14px 0}
+.info-card{background:#fff;border-right:4px solid #DC2626;padding:14px 18px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.info-card .label{font-size:12px;color:#64748b;font-weight:600}
+.info-card .value{font-size:22px;color:#1E3A8A;font-weight:900;margin-top:4px}
+.toolbar{background:#fff;padding:14px 20px;border-radius:12px;margin-bottom:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.toolbar .group{display:flex;gap:6px;padding:4px;background:#F1F5F9;border-radius:10px}
+.toolbar .group button{background:transparent;border:none;padding:8px 14px;font-family:inherit;font-weight:600;font-size:13px;border-radius:6px;cursor:pointer;color:#475569}
+.toolbar .group button.active{background:#1E3A8A;color:#fff}
+.btn{background:#1E3A8A;color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;transition:all .2s}
+.btn:hover{background:#172554;transform:translateY(-1px)}
+.btn.outline{background:#fff;color:#1E3A8A;border:1.5px solid #1E3A8A}
+.btn.outline:hover{background:#EFF6FF}
+.diagram-card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 4px 20px rgba(0,0,0,.06);overflow:auto;min-height:400px}
+.diagram-card .mermaid{background:#fff;text-align:center}
+.view-pane{display:none}
+.view-pane.active{display:block}
+details{margin-top:18px}
+details summary{cursor:pointer;font-weight:700;color:#1E3A8A;padding:12px 16px;background:#EFF6FF;border-radius:10px;font-size:14px}
+pre.source-code{background:#0f172a;color:#e2e8f0;padding:18px;border-radius:8px;overflow-x:auto;font-family:'Fira Code',monospace;font-size:12px;line-height:1.6;max-height:520px;direction:ltr;text-align:left;margin-top:10px}
+.footer{text-align:center;padding:24px;color:#64748b;font-size:13px}
+.notice-slim{background:#FEF3C7;border-right:4px solid #D4AF37;padding:12px 16px;border-radius:8px;margin-bottom:14px;font-size:13px;color:#78350F}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a class="nav-back" href="index.html">← العودة لفهرس مخططات الأقسام</a>
+
+  <div class="header">
+    <h1>💰 ERD — الإدارة المالية</h1>
+    <div class="subtitle">القسم الخامس — الحسابات والفواتير والدفع والإعفاءات والأقساط والتدقيق</div>
+    <div class="badges">
+      <span class="badge">📁 M5_Finance</span>
+      <span class="badge">🗃️ 8 كيان</span>
+      <span class="badge">📊 231 حقل كامل</span>
+      <span class="badge">🔑 33 PK+FK</span>
+      <span class="badge">🔗 7 علاقة</span>
+      <span class="badge">✅ Mermaid 10.9.1</span>
+    </div>
+  </div>
+
+  <div class="compliance">
+    <strong>✔ متوافق مع Mermaid 10.9.1:</strong>
+    جميع الأسماء البرمجية ASCII فقط (مثال: <code>StudentAccount</code>) — كل النصوص العربية موضوعة داخل علامات تنصيص آمنة كتعليقات.
+    <br>كل قسم في مخطط <strong>مستقل تماماً</strong> دون دمج مع أقسام أخرى.
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card"><div class="label">عدد الجداول</div><div class="value">8</div></div>
+    <div class="info-card"><div class="label">الحقول الكلية</div><div class="value">231</div></div>
+    <div class="info-card"><div class="label">PK + FK فقط</div><div class="value">33</div></div>
+    <div class="info-card"><div class="label">العلاقات</div><div class="value">7</div></div>
+    <div class="info-card"><div class="label">المستوى</div><div class="value" style="font-size:14px">Module-Level</div></div>
+  </div>
+
+  <div class="toolbar">
+    <div class="group" role="tablist">
+      <button id="tab-slim" class="active" onclick="switchView('slim')">🔑 عرض مبسّط (PK + FK)</button>
+      <button id="tab-full" onclick="switchView('full')">📊 عرض كامل (جميع الحقول)</button>
+    </div>
+    <div style="flex:1"></div>
+    <button class="btn outline" onclick="copySource()">📋 نسخ كود Mermaid</button>
+    <button class="btn outline" onclick="downloadSource()">⬇ تنزيل .mmd</button>
+    <button class="btn outline" onclick="downloadSvg()">🖼 تنزيل SVG</button>
+  </div>
+
+  <div id="pane-slim" class="view-pane active">
+    <div class="notice-slim">
+      💡 <strong>العرض المبسّط</strong> — يُظهر فقط مفاتيح الجداول (PK) والمفاتيح الخارجية (FK)، مثالي لفهم العلاقات بسرعة. للحقول الكاملة، انقر على "عرض كامل".
+    </div>
+    <div class="diagram-card">
+      <div class="mermaid" id="diagram-slim">
+erDiagram
+    %% =====================================================
+    %% M5_Finance - ERD
+    %% Mermaid 10.9.1 Compliant - SLIM VIEW (PK + FK only)
+    %% =====================================================
+
+    StudentAccount {
+        INT accountId PK "الحساب المالي"
+        INT studentId "معرف الطالب FK Student.studentId - علاقة 1-1"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId - للحسابات..."
+        INT exemptionApprovedByUserId "معرف من اعتمد الإعفاء FK SystemUser.userId"
+    }
+
+    StudentInvoice {
+        INT invoiceId PK "الفواتير"
+        INT accountId FK "معرف الحساب المالي للطالب FK StudentAccount.accountId"
+        INT studentId "معرف الطالب FK Student.studentId - للتكرار"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId - اختياري"
+    }
+
+    InvoiceItem {
+        INT itemId PK "بنود الفاتورة"
+        INT invoiceId FK "معرف الفاتورة FK StudentInvoice.invoiceId"
+        INT feeTypeId FK "معرف نوع الرسم FK FeeType.feeTypeId"
+    }
+
+    Payment {
+        INT paymentId PK "المدفوعات"
+        INT accountId FK "معرف الحساب المالي FK StudentAccount.accountId"
+        INT studentId "معرف الطالب FK Student.studentId - للتكرار"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId - اختياري"
+        INT confirmedByUserId "معرف من قام بالتأكيد FK SystemUser.userId"
+    }
+
+    FeeType {
+        INT feeTypeId PK "أنواع الرسوم"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+    }
+
+    Installment {
+        INT installmentId PK "الأقساط"
+        INT invoiceId FK "معرف الفاتورة المرتبطة FK StudentInvoice.invoiceId"
+        INT itemId FK "معرف بند الفاتورة المرتبط FK InvoiceItem.itemId - اختياري إذا كان ا..."
+        INT accountId FK "معرف الحساب المالي FK StudentAccount.accountId - للتكرار"
+        INT studentId "معرف الطالب FK Student.studentId - للتكرار"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT rescheduledByUserId "معرف من قام بإعادة الجدولة FK SystemUser.userId"
+        INT waivedByUserId "معرف من اعتمد الإعفاء FK SystemUser.userId"
+    }
+
+    AssetWarrantyContract {
+        DECIMAL contractValue PK "الضمان والعقود"
+    }
+
+    FinancialAuditArchive {
+        DECIMAL reportType PK "الأرشفة المالية"
+    }
+
+    %% ===== Relationships =====
+    StudentAccount ||--o{ StudentInvoice : "معرف الحساب المالي للطالب"
+    StudentInvoice ||--o{ InvoiceItem : "معرف الفاتورة FK StudentI"
+    FeeType ||--o{ InvoiceItem : "معرف نوع الرسم FK FeeType"
+    StudentAccount ||--o{ Payment : "معرف الحساب المالي FK Stu"
+    StudentInvoice ||--o{ Installment : "معرف الفاتورة المرتبطة FK"
+    InvoiceItem ||--o{ Installment : "معرف بند الفاتورة المرتبط"
+    StudentAccount ||--o{ Installment : "معرف الحساب المالي FK Stu"
+      </div>
+    </div>
+    <details>
+      <summary>📝 كود Mermaid المصدر (Slim)</summary>
+      <pre class="source-code" id="src-slim">erDiagram
+    %% =====================================================
+    %% M5_Finance - ERD
+    %% Mermaid 10.9.1 Compliant - SLIM VIEW (PK + FK only)
+    %% =====================================================
+
+    StudentAccount {
+        INT accountId PK "الحساب المالي"
+        INT studentId "معرف الطالب FK Student.studentId - علاقة 1-1"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId - للحسابات..."
+        INT exemptionApprovedByUserId "معرف من اعتمد الإعفاء FK SystemUser.userId"
+    }
+
+    StudentInvoice {
+        INT invoiceId PK "الفواتير"
+        INT accountId FK "معرف الحساب المالي للطالب FK StudentAccount.accountId"
+        INT studentId "معرف الطالب FK Student.studentId - للتكرار"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId - اختياري"
+    }
+
+    InvoiceItem {
+        INT itemId PK "بنود الفاتورة"
+        INT invoiceId FK "معرف الفاتورة FK StudentInvoice.invoiceId"
+        INT feeTypeId FK "معرف نوع الرسم FK FeeType.feeTypeId"
+    }
+
+    Payment {
+        INT paymentId PK "المدفوعات"
+        INT accountId FK "معرف الحساب المالي FK StudentAccount.accountId"
+        INT studentId "معرف الطالب FK Student.studentId - للتكرار"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId - اختياري"
+        INT confirmedByUserId "معرف من قام بالتأكيد FK SystemUser.userId"
+    }
+
+    FeeType {
+        INT feeTypeId PK "أنواع الرسوم"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+    }
+
+    Installment {
+        INT installmentId PK "الأقساط"
+        INT invoiceId FK "معرف الفاتورة المرتبطة FK StudentInvoice.invoiceId"
+        INT itemId FK "معرف بند الفاتورة المرتبط FK InvoiceItem.itemId - اختياري إذا كان ا..."
+        INT accountId FK "معرف الحساب المالي FK StudentAccount.accountId - للتكرار"
+        INT studentId "معرف الطالب FK Student.studentId - للتكرار"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT rescheduledByUserId "معرف من قام بإعادة الجدولة FK SystemUser.userId"
+        INT waivedByUserId "معرف من اعتمد الإعفاء FK SystemUser.userId"
+    }
+
+    AssetWarrantyContract {
+        DECIMAL contractValue PK "الضمان والعقود"
+    }
+
+    FinancialAuditArchive {
+        DECIMAL reportType PK "الأرشفة المالية"
+    }
+
+    %% ===== Relationships =====
+    StudentAccount ||--o{ StudentInvoice : "معرف الحساب المالي للطالب"
+    StudentInvoice ||--o{ InvoiceItem : "معرف الفاتورة FK StudentI"
+    FeeType ||--o{ InvoiceItem : "معرف نوع الرسم FK FeeType"
+    StudentAccount ||--o{ Payment : "معرف الحساب المالي FK Stu"
+    StudentInvoice ||--o{ Installment : "معرف الفاتورة المرتبطة FK"
+    InvoiceItem ||--o{ Installment : "معرف بند الفاتورة المرتبط"
+    StudentAccount ||--o{ Installment : "معرف الحساب المالي FK Stu"</pre>
+    </details>
+  </div>
+
+  <div id="pane-full" class="view-pane">
+    <div class="notice-slim" style="background:#FEE2E2;border-right-color:#DC2626;color:#7F1D1D">
+      ⚠️ <strong>تنبيه:</strong> العرض الكامل يحوي 231 حقل وقد يأخذ بضع ثوانٍ للتصيير.
+    </div>
+    <div class="diagram-card">
+      <div class="mermaid" id="diagram-full">
+erDiagram
+    %% =====================================================
+    %% M5_Finance - ERD
+    %% Mermaid 10.9.1 Compliant - ASCII identifiers only
+    %% =====================================================
+
+    StudentAccount {
+        INT accountId PK "الحساب المالي"
+        INT studentId "معرف الطالب FK Student.studentId - علاقة 1-1"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId - للحسابات..."
+        INT accountNumber "رقم الحساب فريد يولد آلياً"
+        DECIMAL totalDebit "إجمالي الرسوم المستحقة على الطالب مدين"
+        DECIMAL totalCredit "إجمالي المدفوعات التي دفعها الطالب دائن"
+        DECIMAL currentBalance "الرصيد الحالي totalDebit - totalCredit"
+        DECIMAL balanceType "نوع الرصيد مدين دائن صفر"
+        DATE lastTransactionDate "تاريخ آخر معاملة فاتورة أو دفع"
+        DATE lastPaymentDate "تاريخ آخر دفعة"
+        DECIMAL lastPaymentAmount "قيمة آخر دفعة"
+        INT accountStatus "حالة الحساب نشط مجمد مغلق منتهي"
+        BOOLEAN isExempt "هل الطالب معفى من الرسوم كلياً"
+        DECIMAL exemptionPercentage "نسبة الإعفاء إن كان جزئياً"
+        TEXT exemptionReason "سبب الإعفاء منحة خصم أخوة خصم أبناء موظفين كفالة"
+        INT exemptionApprovedByUserId "معرف من اعتمد الإعفاء FK SystemUser.userId"
+        DATE exemptionApprovalDate "تاريخ اعتماد الإعفاء"
+        VARCHAR exemptionDocument "مستند الإعفاء مسار ملف"
+        DECIMAL minimumPaymentRequired "الحد الأدنى المطلوب دفعه قبل التسجيل نسبة أو مبلغ"
+        BOOLEAN isBlockedFromRegistration "هل تم منع الطالب من التسجيل بسبب المستحقات"
+        TEXT blockReason "سبب المنع"
+        DATE unblockDate "تاريخ رفع المنع"
+        VARCHAR paymentPlan "خطة الدفع المتفق عليها نص"
+        TEXT notes "ملاحظات عامة"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    StudentInvoice {
+        INT invoiceId PK "الفواتير"
+        INT accountId FK "معرف الحساب المالي للطالب FK StudentAccount.accountId"
+        INT studentId "معرف الطالب FK Student.studentId - للتكرار"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId - اختياري"
+        INT invoiceNumber "رقم الفاتورة فريد يولد آلياً"
+        DATE invoiceDate "تاريخ إصدار الفاتورة"
+        DATE dueDate "تاريخ الاستحقاق آخر موعد للدفع"
+        BOOLEAN issueDate "تاريخ الإصدار مرادف لـ invoiceDate"
+        DECIMAL totalAmount "المبلغ الإجمالي للفاتورة قبل الخصم والضريبة"
+        DECIMAL discountAmount "قيمة الخصم الإجمالي من مبلغ الفاتورة"
+        INT discountReason "سبب الخصم إن وجد"
+        DECIMAL taxAmount "قيمة الضريبة مثل VAT 15"
+        DECIMAL taxRate "نسبة الضريبة افتراضي 15"
+        INT taxRegistrationNumber "الرقم الضريبي للمدرسة"
+        DECIMAL netAmount "المبلغ الصافي بعد الخصم وإضافة الضريبة totalAmount - discountAmount..."
+        DECIMAL paidAmount "المبلغ المدفوع من الفاتورة"
+        DECIMAL remainingAmount "المبلغ المتبقي netAmount - paidAmount"
+        VARCHAR invoiceType "نوع الفاتورة رسوم دراسة رسوم نشاط رسوم كتب رسوم مواصلات رسوم زي مدر..."
+        VARCHAR invoiceCategory "فئة الفاتورة إجبارية اختيارية"
+        VARCHAR paymentStatus "حالة الدفع غير مدفوعة مدفوعة جزئياً مدفوعة كاملة ملغاة"
+        VARCHAR invoiceStatus "حالة الفاتورة مفتوحة مقفلة ملغاة منتهية"
+        VARCHAR paymentMethod "طريقة الدفع المفضلة تحويل بنكي كاش بطاقة ائتمان شيك"
+        BOOLEAN isLate "هل الفاتورة متأخرة تم تجاوز dueDate دون سداد كامل"
+        VARCHAR lateDays "عدد أيام التأخير تحسب تلقائياً"
+        DECIMAL lateFeePercentage "نسبة رسوم التأخير إذا لم تكن مضمنة في الفاتورة"
+        DECIMAL lateFeeAmount "قيمة رسوم التأخير المحسوبة"
+        VARCHAR installmentPlan "خطة التقسيط نعم/لا"
+        INT installmentCount "عدد الأقساط إن وجد"
+        VARCHAR currentInstallment "القسط الحالي المستحق"
+        BOOLEAN parentApprovalRequired "هل تتطلب موافقة ولي الأمر"
+        VARCHAR parentApprovalStatus "حالة موافقة ولي الأمر قيد الانتظار موافق مرفوض"
+        DATE parentApprovalDate "تاريخ الموافقة"
+        BOOLEAN sentToParent "هل تم إرسال الفاتورة لولي الأمر"
+        DATE parentNotifiedAt "تاريخ الإرسال"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    InvoiceItem {
+        INT itemId PK "بنود الفاتورة"
+        INT invoiceId FK "معرف الفاتورة FK StudentInvoice.invoiceId"
+        INT feeTypeId FK "معرف نوع الرسم FK FeeType.feeTypeId"
+        VARCHAR itemCode "كود البند من FeeType أو مخصص"
+        TEXT itemDescription "وصف بند الفاتورة مثال - رسوم الفصل الدراسي الأول - الصف الخامس"
+        INT quantity "الكمية مثل عدد الأشهر عدد الكتب عدد الحصص"
+        DECIMAL unitPrice "سعر الوحدة مثل سعر الكتاب سعر الشهر الدراسي"
+        DECIMAL totalPrice "السعر الإجمالي الكمية × سعر الوحدة - يُحسب آلياً"
+        DECIMAL discountPercentage "نسبة الخصم على هذا البند إن وجد"
+        DECIMAL discountAmount "مبلغ الخصم على هذا البند يحسب = totalPrice × discountPercentage/100"
+        DECIMAL priceAfterDiscount "السعر بعد الخصم totalPrice - discountAmount"
+        DECIMAL taxPercentage "نسبة الضريبة على هذا البند قد تختلف عن الفاتورة الأم"
+        DECIMAL taxAmount "مبلغ الضريبة على هذا البند"
+        DECIMAL netAmount "المبلغ الصافي للبند السعر بعد الخصم + الضريبة"
+        DATE dueDate "تاريخ الاستحقاق لهذا البند إذا اختلف عن تاريخ الفاتورة"
+        INT isPaid "هل البند مدفوع بالكامل"
+        DECIMAL paidAmount "المبلغ المدفوع لهذا البند جزئياً أو كلياً"
+        DECIMAL remainingAmount "المبلغ المتبقي على هذا البند"
+        VARCHAR paymentMethod "طريقة الدفع لهذا البند إذا اختلفت"
+        BOOLEAN isLate "هل البند متأخر عن السداد"
+        BOOLEAN lateFeeApplied "هل طُبّقت رسوم تأخير على هذا البند"
+        DECIMAL lateFeeAmount "مبلغ رسوم التأخير على هذا البند"
+        INT installmentNumber "رقم القسط إذا كان هذا البند يمثل قسطاً ضمن خطة تقسيط"
+        DECIMAL installmentTotal "إجمالي عدد الأقساط لهذه الفاتورة/البند"
+        BOOLEAN isWaived "هل البند معفى"
+        TEXT waiverReason "سبب الإعفاء"
+        DATE waiverDate "تاريخ الإعفاء"
+        VARCHAR status "حالة البند نشط مدفوع ملغي معفى"
+        TEXT notes "ملاحظات حول البند"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    Payment {
+        INT paymentId PK "المدفوعات"
+        INT accountId FK "معرف الحساب المالي FK StudentAccount.accountId"
+        INT studentId "معرف الطالب FK Student.studentId - للتكرار"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId - اختياري"
+        INT paymentNumber "رقم سند الدفع فريد يولد آلياً"
+        DATE paymentDate "تاريخ الدفع"
+        DATETIME paymentTime "وقت الدفع للدفعات الإلكترونية"
+        DECIMAL amount "المبلغ المدفوع"
+        VARCHAR currency "العملة SAR USD"
+        DECIMAL exchangeRate "سعر الصرف إن كانت العملة مختلفة عن العملة الأساسية"
+        DECIMAL convertedAmount "المبلغ بعد التحويل للعملة الأساسية"
+        VARCHAR paymentMethod "طريقة الدفع تحويل بنكي كاش بطاقة ائتمان شيك محفظة إلكترونية"
+        VARCHAR paymentType "نوع الدفع رسوم دراسية قسط غرامة تأخير تبرع أخرى"
+        VARCHAR bankName "اسم البنك للتحويلات البنكية"
+        INT bankTransactionId "رقم المعاملة البنكية Reference"
+        INT checkNumber "رقم الشيك إن وجد"
+        VARCHAR checkBank "بنك الشيك"
+        DATE checkDate "تاريخ الشيك"
+        DECIMAL creditCardLast4 "آخر 4 أرقام من البطاقة الائتمانية"
+        DECIMAL creditCardType "نوع البطاقة فيزا ماستركارد"
+        VARCHAR walletType "نوع المحفظة الإلكترونية STC Pay Apple Pay Google Pay"
+        VARCHAR payerName "اسم الدافع ولي الأمر أو الطالب"
+        VARCHAR payerType "نوع الدافع ولي أمر طالب جهة خارجية"
+        VARCHAR payerEmail "بريد الدافع الإلكتروني للإيصال"
+        INT receiptNumber "رقم الإيصال فريد يولد آلياً"
+        BOOLEAN receiptPrinted "هل تم طباعة الإيصال"
+        BOOLEAN receiptSentToEmail "هل تم إرسال الإيصال عبر البريد الإلكتروني"
+        DATE receiptEmailSentAt "تاريخ إرسال الإيصال"
+        VARCHAR paymentStatus "حالة الدفع معلق مؤكد ملغي فشل"
+        BOOLEAN isConfirmed "هل تم تأكيد الدفع تم وصوله فعلاً للحساب البنكي"
+        DATE confirmationDate "تاريخ التأكيد"
+        INT confirmedByUserId "معرف من قام بالتأكيد FK SystemUser.userId"
+        VARCHAR allocatedInvoices "الفواتير التي تم توزيع الدفع عليها JSON - invoiceId - allocatedAmount"
+        VARCHAR allocatedItems "البنود التي تم توزيع الدفع عليها JSON - itemId - allocatedAmount"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    FeeType {
+        INT feeTypeId PK "أنواع الرسوم"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        DECIMAL feeCode "رمز الرسم فريد داخل المدرسة"
+        DECIMAL feeNameAr "الاسم بالعربية مثال - رسوم دراسية"
+        DECIMAL feeNameEn "الاسم بالإنجليزية مثال - Tuition Fee"
+        DECIMAL feeCategory "فئة الرسم تعليمية خدمات أنشطة غرامات أخرى"
+        DECIMAL amount "المبلغ الافتراضي لهذا الرسم قبل الخصم"
+        VARCHAR currency "العملة"
+        VARCHAR billingFrequency "تكرار الفوترة شهري فصل دراسي سنوي لمرة واحدة"
+        BOOLEAN isTaxable "هل الرسم خاضع للضريبة"
+        DECIMAL taxPercentage "نسبة الضريبة إذا كان خاضعاً افتراضي 15"
+        BOOLEAN isMandatory "هل الرسم إجباري لجميع الطلاب"
+        BOOLEAN isOptional "هل الرسم اختياري يمكن إضافته بناءً على طلب الطالب"
+        BOOLEAN isDiscountable "هل يقبل خصماً"
+        DECIMAL discountPercentageAllowed "الحد الأقصى لنسبة الخصم المسموح بها"
+        BOOLEAN isRefundable "هل الرسم قابل للاسترداد في حالة الانسحاب"
+        DECIMAL refundPercentage "نسبة الاسترداد إذا كان قابلاً للاسترداد"
+        DATE refundCutoffDate "آخر موعد للانسحاب لاستحقاق الاسترداد"
+        BOOLEAN isRecurring "هل الرسم متكرر يتم فوترته تلقائياً كل فترة"
+        VARCHAR recurrenceType "نوع التكرار شهري فصل دراسي سنوي"
+        VARCHAR appliesToGrades "ينطبق على الصفوف JSON - قائمة بـ gradeLevelId"
+        VARCHAR appliesToNationalities "ينطبق على الجنسيات JSON - للرسوم الخاصة بجنسيات معينة"
+        VARCHAR appliesToStudentTypes "ينطبق على أنواع الطلاب جدد قدامى منتظمون منقولون"
+        BOOLEAN isActive "هل نوع الرسم مفعل"
+        DATE validFrom "تاريخ بدء صلاحية هذا المبلغ"
+        DATE validTo "تاريخ انتهاء صلاحية هذا المبلغ"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    Installment {
+        INT installmentId PK "الأقساط"
+        INT invoiceId FK "معرف الفاتورة المرتبطة FK StudentInvoice.invoiceId"
+        INT itemId FK "معرف بند الفاتورة المرتبط FK InvoiceItem.itemId - اختياري إذا كان ا..."
+        INT accountId FK "معرف الحساب المالي FK StudentAccount.accountId - للتكرار"
+        INT studentId "معرف الطالب FK Student.studentId - للتكرار"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT installmentNumber "رقم القسط 1 2 3 ..."
+        DECIMAL installmentTotal "إجمالي عدد الأقساط لهذه الفاتورة/البند"
+        DECIMAL installmentAmount "مبلغ هذا القسط"
+        VARCHAR currency "العملة"
+        DATE dueDate "تاريخ استحقاق هذا القسط"
+        DATE extendedDueDate "تاريخ الاستحقاق بعد التمديد إن وجد"
+        DECIMAL paidAmount "المبلغ المدفوع لهذا القسط 0 إذا لم يدفع"
+        DECIMAL remainingAmount "المبلغ المتبقي لهذا القسط installmentAmount - paidAmount"
+        DATE paymentDate "تاريخ دفع القسط آخر دفعة إن تم الدفع على دفعات"
+        VARCHAR paymentMethod "طريقة الدفع المستخدمة لهذا القسط"
+        VARCHAR paymentReference "رقم مرجع الدفع رقم السند رقم العملية البنكية"
+        VARCHAR installmentType "نوع القسط قسط منتظم قسط أول مقدم قسط أخير دفعة مقدم"
+        VARCHAR installmentStatus "حالة القسط غير مدفوع مدفوع كامل مدفوع جزئياً متأخر ملغي معاد جدولته"
+        BOOLEAN isLate "هل القسط متأخر عن السداد"
+        DATE lateDays "عدد أيام التأخير تحسب تلقائياً من dueDate إلى تاريخ اليوم أو تاريخ ..."
+        DECIMAL lateFeePercentage "نسبة رسوم التأخير المطبقة على هذا القسط حسب سياسة المدرسة"
+        DECIMAL lateFeeAmount "قيمة رسوم التأخير المحسوبة لهذا القسط"
+        INT lateFeePaid "هل تم دفع رسوم التأخير"
+        DATE lateFeePaymentDate "تاريخ دفع رسوم التأخير"
+        DECIMAL lateFeePaymentReference "مرجع دفع رسوم التأخير"
+        BOOLEAN isRescheduled "هل تمت إعادة جدولة هذا القسط"
+        DATE rescheduledDate "تاريخ إعادة الجدولة"
+        INT rescheduledByUserId "معرف من قام بإعادة الجدولة FK SystemUser.userId"
+        TEXT rescheduledReason "سبب إعادة الجدولة"
+        DATE newDueDate "تاريخ الاستحقاق الجديد بعد إعادة الجدولة"
+        BOOLEAN isWaived "هل تم إعفاء هذا القسط من السداد"
+        TEXT waiverReason "سبب الإعفاء"
+        DATE waiverDate "تاريخ الإعفاء"
+        INT waivedByUserId "معرف من اعتمد الإعفاء FK SystemUser.userId"
+        VARCHAR waiverApprovalDocument "مستند الإعفاء مسار ملف"
+        TEXT notes "ملاحظات حول هذا القسط مثل اتفاق خاص ظروف طارئة"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetWarrantyContract {
+        DECIMAL contractValue PK "الضمان والعقود"
+        VARCHAR currency "العملة"
+        VARCHAR paymentTerms "شروط الدفع"
+    }
+
+    FinancialAuditArchive {
+        DECIMAL reportType PK "الأرشفة المالية"
+        VARCHAR fiscalYear "السنة المالية للتقرير"
+        DECIMAL totalAssetsValue "إجمالي قيم الأصول في هذا التقرير لقطة"
+        DECIMAL totalDepreciationValue "إجمالي الإهلاك في هذه الفترة"
+        VARCHAR filePath "مسار ملف التقرير المعتمد PDF/Excel"
+        BOOLEAN isReadOnly "دائماً True لمنع التعديل على البيانات المؤرشفة"
+    }
+
+    %% ===== Relationships =====
+    StudentAccount ||--o{ StudentInvoice : "معرف الحساب المالي للطالب"
+    StudentInvoice ||--o{ InvoiceItem : "معرف الفاتورة FK StudentI"
+    FeeType ||--o{ InvoiceItem : "معرف نوع الرسم FK FeeType"
+    StudentAccount ||--o{ Payment : "معرف الحساب المالي FK Stu"
+    StudentInvoice ||--o{ Installment : "معرف الفاتورة المرتبطة FK"
+    InvoiceItem ||--o{ Installment : "معرف بند الفاتورة المرتبط"
+    StudentAccount ||--o{ Installment : "معرف الحساب المالي FK Stu"
+      </div>
+    </div>
+    <details>
+      <summary>📝 كود Mermaid المصدر (Full)</summary>
+      <pre class="source-code" id="src-full">erDiagram
+    %% =====================================================
+    %% M5_Finance - ERD
+    %% Mermaid 10.9.1 Compliant - ASCII identifiers only
+    %% =====================================================
+
+    StudentAccount {
+        INT accountId PK "الحساب المالي"
+        INT studentId "معرف الطالب FK Student.studentId - علاقة 1-1"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId - للحسابات..."
+        INT accountNumber "رقم الحساب فريد يولد آلياً"
+        DECIMAL totalDebit "إجمالي الرسوم المستحقة على الطالب مدين"
+        DECIMAL totalCredit "إجمالي المدفوعات التي دفعها الطالب دائن"
+        DECIMAL currentBalance "الرصيد الحالي totalDebit - totalCredit"
+        DECIMAL balanceType "نوع الرصيد مدين دائن صفر"
+        DATE lastTransactionDate "تاريخ آخر معاملة فاتورة أو دفع"
+        DATE lastPaymentDate "تاريخ آخر دفعة"
+        DECIMAL lastPaymentAmount "قيمة آخر دفعة"
+        INT accountStatus "حالة الحساب نشط مجمد مغلق منتهي"
+        BOOLEAN isExempt "هل الطالب معفى من الرسوم كلياً"
+        DECIMAL exemptionPercentage "نسبة الإعفاء إن كان جزئياً"
+        TEXT exemptionReason "سبب الإعفاء منحة خصم أخوة خصم أبناء موظفين كفالة"
+        INT exemptionApprovedByUserId "معرف من اعتمد الإعفاء FK SystemUser.userId"
+        DATE exemptionApprovalDate "تاريخ اعتماد الإعفاء"
+        VARCHAR exemptionDocument "مستند الإعفاء مسار ملف"
+        DECIMAL minimumPaymentRequired "الحد الأدنى المطلوب دفعه قبل التسجيل نسبة أو مبلغ"
+        BOOLEAN isBlockedFromRegistration "هل تم منع الطالب من التسجيل بسبب المستحقات"
+        TEXT blockReason "سبب المنع"
+        DATE unblockDate "تاريخ رفع المنع"
+        VARCHAR paymentPlan "خطة الدفع المتفق عليها نص"
+        TEXT notes "ملاحظات عامة"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    StudentInvoice {
+        INT invoiceId PK "الفواتير"
+        INT accountId FK "معرف الحساب المالي للطالب FK StudentAccount.accountId"
+        INT studentId "معرف الطالب FK Student.studentId - للتكرار"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId - اختياري"
+        INT invoiceNumber "رقم الفاتورة فريد يولد آلياً"
+        DATE invoiceDate "تاريخ إصدار الفاتورة"
+        DATE dueDate "تاريخ الاستحقاق آخر موعد للدفع"
+        BOOLEAN issueDate "تاريخ الإصدار مرادف لـ invoiceDate"
+        DECIMAL totalAmount "المبلغ الإجمالي للفاتورة قبل الخصم والضريبة"
+        DECIMAL discountAmount "قيمة الخصم الإجمالي من مبلغ الفاتورة"
+        INT discountReason "سبب الخصم إن وجد"
+        DECIMAL taxAmount "قيمة الضريبة مثل VAT 15"
+        DECIMAL taxRate "نسبة الضريبة افتراضي 15"
+        INT taxRegistrationNumber "الرقم الضريبي للمدرسة"
+        DECIMAL netAmount "المبلغ الصافي بعد الخصم وإضافة الضريبة totalAmount - discountAmount..."
+        DECIMAL paidAmount "المبلغ المدفوع من الفاتورة"
+        DECIMAL remainingAmount "المبلغ المتبقي netAmount - paidAmount"
+        VARCHAR invoiceType "نوع الفاتورة رسوم دراسة رسوم نشاط رسوم كتب رسوم مواصلات رسوم زي مدر..."
+        VARCHAR invoiceCategory "فئة الفاتورة إجبارية اختيارية"
+        VARCHAR paymentStatus "حالة الدفع غير مدفوعة مدفوعة جزئياً مدفوعة كاملة ملغاة"
+        VARCHAR invoiceStatus "حالة الفاتورة مفتوحة مقفلة ملغاة منتهية"
+        VARCHAR paymentMethod "طريقة الدفع المفضلة تحويل بنكي كاش بطاقة ائتمان شيك"
+        BOOLEAN isLate "هل الفاتورة متأخرة تم تجاوز dueDate دون سداد كامل"
+        VARCHAR lateDays "عدد أيام التأخير تحسب تلقائياً"
+        DECIMAL lateFeePercentage "نسبة رسوم التأخير إذا لم تكن مضمنة في الفاتورة"
+        DECIMAL lateFeeAmount "قيمة رسوم التأخير المحسوبة"
+        VARCHAR installmentPlan "خطة التقسيط نعم/لا"
+        INT installmentCount "عدد الأقساط إن وجد"
+        VARCHAR currentInstallment "القسط الحالي المستحق"
+        BOOLEAN parentApprovalRequired "هل تتطلب موافقة ولي الأمر"
+        VARCHAR parentApprovalStatus "حالة موافقة ولي الأمر قيد الانتظار موافق مرفوض"
+        DATE parentApprovalDate "تاريخ الموافقة"
+        BOOLEAN sentToParent "هل تم إرسال الفاتورة لولي الأمر"
+        DATE parentNotifiedAt "تاريخ الإرسال"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    InvoiceItem {
+        INT itemId PK "بنود الفاتورة"
+        INT invoiceId FK "معرف الفاتورة FK StudentInvoice.invoiceId"
+        INT feeTypeId FK "معرف نوع الرسم FK FeeType.feeTypeId"
+        VARCHAR itemCode "كود البند من FeeType أو مخصص"
+        TEXT itemDescription "وصف بند الفاتورة مثال - رسوم الفصل الدراسي الأول - الصف الخامس"
+        INT quantity "الكمية مثل عدد الأشهر عدد الكتب عدد الحصص"
+        DECIMAL unitPrice "سعر الوحدة مثل سعر الكتاب سعر الشهر الدراسي"
+        DECIMAL totalPrice "السعر الإجمالي الكمية × سعر الوحدة - يُحسب آلياً"
+        DECIMAL discountPercentage "نسبة الخصم على هذا البند إن وجد"
+        DECIMAL discountAmount "مبلغ الخصم على هذا البند يحسب = totalPrice × discountPercentage/100"
+        DECIMAL priceAfterDiscount "السعر بعد الخصم totalPrice - discountAmount"
+        DECIMAL taxPercentage "نسبة الضريبة على هذا البند قد تختلف عن الفاتورة الأم"
+        DECIMAL taxAmount "مبلغ الضريبة على هذا البند"
+        DECIMAL netAmount "المبلغ الصافي للبند السعر بعد الخصم + الضريبة"
+        DATE dueDate "تاريخ الاستحقاق لهذا البند إذا اختلف عن تاريخ الفاتورة"
+        INT isPaid "هل البند مدفوع بالكامل"
+        DECIMAL paidAmount "المبلغ المدفوع لهذا البند جزئياً أو كلياً"
+        DECIMAL remainingAmount "المبلغ المتبقي على هذا البند"
+        VARCHAR paymentMethod "طريقة الدفع لهذا البند إذا اختلفت"
+        BOOLEAN isLate "هل البند متأخر عن السداد"
+        BOOLEAN lateFeeApplied "هل طُبّقت رسوم تأخير على هذا البند"
+        DECIMAL lateFeeAmount "مبلغ رسوم التأخير على هذا البند"
+        INT installmentNumber "رقم القسط إذا كان هذا البند يمثل قسطاً ضمن خطة تقسيط"
+        DECIMAL installmentTotal "إجمالي عدد الأقساط لهذه الفاتورة/البند"
+        BOOLEAN isWaived "هل البند معفى"
+        TEXT waiverReason "سبب الإعفاء"
+        DATE waiverDate "تاريخ الإعفاء"
+        VARCHAR status "حالة البند نشط مدفوع ملغي معفى"
+        TEXT notes "ملاحظات حول البند"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    Payment {
+        INT paymentId PK "المدفوعات"
+        INT accountId FK "معرف الحساب المالي FK StudentAccount.accountId"
+        INT studentId "معرف الطالب FK Student.studentId - للتكرار"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId - اختياري"
+        INT paymentNumber "رقم سند الدفع فريد يولد آلياً"
+        DATE paymentDate "تاريخ الدفع"
+        DATETIME paymentTime "وقت الدفع للدفعات الإلكترونية"
+        DECIMAL amount "المبلغ المدفوع"
+        VARCHAR currency "العملة SAR USD"
+        DECIMAL exchangeRate "سعر الصرف إن كانت العملة مختلفة عن العملة الأساسية"
+        DECIMAL convertedAmount "المبلغ بعد التحويل للعملة الأساسية"
+        VARCHAR paymentMethod "طريقة الدفع تحويل بنكي كاش بطاقة ائتمان شيك محفظة إلكترونية"
+        VARCHAR paymentType "نوع الدفع رسوم دراسية قسط غرامة تأخير تبرع أخرى"
+        VARCHAR bankName "اسم البنك للتحويلات البنكية"
+        INT bankTransactionId "رقم المعاملة البنكية Reference"
+        INT checkNumber "رقم الشيك إن وجد"
+        VARCHAR checkBank "بنك الشيك"
+        DATE checkDate "تاريخ الشيك"
+        DECIMAL creditCardLast4 "آخر 4 أرقام من البطاقة الائتمانية"
+        DECIMAL creditCardType "نوع البطاقة فيزا ماستركارد"
+        VARCHAR walletType "نوع المحفظة الإلكترونية STC Pay Apple Pay Google Pay"
+        VARCHAR payerName "اسم الدافع ولي الأمر أو الطالب"
+        VARCHAR payerType "نوع الدافع ولي أمر طالب جهة خارجية"
+        VARCHAR payerEmail "بريد الدافع الإلكتروني للإيصال"
+        INT receiptNumber "رقم الإيصال فريد يولد آلياً"
+        BOOLEAN receiptPrinted "هل تم طباعة الإيصال"
+        BOOLEAN receiptSentToEmail "هل تم إرسال الإيصال عبر البريد الإلكتروني"
+        DATE receiptEmailSentAt "تاريخ إرسال الإيصال"
+        VARCHAR paymentStatus "حالة الدفع معلق مؤكد ملغي فشل"
+        BOOLEAN isConfirmed "هل تم تأكيد الدفع تم وصوله فعلاً للحساب البنكي"
+        DATE confirmationDate "تاريخ التأكيد"
+        INT confirmedByUserId "معرف من قام بالتأكيد FK SystemUser.userId"
+        VARCHAR allocatedInvoices "الفواتير التي تم توزيع الدفع عليها JSON - invoiceId - allocatedAmount"
+        VARCHAR allocatedItems "البنود التي تم توزيع الدفع عليها JSON - itemId - allocatedAmount"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    FeeType {
+        INT feeTypeId PK "أنواع الرسوم"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        DECIMAL feeCode "رمز الرسم فريد داخل المدرسة"
+        DECIMAL feeNameAr "الاسم بالعربية مثال - رسوم دراسية"
+        DECIMAL feeNameEn "الاسم بالإنجليزية مثال - Tuition Fee"
+        DECIMAL feeCategory "فئة الرسم تعليمية خدمات أنشطة غرامات أخرى"
+        DECIMAL amount "المبلغ الافتراضي لهذا الرسم قبل الخصم"
+        VARCHAR currency "العملة"
+        VARCHAR billingFrequency "تكرار الفوترة شهري فصل دراسي سنوي لمرة واحدة"
+        BOOLEAN isTaxable "هل الرسم خاضع للضريبة"
+        DECIMAL taxPercentage "نسبة الضريبة إذا كان خاضعاً افتراضي 15"
+        BOOLEAN isMandatory "هل الرسم إجباري لجميع الطلاب"
+        BOOLEAN isOptional "هل الرسم اختياري يمكن إضافته بناءً على طلب الطالب"
+        BOOLEAN isDiscountable "هل يقبل خصماً"
+        DECIMAL discountPercentageAllowed "الحد الأقصى لنسبة الخصم المسموح بها"
+        BOOLEAN isRefundable "هل الرسم قابل للاسترداد في حالة الانسحاب"
+        DECIMAL refundPercentage "نسبة الاسترداد إذا كان قابلاً للاسترداد"
+        DATE refundCutoffDate "آخر موعد للانسحاب لاستحقاق الاسترداد"
+        BOOLEAN isRecurring "هل الرسم متكرر يتم فوترته تلقائياً كل فترة"
+        VARCHAR recurrenceType "نوع التكرار شهري فصل دراسي سنوي"
+        VARCHAR appliesToGrades "ينطبق على الصفوف JSON - قائمة بـ gradeLevelId"
+        VARCHAR appliesToNationalities "ينطبق على الجنسيات JSON - للرسوم الخاصة بجنسيات معينة"
+        VARCHAR appliesToStudentTypes "ينطبق على أنواع الطلاب جدد قدامى منتظمون منقولون"
+        BOOLEAN isActive "هل نوع الرسم مفعل"
+        DATE validFrom "تاريخ بدء صلاحية هذا المبلغ"
+        DATE validTo "تاريخ انتهاء صلاحية هذا المبلغ"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    Installment {
+        INT installmentId PK "الأقساط"
+        INT invoiceId FK "معرف الفاتورة المرتبطة FK StudentInvoice.invoiceId"
+        INT itemId FK "معرف بند الفاتورة المرتبط FK InvoiceItem.itemId - اختياري إذا كان ا..."
+        INT accountId FK "معرف الحساب المالي FK StudentAccount.accountId - للتكرار"
+        INT studentId "معرف الطالب FK Student.studentId - للتكرار"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT installmentNumber "رقم القسط 1 2 3 ..."
+        DECIMAL installmentTotal "إجمالي عدد الأقساط لهذه الفاتورة/البند"
+        DECIMAL installmentAmount "مبلغ هذا القسط"
+        VARCHAR currency "العملة"
+        DATE dueDate "تاريخ استحقاق هذا القسط"
+        DATE extendedDueDate "تاريخ الاستحقاق بعد التمديد إن وجد"
+        DECIMAL paidAmount "المبلغ المدفوع لهذا القسط 0 إذا لم يدفع"
+        DECIMAL remainingAmount "المبلغ المتبقي لهذا القسط installmentAmount - paidAmount"
+        DATE paymentDate "تاريخ دفع القسط آخر دفعة إن تم الدفع على دفعات"
+        VARCHAR paymentMethod "طريقة الدفع المستخدمة لهذا القسط"
+        VARCHAR paymentReference "رقم مرجع الدفع رقم السند رقم العملية البنكية"
+        VARCHAR installmentType "نوع القسط قسط منتظم قسط أول مقدم قسط أخير دفعة مقدم"
+        VARCHAR installmentStatus "حالة القسط غير مدفوع مدفوع كامل مدفوع جزئياً متأخر ملغي معاد جدولته"
+        BOOLEAN isLate "هل القسط متأخر عن السداد"
+        DATE lateDays "عدد أيام التأخير تحسب تلقائياً من dueDate إلى تاريخ اليوم أو تاريخ ..."
+        DECIMAL lateFeePercentage "نسبة رسوم التأخير المطبقة على هذا القسط حسب سياسة المدرسة"
+        DECIMAL lateFeeAmount "قيمة رسوم التأخير المحسوبة لهذا القسط"
+        INT lateFeePaid "هل تم دفع رسوم التأخير"
+        DATE lateFeePaymentDate "تاريخ دفع رسوم التأخير"
+        DECIMAL lateFeePaymentReference "مرجع دفع رسوم التأخير"
+        BOOLEAN isRescheduled "هل تمت إعادة جدولة هذا القسط"
+        DATE rescheduledDate "تاريخ إعادة الجدولة"
+        INT rescheduledByUserId "معرف من قام بإعادة الجدولة FK SystemUser.userId"
+        TEXT rescheduledReason "سبب إعادة الجدولة"
+        DATE newDueDate "تاريخ الاستحقاق الجديد بعد إعادة الجدولة"
+        BOOLEAN isWaived "هل تم إعفاء هذا القسط من السداد"
+        TEXT waiverReason "سبب الإعفاء"
+        DATE waiverDate "تاريخ الإعفاء"
+        INT waivedByUserId "معرف من اعتمد الإعفاء FK SystemUser.userId"
+        VARCHAR waiverApprovalDocument "مستند الإعفاء مسار ملف"
+        TEXT notes "ملاحظات حول هذا القسط مثل اتفاق خاص ظروف طارئة"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "تاريخ آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    AssetWarrantyContract {
+        DECIMAL contractValue PK "الضمان والعقود"
+        VARCHAR currency "العملة"
+        VARCHAR paymentTerms "شروط الدفع"
+    }
+
+    FinancialAuditArchive {
+        DECIMAL reportType PK "الأرشفة المالية"
+        VARCHAR fiscalYear "السنة المالية للتقرير"
+        DECIMAL totalAssetsValue "إجمالي قيم الأصول في هذا التقرير لقطة"
+        DECIMAL totalDepreciationValue "إجمالي الإهلاك في هذه الفترة"
+        VARCHAR filePath "مسار ملف التقرير المعتمد PDF/Excel"
+        BOOLEAN isReadOnly "دائماً True لمنع التعديل على البيانات المؤرشفة"
+    }
+
+    %% ===== Relationships =====
+    StudentAccount ||--o{ StudentInvoice : "معرف الحساب المالي للطالب"
+    StudentInvoice ||--o{ InvoiceItem : "معرف الفاتورة FK StudentI"
+    FeeType ||--o{ InvoiceItem : "معرف نوع الرسم FK FeeType"
+    StudentAccount ||--o{ Payment : "معرف الحساب المالي FK Stu"
+    StudentInvoice ||--o{ Installment : "معرف الفاتورة المرتبطة FK"
+    InvoiceItem ||--o{ Installment : "معرف بند الفاتورة المرتبط"
+    StudentAccount ||--o{ Installment : "معرف الحساب المالي FK Stu"</pre>
+    </details>
+  </div>
+
+  <div class="footer">
+    EduMS Enterprise © 2026 • ERD M5_Finance • Mermaid 10.9.1 Strict-Compliant • Independent Per-Module Diagram
+  </div>
+
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'default',
+    securityLevel: 'loose',
+    er: { fontSize: 13, diagramPadding: 30, entityPadding: 16, minEntityWidth: 200 },
+    fontFamily: 'Cairo, "Fira Code", sans-serif'
+  });
+
+  let fullRendered = false;
+  function renderSlim() { mermaid.run({ querySelector: '#diagram-slim' }); }
+  function renderFull() {
+    if (fullRendered) return;
+    fullRendered = true;
+    mermaid.run({ querySelector: '#diagram-full' });
+  }
+  // Initial: render slim only
+  renderSlim();
+
+  function switchView(view) {
+    document.getElementById('tab-slim').classList.toggle('active', view === 'slim');
+    document.getElementById('tab-full').classList.toggle('active', view === 'full');
+    document.getElementById('pane-slim').classList.toggle('active', view === 'slim');
+    document.getElementById('pane-full').classList.toggle('active', view === 'full');
+    if (view === 'full') renderFull();
+  }
+
+  function currentSource() {
+    const active = document.querySelector('.view-pane.active');
+    return active.querySelector('.source-code').innerText;
+  }
+  function copySource() {
+    navigator.clipboard.writeText(currentSource()).then(() => alert('✓ تم نسخ كود Mermaid'));
+  }
+  function downloadSource() {
+    const view = document.getElementById('pane-slim').classList.contains('active') ? 'slim' : 'full';
+    const blob = new Blob([currentSource()], { type: 'text/plain;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'ERD_M5_Finance_' + view + '.mmd';
+    a.click();
+  }
+  function downloadSvg() {
+    const active = document.querySelector('.view-pane.active');
+    const svg = active.querySelector('.mermaid svg');
+    if (!svg) { alert('المخطط لم يُحمَّل بعد'); return; }
+    const view = document.getElementById('pane-slim').classList.contains('active') ? 'slim' : 'full';
+    const blob = new Blob([svg.outerHTML], { type: 'image/svg+xml' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'ERD_M5_Finance_' + view + '.svg';
+    a.click();
+  }
+</script>
+
+</body>
+</html>

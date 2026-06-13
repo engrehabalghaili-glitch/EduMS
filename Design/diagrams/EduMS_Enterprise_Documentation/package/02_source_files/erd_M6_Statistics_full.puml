@@ -1,0 +1,476 @@
+@startuml M6_Statistics
+!define PK <b><color:red>PK</color></b>
+!define FK <i><color:blue>FK</color></i>
+skinparam linetype ortho
+skinparam class {
+  BackgroundColor #FEF3C7
+  BorderColor #92400E
+  ArrowColor #1E3A8A
+}
+hide methods
+
+entity "DashboardConfiguration" as DashboardConfiguration {
+  * configId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  kpiType : DECIMAL(5,2)
+  kpiCode : VARCHAR(50)
+  kpiNameAr : VARCHAR(200)
+  kpiNameEn : VARCHAR(200)
+  kpiDescription : TEXT
+  sourceModule : VARCHAR(200)
+  sourceTable : VARCHAR(200)
+  sourceField : VARCHAR(200)
+  aggregationMethod : INT
+  chartType : VARCHAR(50)
+  refreshInterval : VARCHAR(200)
+  targetValue : VARCHAR(200)
+  thresholdGreen : VARCHAR(200)
+  thresholdYellow : VARCHAR(200)
+  thresholdRed : VARCHAR(200)
+  alertEnabled : BOOLEAN
+  alertRecipients : VARCHAR(200)
+  isActive : BOOLEAN
+  displayOrder : VARCHAR(200)
+  dashboardId : BIGINT <<FK>>
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "KPI_Metrics" as KPI_Metrics {
+  * metricId : BIGINT <<PK>>
+  --
+  configId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  academicYearId : BIGINT <<FK>>
+  periodType : VARCHAR(50)
+  periodValue : VARCHAR(200)
+  periodStartDate : DATE
+  periodEndDate : DATE
+  actualValue : VARCHAR(200)
+  targetValue : VARCHAR(200)
+  previousValue : DECIMAL(5,2)
+  changePercentage : DECIMAL(5,2)
+  statusColor : VARCHAR(50)
+  calculationMethod : VARCHAR(200)
+  calculationDate : DATE
+  calculatedByUserId : BIGINT <<FK>>
+  dataSource : VARCHAR(200)
+  notes : TEXT
+  isVerified : BOOLEAN
+  verifiedByUserId : BIGINT <<FK>>
+  verifiedAt : VARCHAR(200)
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "TrendAnalysisResult" as TrendAnalysisResult {
+  * analysisId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  studyPeriod : VARCHAR(200)
+  startYear : VARCHAR(200)
+  endYear : VARCHAR(200)
+  kpiType : DECIMAL(5,2)
+  kpiCode : VARCHAR(50) <<FK>>
+  historicalValues : DATE
+  trendDirection : VARCHAR(200)
+  slope : VARCHAR(200)
+  intercept : VARCHAR(200)
+  correlationCoefficient : VARCHAR(200)
+  forecastedValue : VARCHAR(200)
+  forecastedValueNext : VARCHAR(200)
+  confidenceLevel : DECIMAL(5,2)
+  lowerBound : DECIMAL(5,2)
+  upperBound : DECIMAL(5,2)
+  forecastingMethod : VARCHAR(200)
+  analysisDate : DATE
+  analyzedByUserId : BIGINT <<FK>>
+  notes : TEXT
+  status : VARCHAR(50)
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "SchoolStatisticsDraft" as SchoolStatisticsDraft {
+  * draftId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  academicYearId : BIGINT <<FK>>
+  semesterId : BIGINT <<FK>>
+  periodType : VARCHAR(50)
+  periodValue : VARCHAR(200)
+  periodStartDate : DATE
+  periodEndDate : DATE
+  draftNumber : INT
+  draftVersion : INT
+  studentDataJson : VARCHAR(200)
+  staffDataJson : VARCHAR(200)
+  financialSummaryJson : VARCHAR(200)
+  assetSummaryJson : VARCHAR(200)
+  completenessPercentage : DECIMAL(5,2)
+  draftStatus : VARCHAR(50)
+  isLocked : BOOLEAN
+  lockedAt : DATE
+  lockedByUserId : BIGINT <<FK>>
+  lastSavedAt : DATE
+  savedByUserId : BIGINT <<FK>>
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "SubmittedStatistics" as SubmittedStatistics {
+  * submissionId : BIGINT <<PK>>
+  --
+  draftId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  academicYearId : BIGINT <<FK>>
+  submissionNumber : INT
+  submissionTimestamp : DATETIME
+  submissionMethod : VARCHAR(100)
+  submittedByUserId : BIGINT <<FK>>
+  directorSignature : VARCHAR(200)
+  directorSignatureDate : DATE
+  studentDataSnapshot : VARCHAR(200)
+  staffDataSnapshot : VARCHAR(200)
+  financialSummarySnapshot : VARCHAR(200)
+  assetSummarySnapshot : VARCHAR(200)
+  approvalStatus : VARCHAR(50)
+  reviewerNotes : TEXT
+  reviewDate : DATE
+  reviewedByUserId : BIGINT <<FK>>
+  rejectionReason : VARCHAR(200)
+  approvalDate : DATE
+  approvalCertificateNumber : INT
+  approvalCertificatePath : VARCHAR(200)
+  isFinal : BOOLEAN
+  isArchived : BOOLEAN
+  archivedAt : DATE
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "StatisticsUpdateHistory" as StatisticsUpdateHistory {
+  * historyId : BIGINT <<PK>>
+  --
+  draftId : BIGINT <<FK>>
+  submissionId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  changeType : INT
+  changeCategory : VARCHAR(50)
+  oldValue : VARCHAR(200)
+  newValue : VARCHAR(200)
+  changeDate : DATE
+  updateReason : DATE
+  supportingDocument : VARCHAR(200)
+  changedByUserId : BIGINT <<FK>>
+  isApproved : BOOLEAN
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "StatisticsArchive" as StatisticsArchive {
+  * archiveId : BIGINT <<PK>>
+  --
+  submissionId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  archivedYear : VARCHAR(200)
+  periodType : VARCHAR(50)
+  periodValue : VARCHAR(200)
+  archivedAt : DATE
+  archivedByUserId : BIGINT <<FK>>
+  finalDataSnapshot : VARCHAR(200)
+  studentSnapshot : VARCHAR(200)
+  staffSnapshot : VARCHAR(200)
+  financialSnapshot : VARCHAR(200)
+  assetSnapshot : VARCHAR(200)
+  retentionPeriod : VARCHAR(200)
+  retentionEndDate : DATE
+  isReadOnly : BOOLEAN
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "SystemReports" as SystemReports {
+  * reportId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  reportType : VARCHAR(50)
+  reportSubType : VARCHAR(50)
+  reportTitle : VARCHAR(200)
+  reportFrequency : VARCHAR(200)
+  periodStart : VARCHAR(200)
+  periodEnd : VARCHAR(200)
+  generationDate : DATETIME
+  generatedBy : DECIMAL(5,2)
+  generatedByUserId : BIGINT <<FK>>
+  fileFormat : VARCHAR(200)
+  filePath : VARCHAR(200)
+  fileSize : VARCHAR(200)
+  status : VARCHAR(50)
+  isPublished : BOOLEAN
+  publishedAt : DATE
+  publishedByUserId : BIGINT <<FK>>
+  viewCount : INT
+  lastViewedAt : DATE
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "ReportApprovals" as ReportApprovals {
+  * approvalId : BIGINT <<PK>>
+  --
+  reportId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  submissionDate : DATE
+  submittedByUserId : BIGINT <<FK>>
+  approvalStatus : VARCHAR(50)
+  reviewerId : BIGINT <<FK>>
+  reviewDate : DATE
+  comments : TEXT
+  rejectionReason : VARCHAR(200)
+  approvalDate : DATE
+  approvedByUserId : BIGINT <<FK>>
+  digitalSignature : VARCHAR(50)
+  certificateNumber : INT
+  certificatePath : VARCHAR(200)
+  isFinal : BOOLEAN
+  validUntil : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "ComparativeReport" as ComparativeReport {
+  * comparativeId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  reportNumber : INT
+  comparisonTitle : VARCHAR(200)
+  firstPeriodLabel : VARCHAR(200)
+  firstPeriodStart : VARCHAR(200)
+  firstPeriodEnd : VARCHAR(200)
+  secondPeriodLabel : VARCHAR(200)
+  secondPeriodStart : VARCHAR(200)
+  secondPeriodEnd : VARCHAR(200)
+  comparisonType : VARCHAR(50)
+  kpiCompared : VARCHAR(200)
+  comparisonData : VARCHAR(200)
+  autoInsights : VARCHAR(200)
+  summary : VARCHAR(200)
+  generationDate : DATE
+  generatedByUserId : BIGINT <<FK>>
+  fileFormat : VARCHAR(200)
+  filePath : VARCHAR(200)
+  fileSize : VARCHAR(200)
+  viewCount : INT
+  lastViewedAt : DATE
+  status : VARCHAR(50)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "FinancialSummaryReports" as FinancialSummaryReports {
+  * summaryId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  fiscalYear : VARCHAR(200)
+  reportDate : DATE
+  reportType : VARCHAR(50)
+  totalBookValue : VARCHAR(200)
+  totalDepreciation : VARCHAR(200)
+  totalAssetsCount : INT
+  totalAcquisitionCost : DATE
+  totalRevaluationGains : VARCHAR(200)
+  totalImpairmentLosses : VARCHAR(200)
+  totalRevenue : VARCHAR(200)
+  totalExpenses : VARCHAR(200)
+  netIncome : VARCHAR(200)
+  auditStatus : VARCHAR(50)
+  auditFirmName : VARCHAR(200)
+  auditorName : VARCHAR(200)
+  auditDate : DATE
+  auditorSignature : VARCHAR(200)
+  approvalStatus : VARCHAR(50)
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  filePath : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "ExternalComplianceReports" as ExternalComplianceReports {
+  * reportId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  reportNumber : INT
+  targetEntity : VARCHAR(200)
+  entityType : VARCHAR(50)
+  standardType : VARCHAR(50)
+  standardVersion : VARCHAR(200)
+  reportType : VARCHAR(50)
+  periodStart : VARCHAR(200)
+  periodEnd : VARCHAR(200)
+  generationDate : DATE
+  generatedByUserId : BIGINT <<FK>>
+  filePath : VARCHAR(200)
+  fileSize : VARCHAR(200)
+  submissionDate : DATETIME
+  submissionMethod : VARCHAR(100)
+  apiEndpoint : VARCHAR(500)
+  apiRequestId : BIGINT <<FK>>
+  receiptReference : VARCHAR(50)
+  receiptDate : DATE
+  receiptAttachment : VARCHAR(200)
+  submissionStatus : VARCHAR(50)
+  rejectionReason : VARCHAR(200)
+  resubmissionDate : DATE
+  isFinal : BOOLEAN
+  finalApprovalDate : DATE
+  finalApprovalNumber : INT
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "GapAnalysisReports" as GapAnalysisReports {
+  * analysisId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  analysisNumber : INT
+  analysisType : VARCHAR(50)
+  assetCategoryId : BIGINT <<FK>>
+  gradeLevelId : BIGINT <<FK>>
+  departmentId : BIGINT <<FK>>
+  requiredQty : INT
+  availableQty : INT
+  gapValue : VARCHAR(200)
+  gapPercentage : DECIMAL(5,2)
+  gapType : VARCHAR(50)
+  recommendation : VARCHAR(200)
+  priority : VARCHAR(200)
+  estimatedCost : DECIMAL(15,2)
+  analysisDate : DATE
+  analyzedByUserId : BIGINT <<FK>>
+  filePath : VARCHAR(200)
+  status : VARCHAR(50)
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "ReportsArchive" as ReportsArchive {
+  * archiveId : BIGINT <<PK>>
+  --
+  sourceReportType : VARCHAR(50)
+  sourceReportId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  archivedAt : DATE
+  archivedByUserId : BIGINT <<FK>>
+  retentionPeriod : VARCHAR(200)
+  retentionEndDate : DATE
+  storageLocation : VARCHAR(200)
+  filePath : VARCHAR(200)
+  fileSize : VARCHAR(200)
+  isReadOnly : BOOLEAN
+  disposalDate : DATE
+  disposalStatus : VARCHAR(50)
+  disposalMethod : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "ExceptionalStatistics" as ExceptionalStatistics {
+  * statisticsId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  academicYearId : BIGINT <<FK>>
+  reportNumber : INT
+  totalIncidents : VARCHAR(200)
+  totalClosureDays : VARCHAR(200)
+  totalDamageCost : DECIMAL(15,2)
+  totalAwardsCount : INT
+  totalParticipationsCount : INT
+  totalDeficitCount : INT
+  totalSurplusCount : INT
+  emergencySummary : VARCHAR(200)
+  closureSummary : VARCHAR(200)
+  awardSummary : VARCHAR(200)
+  generationDate : DATE
+  generatedByUserId : BIGINT <<FK>>
+  filePath : VARCHAR(200)
+  status : VARCHAR(50)
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+DashboardConfiguration ||--o{ KPI_Metrics : "configId"
+DashboardConfiguration ||--o{ TrendAnalysisResult : "kpiCode"
+SchoolStatisticsDraft ||--o{ SubmittedStatistics : "draftId"
+SchoolStatisticsDraft ||--o{ StatisticsUpdateHistory : "draftId"
+SubmittedStatistics ||--o{ StatisticsUpdateHistory : "submissionId"
+SubmittedStatistics ||--o{ StatisticsArchive : "submissionId"
+SystemReports ||--o{ ReportApprovals : "reportId"
+@enduml

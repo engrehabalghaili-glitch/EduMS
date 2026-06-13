@@ -1,0 +1,23 @@
+sequenceDiagram
+    actor MGR as مدير الأصول
+    participant API
+    participant DB
+    actor INSP as فريق الجرد
+    
+    MGR->>API: POST /inventory/plan
+    API->>DB: INSERT InventoryPlans
+    MGR->>INSP: تكليف بالجرد
+    loop لكل قسم
+        INSP->>API: مسح الباركودات
+        API->>DB: INSERT FieldInventoryLog
+    end
+    API->>API: مطابقة آلية
+    API->>DB: INSERT InventoryReconciliation
+    alt فروقات موجودة
+        API->>MGR: تنبيه فروقات
+        MGR->>API: تحقيق
+        MGR->>API: معالجة
+    end
+    MGR->>API: اعتماد النتائج
+    API->>DB: UPDATE Asset.lastInventoryDate
+    API->>DB: INSERT ComplianceAudit

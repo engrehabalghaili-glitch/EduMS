@@ -1,0 +1,41 @@
+flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P2_1((2.1<br/>التسجيل والقبول)):::proc
+    P2_2((2.2<br/>الحضور والغياب)):::proc
+    P2_3((2.3<br/>الدرجات والتقييم)):::proc
+    P2_4((2.4<br/>السلوك والإرشاد)):::proc
+    P2_5((2.5<br/>الأنشطة اللاصفية)):::proc
+    P2_6((2.6<br/>الترقية والنقل)):::proc
+    P2_7((2.7<br/>التخرج والأرشفة)):::proc
+    P2_8((2.8<br/>الصحة والنقل المدرسي)):::proc
+
+    DS_Application[("Application")]:::ds
+    DS_Student[("Student")]:::ds
+    DS_Enrollment[("Enrollment")]:::ds
+    DS_Attendance[("Attendance")]:::ds
+    DS_Grade[("Grade")]:::ds
+    DS_Discipline[("Discipline")]:::ds
+    DS_SchoolActivity[("SchoolActivity")]:::ds
+    DS_StudentHealthRecord[("StudentHealthRecord")]:::ds
+
+    Ext1 --> P2_1
+    P2_1 --> P2_2
+    P2_2 --> P2_3
+    P2_3 --> P2_4
+    P2_4 --> P2_5
+    P2_5 --> P2_6
+    P2_6 --> P2_7
+    P2_7 --> P2_8
+    P2_1 <--> DS_Application
+    P2_2 <--> DS_Student
+    P2_3 <--> DS_Enrollment
+    P2_4 <--> DS_Attendance
+    P2_5 <--> DS_Grade
+    P2_6 <--> DS_Discipline
+    P2_7 <--> DS_SchoolActivity
+    P2_8 <--> DS_StudentHealthRecord

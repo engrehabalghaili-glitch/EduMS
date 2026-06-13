@@ -1,0 +1,627 @@
+erDiagram
+    Office {
+        BIGINT officeId "PK"
+        VARCHAR(50) officeCode
+        VARCHAR(200) officeNameAr
+        VARCHAR(200) officeNameEn
+        VARCHAR(50) officeType
+        VARCHAR(50) level
+        BIGINT parentOfficeId "FK"
+        VARCHAR(200) region
+        VARCHAR more__fields "+27 fields"
+    }
+    School {
+        BIGINT schoolId "PK"
+        VARCHAR(50) schoolCode
+        VARCHAR(50) institutionalCode
+        VARCHAR(200) schoolNameAr
+        VARCHAR(200) schoolNameEn
+        VARCHAR(50) schoolType
+        VARCHAR(200) schoolGender
+        VARCHAR(50) educationLevel
+        VARCHAR more__fields "+34 fields"
+    }
+    SchoolLevel {
+        BIGINT schoolLevelId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) levelName
+        VARCHAR(50) levelOrder
+        DECIMAL(5,2) startGrade
+        DECIMAL(5,2) endGrade
+        VARCHAR(200) academicTrack
+        BOOLEAN isActive
+        VARCHAR more__fields "+9 fields"
+    }
+    SchoolContactInfo {
+        BIGINT contactInfoId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(20) officialPhone
+        VARCHAR(20) landline
+        INT faxNumber
+        VARCHAR(100) officialEmail
+        VARCHAR(100) alternativeEmail
+        VARCHAR(200) fullAddress
+        VARCHAR more__fields "+19 fields"
+    }
+    SchoolShiftSetting {
+        BIGINT shiftId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) shiftName
+        VARCHAR(50) shiftCode
+        TIME startTime
+        TIME endTime
+        VARCHAR(200) lessonDuration
+        VARCHAR(200) breakDuration
+        VARCHAR more__fields "+14 fields"
+    }
+    SchoolAcademicYear {
+        BIGINT academicYearId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) yearCode
+        VARCHAR(200) yearNameAr
+        VARCHAR(200) yearNameEn
+        DATE startDate
+        DATE endDate
+        DATE registrationStart
+        VARCHAR more__fields "+17 fields"
+    }
+    SchoolSemester {
+        BIGINT semesterId "PK"
+        BIGINT academicYearId "FK"
+        BIGINT schoolId "FK"
+        INT semesterNumber
+        VARCHAR(200) semesterOrder
+        VARCHAR(50) semesterType
+        VARCHAR(200) semesterNameAr
+        VARCHAR(200) semesterNameEn
+        VARCHAR more__fields "+24 fields"
+    }
+    SchoolCalendar {
+        BIGINT calendarId "PK"
+        BIGINT schoolId "FK"
+        BIGINT semesterId "FK"
+        VARCHAR(200) eventTitle
+        VARCHAR(50) eventType
+        VARCHAR(50) category
+        DATETIME startDate
+        DATETIME endDate
+        VARCHAR more__fields "+18 fields"
+    }
+    SchoolCurriculumPlan {
+        BIGINT curriculumPlanId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) planNameAr
+        VARCHAR(200) planNameEn
+        VARCHAR(50) planCode
+        BIGINT gradeLevelId "FK"
+        BIGINT schoolLevelId "FK"
+        BIGINT academicYearId "FK"
+        VARCHAR more__fields "+16 fields"
+    }
+    GradeCapacity {
+        BIGINT gradeCapacityId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT schoolLevelId "FK"
+        DECIMAL(5,2) gradeLevel
+        DECIMAL(5,2) gradeNameAr
+        DECIMAL(5,2) gradeNameEn
+        VARCHAR(200) maxStudentsPerClass
+        VARCHAR more__fields "+12 fields"
+    }
+    SchoolAuditLog {
+        BIGINT auditId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) tableName
+        BIGINT entityId "FK"
+        VARCHAR(50) operationType
+        VARCHAR(50) changeType
+        VARCHAR(200) oldValue
+        VARCHAR(200) newValue
+        VARCHAR more__fields "+13 fields"
+    }
+    ReferenceCoding {
+        BIGINT referenceId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) codeType
+        VARCHAR(50) codeKey
+        VARCHAR(50) codeValueAr
+        VARCHAR(50) codeValueEn
+        TEXT descriptionAr
+        TEXT descriptionEn
+        VARCHAR more__fields "+10 fields"
+    }
+    CommitmentDeviation {
+        BIGINT deviationId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        VARCHAR(50) type
+        VARCHAR(200) title
+        DATE deviationDate
+        TEXT description
+        VARCHAR(200) affectedItems
+        VARCHAR more__fields "+27 fields"
+    }
+    AcademicException {
+        BIGINT exceptionId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        VARCHAR(50) requestType
+        BIGINT studentId "FK"
+        VARCHAR(200) affectedGroup
+        VARCHAR(200) justification
+        VARCHAR(200) supportingDocuments
+        VARCHAR more__fields "+23 fields"
+    }
+    LeadershipNomination {
+        BIGINT nominationId "PK"
+        BIGINT schoolId "FK"
+        BIGINT officeId "FK"
+        BIGINT candidateEmployeeId "FK"
+        DATE candidateName
+        VARCHAR(200) targetPosition
+        VARCHAR(50) nominationType
+        VARCHAR(200) nominationSource
+        VARCHAR more__fields "+30 fields"
+    }
+    LeadershipAssignment {
+        BIGINT assignmentId "PK"
+        BIGINT nomineeId "FK"
+        BIGINT employeeId "FK"
+        BIGINT schoolId "FK"
+        BIGINT officeId "FK"
+        INT decisionNumber
+        DATE decisionDate
+        VARCHAR(200) decisionDocumentPath
+        VARCHAR more__fields "+18 fields"
+    }
+    OrganizationalStructure {
+        BIGINT structureId "PK"
+        BIGINT schoolId "FK"
+        BIGINT officeId "FK"
+        VARCHAR(200) structureName
+        INT versionNumber
+        DATE versionDate
+        TEXT description
+        VARCHAR(50) approvalStatus
+        VARCHAR more__fields "+12 fields"
+    }
+    SchoolDepartment {
+        BIGINT deptId "PK"
+        BIGINT schoolId "FK"
+        BIGINT structureId "FK"
+        VARCHAR(50) deptCode
+        VARCHAR(200) deptName
+        VARCHAR(200) deptNameEn
+        VARCHAR(50) deptType
+        BIGINT parentDeptId "FK"
+        VARCHAR more__fields "+16 fields"
+    }
+    OrganizationalPermission {
+        BIGINT permissionId "PK"
+        BIGINT schoolId "FK"
+        BIGINT departmentId "FK"
+        VARCHAR(200) positionTitle
+        VARCHAR(200) systemModule
+        VARCHAR(50) accessLevel
+        BOOLEAN canSign
+        VARCHAR(200) financialLimit
+        VARCHAR more__fields "+8 fields"
+    }
+    SchoolDecision {
+        BIGINT decisionId "PK"
+        BIGINT schoolId "FK"
+        INT decisionNumber
+        DATE decisionDate
+        VARCHAR(50) decisionType
+        VARCHAR(200) subject
+        VARCHAR(200) decisionText
+        DATE effectiveDate
+        VARCHAR more__fields "+13 fields"
+    }
+    OrganizationalManual {
+        BIGINT manualId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) manualVersion
+        DATE lastUpdated
+        VARCHAR(200) filePath
+        VARCHAR(200) fileName
+        VARCHAR(50) approvalRef
+        BIGINT approvedByOfficeId "FK"
+        VARCHAR more__fields "+11 fields"
+    }
+    Workflow {
+        BIGINT workflowId "PK"
+        VARCHAR(200) workflowName
+        TEXT description
+        VARCHAR(200) entityName
+        VARCHAR(200) totalSteps
+        BOOLEAN isActive
+        BOOLEAN isDefault
+        BIGINT createdByUserId "FK"
+        VARCHAR more__fields "+4 fields"
+    }
+    WorkflowStep {
+        BIGINT stepId "PK"
+        BIGINT workflowId "FK"
+        VARCHAR(200) stepOrder
+        VARCHAR(200) stepNameAr
+        VARCHAR(200) stepNameEn
+        VARCHAR(200) assignedToPosition
+        BIGINT assignedToRoleId "FK"
+        VARCHAR(200) slaHours
+        VARCHAR more__fields "+10 fields"
+    }
+    AnnualPlanDraft {
+        BIGINT draftId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT draftNumber
+        VARCHAR(200) draftVersion
+        VARCHAR(200) titleAr
+        VARCHAR(200) titleEn
+        VARCHAR(50) draftStatus
+        VARCHAR more__fields "+23 fields"
+    }
+    SubmittedPlan {
+        BIGINT planId "PK"
+        BIGINT draftId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT submissionNumber
+        DATETIME submissionTimestamp
+        VARCHAR(200) directorSignature
+        DATE signatureDate
+        VARCHAR more__fields "+29 fields"
+    }
+    ApprovedPlan {
+        BIGINT approvedPlanId "PK"
+        BIGINT submittedPlanId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT approvalReferenceNumber
+        DATE approvalReferenceDate
+        VARCHAR(200) approvalReferenceDocument
+        VARCHAR(200) approvalRefNo
+        VARCHAR more__fields "+24 fields"
+    }
+    PlanAmendment {
+        BIGINT amendmentId "PK"
+        BIGINT approvedPlanId "FK"
+        VARCHAR(50) amendmentType
+        INT amendmentNumber
+        VARCHAR(200) amendmentTitle
+        TEXT amendmentDescription
+        TEXT changesDescription
+        VARCHAR(200) affectedSections
+        VARCHAR more__fields "+24 fields"
+    }
+    AmendmentRequest {
+        BIGINT requestId "PK"
+        BIGINT approvedPlanId "FK"
+        BIGINT schoolId "FK"
+        INT requestNumber
+        DATE requestDate
+        VARCHAR(200) requestTitle
+        TEXT requestDescription
+        VARCHAR(200) reasonForRequest
+        VARCHAR more__fields "+33 fields"
+    }
+    ProgressReport {
+        BIGINT reportId "PK"
+        BIGINT approvedPlanId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) reportingPeriod
+        VARCHAR(200) periodSequence
+        DATE startDate
+        DATE endDate
+        INT reportNumber
+        VARCHAR more__fields "+37 fields"
+    }
+    FinalEvaluation {
+        BIGINT evaluationId "PK"
+        BIGINT approvedPlanId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        DATE evaluationDate
+        VARCHAR(200) evaluationPeriod
+        VARCHAR(200) goalsAnalysis
+        DECIMAL(5,2) goalsAchievementRate
+        VARCHAR more__fields "+36 fields"
+    }
+    HistoricalRecords {
+        BIGINT recordId "PK"
+        VARCHAR(200) tableName
+        BIGINT entityId "FK"
+        VARCHAR(50) operationType
+        VARCHAR(200) oldValue
+        VARCHAR(200) newValue
+        VARCHAR(200) fieldName
+        VARCHAR(200) oldFieldValue
+        VARCHAR more__fields "+28 fields"
+    }
+    ReceivedCirculars {
+        BIGINT circularId "PK"
+        BIGINT schoolId "FK"
+        BIGINT officeId "FK"
+        INT circularNumber
+        INT circularNumberFull
+        DATE circularDate
+        DATE circularDateGregorian
+        VARCHAR(200) subject
+        VARCHAR more__fields "+35 fields"
+    }
+    CircularsDocumentation {
+        BIGINT documentationId "PK"
+        BIGINT circularId "FK"
+        BIGINT schoolId "FK"
+        INT registrationNumber
+        DATE registrationDate
+        DATE registrationDateGregorian
+        BIGINT registeredByUserId "FK"
+        VARCHAR(200) registeredAt
+        VARCHAR more__fields "+24 fields"
+    }
+    CircularsInternalDistribution {
+        BIGINT distributionId "PK"
+        BIGINT circularId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) distributionType
+        BIGINT departmentId "FK"
+        BIGINT employeeId "FK"
+        VARCHAR(50) accessType
+        BOOLEAN isRequiredToAct
+        VARCHAR more__fields "+28 fields"
+    }
+    CircularsImplementationStatus {
+        BIGINT implementationId "PK"
+        BIGINT circularId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) currentStage
+        DATE stageStartDate
+        DECIMAL(5,2) progressRate
+        DECIMAL(5,2) previousProgressRate
+        DATE lastProgressUpdate
+        VARCHAR more__fields "+31 fields"
+    }
+    CircularsImplementationReports {
+        BIGINT reportId "PK"
+        BIGINT circularId "FK"
+        BIGINT schoolId "FK"
+        INT reportNumber
+        DATE reportDate
+        VARCHAR(50) reportType
+        VARCHAR(200) version
+        DATE submissionDate
+        VARCHAR more__fields "+31 fields"
+    }
+    ArchivedCirculars {
+        BIGINT archiveId "PK"
+        BIGINT circularId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) archiveCategory
+        VARCHAR(50) archiveSubCategory
+        DATE archiveDate
+        BIGINT archivedByUserId "FK"
+        VARCHAR(200) archivedAt
+        VARCHAR more__fields "+26 fields"
+    }
+    CircularsDeadlinesTracking {
+        BIGINT deadlineId "PK"
+        BIGINT circularId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) deadlineType
+        DATE deadlineDate
+        DATE originalDeadline
+        INT extensionCount
+        VARCHAR(200) extensionReason
+        VARCHAR more__fields "+26 fields"
+    }
+    ParentMeeting {
+        BIGINT meetingId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        VARCHAR(50) meetingType
+        INT meetingNumber
+        VARCHAR(200) title
+        VARCHAR(200) objectives
+        VARCHAR more__fields "+42 fields"
+    }
+    Notifications {
+        BIGINT notificationId "PK"
+        BIGINT schoolId "FK"
+        BIGINT userId "FK"
+        VARCHAR(50) userType
+        VARCHAR(50) notificationType
+        VARCHAR(50) category
+        VARCHAR(200) priority
+        VARCHAR(200) title
+        VARCHAR more__fields "+36 fields"
+    }
+    QuarterlyReport {
+        BIGINT reportId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT quarterNumber
+        INT reportNumber
+        DATE generationDate
+        VARCHAR(200) reportingPeriodStart
+        VARCHAR(200) reportingPeriodEnd
+        VARCHAR more__fields "+32 fields"
+    }
+    CalendarComplianceReport {
+        BIGINT reportId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        VARCHAR(200) academicMonth
+        INT monthNumber
+        INT reportNumber
+        DATE generationDate
+        INT plannedStudyDays
+        VARCHAR more__fields "+33 fields"
+    }
+    WeeklyProcessReport {
+        BIGINT reportId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        INT weekNumber
+        DATE startDate
+        DATE endDate
+        INT reportNumber
+        VARCHAR more__fields "+27 fields"
+    }
+    MonthlyDisciplineReport {
+        BIGINT reportId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        VARCHAR(200) month
+        VARCHAR(200) year
+        INT reportNumber
+        DATE generationDate
+        VARCHAR more__fields "+31 fields"
+    }
+    SemesterEndReport {
+        BIGINT reportId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        INT reportNumber
+        DATE generationDate
+        VARCHAR(200) semesterStatsJson
+        INT studentsStartCount
+        VARCHAR more__fields "+37 fields"
+    }
+    AnnualComprehensiveReport {
+        BIGINT reportId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT reportNumber
+        DATE generationDate
+        VARCHAR(200) executiveSummary
+        VARCHAR(200) schoolVision
+        VARCHAR(200) schoolMission
+        VARCHAR more__fields "+40 fields"
+    }
+    EducationalOutcomesReport {
+        BIGINT reportId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT reportNumber
+        DATE generationDate
+        DECIMAL(5,2) generalSuccessRates
+        DECIMAL(5,2) successRateByGrade
+        DECIMAL(5,2) successRateBySubject
+        VARCHAR more__fields "+31 fields"
+    }
+    Office ||--o{ Office : "parentOfficeId"
+    Office ||--o{ School : "officeId"
+    School ||--o{ SchoolLevel : "schoolId"
+    SchoolShiftSetting ||--o{ SchoolLevel : "defaultShiftId"
+    School ||--o{ SchoolContactInfo : "schoolId"
+    School ||--o{ SchoolShiftSetting : "schoolId"
+    School ||--o{ SchoolAcademicYear : "schoolId"
+    SchoolAcademicYear ||--o{ SchoolAcademicYear : "previousYearId"
+    SchoolAcademicYear ||--o{ SchoolSemester : "academicYearId"
+    School ||--o{ SchoolSemester : "schoolId"
+    School ||--o{ SchoolCalendar : "schoolId"
+    SchoolSemester ||--o{ SchoolCalendar : "semesterId"
+    School ||--o{ SchoolCurriculumPlan : "schoolId"
+    GradeCapacity ||--o{ SchoolCurriculumPlan : "gradeLevelId"
+    SchoolLevel ||--o{ SchoolCurriculumPlan : "schoolLevelId"
+    SchoolAcademicYear ||--o{ SchoolCurriculumPlan : "academicYearId"
+    SchoolSemester ||--o{ SchoolCurriculumPlan : "semesterId"
+    School ||--o{ GradeCapacity : "schoolId"
+    SchoolAcademicYear ||--o{ GradeCapacity : "academicYearId"
+    SchoolLevel ||--o{ GradeCapacity : "schoolLevelId"
+    School ||--o{ SchoolAuditLog : "schoolId"
+    School ||--o{ ReferenceCoding : "schoolId"
+    ReferenceCoding ||--o{ ReferenceCoding : "parentCodeId"
+    School ||--o{ CommitmentDeviation : "schoolId"
+    SchoolAcademicYear ||--o{ CommitmentDeviation : "academicYearId"
+    SchoolCalendar ||--o{ CommitmentDeviation : "linkedCalendarId"
+    ApprovedPlan ||--o{ CommitmentDeviation : "linkedPlanId"
+    School ||--o{ AcademicException : "schoolId"
+    SchoolAcademicYear ||--o{ AcademicException : "academicYearId"
+    Workflow ||--o{ AcademicException : "linkToWorkflowId"
+    School ||--o{ LeadershipNomination : "schoolId"
+    Office ||--o{ LeadershipNomination : "officeId"
+    LeadershipAssignment ||--o{ LeadershipNomination : "linkedAssignmentId"
+    LeadershipNomination ||--o{ LeadershipAssignment : "nomineeId"
+    School ||--o{ LeadershipAssignment : "schoolId"
+    Office ||--o{ LeadershipAssignment : "officeId"
+    School ||--o{ OrganizationalStructure : "schoolId"
+    Office ||--o{ OrganizationalStructure : "officeId"
+    School ||--o{ SchoolDepartment : "schoolId"
+    OrganizationalStructure ||--o{ SchoolDepartment : "structureId"
+    SchoolDepartment ||--o{ SchoolDepartment : "parentDeptId"
+    School ||--o{ OrganizationalPermission : "schoolId"
+    SchoolDepartment ||--o{ OrganizationalPermission : "departmentId"
+    School ||--o{ SchoolDecision : "schoolId"
+    Office ||--o{ SchoolDecision : "approvedByOfficeId"
+    Workflow ||--o{ SchoolDecision : "linkedWorkflowId"
+    School ||--o{ OrganizationalManual : "schoolId"
+    Office ||--o{ OrganizationalManual : "approvedByOfficeId"
+    Workflow ||--o{ WorkflowStep : "workflowId"
+    School ||--o{ AnnualPlanDraft : "schoolId"
+    SchoolAcademicYear ||--o{ AnnualPlanDraft : "academicYearId"
+    AnnualPlanDraft ||--o{ SubmittedPlan : "draftId"
+    School ||--o{ SubmittedPlan : "schoolId"
+    SchoolAcademicYear ||--o{ SubmittedPlan : "academicYearId"
+    ApprovedPlan ||--o{ SubmittedPlan : "approvedPlanId"
+    SubmittedPlan ||--o{ ApprovedPlan : "submittedPlanId"
+    School ||--o{ ApprovedPlan : "schoolId"
+    SchoolAcademicYear ||--o{ ApprovedPlan : "academicYearId"
+    Office ||--o{ ApprovedPlan : "approvedByOfficeId"
+    ApprovedPlan ||--o{ PlanAmendment : "approvedPlanId"
+    AmendmentRequest ||--o{ PlanAmendment : "linkedToRequestId"
+    ApprovedPlan ||--o{ AmendmentRequest : "approvedPlanId"
+    School ||--o{ AmendmentRequest : "schoolId"
+    Office ||--o{ AmendmentRequest : "assignedToOfficeId"
+    PlanAmendment ||--o{ AmendmentRequest : "linkedToAmendmentId"
+    ApprovedPlan ||--o{ ProgressReport : "approvedPlanId"
+    School ||--o{ ProgressReport : "schoolId"
+    ApprovedPlan ||--o{ FinalEvaluation : "approvedPlanId"
+    School ||--o{ FinalEvaluation : "schoolId"
+    SchoolAcademicYear ||--o{ FinalEvaluation : "academicYearId"
+    Office ||--o{ FinalEvaluation : "approvedByOfficeId"
+    School ||--o{ ReceivedCirculars : "schoolId"
+    Office ||--o{ ReceivedCirculars : "officeId"
+    ReceivedCirculars ||--o{ CircularsDocumentation : "circularId"
+    School ||--o{ CircularsDocumentation : "schoolId"
+    ReceivedCirculars ||--o{ CircularsInternalDistribution : "circularId"
+    School ||--o{ CircularsInternalDistribution : "schoolId"
+    SchoolDepartment ||--o{ CircularsInternalDistribution : "departmentId"
+    ReceivedCirculars ||--o{ CircularsImplementationStatus : "circularId"
+    School ||--o{ CircularsImplementationStatus : "schoolId"
+    SchoolDepartment ||--o{ CircularsImplementationStatus : "responsibleDepartmentId"
+    ReceivedCirculars ||--o{ CircularsImplementationReports : "circularId"
+    School ||--o{ CircularsImplementationReports : "schoolId"
+    ReceivedCirculars ||--o{ ArchivedCirculars : "circularId"
+    School ||--o{ ArchivedCirculars : "schoolId"
+    ReceivedCirculars ||--o{ CircularsDeadlinesTracking : "circularId"
+    School ||--o{ CircularsDeadlinesTracking : "schoolId"
+    School ||--o{ ParentMeeting : "schoolId"
+    SchoolAcademicYear ||--o{ ParentMeeting : "academicYearId"
+    SchoolSemester ||--o{ ParentMeeting : "semesterId"
+    GradeCapacity ||--o{ ParentMeeting : "gradeLevelId"
+    School ||--o{ Notifications : "schoolId"
+    School ||--o{ QuarterlyReport : "schoolId"
+    SchoolAcademicYear ||--o{ QuarterlyReport : "academicYearId"
+    School ||--o{ CalendarComplianceReport : "schoolId"
+    SchoolAcademicYear ||--o{ CalendarComplianceReport : "academicYearId"
+    School ||--o{ WeeklyProcessReport : "schoolId"
+    SchoolAcademicYear ||--o{ WeeklyProcessReport : "academicYearId"
+    SchoolSemester ||--o{ WeeklyProcessReport : "semesterId"
+    School ||--o{ MonthlyDisciplineReport : "schoolId"
+    SchoolAcademicYear ||--o{ MonthlyDisciplineReport : "academicYearId"
+    SchoolSemester ||--o{ MonthlyDisciplineReport : "semesterId"
+    School ||--o{ SemesterEndReport : "schoolId"
+    SchoolAcademicYear ||--o{ SemesterEndReport : "academicYearId"
+    SchoolSemester ||--o{ SemesterEndReport : "semesterId"
+    School ||--o{ AnnualComprehensiveReport : "schoolId"
+    SchoolAcademicYear ||--o{ AnnualComprehensiveReport : "academicYearId"
+    School ||--o{ EducationalOutcomesReport : "schoolId"
+    SchoolAcademicYear ||--o{ EducationalOutcomesReport : "academicYearId"

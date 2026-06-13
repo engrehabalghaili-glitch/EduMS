@@ -1,0 +1,25 @@
+sequenceDiagram
+    actor U as المستخدم
+    participant UI
+    participant AUTH as Auth Service
+    participant DB
+    participant TOKEN as JWT Service
+    
+    U->>UI: إدخال username + password
+    UI->>AUTH: POST /login
+    AUTH->>DB: SELECT SystemUser
+    DB-->>AUTH: hashed_password
+    AUTH->>AUTH: bcrypt.compare()
+    alt نجاح
+        AUTH->>DB: SELECT UserRole + RolePermission
+        DB-->>AUTH: roles + permissions
+        AUTH->>TOKEN: generateJWT(claims)
+        TOKEN-->>AUTH: token
+        AUTH->>DB: INSERT UserActivityLog
+        AUTH-->>UI: token + permissions
+        UI->>U: مرحبا
+    else فشل
+        AUTH->>DB: INSERT FailedLoginAttempt
+        AUTH-->>UI: 401 Unauthorized
+        UI->>U: خطأ
+    end

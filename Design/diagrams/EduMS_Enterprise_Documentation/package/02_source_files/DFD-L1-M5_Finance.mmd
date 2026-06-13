@@ -1,0 +1,29 @@
+flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P5_1((5.1<br/>إنشاء الحسابات)):::proc
+    P5_2((5.2<br/>إصدار الفواتير)):::proc
+    P5_3((5.3<br/>تحصيل المدفوعات)):::proc
+    P5_4((5.4<br/>إدارة الأقساط)):::proc
+    P5_5((5.5<br/>التقارير المالية)):::proc
+
+    DS_StudentAccount[("StudentAccount")]:::ds
+    DS_StudentInvoice[("StudentInvoice")]:::ds
+    DS_InvoiceItem[("InvoiceItem")]:::ds
+    DS_Payment[("Payment")]:::ds
+    DS_Installment[("Installment")]:::ds
+
+    Ext1 --> P5_1
+    P5_1 --> P5_2
+    P5_2 --> P5_3
+    P5_3 --> P5_4
+    P5_4 --> P5_5
+    P5_1 <--> DS_StudentAccount
+    P5_2 <--> DS_StudentInvoice
+    P5_3 <--> DS_InvoiceItem
+    P5_4 <--> DS_Payment
+    P5_5 <--> DS_Installment

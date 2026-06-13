@@ -1,0 +1,18 @@
+stateDiagram-v2
+    [*] --> Draft
+    Draft --> Issued
+    Issued --> PartiallyPaid : دفعة جزئية
+    Issued --> Paid : دفع كامل
+    Issued --> Overdue : تأخر السداد
+    PartiallyPaid --> Paid
+    PartiallyPaid --> Overdue
+    Overdue --> InCollection : إحالة للتحصيل
+    InCollection --> Paid
+    InCollection --> Written_off
+    Paid --> Refunded : استرداد
+    Refunded --> [*]
+    Paid --> Archived
+    Written_off --> Archived
+    Draft --> Cancelled
+    Cancelled --> [*]
+    Archived --> [*]

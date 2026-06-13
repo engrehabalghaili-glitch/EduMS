@@ -1,0 +1,1268 @@
+erDiagram
+    Employee {
+        BIGINT employeeId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) employeeCode
+        BIGINT nationalId "FK"
+        VARCHAR(50) nationalIdType
+        DATE nationalIdExpiryDate
+        INT passportNumber
+        DATE passportExpiryDate
+        INT residenceNumber
+        DATE residenceExpiryDate
+        VARCHAR(200) residenceSponsor
+        VARCHAR(200) firstNameAr
+        VARCHAR(200) fatherNameAr
+        VARCHAR(200) grandfatherNameAr
+        VARCHAR(200) familyNameAr
+        VARCHAR(200) fullNameAr
+        VARCHAR(200) firstNameEn
+        VARCHAR(200) fatherNameEn
+        VARCHAR(200) grandfatherNameEn
+        VARCHAR(200) familyNameEn
+        VARCHAR(200) fullNameEn
+        VARCHAR(200) fullNameArNormalized
+        VARCHAR(200) fullNameEnNormalized
+        VARCHAR(200) gender
+        DATE birthDate
+        VARCHAR(200) birthPlace
+        VARCHAR(200) nationality
+        VARCHAR(50) maritalStatus
+        INT numberOfDependents
+        INT numberOfChildren
+        VARCHAR(200) spouseName
+        VARCHAR(20) spousePhone
+        VARCHAR(200) emergencyContactName
+        VARCHAR(20) emergencyContactPhone
+        VARCHAR(200) emergencyContactRelation
+        VARCHAR(50) bloodType
+        BOOLEAN hasSpecialNeeds
+        TEXT specialNeedsDetails
+        VARCHAR(200) medicalConditions
+        VARCHAR(200) allergies
+        VARCHAR(20) phonePrimary
+        VARCHAR(20) phoneSecondary
+        VARCHAR(100) emailPersonal
+        VARCHAR(100) emailOfficial
+        VARCHAR(200) address
+        VARCHAR(200) city
+        VARCHAR(200) district
+        VARCHAR(200) street
+        INT buildingNumber
+        INT unitNumber
+        VARCHAR(100) postalCode
+        INT additionalNumber
+        VARCHAR(200) profilePhoto
+        VARCHAR(200) idCardImage
+        VARCHAR(200) passportImage
+        VARCHAR(50) contractType
+        VARCHAR(50) employeeType
+        VARCHAR(50) category
+        BIGINT departmentId "FK"
+        VARCHAR(200) jobTitle
+        DECIMAL(5,2) jobGrade
+        VARCHAR(200) jobRank
+        VARCHAR(200) specialization
+        BOOLEAN qualification
+        VARCHAR(200) qualificationSource
+        VARCHAR(200) graduationYear
+        DECIMAL(5,2) graduationGrade
+        INT experienceYears
+        VARCHAR(200) previousEmployer
+        DATE hireDate
+        DATE startDate
+        DATE endDate
+        VARCHAR(50) employmentStatus
+        VARCHAR(50) statusReason
+        DATE statusDate
+        BOOLEAN isActive
+        BOOLEAN canLogin
+        VARCHAR(200) portalUsername
+        VARCHAR(200) portalPasswordHash
+        DATE lastLoginDate
+        VARCHAR(200) lastLoginIp
+        BOOLEAN twoFactorEnabled
+        VARCHAR(200) preferredLanguage
+        VARCHAR(200) notificationPreference
+        VARCHAR(200) bankName
+        INT bankAccountNumber
+        VARCHAR(50) bankIban
+        INT bankAccountName
+        BOOLEAN hasDrivingLicense
+        INT drivingLicenseNumber
+        DATE drivingLicenseExpiry
+        BOOLEAN hasCar
+        INT carPlateNumber
+        VARCHAR(200) parkingPermit
+        VARCHAR(200) dataSource
+        BIGINT importBatchId "FK"
+        VARCHAR(50) verificationStatus
+        BIGINT verifiedByUserId "FK"
+        DATE verificationDate
+        TEXT verificationNotes
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+        DATE deletedAt
+        BIGINT deletedByUserId "FK"
+    }
+    AppointmentDecision {
+        BIGINT decisionId "PK"
+        BIGINT employeeId "FK"
+        INT decisionNumber
+        DATE decisionDate
+        DATE decisionDateGregorian
+        VARCHAR(200) decisionSource
+        VARCHAR(50) decisionType
+        VARCHAR(200) jobTitle
+        DECIMAL(5,2) jobGrade
+        VARCHAR(200) jobRank
+        BIGINT departmentId "FK"
+        VARCHAR(50) employmentType
+        VARCHAR(50) contractType
+        DATE startDate
+        VARCHAR(200) probationPeriod
+        DATE probationEndDate
+        DECIMAL(15,2) salaryAmount
+        TEXT allowanceDetails
+        VARCHAR(200) otherBenefits
+        VARCHAR(200) attachmentPath
+        VARCHAR(200) attachmentName
+        VARCHAR(50) attachmentType
+        VARCHAR(200) approvedBy
+        VARCHAR(200) approvedByName
+        VARCHAR(200) approvedByTitle
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    EmployeeDocuments {
+        BIGINT documentId "PK"
+        BIGINT employeeId "FK"
+        VARCHAR(50) documentType
+        VARCHAR(50) documentSubType
+        VARCHAR(200) documentName
+        INT documentNumber
+        BOOLEAN issuingAuthority
+        BOOLEAN issuingCountry
+        DATE issueDate
+        DATE expiryDate
+        DATE isExpiryRequired
+        BOOLEAN expiryReminderSent
+        DATE expiryReminderDate
+        VARCHAR(200) filePath
+        VARCHAR(200) fileName
+        VARCHAR(200) fileSize
+        VARCHAR(50) fileType
+        VARCHAR(200) fileHash
+        VARCHAR(200) thumbnailPath
+        TEXT description
+        VARCHAR(200) tags
+        BOOLEAN isRequired
+        BOOLEAN isVerified
+        BIGINT verifiedByUserId "FK"
+        DATE verificationDate
+        TEXT verificationNotes
+        VARCHAR(200) rejectionReason
+        VARCHAR(50) status
+        VARCHAR(50) accessLevel
+        BOOLEAN isConfidential
+        VARCHAR(200) sharedWith
+        INT downloadCount
+        DATE lastDownloadedAt
+        BIGINT lastDownloadedByUserId "FK"
+        BOOLEAN isArchived
+        DATE archivedAt
+        BIGINT archivedByUserId "FK"
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    EmployeeInventoryCustody {
+        BIGINT custodyId "PK"
+        BIGINT employeeId "FK"
+        BIGINT assetId "FK"
+        VARCHAR(50) itemType
+        VARCHAR(200) itemName
+        TEXT itemDescription
+        VARCHAR(200) itemBrand
+        VARCHAR(200) itemModel
+        VARCHAR(50) itemSerial
+        VARCHAR(50) itemCode
+        VARCHAR(200) itemColor
+        VARCHAR(200) estimatedValue
+        VARCHAR(200) conditionAtHandover
+        DATE handoverDate
+        TEXT handoverNotes
+        BIGINT issuedByUserId "FK"
+        BIGINT receivedByUserId "FK"
+        VARCHAR(200) receiptSignature
+        VARCHAR(200) receiptFormPath
+        DATE expectedReturnDate
+        DATE actualReturnDate
+        VARCHAR(200) conditionAtReturn
+        TEXT returnNotes
+        BIGINT returnedToUserId "FK"
+        VARCHAR(200) returnReceiptSignature
+        BOOLEAN isReturned
+        BOOLEAN isDamaged
+        TEXT damageDescription
+        DATE damageDate
+        BIGINT damageReportedByUserId "FK"
+        VARCHAR(200) damagePhotos
+        DECIMAL(15,2) penaltyAmount
+        VARCHAR(50) penaltyStatus
+        BOOLEAN isLost
+        DATE lostDate
+        TEXT lostNotes
+        BOOLEAN replacementRequired
+        DATE replacementDate
+        BIGINT replacementCustodyId "FK"
+        VARCHAR(50) status
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    StaffCustody {
+        BIGINT staffCustodyId "PK"
+        BIGINT employeeId "FK"
+        VARCHAR(200) custodySummary
+        INT totalItems
+        VARCHAR(200) totalEstimatedValue
+        DATE issueDate
+        DATE lastUpdateDate
+        VARCHAR(50) custodyStatus
+        DATE clearanceDate
+        BIGINT clearedByUserId "FK"
+        TEXT clearanceNotes
+        VARCHAR(200) documentPath
+        VARCHAR(200) documentName
+        DATE documentUploadedAt
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    EmployeeAttendance {
+        BIGINT attendanceId "PK"
+        BIGINT employeeId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        DATE attendanceDate
+        VARCHAR(200) dayOfWeek
+        BIGINT shiftId "FK"
+        VARCHAR(200) expectedCheckIn
+        VARCHAR(200) expectedCheckOut
+        TIME checkInTime
+        TIME checkOutTime
+        VARCHAR(200) checkInMethod
+        VARCHAR(200) checkOutMethod
+        BIGINT deviceId "FK"
+        VARCHAR(200) deviceName
+        BOOLEAN locationVerified
+        VARCHAR(200) checkInLocation
+        VARCHAR(200) checkOutLocation
+        VARCHAR(200) checkInIP
+        VARCHAR(200) checkOutIP
+        VARCHAR(200) checkInPhoto
+        VARCHAR(200) checkOutPhoto
+        VARCHAR(50) status
+        VARCHAR(200) lateMinutes
+        VARCHAR(200) earlyDepartureMinutes
+        TIME overtimeMinutes
+        TIME overtimeRate
+        TIME isOvertimeApproved
+        BIGINT overtimeApprovedByUserId "FK"
+        VARCHAR(200) totalWorkHours
+        VARCHAR(200) breakHours
+        VARCHAR(200) netWorkHours
+        BOOLEAN isExcused
+        BIGINT excuseId "FK"
+        VARCHAR(200) excuseDocument
+        BIGINT excuseApprovedByUserId "FK"
+        DATE excuseApprovedAt
+        VARCHAR(200) absenceReason
+        VARCHAR(50) absenceType
+        BOOLEAN isHoliday
+        BOOLEAN isWeekend
+        BOOLEAN isWorkingDay
+        BIGINT replacementEmployeeId "FK"
+        TEXT notes
+        BIGINT recordedById "FK"
+        BIGINT verifiedById "FK"
+        VARCHAR(200) verifiedAt
+        BOOLEAN isOverridden
+        VARCHAR(200) overrideReason
+        BIGINT overriddenByUserId "FK"
+        VARCHAR(200) overrideAt
+        VARCHAR(200) previousCheckIn
+        VARCHAR(200) previousCheckOut
+        BOOLEAN isSyncedWithPayroll
+        VARCHAR(200) syncedAt
+        BIGINT payrollId "FK"
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    TeacherSchedule {
+        BIGINT scheduleId "PK"
+        BIGINT teacherId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) dayOfWeek
+        BIGINT periodId "FK"
+        INT periodNumber
+        BIGINT courseId "FK"
+        BIGINT sectionId "FK"
+        BIGINT gradeLevelId "FK"
+        BIGINT classroomId "FK"
+        BOOLEAN isSubstitute
+        BIGINT originalTeacherId "FK"
+        DATE substituteDate
+        VARCHAR(200) substituteReason
+        BOOLEAN isActive
+        BOOLEAN isCancelled
+        VARCHAR(200) cancellationReason
+        DATE cancelledAt
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    EmployeePayroll {
+        BIGINT payrollId "PK"
+        BIGINT employeeId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) payrollMonth
+        VARCHAR(200) payrollYear
+        DECIMAL(15,2) payrollPeriod
+        DECIMAL(15,2) payrollCode
+        DATE generationDate
+        DATE paymentDate
+        DECIMAL(15,2) basicSalary
+        DECIMAL(15,2) contractualSalary
+        VARCHAR(200) positionAllowance
+        VARCHAR(200) transportationAllowance
+        VARCHAR(200) housingAllowance
+        VARCHAR(200) communicationAllowance
+        VARCHAR(200) foodAllowance
+        VARCHAR(200) educationAllowance
+        VARCHAR(200) professionalAllowance
+        VARCHAR(200) dangerAllowance
+        TIME overtimeAmount
+        TIME overtimeHours
+        TIME overtimeRate
+        DECIMAL(15,2) bonusAmount
+        VARCHAR(200) bonusReason
+        DECIMAL(15,2) incentiveAmount
+        VARCHAR(200) otherEarnings
+        VARCHAR(200) totalEarnings
+        VARCHAR(200) socialInsuranceDeduction
+        INT socialInsuranceNumber
+        VARCHAR(200) taxDeduction
+        BIGINT taxId "FK"
+        VARCHAR(200) absenceDeduction
+        VARCHAR(200) lateDeduction
+        VARCHAR(200) penaltyDeduction
+        VARCHAR(200) loanDeduction
+        VARCHAR(200) advanceDeduction
+        VARCHAR(200) healthInsuranceDeduction
+        VARCHAR(200) otherDeductions
+        VARCHAR(200) totalDeductions
+        DECIMAL(15,2) netSalary
+        VARCHAR(200) bankName
+        INT bankAccountNumber
+        VARCHAR(50) bankIban
+        VARCHAR(50) transferReference
+        DATE transferDate
+        VARCHAR(50) transferStatus
+        VARCHAR(200) paymentMethod
+        INT checkNumber
+        BOOLEAN receiptIssued
+        INT receiptNumber
+        VARCHAR(200) receiptPath
+        DECIMAL(15,2) status
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        TEXT approvalNotes
+        BIGINT paidByUserId "FK"
+        DATE paidAt
+        DECIMAL(15,2) attendanceSummary
+        DATE attendanceFromDate
+        DATE attendanceToDate
+        INT workingDays
+        VARCHAR(200) actualWorkingDays
+        VARCHAR(200) absenceDays
+        VARCHAR(200) lateDays
+        TEXT notes
+        BIGINT previousPayrollId "FK"
+        BOOLEAN isAdjusted
+        VARCHAR(200) adjustmentReason
+        DATE adjustedAt
+        BIGINT adjustedByUserId "FK"
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    EmployeeLeave {
+        BIGINT leaveId "PK"
+        BIGINT employeeId "FK"
+        DECIMAL(15,2) leaveType
+        VARCHAR(50) leaveSubType
+        BIGINT academicYearId "FK"
+        DATE requestDate
+        DATE startDate
+        DATE endDate
+        INT totalDays
+        VARCHAR(200) actualDays
+        DATE returnDate
+        DATE actualReturnDate
+        VARCHAR(200) reason
+        TEXT description
+        VARCHAR(200) attachmentPath
+        VARCHAR(200) attachmentName
+        VARCHAR(200) emergencyContact
+        VARCHAR(20) emergencyPhone
+        VARCHAR(200) workHandover
+        BIGINT handoverToEmployeeId "FK"
+        TEXT handoverNotes
+        VARCHAR(50) status
+        BIGINT reviewedByUserId "FK"
+        DATE reviewDate
+        TEXT reviewNotes
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        TEXT approvalNotes
+        VARCHAR(200) rejectionReason
+        BIGINT isPaid "FK"
+        DECIMAL(15,2) paidPercentage
+        DECIMAL(15,2) salaryDeduction
+        DECIMAL(15,2) balanceBefore
+        DECIMAL(15,2) balanceAfter
+        DECIMAL(15,2) consumedFromBalance
+        BIGINT leaveBalanceId "FK"
+        BOOLEAN isDeducted
+        VARCHAR(200) attendanceIds
+        BOOLEAN isLinkedToAttendance
+        BIGINT linkedByUserId "FK"
+        DATE linkedAt
+        BOOLEAN isExpired
+        DATE expiredAt
+        BOOLEAN isAutoApproved
+        VARCHAR(200) autoApprovalRule
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    PerformanceReview {
+        BIGINT reviewId "PK"
+        BIGINT employeeId "FK"
+        BIGINT reviewerId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        VARCHAR(200) reviewPeriod
+        DATE reviewDate
+        VARCHAR(50) reviewType
+        VARCHAR(200) evaluationMethod
+        VARCHAR(200) criteria
+        DECIMAL(5,2) overallScore
+        VARCHAR(200) overallRating
+        VARCHAR(200) strengths
+        VARCHAR(200) improvementAreas
+        VARCHAR(200) achievements
+        VARCHAR(200) challenges
+        VARCHAR(200) goals
+        VARCHAR(200) futureGoals
+        VARCHAR(200) developmentPlan
+        VARCHAR(200) trainingNeeds
+        VARCHAR(200) promotionRecommendation
+        VARCHAR(200) promotionTo
+        DECIMAL(15,2) salaryIncrease
+        VARCHAR(200) bonusRecommendation
+        DECIMAL(15,2) bonusAmount
+        VARCHAR(200) selfEvaluation
+        DECIMAL(5,2) selfEvaluationScore
+        TEXT selfEvaluationNotes
+        TEXT reviewerComments
+        TEXT employeeComments
+        BOOLEAN employeeAcknowledged
+        DATE acknowledgedAt
+        VARCHAR(200) acknowledgedIP
+        VARCHAR(50) status
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        TEXT approvalNotes
+        BOOLEAN isFinal
+        BIGINT previousReviewId "FK"
+        VARCHAR(200) attachments
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    EmployeeViolations {
+        BIGINT violationId "PK"
+        BIGINT employeeId "FK"
+        BIGINT reportedByUserId "FK"
+        VARCHAR(200) reportedByRole
+        DATE violationDate
+        TIME violationTime
+        DATE reportedDate
+        VARCHAR(50) violationType
+        VARCHAR(50) violationCategory
+        VARCHAR(50) severityLevel
+        TEXT description
+        VARCHAR(200) location
+        VARCHAR(200) witnesses
+        VARCHAR(200) evidence
+        BOOLEAN previousWarnings
+        VARCHAR(200) previousViolationIds
+        VARCHAR(200) policyViolated
+        VARCHAR(200) policySection
+        VARCHAR(200) action
+        TEXT actionDetails
+        DATE actionDate
+        BIGINT actionByUserId "FK"
+        BIGINT actionApprovedByUserId "FK"
+        DATE actionApprovalDate
+        DECIMAL(15,2) penaltyAmount
+        VARCHAR(200) penaltyCurrency
+        DECIMAL(15,2) penaltyPercentage
+        BOOLEAN deductionFromSalary
+        VARCHAR(200) deductionMonth
+        VARCHAR(200) deductionYear
+        BIGINT payrollId "FK"
+        DATE suspensionStartDate
+        DATE suspensionEndDate
+        INT suspensionDays
+        VARCHAR(200) demotionFrom
+        VARCHAR(200) demotionTo
+        DATE terminationDate
+        VARCHAR(200) terminationReason
+        BOOLEAN appealAllowed
+        BOOLEAN appealDeadline
+        BOOLEAN appealSubmitted
+        DATE appealDate
+        VARCHAR(200) appealReason
+        VARCHAR(200) appealDocuments
+        DATE appealReviewDate
+        BIGINT appealReviewByUserId "FK"
+        VARCHAR(200) appealDecision
+        DATE appealDecisionDate
+        TEXT appealNotes
+        VARCHAR(200) finalDecision
+        BOOLEAN isResolved
+        DATE resolvedAt
+        BIGINT resolvedByUserId "FK"
+        TEXT resolutionNotes
+        BOOLEAN notificationToEmployee
+        VARCHAR(200) employeeNotifiedAt
+        BOOLEAN employeeAcknowledged
+        VARCHAR(200) employeeAcknowledgedAt
+        VARCHAR(200) employeeSignature
+        BOOLEAN isConfidential
+        VARCHAR(50) status
+        VARCHAR(200) attachments
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    EmployeeTraining {
+        BIGINT trainingId "PK"
+        BIGINT employeeId "FK"
+        VARCHAR(200) trainingName
+        VARCHAR(50) trainingCode
+        VARCHAR(50) trainingType
+        VARCHAR(50) category
+        VARCHAR(200) provider
+        VARCHAR(50) providerType
+        VARCHAR(200) trainerName
+        BOOLEAN trainerTitle
+        VARCHAR(200) location
+        INT country
+        VARCHAR(200) city
+        BOOLEAN isOnline
+        VARCHAR(500) onlineLink
+        DATE startDate
+        DATE endDate
+        INT totalHours
+        INT totalDays
+        VARCHAR(200) hoursPerDay
+        VARCHAR(200) creditHours
+        VARCHAR(200) accreditation
+        VARCHAR(200) objectives
+        VARCHAR(200) topics
+        VARCHAR(200) targetAudience
+        VARCHAR(200) prerequisites
+        DECIMAL(15,2) cost
+        VARCHAR(200) currency
+        VARCHAR(200) paidBy
+        DATE registrationDate
+        VARCHAR(50) registrationStatus
+        VARCHAR(50) attendanceStatus
+        VARCHAR(200) attendanceDays
+        VARCHAR(50) completionStatus
+        DATE completionDate
+        DECIMAL(5,2) grade
+        DECIMAL(5,2) gradePercentage
+        VARCHAR(50) passingStatus
+        BOOLEAN certificateIssued
+        INT certificateNumber
+        DATE certificateDate
+        DATE certificateExpiryDate
+        VARCHAR(200) certificatePath
+        VARCHAR(200) certificateName
+        VARCHAR(200) evaluation
+        DECIMAL(15,2) evaluationFeedback
+        VARCHAR(200) trainerEvaluation
+        VARCHAR(200) skillsAcquired
+        VARCHAR(200) impactOnWork
+        BOOLEAN isRequired
+        BOOLEAN isRecurring
+        VARCHAR(200) recurringPeriod
+        VARCHAR(200) recommendedBy
+        BIGINT linkedToReviewId "FK"
+        VARCHAR(200) linkedToGoal
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    EmployeeAdditionalTasks {
+        BIGINT taskId "PK"
+        BIGINT employeeId "FK"
+        VARCHAR(200) taskName
+        VARCHAR(50) taskCode
+        VARCHAR(50) taskType
+        TEXT description
+        VARCHAR(200) objectives
+        VARCHAR(200) deliverables
+        VARCHAR(200) scope
+        BIGINT assignedByUserId "FK"
+        DATE assignedDate
+        DATE startDate
+        DATE endDate
+        DATE actualEndDate
+        VARCHAR(200) duration
+        BOOLEAN isOngoing
+        BOOLEAN isActive
+        VARCHAR(200) priority
+        VARCHAR(50) status
+        DECIMAL(5,2) progressPercentage
+        VARCHAR(200) accomplishments
+        VARCHAR(200) challenges
+        VARCHAR(200) performanceRating
+        DATE ratingDate
+        BIGINT ratedByUserId "FK"
+        TEXT ratingNotes
+        DECIMAL(15,2) allowanceAmount
+        DECIMAL(5,2) allowanceType
+        BIGINT isPaid "FK"
+        BOOLEAN payrollIncluded
+        DECIMAL(15,2) bonusAmount
+        BIGINT bonusPaid "FK"
+        DATE bonusPaidDate
+        TEXT completionNotes
+        VARCHAR(200) attachments
+        VARCHAR(200) relatedTo
+        BIGINT relatedId "FK"
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    Mentor {
+        BIGINT mentorId "PK"
+        BIGINT mentorEmployeeId "FK"
+        BIGINT menteeEmployeeId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        DATE startDate
+        DATE endDate
+        DATE actualEndDate
+        VARCHAR(50) mentorshipType
+        VARCHAR(200) objectives
+        VARCHAR(200) focusAreas
+        VARCHAR(200) meetingFrequency
+        VARCHAR(200) meetingDuration
+        INT meetingsCount
+        INT actualMeetingsCount
+        VARCHAR(200) meetingsSchedule
+        DATE nextMeetingDate
+        DATE lastMeetingDate
+        TEXT lastMeetingNotes
+        VARCHAR(200) observations
+        VARCHAR(200) strengths
+        VARCHAR(200) areasForImprovement
+        VARCHAR(200) progressReports
+        VARCHAR(200) goalsAchieved
+        VARCHAR(200) challenges
+        DECIMAL(15,2) feedbackFromMentee
+        DECIMAL(15,2) feedbackFromMentor
+        VARCHAR(200) satisfactionRating
+        VARCHAR(50) status
+        VARCHAR(50) completionStatus
+        DATE completionDate
+        TEXT completionNotes
+        BOOLEAN certificateIssued
+        INT certificateNumber
+        VARCHAR(200) certificatePath
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    SelfServicePortalRequests {
+        BIGINT requestId "PK"
+        BIGINT employeeId "FK"
+        BIGINT schoolId "FK"
+        INT requestNumber
+        VARCHAR(50) requestType
+        VARCHAR(50) requestSubType
+        VARCHAR(50) category
+        VARCHAR(200) title
+        TEXT description
+        VARCHAR(200) priority
+        VARCHAR(200) impact
+        VARCHAR(200) location
+        BIGINT assetId "FK"
+        VARCHAR(200) assetName
+        DATE requestedDate
+        TIME requestedTime
+        DATE desiredCompletionDate
+        VARCHAR(200) attachments
+        VARCHAR(200) attachmentPaths
+        BIGINT assignedToUserId "FK"
+        VARCHAR(200) assignedToDepartment
+        DATE assignedAt
+        BIGINT assignedByUserId "FK"
+        DATE estimatedCompletionDate
+        VARCHAR(200) estimatedHours
+        VARCHAR(50) status
+        DECIMAL(5,2) progressPercentage
+        DATE statusHistory
+        TEXT internalNotes
+        VARCHAR(200) actionTaken
+        DATE completionDate
+        TIME completionTime
+        BIGINT completedByUserId "FK"
+        TEXT completionNotes
+        VARCHAR(200) responseToEmployee
+        DATE responseDate
+        VARCHAR(200) rejectionReason
+        BIGINT cancelledByUserId "FK"
+        DATE cancellationDate
+        VARCHAR(200) cancellationReason
+        VARCHAR(200) employeeRating
+        DECIMAL(15,2) employeeFeedback
+        DATE ratingDate
+        TIME responseTime
+        BOOLEAN isUrgent
+        BOOLEAN requiresApproval
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        TEXT approvalNotes
+        INT trackingNumber
+        VARCHAR(100) source
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    VacantPosition {
+        BIGINT positionId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) positionCode
+        VARCHAR(200) jobTitle
+        DECIMAL(5,2) jobGrade
+        VARCHAR(200) jobRank
+        BIGINT departmentId "FK"
+        VARCHAR(50) employmentType
+        VARCHAR(50) contractType
+        VARCHAR(200) vacancyReason
+        BIGINT replacedEmployeeId "FK"
+        BOOLEAN qualifications
+        INT experienceYears
+        VARCHAR(200) skills
+        VARCHAR(200) certifications
+        VARCHAR(200) languages
+        VARCHAR(200) ageFrom
+        VARCHAR(200) ageTo
+        VARCHAR(200) gender
+        VARCHAR(200) nationality
+        DECIMAL(15,2) salaryRangeFrom
+        DECIMAL(15,2) salaryRangeTo
+        VARCHAR(200) otherBenefits
+        TEXT jobDescription
+        VARCHAR(200) requirements
+        DATE postingDate
+        DATE postingEndDate
+        VARCHAR(200) postingChannels
+        BOOLEAN isInternalOnly
+        VARCHAR(200) priority
+        VARCHAR(200) urgency
+        INT numberOfPositions
+        INT filledPositions
+        INT remainingPositions
+        VARCHAR(50) status
+        INT applicationsCount
+        INT shortlistedCount
+        INT interviewedCount
+        INT offeredCount
+        INT hiredCount
+        DATE hiringDate
+        DATE actualHiringDate
+        BIGINT hiredEmployeeId "FK"
+        DATE closedAt
+        BIGINT closedByUserId "FK"
+        VARCHAR(200) closingReason
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    JobApplicant {
+        BIGINT applicantId "PK"
+        BIGINT positionId "FK"
+        INT applicationNumber
+        DATE applicationDate
+        VARCHAR(200) firstNameAr
+        VARCHAR(200) fatherNameAr
+        VARCHAR(200) grandfatherNameAr
+        VARCHAR(200) familyNameAr
+        VARCHAR(200) fullNameAr
+        VARCHAR(200) firstNameEn
+        VARCHAR(200) fatherNameEn
+        VARCHAR(200) familyNameEn
+        VARCHAR(200) fullNameEn
+        BIGINT nationalId "FK"
+        VARCHAR(50) nationalIdType
+        INT passportNumber
+        DATE birthDate
+        VARCHAR(200) birthPlace
+        VARCHAR(200) gender
+        VARCHAR(200) nationality
+        VARCHAR(50) maritalStatus
+        VARCHAR(20) phonePrimary
+        VARCHAR(20) phoneSecondary
+        VARCHAR(100) email
+        VARCHAR(200) address
+        VARCHAR(200) city
+        BOOLEAN qualification
+        VARCHAR(200) qualificationSource
+        VARCHAR(200) graduationYear
+        DECIMAL(5,2) graduationGrade
+        INT experienceYears
+        VARCHAR(200) currentEmployer
+        VARCHAR(200) currentJobTitle
+        DECIMAL(15,2) currentSalary
+        DECIMAL(15,2) expectedSalary
+        VARCHAR(200) skills
+        VARCHAR(200) languages
+        VARCHAR(200) certifications
+        VARCHAR(200) cvPath
+        VARCHAR(200) cvName
+        VARCHAR(200) portfolioPath
+        VARCHAR(200) coverLetterPath
+        VARCHAR(200) attachments
+        VARCHAR(200) source
+        VARCHAR(200) referredBy
+        VARCHAR(50) status
+        DATE reviewDate
+        BIGINT reviewedByUserId "FK"
+        TEXT reviewNotes
+        DATE shortlistDate
+        TEXT shortlistNotes
+        DATE interviewDate
+        TIME interviewTime
+        VARCHAR(200) interviewLocation
+        VARCHAR(200) interviewers
+        VARCHAR(50) interviewType
+        VARCHAR(500) interviewLink
+        DECIMAL(5,2) interviewScore
+        DECIMAL(15,2) interviewFeedback
+        TEXT interviewNotes
+        DATE testDate
+        VARCHAR(50) testType
+        DECIMAL(5,2) testScore
+        DECIMAL(15,2) testFeedback
+        BOOLEAN offerExtended
+        DATE offerDate
+        DECIMAL(15,2) offerAmount
+        TEXT offerDetails
+        BOOLEAN offerAccepted
+        DATE acceptanceDate
+        TEXT acceptanceNotes
+        VARCHAR(200) offerRejectionReason
+        BIGINT hiredAsEmployeeId "FK"
+        DATE hiredDate
+        BOOLEAN isBlacklisted
+        VARCHAR(200) blacklistReason
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    EmployeeCommittees {
+        BIGINT committeeId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) committeeCode
+        VARCHAR(200) committeeNameAr
+        VARCHAR(200) committeeNameEn
+        VARCHAR(50) committeeType
+        VARCHAR(50) committeeCategory
+        DATE formationDate
+        INT formationDecisionNumber
+        DATE formationDecisionDate
+        VARCHAR(200) formationDecisionPath
+        DATE startDate
+        DATE endDate
+        DATE actualEndDate
+        VARCHAR(200) duration
+        VARCHAR(200) objectives
+        VARCHAR(200) responsibilities
+        VARCHAR(200) meetingFrequency
+        VARCHAR(200) reportingTo
+        BIGINT parentCommitteeId "FK"
+        BIGINT chairpersonId "FK"
+        BIGINT viceChairpersonId "FK"
+        BIGINT secretaryId "FK"
+        BIGINT spokespersonId "FK"
+        INT membersCount
+        VARCHAR(200) quorum
+        VARCHAR(200) decisionMakingMethod
+        VARCHAR(200) budget
+        VARCHAR(200) budgetSource
+        BOOLEAN isActive
+        VARCHAR(50) status
+        DATE dissolutionDate
+        VARCHAR(200) dissolutionReason
+        INT dissolutionDecisionNumber
+        VARCHAR(200) dissolutionDecisionPath
+        VARCHAR(200) achievements
+        VARCHAR(200) reports
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    CommitteeMembers {
+        BIGINT memberId "PK"
+        BIGINT committeeId "FK"
+        BIGINT employeeId "FK"
+        VARCHAR(200) role
+        TEXT roleDetails
+        DATE appointmentDate
+        INT appointmentDecisionNumber
+        DATE startDate
+        DATE endDate
+        DATE actualEndDate
+        BOOLEAN isActive
+        VARCHAR(50) status
+        DATE resignationDate
+        VARCHAR(200) resignationReason
+        DATE terminationDate
+        VARCHAR(200) terminationReason
+        BIGINT terminatedByUserId "FK"
+        DECIMAL(5,2) attendanceRate
+        BOOLEAN votingRights
+        BOOLEAN signatureAuthority
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    EmployeeMeetings {
+        BIGINT meetingId "PK"
+        BIGINT schoolId "FK"
+        BIGINT committeeId "FK"
+        VARCHAR(50) meetingType
+        INT meetingNumber
+        VARCHAR(200) title
+        VARCHAR(200) objectives
+        VARCHAR(200) agenda
+        BIGINT organizerId "FK"
+        VARCHAR(200) organizerDepartment
+        BIGINT chairpersonId "FK"
+        BIGINT secretaryId "FK"
+        DATE meetingDate
+        TIME startTime
+        TIME endTime
+        TIME actualEndTime
+        VARCHAR(200) duration
+        VARCHAR(200) location
+        VARCHAR(50) locationType
+        VARCHAR(500) virtualMeetingLink
+        VARCHAR(200) virtualMeetingPlatform
+        VARCHAR(200) meetingPassword
+        BOOLEAN isRecurring
+        VARCHAR(200) recurringPattern
+        BIGINT parentMeetingId "FK"
+        VARCHAR(200) attendees
+        INT expectedAttendeesCount
+        INT confirmedAttendeesCount
+        INT actualAttendeesCount
+        BOOLEAN quorumAchieved
+        DECIMAL(5,2) quorumPercentage
+        VARCHAR(50) status
+        VARCHAR(200) cancellationReason
+        BIGINT cancelledByUserId "FK"
+        DATE postponementDate
+        VARCHAR(200) minutes
+        VARCHAR(200) decisions
+        DATE actionItems
+        VARCHAR(200) recommendations
+        VARCHAR(200) attachments
+        VARCHAR(200) minutesFilePath
+        BOOLEAN minutesApproved
+        BIGINT minutesApprovedByUserId "FK"
+        DATE minutesApprovalDate
+        BOOLEAN isConfidential
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    MeetingAttendance {
+        BIGINT attendanceId "PK"
+        BIGINT meetingId "FK"
+        BIGINT employeeId "FK"
+        BIGINT committeeId "FK"
+        VARCHAR(50) invitationStatus
+        DATE invitationSentDate
+        DATE invitationResponseDate
+        TEXT invitationResponseNotes
+        VARCHAR(50) attendanceStatus
+        TIME arrivalTime
+        TIME departureTime
+        VARCHAR(200) lateMinutes
+        VARCHAR(200) earlyDepartureMinutes
+        VARCHAR(200) durationAttended
+        VARCHAR(200) excuseReason
+        VARCHAR(200) excuseDocument
+        BIGINT excuseApprovedByUserId "FK"
+        DATE excuseApprovedAt
+        BOOLEAN participatedInDiscussion
+        VARCHAR(200) contributions
+        VARCHAR(200) tasksAssigned
+        TEXT notes
+        BIGINT recordedByUserId "FK"
+        VARCHAR(200) recordedAt
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    InternalTransfer {
+        BIGINT transferId "PK"
+        BIGINT employeeId "FK"
+        VARCHAR(50) transferType
+        INT transferNumber
+        DATE transferDate
+        DATE effectiveDate
+        BIGINT fromSchoolId "FK"
+        BIGINT toSchoolId "FK"
+        BIGINT fromDepartmentId "FK"
+        BIGINT toDepartmentId "FK"
+        VARCHAR(200) fromJobTitle
+        VARCHAR(200) toJobTitle
+        DECIMAL(5,2) fromGrade
+        DECIMAL(5,2) toGrade
+        DECIMAL(15,2) fromSalary
+        DECIMAL(15,2) toSalary
+        VARCHAR(200) transferReason
+        VARCHAR(200) transferDecisionPath
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        VARCHAR(50) status
+        DATE executionDate
+        BIGINT executedByUserId "FK"
+        BOOLEAN handoverCompleted
+        DATE handoverDate
+        TEXT handoverNotes
+        BOOLEAN receivedInNewDepartment
+        DATE receiveDate
+        TEXT receiveNotes
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    ExternalTransfer {
+        BIGINT externalTransferId "PK"
+        BIGINT employeeId "FK"
+        VARCHAR(200) transferDirection
+        INT transferNumber
+        DATE transferDate
+        DATE effectiveDate
+        VARCHAR(200) fromEntity
+        VARCHAR(50) fromEntityType
+        VARCHAR(200) fromEntityAddress
+        VARCHAR(200) toEntity
+        VARCHAR(50) toEntityType
+        VARCHAR(200) toEntityAddress
+        VARCHAR(200) positionAtPrevious
+        VARCHAR(200) positionAtNew
+        VARCHAR(200) transferReason
+        VARCHAR(200) transferDocumentPath
+        BOOLEAN clearanceCompleted
+        DATE clearanceDate
+        VARCHAR(200) clearanceDocumentPath
+        DATE joinedDate
+        VARCHAR(200) joinedDocumentPath
+        BIGINT newEmployeeId "FK"
+        BIGINT terminationId "FK"
+        BIGINT appointmentDecisionId "FK"
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        VARCHAR(50) status
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    EmployeeTermination {
+        BIGINT terminationId "PK"
+        BIGINT employeeId "FK"
+        VARCHAR(50) terminationType
+        INT terminationNumber
+        DATE terminationDate
+        DATE lastWorkingDate
+        DATE effectiveDate
+        VARCHAR(200) reason
+        VARCHAR(50) reasonCategory
+        DATE resignationDate
+        VARCHAR(200) resignationNoticePeriod
+        BOOLEAN resignationNoticeServed
+        VARCHAR(200) terminationInitiator
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        VARCHAR(200) approvalDocumentPath
+        DECIMAL(15,2) finalSettlementAmount
+        DECIMAL(15,2) settlementBreakdown
+        DATE settlementDate
+        INT settlementReceiptNumber
+        VARCHAR(50) settlementStatus
+        VARCHAR(50) clearanceStatus
+        DATE clearanceDate
+        BIGINT clearanceCompletedByUserId "FK"
+        TEXT clearanceNotes
+        BOOLEAN inventoryReturned
+        DATE inventoryReturnDate
+        BIGINT inventoryVerifiedByUserId "FK"
+        BOOLEAN documentsReturned
+        DATE documentsReturnDate
+        BOOLEAN exitInterviewConducted
+        DATE exitInterviewDate
+        TEXT exitInterviewNotes
+        BIGINT exitInterviewerId "FK"
+        BIGINT finalSettlementPaid "FK"
+        DATE paymentDate
+        VARCHAR(200) paymentMethod
+        VARCHAR(50) bankTransferReference
+        BOOLEAN socialInsuranceNotified
+        DATE socialInsuranceNotificationDate
+        BOOLEAN employeeFileClosed
+        DATE fileClosureDate
+        BIGINT fileClosureByUserId "FK"
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    Employee ||--o{ AppointmentDecision : "employeeId"
+    Employee ||--o{ EmployeeDocuments : "employeeId"
+    Employee ||--o{ EmployeeInventoryCustody : "employeeId"
+    Employee ||--o{ EmployeeInventoryCustody : "issuedByUserId"
+    Employee ||--o{ StaffCustody : "employeeId"
+    Employee ||--o{ EmployeeAttendance : "employeeId"
+    EmployeeLeave ||--o{ EmployeeAttendance : "excuseId"
+    EmployeePayroll ||--o{ EmployeeAttendance : "payrollId"
+    Employee ||--o{ TeacherSchedule : "teacherId"
+    Employee ||--o{ EmployeePayroll : "employeeId"
+    Employee ||--o{ EmployeeLeave : "employeeId"
+    Employee ||--o{ EmployeeLeave : "handoverToEmployeeId"
+    Employee ||--o{ PerformanceReview : "employeeId"
+    Employee ||--o{ PerformanceReview : "reviewerId"
+    Employee ||--o{ EmployeeViolations : "employeeId"
+    EmployeePayroll ||--o{ EmployeeViolations : "payrollId"
+    Employee ||--o{ EmployeeTraining : "employeeId"
+    PerformanceReview ||--o{ EmployeeTraining : "linkedToReviewId"
+    Employee ||--o{ EmployeeAdditionalTasks : "employeeId"
+    Employee ||--o{ Mentor : "mentorEmployeeId"
+    Employee ||--o{ Mentor : "menteeEmployeeId"
+    Employee ||--o{ SelfServicePortalRequests : "employeeId"
+    Employee ||--o{ SelfServicePortalRequests : "assignedToUserId"
+    Employee ||--o{ VacantPosition : "replacedEmployeeId"
+    Employee ||--o{ VacantPosition : "hiredEmployeeId"
+    VacantPosition ||--o{ JobApplicant : "positionId"
+    Employee ||--o{ JobApplicant : "hiredAsEmployeeId"
+    Employee ||--o{ EmployeeCommittees : "chairpersonId"
+    Employee ||--o{ EmployeeCommittees : "viceChairpersonId"
+    Employee ||--o{ EmployeeCommittees : "secretaryId"
+    EmployeeCommittees ||--o{ CommitteeMembers : "committeeId"
+    Employee ||--o{ CommitteeMembers : "employeeId"
+    EmployeeCommittees ||--o{ EmployeeMeetings : "committeeId"
+    Employee ||--o{ EmployeeMeetings : "organizerId"
+    Employee ||--o{ EmployeeMeetings : "chairpersonId"
+    Employee ||--o{ EmployeeMeetings : "secretaryId"
+    EmployeeMeetings ||--o{ MeetingAttendance : "meetingId"
+    Employee ||--o{ MeetingAttendance : "employeeId"
+    Employee ||--o{ InternalTransfer : "employeeId"
+    Employee ||--o{ ExternalTransfer : "employeeId"
+    EmployeeTermination ||--o{ ExternalTransfer : "terminationId"
+    AppointmentDecision ||--o{ ExternalTransfer : "appointmentDecisionId"
+    Employee ||--o{ EmployeeTermination : "employeeId"

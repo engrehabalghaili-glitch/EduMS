@@ -1,0 +1,98 @@
+flowchart TB
+    classDef cloud fill:#dbeafe,stroke:#1e3a8a,stroke-width:2px
+    classDef lb fill:#fce7f3,stroke:#831843,stroke-width:2px
+    classDef node fill:#dcfce7,stroke:#166534,stroke-width:2px
+    classDef db fill:#fef3c7,stroke:#b45309,stroke-width:2px
+
+    subgraph Users["👥 المستخدمون"]
+        U1[المتصفح]
+        U2[تطبيق الجوال]
+    end
+
+    subgraph CDN["☁️ CDN"]
+        CF[CloudFront]:::cloud
+    end
+
+    subgraph CloudRegion["☁️ Cloud Region - AWS/Azure"]
+        subgraph DMZ["🛡️ DMZ"]
+            WAF[WAF]:::lb
+            ALB[Application LB]:::lb
+        end
+
+        subgraph WebTier["🌐 Web Tier"]
+            WEB1[Web 1]:::node
+            WEB2[Web 2]:::node
+            WEB3[Web 3]:::node
+        end
+
+        subgraph K8S["☸️ Kubernetes Cluster"]
+            POD1[School Svc x2]:::node
+            POD2[Student Svc x3]:::node
+            POD3[Employee Svc x2]:::node
+            POD4[Asset Svc x2]:::node
+            POD5[Finance Svc x2]:::node
+            POD6[Reporting x2]:::node
+            POD7[Auth Svc x3]:::node
+            POD8[Notification x2]:::node
+            POD9[Emergency x1]:::node
+            POD10[Workflow x2]:::node
+        end
+
+        subgraph Cache["💨 Cache"]
+            REDIS[(Redis Cluster<br/>3 nodes)]:::db
+        end
+
+        subgraph DBTier["💾 Database Tier"]
+            PG_M[(PostgreSQL Primary)]:::db
+            PG_R1[(Replica 1)]:::db
+            PG_R2[(Replica 2)]:::db
+            DW[(Data Warehouse)]:::db
+            ES_C[(ElasticSearch Cluster)]:::db
+        end
+
+        subgraph Storage["📦 Storage"]
+            S3[(S3 / Azure Blob)]:::db
+            BACKUP[(Backup)]:::db
+        end
+
+        subgraph Messaging["📡 Messaging"]
+            RMQ[(RabbitMQ Cluster)]:::node
+        end
+
+        subgraph Monitor["📊 Monitoring"]
+            PROM[Prometheus]:::node
+            GRAF[Grafana]:::node
+            ELK[ELK Stack]:::node
+        end
+    end
+
+    subgraph DR["🆘 Disaster Recovery"]
+        DR_DB[(DR DB)]:::db
+        DR_S3[(DR Storage)]:::db
+    end
+
+    subgraph External["🌍 External"]
+        MIN_API[Ministry API]
+        BANK_API[Banks]
+        SMS_API[SMS]
+    end
+
+    U1 & U2 --> CF
+    CF --> WAF --> ALB --> WEB1 & WEB2 & WEB3
+    WEB1 & WEB2 & WEB3 --> POD1 & POD2 & POD7
+    K8S --> REDIS
+    POD1 & POD2 & POD3 & POD4 & POD5 --> PG_M
+    PG_M -.replicate.-> PG_R1 & PG_R2
+    POD6 --> DW
+    K8S -.index.-> ES_C
+    K8S -.events.-> RMQ
+    RMQ -.subscribe.-> POD6 & POD8 & POD9
+    POD8 --> SMS_API
+    POD5 --> BANK_API
+    POD6 --> MIN_API
+    K8S --> S3
+    PG_M -.backup.-> BACKUP
+    PG_M -.replicate.-> DR_DB
+    S3 -.replicate.-> DR_S3
+    K8S -.metrics.-> PROM --> GRAF
+    K8S -.logs.-> ELK

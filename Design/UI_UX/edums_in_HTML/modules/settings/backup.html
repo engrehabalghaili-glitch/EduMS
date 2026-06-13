@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - النسخ الاحتياطي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=300;400;500;600;700;800;900&family=Tajawal:wght=300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item"><span class="icon">📊</span><span>لوحة التحكم</span></a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">إعدادات النظام</div>
+                    <a href="index.html" class="nav-item"><span class="icon">⚙️</span><span>لوحة الإعدادات</span></a>
+                    <a href="general.html" class="nav-item"><span class="icon">🏫</span><span>إعدادات عامة</span></a>
+                    <a href="academic.html" class="nav-item"><span class="icon">📅</span><span>إعدادات أكاديمية</span></a>
+                    <a href="finance.html" class="nav-item"><span class="icon">💰</span><span>إعدادات مالية</span></a>
+                    <a href="notifications.html" class="nav-item"><span class="icon">🔔</span><span>الإشعارات</span></a>
+                    <a href="backup.html" class="nav-item active"><span class="icon">💾</span><span>النسخ الاحتياطي</span></a>
+                    <a href="logs.html" class="nav-item"><span class="icon">📝</span><span>سجلات النظام</span></a>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left"><h2>إعدادات النظام</h2></div>
+                <div class="header-right">
+                    <div class="header-actions"><button class="header-btn">🔔</button></div>
+                    <div class="user-profile"><div class="user-avatar">م</div><div class="user-info"><h4>مدير المدرسة</h4><p>الإدارة</p></div></div>
+                </div>
+            </header>
+            <div class="content-area">
+                <div class="page-header">
+                    <h1 class="page-title">💾 النسخ الاحتياطي</h1>
+                    <div class="page-breadcrumb"><a href="../../index.html">الرئيسية</a><span>/</span><a href="index.html">إعدادات النظام</a><span>/</span><span>النسخ الاحتياطي</span></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">إنشاء نسخة احتياطية</h3>
+                        <button class="btn btn-primary">+ إنشاء نسخة احتياطية</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr><th>التاريخ</th><th>النوع</th><th>الحجم</th><th>الحالة</th><th>الإجراءات</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>2024-05-28 09:30</td><td>نسخة كاملة</td><td>256 MB</td><td><span class="badge-status active">مكتمل</span></td><td><div class="table-actions"><button class="action-btn">⬇️</button><button class="action-btn">🔄</button><button class="action-btn">🗑️</button></div></td></tr>
+                                    <tr><td>2024-05-25 02:00</td><td>نسخة كاملة</td><td>245 MB</td><td><span class="badge-status active">مكتمل</span></td><td><div class="table-actions"><button class="action-btn">⬇️</button><button class="action-btn">🔄</button><button class="action-btn">🗑️</button></div></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 24px;">
+                    <div class="card-header"><h3 class="card-title">جدولة النسخ الاحتياطي</h3></div>
+                    <div class="card-body">
+                        <form class="form-group">
+                            <label>تفعيل النسخ الاحتياطي التلقائي</label>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" checked style="width: 20px; height: 20px;">
+                                <span>تفعيل</span>
+                            </div>
+                            <label>التكرار</label>
+                            <select class="form-input">
+                                <option>يوميًا</option>
+                                <option selected>أسبوعيًا</option>
+                                <option>شهريًا</option>
+                            </select>
+                            <label>الوقت</label>
+                            <input type="time" class="form-input" value="02:00">
+                            <label>الاحتفاظ بالنسخ</label>
+                            <select class="form-input">
+                                <option>آخر 7 نسخ</option>
+                                <option selected>آخر 30 نسخة</option>
+                                <option>الكل</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary" style="margin-top: 16px;">💾 حفظ التغييرات</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

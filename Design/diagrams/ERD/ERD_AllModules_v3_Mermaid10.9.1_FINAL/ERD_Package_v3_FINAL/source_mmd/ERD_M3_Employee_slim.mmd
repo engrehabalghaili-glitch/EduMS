@@ -1,0 +1,235 @@
+erDiagram
+    %% =====================================================
+    %% M3_Employee - ERD
+    %% Mermaid 10.9.1 Compliant - SLIM VIEW (PK + FK only)
+    %% =====================================================
+
+    Employee {
+        INT employeeId PK "الموظف"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT departmentId "معرف القسم FK SchoolDepartment.deptId"
+    }
+
+    AppointmentDecision {
+        INT decisionId PK "قرار التعيين"
+        INT employeeId FK "معرف الموظف FK Employee.employeeId"
+        INT departmentId "معرف القسم المعين به FK SchoolDepartment.deptId"
+    }
+
+    EmployeeDocuments {
+        INT documentId PK "المستندات والوثائق"
+        INT employeeId FK "معرف الموظف FK Employee.employeeId"
+        INT verifiedByUserId "معرف من تحقق FK SystemUser.userId"
+    }
+
+    EmployeeInventoryCustody {
+        INT custodyId PK "عهدة الموظف"
+        INT employeeId FK "معرف الموظف FK Employee.employeeId"
+        INT assetId "معرف الأصل FK Asset.assetId - من قسم الأصول"
+        INT issuedByUserId FK "معرف المسلِّم FK Employee.employeeId"
+    }
+
+    StaffCustody {
+        INT staffCustodyId PK "عهد الموظفين"
+        INT employeeId FK "معرف الموظف FK Employee.employeeId"
+    }
+
+    EmployeeAttendance {
+        INT attendanceId PK "الحضور والانصراف للموظفين"
+        INT employeeId FK "معرف الموظف FK Employee.employeeId"
+        INT schoolId "معرف المدرسة FK School.schoolId - للمدارس المتعددة"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId - اختياري"
+        INT shiftId "معرف الفترة صباحي مسائي FK SchoolShiftSetting.shiftId"
+        INT excuseId FK "معرف الإجازة FK EmployeeLeave.leaveId - إن كان غياباً بإجازة"
+        INT payrollId FK "معرف كشف الراتب المرتبط FK EmployeePayroll.payrollId - بعد إنشاء ال..."
+    }
+
+    TeacherSchedule {
+        INT scheduleId PK "الجدول الدراسي للمعلم"
+        INT teacherId FK "معرف المعلم FK Employee.employeeId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT periodId "معرف الحصة FK ClassPeriod.periodId"
+        INT courseId "معرف المادة FK Course.courseId"
+        INT sectionId "معرف الشعبة FK ClassSection.sectionId"
+        INT gradeLevelId "معرف الصف FK GradeCapacity.gradeLevelId"
+        INT classroomId "معرف القاعة FK Classroom.classroomId"
+    }
+
+    EmployeePayroll {
+        INT payrollId PK "الرواتب"
+        INT employeeId FK "معرف الموظف FK Employee.employeeId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+    }
+
+    EmployeeLeave {
+        INT leaveId PK "الإجازات"
+        INT employeeId FK "معرف الموظف FK Employee.employeeId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId - لتتبع ال..."
+        INT handoverToEmployeeId FK "معرف الموظف المستلم للعمل FK Employee.employeeId"
+        INT reviewedByUserId "معرف المراجع FK SystemUser.userId"
+        INT approvedByUserId "معرف المعتمد FK SystemUser.userId"
+    }
+
+    PerformanceReview {
+        INT reviewId PK "جدول تقييم الأداء"
+        INT employeeId FK "معرف الموظف المُقيَّم FK Employee.employeeId"
+        INT reviewerId FK "معرف المُقيِّم FK Employee.employeeId - غالباً المشرف المباشر"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId - للتقييمات الفصلية"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+    }
+
+    EmployeeViolations {
+        INT violationId PK "المخالفات والجزاءات"
+        INT employeeId FK "معرف الموظف FK Employee.employeeId"
+        INT reportedByUserId "معرف مقدم البلاغ FK SystemUser.userId"
+        INT actionByUserId "معرف من نفذ الإجراء FK SystemUser.userId"
+        INT payrollId FK "معرف كشف الراتب المرتبط FK EmployeePayroll.payrollId"
+    }
+
+    EmployeeTraining {
+        INT trainingId PK "التدريب والتطوير"
+        INT employeeId FK "معرف الموظف FK Employee.employeeId"
+        INT linkedToReviewId FK "معرف تقييم الأداء المرتبط FK PerformanceReview.reviewId"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+    }
+
+    EmployeeAdditionalTasks {
+        INT taskId PK "المهام الإضافية"
+        INT employeeId FK "معرف الموظف FK Employee.employeeId"
+        INT assignedByUserId "معرف من كلّف بالمهمة FK SystemUser.userId"
+    }
+
+    Mentor {
+        INT mentorId PK "المعلم المرشد"
+        INT mentorEmployeeId FK "معرف المعلم المرشد FK Employee.employeeId"
+        INT menteeEmployeeId FK "معرف المعلم المتدرب FK Employee.employeeId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+    }
+
+    SelfServicePortalRequests {
+        INT requestId PK "البوابة الذاتية وبلاغات الموظفين"
+        INT employeeId FK "معرف الموظف مقدم الطلب FK Employee.employeeId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetId "معرف الأصل المرتبط إن كان بلاغ عطل FK Asset.assetId"
+        INT assignedToUserId FK "معرف الموظف المسؤول عن المعالجة FK Employee.employeeId"
+        INT approvedByUserId "معرف من وافق FK SystemUser.userId"
+    }
+
+    VacantPosition {
+        INT positionId PK "الوظائف الشاغرة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT departmentId "معرف القسم FK SchoolDepartment.deptId"
+        INT replacedEmployeeId FK "معرف الموظف المستبدل إن كان بديلاً FK Employee.employeeId"
+        INT hiredEmployeeId FK "معرف الموظف المعين FK Employee.employeeId - بعد التعيين"
+    }
+
+    JobApplicant {
+        INT applicantId PK "المتقدمين للوظائف"
+        INT positionId FK "معرف الوظيفة المتقدم لها FK VacantPosition.positionId"
+        INT hiredAsEmployeeId FK "معرف الموظف بعد التعيين FK Employee.employeeId"
+    }
+
+    EmployeeCommittees {
+        INT committeeId PK "المجالس واللجان"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT chairpersonId FK "معرف رئيس اللجنة FK Employee.employeeId"
+        INT viceChairpersonId FK "معرف نائب الرئيس FK Employee.employeeId"
+        INT secretaryId FK "معرف مقرر اللجنة FK Employee.employeeId"
+    }
+
+    CommitteeMembers {
+        INT memberId PK "أعضاء المجالس"
+        INT committeeId FK "معرف اللجنة FK EmployeeCommittees.committeeId"
+        INT employeeId FK "معرف الموظف FK Employee.employeeId"
+    }
+
+    EmployeeMeetings {
+        INT meetingId PK "اجتماعات الموظفين"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT committeeId FK "معرف اللجنة FK EmployeeCommittees.committeeId - إن كان اجتماع لجنة"
+        INT organizerId FK "معرف المنظم FK Employee.employeeId"
+        INT chairpersonId FK "معرف رئيس الاجتماع FK Employee.employeeId"
+        INT secretaryId FK "معرف مقرر الاجتماع FK Employee.employeeId - مسؤول المحضر"
+    }
+
+    MeetingAttendance {
+        INT attendanceId PK "حضور الاجتماعات"
+        INT meetingId FK "معرف الاجتماع FK EmployeeMeetings.meetingId"
+        INT employeeId FK "معرف الموظف FK Employee.employeeId"
+    }
+
+    InternalTransfer {
+        INT transferId PK "النقل الداخلي"
+        INT employeeId FK "معرف الموظف FK Employee.employeeId"
+        INT fromSchoolId "معرف المدرسة السابقة FK School.schoolId"
+        INT toSchoolId "معرف المدرسة الجديدة FK School.schoolId"
+        INT fromDepartmentId "معرف القسم السابق FK SchoolDepartment.deptId"
+        INT toDepartmentId "معرف القسم الجديد FK SchoolDepartment.deptId"
+        INT approvedByUserId "معرف من اعتمد النقل FK SystemUser.userId"
+        INT executedByUserId "معرف من نفذ النقل FK SystemUser.userId"
+    }
+
+    ExternalTransfer {
+        INT externalTransferId PK "النقل الخارجي"
+        INT employeeId FK "معرف الموظف FK Employee.employeeId - إن كان موجوداً في النظام"
+        INT terminationId FK "معرف إنهاء الخدمة المرتبط FK EmployeeTermination.terminationId - إن..."
+        INT appointmentDecisionId FK "معرف قرار التعيين المرتبط FK AppointmentDecision.decisionId - إن كا..."
+        INT approvedByUserId "معرف من اعتمد النقل FK SystemUser.userId"
+    }
+
+    EmployeeTermination {
+        INT terminationId PK "إنهاء الخدمة"
+        INT employeeId FK "معرف الموظف FK Employee.employeeId"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+    }
+
+    %% ===== Relationships =====
+    Employee ||--o{ AppointmentDecision : "معرف الموظف FK Employeeem"
+    Employee ||--o{ EmployeeDocuments : "معرف الموظف FK Employeeem"
+    Employee ||--o{ EmployeeInventoryCustody : "معرف الموظف FK Employeeem"
+    Employee ||--o{ EmployeeInventoryCustody : "معرف المسلِّم FK Employee"
+    Employee ||--o{ StaffCustody : "معرف الموظف FK Employeeem"
+    Employee ||--o{ EmployeeAttendance : "معرف الموظف FK Employeeem"
+    EmployeeLeave ||--o{ EmployeeAttendance : "معرف الإجازة FK EmployeeL"
+    EmployeePayroll ||--o{ EmployeeAttendance : "معرف كشف الراتب المرتبط F"
+    Employee ||--o{ TeacherSchedule : "معرف المعلم FK Employeeem"
+    Employee ||--o{ EmployeePayroll : "معرف الموظف FK Employeeem"
+    Employee ||--o{ EmployeeLeave : "معرف الموظف FK Employeeem"
+    Employee ||--o{ EmployeeLeave : "معرف الموظف المستلم للعمل"
+    Employee ||--o{ PerformanceReview : "معرف الموظف المُقيَّم FK "
+    Employee ||--o{ PerformanceReview : "معرف المُقيِّم FK Employe"
+    Employee ||--o{ EmployeeViolations : "معرف الموظف FK Employeeem"
+    EmployeePayroll ||--o{ EmployeeViolations : "معرف كشف الراتب المرتبط F"
+    Employee ||--o{ EmployeeTraining : "معرف الموظف FK Employeeem"
+    PerformanceReview ||--o{ EmployeeTraining : "معرف تقييم الأداء المرتبط"
+    Employee ||--o{ EmployeeAdditionalTasks : "معرف الموظف FK Employeeem"
+    Employee ||--o{ Mentor : "معرف المعلم المرشد FK Emp"
+    Employee ||--o{ Mentor : "معرف المعلم المتدرب FK Em"
+    Employee ||--o{ SelfServicePortalRequests : "معرف الموظف مقدم الطلب FK"
+    Employee ||--o{ SelfServicePortalRequests : "معرف الموظف المسؤول عن ال"
+    Employee ||--o{ VacantPosition : "معرف الموظف المستبدل إن ك"
+    Employee ||--o{ VacantPosition : "معرف الموظف المعين FK Emp"
+    VacantPosition ||--o{ JobApplicant : "معرف الوظيفة المتقدم لها "
+    Employee ||--o{ JobApplicant : "معرف الموظف بعد التعيين F"
+    Employee ||--o{ EmployeeCommittees : "معرف رئيس اللجنة FK Emplo"
+    Employee ||--o{ EmployeeCommittees : "معرف نائب الرئيس FK Emplo"
+    Employee ||--o{ EmployeeCommittees : "معرف مقرر اللجنة FK Emplo"
+    EmployeeCommittees ||--o{ CommitteeMembers : "معرف اللجنة FK EmployeeCo"
+    Employee ||--o{ CommitteeMembers : "معرف الموظف FK Employeeem"
+    EmployeeCommittees ||--o{ EmployeeMeetings : "معرف اللجنة FK EmployeeCo"
+    Employee ||--o{ EmployeeMeetings : "معرف المنظم FK Employeeem"
+    Employee ||--o{ EmployeeMeetings : "معرف رئيس الاجتماع FK Emp"
+    Employee ||--o{ EmployeeMeetings : "معرف مقرر الاجتماع FK Emp"
+    EmployeeMeetings ||--o{ MeetingAttendance : "معرف الاجتماع FK Employee"
+    Employee ||--o{ MeetingAttendance : "معرف الموظف FK Employeeem"
+    Employee ||--o{ InternalTransfer : "معرف الموظف FK Employeeem"
+    Employee ||--o{ ExternalTransfer : "معرف الموظف FK Employeeem"
+    EmployeeTermination ||--o{ ExternalTransfer : "معرف إنهاء الخدمة المرتبط"
+    AppointmentDecision ||--o{ ExternalTransfer : "معرف قرار التعيين المرتبط"
+    Employee ||--o{ EmployeeTermination : "معرف الموظف FK Employeeem"

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - التدقيق والرقابة المالية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">الإدارة المالية</div>
+                    <a href="index.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                    <a href="accounts.html" class="nav-item">
+                        <span class="icon">🗄️</span>
+                        <span>دليل الحسابات والقيود</span>
+                    </a>
+                    <a href="budget.html" class="nav-item">
+                        <span class="icon">📅</span>
+                        <span>الميزانية التقديرية</span>
+                    </a>
+                    <a href="fees.html" class="nav-item">
+                        <span class="icon">🎓</span>
+                        <span>رسوم الطلاب</span>
+                    </a>
+                    <a href="invoices.html" class="nav-item">
+                        <span class="icon">📄</span>
+                        <span>الفواتير</span>
+                    </a>
+                    <a href="payments.html" class="nav-item">
+                        <span class="icon">💳</span>
+                        <span>سندات القبض</span>
+                    </a>
+                    <a href="expenses.html" class="nav-item">
+                        <span class="icon">💸</span>
+                        <span>سندات الصرف</span>
+                    </a>
+                    <a href="salaries.html" class="nav-item">
+                        <span class="icon">👥</span>
+                        <span>رواتب الموظفين</span>
+                    </a>
+                    <a href="treasury.html" class="nav-item">
+                        <span class="icon">🏦</span>
+                        <span>الخزينة والبنوك</span>
+                    </a>
+                    <a href="audit.html" class="nav-item active">
+                        <span class="icon">🔍</span>
+                        <span>التدقيق المالي</span>
+                    </a>
+                    <a href="reports.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>التقارير المالية</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>الإدارة المالية - التدقيق والرقابة</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">
+                            🔔
+                            <span class="badge">1</span>
+                        </button>
+                        <button class="header-btn">💬</button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير المدرسة</h4>
+                            <p>الإدارة</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <h1 class="page-title">🔍 التدقيق والرقابة المالية</h1>
+                            <div class="page-breadcrumb">
+                                <a href="../../index.html">الرئيسية</a>
+                                <span>/</span>
+                                <a href="index.html">الإدارة المالية</a>
+                                <span>/</span>
+                                <span>التدقيق</span>
+                            </div>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-primary" onclick="openModal('startAuditModal')">
+                                <span>⚙️</span>
+                                <span>بدء جولة تدقيق جديدة</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Audit Alerts -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon danger">🛑</div>
+                        <div class="stat-info">
+                            <h3>2</h3>
+                            <p>مخالفات مالية حرجة</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon warning">⚠️</div>
+                        <div class="stat-info">
+                            <h3>5</h3>
+                            <p>ملاحظات تحت المراجعة</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon success">✅</div>
+                        <div class="stat-info">
+                            <h3>140</h3>
+                            <p>عمليات مطابقة ناجحة</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon primary">📜</div>
+                        <div class="stat-info">
+                            <h3>12</h3>
+                            <p>تقارير تدقيق مرشفة</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audit Findings Table -->
+                <div class="card" style="margin-top: 32px;">
+                    <div class="card-header">
+                        <h3 class="card-title">سجل ملاحظات التدقيق الداخلي</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>كود الملاحظة</th>
+                                        <th>تاريخ الرصد</th>
+                                        <th>المجال</th>
+                                        <th>الوصف</th>
+                                        <th>المسؤول</th>
+                                        <th>الخطورة</th>
+                                        <th>الحالة</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>AUD-001</strong></td>
+                                        <td>25 مايو 2026</td>
+                                        <td>الصندوق (Petty Cash)</td>
+                                        <td>نقص في رصيد العهدة النثرية بمقدار 150 ريال</td>
+                                        <td>أمين الصندوق</td>
+                                        <td><span class="badge-priority high">عالية</span></td>
+                                        <td><span class="badge-status danger">مفتوحة</span></td>
+                                        <td>
+                                            <div class="action-btns">
+                                                <button class="btn-icon">👁️</button>
+                                                <button class="btn-icon">📝</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>AUD-002</strong></td>
+                                        <td>20 مايو 2026</td>
+                                        <td>الفواتير</td>
+                                        <td>تكرار صرف فاتورة لمورد خارجي (رقم 556)</td>
+                                        <td>المحاسب المالي</td>
+                                        <td><span class="badge-priority high">عالية</span></td>
+                                        <td><span class="badge-status warning">قيد المعالجة</span></td>
+                                        <td>
+                                            <div class="action-btns">
+                                                <button class="btn-icon">👁️</button>
+                                                <button class="btn-icon">📝</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="startAuditModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>بدء عملية تدقيق مالي</h3>
+                <span class="close-modal" onclick="closeModal('startAuditModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">مجال التدقيق</label>
+                        <select class="form-select">
+                            <option>المطابقة البنكية (Bank Reconciliation)</option>
+                            <option>جرد الصندوق (Cash Count)</option>
+                            <option>مراجعة المشتريات والموردين</option>
+                            <option>مراجعة مسيرات الرواتب</option>
+                            <option>تدقيق الرسوم الدراسية</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">الفترة من</label>
+                            <input type="date" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">الفترة إلى</label>
+                            <input type="date" class="form-input">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">فريق التدقيق</label>
+                        <input type="text" class="form-input" placeholder="أسماء المدققين">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">أهداف الجولة</label>
+                        <textarea class="form-textarea"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('startAuditModal')">إلغاء</button>
+                <button class="btn btn-primary">بدء التدقيق</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .badge-priority { padding: 4px 10px; border-radius: 20px; font-size: 0.75em; font-weight: 700; }
+        .badge-priority.high { background: #fee2e2; color: #991b1b; }
+        
+        .badge-status.success { background: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 20px; font-size: 0.8em; font-weight: 700; }
+        .badge-status.warning { background: #fef3c7; color: #92400e; padding: 4px 10px; border-radius: 20px; font-size: 0.8em; font-weight: 700; }
+        .badge-status.danger { background: #fee2e2; color: #991b1b; padding: 4px 10px; border-radius: 20px; font-size: 0.8em; font-weight: 700; }
+        
+        .action-btns { display: flex; gap: 5px; }
+        .btn-icon { width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e5e7eb; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+        .modal-content { background-color: white; margin: 5% auto; width: 600px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); overflow: hidden; animation: modalSlideDown 0.3s ease-out; }
+        .modal-header { padding: 20px 24px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; }
+        .modal-header h3 { color: #1e3a8a; }
+        .close-modal { font-size: 24px; font-weight: bold; cursor: pointer; color: #6b7280; }
+        .modal-body { padding: 24px; max-height: 70vh; overflow-y: auto; }
+        .modal-footer { padding: 16px 24px; border-top: 1px solid #e5e7eb; display: flex; justify-content: flex-end; gap: 12px; background: #f8fafc; }
+    </style>
+
+    <script>
+        function openModal(id) { document.getElementById(id).style.display = "block"; }
+        function closeModal(id) { document.getElementById(id).style.display = "none"; }
+    </script>
+</body>
+</html>

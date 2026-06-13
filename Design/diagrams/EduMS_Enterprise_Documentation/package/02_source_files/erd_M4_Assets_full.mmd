@@ -1,0 +1,1123 @@
+erDiagram
+    Asset {
+        BIGINT assetId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) assetUniqueCode
+        VARCHAR(200) assetNameAr
+        VARCHAR(200) assetNameEn
+        VARCHAR(200) assetTag
+        INT serialNumber
+        INT modelNumber
+        VARCHAR(200) manufacturer
+        VARCHAR(200) brand
+        BIGINT assetCategoryId "FK"
+        BIGINT assetStatusId "FK"
+        BIGINT assetLocationId "FK"
+        VARCHAR(200) condition
+        VARCHAR(50) acquisitionType
+        DATE acquisitionDate
+        DECIMAL(15,2) acquisitionCost
+        VARCHAR(200) currency
+        VARCHAR(200) supplierName
+        VARCHAR(50) purchaseOrderReference "FK"
+        BIGINT warrantyContractId "FK"
+        BOOLEAN isInsured
+        INT insurancePolicyNumber
+        DATE insuranceExpiryDate
+        VARCHAR(200) usefulLifeYears
+        VARCHAR(200) salvageValue
+        VARCHAR(200) currentValue
+        VARCHAR(50) barcode
+        VARCHAR(500) qrCode
+        VARCHAR(50) rfidTag
+        BOOLEAN hasPhysicalTag
+        DATE physicalTagDate
+        TEXT notes
+        BOOLEAN isActive
+        BOOLEAN isDeleted
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+    }
+    AssetCategory {
+        BIGINT categoryId "PK"
+        BIGINT schoolId "FK"
+        BIGINT parentCategoryId "FK"
+        VARCHAR(50) categoryCode
+        VARCHAR(50) categoryNameAr
+        VARCHAR(50) categoryNameEn
+        VARCHAR(50) categoryLevel
+        VARCHAR(200) fullPath
+        TEXT description
+        DECIMAL(5,2) depreciationRate
+        VARCHAR(200) depreciationMethod
+        VARCHAR(200) usefulLifeYears
+        INT accountCode
+        INT expenseAccountCode
+        INT accumulatedDepAccountCode
+        BOOLEAN isActive
+        BOOLEAN isSystem
+        VARCHAR(200) sortOrder
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AssetLocation {
+        BIGINT locationId "PK"
+        BIGINT schoolId "FK"
+        BIGINT parentLocationId "FK"
+        VARCHAR(50) locationCode
+        VARCHAR(200) locationNameAr
+        VARCHAR(200) locationNameEn
+        VARCHAR(50) locationType
+        VARCHAR(200) buildingName
+        INT floorNumber
+        INT roomNumber
+        VARCHAR(200) section
+        VARCHAR(200) area
+        VARCHAR(200) capacity
+        BOOLEAN isActive
+        BOOLEAN hasPhysicalSign
+        BIGINT responsiblePersonId "FK"
+        VARCHAR(20) contactPhone
+        VARCHAR(200) mapReference
+        VARCHAR(50) qrCode
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AssetStatus {
+        BIGINT statusId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) statusCode
+        VARCHAR(50) statusNameAr
+        VARCHAR(50) statusNameEn
+        VARCHAR(50) statusType
+        BOOLEAN isOperational
+        BOOLEAN isAvailableForAssignment
+        BOOLEAN requiresApproval
+        VARCHAR(50) colorCode
+        BOOLEAN isActive
+        BOOLEAN isSystem
+        VARCHAR(200) sortOrder
+        TEXT descriptionAr
+        TEXT descriptionEn
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AssetWarrantyContract {
+        BIGINT contractId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) contractType
+        INT contractNumber
+        VARCHAR(200) contractName
+        VARCHAR(200) providerName
+        VARCHAR(20) providerContact
+        DATE startDate
+        DATE endDate
+        TEXT coverageDetails
+        VARCHAR(50) coverageType
+        VARCHAR(200) contractValue
+        VARCHAR(200) currency
+        VARCHAR(200) paymentTerms
+        BOOLEAN hasRenewalOption
+        VARCHAR(200) renewalTerms
+        BOOLEAN isActive
+        VARCHAR(50) contractStatus
+        INT reminderDays
+        BOOLEAN isAlertEnabled
+        DATE lastAlertSentDate
+        VARCHAR(200) attachments
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AssetDocument {
+        BIGINT documentId "PK"
+        BIGINT assetId "FK"
+        BIGINT contractId "FK"
+        VARCHAR(50) docType
+        VARCHAR(50) docCode
+        VARCHAR(200) docName
+        TEXT description
+        VARCHAR(200) fileName
+        VARCHAR(200) filePath
+        VARCHAR(200) fileSize
+        VARCHAR(50) mimeType
+        DATE uploadDate
+        BIGINT uploadedByUserId "FK"
+        BOOLEAN isVerified
+        BIGINT verifiedByUserId "FK"
+        DATE verifiedAt
+        TEXT notes
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AssetRequirementRequest {
+        BIGINT requestId "PK"
+        BIGINT schoolId "FK"
+        INT requestNumber
+        VARCHAR(50) requestType
+        VARCHAR(50) assetType
+        BIGINT assetCategoryId "FK"
+        INT quantity
+        DECIMAL(15,2) estimatedUnitCost
+        DECIMAL(15,2) estimatedTotalCost
+        VARCHAR(200) currency
+        VARCHAR(200) priority
+        VARCHAR(200) urgencyReason
+        BIGINT requestingDepartmentId "FK"
+        BIGINT requestedByUserId "FK"
+        DATE requestDate
+        VARCHAR(200) justification
+        VARCHAR(200) gapAnalysisSummary
+        VARCHAR(200) initialSpecs
+        VARCHAR(200) suggestedSuppliers
+        DATE requiredByDate
+        BIGINT renewalPlanId "FK"
+        BOOLEAN isReplacement
+        BIGINT assetToReplaceId "FK"
+        VARCHAR(200) replacementReason
+        VARCHAR(50) approvalStatus
+        VARCHAR(200) rejectionReason
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        BOOLEAN convertedToPO
+        BIGINT purchaseOrderId "FK"
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    TechnicalSpecifications {
+        BIGINT specId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) specCode
+        VARCHAR(200) specNameAr
+        VARCHAR(200) specNameEn
+        BIGINT assetCategoryId "FK"
+        VARCHAR(50) assetType
+        TEXT technicalDetails
+        VARCHAR(200) requiredCertifications
+        VARCHAR(200) acceptanceCriteria
+        VARCHAR(50) qualityStandards
+        VARCHAR(200) warrantyRequirements
+        VARCHAR(200) deliveryRequirements
+        VARCHAR(200) installationRequirements
+        VARCHAR(200) safetyRequirements
+        BOOLEAN isActive
+        DATE validFrom
+        DATE validTo
+        VARCHAR(200) version
+        VARCHAR(200) attachments
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    FeasibilityRiskAnalysis {
+        BIGINT analysisId "PK"
+        BIGINT schoolId "FK"
+        BIGINT requestId "FK"
+        INT analysisNumber
+        DATE analysisDate
+        BIGINT analystUserId "FK"
+        TEXT operationalRisks
+        TEXT financialRisks
+        VARCHAR(50) riskLevel
+        VARCHAR(200) riskMitigationPlan
+        VARCHAR(200) expectedLifeSpan
+        DECIMAL(15,2) usefulLifeEstimate
+        DECIMAL(5,2) roiEstimate
+        VARCHAR(200) paybackPeriod
+        VARCHAR(200) npvEstimate
+        VARCHAR(200) alternativeSolutions
+        VARCHAR(200) finalRecommendation
+        VARCHAR(200) recommendationReason
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        VARCHAR(50) status
+        VARCHAR(200) attachments
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AssetBudgetAllocation {
+        BIGINT allocationId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) fiscalYear
+        VARCHAR(50) budgetType
+        BIGINT assetCategoryId "FK"
+        BIGINT departmentId "FK"
+        DECIMAL(15,2) allocatedAmount
+        DECIMAL(15,2) spentAmount
+        DECIMAL(15,2) remainingAmount
+        VARCHAR(50) budgetLineCode
+        TEXT notes
+        VARCHAR(50) status
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    PurchaseOrders {
+        BIGINT purchaseOrderId "PK"
+        BIGINT schoolId "FK"
+        INT poNumber
+        DATE poDate
+        BIGINT requestId "FK"
+        VARCHAR(200) supplierName
+        VARCHAR(200) supplierContact
+        VARCHAR(200) supplierAddress
+        DECIMAL(15,2) totalAmount
+        DECIMAL(15,2) taxAmount
+        INT taxRegistrationNumber
+        VARCHAR(200) currency
+        VARCHAR(200) paymentTerms
+        VARCHAR(200) deliveryTerms
+        DATE deliveryDeadline
+        DATE actualDeliveryDate
+        VARCHAR(200) shippingMethod
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        VARCHAR(50) poStatus
+        VARCHAR(200) cancellationReason
+        BIGINT budgetAllocationId "FK"
+        TEXT notes
+        VARCHAR(200) attachments
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AssetReceiving {
+        BIGINT receivingId "PK"
+        BIGINT schoolId "FK"
+        BIGINT purchaseOrderId "FK"
+        INT receivingNumber
+        DATE receivedDate
+        BIGINT receivedByUserId "FK"
+        BIGINT inspectorUserId "FK"
+        INT deliveryNoteNumber
+        VARCHAR(200) deliveryCompany
+        VARCHAR(200) inspectionResult
+        DATE inspectionDate
+        TEXT inspectionNotes
+        DECIMAL(5,2) qualityScore
+        VARCHAR(50) deliveryStatus
+        TEXT receivedItemsDetails
+        VARCHAR(200) acceptedAssets
+        VARCHAR(200) rejectedItems
+        BOOLEAN returnRequested
+        DATE returnDate
+        BOOLEAN correctiveActionRequested
+        TEXT correctiveActionDetails
+        VARCHAR(200) finalDecision
+        VARCHAR(200) attachments
+        VARCHAR(50) status
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AssetUsageLog {
+        BIGINT usageLogId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) usageType
+        DATETIME startDateTime
+        DATETIME endDateTime
+        DATETIME durationMinutes
+        VARCHAR(200) purpose
+        TEXT purposeDetails
+        BIGINT userId "FK"
+        VARCHAR(50) userType
+        BIGINT locationId "FK"
+        VARCHAR(50) usageStatus
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    MaintenanceTickets {
+        BIGINT ticketId "PK"
+        BIGINT schoolId "FK"
+        INT ticketNumber
+        BIGINT assetId "FK"
+        BIGINT reportedByUserId "FK"
+        DATETIME reportDate
+        BOOLEAN issueType
+        VARCHAR(50) severityLevel
+        BOOLEAN issueDescription
+        VARCHAR(200) reportedLocation "FK"
+        BIGINT assignedToUserId "FK"
+        DATE assignedDate
+        VARCHAR(200) diagnosis
+        VARCHAR(200) requiredParts
+        DECIMAL(15,2) estimatedCost
+        DATE estimatedCompletionDate
+        DATE actualCompletionDate
+        TEXT resolutionDetails
+        VARCHAR(200) resolutionSummary
+        DECIMAL(15,2) resolutionCost
+        VARCHAR(50) ticketStatus
+        TEXT closureNotes
+        BIGINT closedByUserId "FK"
+        DATE closedAt
+        BIGINT relatedExecutionId "FK"
+        VARCHAR(200) attachments
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    PreventiveMaintenanceSchedule {
+        BIGINT scheduleId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) scheduleCode
+        BIGINT assetId "FK"
+        BIGINT assetCategoryId "FK"
+        VARCHAR(200) taskNameAr
+        VARCHAR(200) taskNameEn
+        VARCHAR(50) maintenanceType
+        VARCHAR(200) frequency
+        INT frequencyValue
+        VARCHAR(200) frequencyUnit
+        DATE nextDueDate
+        DATE lastServiceDate
+        VARCHAR(200) estimatedDuration
+        VARCHAR(200) assignedToTeam "FK"
+        VARCHAR(200) instructions
+        VARCHAR(200) checklist
+        VARCHAR(200) requiredParts
+        DECIMAL(15,2) estimatedCost
+        BIGINT contractId "FK"
+        BOOLEAN isReminderActive
+        INT reminderDaysBefore
+        VARCHAR(50) status
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    MaintenanceExecution {
+        BIGINT executionId "PK"
+        BIGINT schoolId "FK"
+        INT executionNumber
+        BIGINT ticketId "FK"
+        BIGINT scheduleId "FK"
+        BIGINT assetId "FK"
+        VARCHAR(50) executionType
+        DATE startDateTime
+        DATE endDateTime
+        BIGINT executedByUserId "FK"
+        TEXT workPerformed
+        TEXT sparePartsUsed
+        DECIMAL(15,2) maintenanceCost
+        TEXT additionalNotes
+        BOOLEAN isOperationalAfter
+        BIGINT newAssetStatusId "FK"
+        VARCHAR(200) resolutionSummary
+        VARCHAR(200) attachments
+        VARCHAR(50) status
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    MaintenanceSpareParts {
+        BIGINT partId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) partCode
+        VARCHAR(200) partNameAr
+        VARCHAR(200) partNameEn
+        VARCHAR(50) partCategory
+        VARCHAR(200) manufacturer
+        VARCHAR(200) compatibleAssets
+        VARCHAR(200) unitOfMeasure
+        INT currentStockQuantity
+        VARCHAR(50) minStockLevel
+        VARCHAR(50) maxStockLevel
+        INT reorderQuantity
+        DECIMAL(15,2) unitCost
+        VARCHAR(200) currency
+        VARCHAR(200) supplierName
+        VARCHAR(200) locationInWarehouse
+        BOOLEAN isActive
+        VARCHAR(50) status
+        DATE lastRestockDate
+        VARCHAR(200) totalConsumed
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AssetSuspensionRequests {
+        BIGINT suspensionId "PK"
+        BIGINT schoolId "FK"
+        INT requestNumber
+        BIGINT assetId "FK"
+        BIGINT requestedByUserId "FK"
+        DATE requestDate
+        VARCHAR(200) reason
+        TEXT reasonDetails
+        DATE startDate
+        DATE expectedEndDate
+        VARCHAR(200) attachments
+        VARCHAR(50) approvalStatus
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        TEXT approvalNotes
+        VARCHAR(200) rejectionReason
+        BOOLEAN isRevoked
+        DATE revokeDate
+        VARCHAR(200) revokeReason
+        BIGINT revokedByUserId "FK"
+        DATE actualEndDate
+        VARCHAR(50) status
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    MaintenanceNotifications {
+        BIGINT notificationId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) relatedEntityType
+        BIGINT relatedEntityId "FK"
+        VARCHAR(50) notificationType
+        VARCHAR(200) title
+        VARCHAR(200) messageContent
+        BIGINT recipientUserId "FK"
+        VARCHAR(200) priority
+        BOOLEAN isRead
+        DATE readAt
+        DATETIME sentAt
+        VARCHAR(100) deliveryMethod
+        VARCHAR(50) status
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    UsageViolations {
+        BIGINT violationId "PK"
+        BIGINT schoolId "FK"
+        BIGINT assetId "FK"
+        VARCHAR(50) violationType
+        DATE violationDate
+        BIGINT reportedByUserId "FK"
+        DATE reportedDate
+        BIGINT violatingUserId "FK"
+        TEXT description
+        VARCHAR(200) evidence
+        VARCHAR(200) penaltyAction
+        DECIMAL(15,2) penaltyAmount
+        DECIMAL(15,2) penaltyAmountCurrency
+        BOOLEAN deductionFromSalary
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        VARCHAR(50) status
+        DATE closedAt
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AssetFinancials {
+        BIGINT financialsId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        DECIMAL(15,2) purchasePrice
+        DECIMAL(15,2) shippingCosts
+        DECIMAL(15,2) customsFees
+        DECIMAL(15,2) installationCosts
+        DECIMAL(15,2) otherCosts
+        DECIMAL(15,2) totalInitialCost
+        VARCHAR(200) currency
+        DECIMAL(15,2) exchangeRateToSAR
+        VARCHAR(200) salvageValue
+        VARCHAR(200) residualValue
+        DATE residualValueLastUpdate
+        VARCHAR(200) fiscalYear
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AssetDepreciation {
+        BIGINT depreciationId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) methodType
+        VARCHAR(200) usefulLifeYears
+        VARCHAR(200) usefulLifeUnits
+        DECIMAL(5,2) depreciationRate
+        VARCHAR(200) currentBookValue
+        DATE accumulatedDepreciation
+        VARCHAR(200) netBookValue
+        DECIMAL(15,2) depreciableAmount
+        DATE lastDepreciationDate
+        VARCHAR(200) lastDepreciationPeriod
+        BOOLEAN isFullyDepreciated
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    DepreciationTransactions {
+        BIGINT transactionId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        BIGINT depreciationId "FK"
+        VARCHAR(200) periodStart
+        VARCHAR(200) periodEnd
+        VARCHAR(50) periodType
+        VARCHAR(200) fiscalYear
+        INT periodNumber
+        DECIMAL(15,2) depreciationAmount
+        VARCHAR(200) accumulatedDepreciationAfter
+        VARCHAR(200) netBookValueAfter
+        BOOLEAN isPostedToLedger
+        VARCHAR(50) ledgerEntryReference
+        DATE postedToLedgerDate
+        BIGINT calculatedByUserId "FK"
+        DATE calculationDate
+        TEXT notes
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    RevaluationImpairment {
+        BIGINT revaluationId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) type
+        DATE effectiveDate
+        VARCHAR(200) oldBookValue
+        VARCHAR(200) oldAccumulatedDepreciation
+        VARCHAR(200) oldNetBookValue
+        VARCHAR(200) newValue
+        VARCHAR(200) newAccumulatedDepreciation
+        VARCHAR(200) newNetBookValue
+        VARCHAR(200) difference
+        VARCHAR(50) differenceType
+        VARCHAR(200) valuationFirm
+        INT valuationReportNumber
+        DATE valuationReportDate
+        DECIMAL(15,2) valuationMethod
+        VARCHAR(200) reason
+        VARCHAR(200) attachments
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        VARCHAR(50) status
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AssetExpenses {
+        BIGINT expenseId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) expenseType
+        DATE expenseDate
+        DECIMAL(15,2) amount
+        VARCHAR(200) currency
+        TEXT description
+        BIGINT relatedExecutionId "FK"
+        BOOLEAN isCapitalized
+        DATE capitalizationDate
+        BOOLEAN accountedInFinancials
+        BOOLEAN accountedInDepreciation
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    FeasibilityComparison {
+        BIGINT comparisonId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        DATE comparisonDate
+        DECIMAL(15,2) repairEstimate
+        DECIMAL(15,2) repairEstimateBreakdown
+        BIGINT replacementAssetId "FK"
+        DECIMAL(15,2) replacementCost
+        DECIMAL(15,2) replacementCostBreakdown
+        DECIMAL(15,2) totalCostOfOwnershipAnalysis
+        VARCHAR(200) recommendation
+        VARCHAR(200) recommendationReason
+        VARCHAR(50) decisionStatus
+        DATE decisionDate
+        BIGINT approvedByUserId "FK"
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    FinancialAuditArchive {
+        BIGINT archiveId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) reportType
+        VARCHAR(200) fiscalYear
+        VARCHAR(200) periodStart
+        VARCHAR(200) periodEnd
+        DATE generationDate
+        DATE archivedDate
+        VARCHAR(200) totalAssetsValue
+        VARCHAR(200) totalDepreciationValue
+        VARCHAR(200) filePath
+        BOOLEAN isReadOnly
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        DATE createdAt
+        BOOLEAN isDeleted
+    }
+    FinancialSummaryReports {
+        BIGINT summaryId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) fiscalYear
+        DATE reportDate
+        VARCHAR(50) reportType
+        BIGINT assetCategoryId "FK"
+        VARCHAR(200) totalBookValue
+        VARCHAR(200) totalDepreciation
+        INT totalAssetsCount
+        DATE totalAcquisitionCost
+        INT fullyDepreciatedAssetsCount
+        INT assetsWithImpairmentCount
+        VARCHAR(200) revaluationGains
+        VARCHAR(200) revaluationLosses
+        VARCHAR(50) auditStatus
+        VARCHAR(200) auditFirmName
+        VARCHAR(200) auditorName
+        DATE auditDate
+        VARCHAR(200) auditorSignature
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AssetAssignment {
+        BIGINT assignmentId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) assigneeType
+        BIGINT assigneeId "FK"
+        VARCHAR(200) assigneeName
+        BIGINT assignerUserId "FK"
+        DATE assignmentDate
+        DATE expectedReturnDate
+        DATE actualReturnDate
+        VARCHAR(200) assignmentReason
+        VARCHAR(200) conditionAtAssignment
+        TEXT conditionNotesAtAssignment
+        VARCHAR(200) conditionAtReturn
+        TEXT conditionNotesAtReturn
+        TEXT damageNotes
+        DECIMAL(15,2) penaltyAmount
+        VARCHAR(50) penaltyStatus
+        VARCHAR(50) assignmentStatus
+        BOOLEAN isReturned
+        INT returnReceiptNumber
+        BIGINT returnedToUserId "FK"
+        DATE returnDate
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AssetLoans {
+        BIGINT loanId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) borrowerType
+        BIGINT borrowerId "FK"
+        VARCHAR(200) borrowerName
+        VARCHAR(20) borrowerContact
+        DATE loanDate
+        DATE expectedReturnDate
+        DATE actualReturnDate
+        VARCHAR(200) loanPurpose
+        BIGINT issuerUserId "FK"
+        VARCHAR(200) conditionAtLoan
+        VARCHAR(200) conditionAtReturn
+        BOOLEAN isOverdue
+        INT overdueDays
+        DECIMAL(15,2) fineAmount
+        BIGINT finePaid "FK"
+        DATE finePaidDate
+        VARCHAR(50) loanStatus
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AssetTransferRequests {
+        BIGINT transferRequestId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        INT requestNumber
+        VARCHAR(50) fromEntityType
+        BIGINT fromEntityId "FK"
+        VARCHAR(50) toEntityType
+        BIGINT toEntityId "FK"
+        VARCHAR(50) transferType
+        VARCHAR(200) requestReason
+        BIGINT requestedByUserId "FK"
+        DATE requestDate
+        VARCHAR(50) approvalStatus
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        TEXT approvalNotes
+        VARCHAR(200) rejectionReason
+        DATE transferExecutionDate
+        BIGINT executedByUserId "FK"
+        TEXT notes
+        VARCHAR(50) status
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AssetInspectionLog {
+        BIGINT inspectionId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) relatedTransactionType
+        BIGINT relatedTransactionId "FK"
+        VARCHAR(50) inspectionType
+        DATE inspectionDate
+        BIGINT inspectorUserId "FK"
+        VARCHAR(200) physicalCondition
+        TEXT damageDetails
+        VARCHAR(200) damagePhotos
+        VARCHAR(50) functionalStatus
+        VARCHAR(200) missingParts
+        VARCHAR(200) inspectionResult
+        VARCHAR(200) recommendedAction
+        DECIMAL(15,2) estimatedRepairCost
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AssetMovementHistory {
+        BIGINT historyId "PK"
+        BIGINT assetId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) actionType
+        TEXT actionDescription
+        VARCHAR(200) oldValue
+        VARCHAR(200) newValue
+        VARCHAR(50) relatedEntityType
+        BIGINT relatedEntityId "FK"
+        DATETIME actionDate
+        BIGINT performedByUserId "FK"
+        TEXT notes
+        DATE createdAt
+        BOOLEAN isDeleted
+    }
+    LoanTrackingAlerts {
+        BIGINT alertId "PK"
+        BIGINT loanId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) alertType
+        DATE alertDate
+        VARCHAR(200) alertMessage
+        VARCHAR(100) deliveryMethod
+        BOOLEAN isSent
+        VARCHAR(20) sentTo
+        BOOLEAN isAcknowledged
+        DATE acknowledgedAt
+        BOOLEAN violationRecorded
+        BIGINT violationId "FK"
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        DATE createdAt
+        BOOLEAN isDeleted
+    }
+    InventoryPlans {
+        BIGINT planId "PK"
+        BIGINT schoolId "FK"
+        INT planNumber
+        VARCHAR(200) planName
+        VARCHAR(50) inventoryType
+        VARCHAR(50) scopeType
+        VARCHAR(200) scopeValue
+        DATE startDate
+        DATE endDate
+        DATE actualEndDate
+        BIGINT assignedTeamLeaderId "FK"
+        VARCHAR(200) assignedTeamMembers
+        VARCHAR(200) instructions
+        VARCHAR(50) status
+        DECIMAL(5,2) completionPercentage
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    FieldInventoryLog {
+        BIGINT logId "PK"
+        BIGINT planId "FK"
+        BIGINT schoolId "FK"
+        BIGINT scannerUserId "FK"
+        DATE scanTimestamp
+        VARCHAR(50) scannedCode
+        BIGINT assetId "FK"
+        VARCHAR(200) physicalLocation "FK"
+        VARCHAR(200) actualCondition
+        TEXT conditionNotes
+        BOOLEAN found
+        TEXT foundNotes
+        VARCHAR(200) assetPhoto
+        VARCHAR(200) gpsLocation
+        BOOLEAN isVerified
+        BIGINT verifiedByUserId "FK"
+        VARCHAR(200) verifiedAt
+        TEXT notes
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    InventoryReconciliation {
+        BIGINT reconciliationId "PK"
+        BIGINT planId "FK"
+        BIGINT schoolId "FK"
+        BIGINT assetId "FK"
+        VARCHAR(50) discrepancyType
+        BIGINT systemLocationId "FK"
+        BIGINT actualLocationId "FK"
+        VARCHAR(200) systemCondition
+        VARCHAR(200) actualCondition
+        VARCHAR(200) reasonForDiff
+        TEXT investigationNotes
+        VARCHAR(200) correctiveAction
+        BOOLEAN isResolved
+        DATE resolutionDate
+        BIGINT resolvedByUserId "FK"
+        TEXT resolutionNotes
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        VARCHAR(50) status
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    ComplianceAudit {
+        BIGINT auditId "PK"
+        BIGINT schoolId "FK"
+        INT auditNumber
+        DATE auditDate
+        VARCHAR(50) auditType
+        VARCHAR(50) standardType
+        VARCHAR(200) standardVersion
+        BIGINT auditedByUserId "FK"
+        VARCHAR(200) auditScope
+        DECIMAL(5,2) complianceScore
+        VARCHAR(200) violationsFound
+        TEXT violationsDetails
+        VARCHAR(200) correctiveActionsRequired
+        VARCHAR(200) correctiveActionsDeadline
+        VARCHAR(50) correctiveActionsStatus
+        DATE followUpAuditDate
+        VARCHAR(200) auditReportPath
+        VARCHAR(50) status
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    FinalApprovalAudit {
+        BIGINT finalApprovalId "PK"
+        BIGINT schoolId "FK"
+        BIGINT planId "FK"
+        BIGINT auditId "FK"
+        VARCHAR(50) approvalType
+        DATE approvalDate
+        BIGINT approvedByUserId "FK"
+        VARCHAR(200) approvalDocPath
+        VARCHAR(200) summaryOfChanges
+        DATE finalStatusUpdate
+        DATE statusUpdateDate
+        BIGINT statusUpdatedByUserId "FK"
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    FacilityDepartmentAssignment {
+        BIGINT assignmentId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) facilityType
+        BIGINT facilityId "FK"
+        BIGINT departmentId "FK"
+        BIGINT responsibleUserId "FK"
+        VARCHAR(50) assignmentType
+        DATE startDate
+        DATE endDate
+        BOOLEAN isShared
+        VARCHAR(200) sharedWithDepartments
+        VARCHAR(200) sharingSchedule
+        VARCHAR(200) priority
+        TEXT notes
+        VARCHAR(50) status
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    EducationalConsumablesTracking {
+        BIGINT consumptionId "PK"
+        BIGINT schoolId "FK"
+        BIGINT consumableId "FK"
+        VARCHAR(200) consumableName
+        VARCHAR(50) consumableCode
+        VARCHAR(50) category
+        INT quantityConsumed
+        VARCHAR(200) unitOfMeasure
+        DATE consumptionDate
+        BIGINT consumedByUserId "FK"
+        BIGINT departmentId "FK"
+        BIGINT courseId "FK"
+        BIGINT activityId "FK"
+        VARCHAR(200) purpose
+        TEXT notes
+        DECIMAL(15,2) unitCost
+        DECIMAL(15,2) totalCost
+        VARCHAR(50) budgetLineCode
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AssetCategory ||--o{ Asset : "assetCategoryId"
+    AssetStatus ||--o{ Asset : "assetStatusId"
+    AssetLocation ||--o{ Asset : "assetLocationId"
+    PurchaseOrders ||--o{ Asset : "purchaseOrderReference"
+    AssetWarrantyContract ||--o{ Asset : "warrantyContractId"
+    AssetCategory ||--o{ AssetCategory : "parentCategoryId"
+    AssetLocation ||--o{ AssetLocation : "parentLocationId"
+    Asset ||--o{ AssetDocument : "assetId"
+    AssetWarrantyContract ||--o{ AssetDocument : "contractId"
+    AssetCategory ||--o{ AssetRequirementRequest : "assetCategoryId"
+    Asset ||--o{ AssetRequirementRequest : "assetToReplaceId"
+    PurchaseOrders ||--o{ AssetRequirementRequest : "purchaseOrderId"
+    AssetCategory ||--o{ TechnicalSpecifications : "assetCategoryId"
+    AssetRequirementRequest ||--o{ FeasibilityRiskAnalysis : "requestId"
+    AssetCategory ||--o{ AssetBudgetAllocation : "assetCategoryId"
+    AssetRequirementRequest ||--o{ PurchaseOrders : "requestId"
+    AssetBudgetAllocation ||--o{ PurchaseOrders : "budgetAllocationId"
+    PurchaseOrders ||--o{ AssetReceiving : "purchaseOrderId"
+    Asset ||--o{ AssetUsageLog : "assetId"
+    AssetLocation ||--o{ AssetUsageLog : "locationId"
+    Asset ||--o{ MaintenanceTickets : "assetId"
+    AssetLocation ||--o{ MaintenanceTickets : "reportedLocation"
+    MaintenanceExecution ||--o{ MaintenanceTickets : "relatedExecutionId"
+    Asset ||--o{ PreventiveMaintenanceSchedule : "assetId"
+    AssetCategory ||--o{ PreventiveMaintenanceSchedule : "assetCategoryId"
+    AssetWarrantyContract ||--o{ PreventiveMaintenanceSchedule : "contractId"
+    MaintenanceTickets ||--o{ MaintenanceExecution : "ticketId"
+    PreventiveMaintenanceSchedule ||--o{ MaintenanceExecution : "scheduleId"
+    Asset ||--o{ MaintenanceExecution : "assetId"
+    AssetStatus ||--o{ MaintenanceExecution : "newAssetStatusId"
+    Asset ||--o{ AssetSuspensionRequests : "assetId"
+    Asset ||--o{ UsageViolations : "assetId"
+    Asset ||--o{ AssetFinancials : "assetId"
+    Asset ||--o{ AssetDepreciation : "assetId"
+    Asset ||--o{ DepreciationTransactions : "assetId"
+    AssetDepreciation ||--o{ DepreciationTransactions : "depreciationId"
+    Asset ||--o{ RevaluationImpairment : "assetId"
+    Asset ||--o{ AssetExpenses : "assetId"
+    MaintenanceExecution ||--o{ AssetExpenses : "relatedExecutionId"
+    Asset ||--o{ FeasibilityComparison : "assetId"
+    Asset ||--o{ FeasibilityComparison : "replacementAssetId"
+    AssetCategory ||--o{ FinancialSummaryReports : "assetCategoryId"
+    Asset ||--o{ AssetAssignment : "assetId"
+    Asset ||--o{ AssetLoans : "assetId"
+    Asset ||--o{ AssetTransferRequests : "assetId"
+    Asset ||--o{ AssetInspectionLog : "assetId"
+    Asset ||--o{ AssetMovementHistory : "assetId"
+    AssetLoans ||--o{ LoanTrackingAlerts : "loanId"
+    UsageViolations ||--o{ LoanTrackingAlerts : "violationId"
+    InventoryPlans ||--o{ FieldInventoryLog : "planId"
+    Asset ||--o{ FieldInventoryLog : "assetId"
+    AssetLocation ||--o{ FieldInventoryLog : "physicalLocation"
+    InventoryPlans ||--o{ InventoryReconciliation : "planId"
+    Asset ||--o{ InventoryReconciliation : "assetId"
+    InventoryPlans ||--o{ FinalApprovalAudit : "planId"
+    ComplianceAudit ||--o{ FinalApprovalAudit : "auditId"

@@ -1,0 +1,18 @@
+sequenceDiagram
+    actor OF as موظف المكتب
+    participant API
+    participant DB
+    actor PRIN as المدير المرشح
+    
+    OF->>API: POST /schools
+    API->>DB: INSERT School(Pending)
+    OF->>API: تحديد المراحل والصفوف
+    API->>DB: INSERT SchoolLevel, GradeCapacity
+    OF->>API: ترشيح القيادة
+    API->>DB: INSERT LeadershipNomination
+    PRIN->>API: قبول التعيين
+    API->>DB: INSERT LeadershipAssignment
+    API->>DB: UPDATE School.principalId
+    OF->>API: اعتماد المدرسة
+    API->>DB: UPDATE School.status='Active'
+    API->>DB: INSERT SchoolAuditLog

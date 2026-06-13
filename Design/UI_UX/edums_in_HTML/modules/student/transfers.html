@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - الترقية والنقل الطلابي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">إدارة الطلاب</div>
+                    <a href="index.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                    <a href="students.html" class="nav-item">
+                        <span class="icon">👥</span>
+                        <span>قائمة الطلاب</span>
+                    </a>
+                    <a href="applications.html" class="nav-item">
+                        <span class="icon">📝</span>
+                        <span>طلبات التسجيل</span>
+                    </a>
+                    <a href="enrollment.html" class="nav-item">
+                        <span class="icon">✅</span>
+                        <span>القبول والتسجيل</span>
+                    </a>
+                    <a href="attendance.html" class="nav-item">
+                        <span class="icon">📅</span>
+                        <span>الحضور والغياب</span>
+                    </a>
+                    <a href="grades.html" class="nav-item">
+                        <span class="icon">💯</span>
+                        <span>الدرجات والتقييم</span>
+                    </a>
+                    <a href="behavior.html" class="nav-item">
+                        <span class="icon">⚖️</span>
+                        <span>السلوك والانضباط</span>
+                    </a>
+                    <a href="activities.html" class="nav-item">
+                        <span class="icon">🏀</span>
+                        <span>الأنشطة والفعاليات</span>
+                    </a>
+                    <a href="transfers.html" class="nav-item active">
+                        <span class="icon">🔄</span>
+                        <span>الترقية والنقل</span>
+                    </a>
+                    <a href="health.html" class="nav-item">
+                        <span class="icon">🏥</span>
+                        <span>السجل الصحي</span>
+                    </a>
+                    <a href="transport.html" class="nav-item">
+                        <span class="icon">🚌</span>
+                        <span>النقل المدرسي</span>
+                    </a>
+                    <a href="guardians.html" class="nav-item">
+                        <span class="icon">👨‍👩‍👦</span>
+                        <span>أولياء الأمور</span>
+                    </a>
+                    <a href="documents.html" class="nav-item">
+                        <span class="icon">📂</span>
+                        <span>وثائق الطلاب</span>
+                    </a>
+                    <a href="graduation.html" class="nav-item">
+                        <span class="icon">🎓</span>
+                        <span>التخرج والأرشفة</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة الطلاب - الترقية والنقل</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">
+                            🔔
+                            <span class="badge">1</span>
+                        </button>
+                        <button class="header-btn">💬</button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير المدرسة</h4>
+                            <p>الإدارة</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <h1 class="page-title">🔄 الترقية السنوية والنقل الخارجي</h1>
+                            <div class="page-breadcrumb">
+                                <a href="../../index.html">الرئيسية</a>
+                                <span>/</span>
+                                <a href="index.html">إدارة الطلاب</a>
+                                <span>/</span>
+                                <span>الترقية والنقل</span>
+                            </div>
+                        </div>
+                        <div class="page-actions" style="display: flex; gap: 10px;">
+                            <button class="btn btn-outline" onclick="openModal('externalTransferModal')">
+                                <span>📤</span>
+                                <span>نقل خارجي</span>
+                            </button>
+                            <button class="btn btn-primary" onclick="openModal('bulkPromotionModal')">
+                                <span>🚀</span>
+                                <span>ترقية جماعية (نهاية العام)</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Transfer Scenarios -->
+                <div class="grid-2">
+                    <!-- Internal Promotion Status -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">جاهزية الترقية السنوية (1445-1446)</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="promotion-status-list">
+                                <div class="status-item">
+                                    <div class="info">
+                                        <span class="label">طلاب ناجحون (مؤهلون للترقية)</span>
+                                        <span class="count">850</span>
+                                    </div>
+                                    <div class="progress-bar"><div class="progress" style="width: 100%; background: var(--success);"></div></div>
+                                </div>
+                                <div class="status-item">
+                                    <div class="info">
+                                        <span class="label">طلاب دور ثاني (معلق)</span>
+                                        <span class="count">45</span>
+                                    </div>
+                                    <div class="progress-bar"><div class="progress" style="width: 15%; background: var(--warning);"></div></div>
+                                </div>
+                                <div class="status-item">
+                                    <div class="info">
+                                        <span class="label">طلاب باقون للإعادة</span>
+                                        <span class="count">12</span>
+                                    </div>
+                                    <div class="progress-bar"><div class="progress" style="width: 5%; background: var(--danger);"></div></div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 24px; text-align: center;">
+                                <p style="font-size: 0.85em; color: var(--text-secondary); margin-bottom: 15px;">يتم تفعيل الترقية الجماعية بعد اعتماد كافة الدرجات وإغلاق العام الدراسي.</p>
+                                <button class="btn btn-primary btn-sm">فتح معالج الترقية</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- External Transfers -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">طلبات النقل الخارجي النشطة</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="transfer-requests">
+                                <div class="request-item">
+                                    <div class="student-mini-info">
+                                        <div class="avatar">أ</div>
+                                        <div>
+                                            <h4>أحمد سامي محمد</h4>
+                                            <p>الصف التاسع - شعبة أ</p>
+                                        </div>
+                                    </div>
+                                    <div class="transfer-info">
+                                        <span class="direction">إلى: مدرسة النجاح الثانوية</span>
+                                        <span class="status-badge warning">بانتظار موافقة المكتب</span>
+                                    </div>
+                                </div>
+                                <div class="request-item">
+                                    <div class="student-mini-info">
+                                        <div class="avatar">ي</div>
+                                        <div>
+                                            <h4>ياسين إبراهيم</h4>
+                                            <p>الصف العاشر - شعبة ج</p>
+                                        </div>
+                                    </div>
+                                    <div class="transfer-info">
+                                        <span class="direction">إلى: مدرسة المنهل النموذجية</span>
+                                        <span class="status-badge info">بانتظار إخلاء الطرف</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 20px; text-align: center;">
+                                <a href="#" style="color: var(--primary-light); font-size: 0.9em; font-weight: 600;">عرض كافة طلبات النقل</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bulk Promotion Table Preview -->
+                <div class="card" style="margin-top: 32px;">
+                    <div class="card-header">
+                        <h3 class="card-title">محاكاة حركة الطلاب للعام القادم</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>المرحلة الحالية</th>
+                                        <th>الصف الحالي</th>
+                                        <th>عدد الطلاب</th>
+                                        <th>الحالة الأكاديمية</th>
+                                        <th>الإجراء القادم</th>
+                                        <th>الصف المستهدف</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>المتوسطة</td>
+                                        <td>الثالث المتوسط</td>
+                                        <td>120</td>
+                                        <td>ناجح</td>
+                                        <td><strong>ترقية (انتقال مرحلة)</strong></td>
+                                        <td>الأول الثانوي</td>
+                                    </tr>
+                                    <tr>
+                                        <td>المتوسطة</td>
+                                        <td>الثاني المتوسط</td>
+                                        <td>145</td>
+                                        <td>ناجح</td>
+                                        <td><strong>ترقية</strong></td>
+                                        <td>الثالث المتوسط</td>
+                                    </tr>
+                                    <tr>
+                                        <td>المتوسطة</td>
+                                        <td>الثاني المتوسط</td>
+                                        <td>5</td>
+                                        <td>راسب</td>
+                                        <td><strong style="color: var(--danger);">إعادة قيد</strong></td>
+                                        <td>الثاني المتوسط</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="externalTransferModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>طلب نقل طالب لخارج المدرسة</h3>
+                <span class="close-modal" onclick="closeModal('externalTransferModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">اختيار الطالب</label>
+                        <select class="form-select">
+                            <option>ابحث عن طالب بالاسم أو الرقم...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">المدرسة المنقول إليها</label>
+                        <input type="text" class="form-input" placeholder="اسم المدرسة الجديدة">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">المنطقة التعليمية</label>
+                            <select class="form-select">
+                                <option>منطقة الرياض</option>
+                                <option>منطقة مكة</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">سبب النقل</label>
+                            <select class="form-select">
+                                <option>تغيير السكن</option>
+                                <option>رغبة ولي الأمر</option>
+                                <option>أسباب صحية</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">مرفق طلب ولي الأمر (PDF)</label>
+                        <input type="file" class="form-input">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('externalTransferModal')">إلغاء</button>
+                <button class="btn btn-primary">إرسال طلب النقل</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .promotion-status-list { display: grid; gap: 20px; }
+        .status-item .info { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 600; }
+        .status-item .count { color: var(--primary); }
+        .progress-bar { width: 100%; height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden; }
+        .progress { height: 100%; }
+
+        .request-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; border: 1px solid #e5e7eb; border-radius: 10px; margin-bottom: 10px; }
+        .student-mini-info { display: flex; gap: 12px; align-items: center; }
+        .student-mini-info .avatar { width: 40px; height: 40px; background: #dbeafe; color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; }
+        .student-mini-info h4 { font-size: 0.9em; margin-bottom: 2px; }
+        .student-mini-info p { font-size: 0.75em; color: var(--text-secondary); }
+        .transfer-info { text-align: left; display: flex; flex-direction: column; gap: 5px; align-items: flex-end; }
+        .transfer-info .direction { font-size: 0.8em; font-weight: 600; color: var(--text-secondary); }
+        .status-badge { font-size: 0.7em; padding: 2px 8px; border-radius: 10px; font-weight: 700; }
+        .status-badge.warning { background: #fef3c7; color: #92400e; }
+        .status-badge.info { background: #dcfce7; color: #166534; }
+
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+        .modal-content { background-color: white; margin: 5% auto; width: 600px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); overflow: hidden; animation: modalSlideDown 0.3s ease-out; }
+        .modal-header { padding: 20px 24px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; }
+        .modal-header h3 { color: #1e3a8a; }
+        .close-modal { font-size: 24px; font-weight: bold; cursor: pointer; color: #6b7280; }
+        .modal-body { padding: 24px; max-height: 70vh; overflow-y: auto; }
+        .modal-footer { padding: 16px 24px; border-top: 1px solid #e5e7eb; display: flex; justify-content: flex-end; gap: 12px; background: #f8fafc; }
+    </style>
+
+    <script>
+        function openModal(id) { document.getElementById(id).style.display = "block"; }
+        function closeModal(id) { document.getElementById(id).style.display = "none"; }
+    </script>
+</body>
+</html>

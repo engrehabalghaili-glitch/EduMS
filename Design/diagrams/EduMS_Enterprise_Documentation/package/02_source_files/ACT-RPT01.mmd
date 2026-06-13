@@ -1,0 +1,17 @@
+flowchart TD
+    Start([المستخدم]) --> Sel[اختيار نوع التقرير]
+    Sel --> Filter[تحديد الفلاتر]
+    Filter --> Coll[جمع البيانات من الوحدات]
+    Coll --> Agg[التجميع والحساب]
+    Agg --> Format{صيغة التقرير}
+    Format -- PDF --> Pdf[توليد PDF]
+    Format -- Excel --> Xls[توليد Excel]
+    Format -- Charts --> Ch[توليد رسوم]
+    Pdf --> Save[حفظ + ربط مستخدم]
+    Xls --> Save
+    Ch --> Save
+    Save --> Audit[تسجيل في النظام]
+    Audit --> Done{رفع للمكتب؟}
+    Done -- نعم --> Sub[رفع]
+    Done -- لا --> End([انتهاء])
+    Sub --> End

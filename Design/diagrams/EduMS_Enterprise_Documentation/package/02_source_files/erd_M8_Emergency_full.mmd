@@ -1,0 +1,384 @@
+erDiagram
+    EmergencyHosting {
+        BIGINT hostingId "PK"
+        BIGINT schoolId "FK"
+        INT hostingNumber
+        VARCHAR(50) hostingType
+        DATE hostingDate
+        DATE endDate
+        DATE expectedEndDate
+        INT actualCount
+        VARCHAR(200) maxCapacity
+        DECIMAL(5,2) utilizationPercentage
+        VARCHAR(200) reason
+        VARCHAR(200) sourceLocation
+        VARCHAR(200) supportOrg
+        VARCHAR(200) supportOrgContact
+        VARCHAR(200) facilitiesUsed
+        VARCHAR(200) resourcesProvided
+        VARCHAR(200) resourcesReceived
+        VARCHAR(200) expenses
+        VARCHAR(200) totalExpenses
+        VARCHAR(50) status
+        TEXT closureNotes
+        VARCHAR(200) lessonsLearned
+        BIGINT reportedByUserId "FK"
+        VARCHAR(200) attachments
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    EmergencyIncidents {
+        BIGINT incidentId "PK"
+        BIGINT schoolId "FK"
+        INT incidentNumber
+        VARCHAR(50) incidentType
+        DATE incidentDate
+        TIME incidentTime
+        VARCHAR(200) severity
+        TEXT description
+        VARCHAR(200) location
+        BIGINT reportedByUserId "FK"
+        VARCHAR(200) reportedAt
+        BOOLEAN isPlanActive
+        BIGINT emergencyPlanId "FK"
+        INT affectedCount
+        INT studentsAffected
+        INT employeesAffected
+        INT injuriesCount
+        INT severeInjuriesCount
+        INT fatalitiesCount
+        VARCHAR(200) propertyDamage
+        TEXT propertyDamageDescription
+        VARCHAR(200) emergencyResponse
+        VARCHAR(200) externalAgencies
+        TIME externalResponseTime
+        VARCHAR(50) status
+        DATE closureDate
+        TEXT closureNotes
+        VARCHAR(500) investigationReport
+        VARCHAR(200) lessonsLearned
+        VARCHAR(200) recommendations
+        VARCHAR(200) attachments
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    EmergencyClosures {
+        BIGINT closureId "PK"
+        BIGINT schoolId "FK"
+        INT closureNumber
+        VARCHAR(200) closureReason
+        VARCHAR(200) authority
+        INT authorityDecisionNumber
+        DATE startDate
+        DATE endDate
+        DATE actualEndDate
+        INT totalClosureDays
+        INT schoolDaysAffected
+        BOOLEAN alternativeEducation
+        VARCHAR(50) alternativeEducationType
+        VARCHAR(200) altEducationPlatform
+        TEXT altEducationDetails
+        BOOLEAN wasCompensated
+        BIGINT compensationPlanId "FK"
+        BOOLEAN parentNotificationSent
+        DATE parentNotificationDate
+        VARCHAR(100) parentNotificationMethod
+        VARCHAR(50) status
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    TransportationServices {
+        BIGINT serviceId "PK"
+        BIGINT schoolId "FK"
+        BIGINT routeId "FK"
+        VARCHAR(200) routeName
+        VARCHAR(50) routeCode
+        TEXT routeDescription
+        BIGINT busId "FK"
+        INT busPlateNumber
+        INT busCapacity
+        VARCHAR(200) busModel
+        VARCHAR(200) busYear
+        BIGINT driverId "FK"
+        VARCHAR(200) driverName
+        INT driverLicenseNumber
+        VARCHAR(20) driverPhone
+        BIGINT supervisorId "FK"
+        VARCHAR(200) supervisorName
+        VARCHAR(20) supervisorPhone
+        BIGINT shiftId "FK"
+        VARCHAR(50) tripType
+        TIME startTime
+        TIME endTime
+        VARCHAR(200) estimatedDuration
+        VARCHAR(200) stops
+        BOOLEAN isActive
+        VARCHAR(50) status
+        VARCHAR(200) operatorCompany
+        BIGINT contractId "FK"
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    SchoolMergers {
+        BIGINT mergerId "PK"
+        INT mergerNumber
+        DATE mergerDate
+        DATE effectiveDate
+        VARCHAR(200) sourceSchoolIds
+        BIGINT targetSchoolId "FK"
+        INT mergerReason
+        VARCHAR(200) decisionAuthority
+        VARCHAR(200) decisionDocumentPath
+        VARCHAR(50) studentsTransferStatus
+        VARCHAR(50) employeesTransferStatus
+        VARCHAR(50) assetsTransferStatus
+        VARCHAR(50) status
+        DATE completionDate
+        TEXT completionNotes
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    SchoolAwards {
+        BIGINT awardId "PK"
+        BIGINT schoolId "FK"
+        INT awardNumber
+        VARCHAR(200) awardName
+        VARCHAR(50) awardCategory
+        VARCHAR(50) level
+        BOOLEAN issuingBody
+        BOOLEAN issuingBodyType
+        DATE awardDate
+        VARCHAR(200) awardPlace
+        VARCHAR(200) ranking
+        VARCHAR(200) participantsJson
+        INT studentParticipants
+        INT teacherParticipants
+        TEXT awardDetails
+        VARCHAR(200) certificatePath
+        VARCHAR(200) photosPath
+        VARCHAR(200) videoPath
+        VARCHAR(200) impact
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    ExternalParticipations {
+        BIGINT participationId "PK"
+        BIGINT schoolId "FK"
+        INT participationNumber
+        VARCHAR(200) eventName
+        VARCHAR(50) eventType
+        VARCHAR(200) organizer
+        VARCHAR(50) organizerType
+        VARCHAR(200) location
+        DATE startDate
+        DATE endDate
+        VARCHAR(200) results
+        VARCHAR(200) ranking
+        VARCHAR(200) participantsJson
+        INT studentParticipants
+        INT teacherParticipants
+        VARCHAR(200) expenses
+        VARCHAR(200) fundingSource
+        VARCHAR(200) attachments
+        VARCHAR(200) lessonsLearned
+        VARCHAR(200) recommendations
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    CommunityPartnerships {
+        BIGINT partnershipId "PK"
+        BIGINT schoolId "FK"
+        INT partnershipNumber
+        VARCHAR(200) partnerName
+        VARCHAR(50) partnerType
+        VARCHAR(50) supportType
+        DATE agreementDate
+        DATE startDate
+        DATE endDate
+        BOOLEAN isRenewable
+        VARCHAR(200) agreementDocumentPath
+        VARCHAR(200) supportValue
+        VARCHAR(200) supportValueCurrency
+        VARCHAR(50) supportInKind
+        VARCHAR(200) impact
+        VARCHAR(200) impactRating
+        BIGINT responsibleUserId "FK"
+        VARCHAR(200) partnerContactPerson
+        VARCHAR(100) partnerContactEmail
+        VARCHAR(20) partnerContactPhone
+        VARCHAR(50) status
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    SafetySecurityReports {
+        BIGINT reportId "PK"
+        BIGINT schoolId "FK"
+        INT reportNumber
+        DATE reportDate
+        VARCHAR(200) reportPeriod
+        VARCHAR(50) safetyLevel
+        DATE extinguisherExp
+        INT extinguishersCount
+        DATE extinguishersLastInspection
+        DATE extinguishersNextInspection
+        VARCHAR(50) alarmStatus
+        DATE alarmLastTest
+        VARCHAR(50) emergencyLightsStatus
+        VARCHAR(200) fireAlarmSystem
+        VARCHAR(50) fireHosesStatus
+        BOOLEAN evacuationMaps
+        VARCHAR(200) evacuationMapLocations
+        VARCHAR(50) emergencyExitsStatus
+        INT drillCount
+        DATE drillDates
+        TIME drillAverageTime
+        VARCHAR(200) drillEvaluation
+        BOOLEAN safetyCommitteeFormed
+        VARCHAR(200) safetyCommitteeMembers
+        INT safetyTrainingHours
+        INT incidentsCount
+        VARCHAR(200) recommendations
+        VARCHAR(200) actionPlan
+        VARCHAR(200) attachments
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    SchoolDeficit {
+        BIGINT deficitId "PK"
+        BIGINT schoolId "FK"
+        INT deficitNumber
+        VARCHAR(50) deficitType
+        VARCHAR(50) deficitCategory
+        DECIMAL(15,2) deficitAmount
+        DECIMAL(15,2) requiredAmount
+        DECIMAL(15,2) availableAmount
+        TEXT deficitDescription
+        TEXT educationalImpact
+        VARCHAR(50) impactLevel
+        DATE detectionDate
+        BIGINT detectedByUserId "FK"
+        VARCHAR(50) currentStatus
+        DATE statusUpdateDate
+        VARCHAR(200) proposedSolution
+        DECIMAL(15,2) estimatedCost
+        DATE estimatedResolutionDate
+        DATE actualResolutionDate
+        BIGINT resolvedByUserId "FK"
+        TEXT resolutionNotes
+        BIGINT relatedRemediationPlanId "FK"
+        VARCHAR(200) attachments
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    SchoolSurplus {
+        BIGINT surplusId "PK"
+        BIGINT schoolId "FK"
+        INT surplusNumber
+        VARCHAR(50) surplusType
+        VARCHAR(50) surplusCategory
+        DECIMAL(15,2) surplusAmount
+        DECIMAL(15,2) availableAmount
+        DECIMAL(15,2) requiredAmount
+        TEXT surplusDescription
+        VARCHAR(200) utilizationPlan
+        VARCHAR(50) utilizationType
+        VARCHAR(200) potentialBeneficiary
+        DATE discoveryDate
+        BIGINT discoveredByUserId "FK"
+        VARCHAR(50) currentStatus
+        DATE statusUpdateDate
+        DATE utilizationDate
+        DATE actualUtilizationDate
+        BIGINT utilizedByUserId "FK"
+        TEXT utilizationNotes
+        BIGINT relatedRemediationPlanId "FK"
+        VARCHAR(200) attachments
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    RemediationPlan {
+        BIGINT planId "PK"
+        BIGINT schoolId "FK"
+        INT planNumber
+        VARCHAR(200) planName
+        BIGINT relatedDeficitId "FK"
+        BIGINT relatedSurplusId "FK"
+        VARCHAR(50) planType
+        VARCHAR(200) selectedOption
+        TEXT optionDetails
+        VARCHAR(200) objectives
+        VARCHAR(200) actionSteps
+        DATE startDate
+        DATE endDate
+        DATE actualStartDate
+        DATE actualEndDate
+        DECIMAL(15,2) estimatedBudget
+        DECIMAL(15,2) actualCost
+        VARCHAR(200) currency
+        VARCHAR(200) executionLead
+        BIGINT executionLeadUserId "FK"
+        VARCHAR(200) executionTeam
+        DECIMAL(5,2) progressPercentage
+        VARCHAR(50) status
+        DATE approvalDate
+        BIGINT approvedByUserId "FK"
+        VARCHAR(200) completionReport
+        VARCHAR(200) lessonsLearned
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    RemediationPlan ||--o{ EmergencyClosures : "compensationPlanId"
+    RemediationPlan ||--o{ SchoolDeficit : "relatedRemediationPlanId"
+    RemediationPlan ||--o{ SchoolSurplus : "relatedRemediationPlanId"
+    SchoolDeficit ||--o{ RemediationPlan : "relatedDeficitId"
+    SchoolSurplus ||--o{ RemediationPlan : "relatedSurplusId"

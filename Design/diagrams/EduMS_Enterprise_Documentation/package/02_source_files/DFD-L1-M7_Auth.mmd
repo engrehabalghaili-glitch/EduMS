@@ -1,0 +1,33 @@
+flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P7_1((7.1<br/>تسجيل المستخدمين)):::proc
+    P7_2((7.2<br/>إدارة الأدوار)):::proc
+    P7_3((7.3<br/>منح/سحب الصلاحيات)):::proc
+    P7_4((7.4<br/>تطبيق السياسات)):::proc
+    P7_5((7.5<br/>تسجيل التدقيق)):::proc
+    P7_6((7.6<br/>المراقبة الأمنية)):::proc
+
+    DS_SystemUser[("SystemUser")]:::ds
+    DS_Role[("Role")]:::ds
+    DS_Permission[("Permission")]:::ds
+    DS_UserRole[("UserRole")]:::ds
+    DS_AccessPolicy[("AccessPolicy")]:::ds
+    DS_AuditLog[("AuditLog")]:::ds
+
+    Ext1 --> P7_1
+    P7_1 --> P7_2
+    P7_2 --> P7_3
+    P7_3 --> P7_4
+    P7_4 --> P7_5
+    P7_5 --> P7_6
+    P7_1 <--> DS_SystemUser
+    P7_2 <--> DS_Role
+    P7_3 <--> DS_Permission
+    P7_4 <--> DS_UserRole
+    P7_5 <--> DS_AccessPolicy
+    P7_6 <--> DS_AuditLog

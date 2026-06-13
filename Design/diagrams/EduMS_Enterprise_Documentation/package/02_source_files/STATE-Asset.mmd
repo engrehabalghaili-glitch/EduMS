@@ -1,0 +1,28 @@
+stateDiagram-v2
+    [*] --> Proposed : اقتراح اقتناء
+    Proposed --> Approved : اعتماد ميزانية
+    Proposed --> Rejected
+    Approved --> InPurchase
+    InPurchase --> Received : استلام
+    Received --> Inactive : تسجيل
+    Inactive --> Active : تفعيل
+    Active --> InUse : تخصيص
+    InUse --> Maintenance : عطل
+    Maintenance --> InUse : إصلاح
+    Maintenance --> OutOfService : إصلاح فاشل
+    InUse --> Loaned : إعارة
+    Loaned --> InUse : إعادة
+    InUse --> Transferred : نقل
+    Transferred --> InUse
+    Active --> Suspended : تعليق إداري
+    Suspended --> Active
+    OutOfService --> Disposal : قرار شطب
+    InUse --> Disposal
+    Active --> Lost : مفقود (جرد)
+    Lost --> Investigated
+    Investigated --> Recovered : عثور
+    Investigated --> Disposal : إثبات الفقدان
+    Recovered --> Active
+    Disposal --> Archived
+    Archived --> [*]
+    Rejected --> [*]

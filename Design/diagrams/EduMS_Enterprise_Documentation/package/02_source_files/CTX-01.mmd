@@ -1,0 +1,41 @@
+flowchart TB
+    classDef sys fill:#1e3a8a,color:#fff,stroke:#fff,stroke-width:3px,font-weight:bold
+    classDef ext fill:#fef3c7,color:#92400e,stroke:#92400e,stroke-width:2px
+    classDef gov fill:#dcfce7,color:#166534,stroke:#166534,stroke-width:2px
+    classDef tech fill:#e0e7ff,color:#3730a3,stroke:#3730a3,stroke-width:2px
+
+    SYS[("🏛️<br/>EduMS Enterprise<br/>نظام أتمتة العمليات<br/>التعليمية والإدارية")]:::sys
+
+    Student[👨‍🎓 الطالب]:::ext
+    Guardian[👨‍👩‍👧 ولي الأمر]:::ext
+    Teacher[👨‍🏫 المعلم]:::ext
+    Admin[👔 الموظف الإداري]:::ext
+    Principal[🏫 مدير المدرسة]:::ext
+    Office[🏛️ مكتب التربية والتعليم]:::gov
+    Ministry[🏢 وزارة التربية والتعليم]:::gov
+    Vendor[🏭 الموردون والمقاولون]:::ext
+    Bank[🏦 البنوك وقنوات الدفع]:::tech
+    SMS[📱 SMS / Email Gateway]:::tech
+    SmartCard[💳 البطاقة الذكية / الباركود]:::tech
+    Inspector[🔍 المفتش التربوي]:::gov
+
+    Student -->|طلبات / حضور / تقييمات| SYS
+    SYS -->|نتائج / شهادات / إشعارات| Student
+    Guardian -->|طلب تسجيل / استفسارات / دفع رسوم| SYS
+    SYS -->|تقارير الأبناء / فواتير| Guardian
+    Teacher -->|درجات / حضور / تقييمات سلوك| SYS
+    SYS -->|جداول / مهام / كشوف رواتب| Teacher
+    Admin -->|إجازات / مهام إدارية| SYS
+    SYS -->|تقارير إدارية| Admin
+    Principal -->|قرارات / خطط / اعتمادات| SYS
+    SYS -->|Dashboards / تقارير شاملة| Principal
+    SYS -->|تقارير دورية / إحصائيات| Office
+    Office -->|تعاميم / اعتمادات / قرارات| SYS
+    Inspector -->|زيارات إشرافية / ملاحظات| SYS
+    SYS -->|تقارير المدارس| Inspector
+    SYS <-->|API تكامل وطني| Ministry
+    Vendor -->|عروض أسعار / فواتير / تسليم أصول| SYS
+    SYS -->|طلبات شراء / مدفوعات| Vendor
+    Bank <-->|بوابة دفع / تسويات بنكية| SYS
+    SYS -->|إشعارات SMS / Email| SMS
+    SmartCard <-->|قراءة باركود / تتبع أصول وحضور| SYS

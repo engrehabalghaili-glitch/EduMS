@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - تصنيف الأصول</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=300;400;500;600;700;800;900&family=Tajawal:wght=300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item"><span class="icon">📊</span><span>لوحة التحكم</span></a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">إدارة الأصول</div>
+                    <a href="index.html" class="nav-item"><span class="icon">📦</span><span>لوحة التحكم</span></a>
+                    <a href="inventory.html" class="nav-item"><span class="icon">🏢</span><span>الأصول</span></a>
+                    <a href="classification.html" class="nav-item active"><span class="icon">📋</span><span>تصنيف الأصول</span></a>
+                    <a href="maintenance.html" class="nav-item"><span class="icon">🔧</span><span>الصيانة</span></a>
+                    <a href="rooms.html" class="nav-item"><span class="icon">🏫</span><span>القاعات والمرافق</span></a>
+                    <a href="procurement.html" class="nav-item"><span class="icon">🛒</span><span>المشتريات</span></a>
+                    <a href="suppliers.html" class="nav-item"><span class="icon">🏢</span><span>الموردون</span></a>
+                    <a href="insurance.html" class="nav-item"><span class="icon">🛡️</span><span>التأمينات</span></a>
+                    <a href="disposal.html" class="nav-item"><span class="icon">🗑️</span><span>الشهادات والتصرفات</span></a>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left"><h2>إدارة الأصول والمرافق</h2></div>
+                <div class="header-right">
+                    <div class="header-actions"><button class="header-btn">🔔<span class="badge">6</span></button></div>
+                    <div class="user-profile"><div class="user-avatar">م</div><div class="user-info"><h4>مدير المدرسة</h4><p>الإدارة</p></div></div>
+                </div>
+            </header>
+            <div class="content-area">
+                <div class="page-header">
+                    <h1 class="page-title">📋 تصنيف الأصول</h1>
+                    <div class="page-breadcrumb"><a href="../../index.html">الرئيسية</a><span>/</span><a href="index.html">إدارة الأصول</a><span>/</span><span>تصنيف الأصول</span></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">تصنيفات الأصول</h3>
+                        <button class="btn btn-primary" onclick="openModal('addClassificationModal')">➕ إضافة تصنيف</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr><th>التصنيف</th><th>الوصف</th><th>عدد الأصول</th><th>الإجراءات</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td style="font-weight: 600;">تقنيات</td><td>أجهزة كمبيوتر، طابعات، سبورات ذكية</td><td>124</td><td><div class="table-actions"><button class="action-btn view">👁️</button><button class="action-btn edit">✏️</button><button class="action-btn delete">🗑️</button></div></td></tr>
+                                    <tr><td style="font-weight: 600;">أثاث</td><td>مقاعد، طاولات، خزائن</td><td>890</td><td><div class="table-actions"><button class="action-btn view">👁️</button><button class="action-btn edit">✏️</button><button class="action-btn delete">🗑️</button></div></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="addClassificationModal"><div class="modal"><div class="modal-header"><h3>إضافة تصنيف</h3><button class="close-btn" onclick="closeModal('addClassificationModal')">&times;</button></div><div class="modal-body"><form class="form-group"><label>التصنيف</label><input type="text" class="form-input" placeholder="التصنيف"><label>الوصف</label><textarea class="form-input" placeholder="الوصف"></textarea></form></div><div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('addClassificationModal')">إلغاء</button><button class="btn btn-primary">حفظ</button></div></div></div>
+    <script>function openModal(id){document.getElementById(id).classList.add('active');}function closeModal(id){document.getElementById(id).classList.remove('active');}</script>
+</body>
+</html>

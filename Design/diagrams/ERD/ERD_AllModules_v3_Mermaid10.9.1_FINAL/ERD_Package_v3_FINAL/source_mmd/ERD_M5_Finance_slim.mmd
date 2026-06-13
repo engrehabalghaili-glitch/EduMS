@@ -1,0 +1,71 @@
+erDiagram
+    %% =====================================================
+    %% M5_Finance - ERD
+    %% Mermaid 10.9.1 Compliant - SLIM VIEW (PK + FK only)
+    %% =====================================================
+
+    StudentAccount {
+        INT accountId PK "الحساب المالي"
+        INT studentId "معرف الطالب FK Student.studentId - علاقة 1-1"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId - للحسابات..."
+        INT exemptionApprovedByUserId "معرف من اعتمد الإعفاء FK SystemUser.userId"
+    }
+
+    StudentInvoice {
+        INT invoiceId PK "الفواتير"
+        INT accountId FK "معرف الحساب المالي للطالب FK StudentAccount.accountId"
+        INT studentId "معرف الطالب FK Student.studentId - للتكرار"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId - اختياري"
+    }
+
+    InvoiceItem {
+        INT itemId PK "بنود الفاتورة"
+        INT invoiceId FK "معرف الفاتورة FK StudentInvoice.invoiceId"
+        INT feeTypeId FK "معرف نوع الرسم FK FeeType.feeTypeId"
+    }
+
+    Payment {
+        INT paymentId PK "المدفوعات"
+        INT accountId FK "معرف الحساب المالي FK StudentAccount.accountId"
+        INT studentId "معرف الطالب FK Student.studentId - للتكرار"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId - اختياري"
+        INT confirmedByUserId "معرف من قام بالتأكيد FK SystemUser.userId"
+    }
+
+    FeeType {
+        INT feeTypeId PK "أنواع الرسوم"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+    }
+
+    Installment {
+        INT installmentId PK "الأقساط"
+        INT invoiceId FK "معرف الفاتورة المرتبطة FK StudentInvoice.invoiceId"
+        INT itemId FK "معرف بند الفاتورة المرتبط FK InvoiceItem.itemId - اختياري إذا كان ا..."
+        INT accountId FK "معرف الحساب المالي FK StudentAccount.accountId - للتكرار"
+        INT studentId "معرف الطالب FK Student.studentId - للتكرار"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT rescheduledByUserId "معرف من قام بإعادة الجدولة FK SystemUser.userId"
+        INT waivedByUserId "معرف من اعتمد الإعفاء FK SystemUser.userId"
+    }
+
+    AssetWarrantyContract {
+        DECIMAL contractValue PK "الضمان والعقود"
+    }
+
+    FinancialAuditArchive {
+        DECIMAL reportType PK "الأرشفة المالية"
+    }
+
+    %% ===== Relationships =====
+    StudentAccount ||--o{ StudentInvoice : "معرف الحساب المالي للطالب"
+    StudentInvoice ||--o{ InvoiceItem : "معرف الفاتورة FK StudentI"
+    FeeType ||--o{ InvoiceItem : "معرف نوع الرسم FK FeeType"
+    StudentAccount ||--o{ Payment : "معرف الحساب المالي FK Stu"
+    StudentInvoice ||--o{ Installment : "معرف الفاتورة المرتبطة FK"
+    InvoiceItem ||--o{ Installment : "معرف بند الفاتورة المرتبط"
+    StudentAccount ||--o{ Installment : "معرف الحساب المالي FK Stu"

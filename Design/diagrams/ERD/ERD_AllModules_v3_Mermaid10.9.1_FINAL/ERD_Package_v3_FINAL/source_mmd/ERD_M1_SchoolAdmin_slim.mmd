@@ -1,0 +1,485 @@
+erDiagram
+    %% =====================================================
+    %% M1_SchoolAdmin - ERD
+    %% Mermaid 10.9.1 Compliant - SLIM VIEW (PK + FK only)
+    %% =====================================================
+
+    Office {
+        INT officeId PK "مكاتب التربية والتعليم"
+        INT parentOfficeId FK "معرف المكتب الأعلى للربط الهرمي FK Office.officeId"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل FK SystemUser.userId"
+    }
+
+    School {
+        INT schoolId PK "المدرسة الرئيسي"
+        INT officeId FK "معرف المكتب المشرف FK Office.officeId"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل FK SystemUser.userId"
+    }
+
+    SchoolLevel {
+        INT schoolLevelId PK "المراحل الدراسية للمدرسة"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT defaultShiftId FK "الفترة الافتراضية لهذه المرحلة صباحي مسائي FK SchoolShiftSetting.sh..."
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل FK SystemUser.userId"
+    }
+
+    SchoolContactInfo {
+        INT contactInfoId PK "بيانات التواصل والموقع"
+        INT schoolId FK "معرف المدرسة FK School.schoolId - فريد"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل FK SystemUser.userId"
+    }
+
+    SchoolShiftSetting {
+        INT shiftId PK "إعدادات فترات الدوام"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل FK SystemUser.userId"
+    }
+
+    SchoolAcademicYear {
+        INT academicYearId PK "الأعوام الدراسية للمدرسة"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT previousYearId FK "معرف العام السابق للترقية التلقائية FK SchoolAcademicYear.academicY..."
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل FK SystemUser.userId"
+    }
+
+    SchoolSemester {
+        INT semesterId PK "الفصول الدراسية للمدرسة"
+        INT academicYearId FK "معرف العام الدراسي FK SchoolAcademicYear.academicYearId"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل FK SystemUser.userId"
+    }
+
+    SchoolCalendar {
+        INT calendarId PK "التقويم الدراسي التفصيلي"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT semesterId FK "معرف الفصل المرتبط FK SchoolSemester.semesterId - اختياري"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل FK SystemUser.userId"
+    }
+
+    SchoolCurriculumPlan {
+        INT curriculumPlanId PK "الخطط الدراسية للمدرسة"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT gradeLevelId FK "الصف الدراسي المرتبط اختياري يمكن ربط الخطة بصف معين FK GradeCapaci..."
+        INT schoolLevelId FK "المرحلة الدراسية المرتبطة اختياري FK SchoolLevel.schoolLevelId"
+        INT academicYearId FK "العام الدراسي FK SchoolAcademicYear.academicYearId"
+        INT semesterId FK "الفصل الدراسي اختياري FK SchoolSemester.semesterId"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل FK SystemUser.userId"
+    }
+
+    GradeCapacity {
+        INT gradeCapacityId PK "الصفوف الدراسية والطاقة الاستيعابية"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT academicYearId FK "معرف العام الدراسي FK SchoolAcademicYear.academicYearId"
+        INT schoolLevelId FK "معرف المرحلة الدراسية FK SchoolLevel.schoolLevelId"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل FK SystemUser.userId"
+    }
+
+    SchoolAuditLog {
+        INT auditId PK "سجل التغييرات والأرشفة"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT userId "معرف المستخدم المنفذ FK SystemUser.userId"
+    }
+
+    ReferenceCoding {
+        INT referenceId PK "الترميز المرجعي"
+        INT schoolId FK "معرف المدرسة FK School.schoolId - اختياري قد تكون بعض الأكواد عامة ..."
+        INT parentCodeId FK "معرف الكود الأب لإنشاء تصنيفات هرمية FK ReferenceCoding.referenceId"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+        INT updatedByUserId "آخر من عدل FK SystemUser.userId"
+    }
+
+    CommitmentDeviation {
+        INT deviationId PK "الالتزامات والانحرافات"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT academicYearId FK "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId - لتحديد ا..."
+        INT reviewedByUserId "معرف المراجع من المكتب FK SystemUser.userId"
+        INT linkedCalendarId FK "معرف الحدث في التقويم المدرسي المرتبط FK SchoolCalendar.eventId - إ..."
+        INT linkedPlanId FK "معرف الخطة المرتبطة FK ApprovedPlan.planId - إن وجد"
+    }
+
+    AcademicException {
+        INT exceptionId PK "طلبات الاستثناءات الأكاديمية"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT academicYearId FK "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT studentId "معرف الطالب المستفيد FK Student.studentId - إن كان الطلب فردياً"
+        INT approvedByUserId "معرف الموافق من المكتب FK SystemUser.userId"
+        INT linkToWorkflowId FK "معرف مسار الاعتماد FK Workflow.workflowId - اختياري"
+    }
+
+    LeadershipNomination {
+        INT nominationId PK "ترشيحات القيادة"
+        INT schoolId FK "معرف المدرسة المستهدفة FK School.schoolId - لا بد أن يكون موجوداً ح..."
+        INT officeId FK "معرف مكتب التربية المشرف FK Office.officeId"
+        INT candidateEmployeeId "معرف الموظف المرشح FK Employee.employeeId - يجب أن يكون موظفاً مسجل..."
+        INT approvedByUserId "معرف من اعتمد الترشيح النهائي FK SystemUser.userId"
+        INT linkedAssignmentId FK "معرف قرار التعيين المرتبط FK LeadershipAssignment.assignmentId - بع..."
+    }
+
+    LeadershipAssignment {
+        INT assignmentId PK "قرارات التعيين والربط"
+        INT nomineeId FK "معرف الترشيح FK LeadershipNomination.nominationId - كل قرار يأتي من..."
+        INT employeeId "معرف الموظف المعين FK Employee.employeeId - غالباً نفس المرشح من جد..."
+        INT schoolId FK "معرف المدرسة التي تم التعيين فيها FK School.schoolId"
+        INT officeId FK "معرف المكتب الذي أصدر القرار FK Office.officeId"
+    }
+
+    OrganizationalStructure {
+        INT structureId PK "الهياكل التنظيمية"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT officeId FK "معرف مكتب التربية FK Office.officeId - للمواعفة"
+        INT createdByUserId "معرف من قام بتصميم أو رفع هذا الهيكل FK SystemUser.userId"
+    }
+
+    SchoolDepartment {
+        INT deptId PK "الأقسام الإدارية"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT structureId FK "معرف الهيكل التنظيمي الذي يتبعه القسم FK OrganizationalStructure.st..."
+        INT parentDeptId FK "معرف القسم الأعلى للهيكل الشجري FK SchoolDepartment.deptId"
+        INT managerId "معرف مدير القسم FK Employee.employeeId"
+    }
+
+    OrganizationalPermission {
+        INT permissionId PK "مصفوفة الصلاحيات التنظيمية"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT departmentId FK "معرف القسم المسؤول عن هذه الصلاحية FK SchoolDepartment.deptId"
+        INT roleId "معرف الدور البرمجي المرتبط FK Role.roleId من القسم السابع - للتكامل..."
+    }
+
+    SchoolDecision {
+        INT decisionId PK "القرارات الإدارية المدرسية"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT issuedByUserId "معرف من أصدر القرار FK SystemUser.userId - عادة مدير المدرسة"
+        INT approvedByOfficeId FK "معرف المكتب الذي صادق على القرار إن لزم FK Office.officeId"
+        INT linkedWorkflowId FK "معرف مسار الاعتماد FK Workflow.workflowId - إذا كان القرار يحتاج إل..."
+    }
+
+    OrganizationalManual {
+        INT manualId PK "الدليل التنظيمي"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT approvedByOfficeId FK "معرف المكتب الذي اعتمد الدليل FK Office.officeId"
+        INT publishedByUserId "معرف من نشر الدليل FK SystemUser.userId"
+    }
+
+    Workflow {
+        INT workflowId PK "مسارات العمل"
+    }
+
+    WorkflowStep {
+        INT stepId PK "خطوات مسار العمل"
+        INT workflowId FK "معرف مسار العمل FK Workflow.workflowId"
+        INT assignedToRoleId "معرف الدور البرمجي المسؤول FK Role.roleId - لربطها بمستخدم معين في ..."
+    }
+
+    AnnualPlanDraft {
+        INT draftId PK "مسودات الخطط السنوية"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT academicYearId FK "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+    }
+
+    SubmittedPlan {
+        INT planId PK "الخطط المرفوعة للمراجعة"
+        INT draftId FK "معرف المسودة الأصلية FK AnnualPlanDraft.draftId"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT academicYearId FK "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT assignedReviewerId "معرف المشرف المراجع في المكتب FK SystemUser.userId"
+        INT approvedPlanId FK "معرف الخطة المعتمدة المرتبطة بعد القبول"
+    }
+
+    ApprovedPlan {
+        INT approvedPlanId PK "الخطط المعتمدة"
+        INT submittedPlanId FK "معرف الخطة المرفوعة FK SubmittedPlan.planId"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT academicYearId FK "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT approvedByOfficeId FK "معرف المكتب المصدر للاعتماد FK Office.officeId"
+    }
+
+    PlanAmendment {
+        INT amendmentId PK "تعديلات الخطط"
+        INT approvedPlanId FK "معرف الخطة المعتمدة FK ApprovedPlan.approvedPlanId"
+        INT requestedByUserId "معرف مقدم طلب التعديل FK SystemUser.userId"
+        INT approvedByUserId "معرف من وافق على التعديل FK SystemUser.userId"
+        INT linkedToRequestId FK "معرف طلب التعديل المرتبط FK AmendmentRequest.requestId"
+    }
+
+    AmendmentRequest {
+        INT requestId PK "طلبات تعديل الخطة"
+        INT approvedPlanId FK "معرف الخطة المعتمدة FK ApprovedPlan.approvedPlanId"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT submittedByUserId "معرف مقدم الطلب FK SystemUser.userId"
+        INT assignedToOfficeId FK "معرف المكتب المرسل إليه الطلب FK Office.officeId"
+        INT assignedToReviewerId "معرف المراجع المختص في المكتب FK SystemUser.userId"
+        INT linkedToAmendmentId FK "معرف التعديل المرتبط بعد الموافقة FK PlanAmendment.amendmentId"
+    }
+
+    ProgressReport {
+        INT reportId PK "تقارير المتابعة الدورية"
+        INT approvedPlanId FK "معرف الخطة المعتمدة FK ApprovedPlan.approvedPlanId"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT submittedByUserId "معرف من قام برفع التقرير FK SystemUser.userId"
+        INT reviewedByUserId "معرف المراجع من المكتب FK SystemUser.userId"
+    }
+
+    FinalEvaluation {
+        INT evaluationId PK "التقييمات النهائية للخطط"
+        INT approvedPlanId FK "معرف الخطة المعتمدة FK ApprovedPlan.approvedPlanId"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT academicYearId FK "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT approvedByOfficeId FK "معرف المكتب المعتمد للتقييم FK Office.officeId"
+    }
+
+    HistoricalRecords {
+        INT recordId PK "السجلات التاريخية"
+        INT userId "معرف المستخدم الذي قام بالعملية FK SystemUser.userId"
+        INT reversedByUserId "معرف من قام بالاسترجاع FK SystemUser.userId"
+    }
+
+    ReceivedCirculars {
+        INT circularId PK "التعاميم المستلمة"
+        INT schoolId FK "معرف المدرسة المستلمة FK School.schoolId"
+        INT officeId FK "معرف المكتب المصدر FK Office.officeId"
+        INT receivedByUserId "معرف موظف الاستلام FK SystemUser.userId"
+        INT acknowledgedById "معرف من اطلع على التعميم FK SystemUser.userId"
+    }
+
+    CircularsDocumentation {
+        INT documentationId PK "توثيق التعاميم في السجل"
+        INT circularId FK "معرف التعميم FK ReceivedCirculars.circularId - علاقة 1 -1"
+        INT schoolId FK "معرف المدرسة FK School.schoolId للتكرار للربط السريع"
+        INT registeredByUserId "معرف الموظف الذي قام بالقيد FK SystemUser.userId"
+    }
+
+    CircularsInternalDistribution {
+        INT distributionId PK "التوزيع الداخلي للتعاميم"
+        INT circularId FK "معرف التعميم FK ReceivedCirculars.circularId"
+        INT schoolId FK "معرف المدرسة FK School.schoolId للتكرار"
+        INT departmentId FK "معرف القسم المستلم FK SchoolDepartment.deptId - إن كان التوزيع لقسم"
+        INT employeeId "معرف الموظف المستلم FK Employee.employeeId - إن كان التوزيع لموظف محدد"
+        INT distributedByUserId "معرف من قام بالتوزيع FK SystemUser.userId"
+        INT acknowledgedByUserId "معرف من أكد الاستلام FK SystemUser.userId"
+    }
+
+    CircularsImplementationStatus {
+        INT implementationId PK "حالة تنفيذ التعميم"
+        INT circularId FK "معرف التعميم FK ReceivedCirculars.circularId - علاقة 1 -1"
+        INT schoolId FK "معرف المدرسة FK School.schoolId للتكرار"
+        INT responsibleEmployeeId "معرف الموظف المسؤول عن تنفيذ التعميم FK Employee.employeeId"
+        INT responsibleDepartmentId FK "معرف القسم المسؤول عن التنفيذ FK SchoolDepartment.deptId"
+        INT verifiedByUserId "معرف من تحقق من صحة التنفيذ FK SystemUser.userId"
+    }
+
+    CircularsImplementationReports {
+        INT reportId PK "إفادات تنفيذ التعاميم"
+        INT circularId FK "معرف التعميم FK ReceivedCirculars.circularId"
+        INT schoolId FK "معرف المدرسة FK School.schoolId للتكرار"
+        INT submittedByUserId "معرف من رفع الإفادة FK SystemUser.userId"
+        INT officeDecisionByUserId "معرف من أصدر القرار FK SystemUser.userId"
+    }
+
+    ArchivedCirculars {
+        INT archiveId PK "الأرشيف الرقمي للتعاميم"
+        INT circularId FK "معرف التعميم FK ReceivedCirculars.circularId - علاقة 1 -1"
+        INT schoolId FK "معرف المدرسة FK School.schoolId للتكرار"
+        INT archivedByUserId "معرف من قام بالأرشفة FK SystemUser.userId"
+        INT closedByUserId "معرف من أغلق التعميم FK SystemUser.userId"
+        INT disposalAuthorizedByUserId "معرف من أذن بالإتلاف FK SystemUser.userId"
+    }
+
+    CircularsDeadlinesTracking {
+        INT deadlineId PK "متابعة المهل الزمنية للتعاميم"
+        INT circularId FK "معرف التعميم FK ReceivedCirculars.circularId - علاقة 1 -1"
+        INT schoolId FK "معرف المدرسة FK School.schoolId للتكرار"
+        INT responseByUserId "معرف من استجاب FK SystemUser.userId"
+        INT escalatedToUserId "معرف من تم التصعيد إليه FK SystemUser.userId"
+    }
+
+    ParentMeeting {
+        INT meetingId PK "اجتماع أولياء الأمور"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT academicYearId FK "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId FK "معرف الفصل الدراسي FK SchoolSemester.semesterId - اختياري"
+        INT organizerId "معرف المنظم FK Employee.employeeId"
+        INT studentId "معرف الطالب المعني FK Student.studentId - في الاجتماعات الفردية"
+        INT gradeLevelId FK "معرف الصف FK GradeCapacity.gradeLevelId - في الاجتماعات الجماعية لص..."
+        INT classSectionId "معرف الشعبة FK ClassSection.sectionId - في الاجتماعات الجماعية لشعب..."
+        INT relatedComplaintId "معرف شكوى مرتبطة FK StudentComplaint.complaintId - اختياري"
+        INT relatedDisciplineId "معرف حالة سلوكية مرتبطة FK Discipline.disciplineId - اختياري"
+    }
+
+    Notifications {
+        INT notificationId PK "الإشعارات"
+        INT schoolId FK "معرف المدرسة FK School.schoolId - اختياري للإشعارات العامة"
+        INT userId "معرف المستخدم المستلم FK SystemUser.userId"
+        INT senderUserId "معرف المرسل FK SystemUser.userId - اختياري"
+    }
+
+    QuarterlyReport {
+        INT reportId PK "التقارير الربع سنوية"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT academicYearId FK "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT submittedByUserId "معرف من قام بالرفع FK SystemUser.userId"
+        INT officeReviewerId "معرف مراجع المكتب FK SystemUser.userId - اختياري"
+    }
+
+    CalendarComplianceReport {
+        INT reportId PK "تقارير الالتزام بالتقويم"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT academicYearId FK "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT submittedByUserId "معرف من قام بالرفع FK SystemUser.userId"
+    }
+
+    WeeklyProcessReport {
+        INT reportId PK "تقارير سير العملية التعليمية الأسبوعية"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT academicYearId FK "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId FK "معرف الفصل الدراسي FK SchoolSemester.semesterId"
+        INT approvedByUserId "معرف المعتمد FK Employee.employeeId"
+    }
+
+    MonthlyDisciplineReport {
+        INT reportId PK "تقارير الانضباط المدرسي"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT academicYearId FK "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId FK "معرف الفصل الدراسي FK SchoolSemester.semesterId - اختياري"
+        INT submittedByUserId "معرف من قام بالرفع FK SystemUser.userId"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId - اختياري"
+    }
+
+    SemesterEndReport {
+        INT reportId PK "تقارير نهاية الفصل الدراسي"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT academicYearId FK "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId FK "معرف الفصل الدراسي FK SchoolSemester.semesterId"
+        INT submittedByUserId "معرف من قام بالرفع FK SystemUser.userId"
+    }
+
+    AnnualComprehensiveReport {
+        INT reportId PK "التقارير السنوية الشاملة"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT academicYearId FK "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT submittedByUserId "معرف من قام بالرفع FK SystemUser.userId"
+        INT officeReviewerId "معرف مراجع المكتب FK SystemUser.userId"
+    }
+
+    EducationalOutcomesReport {
+        INT reportId PK "تقارير المخرجات التعليمية"
+        INT schoolId FK "معرف المدرسة FK School.schoolId"
+        INT academicYearId FK "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT submittedByUserId "معرف من قام بالرفع FK SystemUser.userId"
+    }
+
+    %% ===== Relationships =====
+    Office ||--o{ School : "معرف المكتب المشرف FK Off"
+    School ||--o{ SchoolLevel : "معرف المدرسة FK Schoolsch"
+    SchoolShiftSetting ||--o{ SchoolLevel : "الفترة الافتراضية لهذه ال"
+    School ||--o{ SchoolContactInfo : "معرف المدرسة FK Schoolsch"
+    School ||--o{ SchoolShiftSetting : "معرف المدرسة FK Schoolsch"
+    School ||--o{ SchoolAcademicYear : "معرف المدرسة FK Schoolsch"
+    SchoolAcademicYear ||--o{ SchoolSemester : "معرف العام الدراسي FK Sch"
+    School ||--o{ SchoolSemester : "معرف المدرسة FK Schoolsch"
+    School ||--o{ SchoolCalendar : "معرف المدرسة FK Schoolsch"
+    SchoolSemester ||--o{ SchoolCalendar : "معرف الفصل المرتبط FK Sch"
+    School ||--o{ SchoolCurriculumPlan : "معرف المدرسة FK Schoolsch"
+    GradeCapacity ||--o{ SchoolCurriculumPlan : "الصف الدراسي المرتبط اختي"
+    SchoolLevel ||--o{ SchoolCurriculumPlan : "المرحلة الدراسية المرتبطة"
+    SchoolAcademicYear ||--o{ SchoolCurriculumPlan : "العام الدراسي FK SchoolAc"
+    SchoolSemester ||--o{ SchoolCurriculumPlan : "الفصل الدراسي اختياري FK"
+    School ||--o{ GradeCapacity : "معرف المدرسة FK Schoolsch"
+    SchoolAcademicYear ||--o{ GradeCapacity : "معرف العام الدراسي FK Sch"
+    SchoolLevel ||--o{ GradeCapacity : "معرف المرحلة الدراسية FK "
+    School ||--o{ SchoolAuditLog : "معرف المدرسة FK Schoolsch"
+    School ||--o{ ReferenceCoding : "معرف المدرسة FK Schoolsch"
+    School ||--o{ CommitmentDeviation : "معرف المدرسة FK Schoolsch"
+    SchoolAcademicYear ||--o{ CommitmentDeviation : "معرف السنة الدراسية FK Sc"
+    SchoolCalendar ||--o{ CommitmentDeviation : "معرف الحدث في التقويم الم"
+    ApprovedPlan ||--o{ CommitmentDeviation : "معرف الخطة المرتبطة FK Ap"
+    School ||--o{ AcademicException : "معرف المدرسة FK Schoolsch"
+    SchoolAcademicYear ||--o{ AcademicException : "معرف السنة الدراسية FK Sc"
+    Workflow ||--o{ AcademicException : "معرف مسار الاعتماد FK Wor"
+    School ||--o{ LeadershipNomination : "معرف المدرسة المستهدفة FK"
+    Office ||--o{ LeadershipNomination : "معرف مكتب التربية المشرف "
+    LeadershipAssignment ||--o{ LeadershipNomination : "معرف قرار التعيين المرتبط"
+    LeadershipNomination ||--o{ LeadershipAssignment : "معرف الترشيح FK Leadershi"
+    School ||--o{ LeadershipAssignment : "معرف المدرسة التي تم التع"
+    Office ||--o{ LeadershipAssignment : "معرف المكتب الذي أصدر الق"
+    School ||--o{ OrganizationalStructure : "معرف المدرسة FK Schoolsch"
+    Office ||--o{ OrganizationalStructure : "معرف مكتب التربية FK Offi"
+    School ||--o{ SchoolDepartment : "معرف المدرسة FK Schoolsch"
+    OrganizationalStructure ||--o{ SchoolDepartment : "معرف الهيكل التنظيمي الذي"
+    School ||--o{ OrganizationalPermission : "معرف المدرسة FK Schoolsch"
+    SchoolDepartment ||--o{ OrganizationalPermission : "معرف القسم المسؤول عن هذه"
+    School ||--o{ SchoolDecision : "معرف المدرسة FK Schoolsch"
+    Office ||--o{ SchoolDecision : "معرف المكتب الذي صادق على"
+    Workflow ||--o{ SchoolDecision : "معرف مسار الاعتماد FK Wor"
+    School ||--o{ OrganizationalManual : "معرف المدرسة FK Schoolsch"
+    Office ||--o{ OrganizationalManual : "معرف المكتب الذي اعتمد ال"
+    Workflow ||--o{ WorkflowStep : "معرف مسار العمل FK Workfl"
+    School ||--o{ AnnualPlanDraft : "معرف المدرسة FK Schoolsch"
+    SchoolAcademicYear ||--o{ AnnualPlanDraft : "معرف السنة الدراسية FK Sc"
+    AnnualPlanDraft ||--o{ SubmittedPlan : "معرف المسودة الأصلية FK A"
+    School ||--o{ SubmittedPlan : "معرف المدرسة FK Schoolsch"
+    SchoolAcademicYear ||--o{ SubmittedPlan : "معرف السنة الدراسية FK Sc"
+    ApprovedPlan ||--o{ SubmittedPlan : "معرف الخطة المعتمدة المرت"
+    SubmittedPlan ||--o{ ApprovedPlan : "معرف الخطة المرفوعة FK Su"
+    School ||--o{ ApprovedPlan : "معرف المدرسة FK Schoolsch"
+    SchoolAcademicYear ||--o{ ApprovedPlan : "معرف السنة الدراسية FK Sc"
+    Office ||--o{ ApprovedPlan : "معرف المكتب المصدر للاعتم"
+    ApprovedPlan ||--o{ PlanAmendment : "معرف الخطة المعتمدة FK Ap"
+    AmendmentRequest ||--o{ PlanAmendment : "معرف طلب التعديل المرتبط "
+    ApprovedPlan ||--o{ AmendmentRequest : "معرف الخطة المعتمدة FK Ap"
+    School ||--o{ AmendmentRequest : "معرف المدرسة FK Schoolsch"
+    Office ||--o{ AmendmentRequest : "معرف المكتب المرسل إليه ا"
+    PlanAmendment ||--o{ AmendmentRequest : "معرف التعديل المرتبط بعد "
+    ApprovedPlan ||--o{ ProgressReport : "معرف الخطة المعتمدة FK Ap"
+    School ||--o{ ProgressReport : "معرف المدرسة FK Schoolsch"
+    ApprovedPlan ||--o{ FinalEvaluation : "معرف الخطة المعتمدة FK Ap"
+    School ||--o{ FinalEvaluation : "معرف المدرسة FK Schoolsch"
+    SchoolAcademicYear ||--o{ FinalEvaluation : "معرف السنة الدراسية FK Sc"
+    Office ||--o{ FinalEvaluation : "معرف المكتب المعتمد للتقي"
+    School ||--o{ ReceivedCirculars : "معرف المدرسة المستلمة FK "
+    Office ||--o{ ReceivedCirculars : "معرف المكتب المصدر FK Off"
+    ReceivedCirculars ||--o{ CircularsDocumentation : "معرف التعميم FK ReceivedC"
+    School ||--o{ CircularsDocumentation : "معرف المدرسة FK Schoolsch"
+    ReceivedCirculars ||--o{ CircularsInternalDistribution : "معرف التعميم FK ReceivedC"
+    School ||--o{ CircularsInternalDistribution : "معرف المدرسة FK Schoolsch"
+    SchoolDepartment ||--o{ CircularsInternalDistribution : "معرف القسم المستلم FK Sch"
+    ReceivedCirculars ||--o{ CircularsImplementationStatus : "معرف التعميم FK ReceivedC"
+    School ||--o{ CircularsImplementationStatus : "معرف المدرسة FK Schoolsch"
+    SchoolDepartment ||--o{ CircularsImplementationStatus : "معرف القسم المسؤول عن الت"
+    ReceivedCirculars ||--o{ CircularsImplementationReports : "معرف التعميم FK ReceivedC"
+    School ||--o{ CircularsImplementationReports : "معرف المدرسة FK Schoolsch"
+    ReceivedCirculars ||--o{ ArchivedCirculars : "معرف التعميم FK ReceivedC"
+    School ||--o{ ArchivedCirculars : "معرف المدرسة FK Schoolsch"
+    ReceivedCirculars ||--o{ CircularsDeadlinesTracking : "معرف التعميم FK ReceivedC"
+    School ||--o{ CircularsDeadlinesTracking : "معرف المدرسة FK Schoolsch"
+    School ||--o{ ParentMeeting : "معرف المدرسة FK Schoolsch"
+    SchoolAcademicYear ||--o{ ParentMeeting : "معرف السنة الدراسية FK Sc"
+    SchoolSemester ||--o{ ParentMeeting : "معرف الفصل الدراسي FK Sch"
+    GradeCapacity ||--o{ ParentMeeting : "معرف الصف FK GradeCapacit"
+    School ||--o{ Notifications : "معرف المدرسة FK Schoolsch"
+    School ||--o{ QuarterlyReport : "معرف المدرسة FK Schoolsch"
+    SchoolAcademicYear ||--o{ QuarterlyReport : "معرف السنة الدراسية FK Sc"
+    School ||--o{ CalendarComplianceReport : "معرف المدرسة FK Schoolsch"
+    SchoolAcademicYear ||--o{ CalendarComplianceReport : "معرف السنة الدراسية FK Sc"
+    School ||--o{ WeeklyProcessReport : "معرف المدرسة FK Schoolsch"
+    SchoolAcademicYear ||--o{ WeeklyProcessReport : "معرف السنة الدراسية FK Sc"
+    SchoolSemester ||--o{ WeeklyProcessReport : "معرف الفصل الدراسي FK Sch"
+    School ||--o{ MonthlyDisciplineReport : "معرف المدرسة FK Schoolsch"
+    SchoolAcademicYear ||--o{ MonthlyDisciplineReport : "معرف السنة الدراسية FK Sc"
+    SchoolSemester ||--o{ MonthlyDisciplineReport : "معرف الفصل الدراسي FK Sch"
+    School ||--o{ SemesterEndReport : "معرف المدرسة FK Schoolsch"
+    SchoolAcademicYear ||--o{ SemesterEndReport : "معرف السنة الدراسية FK Sc"
+    SchoolSemester ||--o{ SemesterEndReport : "معرف الفصل الدراسي FK Sch"
+    School ||--o{ AnnualComprehensiveReport : "معرف المدرسة FK Schoolsch"
+    SchoolAcademicYear ||--o{ AnnualComprehensiveReport : "معرف السنة الدراسية FK Sc"
+    School ||--o{ EducationalOutcomesReport : "معرف المدرسة FK Schoolsch"
+    SchoolAcademicYear ||--o{ EducationalOutcomesReport : "معرف السنة الدراسية FK Sc"

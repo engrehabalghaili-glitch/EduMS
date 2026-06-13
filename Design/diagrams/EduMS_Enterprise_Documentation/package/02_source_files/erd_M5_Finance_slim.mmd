@@ -1,0 +1,87 @@
+erDiagram
+    StudentAccount {
+        BIGINT accountId "PK"
+        BIGINT studentId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT accountNumber
+        DECIMAL(15,2) totalDebit
+        VARCHAR(200) totalCredit
+        DECIMAL(15,2) currentBalance
+        VARCHAR more__fields "+22 fields"
+    }
+    StudentInvoice {
+        BIGINT invoiceId "PK"
+        BIGINT accountId "FK"
+        BIGINT studentId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        INT invoiceNumber
+        DATE invoiceDate
+        VARCHAR more__fields "+34 fields"
+    }
+    InvoiceItem {
+        BIGINT itemId "PK"
+        BIGINT invoiceId "FK"
+        BIGINT feeTypeId "FK"
+        VARCHAR(50) itemCode
+        DECIMAL(15,2) itemDescription
+        INT quantity
+        DECIMAL(15,2) unitPrice
+        DECIMAL(15,2) totalPrice
+        VARCHAR more__fields "+26 fields"
+    }
+    Payment {
+        BIGINT paymentId "PK"
+        BIGINT accountId "FK"
+        BIGINT studentId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT paymentNumber
+        DATE paymentDate
+        TIME paymentTime
+        VARCHAR more__fields "+33 fields"
+    }
+    FeeType {
+        BIGINT feeTypeId "PK"
+        BIGINT schoolId "FK"
+        DECIMAL(15,2) feeCode
+        DECIMAL(15,2) feeNameAr
+        DECIMAL(15,2) feeNameEn
+        DECIMAL(15,2) feeCategory
+        DECIMAL(15,2) amount
+        VARCHAR(200) currency
+        VARCHAR more__fields "+24 fields"
+    }
+    Installment {
+        BIGINT installmentId "PK"
+        BIGINT invoiceId "FK"
+        BIGINT itemId "FK"
+        BIGINT accountId "FK"
+        BIGINT studentId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT installmentNumber
+        VARCHAR more__fields "+35 fields"
+    }
+    AssetWarrantyContract {
+        VARCHAR(200) contractValue "PK"
+        VARCHAR(200) currency
+        VARCHAR(200) paymentTerms
+    }
+    FinancialAuditArchive {
+        VARCHAR(50) reportType "PK"
+        VARCHAR(200) fiscalYear
+        VARCHAR(200) totalAssetsValue
+        VARCHAR(200) totalDepreciationValue
+        VARCHAR(200) filePath
+        BOOLEAN isReadOnly
+    }
+    StudentAccount ||--o{ StudentInvoice : "accountId"
+    StudentInvoice ||--o{ InvoiceItem : "invoiceId"
+    FeeType ||--o{ InvoiceItem : "feeTypeId"
+    StudentAccount ||--o{ Payment : "accountId"
+    StudentInvoice ||--o{ Installment : "invoiceId"
+    InvoiceItem ||--o{ Installment : "itemId"
+    StudentAccount ||--o{ Installment : "accountId"

@@ -1,0 +1,24 @@
+sequenceDiagram
+    actor E as الموظف
+    participant UI
+    participant API
+    participant DB
+    actor MGR
+    actor HR
+    
+    E->>UI: تصفح البرامج
+    UI->>API: GET /trainings
+    API->>DB: SELECT
+    DB-->>API: قائمة
+    E->>UI: تقديم طلب
+    UI->>API: POST /training-requests
+    API->>DB: INSERT
+    API->>MGR: إشعار
+    MGR->>API: اعتماد
+    API->>HR: للمراجعة
+    HR->>API: تأكيد
+    API->>DB: INSERT EmployeeTraining
+    API->>E: تفاصيل
+    E->>API: تسجيل الحضور
+    E->>API: إنهاء
+    API->>DB: UPDATE completed=true

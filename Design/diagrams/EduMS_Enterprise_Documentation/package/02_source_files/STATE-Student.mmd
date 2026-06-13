@@ -1,0 +1,31 @@
+stateDiagram-v2
+    [*] --> Pending : تقديم طلب
+    Pending --> SchoolApproved : قبول المدرسة
+    Pending --> Rejected : رفض
+    SchoolApproved --> Registered : اعتماد المكتب
+    SchoolApproved --> Returned : إرجاع للتعديل
+    Returned --> Pending
+    Registered --> Active : توزيع على فصل
+    Active --> Active : عام دراسي/درجات/حضور
+    Active --> Frozen : تجميد قيد
+    Frozen --> Active : إعادة تفعيل
+    Frozen --> Withdrawn : انسحاب أثناء التجميد
+    Active --> Disconnected : انقطاع مزمن
+    Disconnected --> Active : عودة
+    Disconnected --> Withdrawn
+    Active --> Promoted : نهاية العام (نجاح)
+    Promoted --> Active : عام جديد
+    Active --> Repeated : رسوب
+    Repeated --> Active : عام جديد بنفس الصف
+    Active --> Transferred : نقل خارجي
+    Active --> Withdrawn : انسحاب
+    Active --> Expelled : استبعاد تأديبي
+    Active --> Graduated : تخرج
+    Active --> Deceased : وفاة
+    Transferred --> Archived
+    Withdrawn --> Archived
+    Expelled --> Archived
+    Graduated --> Archived
+    Deceased --> Archived
+    Rejected --> [*]
+    Archived --> [*]

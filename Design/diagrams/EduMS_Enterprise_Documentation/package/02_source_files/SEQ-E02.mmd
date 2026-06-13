@@ -1,0 +1,27 @@
+sequenceDiagram
+    autonumber
+    actor HR
+    participant API
+    participant ENG as Payroll Engine
+    participant DB
+    participant BANK
+    actor EMP as الموظف
+    
+    HR->>API: POST /payroll/cycles {month}
+    API->>ENG: تنفيذ الدورة
+    ENG->>DB: SELECT Employees(Active)
+    DB-->>ENG: 250 موظف
+    loop لكل موظف
+        ENG->>DB: SELECT Attendance, Leave, Violations
+        DB-->>ENG: البيانات
+        ENG->>ENG: راتب + بدلات
+        ENG->>ENG: - غياب - جزاءات
+        ENG->>ENG: - تأمينات
+        ENG->>DB: INSERT EmployeePayroll
+    end
+    ENG-->>API: تم
+    HR->>API: اعتماد المسير
+    API->>BANK: تحويلات
+    BANK-->>API: نجاح
+    API->>DB: UPDATE Payroll.status='Paid'
+    API->>EMP: كشف راتب PDF

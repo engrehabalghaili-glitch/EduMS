@@ -1,0 +1,25 @@
+sequenceDiagram
+    actor EMP as الموظف
+    participant UI
+    participant API
+    participant DB
+    actor MGR as المدير المباشر
+    actor HR
+    
+    EMP->>UI: طلب إجازة
+    UI->>API: POST /leaves
+    API->>DB: SELECT EmployeeBalance
+    DB-->>API: الرصيد المتاح
+    alt الرصيد كافٍ
+        API->>DB: INSERT EmployeeLeave(Pending)
+        API->>MGR: إشعار
+        MGR->>API: اعتماد
+        API->>DB: UPDATE status='ManagerApproved'
+        API->>HR: للمراجعة
+        HR->>API: اعتماد نهائي
+        API->>DB: UPDATE status='Approved'
+        API->>DB: UPDATE EmployeeBalance
+        API->>EMP: موافقة + تاريخ البدء
+    else غير كافٍ
+        API->>EMP: رفض - الرصيد غير كافٍ
+    end

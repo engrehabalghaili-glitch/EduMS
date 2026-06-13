@@ -1,0 +1,24 @@
+stateDiagram-v2
+    [*] --> Applicant : تقديم طلب
+    Applicant --> Interviewed : مقابلة
+    Applicant --> Rejected : رفض
+    Interviewed --> Selected : اختيار
+    Interviewed --> Rejected
+    Selected --> Inactive : تعيين رسمي
+    Inactive --> Active : تفعيل
+    Active --> OnLeave : إجازة معتمدة
+    OnLeave --> Active : عودة
+    Active --> Suspended : إيقاف مؤقت
+    Suspended --> Active : إعادة
+    Active --> InTransfer : نقل قيد التنفيذ
+    InTransfer --> Active : نقل ناجح (مدرسة جديدة)
+    Active --> Resigned : استقالة
+    Active --> Terminated : إنهاء خدمة
+    Active --> Retired : تقاعد
+    Resigned --> ClearanceInProgress
+    Terminated --> ClearanceInProgress
+    Retired --> ClearanceInProgress
+    ClearanceInProgress --> FinallySettled : تسوية مالية
+    FinallySettled --> Archived
+    Rejected --> [*]
+    Archived --> [*]

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - إدارة الأصول والمرافق</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">إدارة الأصول</div>
+                    <a href="index.html" class="nav-item active">
+                        <span class="icon">📦</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                    <a href="requirements.html" class="nav-item">
+                        <span class="icon">📋</span>
+                        <span>طلبات الاحتياج</span>
+                    </a>
+                    <a href="inventory.html" class="nav-item">
+                        <span class="icon">🏢</span>
+                        <span>الأصول</span>
+                    </a>
+                    <a href="classification.html" class="nav-item">
+                        <span class="icon">📑</span>
+                        <span>تصنيف الأصول</span>
+                    </a>
+                    <a href="assignment.html" class="nav-item">
+                        <span class="icon">🔗</span>
+                        <span>تخصيص الأصول</span>
+                    </a>
+                    <a href="maintenance.html" class="nav-item">
+                        <span class="icon">🔧</span>
+                        <span>الصيانة</span>
+                    </a>
+                    <a href="rooms.html" class="nav-item">
+                        <span class="icon">🏫</span>
+                        <span>القاعات والمرافق</span>
+                    </a>
+                    <a href="procurement.html" class="nav-item">
+                        <span class="icon">🛒</span>
+                        <span>المشتريات</span>
+                    </a>
+                    <a href="suppliers.html" class="nav-item">
+                        <span class="icon">🏢</span>
+                        <span>الموردون</span>
+                    </a>
+                    <a href="financials.html" class="nav-item">
+                        <span class="icon">💰</span>
+                        <span>المالية</span>
+                    </a>
+                    <a href="inventory-plans.html" class="nav-item">
+                        <span class="icon">📆</span>
+                        <span>خطط الجرد</span>
+                    </a>
+                    <a href="insurance.html" class="nav-item">
+                        <span class="icon">🛡️</span>
+                        <span>التأمينات</span>
+                    </a>
+                    <a href="disposal.html" class="nav-item">
+                        <span class="icon">🗑️</span>
+                        <span>الشهادات والتصرف</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة الأصول والمرافق</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">
+                            🔔
+                            <span class="badge">6</span>
+                        </button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير المدرسة</h4>
+                            <p>الإدارة</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h1 class="page-title">📦 إدارة الأصول</h1>
+                    <div class="page-breadcrumb">
+                        <a href="../../index.html">الرئيسية</a>
+                        <span>/</span>
+                        <span>إدارة الأصول</span>
+                    </div>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon primary">📦</div>
+                        <div class="stat-info">
+                            <h3>3,456</h3>
+                            <p>إجمالي الأصول</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon success">✅</div>
+                        <div class="stat-info">
+                            <h3>3,120</h3>
+                            <p>أصول فعالة</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon warning">🔧</div>
+                        <div class="stat-info">
+                            <h3>45</h3>
+                            <p>تحت الصيانة</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon danger">💰</div>
+                        <div class="stat-info">
+                            <h3>2.8M</h3>
+                            <p>إجمالي القيمة</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header">
+                        <h3 class="card-title">إجراءات سريعة</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="quick-actions">
+                            <a href="inventory.html" class="quick-action">
+                                <div class="icon">➕</div>
+                                <h4>إضافة أصل</h4>
+                                <p>تسجيل أصل جديد</p>
+                            </a>
+                            <a href="inventory.html" class="quick-action">
+                                <div class="icon">🔍</div>
+                                <h4>جرد الأصول</h4>
+                                <p>عملية جرد</p>
+                            </a>
+                            <a href="maintenance.html" class="quick-action">
+                                <div class="icon">🔧</div>
+                                <h4>طلب صيانة</h4>
+                                <p>طلب صيانة أصول</p>
+                            </a>
+                            <a href="procurement.html" class="quick-action">
+                                <div class="icon">🛒</div>
+                                <h4>طلب شراء</h4>
+                                <p>طلب أصول جديدة</p>
+                            </a>
+                            <a href="rooms.html" class="quick-action">
+                                <div class="icon">🏫</div>
+                                <h4>حجز قاعة</h4>
+                                <p>حجز قاعات</p>
+                            </a>
+                            <a href="suppliers.html" class="quick-action">
+                                <div class="icon">🏢</div>
+                                <h4>إدارة الموردين</h4>
+                                <p>إدارة الموردين</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Grid -->
+                <div class="grid-2">
+                    <!-- Assets By Category -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">توزيع الأصول حسب التصنيف</h3>
+                            <button class="btn btn-outline btn-sm">📊 عرض التقرير</button>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="assetsByCategory" height="200"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- Maintenance Overview -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">نظرة عامة على الصيانة</h3>
+                            <button class="btn btn-outline btn-sm">📅 عرض التفاصيل</button>
+                        </div>
+                        <div class="card-body">
+                            <div style="display: grid; gap: 16px;">
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+                                    <div style="background: linear-gradient(135deg, #dcfce7, #bbf7d0); padding: 20px; border-radius: 12px; text-align: center;">
+                                        <div style="font-size: 2.5em; font-weight: 800; color: #166534;">156</div>
+                                        <div style="color: #166534; font-weight: 600; margin-top: 8px;">مكتملة</div>
+                                    </div>
+                                    <div style="background: linear-gradient(135deg, #fee2e2, #fecaca); padding: 20px; border-radius: 12px; text-align: center;">
+                                        <div style="font-size: 2.5em; font-weight: 800; color: #991b1b;">45</div>
+                                        <div style="color: #991b1b; font-weight: 600; margin-top: 8px;">قيد التنفيذ</div>
+                                    </div>
+                                </div>
+                                <div style="display: grid; gap: 8px;">
+                                    <div style="display: flex; justify-content: space-between; padding: 12px; background: #fef3c7; border-radius: 8px;">
+                                        <span style="font-weight: 600; color: #92400e;">🔧 صيانة مجدولة</span>
+                                        <span style="font-weight: 800; color: #92400e;">28</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; padding: 12px; background: #fce7f3; border-radius: 8px;">
+                                        <span style="font-weight: 600; color: #9d174d;">⚠️ صيانة طارئة</span>
+                                        <span style="font-weight: 800; color: #9d174d;">17</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Activity & Pending Maintenance -->
+                <div class="grid-2" style="margin-top: 24px;">
+                    <!-- Recent Assets -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">آخر الأصول المضافة</h3>
+                            <a href="inventory.html" class="btn btn-outline btn-sm">عرض الكل</a>
+                        </div>
+                        <div class="card-body">
+                            <div style="display: grid; gap: 12px;">
+                                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; border-right: 4px solid #f59e0b;">
+                                    <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #3b82f6, #1e40af); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.2em;">🖥️</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 600;">حاسوب محمول</div>
+                                        <div style="color: #6b7280; font-size: 0.9em;">ASSET-2024-001 - معمل الحاسوب 201</div>
+                                    </div>
+                                    <span class="badge-status active">فعال</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; border-right: 4px solid #f59e0b;">
+                                    <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #10b981, #059669); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.2em;">📋</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 600;">سبورة ذكية</div>
+                                        <div style="color: #6b7280; font-size: 0.9em;">ASSET-2024-002 - الفصل 10/1</div>
+                                    </div>
+                                    <span class="badge-status active">فعال</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; border-right: 4px solid #10b981;">
+                                    <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #8b5cf6, #6d28d9); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.2em;">🖨️</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 600;">طابعة ليزر</div>
+                                        <div style="color: #6b7280; font-size: 0.9em;">ASSET-2024-003 - الشئف الأطباعة</div>
+                                    </div>
+                                    <span class="badge-status active">فعال</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Activity -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">النشاط الأخير</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="activity-list">
+                                <li class="activity-item">
+                                    <div class="activity-icon" style="background: #dcfce7; color: #166534;">➕</div>
+                                    <div class="activity-content">
+                                        <h4>تمت إضافة أصل جديد</h4>
+                                        <p>حاسوب محمول - ASSET-2024-001</p>
+                                        <div class="activity-time">منذ 2 ساعات</div>
+                                    </div>
+                                </li>
+                                <li class="activity-item">
+                                    <div class="activity-icon" style="background: #dbeafe; color: #1e40af;">🔧</div>
+                                    <div class="activity-content">
+                                        <h4>طلب صيانة جديد</h4>
+                                        <p>تكييف في الفصل 8/3</p>
+                                        <div class="activity-time">منذ 4 ساعات</div>
+                                    </div>
+                                </li>
+                                <li class="activity-item">
+                                    <div class="activity-icon" style="background: #fef3c7; color: #92400e;">✅</div>
+                                    <div class="activity-content">
+                                        <h4>تمت عملية الجرد</h4>
+                                        <p>للقسم التقني</p>
+                                        <div class="activity-time">أمس</div>
+                                    </div>
+                                </li>
+                                <li class="activity-item">
+                                    <div class="activity-icon" style="background: #fce7f3; color: #9d174d;">🔄</div>
+                                    <div class="activity-content">
+                                        <h4>تم تحويل أصل</h4>
+                                        <p>من المخزن للفصل 10/2</p>
+                                        <div class="activity-time">منذ 2 أيام</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Upcoming Maintenance -->
+                <div class="card" style="margin-top: 24px;">
+                    <div class="card-header">
+                        <h3 class="card-title">مواعيد الصيانة القادمة</h3>
+                        <a href="maintenance.html" class="btn btn-primary btn-sm">عرض الكل</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>رقم الطلب</th>
+                                        <th>الأصل</th>
+                                        <th>نوع الصيانة</th>
+                                        <th>تاريخ</th>
+                                        <th>الأولوية</th>
+                                        <th>الحالة</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">MAINT-2024-001</code></td>
+                                        <td style="font-weight: 600;">تكييف الفصل 10/1</td>
+                                        <td>صيانة دورية</td>
+                                        <td>2024-05-18</td>
+                                        <td><span class="badge-status warning">عالية</span></td>
+                                        <td><span class="badge-status pending">قيد التنفيذ</span></td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="action-btn view">👁️</button>
+                                                <button class="action-btn edit">✏️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">MAINT-2024-002</code></td>
+                                        <td style="font-weight: 600;">حاسوب مخزن</td>
+                                        <td>تعديل برمجي</td>
+                                        <td>2024-05-22</td>
+                                        <td><span class="badge-status approved">متوسطة</span></td>
+                                        <td><span class="badge-status pending">مجدولة</span></td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="action-btn view">👁️</button>
+                                                <button class="action-btn edit">✏️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">MAINT-2024-003</code></td>
+                                        <td style="font-weight: 600;">مبرد المطبخ</td>
+                                        <td>تصليح</td>
+                                        <td>2024-05-25</td>
+                                        <td><span class="badge-status danger">عاجل</span></td>
+                                        <td><span class="badge-status pending">مجدولة</span></td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="action-btn view">👁️</button>
+                                                <button class="action-btn edit">✏️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Initialize Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Assets By Category Chart
+            const ctx = document.getElementById('assetsByCategory').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['تقنيات', 'أثاث', 'معدات تعليمية', 'مرافق', 'مركبات'],
+                    datasets: [{
+                        label: 'عدد الأصول',
+                        data: [1245, 890, 567, 432, 322],
+                        backgroundColor: [
+                            '#3b82f6',
+                            '#10b981',
+                            '#f59e0b',
+                            '#ef4444',
+                            '#8b5cf6'
+                        ],
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

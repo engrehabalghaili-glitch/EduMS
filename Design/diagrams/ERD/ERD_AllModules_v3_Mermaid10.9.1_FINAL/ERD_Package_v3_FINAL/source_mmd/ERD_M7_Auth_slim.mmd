@@ -1,0 +1,162 @@
+erDiagram
+    %% =====================================================
+    %% M7_Auth - ERD
+    %% Mermaid 10.9.1 Compliant - SLIM VIEW (PK + FK only)
+    %% =====================================================
+
+    SystemUser {
+        INT userId PK "المستخدمين"
+        INT schoolId "معرف المدرسة FK School.schoolId - يمكن أن يكون NULL للمستخدمين على ..."
+        INT officeId "معرف المكتب FK Office.officeId - للمستخدمين على مستوى المكتب"
+        INT employeeId "معرف الموظف المرتبط FK Employee.employeeId - إذا كان المستخدم موظفاً"
+        INT studentId "معرف الطالب المرتبط FK Student.studentId - إذا كان المستخدم طالباً"
+        INT guardianId "معرف ولي الأمر المرتبط FK Guardian.guardianId - إذا كان المستخدم ول..."
+    }
+
+    UserActivityLog {
+        INT logId PK "تتبع النشاط الزمني للمستخدم"
+        INT userId FK "معرف المستخدم FK SystemUser.userId"
+        INT schoolId "معرف المدرسة FK School.schoolId - للتكرار"
+    }
+
+    PermissionType {
+        INT typeId PK "أنواع الصلاحيات"
+    }
+
+    Permission {
+        INT permissionId PK "الصلاحيات"
+        INT typeId FK "معرف نوع الصلاحية FK PermissionType.typeId"
+    }
+
+    Role {
+        INT roleId PK "الأدوار"
+        INT parentRoleId FK "معرف الدور الأب Self FK Role.roleId - لوراثة الصلاحيات"
+    }
+
+    RolePermission {
+        INT rolePermissionId PK "صلاحيات الأدوار"
+        INT roleId FK "معرف الدور FK Role.roleId"
+        INT permissionId FK "معرف الصلاحية FK Permission.permissionId"
+        INT inheritedFromRoleId FK "معرف الدور الذي ورثت منه الصلاحية FK Role.roleId - اختياري"
+        INT grantedByUserId FK "معرف من منح الصلاحية FK SystemUser.userId"
+    }
+
+    UserRole {
+        INT userRoleId PK "تعيين الأدوار للمستخدمين"
+        INT userId FK "معرف المستخدم FK SystemUser.userId"
+        INT roleId FK "معرف الدور FK Role.roleId"
+        INT schoolId "معرف المدرسة FK School.schoolId - لتحديد سياق الدور مثلاً دور معلم ..."
+        INT assignedByUserId FK "معرف من قام بتعيين الدور FK SystemUser.userId"
+    }
+
+    GovernanceRBAC {
+        INT governanceId PK "حوكمة الصلاحيات والأدوار"
+        INT roleId FK "معرف الدور الذي له صلاحية إدارة الصلاحيات FK Role.roleId"
+        INT targetRoleId FK "معرف الدور المستهدف الذي يمكن إدارة صلاحياته FK Role.roleId - يمكن ..."
+        INT targetPermissionId FK "معرف الصلاحية المستهدفة FK Permission.permissionId - يمكن أن يكون N..."
+        INT approvalRoleId FK "معرف الدور الذي يجب أن يوافق FK Role.roleId - اختياري"
+    }
+
+    UserPermission {
+        INT userPermissionId PK "الصلاحيات المباشرة للمستخدمين"
+        INT userId FK "معرف المستخدم FK SystemUser.userId"
+        INT permissionId FK "معرف الصلاحية FK Permission.permissionId"
+        INT schoolId "معرف المدرسة FK School.schoolId - سياق الصلاحية يمكن أن تختلف الصلا..."
+        INT grantedByUserId FK "معرف من منح الصلاحية FK SystemUser.userId"
+    }
+
+    AccessPolicy {
+        INT policyId PK "سياسات الوصول"
+        INT schoolId "معرف المدرسة FK School.schoolId - يمكن أن يكون NULL للسياسات العامة"
+    }
+
+    PermissionBase {
+        INT baseId PK "الجداول الأساسية لنظام الصلاحيات"
+    }
+
+    StudentBasePermissions {
+        INT permissionId PK "صلاحيات الطالب الأساسية"
+        INT schoolId "معرف المدرسة FK School.schoolId - يمكن أن يكون NULL للسياسات العامة"
+        INT roleId FK "معرف الدور المطبق عليه هذه الصلاحية FK Role.roleId"
+    }
+
+    StudentAcademicPermissions {
+        INT permissionId PK "الصلاحيات الأكاديمية المرتبطة بالطالب"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT roleId FK "معرف الدور FK Role.roleId"
+    }
+
+    StudentFinancePermissions {
+        INT permissionId PK "صلاحيات المالية المرتبطة بالطالب"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT roleId FK "معرف الدور FK Role.roleId"
+    }
+
+    OfficePermissions {
+        INT permissionId PK "صلاحيات المكتب التربوي"
+        INT officeId "معرف المكتب FK Office.officeId"
+        INT roleId FK "معرف الدور FK Role.roleId"
+    }
+
+    BehaviorPermissionMatrix {
+        INT matrixId PK "صلاحيات السلوك والمتابعة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT roleId FK "معرف الدور FK Role.roleId"
+        INT permissionId FK "معرف الصلاحية المرتبطة FK BehaviorPermissions.permissionId - اختيار..."
+    }
+
+    BehaviorPermissions {
+        INT permissionId PK "السلوك"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT roleId FK "معرف الدور FK Role.roleId"
+    }
+
+    AuditLog {
+        INT auditId PK "سجل التدقيق"
+        INT schoolId "معرف المدرسة FK School.schoolId - يمكن أن يكون NULL لعمليات على مست..."
+        INT userId FK "معرف المستخدم الذي قام بالعملية FK SystemUser.userId"
+    }
+
+    StudentPermissionAudit {
+        INT auditId PK "سجل صلاحيات الطالب"
+        INT studentId "معرف الطالب المتأثر FK Student.studentId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT userId FK "معرف المستخدم الذي حاول الوصول FK SystemUser.userId"
+    }
+
+    RoleMatrix {
+        INT matrixId PK "مصفوفة الأدوار النموذجية"
+        INT schoolId "معرف المدرسة FK School.schoolId - يمكن أن يكون NULL للأدوار العامة"
+    }
+
+    PrivilegeRules {
+        INT ruleId PK "الامتيازات وقواعد النظام"
+        INT schoolId "معرف المدرسة FK School.schoolId - يمكن أن يكون NULL للقواعد العامة"
+    }
+
+    %% ===== Relationships =====
+    SystemUser ||--o{ UserActivityLog : "معرف المستخدم FK SystemUs"
+    PermissionType ||--o{ Permission : "معرف نوع الصلاحية FK Perm"
+    Role ||--o{ RolePermission : "معرف الدور FK RoleroleId"
+    Permission ||--o{ RolePermission : "معرف الصلاحية FK Permissi"
+    Role ||--o{ RolePermission : "معرف الدور الذي ورثت منه "
+    SystemUser ||--o{ RolePermission : "معرف من منح الصلاحية FK S"
+    SystemUser ||--o{ UserRole : "معرف المستخدم FK SystemUs"
+    Role ||--o{ UserRole : "معرف الدور FK RoleroleId"
+    SystemUser ||--o{ UserRole : "معرف من قام بتعيين الدور "
+    Role ||--o{ GovernanceRBAC : "معرف الدور الذي له صلاحية"
+    Role ||--o{ GovernanceRBAC : "معرف الدور المستهدف الذي "
+    Permission ||--o{ GovernanceRBAC : "معرف الصلاحية المستهدفة F"
+    Role ||--o{ GovernanceRBAC : "معرف الدور الذي يجب أن يو"
+    SystemUser ||--o{ UserPermission : "معرف المستخدم FK SystemUs"
+    Permission ||--o{ UserPermission : "معرف الصلاحية FK Permissi"
+    SystemUser ||--o{ UserPermission : "معرف من منح الصلاحية FK S"
+    Role ||--o{ StudentBasePermissions : "معرف الدور المطبق عليه هذ"
+    Role ||--o{ StudentAcademicPermissions : "معرف الدور FK RoleroleId"
+    Role ||--o{ StudentFinancePermissions : "معرف الدور FK RoleroleId"
+    Role ||--o{ OfficePermissions : "معرف الدور FK RoleroleId"
+    Role ||--o{ BehaviorPermissionMatrix : "معرف الدور FK RoleroleId"
+    BehaviorPermissions ||--o{ BehaviorPermissionMatrix : "معرف الصلاحية المرتبطة FK"
+    Role ||--o{ BehaviorPermissions : "معرف الدور FK RoleroleId"
+    SystemUser ||--o{ AuditLog : "معرف المستخدم الذي قام با"
+    SystemUser ||--o{ StudentPermissionAudit : "معرف المستخدم الذي حاول ا"

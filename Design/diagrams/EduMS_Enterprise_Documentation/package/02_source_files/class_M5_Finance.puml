@@ -1,0 +1,322 @@
+@startuml M5_Finance_class
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #DBEAFE
+  BorderColor #1E3A8A
+}
+
+class StudentAccount {
+  + {static} accountId : BIGINT <<PK>>
+  + studentId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + academicYearId : BIGINT <<FK>>
+  + accountNumber : INT
+  + totalDebit : DECIMAL(15,2)
+  + totalCredit : VARCHAR(200)
+  + currentBalance : DECIMAL(15,2)
+  + balanceType : DECIMAL(15,2)
+  + lastTransactionDate : DATE
+  + lastPaymentDate : DATE
+  + lastPaymentAmount : DECIMAL(15,2)
+  + accountStatus : INT
+  + isExempt : BOOLEAN
+  + exemptionPercentage : DECIMAL(5,2)
+  + exemptionReason : VARCHAR(200)
+  + exemptionApprovedByUserId : BIGINT <<FK>>
+  + exemptionApprovalDate : DATE
+  + exemptionDocument : VARCHAR(200)
+  + minimumPaymentRequired : DECIMAL(15,2)
+  + isBlockedFromRegistration : BOOLEAN
+  + blockReason : VARCHAR(200)
+  + unblockDate : DATE
+  + paymentPlan : VARCHAR(200)
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+}
+class StudentInvoice {
+  + {static} invoiceId : BIGINT <<PK>>
+  + accountId : BIGINT <<FK>>
+  + studentId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + academicYearId : BIGINT <<FK>>
+  + semesterId : BIGINT <<FK>>
+  + invoiceNumber : INT
+  + invoiceDate : DATE
+  + dueDate : DATE
+  + issueDate : DATE
+  + totalAmount : DECIMAL(15,2)
+  + discountAmount : DECIMAL(15,2)
+  + discountReason : INT
+  + taxAmount : DECIMAL(15,2)
+  + taxRate : DECIMAL(5,2)
+  + taxRegistrationNumber : INT
+  + netAmount : DECIMAL(15,2)
+  + paidAmount : DECIMAL(15,2)
+  + remainingAmount : DECIMAL(15,2)
+  + invoiceType : DECIMAL(15,2)
+  + invoiceCategory : VARCHAR(50)
+  + paymentStatus : VARCHAR(50)
+  + invoiceStatus : VARCHAR(50)
+  + paymentMethod : VARCHAR(200)
+  + isLate : BOOLEAN
+  + lateDays : INT
+  + lateFeePercentage : DECIMAL(15,2)
+  + lateFeeAmount : DECIMAL(15,2)
+  + installmentPlan : VARCHAR(200)
+  + installmentCount : INT
+  + currentInstallment : VARCHAR(200)
+  + parentApprovalRequired : BOOLEAN
+  + parentApprovalStatus : VARCHAR(50)
+  + parentApprovalDate : DATE
+  + sentToParent : BOOLEAN
+  + parentNotifiedAt : DATE
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+  + generate()
+}
+class InvoiceItem {
+  + {static} itemId : BIGINT <<PK>>
+  + invoiceId : BIGINT <<FK>>
+  + feeTypeId : BIGINT <<FK>>
+  + itemCode : VARCHAR(50)
+  + itemDescription : DECIMAL(15,2)
+  + quantity : INT
+  + unitPrice : DECIMAL(15,2)
+  + totalPrice : DECIMAL(15,2)
+  + discountPercentage : INT
+  + discountAmount : DECIMAL(15,2)
+  + priceAfterDiscount : DECIMAL(15,2)
+  + taxPercentage : DECIMAL(5,2)
+  + taxAmount : DECIMAL(15,2)
+  + netAmount : DECIMAL(15,2)
+  + dueDate : DATE
+  + isPaid : BIGINT <<FK>>
+  + paidAmount : DECIMAL(15,2)
+  + remainingAmount : DECIMAL(15,2)
+  + paymentMethod : VARCHAR(200)
+  + isLate : BOOLEAN
+  + lateFeeApplied : BOOLEAN
+  + lateFeeAmount : DECIMAL(15,2)
+  + installmentNumber : INT
+  + installmentTotal : INT
+  + isWaived : BOOLEAN
+  + waiverReason : VARCHAR(200)
+  + waiverDate : DATE
+  + status : VARCHAR(50)
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + generate()
+  + settle(payment)
+  + void()
+}
+class Payment {
+  + {static} paymentId : BIGINT <<PK>>
+  + accountId : BIGINT <<FK>>
+  + studentId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + academicYearId : BIGINT <<FK>>
+  + paymentNumber : INT
+  + paymentDate : DATE
+  + paymentTime : TIME
+  + amount : DECIMAL(15,2)
+  + currency : VARCHAR(200)
+  + exchangeRate : DECIMAL(15,2)
+  + convertedAmount : DECIMAL(15,2)
+  + paymentMethod : VARCHAR(200)
+  + paymentType : DECIMAL(15,2)
+  + bankName : VARCHAR(200)
+  + bankTransactionId : BIGINT <<FK>>
+  + checkNumber : INT
+  + checkBank : VARCHAR(200)
+  + checkDate : DATE
+  + creditCardLast4 : VARCHAR(200)
+  + creditCardType : VARCHAR(50)
+  + walletType : VARCHAR(50)
+  + payerName : VARCHAR(200)
+  + payerType : VARCHAR(50)
+  + payerEmail : VARCHAR(100)
+  + receiptNumber : INT
+  + receiptPrinted : BOOLEAN
+  + receiptSentToEmail : BOOLEAN
+  + receiptEmailSentAt : DATE
+  + paymentStatus : VARCHAR(50)
+  + isConfirmed : BOOLEAN
+  + confirmationDate : DATE
+  + confirmedByUserId : BIGINT <<FK>>
+  + allocatedInvoices : VARCHAR(200)
+  + allocatedItems : VARCHAR(200)
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + process()
+  + refund()
+  + verify()
+}
+class FeeType {
+  + {static} feeTypeId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + feeCode : DECIMAL(15,2)
+  + feeNameAr : DECIMAL(15,2)
+  + feeNameEn : DECIMAL(15,2)
+  + feeCategory : DECIMAL(15,2)
+  + amount : DECIMAL(15,2)
+  + currency : VARCHAR(200)
+  + billingFrequency : VARCHAR(200)
+  + isTaxable : BOOLEAN
+  + taxPercentage : DECIMAL(5,2)
+  + isMandatory : BOOLEAN
+  + isOptional : BOOLEAN
+  + isDiscountable : BOOLEAN
+  + discountPercentageAllowed : INT
+  + isRefundable : BOOLEAN
+  + refundPercentage : DECIMAL(5,2)
+  + refundCutoffDate : DATE
+  + isRecurring : BOOLEAN
+  + recurrenceType : VARCHAR(50)
+  + appliesToGrades : DECIMAL(5,2)
+  + appliesToNationalities : DECIMAL(15,2)
+  + appliesToStudentTypes : VARCHAR(50)
+  + isActive : BOOLEAN
+  + validFrom : DATE
+  + validTo : DATE
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+}
+class Installment {
+  + {static} installmentId : BIGINT <<PK>>
+  + invoiceId : BIGINT <<FK>>
+  + itemId : BIGINT <<FK>>
+  + accountId : BIGINT <<FK>>
+  + studentId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + academicYearId : BIGINT <<FK>>
+  + installmentNumber : INT
+  + installmentTotal : INT
+  + installmentAmount : DECIMAL(15,2)
+  + currency : VARCHAR(200)
+  + dueDate : DATE
+  + extendedDueDate : DATE
+  + paidAmount : DECIMAL(15,2)
+  + remainingAmount : DECIMAL(15,2)
+  + paymentDate : DATE
+  + paymentMethod : VARCHAR(200)
+  + paymentReference : VARCHAR(50)
+  + installmentType : VARCHAR(50)
+  + installmentStatus : VARCHAR(50)
+  + isLate : BOOLEAN
+  + lateDays : DATE
+  + lateFeePercentage : DECIMAL(15,2)
+  + lateFeeAmount : DECIMAL(15,2)
+  + lateFeePaid : BIGINT <<FK>>
+  + lateFeePaymentDate : DATE
+  + lateFeePaymentReference : DECIMAL(15,2)
+  + isRescheduled : BOOLEAN
+  + rescheduledDate : DATE
+  + rescheduledByUserId : BIGINT <<FK>>
+  + rescheduledReason : VARCHAR(200)
+  + newDueDate : DATE
+  + isWaived : BOOLEAN
+  + waiverReason : VARCHAR(200)
+  + waiverDate : DATE
+  + waivedByUserId : BIGINT <<FK>>
+  + waiverApprovalDocument : VARCHAR(200)
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+}
+class AssetWarrantyContract {
+  + {static} contractValue : VARCHAR(200) <<PK>>
+  + currency : VARCHAR(200)
+  + paymentTerms : VARCHAR(200)
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+}
+class FinancialAuditArchive {
+  + {static} reportType : VARCHAR(50) <<PK>>
+  + fiscalYear : VARCHAR(200)
+  + totalAssetsValue : VARCHAR(200)
+  + totalDepreciationValue : VARCHAR(200)
+  + filePath : VARCHAR(200)
+  + isReadOnly : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + record(event)
+  + query(filters)
+}
+StudentAccount "1" o-- "*" StudentInvoice : accountId
+StudentInvoice "1" o-- "*" InvoiceItem : invoiceId
+FeeType "1" o-- "*" InvoiceItem : feeTypeId
+StudentAccount "1" o-- "*" Payment : accountId
+StudentInvoice "1" o-- "*" Installment : invoiceId
+InvoiceItem "1" o-- "*" Installment : itemId
+StudentAccount "1" o-- "*" Installment : accountId
+@enduml

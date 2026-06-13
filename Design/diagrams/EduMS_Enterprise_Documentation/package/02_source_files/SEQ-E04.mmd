@@ -1,0 +1,23 @@
+sequenceDiagram
+    actor EMP
+    actor SrcMgr as مدير المدرسة الحالية
+    participant API
+    participant DB
+    actor OF as مكتب التربية
+    actor DestMgr as مدير المدرسة المستقبلة
+    
+    EMP->>API: طلب نقل خارجي
+    API->>DB: INSERT ExternalTransfer(Pending)
+    SrcMgr->>API: مراجعة + توصية
+    OF->>API: مراجعة الطلب
+    OF->>DestMgr: استشارة
+    DestMgr->>OF: موافقة/رفض
+    OF->>API: قرار النقل
+    alt موافقة
+        API->>DB: UPDATE Employee.schoolId
+        API->>DB: UPDATE ExternalTransfer.status='Approved'
+        API->>DB: تنفيذ إخلاء طرف
+        API->>EMP: مباشرة العمل الجديد
+    else رفض
+        API->>EMP: تم الرفض
+    end

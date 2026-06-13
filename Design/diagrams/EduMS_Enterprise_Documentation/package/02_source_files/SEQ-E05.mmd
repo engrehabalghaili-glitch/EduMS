@@ -1,0 +1,20 @@
+sequenceDiagram
+    actor MGR
+    actor HR
+    participant API
+    participant DB
+    actor FIN as الإدارة المالية
+    actor EMP
+    
+    MGR->>API: قرار إنهاء خدمة
+    API->>DB: INSERT EmployeeTermination
+    HR->>API: بدء إجراءات إخلاء الطرف
+    HR->>API: استرجاع العهد
+    API->>DB: UPDATE EmployeeInventoryCustody.returned
+    HR->>FIN: تسوية مالية
+    FIN->>API: احتساب المستحقات
+    API->>DB: INSERT FinalSettlement
+    FIN->>API: صرف
+    HR->>API: إصدار شهادة الخبرة
+    API->>DB: UPDATE Employee.status='Terminated'
+    API->>EMP: الوثائق النهائية

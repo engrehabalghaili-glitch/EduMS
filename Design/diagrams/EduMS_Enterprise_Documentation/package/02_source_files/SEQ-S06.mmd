@@ -1,0 +1,27 @@
+sequenceDiagram
+    autonumber
+    actor G as ولي الأمر
+    participant UI as Portal
+    participant FIN as Finance Service
+    participant BANK as Payment Gateway
+    participant DB as DB
+    participant NOT
+    
+    G->>UI: عرض الفواتير المستحقة
+    UI->>FIN: GET /invoices?guardian=G123
+    FIN->>DB: SELECT Outstanding
+    DB-->>FIN: قائمة
+    FIN-->>UI: عرض
+    G->>UI: اختيار + الدفع
+    UI->>FIN: POST /payments/initiate
+    FIN->>DB: INSERT Payment(Pending)
+    FIN->>BANK: Create Session
+    BANK-->>FIN: paymentUrl
+    FIN-->>UI: redirect
+    UI->>BANK: redirect
+    G->>BANK: بيانات البطاقة + 3DS
+    BANK->>FIN: Webhook OK
+    FIN->>DB: UPDATE Payment(Paid)
+    FIN->>DB: UPDATE Invoice(Settled)
+    FIN->>NOT: إشعار
+    NOT-->>G: إيصال إلكتروني

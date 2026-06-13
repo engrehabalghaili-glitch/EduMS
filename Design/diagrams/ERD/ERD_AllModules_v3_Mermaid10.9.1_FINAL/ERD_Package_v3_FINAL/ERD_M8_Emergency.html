@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERD - إدارة الطوارئ والتميز</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<style>
+*{box-sizing:border-box}
+body{font-family:'Cairo',sans-serif;background:#f8fafc;margin:0;padding:24px;color:#1f2937}
+.container{max-width:1500px;margin:0 auto}
+.header{background:linear-gradient(135deg,#BE185D,#BE185Ddd);color:#fff;padding:32px;border-radius:16px;margin-bottom:20px;box-shadow:0 8px 24px #BE185D33}
+.header h1{margin:0 0 8px;font-size:28px;font-weight:900;display:flex;align-items:center;gap:12px}
+.header .subtitle{opacity:.92;font-size:15px;line-height:1.7}
+.header .badges{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+.badge{background:rgba(255,255,255,.2);padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;backdrop-filter:blur(10px)}
+.compliance{background:#D1FAE5;border-right:4px solid #10B981;padding:14px 18px;border-radius:10px;margin-bottom:16px;font-size:13px;color:#065F46;line-height:1.8}
+.compliance strong{color:#064E3B}
+.compliance code{background:#fff;padding:2px 8px;border-radius:4px;font-family:'Fira Code',monospace;font-size:12px}
+.nav-back{display:inline-block;color:#1E3A8A;text-decoration:none;font-weight:700;margin-bottom:12px;font-size:14px}
+.nav-back:hover{text-decoration:underline}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:14px 0}
+.info-card{background:#fff;border-right:4px solid #BE185D;padding:14px 18px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.info-card .label{font-size:12px;color:#64748b;font-weight:600}
+.info-card .value{font-size:22px;color:#1E3A8A;font-weight:900;margin-top:4px}
+.toolbar{background:#fff;padding:14px 20px;border-radius:12px;margin-bottom:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.toolbar .group{display:flex;gap:6px;padding:4px;background:#F1F5F9;border-radius:10px}
+.toolbar .group button{background:transparent;border:none;padding:8px 14px;font-family:inherit;font-weight:600;font-size:13px;border-radius:6px;cursor:pointer;color:#475569}
+.toolbar .group button.active{background:#1E3A8A;color:#fff}
+.btn{background:#1E3A8A;color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;transition:all .2s}
+.btn:hover{background:#172554;transform:translateY(-1px)}
+.btn.outline{background:#fff;color:#1E3A8A;border:1.5px solid #1E3A8A}
+.btn.outline:hover{background:#EFF6FF}
+.diagram-card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 4px 20px rgba(0,0,0,.06);overflow:auto;min-height:400px}
+.diagram-card .mermaid{background:#fff;text-align:center}
+.view-pane{display:none}
+.view-pane.active{display:block}
+details{margin-top:18px}
+details summary{cursor:pointer;font-weight:700;color:#1E3A8A;padding:12px 16px;background:#EFF6FF;border-radius:10px;font-size:14px}
+pre.source-code{background:#0f172a;color:#e2e8f0;padding:18px;border-radius:8px;overflow-x:auto;font-family:'Fira Code',monospace;font-size:12px;line-height:1.6;max-height:520px;direction:ltr;text-align:left;margin-top:10px}
+.footer{text-align:center;padding:24px;color:#64748b;font-size:13px}
+.notice-slim{background:#FEF3C7;border-right:4px solid #D4AF37;padding:12px 16px;border-radius:8px;margin-bottom:14px;font-size:13px;color:#78350F}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a class="nav-back" href="index.html">← العودة لفهرس مخططات الأقسام</a>
+
+  <div class="header">
+    <h1>🚨 ERD — إدارة الطوارئ والتميز</h1>
+    <div class="subtitle">القسم الثامن — حالات الطوارئ والتميز والحماية الاجتماعية والإحالات</div>
+    <div class="badges">
+      <span class="badge">📁 M8_Emergency</span>
+      <span class="badge">🗃️ 12 كيان</span>
+      <span class="badge">📊 354 حقل كامل</span>
+      <span class="badge">🔑 43 PK+FK</span>
+      <span class="badge">🔗 5 علاقة</span>
+      <span class="badge">✅ Mermaid 10.9.1</span>
+    </div>
+  </div>
+
+  <div class="compliance">
+    <strong>✔ متوافق مع Mermaid 10.9.1:</strong>
+    جميع الأسماء البرمجية ASCII فقط (مثال: <code>StudentAccount</code>) — كل النصوص العربية موضوعة داخل علامات تنصيص آمنة كتعليقات.
+    <br>كل قسم في مخطط <strong>مستقل تماماً</strong> دون دمج مع أقسام أخرى.
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card"><div class="label">عدد الجداول</div><div class="value">12</div></div>
+    <div class="info-card"><div class="label">الحقول الكلية</div><div class="value">354</div></div>
+    <div class="info-card"><div class="label">PK + FK فقط</div><div class="value">43</div></div>
+    <div class="info-card"><div class="label">العلاقات</div><div class="value">5</div></div>
+    <div class="info-card"><div class="label">المستوى</div><div class="value" style="font-size:14px">Module-Level</div></div>
+  </div>
+
+  <div class="toolbar">
+    <div class="group" role="tablist">
+      <button id="tab-slim" class="active" onclick="switchView('slim')">🔑 عرض مبسّط (PK + FK)</button>
+      <button id="tab-full" onclick="switchView('full')">📊 عرض كامل (جميع الحقول)</button>
+    </div>
+    <div style="flex:1"></div>
+    <button class="btn outline" onclick="copySource()">📋 نسخ كود Mermaid</button>
+    <button class="btn outline" onclick="downloadSource()">⬇ تنزيل .mmd</button>
+    <button class="btn outline" onclick="downloadSvg()">🖼 تنزيل SVG</button>
+  </div>
+
+  <div id="pane-slim" class="view-pane active">
+    <div class="notice-slim">
+      💡 <strong>العرض المبسّط</strong> — يُظهر فقط مفاتيح الجداول (PK) والمفاتيح الخارجية (FK)، مثالي لفهم العلاقات بسرعة. للحقول الكاملة، انقر على "عرض كامل".
+    </div>
+    <div class="diagram-card">
+      <div class="mermaid" id="diagram-slim">
+erDiagram
+    %% =====================================================
+    %% M8_Emergency - ERD
+    %% Mermaid 10.9.1 Compliant - SLIM VIEW (PK + FK only)
+    %% =====================================================
+
+    EmergencyHosting {
+        INT hostingId PK "الاستضافة الطارئة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT reportedByUserId "معرف من سجل الحالة FK SystemUser.userId"
+    }
+
+    EmergencyIncidents {
+        INT incidentId PK "حوادث الطوارئ"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT reportedByUserId "معرف من أبلغ عن الحادثة FK SystemUser.userId"
+        INT emergencyPlanId "معرف خطة الطوارئ المستخدمة FK من جدول خطط الطوارئ - خارج هذا القسم"
+    }
+
+    EmergencyClosures {
+        INT closureId PK "الإغلاق الطارئ"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT compensationPlanId FK "معرف خطة التعويض المرتبطة FK RemediationPlan.planId - من المجموعة 8-ج"
+    }
+
+    TransportationServices {
+        INT serviceId PK "خدمات النقل المدرسي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT driverId "معرف السائق FK Employee.employeeId"
+        INT supervisorId "معرف المشرف FK Employee.employeeId"
+        INT shiftId "معرف الفترة صباحي مسائي FK SchoolShiftSetting.shiftId"
+    }
+
+    SchoolMergers {
+        INT mergerId PK "عمليات الدمج المدرسي"
+        INT targetSchoolId "المدرسة الدامجة المدرسة الناتجة FK School.schoolId"
+    }
+
+    SchoolAwards {
+        INT awardId PK "الجوائز والتميز"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+    }
+
+    ExternalParticipations {
+        INT participationId PK "المشاركات والتمثيل الخارجي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+    }
+
+    CommunityPartnerships {
+        INT partnershipId PK "الشراكات المجتمعية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT responsibleUserId "معرف المسؤول عن الشراكة من المدرسة FK Employee.employeeId"
+    }
+
+    SafetySecurityReports {
+        INT reportId PK "تقارير السلامة والأمان"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT approvedByUserId "معرف من اعتمد التقرير FK SystemUser.userId"
+    }
+
+    SchoolDeficit {
+        INT deficitId PK "حالات العجز التعليمي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT detectedByUserId "معرف من اكتشف العجز FK SystemUser.userId"
+        INT resolvedByUserId "معرف من قام بحل العجز FK SystemUser.userId"
+        INT relatedRemediationPlanId FK "معرف خطة المعالجة المرتبطة FK RemediationPlan.planId"
+    }
+
+    SchoolSurplus {
+        INT surplusId PK "حالات الفائض التعليمي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT discoveredByUserId "معرف من اكتشف الفائض FK SystemUser.userId"
+        INT utilizedByUserId "معرف من قام بالاستغلال FK SystemUser.userId"
+        INT relatedRemediationPlanId FK "معرف خطة المعالجة المرتبطة قد تكون خطة للاستفادة من الفائض FK Remed..."
+    }
+
+    RemediationPlan {
+        INT planId PK "خطط معالجة العجز/الفائض"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT relatedDeficitId FK "معرف العجز المرتبط FK SchoolDeficit.deficitId - اختياري"
+        INT relatedSurplusId FK "معرف الفائض المرتبط FK SchoolSurplus.surplusId - اختياري"
+        INT executionLeadUserId "معرف المسؤول FK Employee.employeeId"
+        INT approvedByUserId "معرف من اعتمد الخطة FK SystemUser.userId"
+    }
+
+    %% ===== Relationships =====
+    RemediationPlan ||--o{ EmergencyClosures : "معرف خطة التعويض المرتبطة"
+    RemediationPlan ||--o{ SchoolDeficit : "معرف خطة المعالجة المرتبط"
+    RemediationPlan ||--o{ SchoolSurplus : "معرف خطة المعالجة المرتبط"
+    SchoolDeficit ||--o{ RemediationPlan : "معرف العجز المرتبط FK Sch"
+    SchoolSurplus ||--o{ RemediationPlan : "معرف الفائض المرتبط FK Sc"
+      </div>
+    </div>
+    <details>
+      <summary>📝 كود Mermaid المصدر (Slim)</summary>
+      <pre class="source-code" id="src-slim">erDiagram
+    %% =====================================================
+    %% M8_Emergency - ERD
+    %% Mermaid 10.9.1 Compliant - SLIM VIEW (PK + FK only)
+    %% =====================================================
+
+    EmergencyHosting {
+        INT hostingId PK "الاستضافة الطارئة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT reportedByUserId "معرف من سجل الحالة FK SystemUser.userId"
+    }
+
+    EmergencyIncidents {
+        INT incidentId PK "حوادث الطوارئ"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT reportedByUserId "معرف من أبلغ عن الحادثة FK SystemUser.userId"
+        INT emergencyPlanId "معرف خطة الطوارئ المستخدمة FK من جدول خطط الطوارئ - خارج هذا القسم"
+    }
+
+    EmergencyClosures {
+        INT closureId PK "الإغلاق الطارئ"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT compensationPlanId FK "معرف خطة التعويض المرتبطة FK RemediationPlan.planId - من المجموعة 8-ج"
+    }
+
+    TransportationServices {
+        INT serviceId PK "خدمات النقل المدرسي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT driverId "معرف السائق FK Employee.employeeId"
+        INT supervisorId "معرف المشرف FK Employee.employeeId"
+        INT shiftId "معرف الفترة صباحي مسائي FK SchoolShiftSetting.shiftId"
+    }
+
+    SchoolMergers {
+        INT mergerId PK "عمليات الدمج المدرسي"
+        INT targetSchoolId "المدرسة الدامجة المدرسة الناتجة FK School.schoolId"
+    }
+
+    SchoolAwards {
+        INT awardId PK "الجوائز والتميز"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+    }
+
+    ExternalParticipations {
+        INT participationId PK "المشاركات والتمثيل الخارجي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+    }
+
+    CommunityPartnerships {
+        INT partnershipId PK "الشراكات المجتمعية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT responsibleUserId "معرف المسؤول عن الشراكة من المدرسة FK Employee.employeeId"
+    }
+
+    SafetySecurityReports {
+        INT reportId PK "تقارير السلامة والأمان"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT approvedByUserId "معرف من اعتمد التقرير FK SystemUser.userId"
+    }
+
+    SchoolDeficit {
+        INT deficitId PK "حالات العجز التعليمي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT detectedByUserId "معرف من اكتشف العجز FK SystemUser.userId"
+        INT resolvedByUserId "معرف من قام بحل العجز FK SystemUser.userId"
+        INT relatedRemediationPlanId FK "معرف خطة المعالجة المرتبطة FK RemediationPlan.planId"
+    }
+
+    SchoolSurplus {
+        INT surplusId PK "حالات الفائض التعليمي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT discoveredByUserId "معرف من اكتشف الفائض FK SystemUser.userId"
+        INT utilizedByUserId "معرف من قام بالاستغلال FK SystemUser.userId"
+        INT relatedRemediationPlanId FK "معرف خطة المعالجة المرتبطة قد تكون خطة للاستفادة من الفائض FK Remed..."
+    }
+
+    RemediationPlan {
+        INT planId PK "خطط معالجة العجز/الفائض"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT relatedDeficitId FK "معرف العجز المرتبط FK SchoolDeficit.deficitId - اختياري"
+        INT relatedSurplusId FK "معرف الفائض المرتبط FK SchoolSurplus.surplusId - اختياري"
+        INT executionLeadUserId "معرف المسؤول FK Employee.employeeId"
+        INT approvedByUserId "معرف من اعتمد الخطة FK SystemUser.userId"
+    }
+
+    %% ===== Relationships =====
+    RemediationPlan ||--o{ EmergencyClosures : "معرف خطة التعويض المرتبطة"
+    RemediationPlan ||--o{ SchoolDeficit : "معرف خطة المعالجة المرتبط"
+    RemediationPlan ||--o{ SchoolSurplus : "معرف خطة المعالجة المرتبط"
+    SchoolDeficit ||--o{ RemediationPlan : "معرف العجز المرتبط FK Sch"
+    SchoolSurplus ||--o{ RemediationPlan : "معرف الفائض المرتبط FK Sc"</pre>
+    </details>
+  </div>
+
+  <div id="pane-full" class="view-pane">
+    <div class="notice-slim" style="background:#FEE2E2;border-right-color:#DC2626;color:#7F1D1D">
+      ⚠️ <strong>تنبيه:</strong> العرض الكامل يحوي 354 حقل وقد يأخذ بضع ثوانٍ للتصيير.
+    </div>
+    <div class="diagram-card">
+      <div class="mermaid" id="diagram-full">
+erDiagram
+    %% =====================================================
+    %% M8_Emergency - ERD
+    %% Mermaid 10.9.1 Compliant - ASCII identifiers only
+    %% =====================================================
+
+    EmergencyHosting {
+        INT hostingId PK "الاستضافة الطارئة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT hostingNumber "رقم الحالة تسلسلي"
+        VARCHAR hostingType "نوع الاستضافة نازحين طلاب خارجيين أغراض صحية مركز قيادة طوارئ أخرى"
+        DATE hostingDate "تاريخ بدء الاستضافة"
+        DATE endDate "تاريخ انتهاء الاستضافة الفعلي أو المتوقع"
+        DATE expectedEndDate "تاريخ الانتهاء المتوقع عند بدء الاستضافة"
+        INT actualCount "عدد الأفراد المستضافين فعلياً"
+        VARCHAR maxCapacity "السعة القصوى للمدرسة لهذا النوع من الاستضافة"
+        DECIMAL utilizationPercentage "نسبة الاستغلال actualCount / maxCapacity"
+        TEXT reason "سبب الاستضافة كوارث طبيعية حريق مدرسة مجاورة أزمة صحية أخرى"
+        VARCHAR sourceLocation "موقع المصدر منطقة مدينة للأفراد المستضافين"
+        VARCHAR supportOrg "الجهة الداعمة مثل اليونيسيف الهلال الأحمر وزارة الصحة"
+        VARCHAR supportOrgContact "جهة اتصال الجهة الداعمة"
+        VARCHAR facilitiesUsed "المرافق المستخدمة في الاستضافة JSON - قاعات معامل ملاعب"
+        VARCHAR resourcesProvided "الموارد التي قدمتها المدرسة JSON - مياه كهرباء إنترنت أغذية"
+        VARCHAR resourcesReceived "الموارد التي تلقتها المدرسة من جهات داعمة JSON"
+        VARCHAR expenses "التكاليف التي تكبدتها المدرسة JSON"
+        DECIMAL totalExpenses "إجمالي التكاليف"
+        VARCHAR status "حالة الاستضافة نشطة منتهية قيد التجهيز"
+        TEXT closureNotes "ملاحظات عند إنهاء الاستضافة"
+        VARCHAR lessonsLearned "الدروس المستفادة من هذه التجربة"
+        INT reportedByUserId "معرف من سجل الحالة FK SystemUser.userId"
+        VARCHAR attachments "مرفقات صور تقارير JSON"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    EmergencyIncidents {
+        INT incidentId PK "حوادث الطوارئ"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT incidentNumber "رقم الحادثة تسلسلي حسب العام"
+        VARCHAR incidentType "نوع الحادثة زلزال حريق وباء اضطراب أمني فيضان عاصفة حادث كيميائي ان..."
+        DATE incidentDate "تاريخ الحادثة"
+        DATETIME incidentTime "وقت الحادثة"
+        VARCHAR severity "مستوى الخطورة منخفض متوسط عالٍ حرج"
+        TEXT description "وصف تفصيلي للحادثة"
+        VARCHAR location "موقع الحادثة داخل المدرسة مبنى طابق غرفة"
+        INT reportedByUserId "معرف من أبلغ عن الحادثة FK SystemUser.userId"
+        DATETIME reportedAt "وقت الإبلاغ"
+        BOOLEAN isPlanActive "هل تم تفعيل خطة الطوارئ المعتمدة"
+        INT emergencyPlanId "معرف خطة الطوارئ المستخدمة FK من جدول خطط الطوارئ - خارج هذا القسم"
+        INT affectedCount "عدد المتضررين إحصائية أولية"
+        VARCHAR studentsAffected "عدد الطلاب المتضررين"
+        VARCHAR employeesAffected "عدد الموظفين المتضررين"
+        INT injuriesCount "عدد الإصابات"
+        INT severeInjuriesCount "عدد الإصابات الخطيرة"
+        INT fatalitiesCount "عدد الوفيات لا قدر الله"
+        DECIMAL propertyDamage "قيمة الأضرار المادية التقديرية"
+        INT propertyDamageDescription "وصف الأضرار المادية"
+        VARCHAR emergencyResponse "الإجراءات المتخذة فوراً إخلاء إسعافات أولية إطفاء"
+        INT externalAgencies "الجهات الخارجية المستجوبة دفاع مدني إسعاف شرطة JSON"
+        DATETIME externalResponseTime "وقت استجابة الجهات الخارجية"
+        VARCHAR status "حالة البلاغ مفتوح قيد المعالجة مغلق تحت التحقيق"
+        DATE closureDate "تاريخ الإغلاق"
+        TEXT closureNotes "ملاحظات الإغلاق"
+        VARCHAR investigationReport "رابط تقرير التحقيق إن وجد"
+        VARCHAR lessonsLearned "الدروس المستفادة لتجنب تكرار الحادثة"
+        VARCHAR recommendations "توصيات للتحسين"
+        VARCHAR attachments "مرفقات صور تقارير JSON"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    EmergencyClosures {
+        INT closureId PK "الإغلاق الطارئ"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT closureNumber "رقم الإغلاق تسلسلي"
+        TEXT closureReason "سبب الإغلاق ظروف جوية وباء تهديد أمني عطل فني شامل أمر حكومي أخرى"
+        VARCHAR authority "الجهة المقررة للإغلاق وزارة الصحة الدفاع المدني وزارة التعليم المكت..."
+        INT authorityDecisionNumber "رقم قرار الإغلاق إن وجد"
+        DATE startDate "تاريخ بداية توقف الدراسة"
+        DATE endDate "تاريخ نهاية الإغلاق المتوقع أو الفعلي"
+        DATE actualEndDate "تاريخ العودة الفعلي"
+        DECIMAL totalClosureDays "عدد أيام الإغلاق"
+        VARCHAR schoolDaysAffected "عدد أيام الدراسة الفعلية التي تأثرت"
+        BOOLEAN alternativeEducation "هل تم تفعيل التعليم عن بعد"
+        VARCHAR alternativeEducationType "نوع التعليم البديل عن بعد متزامن عن بعد غير متزامن حصص تعويضية حصص ..."
+        VARCHAR altEducationPlatform "المنصة المستخدمة Teams Zoom منصة مدرستي أخرى"
+        TEXT altEducationDetails "تفاصيل خطة التعليم البديل"
+        BOOLEAN wasCompensated "هل تم تعويض الفاقد التعليمي"
+        INT compensationPlanId FK "معرف خطة التعويض المرتبطة FK RemediationPlan.planId - من المجموعة 8-ج"
+        BOOLEAN parentNotificationSent "هل تم إشعار أولياء الأمور"
+        DATE parentNotificationDate "تاريخ إشعار أولياء الأمور"
+        VARCHAR parentNotificationMethod "طريقة الإشعار رسالة نصية بريد إلكتروني تطبيق"
+        VARCHAR status "حالة الإغلاق مخطط جاري منتهي"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    TransportationServices {
+        INT serviceId PK "خدمات النقل المدرسي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT routeId "معرف المسار فريد داخل المدرسة"
+        VARCHAR routeName "اسم المسار مثال - المسار الشرقي"
+        VARCHAR routeCode "كود المسار"
+        TEXT routeDescription "وصف المسار المناطق التي يغطيها"
+        INT busId "معرف الحافلة يمكن ربطه بجدول Asset في القسم الرابع"
+        INT busPlateNumber "رقم لوحة الحافلة"
+        VARCHAR busCapacity "سعة الحافلة عدد الطلاب"
+        VARCHAR busModel "موديل الحافلة"
+        VARCHAR busYear "سنة الصنع"
+        INT driverId "معرف السائق FK Employee.employeeId"
+        VARCHAR driverName "اسم السائق"
+        INT driverLicenseNumber "رقم رخصة السائق"
+        VARCHAR driverPhone "هاتف السائق"
+        INT supervisorId "معرف المشرف FK Employee.employeeId"
+        VARCHAR supervisorName "اسم المشرف"
+        VARCHAR supervisorPhone "هاتف المشرف"
+        INT shiftId "معرف الفترة صباحي مسائي FK SchoolShiftSetting.shiftId"
+        VARCHAR tripType "نوع الرحلة صباحية مسائية جميع الأيام"
+        DATETIME startTime "وقت بدء الرحلة"
+        DATETIME endTime "وقت انتهاء الرحلة"
+        VARCHAR estimatedDuration "المدة التقديرية للرحلة"
+        DATETIME stops "محطات التوقف JSON - تحتوي على المحطة العنوان الوقت الإحداثيات"
+        BOOLEAN isActive "هل المسار نشط"
+        VARCHAR status "حالة الخدمة نشطة متوقفة كاملة"
+        VARCHAR operatorCompany "الشركة المشغلة إن وجدت"
+        INT contractId "معرف العقد مع الشركة المشغلة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    SchoolMergers {
+        INT mergerId PK "عمليات الدمج المدرسي"
+        INT mergerNumber "رقم قرار الدمج"
+        DATE mergerDate "تاريخ صدور قرار الدمج"
+        DATE effectiveDate "تاريخ السريان الفعلي للدمج"
+        VARCHAR sourceSchoolIds "المدارس المندمجة JSON - قائمة بـ School.schoolId"
+        INT targetSchoolId "المدرسة الدامجة المدرسة الناتجة FK School.schoolId"
+        TEXT mergerReason "سبب الدمج نقص عدد الطلاب خفض التكاليف تحسين الجودة قرار وزار"
+        VARCHAR decisionAuthority "جهة إصدار القرار مكتب التربية وزارة التعليم"
+        VARCHAR decisionDocumentPath "مسار ملف قرار الدمج"
+        VARCHAR studentsTransferStatus "حالة نقل الطلاب قيد التنفيذ مكتمل"
+        VARCHAR employeesTransferStatus "حالة نقل الموظفين قيد التنفيذ مكتمل"
+        VARCHAR assetsTransferStatus "حالة نقل الأصول قيد التنفيذ مكتمل"
+        VARCHAR status "حالة العملية مخطط قيد التنفيذ مكتمل ملغي"
+        DATE completionDate "تاريخ اكتمال الدمج"
+        TEXT completionNotes "ملاحظات عند الإكمال"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    SchoolAwards {
+        INT awardId PK "الجوائز والتميز"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT awardNumber "رقم الجائزة تسلسلي"
+        VARCHAR awardName "اسم الجائزة مثال - جائزة التميز المدرسي"
+        VARCHAR awardCategory "فئة الجائزة تعليمية تربوية رياضية ثقافية بيئية خدمة مجتمع"
+        VARCHAR level "المستوى محلي وطني إقليمي دولي"
+        BOOLEAN issuingBody "الجهة المانحة وزارة التعليم مركز تميز منظمة دولية"
+        BOOLEAN issuingBodyType "نوع الجهة حكومية خاصة دولية"
+        DATE awardDate "تاريخ التكريم"
+        VARCHAR awardPlace "مكان التكريم مدينة دولة"
+        VARCHAR ranking "الترتيب المحقق الأول الثاني الثالث متميز"
+        VARCHAR participantsJson "المشاركون JSON - قائمة بأسماء المشاركين وأدوارهم"
+        VARCHAR studentParticipants "عدد الطلاب المشاركين"
+        VARCHAR teacherParticipants "عدد المعلمين المشاركين"
+        TEXT awardDetails "تفاصيل الجائزة ما تم تقديره سبب الفوز"
+        VARCHAR certificatePath "مسار ملف شهادة الجائزة PDF"
+        VARCHAR photosPath "مسارات صور التكريم JSON"
+        VARCHAR videoPath "مسار فيديو التكريم اختياري"
+        VARCHAR impact "أثر الجائزة على المدرسة زيادة السمعة تحفيز الطلاب الخ"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    ExternalParticipations {
+        INT participationId PK "المشاركات والتمثيل الخارجي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT participationNumber "رقم المشاركة تسلسلي"
+        VARCHAR eventName "اسم الفعالية مؤتمر مسابقة معرض مهرجان زيارة"
+        VARCHAR eventType "نوع الفعالية رياضي علمي ثقافي فني تطوعي أكاديمي"
+        VARCHAR organizer "الجهة المنظمة"
+        VARCHAR organizerType "نوع الجهة مدرسة جامعة جهة حكومية منظمة دولية"
+        VARCHAR location "مكان الفعالية مدينة دولة"
+        DATE startDate "تاريخ بدء الفعالية"
+        DATE endDate "تاريخ انتهاء الفعالية"
+        VARCHAR results "نتائج المشاركة المراكز المحققة الشهادات الدروس المستفادة"
+        VARCHAR ranking "الترتيب إن وجد"
+        VARCHAR participantsJson "المشاركون JSON - قائمة بالأسماء والأدوار"
+        VARCHAR studentParticipants "عدد الطلاب المشاركين"
+        VARCHAR teacherParticipants "عدد المعلمين المشاركين"
+        VARCHAR expenses "تكاليف المشاركة سفر إقامة تسجيل"
+        VARCHAR fundingSource "مصدر التمويل المدرسة جهة خارجية ذاتي"
+        VARCHAR attachments "مرفقات صور شهادات تقارير JSON"
+        VARCHAR lessonsLearned "الدروس المستفادة"
+        VARCHAR recommendations "توصيات للمشاركات المستقبلية"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    CommunityPartnerships {
+        INT partnershipId PK "الشراكات المجتمعية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT partnershipNumber "رقم الشراكة تسلسلي"
+        VARCHAR partnerName "اسم الشريك المؤسسة أو الجهة المانحة"
+        VARCHAR partnerType "نوع الشريك شركة منظمة غير ربحية جامعة جهة حكومية فرد"
+        VARCHAR supportType "نوع الدعم تجهيزات صيانة تطوير برامج مالي تدريب تبادل خبرات"
+        DATE agreementDate "تاريخ الاتفاقية"
+        DATE startDate "تاريخ بدء الشراكة"
+        DATE endDate "تاريخ انتهاء الشراكة إن وجد"
+        BOOLEAN isRenewable "هل الشراكة قابلة للتجديد"
+        VARCHAR agreementDocumentPath "مسار ملف الاتفاقية PDF"
+        DECIMAL supportValue "قيمة الدعم المالي إن وجد"
+        DECIMAL supportValueCurrency "عملة الدعم"
+        VARCHAR supportInKind "دعم عيني تجهيزات خدمات JSON"
+        VARCHAR impact "الأثر المحقق من الشراكة تقييم مدى فعالية الدعم"
+        VARCHAR impactRating "تقييم الأثر 1-5"
+        INT responsibleUserId "معرف المسؤول عن الشراكة من المدرسة FK Employee.employeeId"
+        VARCHAR partnerContactPerson "جهة اتصال الشريك"
+        VARCHAR partnerContactEmail "بريد جهة اتصال الشريك"
+        VARCHAR partnerContactPhone "هاتف جهة اتصال الشريك"
+        VARCHAR status "حالة الشراكة نشطة منتهية مجددة ملغاة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    SafetySecurityReports {
+        INT reportId PK "تقارير السلامة والأمان"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT reportNumber "رقم التقرير تسلسلي"
+        DATE reportDate "تاريخ التقرير"
+        VARCHAR reportPeriod "فترة التقرير شهري ربع سنوي سنوي"
+        VARCHAR safetyLevel "مستوى السلامة العام ممتاز جيد مقبول يحتاج تحسين"
+        DATE extinguisherExp "تاريخ انتهاء صلاحية أقرب طفاية حريق للتذكير"
+        INT extinguishersCount "عدد الطفايات المتوفرة"
+        DATE extinguishersLastInspection "تاريخ آخر فحص للطفايات"
+        DATE extinguishersNextInspection "تاريخ الفحص القادم"
+        VARCHAR alarmStatus "حالة أنظمة الإنذار يعمل بكفاءة يحتاج صيانة معطل"
+        DATE alarmLastTest "تاريخ آخر اختبار لأنظمة الإنذار"
+        VARCHAR emergencyLightsStatus "حالة أضواء الطوارئ"
+        VARCHAR fireAlarmSystem "نوع نظام إنذار الحريق يدوي آلي متكامل"
+        VARCHAR fireHosesStatus "حالة خراطيم الحريق"
+        BOOLEAN evacuationMaps "هل توجد خرائط إخلاء واضحة"
+        VARCHAR evacuationMapLocations "مواقع خرائط الإخلاء JSON"
+        VARCHAR emergencyExitsStatus "حالة مخارج الطوارئ كلها تعمل بعضها معطل"
+        INT drillCount "عدد تدريبات الإخلاء المنفذة خلال الفترة"
+        DATE drillDates "تواريخ التدريبات JSON"
+        DATETIME drillAverageTime "متوسط زمن الإخلاء بالدقائق"
+        VARCHAR drillEvaluation "تقييم التدريبات فعالة تحتاج تحسين"
+        BOOLEAN safetyCommitteeFormed "هل تم تشكيل لجنة سلامة"
+        VARCHAR safetyCommitteeMembers "أعضاء لجنة السلامة JSON"
+        VARCHAR safetyTrainingHours "عدد ساعات التدريب على السلامة"
+        INT incidentsCount "عدد الحوادث المسجلة خلال الفترة"
+        VARCHAR recommendations "توصيات لتحسين السلامة"
+        VARCHAR actionPlan "خطة عمل للتحسين"
+        VARCHAR attachments "مرفقات صور تقارير JSON"
+        INT approvedByUserId "معرف من اعتمد التقرير FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    SchoolDeficit {
+        INT deficitId PK "حالات العجز التعليمي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT deficitNumber "رقم العجز تسلسلي"
+        VARCHAR deficitType "نوع العجز فصول كادر تعليمي تجهيزات مالي برامج تعليمية وسائل نقل"
+        VARCHAR deficitCategory "فئة العجز كمي نوعي مؤقت دائم"
+        DECIMAL deficitAmount "مقدار العجز عدد الوحدات الناقصة أو النسبة المئوية"
+        DECIMAL requiredAmount "المبلغ أو العدد المطلوب"
+        DECIMAL availableAmount "المبلغ أو العدد المتاح حالياً"
+        TEXT deficitDescription "وصف تفصيلي للعجز"
+        VARCHAR educationalImpact "وصف لكيفية تأثر الطلاب والنتائج التعليمية بالعجز نص مفصل"
+        VARCHAR impactLevel "مستوى التأثير منخفض متوسط عالٍ حرج"
+        DATE detectionDate "تاريخ اكتشاف العجز"
+        INT detectedByUserId "معرف من اكتشف العجز FK SystemUser.userId"
+        VARCHAR currentStatus "الحالة الحالية نشط قيد المعالجة تم الحل مؤجل"
+        DATE statusUpdateDate "تاريخ آخر تحديث للحالة"
+        VARCHAR proposedSolution "الحل المقترح لمعالجة العجز"
+        DECIMAL estimatedCost "التكلفة التقديرية للمعالجة"
+        DATE estimatedResolutionDate "التاريخ المتوقع لحل العجز"
+        DATE actualResolutionDate "تاريخ الحل الفعلي"
+        INT resolvedByUserId "معرف من قام بحل العجز FK SystemUser.userId"
+        TEXT resolutionNotes "ملاحظات الحل"
+        INT relatedRemediationPlanId FK "معرف خطة المعالجة المرتبطة FK RemediationPlan.planId"
+        VARCHAR attachments "مرفقات تقارير دراسات JSON"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    SchoolSurplus {
+        INT surplusId PK "حالات الفائض التعليمي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT surplusNumber "رقم الفائض تسلسلي"
+        DATETIME surplusType "نوع الفائض فصول كادر تعليمي تجهيزات ميزانية وقت وسائل نقل"
+        VARCHAR surplusCategory "فئة الفائض كمي نوعي مؤقت دائم"
+        DECIMAL surplusAmount "مقدار الفائض عدد الوحدات الزائدة أو النسبة المئوية"
+        DECIMAL availableAmount "المبلغ أو العدد المتاح حالياً"
+        DECIMAL requiredAmount "المبلغ أو العدد المطلوب صفر أو أقل"
+        TEXT surplusDescription "وصف تفصيلي للفائض"
+        VARCHAR utilizationPlan "خطة الاستغلال مقترح المدرسة للاستفادة من الفائض"
+        VARCHAR utilizationType "نوع الاستغلال نقل لمدرسة أخرى تأجير إعادة توزيع داخلي بيع إيقاف"
+        VARCHAR potentialBeneficiary "جهة مستفيدة محتملة مدرسة قسم جهة خارجية"
+        DATE discoveryDate "تاريخ اكتشاف الفائض"
+        INT discoveredByUserId "معرف من اكتشف الفائض FK SystemUser.userId"
+        VARCHAR currentStatus "الحالة الحالية مكتشف قيد المعالجة تم الاستغلال ملغي"
+        DATE statusUpdateDate "تاريخ آخر تحديث للحالة"
+        DATE utilizationDate "تاريخ استغلال الفائض المتوقع"
+        DATE actualUtilizationDate "تاريخ الاستغلال الفعلي"
+        INT utilizedByUserId "معرف من قام بالاستغلال FK SystemUser.userId"
+        TEXT utilizationNotes "ملاحظات الاستغلال"
+        INT relatedRemediationPlanId FK "معرف خطة المعالجة المرتبطة قد تكون خطة للاستفادة من الفائض FK Remed..."
+        VARCHAR attachments "مرفقات تقارير دراسات JSON"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    RemediationPlan {
+        INT planId PK "خطط معالجة العجز/الفائض"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT planNumber "رقم الخطة تسلسلي"
+        VARCHAR planName "اسم الخطة مثال - خطة معالجة عجز الكادر في الرياضيات"
+        INT relatedDeficitId FK "معرف العجز المرتبط FK SchoolDeficit.deficitId - اختياري"
+        INT relatedSurplusId FK "معرف الفائض المرتبط FK SchoolSurplus.surplusId - اختياري"
+        VARCHAR planType "نوع الخطة معالجة عجز استغلال فائض"
+        VARCHAR selectedOption "الخيار المختار توسع دمج نقل شراكة تعاقد خارجي تأجير إعادة توزيع"
+        TEXT optionDetails "تفاصيل الخيار المختار نص مفصل"
+        VARCHAR objectives "أهداف الخطة"
+        VARCHAR actionSteps "خطوات التنفيذ JSON"
+        DATE startDate "التاريخ المتوقع لبدء تنفيذ المعالجة"
+        DATE endDate "التاريخ المتوقع للانتهاء"
+        DATE actualStartDate "تاريخ البدء الفعلي"
+        DATE actualEndDate "تاريخ الانتهاء الفعلي"
+        DECIMAL estimatedBudget "التكلفة المالية المقدرة للمعالجة"
+        DECIMAL actualCost "التكلفة الفعلية"
+        VARCHAR currency "العملة"
+        VARCHAR executionLead "الشخص أو الجهة المسؤولة عن الخطة اسم أو معرف موظف"
+        INT executionLeadUserId "معرف المسؤول FK Employee.employeeId"
+        VARCHAR executionTeam "فريق التنفيذ JSON - قائمة بـ Employee.employeeId"
+        DECIMAL progressPercentage "نسبة الإنجاز"
+        VARCHAR status "حالة الخطة قيد الإعداد معتمدة قيد التنفيذ مكتملة ملغاة متعثرة"
+        DATE approvalDate "تاريخ الاعتماد"
+        INT approvedByUserId "معرف من اعتمد الخطة FK SystemUser.userId"
+        VARCHAR completionReport "تقرير الإنجاز نص"
+        VARCHAR lessonsLearned "الدروس المستفادة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    %% ===== Relationships =====
+    RemediationPlan ||--o{ EmergencyClosures : "معرف خطة التعويض المرتبطة"
+    RemediationPlan ||--o{ SchoolDeficit : "معرف خطة المعالجة المرتبط"
+    RemediationPlan ||--o{ SchoolSurplus : "معرف خطة المعالجة المرتبط"
+    SchoolDeficit ||--o{ RemediationPlan : "معرف العجز المرتبط FK Sch"
+    SchoolSurplus ||--o{ RemediationPlan : "معرف الفائض المرتبط FK Sc"
+      </div>
+    </div>
+    <details>
+      <summary>📝 كود Mermaid المصدر (Full)</summary>
+      <pre class="source-code" id="src-full">erDiagram
+    %% =====================================================
+    %% M8_Emergency - ERD
+    %% Mermaid 10.9.1 Compliant - ASCII identifiers only
+    %% =====================================================
+
+    EmergencyHosting {
+        INT hostingId PK "الاستضافة الطارئة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT hostingNumber "رقم الحالة تسلسلي"
+        VARCHAR hostingType "نوع الاستضافة نازحين طلاب خارجيين أغراض صحية مركز قيادة طوارئ أخرى"
+        DATE hostingDate "تاريخ بدء الاستضافة"
+        DATE endDate "تاريخ انتهاء الاستضافة الفعلي أو المتوقع"
+        DATE expectedEndDate "تاريخ الانتهاء المتوقع عند بدء الاستضافة"
+        INT actualCount "عدد الأفراد المستضافين فعلياً"
+        VARCHAR maxCapacity "السعة القصوى للمدرسة لهذا النوع من الاستضافة"
+        DECIMAL utilizationPercentage "نسبة الاستغلال actualCount / maxCapacity"
+        TEXT reason "سبب الاستضافة كوارث طبيعية حريق مدرسة مجاورة أزمة صحية أخرى"
+        VARCHAR sourceLocation "موقع المصدر منطقة مدينة للأفراد المستضافين"
+        VARCHAR supportOrg "الجهة الداعمة مثل اليونيسيف الهلال الأحمر وزارة الصحة"
+        VARCHAR supportOrgContact "جهة اتصال الجهة الداعمة"
+        VARCHAR facilitiesUsed "المرافق المستخدمة في الاستضافة JSON - قاعات معامل ملاعب"
+        VARCHAR resourcesProvided "الموارد التي قدمتها المدرسة JSON - مياه كهرباء إنترنت أغذية"
+        VARCHAR resourcesReceived "الموارد التي تلقتها المدرسة من جهات داعمة JSON"
+        VARCHAR expenses "التكاليف التي تكبدتها المدرسة JSON"
+        DECIMAL totalExpenses "إجمالي التكاليف"
+        VARCHAR status "حالة الاستضافة نشطة منتهية قيد التجهيز"
+        TEXT closureNotes "ملاحظات عند إنهاء الاستضافة"
+        VARCHAR lessonsLearned "الدروس المستفادة من هذه التجربة"
+        INT reportedByUserId "معرف من سجل الحالة FK SystemUser.userId"
+        VARCHAR attachments "مرفقات صور تقارير JSON"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    EmergencyIncidents {
+        INT incidentId PK "حوادث الطوارئ"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT incidentNumber "رقم الحادثة تسلسلي حسب العام"
+        VARCHAR incidentType "نوع الحادثة زلزال حريق وباء اضطراب أمني فيضان عاصفة حادث كيميائي ان..."
+        DATE incidentDate "تاريخ الحادثة"
+        DATETIME incidentTime "وقت الحادثة"
+        VARCHAR severity "مستوى الخطورة منخفض متوسط عالٍ حرج"
+        TEXT description "وصف تفصيلي للحادثة"
+        VARCHAR location "موقع الحادثة داخل المدرسة مبنى طابق غرفة"
+        INT reportedByUserId "معرف من أبلغ عن الحادثة FK SystemUser.userId"
+        DATETIME reportedAt "وقت الإبلاغ"
+        BOOLEAN isPlanActive "هل تم تفعيل خطة الطوارئ المعتمدة"
+        INT emergencyPlanId "معرف خطة الطوارئ المستخدمة FK من جدول خطط الطوارئ - خارج هذا القسم"
+        INT affectedCount "عدد المتضررين إحصائية أولية"
+        VARCHAR studentsAffected "عدد الطلاب المتضررين"
+        VARCHAR employeesAffected "عدد الموظفين المتضررين"
+        INT injuriesCount "عدد الإصابات"
+        INT severeInjuriesCount "عدد الإصابات الخطيرة"
+        INT fatalitiesCount "عدد الوفيات لا قدر الله"
+        DECIMAL propertyDamage "قيمة الأضرار المادية التقديرية"
+        INT propertyDamageDescription "وصف الأضرار المادية"
+        VARCHAR emergencyResponse "الإجراءات المتخذة فوراً إخلاء إسعافات أولية إطفاء"
+        INT externalAgencies "الجهات الخارجية المستجوبة دفاع مدني إسعاف شرطة JSON"
+        DATETIME externalResponseTime "وقت استجابة الجهات الخارجية"
+        VARCHAR status "حالة البلاغ مفتوح قيد المعالجة مغلق تحت التحقيق"
+        DATE closureDate "تاريخ الإغلاق"
+        TEXT closureNotes "ملاحظات الإغلاق"
+        VARCHAR investigationReport "رابط تقرير التحقيق إن وجد"
+        VARCHAR lessonsLearned "الدروس المستفادة لتجنب تكرار الحادثة"
+        VARCHAR recommendations "توصيات للتحسين"
+        VARCHAR attachments "مرفقات صور تقارير JSON"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    EmergencyClosures {
+        INT closureId PK "الإغلاق الطارئ"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT closureNumber "رقم الإغلاق تسلسلي"
+        TEXT closureReason "سبب الإغلاق ظروف جوية وباء تهديد أمني عطل فني شامل أمر حكومي أخرى"
+        VARCHAR authority "الجهة المقررة للإغلاق وزارة الصحة الدفاع المدني وزارة التعليم المكت..."
+        INT authorityDecisionNumber "رقم قرار الإغلاق إن وجد"
+        DATE startDate "تاريخ بداية توقف الدراسة"
+        DATE endDate "تاريخ نهاية الإغلاق المتوقع أو الفعلي"
+        DATE actualEndDate "تاريخ العودة الفعلي"
+        DECIMAL totalClosureDays "عدد أيام الإغلاق"
+        VARCHAR schoolDaysAffected "عدد أيام الدراسة الفعلية التي تأثرت"
+        BOOLEAN alternativeEducation "هل تم تفعيل التعليم عن بعد"
+        VARCHAR alternativeEducationType "نوع التعليم البديل عن بعد متزامن عن بعد غير متزامن حصص تعويضية حصص ..."
+        VARCHAR altEducationPlatform "المنصة المستخدمة Teams Zoom منصة مدرستي أخرى"
+        TEXT altEducationDetails "تفاصيل خطة التعليم البديل"
+        BOOLEAN wasCompensated "هل تم تعويض الفاقد التعليمي"
+        INT compensationPlanId FK "معرف خطة التعويض المرتبطة FK RemediationPlan.planId - من المجموعة 8-ج"
+        BOOLEAN parentNotificationSent "هل تم إشعار أولياء الأمور"
+        DATE parentNotificationDate "تاريخ إشعار أولياء الأمور"
+        VARCHAR parentNotificationMethod "طريقة الإشعار رسالة نصية بريد إلكتروني تطبيق"
+        VARCHAR status "حالة الإغلاق مخطط جاري منتهي"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    TransportationServices {
+        INT serviceId PK "خدمات النقل المدرسي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT routeId "معرف المسار فريد داخل المدرسة"
+        VARCHAR routeName "اسم المسار مثال - المسار الشرقي"
+        VARCHAR routeCode "كود المسار"
+        TEXT routeDescription "وصف المسار المناطق التي يغطيها"
+        INT busId "معرف الحافلة يمكن ربطه بجدول Asset في القسم الرابع"
+        INT busPlateNumber "رقم لوحة الحافلة"
+        VARCHAR busCapacity "سعة الحافلة عدد الطلاب"
+        VARCHAR busModel "موديل الحافلة"
+        VARCHAR busYear "سنة الصنع"
+        INT driverId "معرف السائق FK Employee.employeeId"
+        VARCHAR driverName "اسم السائق"
+        INT driverLicenseNumber "رقم رخصة السائق"
+        VARCHAR driverPhone "هاتف السائق"
+        INT supervisorId "معرف المشرف FK Employee.employeeId"
+        VARCHAR supervisorName "اسم المشرف"
+        VARCHAR supervisorPhone "هاتف المشرف"
+        INT shiftId "معرف الفترة صباحي مسائي FK SchoolShiftSetting.shiftId"
+        VARCHAR tripType "نوع الرحلة صباحية مسائية جميع الأيام"
+        DATETIME startTime "وقت بدء الرحلة"
+        DATETIME endTime "وقت انتهاء الرحلة"
+        VARCHAR estimatedDuration "المدة التقديرية للرحلة"
+        DATETIME stops "محطات التوقف JSON - تحتوي على المحطة العنوان الوقت الإحداثيات"
+        BOOLEAN isActive "هل المسار نشط"
+        VARCHAR status "حالة الخدمة نشطة متوقفة كاملة"
+        VARCHAR operatorCompany "الشركة المشغلة إن وجدت"
+        INT contractId "معرف العقد مع الشركة المشغلة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    SchoolMergers {
+        INT mergerId PK "عمليات الدمج المدرسي"
+        INT mergerNumber "رقم قرار الدمج"
+        DATE mergerDate "تاريخ صدور قرار الدمج"
+        DATE effectiveDate "تاريخ السريان الفعلي للدمج"
+        VARCHAR sourceSchoolIds "المدارس المندمجة JSON - قائمة بـ School.schoolId"
+        INT targetSchoolId "المدرسة الدامجة المدرسة الناتجة FK School.schoolId"
+        TEXT mergerReason "سبب الدمج نقص عدد الطلاب خفض التكاليف تحسين الجودة قرار وزار"
+        VARCHAR decisionAuthority "جهة إصدار القرار مكتب التربية وزارة التعليم"
+        VARCHAR decisionDocumentPath "مسار ملف قرار الدمج"
+        VARCHAR studentsTransferStatus "حالة نقل الطلاب قيد التنفيذ مكتمل"
+        VARCHAR employeesTransferStatus "حالة نقل الموظفين قيد التنفيذ مكتمل"
+        VARCHAR assetsTransferStatus "حالة نقل الأصول قيد التنفيذ مكتمل"
+        VARCHAR status "حالة العملية مخطط قيد التنفيذ مكتمل ملغي"
+        DATE completionDate "تاريخ اكتمال الدمج"
+        TEXT completionNotes "ملاحظات عند الإكمال"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    SchoolAwards {
+        INT awardId PK "الجوائز والتميز"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT awardNumber "رقم الجائزة تسلسلي"
+        VARCHAR awardName "اسم الجائزة مثال - جائزة التميز المدرسي"
+        VARCHAR awardCategory "فئة الجائزة تعليمية تربوية رياضية ثقافية بيئية خدمة مجتمع"
+        VARCHAR level "المستوى محلي وطني إقليمي دولي"
+        BOOLEAN issuingBody "الجهة المانحة وزارة التعليم مركز تميز منظمة دولية"
+        BOOLEAN issuingBodyType "نوع الجهة حكومية خاصة دولية"
+        DATE awardDate "تاريخ التكريم"
+        VARCHAR awardPlace "مكان التكريم مدينة دولة"
+        VARCHAR ranking "الترتيب المحقق الأول الثاني الثالث متميز"
+        VARCHAR participantsJson "المشاركون JSON - قائمة بأسماء المشاركين وأدوارهم"
+        VARCHAR studentParticipants "عدد الطلاب المشاركين"
+        VARCHAR teacherParticipants "عدد المعلمين المشاركين"
+        TEXT awardDetails "تفاصيل الجائزة ما تم تقديره سبب الفوز"
+        VARCHAR certificatePath "مسار ملف شهادة الجائزة PDF"
+        VARCHAR photosPath "مسارات صور التكريم JSON"
+        VARCHAR videoPath "مسار فيديو التكريم اختياري"
+        VARCHAR impact "أثر الجائزة على المدرسة زيادة السمعة تحفيز الطلاب الخ"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    ExternalParticipations {
+        INT participationId PK "المشاركات والتمثيل الخارجي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT participationNumber "رقم المشاركة تسلسلي"
+        VARCHAR eventName "اسم الفعالية مؤتمر مسابقة معرض مهرجان زيارة"
+        VARCHAR eventType "نوع الفعالية رياضي علمي ثقافي فني تطوعي أكاديمي"
+        VARCHAR organizer "الجهة المنظمة"
+        VARCHAR organizerType "نوع الجهة مدرسة جامعة جهة حكومية منظمة دولية"
+        VARCHAR location "مكان الفعالية مدينة دولة"
+        DATE startDate "تاريخ بدء الفعالية"
+        DATE endDate "تاريخ انتهاء الفعالية"
+        VARCHAR results "نتائج المشاركة المراكز المحققة الشهادات الدروس المستفادة"
+        VARCHAR ranking "الترتيب إن وجد"
+        VARCHAR participantsJson "المشاركون JSON - قائمة بالأسماء والأدوار"
+        VARCHAR studentParticipants "عدد الطلاب المشاركين"
+        VARCHAR teacherParticipants "عدد المعلمين المشاركين"
+        VARCHAR expenses "تكاليف المشاركة سفر إقامة تسجيل"
+        VARCHAR fundingSource "مصدر التمويل المدرسة جهة خارجية ذاتي"
+        VARCHAR attachments "مرفقات صور شهادات تقارير JSON"
+        VARCHAR lessonsLearned "الدروس المستفادة"
+        VARCHAR recommendations "توصيات للمشاركات المستقبلية"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    CommunityPartnerships {
+        INT partnershipId PK "الشراكات المجتمعية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT partnershipNumber "رقم الشراكة تسلسلي"
+        VARCHAR partnerName "اسم الشريك المؤسسة أو الجهة المانحة"
+        VARCHAR partnerType "نوع الشريك شركة منظمة غير ربحية جامعة جهة حكومية فرد"
+        VARCHAR supportType "نوع الدعم تجهيزات صيانة تطوير برامج مالي تدريب تبادل خبرات"
+        DATE agreementDate "تاريخ الاتفاقية"
+        DATE startDate "تاريخ بدء الشراكة"
+        DATE endDate "تاريخ انتهاء الشراكة إن وجد"
+        BOOLEAN isRenewable "هل الشراكة قابلة للتجديد"
+        VARCHAR agreementDocumentPath "مسار ملف الاتفاقية PDF"
+        DECIMAL supportValue "قيمة الدعم المالي إن وجد"
+        DECIMAL supportValueCurrency "عملة الدعم"
+        VARCHAR supportInKind "دعم عيني تجهيزات خدمات JSON"
+        VARCHAR impact "الأثر المحقق من الشراكة تقييم مدى فعالية الدعم"
+        VARCHAR impactRating "تقييم الأثر 1-5"
+        INT responsibleUserId "معرف المسؤول عن الشراكة من المدرسة FK Employee.employeeId"
+        VARCHAR partnerContactPerson "جهة اتصال الشريك"
+        VARCHAR partnerContactEmail "بريد جهة اتصال الشريك"
+        VARCHAR partnerContactPhone "هاتف جهة اتصال الشريك"
+        VARCHAR status "حالة الشراكة نشطة منتهية مجددة ملغاة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    SafetySecurityReports {
+        INT reportId PK "تقارير السلامة والأمان"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT reportNumber "رقم التقرير تسلسلي"
+        DATE reportDate "تاريخ التقرير"
+        VARCHAR reportPeriod "فترة التقرير شهري ربع سنوي سنوي"
+        VARCHAR safetyLevel "مستوى السلامة العام ممتاز جيد مقبول يحتاج تحسين"
+        DATE extinguisherExp "تاريخ انتهاء صلاحية أقرب طفاية حريق للتذكير"
+        INT extinguishersCount "عدد الطفايات المتوفرة"
+        DATE extinguishersLastInspection "تاريخ آخر فحص للطفايات"
+        DATE extinguishersNextInspection "تاريخ الفحص القادم"
+        VARCHAR alarmStatus "حالة أنظمة الإنذار يعمل بكفاءة يحتاج صيانة معطل"
+        DATE alarmLastTest "تاريخ آخر اختبار لأنظمة الإنذار"
+        VARCHAR emergencyLightsStatus "حالة أضواء الطوارئ"
+        VARCHAR fireAlarmSystem "نوع نظام إنذار الحريق يدوي آلي متكامل"
+        VARCHAR fireHosesStatus "حالة خراطيم الحريق"
+        BOOLEAN evacuationMaps "هل توجد خرائط إخلاء واضحة"
+        VARCHAR evacuationMapLocations "مواقع خرائط الإخلاء JSON"
+        VARCHAR emergencyExitsStatus "حالة مخارج الطوارئ كلها تعمل بعضها معطل"
+        INT drillCount "عدد تدريبات الإخلاء المنفذة خلال الفترة"
+        DATE drillDates "تواريخ التدريبات JSON"
+        DATETIME drillAverageTime "متوسط زمن الإخلاء بالدقائق"
+        VARCHAR drillEvaluation "تقييم التدريبات فعالة تحتاج تحسين"
+        BOOLEAN safetyCommitteeFormed "هل تم تشكيل لجنة سلامة"
+        VARCHAR safetyCommitteeMembers "أعضاء لجنة السلامة JSON"
+        VARCHAR safetyTrainingHours "عدد ساعات التدريب على السلامة"
+        INT incidentsCount "عدد الحوادث المسجلة خلال الفترة"
+        VARCHAR recommendations "توصيات لتحسين السلامة"
+        VARCHAR actionPlan "خطة عمل للتحسين"
+        VARCHAR attachments "مرفقات صور تقارير JSON"
+        INT approvedByUserId "معرف من اعتمد التقرير FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    SchoolDeficit {
+        INT deficitId PK "حالات العجز التعليمي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT deficitNumber "رقم العجز تسلسلي"
+        VARCHAR deficitType "نوع العجز فصول كادر تعليمي تجهيزات مالي برامج تعليمية وسائل نقل"
+        VARCHAR deficitCategory "فئة العجز كمي نوعي مؤقت دائم"
+        DECIMAL deficitAmount "مقدار العجز عدد الوحدات الناقصة أو النسبة المئوية"
+        DECIMAL requiredAmount "المبلغ أو العدد المطلوب"
+        DECIMAL availableAmount "المبلغ أو العدد المتاح حالياً"
+        TEXT deficitDescription "وصف تفصيلي للعجز"
+        VARCHAR educationalImpact "وصف لكيفية تأثر الطلاب والنتائج التعليمية بالعجز نص مفصل"
+        VARCHAR impactLevel "مستوى التأثير منخفض متوسط عالٍ حرج"
+        DATE detectionDate "تاريخ اكتشاف العجز"
+        INT detectedByUserId "معرف من اكتشف العجز FK SystemUser.userId"
+        VARCHAR currentStatus "الحالة الحالية نشط قيد المعالجة تم الحل مؤجل"
+        DATE statusUpdateDate "تاريخ آخر تحديث للحالة"
+        VARCHAR proposedSolution "الحل المقترح لمعالجة العجز"
+        DECIMAL estimatedCost "التكلفة التقديرية للمعالجة"
+        DATE estimatedResolutionDate "التاريخ المتوقع لحل العجز"
+        DATE actualResolutionDate "تاريخ الحل الفعلي"
+        INT resolvedByUserId "معرف من قام بحل العجز FK SystemUser.userId"
+        TEXT resolutionNotes "ملاحظات الحل"
+        INT relatedRemediationPlanId FK "معرف خطة المعالجة المرتبطة FK RemediationPlan.planId"
+        VARCHAR attachments "مرفقات تقارير دراسات JSON"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    SchoolSurplus {
+        INT surplusId PK "حالات الفائض التعليمي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT surplusNumber "رقم الفائض تسلسلي"
+        DATETIME surplusType "نوع الفائض فصول كادر تعليمي تجهيزات ميزانية وقت وسائل نقل"
+        VARCHAR surplusCategory "فئة الفائض كمي نوعي مؤقت دائم"
+        DECIMAL surplusAmount "مقدار الفائض عدد الوحدات الزائدة أو النسبة المئوية"
+        DECIMAL availableAmount "المبلغ أو العدد المتاح حالياً"
+        DECIMAL requiredAmount "المبلغ أو العدد المطلوب صفر أو أقل"
+        TEXT surplusDescription "وصف تفصيلي للفائض"
+        VARCHAR utilizationPlan "خطة الاستغلال مقترح المدرسة للاستفادة من الفائض"
+        VARCHAR utilizationType "نوع الاستغلال نقل لمدرسة أخرى تأجير إعادة توزيع داخلي بيع إيقاف"
+        VARCHAR potentialBeneficiary "جهة مستفيدة محتملة مدرسة قسم جهة خارجية"
+        DATE discoveryDate "تاريخ اكتشاف الفائض"
+        INT discoveredByUserId "معرف من اكتشف الفائض FK SystemUser.userId"
+        VARCHAR currentStatus "الحالة الحالية مكتشف قيد المعالجة تم الاستغلال ملغي"
+        DATE statusUpdateDate "تاريخ آخر تحديث للحالة"
+        DATE utilizationDate "تاريخ استغلال الفائض المتوقع"
+        DATE actualUtilizationDate "تاريخ الاستغلال الفعلي"
+        INT utilizedByUserId "معرف من قام بالاستغلال FK SystemUser.userId"
+        TEXT utilizationNotes "ملاحظات الاستغلال"
+        INT relatedRemediationPlanId FK "معرف خطة المعالجة المرتبطة قد تكون خطة للاستفادة من الفائض FK Remed..."
+        VARCHAR attachments "مرفقات تقارير دراسات JSON"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    RemediationPlan {
+        INT planId PK "خطط معالجة العجز/الفائض"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT planNumber "رقم الخطة تسلسلي"
+        VARCHAR planName "اسم الخطة مثال - خطة معالجة عجز الكادر في الرياضيات"
+        INT relatedDeficitId FK "معرف العجز المرتبط FK SchoolDeficit.deficitId - اختياري"
+        INT relatedSurplusId FK "معرف الفائض المرتبط FK SchoolSurplus.surplusId - اختياري"
+        VARCHAR planType "نوع الخطة معالجة عجز استغلال فائض"
+        VARCHAR selectedOption "الخيار المختار توسع دمج نقل شراكة تعاقد خارجي تأجير إعادة توزيع"
+        TEXT optionDetails "تفاصيل الخيار المختار نص مفصل"
+        VARCHAR objectives "أهداف الخطة"
+        VARCHAR actionSteps "خطوات التنفيذ JSON"
+        DATE startDate "التاريخ المتوقع لبدء تنفيذ المعالجة"
+        DATE endDate "التاريخ المتوقع للانتهاء"
+        DATE actualStartDate "تاريخ البدء الفعلي"
+        DATE actualEndDate "تاريخ الانتهاء الفعلي"
+        DECIMAL estimatedBudget "التكلفة المالية المقدرة للمعالجة"
+        DECIMAL actualCost "التكلفة الفعلية"
+        VARCHAR currency "العملة"
+        VARCHAR executionLead "الشخص أو الجهة المسؤولة عن الخطة اسم أو معرف موظف"
+        INT executionLeadUserId "معرف المسؤول FK Employee.employeeId"
+        VARCHAR executionTeam "فريق التنفيذ JSON - قائمة بـ Employee.employeeId"
+        DECIMAL progressPercentage "نسبة الإنجاز"
+        VARCHAR status "حالة الخطة قيد الإعداد معتمدة قيد التنفيذ مكتملة ملغاة متعثرة"
+        DATE approvalDate "تاريخ الاعتماد"
+        INT approvedByUserId "معرف من اعتمد الخطة FK SystemUser.userId"
+        VARCHAR completionReport "تقرير الإنجاز نص"
+        VARCHAR lessonsLearned "الدروس المستفادة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    %% ===== Relationships =====
+    RemediationPlan ||--o{ EmergencyClosures : "معرف خطة التعويض المرتبطة"
+    RemediationPlan ||--o{ SchoolDeficit : "معرف خطة المعالجة المرتبط"
+    RemediationPlan ||--o{ SchoolSurplus : "معرف خطة المعالجة المرتبط"
+    SchoolDeficit ||--o{ RemediationPlan : "معرف العجز المرتبط FK Sch"
+    SchoolSurplus ||--o{ RemediationPlan : "معرف الفائض المرتبط FK Sc"</pre>
+    </details>
+  </div>
+
+  <div class="footer">
+    EduMS Enterprise © 2026 • ERD M8_Emergency • Mermaid 10.9.1 Strict-Compliant • Independent Per-Module Diagram
+  </div>
+
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'default',
+    securityLevel: 'loose',
+    er: { fontSize: 13, diagramPadding: 30, entityPadding: 16, minEntityWidth: 200 },
+    fontFamily: 'Cairo, "Fira Code", sans-serif'
+  });
+
+  let fullRendered = false;
+  function renderSlim() { mermaid.run({ querySelector: '#diagram-slim' }); }
+  function renderFull() {
+    if (fullRendered) return;
+    fullRendered = true;
+    mermaid.run({ querySelector: '#diagram-full' });
+  }
+  // Initial: render slim only
+  renderSlim();
+
+  function switchView(view) {
+    document.getElementById('tab-slim').classList.toggle('active', view === 'slim');
+    document.getElementById('tab-full').classList.toggle('active', view === 'full');
+    document.getElementById('pane-slim').classList.toggle('active', view === 'slim');
+    document.getElementById('pane-full').classList.toggle('active', view === 'full');
+    if (view === 'full') renderFull();
+  }
+
+  function currentSource() {
+    const active = document.querySelector('.view-pane.active');
+    return active.querySelector('.source-code').innerText;
+  }
+  function copySource() {
+    navigator.clipboard.writeText(currentSource()).then(() => alert('✓ تم نسخ كود Mermaid'));
+  }
+  function downloadSource() {
+    const view = document.getElementById('pane-slim').classList.contains('active') ? 'slim' : 'full';
+    const blob = new Blob([currentSource()], { type: 'text/plain;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'ERD_M8_Emergency_' + view + '.mmd';
+    a.click();
+  }
+  function downloadSvg() {
+    const active = document.querySelector('.view-pane.active');
+    const svg = active.querySelector('.mermaid svg');
+    if (!svg) { alert('المخطط لم يُحمَّل بعد'); return; }
+    const view = document.getElementById('pane-slim').classList.contains('active') ? 'slim' : 'full';
+    const blob = new Blob([svg.outerHTML], { type: 'image/svg+xml' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'ERD_M8_Emergency_' + view + '.svg';
+    a.click();
+  }
+</script>
+
+</body>
+</html>

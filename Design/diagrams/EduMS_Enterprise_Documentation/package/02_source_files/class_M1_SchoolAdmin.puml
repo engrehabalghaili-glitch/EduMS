@@ -1,0 +1,2059 @@
+@startuml M1_SchoolAdmin_class
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #DBEAFE
+  BorderColor #1E3A8A
+}
+
+class Office {
+  + {static} officeId : BIGINT <<PK>>
+  + officeCode : VARCHAR(50)
+  + officeNameAr : VARCHAR(200)
+  + officeNameEn : VARCHAR(200)
+  + officeType : VARCHAR(50)
+  + level : VARCHAR(50)
+  + parentOfficeId : BIGINT <<FK>>
+  + region : VARCHAR(200)
+  + city : VARCHAR(200)
+  + managerName : VARCHAR(200)
+  + managerEmail : VARCHAR(100)
+  + managerPhone : VARCHAR(20)
+  + contactPhone : VARCHAR(20)
+  + email : VARCHAR(100)
+  + address : VARCHAR(200)
+  + latitude : VARCHAR(200)
+  + longitude : VARCHAR(200)
+  + officeStatus : VARCHAR(50)
+  + isActive : BOOLEAN
+  + approvalAuthority : BOOLEAN
+  + apiEndpoint : VARCHAR(500)
+  + isApiEnabled : BOOLEAN
+  + syncFrequency : VARCHAR(200)
+  + totalSchools : INT
+  + logoPath : VARCHAR(200)
+  + notes : TEXT
+  + dataSource : VARCHAR(200)
+  + importBatchId : BIGINT <<FK>>
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  + deletedAt : DATE
+  + deletedByUserId : BIGINT <<FK>>
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+}
+class School {
+  + {static} schoolId : BIGINT <<PK>>
+  + schoolCode : VARCHAR(50)
+  + institutionalCode : VARCHAR(50)
+  + schoolNameAr : VARCHAR(200)
+  + schoolNameEn : VARCHAR(200)
+  + schoolType : VARCHAR(50)
+  + schoolGender : VARCHAR(200)
+  + educationLevel : VARCHAR(50)
+  + classification : VARCHAR(200)
+  + schoolStatus : VARCHAR(50)
+  + isActive : BOOLEAN
+  + isApproved : BOOLEAN
+  + isArchived : BOOLEAN
+  + establishmentDate : DATE
+  + licenseNumber : INT
+  + principalName : VARCHAR(200)
+  + principalEmail : VARCHAR(100)
+  + principalPhone : VARCHAR(20)
+  + vicePrincipalName : VARCHAR(200)
+  + phone : VARCHAR(20)
+  + email : VARCHAR(100)
+  + address : VARCHAR(200)
+  + city : VARCHAR(200)
+  + district : VARCHAR(200)
+  + postalCode : VARCHAR(100)
+  + maxCapacity : VARCHAR(200)
+  + currentStudents : INT
+  + officeId : BIGINT <<FK>>
+  + logoPath : VARCHAR(200)
+  + website : VARCHAR(500)
+  + facebookPage : VARCHAR(500)
+  + twitterAccount : VARCHAR(500)
+  + instagramAccount : VARCHAR(500)
+  + workingHours : VARCHAR(200)
+  + timezone : TIME
+  + academicCalendar : VARCHAR(200)
+  + gradingSystem : DECIMAL(5,2)
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+  + archive()
+}
+class SchoolLevel {
+  + {static} schoolLevelId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + levelName : VARCHAR(50)
+  + levelOrder : VARCHAR(50)
+  + startGrade : DECIMAL(5,2)
+  + endGrade : DECIMAL(5,2)
+  + academicTrack : VARCHAR(200)
+  + isActive : BOOLEAN
+  + minAge : VARCHAR(200)
+  + maxAge : VARCHAR(200)
+  + defaultShiftId : BIGINT <<FK>>
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+}
+class SchoolContactInfo {
+  + {static} contactInfoId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + officialPhone : VARCHAR(20)
+  + landline : VARCHAR(20)
+  + faxNumber : INT
+  + officialEmail : VARCHAR(100)
+  + alternativeEmail : VARCHAR(100)
+  + fullAddress : VARCHAR(200)
+  + streetName : VARCHAR(200)
+  + buildingNumber : INT
+  + unitNumber : INT
+  + postalCode : VARCHAR(100)
+  + additionalNumber : INT
+  + districtName : VARCHAR(200)
+  + city : VARCHAR(200)
+  + latitude : VARCHAR(200)
+  + longitude : VARCHAR(200)
+  + locationUrl : VARCHAR(500)
+  + socialLinks : VARCHAR(200)
+  + workingHours : VARCHAR(200)
+  + emergencyContact : VARCHAR(200)
+  + emergencyPhone : VARCHAR(20)
+  + updatedAt : DATE
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+}
+class SchoolShiftSetting {
+  + {static} shiftId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + shiftName : VARCHAR(200)
+  + shiftCode : VARCHAR(50)
+  + startTime : TIME
+  + endTime : TIME
+  + lessonDuration : VARCHAR(200)
+  + breakDuration : VARCHAR(200)
+  + breakStartTime : TIME
+  + breakEndTime : TIME
+  + gracePeriod : VARCHAR(200)
+  + isDefault : BOOLEAN
+  + shiftStatus : VARCHAR(50)
+  + workingDays : VARCHAR(200)
+  + maxPeriods : INT
+  + applicableGrades : DECIMAL(5,2)
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+}
+class SchoolAcademicYear {
+  + {static} academicYearId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + yearCode : VARCHAR(50)
+  + yearNameAr : VARCHAR(200)
+  + yearNameEn : VARCHAR(200)
+  + startDate : DATE
+  + endDate : DATE
+  + registrationStart : DATE
+  + registrationEnd : DATE
+  + addDropStart : DATE
+  + addDropEnd : DATE
+  + withdrawalDeadline : VARCHAR(200)
+  + examsStart : DATE
+  + examsEnd : DATE
+  + isCurrentYear : BOOLEAN
+  + yearStatus : VARCHAR(50)
+  + previousYearId : BIGINT <<FK>>
+  + isArchived : BOOLEAN
+  + archivedAt : DATE
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + archive()
+}
+class SchoolSemester {
+  + {static} semesterId : BIGINT <<PK>>
+  + academicYearId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + semesterNumber : INT
+  + semesterOrder : VARCHAR(200)
+  + semesterType : VARCHAR(50)
+  + semesterNameAr : VARCHAR(200)
+  + semesterNameEn : VARCHAR(200)
+  + startDate : DATE
+  + endDate : DATE
+  + teachingWeeks : INT
+  + examWeeks : INT
+  + totalWeeks : INT
+  + regStartDate : DATE
+  + regEndDate : DATE
+  + addDropStartDate : DATE
+  + addDropEndDate : DATE
+  + withdrawalDeadline : VARCHAR(200)
+  + examStartDate : DATE
+  + examEndDate : DATE
+  + gradingStartDate : DATE
+  + gradingEndDate : DATE
+  + approvalStatus : VARCHAR(50)
+  + closureDate : DATE
+  + isActive : BOOLEAN
+  + isCurrent : BOOLEAN
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+}
+class SchoolCalendar {
+  + {static} calendarId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + semesterId : BIGINT <<FK>>
+  + eventTitle : VARCHAR(200)
+  + eventType : VARCHAR(50)
+  + category : VARCHAR(50)
+  + startDate : DATETIME
+  + endDate : DATETIME
+  + isHoliday : BOOLEAN
+  + noAttendance : BOOLEAN
+  + affectsSchedule : BOOLEAN
+  + alternativeSchedule : VARCHAR(200)
+  + targetAudience : VARCHAR(200)
+  + targetGrades : DECIMAL(5,2)
+  + isPublic : BOOLEAN
+  + description : TEXT
+  + location : VARCHAR(200)
+  + attachments : VARCHAR(200)
+  + notificationSent : BOOLEAN
+  + notificationDate : DATE
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+}
+class SchoolCurriculumPlan {
+  + {static} curriculumPlanId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + planNameAr : VARCHAR(200)
+  + planNameEn : VARCHAR(200)
+  + planCode : VARCHAR(50)
+  + gradeLevelId : BIGINT <<FK>>
+  + schoolLevelId : BIGINT <<FK>>
+  + academicYearId : BIGINT <<FK>>
+  + semesterId : BIGINT <<FK>>
+  + version : VARCHAR(200)
+  + adoptionDate : DATE
+  + totalCreditHours : VARCHAR(200)
+  + planStatus : VARCHAR(50)
+  + ministerialApproval : VARCHAR(200)
+  + approvalDocument : VARCHAR(200)
+  + isActive : BOOLEAN
+  + effectiveDate : DATE
+  + expiryDate : DATE
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+  + draft()
+}
+class GradeCapacity {
+  + {static} gradeCapacityId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + academicYearId : BIGINT <<FK>>
+  + schoolLevelId : BIGINT <<FK>>
+  + gradeLevel : DECIMAL(5,2)
+  + gradeNameAr : DECIMAL(5,2)
+  + gradeNameEn : DECIMAL(5,2)
+  + maxStudentsPerClass : VARCHAR(200)
+  + maxSectionsCount : INT
+  + totalCapacity : VARCHAR(200)
+  + availableCapacity : INT
+  + currentEnrolled : INT
+  + genderAllocation : VARCHAR(200)
+  + isActive : BOOLEAN
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+}
+class SchoolAuditLog {
+  + {static} auditId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + tableName : VARCHAR(200)
+  + entityId : BIGINT <<FK>>
+  + operationType : VARCHAR(50)
+  + changeType : VARCHAR(50)
+  + oldValue : VARCHAR(200)
+  + newValue : VARCHAR(200)
+  + changeSummary : VARCHAR(200)
+  + userId : BIGINT <<FK>>
+  + userName : VARCHAR(200)
+  + userRole : VARCHAR(200)
+  + ipAddress : VARCHAR(200)
+  + deviceInfo : VARCHAR(200)
+  + actionDate : DATE
+  + severity : VARCHAR(200)
+  + isSuspicious : BOOLEAN
+  + decisionDocPath : VARCHAR(200)
+  + notes : TEXT
+  + createdAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + record(event)
+  + query(filters)
+}
+class ReferenceCoding {
+  + {static} referenceId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + codeType : VARCHAR(50)
+  + codeKey : VARCHAR(50)
+  + codeValueAr : VARCHAR(50)
+  + codeValueEn : VARCHAR(50)
+  + descriptionAr : TEXT
+  + descriptionEn : TEXT
+  + sortOrder : VARCHAR(200)
+  + isSystemCode : BOOLEAN
+  + isActive : BOOLEAN
+  + parentCodeId : BIGINT <<FK>>
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+}
+class CommitmentDeviation {
+  + {static} deviationId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + academicYearId : BIGINT <<FK>>
+  + type : VARCHAR(50)
+  + title : VARCHAR(200)
+  + deviationDate : DATE
+  + description : TEXT
+  + affectedItems : VARCHAR(200)
+  + reason : VARCHAR(200)
+  + impactLevel : VARCHAR(50)
+  + compensatoryPlan : VARCHAR(200)
+  + isCompensatoryPlanApproved : BOOLEAN
+  + digitalSignature : VARCHAR(200)
+  + signedAt : DATE
+  + status : VARCHAR(50)
+  + submittedAt : DATE
+  + reviewedByUserId : BIGINT <<FK>>
+  + reviewDate : DATE
+  + reviewNotes : TEXT
+  + officeDecision : VARCHAR(200)
+  + decisionDate : DATE
+  + decisionNotes : TEXT
+  + attachmentPath : VARCHAR(200)
+  + linkedCalendarId : BIGINT <<FK>>
+  + linkedPlanId : BIGINT <<FK>>
+  + complianceStatus : VARCHAR(50)
+  + complianceDueDate : DATE
+  + complianceSubmittedAt : DATE
+  + createdAt : DATE
+  + createdByUserId : BIGINT <<FK>>
+  + updatedAt : DATE
+  + updatedByUserId : BIGINT <<FK>>
+  + isDeleted : BOOLEAN
+  + deletedAt : DATE
+  + deletedByUserId : BIGINT <<FK>>
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+}
+class AcademicException {
+  + {static} exceptionId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + academicYearId : BIGINT <<FK>>
+  + requestType : VARCHAR(50)
+  + studentId : BIGINT <<FK>>
+  + affectedGroup : VARCHAR(200)
+  + justification : VARCHAR(200)
+  + supportingDocuments : VARCHAR(200)
+  + requestedStartDate : DATE
+  + requestedEndDate : DATE
+  + expectedImpact : VARCHAR(200)
+  + alternativePlan : VARCHAR(200)
+  + status : VARCHAR(50)
+  + submittedAt : DATE
+  + submittedByUserId : BIGINT <<FK>>
+  + officeDecision : VARCHAR(200)
+  + decisionNotes : TEXT
+  + decisionReference : VARCHAR(50)
+  + decisionDate : DATE
+  + approvedByUserId : BIGINT <<FK>>
+  + expirationDate : DATE
+  + isRenewable : BOOLEAN
+  + renewalCount : INT
+  + parentExceptionId : BIGINT <<FK>>
+  + linkToWorkflowId : BIGINT <<FK>>
+  + notes : TEXT
+  + createdAt : DATE
+  + createdByUserId : BIGINT <<FK>>
+  + updatedAt : DATE
+  + updatedByUserId : BIGINT <<FK>>
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+}
+class LeadershipNomination {
+  + {static} nominationId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + officeId : BIGINT <<FK>>
+  + candidateEmployeeId : BIGINT <<FK>>
+  + candidateName : DATE
+  + targetPosition : VARCHAR(200)
+  + nominationType : VARCHAR(50)
+  + nominationSource : VARCHAR(200)
+  + nominationDate : DATE
+  + nominationDocumentPath : VARCHAR(200)
+  + cvAttachment : VARCHAR(200)
+  + coverLetter : VARCHAR(200)
+  + qualifications : BOOLEAN
+  + experienceSummary : VARCHAR(200)
+  + finalShortlist : BOOLEAN
+  + interviewDate : DATE
+  + interviewTime : TIME
+  + interviewLocation : VARCHAR(200)
+  + interviewPanel : VARCHAR(200)
+  + interviewScore : DECIMAL(5,2)
+  + interviewFeedback : DECIMAL(15,2)
+  + interviewDecision : VARCHAR(200)
+  + placementTestRequired : BOOLEAN
+  + placementTestDate : DATE
+  + placementTestScore : DECIMAL(5,2)
+  + evaluationSummary : VARCHAR(200)
+  + finalDecision : VARCHAR(200)
+  + rejectionReason : VARCHAR(200)
+  + approvedByUserId : BIGINT <<FK>>
+  + approvalDate : DATE
+  + linkedAssignmentId : BIGINT <<FK>>
+  + status : VARCHAR(50)
+  + notes : TEXT
+  + createdAt : DATE
+  + createdByUserId : BIGINT <<FK>>
+  + updatedAt : DATE
+  + updatedByUserId : BIGINT <<FK>>
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+}
+class LeadershipAssignment {
+  + {static} assignmentId : BIGINT <<PK>>
+  + nomineeId : BIGINT <<FK>>
+  + employeeId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + officeId : BIGINT <<FK>>
+  + decisionNumber : INT
+  + decisionDate : DATE
+  + decisionDocumentPath : VARCHAR(200)
+  + position : VARCHAR(200)
+  + positionLevel : VARCHAR(50)
+  + startDate : DATE
+  + endDate : DATE
+  + actualEndDate : DATE
+  + isActive : BOOLEAN
+  + assignmentNature : VARCHAR(200)
+  + handoverStatus : VARCHAR(50)
+  + handoverDate : DATE
+  + handoverDocumentPath : VARCHAR(200)
+  + salaryGrade : DECIMAL(15,2)
+  + allowance : VARCHAR(200)
+  + notes : TEXT
+  + createdAt : DATE
+  + createdByUserId : BIGINT <<FK>>
+  + updatedAt : DATE
+  + updatedByUserId : BIGINT <<FK>>
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+}
+class OrganizationalStructure {
+  + {static} structureId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + officeId : BIGINT <<FK>>
+  + structureName : VARCHAR(200)
+  + versionNumber : INT
+  + versionDate : DATE
+  + description : TEXT
+  + approvalStatus : VARCHAR(50)
+  + approvalDate : DATE
+  + approvalDocumentPath : VARCHAR(200)
+  + structureFile : VARCHAR(200)
+  + effectiveDate : DATE
+  + isActive : BOOLEAN
+  + createdByUserId : BIGINT <<FK>>
+  + previousVersionId : BIGINT <<FK>>
+  + notes : TEXT
+  + createdAt : DATE
+  + updatedAt : DATE
+  + updatedByUserId : BIGINT <<FK>>
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+}
+class SchoolDepartment {
+  + {static} deptId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + structureId : BIGINT <<FK>>
+  + deptCode : VARCHAR(50)
+  + deptName : VARCHAR(200)
+  + deptNameEn : VARCHAR(200)
+  + deptType : VARCHAR(50)
+  + parentDeptId : BIGINT <<FK>>
+  + managerId : BIGINT <<FK>>
+  + actingManagerId : BIGINT <<FK>>
+  + maxCapacity : INT
+  + currentEmployeeCount : INT
+  + budgetCode : VARCHAR(50)
+  + location : VARCHAR(200)
+  + phone : VARCHAR(20)
+  + email : VARCHAR(100)
+  + status : VARCHAR(50)
+  + mergedIntoDeptId : BIGINT <<FK>>
+  + notes : TEXT
+  + createdAt : DATE
+  + createdByUserId : BIGINT <<FK>>
+  + updatedAt : DATE
+  + updatedByUserId : BIGINT <<FK>>
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+}
+class OrganizationalPermission {
+  + {static} permissionId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + departmentId : BIGINT <<FK>>
+  + positionTitle : VARCHAR(200)
+  + systemModule : VARCHAR(200)
+  + accessLevel : VARCHAR(50)
+  + canSign : BOOLEAN
+  + financialLimit : VARCHAR(200)
+  + roleId : BIGINT <<FK>>
+  + isActive : BOOLEAN
+  + notes : TEXT
+  + createdAt : DATE
+  + createdByUserId : BIGINT <<FK>>
+  + updatedAt : DATE
+  + updatedByUserId : BIGINT <<FK>>
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + grant(user)
+  + revoke(user)
+  + check(action, resource)
+}
+class SchoolDecision {
+  + {static} decisionId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + decisionNumber : INT
+  + decisionDate : DATE
+  + decisionType : VARCHAR(50)
+  + subject : VARCHAR(200)
+  + decisionText : VARCHAR(200)
+  + effectiveDate : DATE
+  + expiryDate : DATE
+  + pdfAttachment : VARCHAR(200)
+  + status : VARCHAR(50)
+  + targetEmployees : VARCHAR(200)
+  + issuedByUserId : BIGINT <<FK>>
+  + approvedByOfficeId : BIGINT <<FK>>
+  + linkedWorkflowId : BIGINT <<FK>>
+  + notes : TEXT
+  + createdAt : DATE
+  + createdByUserId : BIGINT <<FK>>
+  + updatedAt : DATE
+  + updatedByUserId : BIGINT <<FK>>
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+}
+class OrganizationalManual {
+  + {static} manualId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + manualVersion : VARCHAR(200)
+  + lastUpdated : DATE
+  + filePath : VARCHAR(200)
+  + fileName : VARCHAR(200)
+  + approvalRef : VARCHAR(50)
+  + approvedByOfficeId : BIGINT <<FK>>
+  + approvalDate : DATE
+  + requiresAcknowledgment : VARCHAR(200)
+  + status : VARCHAR(50)
+  + publishedAt : DATE
+  + publishedByUserId : BIGINT <<FK>>
+  + notes : TEXT
+  + createdAt : DATE
+  + createdByUserId : BIGINT <<FK>>
+  + updatedAt : DATE
+  + updatedByUserId : BIGINT <<FK>>
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+}
+class Workflow {
+  + {static} workflowId : BIGINT <<PK>>
+  + workflowName : VARCHAR(200)
+  + description : TEXT
+  + entityName : VARCHAR(200)
+  + totalSteps : VARCHAR(200)
+  + isActive : BOOLEAN
+  + isDefault : BOOLEAN
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+}
+class WorkflowStep {
+  + {static} stepId : BIGINT <<PK>>
+  + workflowId : BIGINT <<FK>>
+  + stepOrder : VARCHAR(200)
+  + stepNameAr : VARCHAR(200)
+  + stepNameEn : VARCHAR(200)
+  + assignedToPosition : VARCHAR(200)
+  + assignedToRoleId : BIGINT <<FK>>
+  + slaHours : VARCHAR(200)
+  + actionType : VARCHAR(50)
+  + isFinalStep : BOOLEAN
+  + escalationStepId : BIGINT <<FK>>
+  + isActive : BOOLEAN
+  + notes : TEXT
+  + createdAt : DATE
+  + createdByUserId : BIGINT <<FK>>
+  + updatedAt : DATE
+  + updatedByUserId : BIGINT <<FK>>
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+}
+class AnnualPlanDraft {
+  + {static} draftId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + academicYearId : BIGINT <<FK>>
+  + draftNumber : INT
+  + draftVersion : VARCHAR(200)
+  + titleAr : VARCHAR(200)
+  + titleEn : VARCHAR(200)
+  + draftStatus : VARCHAR(50)
+  + completionPercentage : DECIMAL(5,2)
+  + lastSavedAt : DATE
+  + lastSavedByUserId : BIGINT <<FK>>
+  + goalsActivitiesJson : VARCHAR(200)
+  + strategicGoals : DECIMAL(5,2)
+  + operationalGoals : VARCHAR(200)
+  + kpis : VARCHAR(200)
+  + requiredResources : VARCHAR(200)
+  + risksAndChallenges : VARCHAR(200)
+  + successCriteria : VARCHAR(200)
+  + attachments : VARCHAR(200)
+  + internalReviewDate : DATE
+  + internalReviewByUserId : BIGINT <<FK>>
+  + internalReviewNotes : TEXT
+  + internalReviewStatus : VARCHAR(50)
+  + isReadyForSubmission : BOOLEAN
+  + submittedToPlanId : BIGINT <<FK>>
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+}
+class SubmittedPlan {
+  + {static} planId : BIGINT <<PK>>
+  + draftId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + academicYearId : BIGINT <<FK>>
+  + submissionNumber : INT
+  + submissionTimestamp : DATETIME
+  + directorSignature : VARCHAR(200)
+  + signatureDate : DATE
+  + signatureMethod : VARCHAR(200)
+  + planFilePath : VARCHAR(200)
+  + planFileName : VARCHAR(200)
+  + planFileSize : VARCHAR(200)
+  + planHash : VARCHAR(200)
+  + assignedReviewerId : BIGINT <<FK>>
+  + priority : VARCHAR(200)
+  + priorityReason : VARCHAR(200)
+  + submissionType : VARCHAR(50)
+  + isResubmission : BOOLEAN
+  + previousSubmissionId : BIGINT <<FK>>
+  + resubmissionReason : VARCHAR(200)
+  + status : VARCHAR(50)
+  + reviewStartDate : DATE
+  + reviewEndDate : DATE
+  + reviewerNotes : TEXT
+  + rejectionReason : VARCHAR(200)
+  + rejectionDetails : TEXT
+  + requiredModifications : VARCHAR(200)
+  + modificationDeadline : BOOLEAN
+  + resubmissionDate : DATE
+  + resubmissionFilePath : VARCHAR(200)
+  + approvedPlanId : BIGINT <<FK>>
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+  + draft()
+}
+class ApprovedPlan {
+  + {static} approvedPlanId : BIGINT <<PK>>
+  + submittedPlanId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + academicYearId : BIGINT <<FK>>
+  + approvalReferenceNumber : INT
+  + approvalReferenceDate : DATE
+  + approvalReferenceDocument : VARCHAR(200)
+  + approvalRefNo : VARCHAR(200)
+  + effectiveDate : DATE
+  + effectiveDateHijri : DATE
+  + expiryDate : DATE
+  + planStatus : VARCHAR(50)
+  + approvalNotes : TEXT
+  + approvalDetails : TEXT
+  + approvedByOfficeId : BIGINT <<FK>>
+  + finalPlanFilePath : VARCHAR(200)
+  + finalPlanFileName : VARCHAR(200)
+  + finalPlanHash : VARCHAR(200)
+  + signedPlanPath : VARCHAR(200)
+  + hasDigitalSignature : BOOLEAN
+  + digitalSignatureDetails : TEXT
+  + isActive : BOOLEAN
+  + replacedByPlanId : BIGINT <<FK>>
+  + suspensionReason : VARCHAR(200)
+  + suspendedAt : DATE
+  + suspendedByUserId : BIGINT <<FK>>
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+  + draft()
+}
+class PlanAmendment {
+  + {static} amendmentId : BIGINT <<PK>>
+  + approvedPlanId : BIGINT <<FK>>
+  + amendmentType : VARCHAR(50)
+  + amendmentNumber : INT
+  + amendmentTitle : VARCHAR(200)
+  + amendmentDescription : TEXT
+  + changesDescription : TEXT
+  + affectedSections : VARCHAR(200)
+  + impactAnalysis : VARCHAR(200)
+  + impactLevel : VARCHAR(50)
+  + estimatedCostChange : DECIMAL(15,2)
+  + estimatedTimelineChange : TIME
+  + requestedByUserId : BIGINT <<FK>>
+  + requestDate : DATE
+  + approvalStatus : VARCHAR(50)
+  + approvedByUserId : BIGINT <<FK>>
+  + approvalDate : DATE
+  + approvalNotes : TEXT
+  + rejectionReason : VARCHAR(200)
+  + implementationDate : DATE
+  + implementedByUserId : BIGINT <<FK>>
+  + implementationNotes : TEXT
+  + linkedToRequestId : BIGINT <<FK>>
+  + isPermanent : BOOLEAN
+  + effectiveFrom : DATE
+  + effectiveUntil : DATE
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+}
+class AmendmentRequest {
+  + {static} requestId : BIGINT <<PK>>
+  + approvedPlanId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + requestNumber : INT
+  + requestDate : DATE
+  + requestTitle : VARCHAR(200)
+  + requestDescription : TEXT
+  + reasonForRequest : VARCHAR(200)
+  + proposedChanges : VARCHAR(200)
+  + affectedActivities : VARCHAR(200)
+  + expectedImpact : VARCHAR(200)
+  + supportingDocs : VARCHAR(200)
+  + supportingDocsDescription : TEXT
+  + priority : VARCHAR(200)
+  + submittedByUserId : BIGINT <<FK>>
+  + submittedByRole : VARCHAR(200)
+  + assignedToOfficeId : BIGINT <<FK>>
+  + assignedToReviewerId : BIGINT <<FK>>
+  + reviewStartDate : DATE
+  + reviewEndDate : DATE
+  + reviewNotes : TEXT
+  + status : VARCHAR(50)
+  + approvalDecision : VARCHAR(200)
+  + decisionDate : DATE
+  + decisionReferenceNumber : INT
+  + decisionNotes : TEXT
+  + rejectionReason : VARCHAR(200)
+  + requiredModifications : VARCHAR(200)
+  + resubmissionDeadline : BOOLEAN
+  + resubmittedAt : DATE
+  + resubmittedFile : VARCHAR(200)
+  + linkedToAmendmentId : BIGINT <<FK>>
+  + closedAt : DATE
+  + closedByUserId : BIGINT <<FK>>
+  + closingNotes : TEXT
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+}
+class ProgressReport {
+  + {static} reportId : BIGINT <<PK>>
+  + approvedPlanId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + reportingPeriod : VARCHAR(200)
+  + periodSequence : VARCHAR(200)
+  + startDate : DATE
+  + endDate : DATE
+  + reportNumber : INT
+  + reportDate : DATE
+  + completionRate : DECIMAL(5,2)
+  + plannedActivitiesCount : INT
+  + completedActivitiesCount : INT
+  + partiallyCompletedCount : INT
+  + notStartedCount : INT
+  + cancelledActivitiesCount : INT
+  + activitiesProgress : TEXT
+  + kpiProgress : VARCHAR(200)
+  + budgetConsumed : VARCHAR(200)
+  + budgetPercentage : DECIMAL(5,2)
+  + achievements : VARCHAR(200)
+  + challenges : VARCHAR(200)
+  + correctiveActions : VARCHAR(200)
+  + recommendations : VARCHAR(200)
+  + deviationNotes : TEXT
+  + attachments : VARCHAR(200)
+  + reportFilePath : VARCHAR(200)
+  + reportFileName : VARCHAR(200)
+  + submittedByUserId : BIGINT <<FK>>
+  + submissionDate : DATE
+  + directorSignature : VARCHAR(200)
+  + status : VARCHAR(50)
+  + reviewedByUserId : BIGINT <<FK>>
+  + reviewDate : DATE
+  + reviewerNotes : TEXT
+  + reviewerRecommendations : VARCHAR(200)
+  + rejectionReason : VARCHAR(200)
+  + requiredModifications : VARCHAR(200)
+  + resubmissionDate : DATE
+  + isFinal : BOOLEAN
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+  + generate()
+}
+class FinalEvaluation {
+  + {static} evaluationId : BIGINT <<PK>>
+  + approvedPlanId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + academicYearId : BIGINT <<FK>>
+  + evaluationDate : DATE
+  + evaluationPeriod : VARCHAR(200)
+  + goalsAnalysis : VARCHAR(200)
+  + goalsAchievementRate : DECIMAL(5,2)
+  + activitiesCompletionRate : DECIMAL(5,2)
+  + kpiAchievementRate : DECIMAL(5,2)
+  + budgetAnalysis : VARCHAR(200)
+  + resourceEfficiency : VARCHAR(200)
+  + resourceEfficiencyScore : DECIMAL(5,2)
+  + humanResourcesEfficiency : VARCHAR(200)
+  + timelineAdherence : TIME
+  + deviationsSummary : VARCHAR(200)
+  + positiveDeviations : VARCHAR(200)
+  + negativeDeviations : VARCHAR(200)
+  + deviationReasons : VARCHAR(200)
+  + lessonsLearned : VARCHAR(200)
+  + bestPractices : VARCHAR(200)
+  + challengesEncountered : INT
+  + recommendationsForNextYear : VARCHAR(200)
+  + finalScore : DECIMAL(5,2)
+  + rating : VARCHAR(200)
+  + evaluationTeam : VARCHAR(200)
+  + evaluationNotes : TEXT
+  + attachments : VARCHAR(200)
+  + evaluationReportPath : VARCHAR(200)
+  + evaluationReportName : VARCHAR(200)
+  + approvedByOfficeId : BIGINT <<FK>>
+  + approvalDate : DATE
+  + approvalStatus : VARCHAR(50)
+  + approvalNotes : TEXT
+  + isPublished : BOOLEAN
+  + publishedAt : DATE
+  + exportedToNextYearPlan : BOOLEAN
+  + nextYearPlanDraftId : BIGINT <<FK>>
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+}
+class HistoricalRecords {
+  + {static} recordId : BIGINT <<PK>>
+  + tableName : VARCHAR(200)
+  + entityId : BIGINT <<FK>>
+  + operationType : VARCHAR(50)
+  + oldValue : VARCHAR(200)
+  + newValue : VARCHAR(200)
+  + fieldName : VARCHAR(200)
+  + oldFieldValue : VARCHAR(200)
+  + newFieldValue : VARCHAR(200)
+  + changeReason : VARCHAR(200)
+  + changeReasonCategory : VARCHAR(50)
+  + userId : BIGINT <<FK>>
+  + userRole : VARCHAR(200)
+  + userName : VARCHAR(200)
+  + operationDate : DATETIME
+  + ipAddress : VARCHAR(200)
+  + deviceInfo : VARCHAR(200)
+  + location : VARCHAR(200)
+  + sessionId : BIGINT <<FK>>
+  + affectedRowsCount : INT
+  + isReversible : BOOLEAN
+  + reversalRecordId : BIGINT <<FK>>
+  + reversedAt : DATE
+  + reversedByUserId : BIGINT <<FK>>
+  + digitalSignature : VARCHAR(200)
+  + riskScore : DECIMAL(5,2)
+  + isHighRisk : BOOLEAN
+  + reviewedByAudit : BOOLEAN
+  + auditReviewDate : DATE
+  + auditReviewNotes : TEXT
+  + retentionPeriodYears : VARCHAR(200)
+  + expiresAt : DATE
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+}
+class ReceivedCirculars {
+  + {static} circularId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + officeId : BIGINT <<FK>>
+  + circularNumber : INT
+  + circularNumberFull : INT
+  + circularDate : DATE
+  + circularDateGregorian : DATE
+  + subject : VARCHAR(200)
+  + subjectNormalized : VARCHAR(200)
+  + summary : VARCHAR(200)
+  + content : VARCHAR(200)
+  + priorityLevel : VARCHAR(50)
+  + priorityColor : VARCHAR(200)
+  + requiresReply : BOOLEAN
+  + replyDeadline : VARCHAR(200)
+  + requiresAction : BOOLEAN
+  + actionDeadline : VARCHAR(200)
+  + relatedToEntity : VARCHAR(200)
+  + relatedEntityId : BIGINT <<FK>>
+  + isConfidential : BOOLEAN
+  + isUrgent : BOOLEAN
+  + receivedAt : DATETIME
+  + receivedByUserId : BIGINT <<FK>>
+  + receivedMethod : VARCHAR(100)
+  + receivedReference : VARCHAR(50)
+  + documentType : VARCHAR(50)
+  + documentPath : VARCHAR(200)
+  + documentName : VARCHAR(200)
+  + documentSize : VARCHAR(200)
+  + documentHash : VARCHAR(200)
+  + physicalLocation : VARCHAR(200)
+  + status : VARCHAR(50)
+  + statusHistory : DATE
+  + acknowledgedById : BIGINT <<FK>>
+  + acknowledgedAt : DATE
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  + deletedAt : DATE
+  + deletedByUserId : BIGINT <<FK>>
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+}
+class CircularsDocumentation {
+  + {static} documentationId : BIGINT <<PK>>
+  + circularId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + registrationNumber : INT
+  + registrationDate : DATE
+  + registrationDateGregorian : DATE
+  + registeredByUserId : BIGINT <<FK>>
+  + registeredAt : VARCHAR(200)
+  + documentCategory : VARCHAR(50)
+  + subCategory : VARCHAR(50)
+  + keywords : VARCHAR(200)
+  + physicalArchiveBox : VARCHAR(50)
+  + physicalArchiveShelf : VARCHAR(50)
+  + physicalArchivePage : VARCHAR(50)
+  + physicalArchiveNotes : TEXT
+  + digitalCopyPath : VARCHAR(200)
+  + digitalBackupPath : VARCHAR(200)
+  + hasDigitalSignature : BOOLEAN
+  + digitalSignatureVerified : BOOLEAN
+  + retentionPeriodYears : VARCHAR(200)
+  + retentionEndDate : DATE
+  + disposalDate : DATE
+  + disposalStatus : VARCHAR(50)
+  + disposalMethod : VARCHAR(200)
+  + disposalAuthorizedByUserId : BIGINT <<FK>>
+  + disposalNotes : TEXT
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + archive()
+}
+class CircularsInternalDistribution {
+  + {static} distributionId : BIGINT <<PK>>
+  + circularId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + distributionType : VARCHAR(50)
+  + departmentId : BIGINT <<FK>>
+  + employeeId : BIGINT <<FK>>
+  + accessType : VARCHAR(50)
+  + isRequiredToAct : BOOLEAN
+  + isRequiredToReply : BOOLEAN
+  + distributionNotes : TEXT
+  + distributionTime : TIME
+  + distributedByUserId : BIGINT <<FK>>
+  + isAcknowledged : BOOLEAN
+  + acknowledgedAt : VARCHAR(200)
+  + acknowledgedByUserId : BIGINT <<FK>>
+  + acknowledgedMethod : VARCHAR(200)
+  + acknowledgmentNotes : TEXT
+  + readAt : VARCHAR(200)
+  + readDuration : VARCHAR(200)
+  + hasQuestions : BOOLEAN
+  + questionsText : VARCHAR(200)
+  + questionsRepliedAt : VARCHAR(200)
+  + questionsRepliedByUserId : BIGINT <<FK>>
+  + isForwarded : BOOLEAN
+  + forwardedToEmployeeId : BIGINT <<FK>>
+  + forwardingReason : VARCHAR(200)
+  + forwardingDate : DATE
+  + status : VARCHAR(50)
+  + reminderSentCount : INT
+  + lastReminderSentAt : VARCHAR(200)
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+}
+class CircularsImplementationStatus {
+  + {static} implementationId : BIGINT <<PK>>
+  + circularId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + currentStage : VARCHAR(200)
+  + stageStartDate : DATE
+  + progressRate : DECIMAL(5,2)
+  + previousProgressRate : DECIMAL(5,2)
+  + lastProgressUpdate : DATE
+  + responsibleEmployeeId : BIGINT <<FK>>
+  + responsibleDepartmentId : BIGINT <<FK>>
+  + executionStartDate : DATE
+  + expectedCompletionDate : DATE
+  + actualCompletionDate : DATE
+  + statusNotes : VARCHAR(50)
+  + challenges : VARCHAR(200)
+  + challengesDetails : TEXT
+  + actionsTaken : VARCHAR(200)
+  + actionsTakenDetails : TEXT
+  + pendingActions : VARCHAR(200)
+  + pendingActionsDetails : TEXT
+  + resourcesNeeded : VARCHAR(200)
+  + isOnTrack : BOOLEAN
+  + deviationReason : VARCHAR(200)
+  + delayDays : INT
+  + isCompleted : BOOLEAN
+  + completionPercentage : DECIMAL(5,2)
+  + completionNotes : TEXT
+  + verifiedByUserId : BIGINT <<FK>>
+  + verifiedAt : VARCHAR(200)
+  + verificationNotes : TEXT
+  + reportedToOffice : BOOLEAN
+  + reportedToOfficeAt : VARCHAR(200)
+  + status : VARCHAR(50)
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+}
+class CircularsImplementationReports {
+  + {static} reportId : BIGINT <<PK>>
+  + circularId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + reportNumber : INT
+  + reportDate : DATE
+  + reportType : VARCHAR(50)
+  + version : VARCHAR(200)
+  + submissionDate : DATE
+  + submittedByUserId : BIGINT <<FK>>
+  + submissionMethod : VARCHAR(100)
+  + submissionReference : VARCHAR(50)
+  + resultsSummary : VARCHAR(200)
+  + achievements : VARCHAR(200)
+  + challenges : VARCHAR(200)
+  + recommendations : VARCHAR(200)
+  + evidencePath : VARCHAR(200)
+  + evidenceTypes : VARCHAR(50)
+  + evidenceDescription : TEXT
+  + directorSignature : VARCHAR(200)
+  + signatureDate : DATE
+  + signatureMethod : VARCHAR(200)
+  + officeDecision : VARCHAR(200)
+  + officeDecisionDate : DATE
+  + officeDecisionByUserId : BIGINT <<FK>>
+  + decisionNotes : TEXT
+  + modificationRequired : BOOLEAN
+  + modificationNotes : TEXT
+  + resubmissionDate : DATE
+  + finalApprovalDate : DATE
+  + finalApprovedByUserId : BIGINT <<FK>>
+  + status : VARCHAR(50)
+  + isFinal : BOOLEAN
+  + relatedReportId : BIGINT <<FK>>
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+  + generate()
+}
+class ArchivedCirculars {
+  + {static} archiveId : BIGINT <<PK>>
+  + circularId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + archiveCategory : VARCHAR(50)
+  + archiveSubCategory : VARCHAR(50)
+  + archiveDate : DATE
+  + archivedByUserId : BIGINT <<FK>>
+  + archivedAt : VARCHAR(200)
+  + archiveReason : VARCHAR(200)
+  + closureDate : DATE
+  + closedByUserId : BIGINT <<FK>>
+  + closureNotes : TEXT
+  + retentionPeriodYears : VARCHAR(200)
+  + retentionPeriodStart : DATE
+  + retentionPeriodEnd : DATE
+  + retentionReason : VARCHAR(200)
+  + disposalAllowed : BOOLEAN
+  + disposalDateScheduled : DATE
+  + disposalActualDate : DATE
+  + disposalMethod : VARCHAR(200)
+  + disposalAuthorizedByUserId : BIGINT <<FK>>
+  + disposalNotes : TEXT
+  + isDestroyed : BOOLEAN
+  + destroyedAt : DATE
+  + restoredFromArchive : BOOLEAN
+  + restoredAt : DATE
+  + restoredByUserId : BIGINT <<FK>>
+  + restoreReason : VARCHAR(200)
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + archive()
+}
+class CircularsDeadlinesTracking {
+  + {static} deadlineId : BIGINT <<PK>>
+  + circularId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + deadlineType : VARCHAR(50)
+  + deadlineDate : DATE
+  + originalDeadline : DATE
+  + extensionCount : INT
+  + extensionReason : VARCHAR(200)
+  + extensionApprovedBy : VARCHAR(200)
+  + extensionApprovedAt : DATE
+  + daysRemaining : INT
+  + alertLevel : VARCHAR(50)
+  + alertLevelReason : VARCHAR(50)
+  + lastAlertSentAt : VARCHAR(200)
+  + alertSentCount : INT
+  + alertRecipients : VARCHAR(200)
+  + isResponded : BOOLEAN
+  + responseDate : DATE
+  + responseType : VARCHAR(50)
+  + responseDetails : TEXT
+  + responseByUserId : BIGINT <<FK>>
+  + isOverdue : BOOLEAN
+  + overdueDays : INT
+  + overdueAction : VARCHAR(200)
+  + overdueActionDate : DATE
+  + escalationLevel : VARCHAR(50)
+  + escalatedAt : DATE
+  + escalatedToUserId : BIGINT <<FK>>
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + approve()
+  + reject(reason)
+}
+class ParentMeeting {
+  + {static} meetingId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + academicYearId : BIGINT <<FK>>
+  + semesterId : BIGINT <<FK>>
+  + meetingType : VARCHAR(50)
+  + meetingNumber : INT
+  + title : VARCHAR(200)
+  + objectives : VARCHAR(200)
+  + agenda : VARCHAR(200)
+  + organizerId : BIGINT <<FK>>
+  + organizerRole : VARCHAR(200)
+  + meetingDate : DATE
+  + startTime : TIME
+  + endTime : TIME
+  + actualEndTime : TIME
+  + duration : VARCHAR(200)
+  + location : VARCHAR(200)
+  + locationType : VARCHAR(50)
+  + virtualMeetingLink : VARCHAR(500)
+  + studentId : BIGINT <<FK>>
+  + gradeLevelId : BIGINT <<FK>>
+  + classSectionId : BIGINT <<FK>>
+  + targetGuardians : VARCHAR(200)
+  + invitedGuardiansCount : INT
+  + confirmedGuardiansCount : INT
+  + actualAttendeesCount : INT
+  + attendees : VARCHAR(200)
+  + guardiansFeedback : DECIMAL(15,2)
+  + minutes : VARCHAR(200)
+  + discussionTopics : VARCHAR(200)
+  + decisions : VARCHAR(200)
+  + recommendations : VARCHAR(200)
+  + actionItems : DATE
+  + attachments : VARCHAR(200)
+  + minutesFilePath : VARCHAR(200)
+  + minutesApproved : BOOLEAN
+  + minutesApprovedByUserId : BIGINT <<FK>>
+  + minutesApprovalDate : DATE
+  + followUpDate : DATE
+  + followUpStatus : VARCHAR(50)
+  + followUpNotes : TEXT
+  + relatedComplaintId : BIGINT <<FK>>
+  + relatedDisciplineId : BIGINT <<FK>>
+  + status : VARCHAR(50)
+  + cancellationReason : VARCHAR(200)
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+}
+class Notifications {
+  + {static} notificationId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + userId : BIGINT <<FK>>
+  + userType : VARCHAR(50)
+  + notificationType : VARCHAR(50)
+  + category : VARCHAR(50)
+  + priority : VARCHAR(200)
+  + title : VARCHAR(200)
+  + message : VARCHAR(200)
+  + body : VARCHAR(200)
+  + actionLink : VARCHAR(500)
+  + actionType : VARCHAR(50)
+  + relatedEntityType : VARCHAR(50)
+  + relatedEntityId : BIGINT <<FK>>
+  + senderEntity : VARCHAR(200)
+  + senderUserId : BIGINT <<FK>>
+  + sendDate : DATE
+  + sendTime : TIME
+  + deliveryChannel : VARCHAR(100)
+  + emailSent : BOOLEAN
+  + emailSentAt : DATE
+  + smsSent : BOOLEAN
+  + smsSentAt : DATE
+  + appSent : BOOLEAN
+  + appSentAt : DATE
+  + isRead : BOOLEAN
+  + readAt : DATE
+  + readDevice : VARCHAR(200)
+  + isActionTaken : BOOLEAN
+  + actionTakenAt : DATE
+  + actionTakenByUserId : BIGINT <<FK>>
+  + isDismissed : BOOLEAN
+  + dismissedAt : DATE
+  + expiresAt : DATE
+  + reminderSent : BOOLEAN
+  + reminderCount : INT
+  + lastReminderSentAt : DATE
+  + status : VARCHAR(50)
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+}
+class QuarterlyReport {
+  + {static} reportId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + academicYearId : BIGINT <<FK>>
+  + quarterNumber : INT
+  + reportNumber : INT
+  + generationDate : DATE
+  + reportingPeriodStart : VARCHAR(200)
+  + reportingPeriodEnd : VARCHAR(200)
+  + achievementsJson : VARCHAR(200)
+  + studentStats : INT
+  + staffStats : INT
+  + attendanceStats : DECIMAL(5,2)
+  + financialStats : VARCHAR(200)
+  + activityStats : INT
+  + disciplineStats : INT
+  + achievementRate : DECIMAL(5,2)
+  + challenges : VARCHAR(200)
+  + recommendations : VARCHAR(200)
+  + filingNumber : INT
+  + submissionDate : DATE
+  + submissionMethod : VARCHAR(100)
+  + submittedByUserId : BIGINT <<FK>>
+  + directorSignature : VARCHAR(200)
+  + officeReviewStatus : VARCHAR(50)
+  + officeReviewDate : DATE
+  + officeReviewerId : BIGINT <<FK>>
+  + officeReviewNotes : TEXT
+  + officeDecision : VARCHAR(200)
+  + officeDecisionNumber : INT
+  + officeDecisionDate : DATE
+  + reportFilePath : VARCHAR(200)
+  + attachments : VARCHAR(200)
+  + status : VARCHAR(50)
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + submittedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + generate()
+  + export(format)
+  + publish()
+}
+class CalendarComplianceReport {
+  + {static} reportId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + academicYearId : BIGINT <<FK>>
+  + academicMonth : VARCHAR(200)
+  + monthNumber : INT
+  + reportNumber : INT
+  + generationDate : DATE
+  + plannedStudyDays : INT
+  + actualStudyDays : INT
+  + plannedHolidays : INT
+  + actualHolidays : INT
+  + emergencyClosures : INT
+  + closureReasons : VARCHAR(200)
+  + deviationDays : INT
+  + deviationPercentage : DECIMAL(5,2)
+  + deviationDetails : VARCHAR(200)
+  + affectedGrades : DECIMAL(5,2)
+  + affectedSubjects : VARCHAR(200)
+  + learningLoss : DECIMAL(5,2)
+  + compensationPlan : VARCHAR(200)
+  + compensationPlanDetails : TEXT
+  + compensationPlanStartDate : DATE
+  + compensationPlanEndDate : DATE
+  + compensationHours : INT
+  + compensationStatus : VARCHAR(50)
+  + submissionDate : DATE
+  + submittedByUserId : BIGINT <<FK>>
+  + directorSignature : VARCHAR(200)
+  + officeReviewStatus : VARCHAR(50)
+  + officeReviewNotes : TEXT
+  + officeApprovalStatus : VARCHAR(50)
+  + officeApprovalDate : DATE
+  + officeDecisionNumber : INT
+  + reportFilePath : VARCHAR(200)
+  + status : VARCHAR(50)
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+  + generate()
+}
+class WeeklyProcessReport {
+  + {static} reportId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + academicYearId : BIGINT <<FK>>
+  + semesterId : BIGINT <<FK>>
+  + weekNumber : INT
+  + startDate : DATE
+  + endDate : DATE
+  + reportNumber : INT
+  + generationDate : DATE
+  + curriculumProgress : DECIMAL(5,2)
+  + subjectProgressDetails : TEXT
+  + averageProgress : VARCHAR(200)
+  + completedTopics : VARCHAR(200)
+  + pendingTopics : VARCHAR(200)
+  + educationalObstacles : VARCHAR(200)
+  + obstaclesDetails : DATE
+  + obstaclesCategories : VARCHAR(200)
+  + teacherAbsences : VARCHAR(200)
+  + substituteTeachers : VARCHAR(200)
+  + studentAttendanceRate : DECIMAL(5,2)
+  + teacherAttendanceRate : DECIMAL(5,2)
+  + recommendations : VARCHAR(200)
+  + internalApproval : VARCHAR(200)
+  + approvedByUserId : BIGINT <<FK>>
+  + approvalDate : DATE
+  + approvalNotes : TEXT
+  + rejectionReason : VARCHAR(200)
+  + status : VARCHAR(50)
+  + attachments : VARCHAR(200)
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+  + generate()
+}
+class MonthlyDisciplineReport {
+  + {static} reportId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + academicYearId : BIGINT <<FK>>
+  + semesterId : BIGINT <<FK>>
+  + month : VARCHAR(200)
+  + year : VARCHAR(200)
+  + reportNumber : INT
+  + generationDate : DATE
+  + studentAttendanceRate : DECIMAL(5,2)
+  + studentAttendanceByGrade : DECIMAL(5,2)
+  + staffAttendanceRate : DECIMAL(5,2)
+  + staffAttendanceByDepartment : VARCHAR(200)
+  + totalPositiveBehaviors : INT
+  + positiveBehaviorDetails : TEXT
+  + totalViolations : INT
+  + violationsByType : VARCHAR(50)
+  + violationsBySeverity : VARCHAR(200)
+  + violationsByGrade : DECIMAL(5,2)
+  + topViolations : VARCHAR(200)
+  + mostAffectedGrades : DECIMAL(5,2)
+  + violationsSummary : VARCHAR(200)
+  + penaltiesApplied : VARCHAR(200)
+  + guidancePrograms : VARCHAR(200)
+  + guidanceProgramsCount : INT
+  + guidanceProgramsBeneficiaries : INT
+  + recommendations : VARCHAR(200)
+  + comparisonWithPreviousMonth : VARCHAR(200)
+  + submissionDate : DATE
+  + submittedByUserId : BIGINT <<FK>>
+  + directorSignature : VARCHAR(200)
+  + status : VARCHAR(50)
+  + approvedByUserId : BIGINT <<FK>>
+  + approvalDate : DATE
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+  + generate()
+}
+class SemesterEndReport {
+  + {static} reportId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + academicYearId : BIGINT <<FK>>
+  + semesterId : BIGINT <<FK>>
+  + reportNumber : INT
+  + generationDate : DATE
+  + semesterStatsJson : VARCHAR(200)
+  + studentsStartCount : INT
+  + studentsEndCount : INT
+  + studentsNewCount : INT
+  + studentsWithdrawnCount : INT
+  + teachersCount : INT
+  + staffCount : INT
+  + classesCount : INT
+  + examResultsSummary : VARCHAR(200)
+  + successRateByGrade : DECIMAL(5,2)
+  + successRateBySubject : DECIMAL(5,2)
+  + topPerformingSubjects : VARCHAR(200)
+  + lowestPerformingSubjects : VARCHAR(200)
+  + gradeDistribution : DECIMAL(5,2)
+  + studentRanking : VARCHAR(200)
+  + teacherPerformanceSummary : VARCHAR(200)
+  + classPerformance : VARCHAR(200)
+  + comparisonWithPreviousSemester : VARCHAR(200)
+  + strengths : VARCHAR(200)
+  + weaknesses : VARCHAR(200)
+  + challenges : VARCHAR(200)
+  + futureRecommendations : VARCHAR(200)
+  + actionPlan : VARCHAR(200)
+  + submissionDate : DATE
+  + submittedByUserId : BIGINT <<FK>>
+  + directorSignature : VARCHAR(200)
+  + officeReviewStatus : VARCHAR(50)
+  + officeReviewNotes : TEXT
+  + officeApprovalStatus : VARCHAR(50)
+  + officeApprovalDate : DATE
+  + reportFilePath : VARCHAR(200)
+  + status : VARCHAR(50)
+  + attachments : VARCHAR(200)
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+  + generate()
+}
+class AnnualComprehensiveReport {
+  + {static} reportId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + academicYearId : BIGINT <<FK>>
+  + reportNumber : INT
+  + generationDate : DATE
+  + executiveSummary : VARCHAR(200)
+  + schoolVision : VARCHAR(200)
+  + schoolMission : VARCHAR(200)
+  + strategicGoals : DECIMAL(5,2)
+  + academicAchievement : INT
+  + studentStats : INT
+  + staffStats : INT
+  + financialSummary : VARCHAR(200)
+  + facilityStatus : VARCHAR(50)
+  + activitiesSummary : INT
+  + selfEvaluationResults : VARCHAR(200)
+  + selfEvaluationDetails : TEXT
+  + goalAchievementAnalysis : VARCHAR(200)
+  + goalAchievementRate : DECIMAL(5,2)
+  + achievedGoals : VARCHAR(200)
+  + partiallyAchievedGoals : VARCHAR(200)
+  + unachievedGoals : VARCHAR(200)
+  + challenges : VARCHAR(200)
+  + lessonsLearned : VARCHAR(200)
+  + lessonsLearnedDetails : TEXT
+  + futureRecommendations : VARCHAR(200)
+  + signedPdfPath : VARCHAR(500)
+  + reportLanguage : VARCHAR(200)
+  + submissionDate : DATE
+  + submittedByUserId : BIGINT <<FK>>
+  + directorName : VARCHAR(200)
+  + directorSignature : VARCHAR(200)
+  + directorSignatureDate : DATE
+  + officeReviewStatus : VARCHAR(50)
+  + officeReviewDate : DATE
+  + officeReviewerId : BIGINT <<FK>>
+  + officeReviewNotes : TEXT
+  + officeApprovalStatus : VARCHAR(50)
+  + officeApprovalDate : DATE
+  + officeDecisionNumber : INT
+  + reportFilePath : VARCHAR(200)
+  + status : VARCHAR(50)
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+  + generate()
+}
+class EducationalOutcomesReport {
+  + {static} reportId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + academicYearId : BIGINT <<FK>>
+  + reportNumber : INT
+  + generationDate : DATE
+  + generalSuccessRates : DECIMAL(5,2)
+  + successRateByGrade : DECIMAL(5,2)
+  + successRateBySubject : DECIMAL(5,2)
+  + successRateByCategory : DECIMAL(5,2)
+  + topPerformingSubjects : VARCHAR(200)
+  + lowestPerformingSubjects : VARCHAR(200)
+  + gradeTrendAnalysis : DECIMAL(5,2)
+  + comparisonWithPreviousYear : VARCHAR(200)
+  + comparisonWithLast3Years : VARCHAR(200)
+  + subjectsImprovement : VARCHAR(200)
+  + subjectsDecline : VARCHAR(200)
+  + educationalImpact : VARCHAR(200)
+  + initiativesImpact : VARCHAR(200)
+  + programsEffectiveness : VARCHAR(200)
+  + correlationAnalysis : VARCHAR(200)
+  + correlationWithAttendance : VARCHAR(200)
+  + recommendations : VARCHAR(200)
+  + actionPlan : VARCHAR(200)
+  + submissionDate : DATE
+  + submittedByUserId : BIGINT <<FK>>
+  + directorSignature : VARCHAR(200)
+  + officialApprovalDate : DATE
+  + officeApprovalStatus : VARCHAR(50)
+  + officeApprovalNumber : INT
+  + officeApprovalNotes : TEXT
+  + reportFilePath : VARCHAR(200)
+  + status : VARCHAR(50)
+  + attachments : VARCHAR(200)
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+  + generate()
+}
+Office "1" o-- "*" Office : parentOfficeId
+Office "1" o-- "*" School : officeId
+School "1" o-- "*" SchoolLevel : schoolId
+SchoolShiftSetting "1" o-- "*" SchoolLevel : defaultShiftId
+School "1" o-- "*" SchoolContactInfo : schoolId
+School "1" o-- "*" SchoolShiftSetting : schoolId
+School "1" o-- "*" SchoolAcademicYear : schoolId
+SchoolAcademicYear "1" o-- "*" SchoolAcademicYear : previousYearId
+SchoolAcademicYear "1" o-- "*" SchoolSemester : academicYearId
+School "1" o-- "*" SchoolSemester : schoolId
+School "1" o-- "*" SchoolCalendar : schoolId
+SchoolSemester "1" o-- "*" SchoolCalendar : semesterId
+School "1" o-- "*" SchoolCurriculumPlan : schoolId
+GradeCapacity "1" o-- "*" SchoolCurriculumPlan : gradeLevelId
+SchoolLevel "1" o-- "*" SchoolCurriculumPlan : schoolLevelId
+SchoolAcademicYear "1" o-- "*" SchoolCurriculumPlan : academicYearId
+SchoolSemester "1" o-- "*" SchoolCurriculumPlan : semesterId
+School "1" o-- "*" GradeCapacity : schoolId
+SchoolAcademicYear "1" o-- "*" GradeCapacity : academicYearId
+SchoolLevel "1" o-- "*" GradeCapacity : schoolLevelId
+School "1" o-- "*" SchoolAuditLog : schoolId
+School "1" o-- "*" ReferenceCoding : schoolId
+ReferenceCoding "1" o-- "*" ReferenceCoding : parentCodeId
+School "1" o-- "*" CommitmentDeviation : schoolId
+SchoolAcademicYear "1" o-- "*" CommitmentDeviation : academicYearId
+SchoolCalendar "1" o-- "*" CommitmentDeviation : linkedCalendarId
+ApprovedPlan "1" o-- "*" CommitmentDeviation : linkedPlanId
+School "1" o-- "*" AcademicException : schoolId
+SchoolAcademicYear "1" o-- "*" AcademicException : academicYearId
+Workflow "1" o-- "*" AcademicException : linkToWorkflowId
+School "1" o-- "*" LeadershipNomination : schoolId
+Office "1" o-- "*" LeadershipNomination : officeId
+LeadershipAssignment "1" o-- "*" LeadershipNomination : linkedAssignmentId
+LeadershipNomination "1" o-- "*" LeadershipAssignment : nomineeId
+School "1" o-- "*" LeadershipAssignment : schoolId
+Office "1" o-- "*" LeadershipAssignment : officeId
+School "1" o-- "*" OrganizationalStructure : schoolId
+Office "1" o-- "*" OrganizationalStructure : officeId
+School "1" o-- "*" SchoolDepartment : schoolId
+OrganizationalStructure "1" o-- "*" SchoolDepartment : structureId
+SchoolDepartment "1" o-- "*" SchoolDepartment : parentDeptId
+School "1" o-- "*" OrganizationalPermission : schoolId
+SchoolDepartment "1" o-- "*" OrganizationalPermission : departmentId
+School "1" o-- "*" SchoolDecision : schoolId
+Office "1" o-- "*" SchoolDecision : approvedByOfficeId
+Workflow "1" o-- "*" SchoolDecision : linkedWorkflowId
+School "1" o-- "*" OrganizationalManual : schoolId
+Office "1" o-- "*" OrganizationalManual : approvedByOfficeId
+Workflow "1" o-- "*" WorkflowStep : workflowId
+School "1" o-- "*" AnnualPlanDraft : schoolId
+SchoolAcademicYear "1" o-- "*" AnnualPlanDraft : academicYearId
+AnnualPlanDraft "1" o-- "*" SubmittedPlan : draftId
+School "1" o-- "*" SubmittedPlan : schoolId
+SchoolAcademicYear "1" o-- "*" SubmittedPlan : academicYearId
+ApprovedPlan "1" o-- "*" SubmittedPlan : approvedPlanId
+SubmittedPlan "1" o-- "*" ApprovedPlan : submittedPlanId
+School "1" o-- "*" ApprovedPlan : schoolId
+SchoolAcademicYear "1" o-- "*" ApprovedPlan : academicYearId
+Office "1" o-- "*" ApprovedPlan : approvedByOfficeId
+ApprovedPlan "1" o-- "*" PlanAmendment : approvedPlanId
+AmendmentRequest "1" o-- "*" PlanAmendment : linkedToRequestId
+ApprovedPlan "1" o-- "*" AmendmentRequest : approvedPlanId
+School "1" o-- "*" AmendmentRequest : schoolId
+Office "1" o-- "*" AmendmentRequest : assignedToOfficeId
+PlanAmendment "1" o-- "*" AmendmentRequest : linkedToAmendmentId
+ApprovedPlan "1" o-- "*" ProgressReport : approvedPlanId
+School "1" o-- "*" ProgressReport : schoolId
+ApprovedPlan "1" o-- "*" FinalEvaluation : approvedPlanId
+School "1" o-- "*" FinalEvaluation : schoolId
+SchoolAcademicYear "1" o-- "*" FinalEvaluation : academicYearId
+Office "1" o-- "*" FinalEvaluation : approvedByOfficeId
+School "1" o-- "*" ReceivedCirculars : schoolId
+Office "1" o-- "*" ReceivedCirculars : officeId
+ReceivedCirculars "1" o-- "*" CircularsDocumentation : circularId
+School "1" o-- "*" CircularsDocumentation : schoolId
+ReceivedCirculars "1" o-- "*" CircularsInternalDistribution : circularId
+School "1" o-- "*" CircularsInternalDistribution : schoolId
+SchoolDepartment "1" o-- "*" CircularsInternalDistribution : departmentId
+ReceivedCirculars "1" o-- "*" CircularsImplementationStatus : circularId
+School "1" o-- "*" CircularsImplementationStatus : schoolId
+SchoolDepartment "1" o-- "*" CircularsImplementationStatus : responsibleDepartmentId
+ReceivedCirculars "1" o-- "*" CircularsImplementationReports : circularId
+School "1" o-- "*" CircularsImplementationReports : schoolId
+ReceivedCirculars "1" o-- "*" ArchivedCirculars : circularId
+School "1" o-- "*" ArchivedCirculars : schoolId
+ReceivedCirculars "1" o-- "*" CircularsDeadlinesTracking : circularId
+School "1" o-- "*" CircularsDeadlinesTracking : schoolId
+School "1" o-- "*" ParentMeeting : schoolId
+SchoolAcademicYear "1" o-- "*" ParentMeeting : academicYearId
+SchoolSemester "1" o-- "*" ParentMeeting : semesterId
+GradeCapacity "1" o-- "*" ParentMeeting : gradeLevelId
+School "1" o-- "*" Notifications : schoolId
+School "1" o-- "*" QuarterlyReport : schoolId
+SchoolAcademicYear "1" o-- "*" QuarterlyReport : academicYearId
+School "1" o-- "*" CalendarComplianceReport : schoolId
+SchoolAcademicYear "1" o-- "*" CalendarComplianceReport : academicYearId
+School "1" o-- "*" WeeklyProcessReport : schoolId
+SchoolAcademicYear "1" o-- "*" WeeklyProcessReport : academicYearId
+SchoolSemester "1" o-- "*" WeeklyProcessReport : semesterId
+School "1" o-- "*" MonthlyDisciplineReport : schoolId
+SchoolAcademicYear "1" o-- "*" MonthlyDisciplineReport : academicYearId
+SchoolSemester "1" o-- "*" MonthlyDisciplineReport : semesterId
+School "1" o-- "*" SemesterEndReport : schoolId
+SchoolAcademicYear "1" o-- "*" SemesterEndReport : academicYearId
+SchoolSemester "1" o-- "*" SemesterEndReport : semesterId
+School "1" o-- "*" AnnualComprehensiveReport : schoolId
+SchoolAcademicYear "1" o-- "*" AnnualComprehensiveReport : academicYearId
+School "1" o-- "*" EducationalOutcomesReport : schoolId
+SchoolAcademicYear "1" o-- "*" EducationalOutcomesReport : academicYearId
+@enduml

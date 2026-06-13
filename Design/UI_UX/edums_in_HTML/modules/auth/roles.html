@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - الأدوار والصلاحيات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=300;400;500;600;700;800;900&family=Tajawal:wght=300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item"><span class="icon">📊</span><span>لوحة التحكم</span></a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">الأمن والصلاحيات</div>
+                    <a href="index.html" class="nav-item"><span class="icon">🔐</span><span>لوحة التحكم</span></a>
+                    <a href="users.html" class="nav-item"><span class="icon">👥</span><span>المستخدمين</span></a>
+                    <a href="roles.html" class="nav-item active"><span class="icon">🔑</span><span>الأدوار والصلاحيات</span></a>
+                    <a href="permissions.html" class="nav-item"><span class="icon">🛡️</span><span>الصلاحيات</span></a>
+                    <a href="audit.html" class="nav-item"><span class="icon">📜</span><span>سجل النشاط</span></a>
+                    <a href="security.html" class="nav-item"><span class="icon">🔒</span><span>إعدادات الأمان</span></a>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left"><h2>الأمن والصلاحيات والمستخدمين</h2></div>
+                <div class="header-right">
+                    <div class="header-actions"><button class="header-btn">🔔<span class="badge">3</span></button></div>
+                    <div class="user-profile"><div class="user-avatar">م</div><div class="user-info"><h4>مدير المدرسة</h4><p>الإدارة</p></div></div>
+                </div>
+            </header>
+            <div class="content-area">
+                <div class="page-header">
+                    <h1 class="page-title">🔑 الأدوار والصلاحيات</h1>
+                    <div class="page-breadcrumb"><a href="../../index.html">الرئيسية</a><span>/</span><a href="index.html">الأمن والصلاحيات</a><span>/</span><span>الأدوار والصلاحيات</span></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">قائمة الأدوار</h3>
+                        <button class="btn btn-primary" onclick="openModal('addRoleModal')">➕ إضافة دور</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr><th>الاسم</th><th>الوصف</th><th>عدد المستخدمين</th><th>الإجراءات</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td style="font-weight: 600;">مدير</td><td>مدير المدرسة - صلاحيات كاملة</td><td>2</td><td><div class="table-actions"><button class="action-btn view">👁️</button><button class="action-btn edit">✏️</button><button class="action-btn delete">🗑️</button></div></td></tr>
+                                    <tr><td style="font-weight: 600;">أمين</td><td>أمين المدرسة - صلاحيات محدودة</td><td>5</td><td><div class="table-actions"><button class="action-btn view">👁️</button><button class="action-btn edit">✏️</button><button class="action-btn delete">🗑️</button></div></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="addRoleModal"><div class="modal"><div class="modal-header"><h3>إضافة دور جديد</h3><button class="close-btn" onclick="closeModal('addRoleModal')">&times;</button></div><div class="modal-body"><form class="form-group"><label>الاسم</label><input type="text" class="form-input" placeholder="الاسم"><label>الوصف</label><textarea class="form-input" placeholder="الوصف"></textarea></form></div><div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('addRoleModal')">إلغاء</button><button class="btn btn-primary">حفظ</button></div></div></div>
+    <script>function openModal(id){document.getElementById(id).classList.add('active');}function closeModal(id){document.getElementById(id).classList.remove('active');}</script>
+</body>
+</html>

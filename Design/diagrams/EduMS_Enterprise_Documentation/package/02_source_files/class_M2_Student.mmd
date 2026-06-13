@@ -1,0 +1,767 @@
+classDiagram
+    direction TB
+    class Application {
+        +applicationId : BIGINT «PK»
+        +ParentId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +birthDate : DATE
+        +birthPlace : VARCHAR(200)
+        +gender : VARCHAR(200)
+        +nationality : VARCHAR(200)
+        +address : VARCHAR(200)
+        +BirthCartificate : VARCHAR(200)
+        +PersonalPhoto : VARCHAR(200)
+        +...(41 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +approve()
+        +reject(reason)
+        +submit()
+    }
+    class Student {
+        +schoolStudentNumber : INT
+        +nationalId : BIGINT «PK»
+        +fullNameAr : VARCHAR(200)
+        +fullNameEn : VARCHAR(200)
+        +birthDate : DATE
+        +birthPlace : VARCHAR(200)
+        +gender : VARCHAR(200)
+        +nationality : VARCHAR(200)
+        +religion : VARCHAR(200)
+        +bloodType : VARCHAR(50)
+        +...(94 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +promote()
+        +graduate()
+        +transfer(targetSchool)
+    }
+    class Guardian {
+        +nationalId : BIGINT «FK»
+        +fullNameAr : VARCHAR(200)
+        +relationship : VARCHAR(200)
+        +phonePrimary : VARCHAR(20)
+        +phoneSecondary : VARCHAR(20)
+        +email : VARCHAR(100)
+        +jobTitle : VARCHAR(200)
+        +isPrimary : BOOLEAN
+        +isEmergencyContact : BOOLEAN
+        +createdAt : DATE
+        +...(91 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class Enrollment {
+        +enrollmentType : VARCHAR(50)
+        +enrollmentDate : DATE
+        +enrollmentNumber : INT
+        +enrollmentStatus : VARCHAR(50)
+        +approvalStatus : VARCHAR(50)
+        +createdAt : DATE
+        +studentId : BIGINT «PK»
+        +academicYearId : BIGINT «FK»
+        +gradeLevelId : BIGINT «FK»
+        +classSectionId : BIGINT «FK»
+        +...(63 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class StudentDocument {
+        +documentType : VARCHAR(50)
+        +documentName : VARCHAR(200)
+        +filePath : VARCHAR(200)
+        +mimeType : VARCHAR(50)
+        +isVerified : BOOLEAN
+        +status : VARCHAR(50)
+        +uploadedAt : DATE
+        +studentId : BIGINT «PK»
+        +enrollmentId : BIGINT «FK»
+        +documentCategory : VARCHAR(50)
+        +...(55 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +archive()
+    }
+    class StudentHealthRecord {
+        +bloodType : VARCHAR(50)
+        +height : VARCHAR(200)
+        +weight : VARCHAR(200)
+        +chronicDiseases : VARCHAR(200)
+        +allergies : VARCHAR(200)
+        +vaccinationStatus : VARCHAR(50)
+        +lastCheckupDate : DATE
+        +createdAt : DATE
+        +studentId : BIGINT «PK»
+        +healthRecordNumber : INT
+        +...(91 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class StudentTransportPreference {
+        +preferenceId : BIGINT «PK»
+        +studentId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +transportType : VARCHAR(50)
+        +busSubscriptionId : BIGINT «FK»
+        +preferredBusRouteId : BIGINT «FK»
+        +preferredBusStopId : BIGINT «FK»
+        +alternativeBusRouteId : BIGINT «FK»
+        +alternativeBusStopId : BIGINT «FK»
+        +pickupPoint : VARCHAR(200)
+        +...(35 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class StudentInventory {
+        +inventoryId : BIGINT «PK»
+        +studentId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +itemType : VARCHAR(50)
+        +itemId : BIGINT «FK»
+        +itemCode : VARCHAR(50)
+        +itemName : VARCHAR(200)
+        +itemDescription : TEXT
+        +quantity : INT
+        +unitOfMeasure : VARCHAR(200)
+        +...(39 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +countPhysical()
+    }
+    class Transportation {
+        +transportId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +routeId : BIGINT «FK»
+        +routeName : VARCHAR(200)
+        +routeCode : VARCHAR(50)
+        +routeDescription : TEXT
+        +busId : BIGINT «FK»
+        +busPlateNumber : INT
+        +busCapacity : VARCHAR(200)
+        +busType : VARCHAR(50)
+        +...(35 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class Course {
+        +courseId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +curriculumId : BIGINT «FK»
+        +departmentId : BIGINT «FK»
+        +courseCode : VARCHAR(50)
+        +courseNameAr : VARCHAR(200)
+        +courseNameEn : VARCHAR(200)
+        +courseNameArNormalized : VARCHAR(200)
+        +courseNameEnNormalized : VARCHAR(200)
+        +shortNameAr : VARCHAR(200)
+        +...(46 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class Curriculum {
+        +curriculumId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +curriculumCode : VARCHAR(50)
+        +curriculumNameAr : VARCHAR(200)
+        +curriculumNameEn : VARCHAR(200)
+        +curriculumType : VARCHAR(50)
+        +educationSystem : VARCHAR(200)
+        +descriptionAr : TEXT
+        +descriptionEn : TEXT
+        +gradeLevels : DECIMAL(5,2)
+        +...(18 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +approve()
+        +reject(reason)
+    }
+    class CoursePlan {
+        +planId : BIGINT «PK»
+        +courseId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +teacherId : BIGINT «FK»
+        +gradeLevelId : BIGINT «FK»
+        +planCode : VARCHAR(50)
+        +planVersion : VARCHAR(200)
+        +totalWeeks : VARCHAR(200)
+        +teachingWeeks : VARCHAR(200)
+        +...(22 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +approve()
+        +reject(reason)
+        +draft()
+        +submit()
+    }
+    class ClassSection {
+        +sectionId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +gradeLevelId : BIGINT «FK»
+        +sectionCode : VARCHAR(50)
+        +sectionNameAr : VARCHAR(200)
+        +sectionNameEn : VARCHAR(200)
+        +sectionType : VARCHAR(50)
+        +capacity : VARCHAR(200)
+        +...(22 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class CourseRegistration {
+        +registrationId : BIGINT «PK»
+        +studentId : BIGINT «FK»
+        +enrollmentId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +courseId : BIGINT «FK»
+        +sectionId : BIGINT «FK»
+        +teacherId : BIGINT «FK»
+        +registrationDate : DATE
+        +registrationType : VARCHAR(50)
+        +...(52 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class Grade {
+        +gradeId : BIGINT «PK»
+        +registrationId : BIGINT «FK»
+        +studentId : BIGINT «FK»
+        +courseId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +gradeType : DECIMAL(5,2)
+        +gradeCategory : DECIMAL(5,2)
+        +gradeCode : DECIMAL(5,2)
+        +gradeNameAr : DECIMAL(5,2)
+        +...(34 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +calculate()
+    }
+    class Evaluation {
+        +evaluationId : BIGINT «PK»
+        +courseId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +evaluationNameAr : VARCHAR(200)
+        +evaluationNameEn : VARCHAR(200)
+        +evaluationType : VARCHAR(50)
+        +components : VARCHAR(200)
+        +totalWeight : VARCHAR(200)
+        +passingScore : DECIMAL(5,2)
+        +...(13 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +approve()
+        +reject(reason)
+    }
+    class ExamResult {
+        +examResultId : BIGINT «PK»
+        +registrationId : BIGINT «FK»
+        +studentId : BIGINT «FK»
+        +courseId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +examId : BIGINT «FK»
+        +examName : VARCHAR(200)
+        +examType : VARCHAR(50)
+        +examDate : DATE
+        +...(30 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class Activity {
+        +activityId : BIGINT «PK»
+        +courseId : BIGINT «FK»
+        +activityTypeId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +activityNameAr : VARCHAR(200)
+        +activityNameEn : VARCHAR(200)
+        +activityCode : VARCHAR(50)
+        +descriptionAr : TEXT
+        +descriptionEn : TEXT
+        +...(31 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class ActivityDetail {
+        +detailId : BIGINT «PK»
+        +activityId : BIGINT «FK»
+        +studentId : BIGINT «FK»
+        +registrationDate : DATE
+        +registrationStatus : VARCHAR(50)
+        +role : VARCHAR(200)
+        +attendanceStatus : VARCHAR(50)
+        +attendanceDates : DATE
+        +totalAttendance : VARCHAR(200)
+        +obtainedGrade : DECIMAL(5,2)
+        +...(16 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class ActivityType {
+        +activityTypeId : BIGINT «PK»
+        +typeCode : VARCHAR(50)
+        +typeNameAr : VARCHAR(50)
+        +typeNameEn : VARCHAR(50)
+        +descriptionAr : TEXT
+        +descriptionEn : TEXT
+        +category : VARCHAR(50)
+        +colorCode : VARCHAR(50)
+        +icon : VARCHAR(200)
+        +requiresApproval : BOOLEAN
+        +...(9 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +approve()
+        +reject(reason)
+    }
+    class LeaveType {
+        +leaveTypeId : BIGINT «PK»
+        +typeCode : VARCHAR(50)
+        +typeNameAr : VARCHAR(50)
+        +typeNameEn : VARCHAR(50)
+        +descriptionAr : TEXT
+        +descriptionEn : TEXT
+        +category : VARCHAR(50)
+        +isPaid : BIGINT «FK»
+        +isExcused : BOOLEAN
+        +requiresDocument : BOOLEAN
+        +...(12 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +request()
+        +approve()
+        +cancel()
+    }
+    class Attendance {
+        +attendanceId : BIGINT «PK»
+        +studentId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +gradeLevelId : BIGINT «FK»
+        +classSectionId : BIGINT «FK»
+        +attendanceDate : DATE
+        +dayOfWeek : VARCHAR(200)
+        +attendanceType : VARCHAR(50)
+        +status : VARCHAR(50)
+        +...(32 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +record(date, status)
+    }
+    class AttendanceDetail {
+        +attendanceDetailId : BIGINT «PK»
+        +attendanceId : BIGINT «FK»
+        +studentId : BIGINT «FK»
+        +timetableSlotId : BIGINT «FK»
+        +periodId : BIGINT «FK»
+        +courseId : BIGINT «FK»
+        +teacherId : BIGINT «FK»
+        +classSectionId : BIGINT «FK»
+        +periodNumber : INT
+        +periodStartTime : TIME
+        +...(15 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +record(date, status)
+        +calculateMonthlyRate()
+    }
+    class StudentLeave {
+        +leaveId : BIGINT «PK»
+        +studentId : BIGINT «FK»
+        +leaveTypeId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +requestDate : DATE
+        +startDate : DATE
+        +endDate : DATE
+        +totalDays : INT
+        +daysCount : INT
+        +...(31 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class Discipline {
+        +disciplineId : BIGINT «PK»
+        +studentId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +caseNumber : INT
+        +incidentDate : DATE
+        +incidentTime : TIME
+        +location : VARCHAR(200)
+        +reportedById : BIGINT «FK»
+        +reportedByRole : DECIMAL(15,2)
+        +...(41 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +approve()
+        +reject(reason)
+    }
+    class StudentComplaint {
+        +complaintId : BIGINT «PK»
+        +complaintNumber : INT
+        +studentId : BIGINT «FK»
+        +guardianId : BIGINT «FK»
+        +complainantType : VARCHAR(50)
+        +complainantName : VARCHAR(200)
+        +complainantPhone : VARCHAR(20)
+        +complainantEmail : VARCHAR(100)
+        +complainantRelation : VARCHAR(200)
+        +complaintDate : DATE
+        +...(45 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class GuidanceSession {
+        +sessionId : BIGINT «PK»
+        +sessionNumber : INT
+        +counselorId : BIGINT «FK»
+        +sessionType : VARCHAR(50)
+        +category : VARCHAR(50)
+        +title : VARCHAR(200)
+        +objectives : VARCHAR(200)
+        +plannedDate : DATE
+        +actualDate : DATE
+        +startTime : TIME
+        +...(33 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class LibraryLoan {
+        +loanId : BIGINT «PK»
+        +resourceId : BIGINT «FK»
+        +borrowerType : VARCHAR(50)
+        +borrowerId : BIGINT «FK»
+        +borrowerName : VARCHAR(200)
+        +borrowerClass : VARCHAR(200)
+        +borrowerPhone : VARCHAR(20)
+        +loanDate : DATE
+        +dueDate : DATE
+        +expectedReturnDate : DATE
+        +...(35 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class StudentActivityRegistration {
+        +registrationId : BIGINT «PK»
+        +studentId : BIGINT «FK»
+        +activityId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +registrationDate : DATE
+        +registrationSource : VARCHAR(200)
+        +status : VARCHAR(50)
+        +waitlistPosition : VARCHAR(200)
+        +role : VARCHAR(200)
+        +...(26 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class SchoolActivity {
+        +activityId : BIGINT «PK»
+        +activityCode : VARCHAR(50)
+        +activityNameAr : VARCHAR(200)
+        +activityNameEn : VARCHAR(200)
+        +activityTypeId : BIGINT «FK»
+        +category : VARCHAR(50)
+        +subCategory : VARCHAR(50)
+        +descriptionAr : TEXT
+        +descriptionEn : TEXT
+        +objectives : VARCHAR(200)
+        +...(51 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class ClassPeriod {
+        +periodId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +shiftId : BIGINT «FK»
+        +periodNumber : INT
+        +periodCode : VARCHAR(50)
+        +nameAr : VARCHAR(200)
+        +nameEn : VARCHAR(200)
+        +periodType : VARCHAR(50)
+        +startTime : TIME
+        +endTime : TIME
+        +...(10 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class TimetableSlot {
+        +slotId : BIGINT «PK»
+        +timetableId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +gradeLevelId : BIGINT «FK»
+        +sectionId : BIGINT «FK»
+        +dayOfWeek : VARCHAR(200)
+        +periodId : BIGINT «FK»
+        +periodNumber : INT
+        +courseId : BIGINT «FK»
+        +...(20 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class ActivityAttendance {
+        +attendanceId : BIGINT «PK»
+        +activityRegistrationId : BIGINT «FK»
+        +activityId : BIGINT «FK»
+        +studentId : BIGINT «FK»
+        +sessionDate : DATE
+        +sessionNumber : INT
+        +sessionTitle : VARCHAR(200)
+        +startTime : TIME
+        +endTime : TIME
+        +status : VARCHAR(50)
+        +...(19 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +record(date, status)
+    }
+    class Classroom {
+        +classroomId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +classroomCode : VARCHAR(50)
+        +classroomNameAr : VARCHAR(200)
+        +classroomNameEn : VARCHAR(200)
+        +classroomNumber : INT
+        +buildingId : BIGINT «FK»
+        +buildingName : VARCHAR(200)
+        +floorNumber : INT
+        +wing : VARCHAR(200)
+        +...(59 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class Timetable {
+        +timetableId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +gradeLevelId : BIGINT «FK»
+        +sectionId : BIGINT «FK»
+        +timetableCode : TIME
+        +timetableNameAr : TIME
+        +timetableNameEn : TIME
+        +version : VARCHAR(200)
+        +...(19 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class FacilityDepartmentAssignment {
+        +assignmentId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +facilityType : VARCHAR(50)
+        +facilityId : BIGINT «FK»
+        +departmentId : BIGINT «FK»
+        +assignmentType : VARCHAR(50)
+        +responsibleUserId : BIGINT «FK»
+        +responsibleRole : VARCHAR(200)
+        +assistantResponsibleUserId : BIGINT «FK»
+        +assignmentDate : DATE
+        +...(24 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class AcademicAssetMapping {
+        +mappingId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +courseId : BIGINT «FK»
+        +curriculumId : BIGINT «FK»
+        +gradeLevelId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +assetType : VARCHAR(50)
+        +assetCategoryId : BIGINT «FK»
+        +assetId : BIGINT «FK»
+        +...(27 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    Guardian "1" --o "0..*" Application : ParentId
+    Student "1" --o "0..*" Application : convertedToStudentId
+    Student "1" --o "0..*" Guardian : studentId
+    Guardian "1" --o "0..*" Guardian : guardianId
+    Student "1" --o "0..*" Enrollment : studentId
+    ClassSection "1" --o "0..*" Enrollment : classSectionId
+    Student "1" --o "0..*" StudentDocument : studentId
+    Enrollment "1" --o "0..*" StudentDocument : enrollmentId
+    Student "1" --o "0..*" StudentHealthRecord : studentId
+    Student "1" --o "0..*" StudentTransportPreference : studentId
+    Transportation "1" --o "0..*" StudentTransportPreference : preferredBusRouteId
+    Student "1" --o "0..*" StudentInventory : studentId
+    Curriculum "1" --o "0..*" Course : curriculumId
+    Course "1" --o "0..*" CoursePlan : courseId
+    Classroom "1" --o "0..*" ClassSection : classroomId
+    Student "1" --o "0..*" CourseRegistration : studentId
+    Enrollment "1" --o "0..*" CourseRegistration : enrollmentId
+    Course "1" --o "0..*" CourseRegistration : courseId
+    ClassSection "1" --o "0..*" CourseRegistration : sectionId
+    CourseRegistration "1" --o "0..*" Grade : registrationId
+    Student "1" --o "0..*" Grade : studentId
+    Course "1" --o "0..*" Grade : courseId
+    Course "1" --o "0..*" Evaluation : courseId
+    CourseRegistration "1" --o "0..*" ExamResult : registrationId
+    Student "1" --o "0..*" ExamResult : studentId
+    Course "1" --o "0..*" ExamResult : courseId
+    Course "1" --o "0..*" Activity : courseId
+    ActivityType "1" --o "0..*" Activity : activityTypeId
+    Activity "1" --o "0..*" ActivityDetail : activityId
+    Student "1" --o "0..*" ActivityDetail : studentId
+    Student "1" --o "0..*" Attendance : studentId
+    ClassSection "1" --o "0..*" Attendance : classSectionId
+    StudentLeave "1" --o "0..*" Attendance : excuseId
+    Attendance "1" --o "0..*" AttendanceDetail : attendanceId
+    Student "1" --o "0..*" AttendanceDetail : studentId
+    TimetableSlot "1" --o "0..*" AttendanceDetail : timetableSlotId
+    ClassPeriod "1" --o "0..*" AttendanceDetail : periodId
+    Course "1" --o "0..*" AttendanceDetail : courseId
+    ClassSection "1" --o "0..*" AttendanceDetail : classSectionId
+    Student "1" --o "0..*" StudentLeave : studentId
+    LeaveType "1" --o "0..*" StudentLeave : leaveTypeId
+    Student "1" --o "0..*" Discipline : studentId
+    Student "1" --o "0..*" StudentComplaint : studentId
+    Guardian "1" --o "0..*" StudentComplaint : guardianId
+    Discipline "1" --o "0..*" GuidanceSession : relatedDisciplineId
+    Student "1" --o "0..*" StudentActivityRegistration : studentId
+    SchoolActivity "1" --o "0..*" StudentActivityRegistration : activityId
+    ActivityType "1" --o "0..*" SchoolActivity : activityTypeId
+    Timetable "1" --o "0..*" TimetableSlot : timetableId
+    ClassSection "1" --o "0..*" TimetableSlot : sectionId
+    ClassPeriod "1" --o "0..*" TimetableSlot : periodId
+    Course "1" --o "0..*" TimetableSlot : courseId
+    Classroom "1" --o "0..*" TimetableSlot : classroomId
+    StudentActivityRegistration "1" --o "0..*" ActivityAttendance : activityRegistrationId
+    SchoolActivity "1" --o "0..*" ActivityAttendance : activityId
+    Student "1" --o "0..*" ActivityAttendance : studentId
+    ClassSection "1" --o "0..*" Timetable : sectionId
+    Classroom "1" --o "0..*" FacilityDepartmentAssignment : facilityId
+    Course "1" --o "0..*" AcademicAssetMapping : courseId
+    Curriculum "1" --o "0..*" AcademicAssetMapping : curriculumId

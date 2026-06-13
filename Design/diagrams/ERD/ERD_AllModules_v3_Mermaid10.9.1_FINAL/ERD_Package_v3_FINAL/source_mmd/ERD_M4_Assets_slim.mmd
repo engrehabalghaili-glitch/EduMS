@@ -1,0 +1,381 @@
+erDiagram
+    %% =====================================================
+    %% M4_Assets - ERD
+    %% Mermaid 10.9.1 Compliant - SLIM VIEW (PK + FK only)
+    %% =====================================================
+
+    Asset {
+        INT assetId PK "الأصول الأساسي"
+        INT schoolId "معرف المدرسة FK School.schoolId . هذا الحقل يربط كل أصل بمدرسته."
+        INT assetCategoryId FK "معرف فئة الأصل FK AssetCategory.categoryId . يربط الأصل بفئته."
+        INT assetStatusId FK "معرف حالة الأصل FK AssetStatus.statusId . يربط الأصل بحالته الحالية."
+        INT assetLocationId FK "معرف الموقع المكاني الحالي FK AssetLocation.locationId . يحدد أين ي..."
+        VARCHAR purchaseOrderReference "رقم أمر الشراء المرتبط FK PurchaseOrders.poNumber"
+        INT warrantyContractId FK "معرف عقد الضمان المرتبط FK AssetWarrantyContract.contractId"
+        INT createdByUserId "معرف المستخدم الذي أضاف الأصل FK SystemUser.userId"
+    }
+
+    AssetCategory {
+        INT categoryId PK "فئات الأصول"
+        INT schoolId "معرف المدرسة FK School.schoolId - لتمكين كل مدرسة من تخصيص تصنيفاته..."
+        INT parentCategoryId FK "معرف الفئة الأم Self FK AssetCategory.categoryId - لبناء الهيكل اله..."
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetLocation {
+        INT locationId PK "المواقع المكانية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT parentLocationId FK "معرف الموقع الأب Self FK AssetLocation.locationId - لإنشاء هيكل هرم..."
+        INT responsiblePersonId "معرف الشخص المسؤول عن هذا الموقع FK Employee.employeeId - اختياري"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetStatus {
+        INT statusId PK "حالات الأصل"
+        INT schoolId "معرف المدرسة FK School.schoolId - لتمكين كل مدرسة من إضافة حالاتها ..."
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetWarrantyContract {
+        INT contractId PK "الضمان والعقود"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetDocument {
+        INT documentId PK "وثائق الأصل"
+        INT assetId FK "معرف الأصل المرتبط FK Asset.assetId - مهم جداً هذا هو الرابط الأساسي"
+        INT contractId FK "معرف العقد المرتبط FK AssetWarrantyContract.contractId - اختياري لر..."
+        INT uploadedByUserId "معرف من قام بالرفع FK SystemUser.userId"
+    }
+
+    AssetRequirementRequest {
+        INT requestId PK "مقترحات وطلبات الاحتياج"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetCategoryId FK "معرف الفئة المقترحة FK AssetCategory.categoryId - لتسهيل التصنيف"
+        INT requestingDepartmentId "معرف القسم الطالب FK SchoolDepartment.deptId"
+        INT requestedByUserId "معرف الموظف مقدم الطلب FK Employee.employeeId"
+        INT renewalPlanId "ربط الطلب بخطة تجديد الأسطول إن وجدت FK PlanId من جدول خطط التطوير ..."
+        INT assetToReplaceId FK "معرف الأصل المطلوب استبداله FK Asset.assetId - إذا كان isReplacemen..."
+        INT approvedByUserId "معرف من اعتمد الطلب FK SystemUser.userId"
+        INT purchaseOrderId FK "معرف أمر الشراء المرتبط FK PurchaseOrders.purchaseOrderId - بعد الت..."
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    TechnicalSpecifications {
+        INT specId PK "المواصفات الفنية والمعايير"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetCategoryId FK "معرف فئة الأصل المرتبطة FK AssetCategory.categoryId"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    FeasibilityRiskAnalysis {
+        INT analysisId PK "دراسات الجدوى والمخاطر"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT requestId FK "معرف طلب الاحتياج المرتبط FK AssetRequirementRequest.requestId - ال..."
+        INT analystUserId "معرف من قام بالتحليل FK Employee.employeeId"
+        INT approvedByUserId "معرف من اعتمد التحليل FK SystemUser.userId"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetBudgetAllocation {
+        INT allocationId PK "ميزانية الأصول"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetCategoryId FK "معرف فئة الأصل FK AssetCategory.categoryId - يمكن أن يكون فارغاً لل..."
+        INT departmentId "معرف القسم FK SchoolDepartment.deptId - يمكن أن يكون فارغاً للتخصيص..."
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    PurchaseOrders {
+        INT purchaseOrderId PK "طلبات الشراء والمناقصات"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT requestId FK "معرف طلب الاحتياج المرتبط FK AssetRequirementRequest.requestId - يم..."
+        INT approvedByUserId "معرف من اعتمد الأمر FK SystemUser.userId"
+        INT budgetAllocationId FK "معرف تخصيص الميزانية المرتبط FK AssetBudgetAllocation.allocationId ..."
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetReceiving {
+        INT receivingId PK "الاستلام المبدئي وفحص الجودة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT purchaseOrderId FK "معرف أمر الشراء المرتبط FK PurchaseOrders.purchaseOrderId"
+        INT receivedByUserId "معرف من قام بالاستلام FK Employee.employeeId - عضو لجنة الاستلام"
+        INT inspectorUserId "معرف المفتش FK Employee.employeeId - عضو لجنة فحص الجودة"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetUsageLog {
+        INT usageLogId PK "سجل التشغيل والاستخدام"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId - للتكرار"
+        INT userId "معرف المستخدم الذي استخدم الأصل FK SystemUser.userId - يمكن أن يكون..."
+        INT locationId FK "معرف الموقع الذي تم فيه الاستخدام FK AssetLocation.locationId"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    MaintenanceTickets {
+        INT ticketId PK "بلاغات الأعطال"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetId FK "معرف الأصل المعطوب FK Asset.assetId"
+        INT reportedByUserId "معرف مقدم البلاغ FK SystemUser.userId"
+        VARCHAR reportedLocation "موقع العطل نص أو FK AssetLocation.locationId"
+        INT assignedToUserId "معرف الفني المسؤول عن الإصلاح FK Employee.employeeId - من قسم الموظفين"
+        INT relatedExecutionId FK "معرف سجل تنفيذ الصيانة المرتبط FK MaintenanceExecution.executionId ..."
+    }
+
+    PreventiveMaintenanceSchedule {
+        INT scheduleId PK "جدولة الصيانة الوقائية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetId FK "معرف الأصل المستهدف FK Asset.assetId - يمكن أن يكون فارغاً لتطبيق ا..."
+        INT assetCategoryId FK "معرف فئة الأصول FK AssetCategory.categoryId - يُستخدم إذا كان الجدو..."
+        VARCHAR assignedToTeam "الفريق المسؤول نص أو FK Employee.employeeId"
+        INT contractId FK "معرف عقد الصيانة الخارجي المرتبط FK AssetWarrantyContract.contractI..."
+    }
+
+    MaintenanceExecution {
+        INT executionId PK "سجل تنفيذ الصيانة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT ticketId FK "معرف تذكرة العطل المرتبطة FK MaintenanceTickets.ticketId - اختياري ..."
+        INT scheduleId FK "معرف جدول الصيانة الوقائية المرتبط FK PreventiveMaintenanceSchedule..."
+        INT assetId FK "معرف الأصل الذي تمت صيانته FK Asset.assetId"
+        INT executedByUserId "معرف الفني المنفذ FK Employee.employeeId"
+        INT newAssetStatusId FK "معرف الحالة الجديدة للأصل بعد الصيانة FK AssetStatus.statusId - مثل..."
+    }
+
+    MaintenanceSpareParts {
+        INT partId PK "قطع الغيار والمستهلكات"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+    }
+
+    AssetSuspensionRequests {
+        INT suspensionId PK "طلبات تعليق الأصل"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetId FK "معرف الأصل المراد تعليقه FK Asset.assetId"
+        INT requestedByUserId "معرف مقدم الطلب FK SystemUser.userId"
+        INT approvedByUserId "معرف المعتمد FK SystemUser.userId"
+    }
+
+    MaintenanceNotifications {
+        INT notificationId PK "إشعارات الصيانة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT recipientUserId "معرف المستخدم المستلم FK SystemUser.userId"
+    }
+
+    UsageViolations {
+        INT violationId PK "مخالفات الاستخدام"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetId FK "معرف الأصل المخالف في استخدامه FK Asset.assetId"
+        INT reportedByUserId "معرف من أبلغ عن المخالفة FK SystemUser.userId"
+        INT violatingUserId "معرف المستخدم المخالف FK SystemUser.userId - يمكن أن يكون موظفاً أو..."
+        INT approvedByUserId "معرف من اعتمد الإجراء التأديبي FK SystemUser.userId"
+    }
+
+    AssetFinancials {
+        INT financialsId PK "القيم المالية للأصل"
+        INT assetId FK "معرف الأصل المرتبط FK Asset.assetId - علاقة 1-1 أصل واحد له سجل مال..."
+        INT schoolId "معرف المدرسة FK School.schoolId - للتكرار وتسهيل التقارير"
+        INT createdByUserId "منشئ السجل FK SystemUser.userId"
+    }
+
+    AssetDepreciation {
+        INT depreciationId PK "سياسات وحسابات الإهلاك"
+        INT assetId FK "معرف الأصل FK Asset.assetId - علاقة 1-1"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+    }
+
+    DepreciationTransactions {
+        INT transactionId PK "معاملات الإهلاك الدورية"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT depreciationId FK "معرف سجل الإهلاك المرتبط FK AssetDepreciation.depreciationId"
+    }
+
+    RevaluationImpairment {
+        INT revaluationId PK "إعادة التقييم والانخفاض"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT approvedByUserId "معرف من اعتمد العملية FK SystemUser.userId"
+    }
+
+    AssetExpenses {
+        INT expenseId PK "المصروفات الرأسمالية والتشغيلية"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT relatedExecutionId FK "معرف سجل تنفيذ الصيانة المرتبط FK MaintenanceExecution.executionId ..."
+        INT approvedByUserId "معرف من اعتمد تصنيف المصروف FK SystemUser.userId"
+    }
+
+    FeasibilityComparison {
+        INT comparisonId PK "مقارنات الجدوى والاستبدال"
+        INT assetId FK "معرف الأصل المُقارَن FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT replacementAssetId FK "معرف الأصل البديل المقترح FK Asset.assetId - يمكن أن يكون أصل جديد ..."
+        INT approvedByUserId "معرف من اتخذ القرار FK SystemUser.userId"
+    }
+
+    FinancialAuditArchive {
+        INT archiveId PK "الأرشفة المالية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+    }
+
+    FinancialSummaryReports {
+        INT summaryId PK "تقارير القيمة المالية المجمعة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetCategoryId FK "معرف فئة الأصول FK AssetCategory.categoryId - يمكن أن يكون فارغاً ل..."
+    }
+
+    AssetAssignment {
+        INT assignmentId PK "تخصيص الأصول"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assignerUserId "معرف من قام بالتخصيص FK SystemUser.userId"
+        INT returnedToUserId "معرف من استلم الأصل عند الإرجاع FK SystemUser.userId"
+    }
+
+    AssetLoans {
+        INT loanId PK "إعارات الأصول"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT issuerUserId "معرف من قام بالإعارة FK SystemUser.userId"
+    }
+
+    AssetTransferRequests {
+        INT transferRequestId PK "طلبات النقل والتحويل"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT requestedByUserId "معرف مقدم الطلب FK SystemUser.userId"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+        INT executedByUserId "معرف من نفذ النقل FK SystemUser.userId"
+    }
+
+    AssetInspectionLog {
+        INT inspectionId PK "فحص الاستلام والإرجاع"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT inspectorUserId "معرف المفتش FK SystemUser.userId"
+    }
+
+    AssetMovementHistory {
+        INT historyId PK "سجل حركة الأصول التاريخي"
+        INT assetId FK "معرف الأصل FK Asset.assetId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT performedByUserId "معرف من قام بالحركة FK SystemUser.userId"
+    }
+
+    LoanTrackingAlerts {
+        INT alertId PK "تنبيهات ومتابعة الإعارات"
+        INT loanId FK "معرف الإعارة المرتبطة FK AssetLoans.loanId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT violationId FK "معرف المخالفة المسجلة FK UsageViolations.violationId - اختياري"
+    }
+
+    InventoryPlans {
+        INT planId PK "خطط الجرد"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assignedTeamLeaderId "معرف قائد فريق الجرد FK Employee.employeeId"
+    }
+
+    FieldInventoryLog {
+        INT logId PK "الجرد الميداني"
+        INT planId FK "معرف خطة الجرد المرتبطة FK InventoryPlans.planId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT scannerUserId "معرف من قام بالمسح FK SystemUser.userId"
+        INT assetId FK "معرف الأصل الناتج عن المسح يتم البحث عنه آلياً باستخدام scannedCode"
+        VARCHAR physicalLocation "الموقع الفعلي الذي تم العثور فيه على الأصل نص أو FK AssetLocation.l..."
+        INT verifiedByUserId "معرف من تحقق FK SystemUser.userId"
+    }
+
+    InventoryReconciliation {
+        INT reconciliationId PK "مطابقة وفروقات الجرد"
+        INT planId FK "معرف خطة الجرد FK InventoryPlans.planId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetId FK "معرف الأصل من جدول Asset"
+        INT resolvedByUserId "معرف من قام بحل الفرق FK SystemUser.userId"
+        INT approvedByUserId "معرف من اعتمد نتيجة المطابقة FK SystemUser.userId"
+    }
+
+    ComplianceAudit {
+        INT auditId PK "الامتثال والرقابة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT auditedByUserId "معرف المدقق FK SystemUser.userId"
+        INT approvedByUserId "معرف من اعتمد تقرير التدقيق FK SystemUser.userId"
+    }
+
+    FinalApprovalAudit {
+        INT finalApprovalId PK "اعتماد نتائج الرقابة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT planId FK "معرف خطة الجرد المرتبطة FK InventoryPlans.planId - اختياري قد يكون ..."
+        INT auditId FK "معرف التدقيق المرتبط FK ComplianceAudit.auditId - اختياري"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+        INT statusUpdatedByUserId "معرف من قام بتحديث النظام FK SystemUser.userId"
+    }
+
+    FacilityDepartmentAssignment {
+        INT assignmentId PK "تخصيص المرافق التعليمية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT facilityId "معرف المرفق FK Classroom.classroomId أو Asset.assetId"
+        INT departmentId "معرف القسم المستفيد FK SchoolDepartment.deptId"
+        INT responsibleUserId "رئيس القسم أو أمين المختبر المسؤول FK Employee.employeeId"
+    }
+
+    EducationalConsumablesTracking {
+        INT consumptionId PK "استهلاك المواد التعليمية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT consumedByUserId "معرف من صرف المادة FK SystemUser.userId"
+        INT departmentId "معرف القسم المستهلك FK SchoolDepartment.deptId"
+        INT courseId "معرف المادة الدراسية المرتبطة بالاستهلاك FK Course.courseId - اختياري"
+        INT activityId "معرف النشاط الطلابي المرتبط بالاستهلاك FK SchoolActivity.activityId..."
+    }
+
+    %% ===== Relationships =====
+    AssetCategory ||--o{ Asset : "معرف فئة الأصل FK AssetCa"
+    AssetStatus ||--o{ Asset : "معرف حالة الأصل FK AssetS"
+    AssetLocation ||--o{ Asset : "معرف الموقع المكاني الحال"
+    AssetWarrantyContract ||--o{ Asset : "معرف عقد الضمان المرتبط F"
+    Asset ||--o{ AssetDocument : "معرف الأصل المرتبط FK Ass"
+    AssetWarrantyContract ||--o{ AssetDocument : "معرف العقد المرتبط FK Ass"
+    AssetCategory ||--o{ AssetRequirementRequest : "معرف الفئة المقترحة FK As"
+    Asset ||--o{ AssetRequirementRequest : "معرف الأصل المطلوب استبدا"
+    PurchaseOrders ||--o{ AssetRequirementRequest : "معرف أمر الشراء المرتبط F"
+    AssetCategory ||--o{ TechnicalSpecifications : "معرف فئة الأصل المرتبطة F"
+    AssetRequirementRequest ||--o{ FeasibilityRiskAnalysis : "معرف طلب الاحتياج المرتبط"
+    AssetCategory ||--o{ AssetBudgetAllocation : "معرف فئة الأصل FK AssetCa"
+    AssetRequirementRequest ||--o{ PurchaseOrders : "معرف طلب الاحتياج المرتبط"
+    AssetBudgetAllocation ||--o{ PurchaseOrders : "معرف تخصيص الميزانية المر"
+    PurchaseOrders ||--o{ AssetReceiving : "معرف أمر الشراء المرتبط F"
+    Asset ||--o{ AssetUsageLog : "معرف الأصل FK AssetassetI"
+    AssetLocation ||--o{ AssetUsageLog : "معرف الموقع الذي تم فيه ا"
+    Asset ||--o{ MaintenanceTickets : "معرف الأصل المعطوب FK Ass"
+    MaintenanceExecution ||--o{ MaintenanceTickets : "معرف سجل تنفيذ الصيانة ال"
+    Asset ||--o{ PreventiveMaintenanceSchedule : "معرف الأصل المستهدف FK As"
+    AssetCategory ||--o{ PreventiveMaintenanceSchedule : "معرف فئة الأصول FK AssetC"
+    AssetWarrantyContract ||--o{ PreventiveMaintenanceSchedule : "معرف عقد الصيانة الخارجي "
+    MaintenanceTickets ||--o{ MaintenanceExecution : "معرف تذكرة العطل المرتبطة"
+    PreventiveMaintenanceSchedule ||--o{ MaintenanceExecution : "معرف جدول الصيانة الوقائي"
+    Asset ||--o{ MaintenanceExecution : "معرف الأصل الذي تمت صيانت"
+    AssetStatus ||--o{ MaintenanceExecution : "معرف الحالة الجديدة للأصل"
+    Asset ||--o{ AssetSuspensionRequests : "معرف الأصل المراد تعليقه "
+    Asset ||--o{ UsageViolations : "معرف الأصل المخالف في است"
+    Asset ||--o{ AssetFinancials : "معرف الأصل المرتبط FK Ass"
+    Asset ||--o{ AssetDepreciation : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ DepreciationTransactions : "معرف الأصل FK AssetassetI"
+    AssetDepreciation ||--o{ DepreciationTransactions : "معرف سجل الإهلاك المرتبط "
+    Asset ||--o{ RevaluationImpairment : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetExpenses : "معرف الأصل FK AssetassetI"
+    MaintenanceExecution ||--o{ AssetExpenses : "معرف سجل تنفيذ الصيانة ال"
+    Asset ||--o{ FeasibilityComparison : "معرف الأصل المُقارَن FK A"
+    Asset ||--o{ FeasibilityComparison : "معرف الأصل البديل المقترح"
+    AssetCategory ||--o{ FinancialSummaryReports : "معرف فئة الأصول FK AssetC"
+    Asset ||--o{ AssetAssignment : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetLoans : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetTransferRequests : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetInspectionLog : "معرف الأصل FK AssetassetI"
+    Asset ||--o{ AssetMovementHistory : "معرف الأصل FK AssetassetI"
+    AssetLoans ||--o{ LoanTrackingAlerts : "معرف الإعارة المرتبطة FK "
+    UsageViolations ||--o{ LoanTrackingAlerts : "معرف المخالفة المسجلة FK "
+    InventoryPlans ||--o{ FieldInventoryLog : "معرف خطة الجرد المرتبطة F"
+    Asset ||--o{ FieldInventoryLog : "معرف الأصل الناتج عن المس"
+    InventoryPlans ||--o{ InventoryReconciliation : "معرف خطة الجرد FK Invento"
+    Asset ||--o{ InventoryReconciliation : "معرف الأصل من جدول Asset"
+    InventoryPlans ||--o{ FinalApprovalAudit : "معرف خطة الجرد المرتبطة F"
+    ComplianceAudit ||--o{ FinalApprovalAudit : "معرف التدقيق المرتبط FK C"

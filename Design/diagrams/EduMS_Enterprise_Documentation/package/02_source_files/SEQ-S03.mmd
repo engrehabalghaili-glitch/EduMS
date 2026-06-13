@@ -1,0 +1,25 @@
+sequenceDiagram
+    actor T as المعلم
+    participant UI
+    participant API
+    participant DB
+    participant CALC as Grade Engine
+    actor SA as مدير المدرسة
+    
+    T->>UI: شاشة إدخال الدرجات
+    UI->>API: GET /grades/template
+    API->>DB: SELECT CourseRegistration + GradeStructure
+    DB-->>API: قالب
+    API-->>UI: عرض القالب
+    T->>UI: إدخال الدرجات
+    UI->>API: POST /grades/batch
+    loop لكل طالب
+        API->>DB: INSERT/UPDATE Grade
+    end
+    API->>CALC: احتساب الدرجة النهائية
+    CALC->>CALC: تطبيق المعادلة
+    CALC->>DB: UPDATE Grade.finalScore
+    API-->>UI: ملخص
+    SA->>API: مراجعة وتثبيت
+    API->>DB: UPDATE Grade.status='Published'
+    API->>UI: نشر للأولياء

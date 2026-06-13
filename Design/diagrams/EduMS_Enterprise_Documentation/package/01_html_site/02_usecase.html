@@ -1,0 +1,1873 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎯 مخططات حالات الاستخدام | EduMS Documentation</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Cairo',sans-serif;background:#f8fafc;color:#1f2937;line-height:1.7;font-size:14.5px}
+header.top{background:linear-gradient(135deg,#1e3a8a,#3b82f6,#8b5cf6);color:#fff;padding:30px 24px;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+header.top h1{font-size:1.9em;font-weight:800;text-shadow:1px 1px 4px rgba(0,0,0,.3)}
+header.top .breadcrumb{margin-top:10px;font-size:.95em;opacity:.95}
+header.top .breadcrumb a{color:#fef3c7;text-decoration:none;font-weight:600}
+header.top .breadcrumb a:hover{text-decoration:underline}
+header.top .stats{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap}
+header.top .stat{background:rgba(255,255,255,.18);padding:8px 16px;border-radius:20px;font-size:.9em;font-weight:600;border:1px solid rgba(255,255,255,.3)}
+.container{max-width:1500px;margin:24px auto;padding:0 20px}
+.toc-side{background:#fff;border-radius:14px;padding:20px;margin-bottom:24px;box-shadow:0 2px 10px rgba(0,0,0,.06);position:sticky;top:0;z-index:50}
+.toc-side h3{color:#1e3a8a;font-size:1.15em;margin-bottom:12px}
+.toc-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:4px}
+.toc-list a{color:#374151;text-decoration:none;padding:5px 10px;border-radius:6px;font-size:.88em;display:block;font-weight:500}
+.toc-list a:hover{background:#dbeafe;color:#1e3a8a}
+.toc-list code{background:#f3f4f6;padding:1px 5px;border-radius:3px;font-size:.85em;color:#1e3a8a;font-weight:700}
+.diagram-card{background:#fff;border-radius:14px;margin-bottom:24px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.05)}
+.diagram-header{background:linear-gradient(90deg,#f8fafc,#e0e7ff);padding:18px 24px;border-bottom:2px solid #e5e7eb}
+.id-badge{display:inline-block;background:#1e3a8a;color:#fff;padding:4px 12px;border-radius:6px;font-size:.82em;font-weight:700;font-family:'Fira Code',monospace;margin-left:10px}
+.diagram-header h3{display:inline;color:#1e3a8a;font-size:1.3em;font-weight:700}
+.diagram-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tag{display:inline-block;padding:4px 10px;border-radius:18px;font-size:.82em;font-weight:600}
+.tag.type{background:#dbeafe;color:#1e3a8a}
+.tag.level{background:#fce7f3;color:#831843}
+.tag.mod{background:#f3e8ff;color:#6b21a8}
+.tag.stats{background:#fef3c7;color:#92400e}
+.diagram-body{padding:20px 24px}
+.info-block{margin-bottom:10px;font-size:.93em}
+.info-block strong{color:#1e3a8a;margin-left:5px}
+.mermaid-wrapper{background:#fafbfc;border:2px dashed #d1d5db;border-radius:10px;padding:20px 12px;margin:16px 0;overflow:auto;min-height:150px}
+.mermaid{text-align:center;direction:ltr;font-size:13px}
+.code-tabs{display:flex;gap:5px;margin-top:14px;border-bottom:2px solid #e5e7eb}
+.code-tab{background:#e5e7eb;color:#374151;padding:6px 14px;border-radius:6px 6px 0 0;cursor:pointer;font-weight:600;font-size:.85em;border:none;font-family:inherit}
+.code-tab.active{background:#1e3a8a;color:#fff}
+.code-block{background:#0f172a;color:#cbd5e1;border-radius:0 10px 10px 10px;padding:14px;overflow:auto;max-height:480px;font-family:'Fira Code',monospace;font-size:.78em;line-height:1.5;direction:ltr;text-align:left;display:none;white-space:pre}
+.code-block.active{display:block}
+.back-to-top{position:fixed;bottom:24px;left:24px;background:#1e3a8a;color:#fff;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.3em;box-shadow:0 4px 14px rgba(0,0,0,.25);z-index:100}
+.back-to-top:hover{background:#f59e0b}
+.nav-buttons{display:flex;gap:12px;justify-content:space-between;margin:30px 0}
+.nav-btn{background:#1e3a8a;color:#fff;padding:14px 22px;border-radius:10px;text-decoration:none;font-weight:700;flex:1;text-align:center;transition:all .2s}
+.nav-btn:hover{background:#3b82f6;transform:translateY(-2px)}
+.nav-btn.disabled{background:#9ca3af;cursor:not-allowed}
+@media(max-width:768px){
+  header.top h1{font-size:1.4em}
+  .container{padding:0 12px}
+  .diagram-header{padding:14px}
+  .diagram-body{padding:14px}
+}
+</style>
+</head>
+<body>
+
+<a id="top"></a>
+<header class="top">
+  <div class="breadcrumb"><a href="index.html">🏠 الفهرس الرئيسي</a> &nbsp;›&nbsp; 🎯 مخططات حالات الاستخدام</div>
+  <h1>🎯 مخططات حالات الاستخدام</h1>
+  <div class="stats">
+    <div class="stat">📊 9 مخطط</div>
+    <div class="stat">🎯 EduMS Enterprise</div>
+  </div>
+</header>
+<div class="container">
+<div class="toc-side"><h3>📑 محتويات هذا القسم</h3><div class="toc-list"><a href="#UC-M1_SchoolAdmin"><code>UC-M1_SchoolAdmin</code> Use Case Diagram تفصيلي — Use Case — إدارة المدرسة</a><a href="#UC-M2_Student"><code>UC-M2_Student</code> Use Case Diagram تفصيلي — Use Case — إدارة الطلاب</a><a href="#UC-M3_Employee"><code>UC-M3_Employee</code> Use Case Diagram تفصيلي — Use Case — إدارة الموظفين</a><a href="#UC-M4_Assets"><code>UC-M4_Assets</code> Use Case Diagram تفصيلي — Use Case — إدارة الأصول</a><a href="#UC-M5_Finance"><code>UC-M5_Finance</code> Use Case Diagram تفصيلي — Use Case — الإدارة المالية</a><a href="#UC-M6_Statistics"><code>UC-M6_Statistics</code> Use Case Diagram تفصيلي — Use Case — البيانات والإحصاء</a><a href="#UC-M7_Auth"><code>UC-M7_Auth</code> Use Case Diagram تفصيلي — Use Case — الأمن والصلاحيات</a><a href="#UC-M8_Emergency"><code>UC-M8_Emergency</code> Use Case Diagram تفصيلي — Use Case — الطوارئ والتميز</a><a href="#UC-MASTER"><code>UC-MASTER</code> Master Use Case — حزم Use Cases المؤسسية</a></div></div>
+<div class="nav-buttons"><a href="01_dfd.html" class="nav-btn">→ 🌐 مخططات السياق وتدفق البيانات (DFD)</a><a href="index.html" class="nav-btn" style="background:#f59e0b">🏠 الفهرس الرئيسي</a><a href="03_sequence.html" class="nav-btn">🔄 مخططات التسلسل (Sequence) ←</a></div>
+
+<article class="diagram-card" id="UC-M1_SchoolAdmin">
+  <div class="diagram-header">
+    <span class="id-badge">UC-M1_SchoolAdmin</span>
+    <h3>Use Case Diagram تفصيلي — Use Case — إدارة المدرسة</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Use Case Diagram (Detailed)</span>
+      <span class="tag level">🎯 Module</span>
+       <span class="tag mod">🏛️ إدارة المدرسة والبيئة الت</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>عرض شامل لجميع حالات الاستخدام في Use Case — إدارة المدرسة.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>5 ممثل + 28 حالة استخدام.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart LR
+    classDef actor fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef uc fill:#dbeafe,color:#1e3a8a,stroke:#1e3a8a,rx:30,ry:30,stroke-width:1px
+
+    A0[👤 مدير المدرسة]:::actor
+    A1[👤 وكيل المدرسة]:::actor
+    A2[👤 مكتب التربية]:::actor
+    A3[👤 المفتش]:::actor
+    A4[👤 الموظف الإداري]:::actor
+
+    U0((إنشاء وتسجيل المدرسة)):::uc
+    U1((ربط المدرسة بالمكتب)):::uc
+    U2((تحديد المراحل والصفوف)):::uc
+    U3((إعداد التقويم الدراسي)):::uc
+    U4((ترشيح القيادة المدرسية)):::uc
+    U5((اعتماد القيادة)):::uc
+    U6((إعداد الهيكل التنظيمي)):::uc
+    U7((تحديث الصلاحيات)):::uc
+    U8((تقديم طلب اعتماد)):::uc
+    U9((تجديد الاعتماد)):::uc
+    U10((تسجيل التقييم المدرسي)):::uc
+    U11((جدولة الزيارات الإشرافية)):::uc
+    U12((إعداد الإحصاء العام)):::uc
+    U13((رفع الإحصائية للمكتب)):::uc
+    U14((إعداد الخطة السنوية)):::uc
+    U15((رفع تقارير المتابعة)):::uc
+    U16((تقييم الخطة)):::uc
+    U17((رفع تقرير الأداء العام)):::uc
+    U18((استلام التعاميم)):::uc
+    U19((توزيع التعميم داخلياً)):::uc
+    U20((رفع إفادة التنفيذ)):::uc
+    U21((تسجيل العجز والفائض)):::uc
+    U22((تسجيل جاهزية الاختبارات)):::uc
+    U23((رفع تقرير الاختبارات)):::uc
+    U24((تسجيل حالة الطوارئ)):::uc
+    U25((دمج/فصل المدرسة)):::uc
+    U26((تسجيل الجوائز)):::uc
+    U27((رفع التقرير السنوي الشامل)):::uc
+
+    A0 --> U0
+    A1 -.-> U0
+    A1 --> U1
+    A2 --> U2
+    A3 --> U3
+    A4 -.-> U3
+    A4 --> U4
+    A0 --> U5
+    A1 --> U6
+    A2 -.-> U6
+    A2 --> U7
+    A3 --> U8
+    A4 --> U9
+    A0 -.-> U9
+    A0 --> U10
+    A1 --> U11
+    A2 --> U12
+    A3 -.-> U12
+    A3 --> U13
+    A4 --> U14
+    A0 --> U15
+    A1 -.-> U15
+    A1 --> U16
+    A2 --> U17
+    A3 --> U18
+    A4 -.-> U18
+    A4 --> U19
+    A0 --> U20
+    A1 --> U21
+    A2 -.-> U21
+    A2 --> U22
+    A3 --> U23
+    A4 --> U24
+    A0 -.-> U24
+    A0 --> U25
+    A1 --> U26
+    A2 --> U27
+    A3 -.-> U27
+
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'UC-M1_SchoolAdmin-mer')">📊 Mermaid</button>
+      <button class="code-tab" onclick="showCode(this,'UC-M1_SchoolAdmin-pu')">🌳 PlantUML</button>
+    </div>
+    <pre class="code-block active" id="UC-M1_SchoolAdmin-mer">flowchart LR
+    classDef actor fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef uc fill:#dbeafe,color:#1e3a8a,stroke:#1e3a8a,rx:30,ry:30,stroke-width:1px
+
+    A0[👤 مدير المدرسة]:::actor
+    A1[👤 وكيل المدرسة]:::actor
+    A2[👤 مكتب التربية]:::actor
+    A3[👤 المفتش]:::actor
+    A4[👤 الموظف الإداري]:::actor
+
+    U0((إنشاء وتسجيل المدرسة)):::uc
+    U1((ربط المدرسة بالمكتب)):::uc
+    U2((تحديد المراحل والصفوف)):::uc
+    U3((إعداد التقويم الدراسي)):::uc
+    U4((ترشيح القيادة المدرسية)):::uc
+    U5((اعتماد القيادة)):::uc
+    U6((إعداد الهيكل التنظيمي)):::uc
+    U7((تحديث الصلاحيات)):::uc
+    U8((تقديم طلب اعتماد)):::uc
+    U9((تجديد الاعتماد)):::uc
+    U10((تسجيل التقييم المدرسي)):::uc
+    U11((جدولة الزيارات الإشرافية)):::uc
+    U12((إعداد الإحصاء العام)):::uc
+    U13((رفع الإحصائية للمكتب)):::uc
+    U14((إعداد الخطة السنوية)):::uc
+    U15((رفع تقارير المتابعة)):::uc
+    U16((تقييم الخطة)):::uc
+    U17((رفع تقرير الأداء العام)):::uc
+    U18((استلام التعاميم)):::uc
+    U19((توزيع التعميم داخلياً)):::uc
+    U20((رفع إفادة التنفيذ)):::uc
+    U21((تسجيل العجز والفائض)):::uc
+    U22((تسجيل جاهزية الاختبارات)):::uc
+    U23((رفع تقرير الاختبارات)):::uc
+    U24((تسجيل حالة الطوارئ)):::uc
+    U25((دمج/فصل المدرسة)):::uc
+    U26((تسجيل الجوائز)):::uc
+    U27((رفع التقرير السنوي الشامل)):::uc
+
+    A0 --&gt; U0
+    A1 -.-&gt; U0
+    A1 --&gt; U1
+    A2 --&gt; U2
+    A3 --&gt; U3
+    A4 -.-&gt; U3
+    A4 --&gt; U4
+    A0 --&gt; U5
+    A1 --&gt; U6
+    A2 -.-&gt; U6
+    A2 --&gt; U7
+    A3 --&gt; U8
+    A4 --&gt; U9
+    A0 -.-&gt; U9
+    A0 --&gt; U10
+    A1 --&gt; U11
+    A2 --&gt; U12
+    A3 -.-&gt; U12
+    A3 --&gt; U13
+    A4 --&gt; U14
+    A0 --&gt; U15
+    A1 -.-&gt; U15
+    A1 --&gt; U16
+    A2 --&gt; U17
+    A3 --&gt; U18
+    A4 -.-&gt; U18
+    A4 --&gt; U19
+    A0 --&gt; U20
+    A1 --&gt; U21
+    A2 -.-&gt; U21
+    A2 --&gt; U22
+    A3 --&gt; U23
+    A4 --&gt; U24
+    A0 -.-&gt; U24
+    A0 --&gt; U25
+    A1 --&gt; U26
+    A2 --&gt; U27
+    A3 -.-&gt; U27
+</pre>
+    <pre class="code-block" id="UC-M1_SchoolAdmin-pu">@startuml
+left to right direction
+actor &quot;مدير المدرسة&quot; as A0
+actor &quot;وكيل المدرسة&quot; as A1
+actor &quot;مكتب التربية&quot; as A2
+actor &quot;المفتش&quot; as A3
+actor &quot;الموظف الإداري&quot; as A4
+usecase &quot;إنشاء وتسجيل المدرسة&quot; as U0
+usecase &quot;ربط المدرسة بالمكتب&quot; as U1
+usecase &quot;تحديد المراحل والصفوف&quot; as U2
+usecase &quot;إعداد التقويم الدراسي&quot; as U3
+usecase &quot;ترشيح القيادة المدرسية&quot; as U4
+usecase &quot;اعتماد القيادة&quot; as U5
+usecase &quot;إعداد الهيكل التنظيمي&quot; as U6
+usecase &quot;تحديث الصلاحيات&quot; as U7
+usecase &quot;تقديم طلب اعتماد&quot; as U8
+usecase &quot;تجديد الاعتماد&quot; as U9
+usecase &quot;تسجيل التقييم المدرسي&quot; as U10
+usecase &quot;جدولة الزيارات الإشرافية&quot; as U11
+usecase &quot;إعداد الإحصاء العام&quot; as U12
+usecase &quot;رفع الإحصائية للمكتب&quot; as U13
+usecase &quot;إعداد الخطة السنوية&quot; as U14
+usecase &quot;رفع تقارير المتابعة&quot; as U15
+usecase &quot;تقييم الخطة&quot; as U16
+usecase &quot;رفع تقرير الأداء العام&quot; as U17
+usecase &quot;استلام التعاميم&quot; as U18
+usecase &quot;توزيع التعميم داخلياً&quot; as U19
+usecase &quot;رفع إفادة التنفيذ&quot; as U20
+usecase &quot;تسجيل العجز والفائض&quot; as U21
+usecase &quot;تسجيل جاهزية الاختبارات&quot; as U22
+usecase &quot;رفع تقرير الاختبارات&quot; as U23
+usecase &quot;تسجيل حالة الطوارئ&quot; as U24
+usecase &quot;دمج/فصل المدرسة&quot; as U25
+usecase &quot;تسجيل الجوائز&quot; as U26
+usecase &quot;رفع التقرير السنوي الشامل&quot; as U27
+
+@enduml</pre>
+  </div>
+</article>
+
+<article class="diagram-card" id="UC-M2_Student">
+  <div class="diagram-header">
+    <span class="id-badge">UC-M2_Student</span>
+    <h3>Use Case Diagram تفصيلي — Use Case — إدارة الطلاب</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Use Case Diagram (Detailed)</span>
+      <span class="tag level">🎯 Module</span>
+       <span class="tag mod">🎓 إدارة الطلاب والشؤون الأك</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>عرض شامل لجميع حالات الاستخدام في Use Case — إدارة الطلاب.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>7 ممثل + 39 حالة استخدام.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart LR
+    classDef actor fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef uc fill:#dbeafe,color:#1e3a8a,stroke:#1e3a8a,rx:30,ry:30,stroke-width:1px
+
+    A0[👤 ولي الأمر]:::actor
+    A1[👤 الطالب]:::actor
+    A2[👤 المعلم]:::actor
+    A3[👤 إدارة المدرسة]:::actor
+    A4[👤 مكتب التربية]:::actor
+    A5[👤 طبيب المدرسة]:::actor
+    A6[👤 المرشد]:::actor
+
+    U0((تقديم طلب تسجيل)):::uc
+    U1((مراجعة وقبول الطلب)):::uc
+    U2((اعتماد القيد رسمياً)):::uc
+    U3((ربط الطالب بولي الأمر)):::uc
+    U4((تحديد الصف والشعبة)):::uc
+    U5((تعديل البيانات الأساسية)):::uc
+    U6((تسجيل الحضور اليومي)):::uc
+    U7((تسجيل الحضور الحصصي)):::uc
+    U8((إدخال الدرجات)):::uc
+    U9((تعديل الدرجات)):::uc
+    U10((احتساب النتيجة)):::uc
+    U11((تسجيل ملاحظة سلوكية)):::uc
+    U12((إصدار إنذار)):::uc
+    U13((جلسة إرشاد)):::uc
+    U14((تسجيل حالة صحية)):::uc
+    U15((إدارة الإجازة المرضية)):::uc
+    U16((تسجيل نشاط لاصفي)):::uc
+    U17((تسجيل في الأنشطة)):::uc
+    U18((ترقية لصف أعلى)):::uc
+    U19((إعادة السنة)):::uc
+    U20((النقل بين الشعب)):::uc
+    U21((تغيير المسار)):::uc
+    U22((تجميد القيد)):::uc
+    U23((إعادة التفعيل)):::uc
+    U24((طلب نقل خارجي)):::uc
+    U25((استقبال طالب منقول)):::uc
+    U26((طلب انسحاب)):::uc
+    U27((تخرج طالب)):::uc
+    U28((استبعاد تأديبي)):::uc
+    U29((تسجيل وفاة)):::uc
+    U30((أرشفة السجل)):::uc
+    U31((إصدار شهادة قيد)):::uc
+    U32((إصدار شهادة تخرج)):::uc
+    U33((تصدير السجل الأكاديمي)):::uc
+    U34((استعارة من المكتبة)):::uc
+    U35((رفع شكوى)):::uc
+    U36((إصدار كشف درجات)):::uc
+    U37((مراجعة سجل الطالب)):::uc
+    U38((تقرير المعرضين للخطر)):::uc
+
+    A0 --> U0
+    A1 -.-> U0
+    A1 --> U1
+    A2 --> U2
+    A3 --> U3
+    A4 -.-> U3
+    A4 --> U4
+    A5 --> U5
+    A6 --> U6
+    A0 -.-> U6
+    A0 --> U7
+    A1 --> U8
+    A2 --> U9
+    A3 -.-> U9
+    A3 --> U10
+    A4 --> U11
+    A5 --> U12
+    A6 -.-> U12
+    A6 --> U13
+    A0 --> U14
+    A1 --> U15
+    A2 -.-> U15
+    A2 --> U16
+    A3 --> U17
+    A4 --> U18
+    A5 -.-> U18
+    A5 --> U19
+    A6 --> U20
+    A0 --> U21
+    A1 -.-> U21
+    A1 --> U22
+    A2 --> U23
+    A3 --> U24
+    A4 -.-> U24
+    A4 --> U25
+    A5 --> U26
+    A6 --> U27
+    A0 -.-> U27
+    A0 --> U28
+    A1 --> U29
+    A2 --> U30
+    A3 -.-> U30
+    A3 --> U31
+    A4 --> U32
+    A5 --> U33
+    A6 -.-> U33
+    A6 --> U34
+    A0 --> U35
+    A1 --> U36
+    A2 -.-> U36
+    A2 --> U37
+    A3 --> U38
+
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'UC-M2_Student-mer')">📊 Mermaid</button>
+      <button class="code-tab" onclick="showCode(this,'UC-M2_Student-pu')">🌳 PlantUML</button>
+    </div>
+    <pre class="code-block active" id="UC-M2_Student-mer">flowchart LR
+    classDef actor fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef uc fill:#dbeafe,color:#1e3a8a,stroke:#1e3a8a,rx:30,ry:30,stroke-width:1px
+
+    A0[👤 ولي الأمر]:::actor
+    A1[👤 الطالب]:::actor
+    A2[👤 المعلم]:::actor
+    A3[👤 إدارة المدرسة]:::actor
+    A4[👤 مكتب التربية]:::actor
+    A5[👤 طبيب المدرسة]:::actor
+    A6[👤 المرشد]:::actor
+
+    U0((تقديم طلب تسجيل)):::uc
+    U1((مراجعة وقبول الطلب)):::uc
+    U2((اعتماد القيد رسمياً)):::uc
+    U3((ربط الطالب بولي الأمر)):::uc
+    U4((تحديد الصف والشعبة)):::uc
+    U5((تعديل البيانات الأساسية)):::uc
+    U6((تسجيل الحضور اليومي)):::uc
+    U7((تسجيل الحضور الحصصي)):::uc
+    U8((إدخال الدرجات)):::uc
+    U9((تعديل الدرجات)):::uc
+    U10((احتساب النتيجة)):::uc
+    U11((تسجيل ملاحظة سلوكية)):::uc
+    U12((إصدار إنذار)):::uc
+    U13((جلسة إرشاد)):::uc
+    U14((تسجيل حالة صحية)):::uc
+    U15((إدارة الإجازة المرضية)):::uc
+    U16((تسجيل نشاط لاصفي)):::uc
+    U17((تسجيل في الأنشطة)):::uc
+    U18((ترقية لصف أعلى)):::uc
+    U19((إعادة السنة)):::uc
+    U20((النقل بين الشعب)):::uc
+    U21((تغيير المسار)):::uc
+    U22((تجميد القيد)):::uc
+    U23((إعادة التفعيل)):::uc
+    U24((طلب نقل خارجي)):::uc
+    U25((استقبال طالب منقول)):::uc
+    U26((طلب انسحاب)):::uc
+    U27((تخرج طالب)):::uc
+    U28((استبعاد تأديبي)):::uc
+    U29((تسجيل وفاة)):::uc
+    U30((أرشفة السجل)):::uc
+    U31((إصدار شهادة قيد)):::uc
+    U32((إصدار شهادة تخرج)):::uc
+    U33((تصدير السجل الأكاديمي)):::uc
+    U34((استعارة من المكتبة)):::uc
+    U35((رفع شكوى)):::uc
+    U36((إصدار كشف درجات)):::uc
+    U37((مراجعة سجل الطالب)):::uc
+    U38((تقرير المعرضين للخطر)):::uc
+
+    A0 --&gt; U0
+    A1 -.-&gt; U0
+    A1 --&gt; U1
+    A2 --&gt; U2
+    A3 --&gt; U3
+    A4 -.-&gt; U3
+    A4 --&gt; U4
+    A5 --&gt; U5
+    A6 --&gt; U6
+    A0 -.-&gt; U6
+    A0 --&gt; U7
+    A1 --&gt; U8
+    A2 --&gt; U9
+    A3 -.-&gt; U9
+    A3 --&gt; U10
+    A4 --&gt; U11
+    A5 --&gt; U12
+    A6 -.-&gt; U12
+    A6 --&gt; U13
+    A0 --&gt; U14
+    A1 --&gt; U15
+    A2 -.-&gt; U15
+    A2 --&gt; U16
+    A3 --&gt; U17
+    A4 --&gt; U18
+    A5 -.-&gt; U18
+    A5 --&gt; U19
+    A6 --&gt; U20
+    A0 --&gt; U21
+    A1 -.-&gt; U21
+    A1 --&gt; U22
+    A2 --&gt; U23
+    A3 --&gt; U24
+    A4 -.-&gt; U24
+    A4 --&gt; U25
+    A5 --&gt; U26
+    A6 --&gt; U27
+    A0 -.-&gt; U27
+    A0 --&gt; U28
+    A1 --&gt; U29
+    A2 --&gt; U30
+    A3 -.-&gt; U30
+    A3 --&gt; U31
+    A4 --&gt; U32
+    A5 --&gt; U33
+    A6 -.-&gt; U33
+    A6 --&gt; U34
+    A0 --&gt; U35
+    A1 --&gt; U36
+    A2 -.-&gt; U36
+    A2 --&gt; U37
+    A3 --&gt; U38
+</pre>
+    <pre class="code-block" id="UC-M2_Student-pu">@startuml
+left to right direction
+actor &quot;ولي الأمر&quot; as A0
+actor &quot;الطالب&quot; as A1
+actor &quot;المعلم&quot; as A2
+actor &quot;إدارة المدرسة&quot; as A3
+actor &quot;مكتب التربية&quot; as A4
+actor &quot;طبيب المدرسة&quot; as A5
+actor &quot;المرشد&quot; as A6
+usecase &quot;تقديم طلب تسجيل&quot; as U0
+usecase &quot;مراجعة وقبول الطلب&quot; as U1
+usecase &quot;اعتماد القيد رسمياً&quot; as U2
+usecase &quot;ربط الطالب بولي الأمر&quot; as U3
+usecase &quot;تحديد الصف والشعبة&quot; as U4
+usecase &quot;تعديل البيانات الأساسية&quot; as U5
+usecase &quot;تسجيل الحضور اليومي&quot; as U6
+usecase &quot;تسجيل الحضور الحصصي&quot; as U7
+usecase &quot;إدخال الدرجات&quot; as U8
+usecase &quot;تعديل الدرجات&quot; as U9
+usecase &quot;احتساب النتيجة&quot; as U10
+usecase &quot;تسجيل ملاحظة سلوكية&quot; as U11
+usecase &quot;إصدار إنذار&quot; as U12
+usecase &quot;جلسة إرشاد&quot; as U13
+usecase &quot;تسجيل حالة صحية&quot; as U14
+usecase &quot;إدارة الإجازة المرضية&quot; as U15
+usecase &quot;تسجيل نشاط لاصفي&quot; as U16
+usecase &quot;تسجيل في الأنشطة&quot; as U17
+usecase &quot;ترقية لصف أعلى&quot; as U18
+usecase &quot;إعادة السنة&quot; as U19
+usecase &quot;النقل بين الشعب&quot; as U20
+usecase &quot;تغيير المسار&quot; as U21
+usecase &quot;تجميد القيد&quot; as U22
+usecase &quot;إعادة التفعيل&quot; as U23
+usecase &quot;طلب نقل خارجي&quot; as U24
+usecase &quot;استقبال طالب منقول&quot; as U25
+usecase &quot;طلب انسحاب&quot; as U26
+usecase &quot;تخرج طالب&quot; as U27
+usecase &quot;استبعاد تأديبي&quot; as U28
+usecase &quot;تسجيل وفاة&quot; as U29
+usecase &quot;أرشفة السجل&quot; as U30
+usecase &quot;إصدار شهادة قيد&quot; as U31
+usecase &quot;إصدار شهادة تخرج&quot; as U32
+usecase &quot;تصدير السجل الأكاديمي&quot; as U33
+usecase &quot;استعارة من المكتبة&quot; as U34
+usecase &quot;رفع شكوى&quot; as U35
+usecase &quot;إصدار كشف درجات&quot; as U36
+usecase &quot;مراجعة سجل الطالب&quot; as U37
+usecase &quot;تقرير المعرضين للخطر&quot; as U38
+
+@enduml</pre>
+  </div>
+</article>
+
+<article class="diagram-card" id="UC-M3_Employee">
+  <div class="diagram-header">
+    <span class="id-badge">UC-M3_Employee</span>
+    <h3>Use Case Diagram تفصيلي — Use Case — إدارة الموظفين</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Use Case Diagram (Detailed)</span>
+      <span class="tag level">🎯 Module</span>
+       <span class="tag mod">👥 إدارة الموظفين والكادر ال</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>عرض شامل لجميع حالات الاستخدام في Use Case — إدارة الموظفين.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>6 ممثل + 32 حالة استخدام.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart LR
+    classDef actor fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef uc fill:#dbeafe,color:#1e3a8a,stroke:#1e3a8a,rx:30,ry:30,stroke-width:1px
+
+    A0[👤 شؤون الموظفين]:::actor
+    A1[👤 الموظف]:::actor
+    A2[👤 المدير المباشر]:::actor
+    A3[👤 مكتب التربية]:::actor
+    A4[👤 المعلم المرشد]:::actor
+    A5[👤 المتقدم للوظيفة]:::actor
+
+    U0((إعلان وظيفة شاغرة)):::uc
+    U1((تقديم طلب توظيف)):::uc
+    U2((فرز المتقدمين)):::uc
+    U3((إجراء المقابلات)):::uc
+    U4((إصدار قرار التعيين)):::uc
+    U5((تسكين الموظف الجديد)):::uc
+    U6((تعيين معلم مرشد)):::uc
+    U7((تسجيل الحضور والانصراف)):::uc
+    U8((إدارة الجداول الدراسية)):::uc
+    U9((تقييم الأداء)):::uc
+    U10((إصدار جزاء/إنذار)):::uc
+    U11((احتساب الراتب الشهري)):::uc
+    U12((صرف البدلات)):::uc
+    U13((صرف المكافآت)):::uc
+    U14((خصم الجزاءات)):::uc
+    U15((طلب إجازة)):::uc
+    U16((اعتماد الإجازة)):::uc
+    U17((تسجيل تدريب)):::uc
+    U18((إكمال برنامج تدريبي)):::uc
+    U19((نقل داخلي)):::uc
+    U20((نقل خارجي)):::uc
+    U21((تعديل بيانات الموظف)):::uc
+    U22((تقديم استقالة)):::uc
+    U23((إنهاء الخدمة)):::uc
+    U24((إخلاء الطرف)):::uc
+    U25((التسوية النهائية)):::uc
+    U26((إصدار شهادة الخبرة)):::uc
+    U27((استرجاع الوثائق)):::uc
+    U28((تقارير شؤون الموظفين)):::uc
+    U29((الاستخلاف الوظيفي)):::uc
+    U30((المهام الإضافية)):::uc
+    U31((تشكيل اللجان)):::uc
+
+    A0 --> U0
+    A1 -.-> U0
+    A1 --> U1
+    A2 --> U2
+    A3 --> U3
+    A4 -.-> U3
+    A4 --> U4
+    A5 --> U5
+    A0 --> U6
+    A1 -.-> U6
+    A1 --> U7
+    A2 --> U8
+    A3 --> U9
+    A4 -.-> U9
+    A4 --> U10
+    A5 --> U11
+    A0 --> U12
+    A1 -.-> U12
+    A1 --> U13
+    A2 --> U14
+    A3 --> U15
+    A4 -.-> U15
+    A4 --> U16
+    A5 --> U17
+    A0 --> U18
+    A1 -.-> U18
+    A1 --> U19
+    A2 --> U20
+    A3 --> U21
+    A4 -.-> U21
+    A4 --> U22
+    A5 --> U23
+    A0 --> U24
+    A1 -.-> U24
+    A1 --> U25
+    A2 --> U26
+    A3 --> U27
+    A4 -.-> U27
+    A4 --> U28
+    A5 --> U29
+    A0 --> U30
+    A1 -.-> U30
+    A1 --> U31
+
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'UC-M3_Employee-mer')">📊 Mermaid</button>
+      <button class="code-tab" onclick="showCode(this,'UC-M3_Employee-pu')">🌳 PlantUML</button>
+    </div>
+    <pre class="code-block active" id="UC-M3_Employee-mer">flowchart LR
+    classDef actor fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef uc fill:#dbeafe,color:#1e3a8a,stroke:#1e3a8a,rx:30,ry:30,stroke-width:1px
+
+    A0[👤 شؤون الموظفين]:::actor
+    A1[👤 الموظف]:::actor
+    A2[👤 المدير المباشر]:::actor
+    A3[👤 مكتب التربية]:::actor
+    A4[👤 المعلم المرشد]:::actor
+    A5[👤 المتقدم للوظيفة]:::actor
+
+    U0((إعلان وظيفة شاغرة)):::uc
+    U1((تقديم طلب توظيف)):::uc
+    U2((فرز المتقدمين)):::uc
+    U3((إجراء المقابلات)):::uc
+    U4((إصدار قرار التعيين)):::uc
+    U5((تسكين الموظف الجديد)):::uc
+    U6((تعيين معلم مرشد)):::uc
+    U7((تسجيل الحضور والانصراف)):::uc
+    U8((إدارة الجداول الدراسية)):::uc
+    U9((تقييم الأداء)):::uc
+    U10((إصدار جزاء/إنذار)):::uc
+    U11((احتساب الراتب الشهري)):::uc
+    U12((صرف البدلات)):::uc
+    U13((صرف المكافآت)):::uc
+    U14((خصم الجزاءات)):::uc
+    U15((طلب إجازة)):::uc
+    U16((اعتماد الإجازة)):::uc
+    U17((تسجيل تدريب)):::uc
+    U18((إكمال برنامج تدريبي)):::uc
+    U19((نقل داخلي)):::uc
+    U20((نقل خارجي)):::uc
+    U21((تعديل بيانات الموظف)):::uc
+    U22((تقديم استقالة)):::uc
+    U23((إنهاء الخدمة)):::uc
+    U24((إخلاء الطرف)):::uc
+    U25((التسوية النهائية)):::uc
+    U26((إصدار شهادة الخبرة)):::uc
+    U27((استرجاع الوثائق)):::uc
+    U28((تقارير شؤون الموظفين)):::uc
+    U29((الاستخلاف الوظيفي)):::uc
+    U30((المهام الإضافية)):::uc
+    U31((تشكيل اللجان)):::uc
+
+    A0 --&gt; U0
+    A1 -.-&gt; U0
+    A1 --&gt; U1
+    A2 --&gt; U2
+    A3 --&gt; U3
+    A4 -.-&gt; U3
+    A4 --&gt; U4
+    A5 --&gt; U5
+    A0 --&gt; U6
+    A1 -.-&gt; U6
+    A1 --&gt; U7
+    A2 --&gt; U8
+    A3 --&gt; U9
+    A4 -.-&gt; U9
+    A4 --&gt; U10
+    A5 --&gt; U11
+    A0 --&gt; U12
+    A1 -.-&gt; U12
+    A1 --&gt; U13
+    A2 --&gt; U14
+    A3 --&gt; U15
+    A4 -.-&gt; U15
+    A4 --&gt; U16
+    A5 --&gt; U17
+    A0 --&gt; U18
+    A1 -.-&gt; U18
+    A1 --&gt; U19
+    A2 --&gt; U20
+    A3 --&gt; U21
+    A4 -.-&gt; U21
+    A4 --&gt; U22
+    A5 --&gt; U23
+    A0 --&gt; U24
+    A1 -.-&gt; U24
+    A1 --&gt; U25
+    A2 --&gt; U26
+    A3 --&gt; U27
+    A4 -.-&gt; U27
+    A4 --&gt; U28
+    A5 --&gt; U29
+    A0 --&gt; U30
+    A1 -.-&gt; U30
+    A1 --&gt; U31
+</pre>
+    <pre class="code-block" id="UC-M3_Employee-pu">@startuml
+left to right direction
+actor &quot;شؤون الموظفين&quot; as A0
+actor &quot;الموظف&quot; as A1
+actor &quot;المدير المباشر&quot; as A2
+actor &quot;مكتب التربية&quot; as A3
+actor &quot;المعلم المرشد&quot; as A4
+actor &quot;المتقدم للوظيفة&quot; as A5
+usecase &quot;إعلان وظيفة شاغرة&quot; as U0
+usecase &quot;تقديم طلب توظيف&quot; as U1
+usecase &quot;فرز المتقدمين&quot; as U2
+usecase &quot;إجراء المقابلات&quot; as U3
+usecase &quot;إصدار قرار التعيين&quot; as U4
+usecase &quot;تسكين الموظف الجديد&quot; as U5
+usecase &quot;تعيين معلم مرشد&quot; as U6
+usecase &quot;تسجيل الحضور والانصراف&quot; as U7
+usecase &quot;إدارة الجداول الدراسية&quot; as U8
+usecase &quot;تقييم الأداء&quot; as U9
+usecase &quot;إصدار جزاء/إنذار&quot; as U10
+usecase &quot;احتساب الراتب الشهري&quot; as U11
+usecase &quot;صرف البدلات&quot; as U12
+usecase &quot;صرف المكافآت&quot; as U13
+usecase &quot;خصم الجزاءات&quot; as U14
+usecase &quot;طلب إجازة&quot; as U15
+usecase &quot;اعتماد الإجازة&quot; as U16
+usecase &quot;تسجيل تدريب&quot; as U17
+usecase &quot;إكمال برنامج تدريبي&quot; as U18
+usecase &quot;نقل داخلي&quot; as U19
+usecase &quot;نقل خارجي&quot; as U20
+usecase &quot;تعديل بيانات الموظف&quot; as U21
+usecase &quot;تقديم استقالة&quot; as U22
+usecase &quot;إنهاء الخدمة&quot; as U23
+usecase &quot;إخلاء الطرف&quot; as U24
+usecase &quot;التسوية النهائية&quot; as U25
+usecase &quot;إصدار شهادة الخبرة&quot; as U26
+usecase &quot;استرجاع الوثائق&quot; as U27
+usecase &quot;تقارير شؤون الموظفين&quot; as U28
+usecase &quot;الاستخلاف الوظيفي&quot; as U29
+usecase &quot;المهام الإضافية&quot; as U30
+usecase &quot;تشكيل اللجان&quot; as U31
+
+@enduml</pre>
+  </div>
+</article>
+
+<article class="diagram-card" id="UC-M4_Assets">
+  <div class="diagram-header">
+    <span class="id-badge">UC-M4_Assets</span>
+    <h3>Use Case Diagram تفصيلي — Use Case — إدارة الأصول</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Use Case Diagram (Detailed)</span>
+      <span class="tag level">🎯 Module</span>
+       <span class="tag mod">📦 إدارة الأصول والمرافق</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>عرض شامل لجميع حالات الاستخدام في Use Case — إدارة الأصول.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>7 ممثل + 42 حالة استخدام.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart LR
+    classDef actor fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef uc fill:#dbeafe,color:#1e3a8a,stroke:#1e3a8a,rx:30,ry:30,stroke-width:1px
+
+    A0[👤 موظف المشتريات]:::actor
+    A1[👤 رئيس القسم]:::actor
+    A2[👤 الفني]:::actor
+    A3[👤 المستخدم]:::actor
+    A4[👤 المراجع]:::actor
+    A5[👤 المورد]:::actor
+    A6[👤 مدير الصيانة]:::actor
+
+    U0((تحليل الاحتياج)):::uc
+    U1((اقتراح أصل)):::uc
+    U2((إعداد طلب احتياج)):::uc
+    U3((اعتماد طلب الاحتياج)):::uc
+    U4((إعداد المواصفات)):::uc
+    U5((تقدير التكلفة)):::uc
+    U6((إنشاء طلب شراء)):::uc
+    U7((اعتماد الشراء)):::uc
+    U8((اختيار المورد)):::uc
+    U9((إصدار أمر الشراء)):::uc
+    U10((استلام الأصل)):::uc
+    U11((فحص الجودة)):::uc
+    U12((تسجيل أصل جديد)):::uc
+    U13((توليد رقم تعريفي)):::uc
+    U14((توليد باركود/QR)):::uc
+    U15((تحديد النوع والفئة)):::uc
+    U16((ربط بالموقع المكاني)):::uc
+    U17((تفعيل الأصل)):::uc
+    U18((تخصيص لقسم)):::uc
+    U19((نقل بين الأقسام)):::uc
+    U20((إعارة الأصل)):::uc
+    U21((إعادة الأصل)):::uc
+    U22((تسجيل الاستخدام)):::uc
+    U23((بلاغ عطل)):::uc
+    U24((اعتماد طلب صيانة)):::uc
+    U25((جدولة صيانة دورية)):::uc
+    U26((تنفيذ الصيانة)):::uc
+    U27((اختبار بعد الصيانة)):::uc
+    U28((إعادة للخدمة)):::uc
+    U29((تسجيل الإهلاك)):::uc
+    U30((إعادة التقييم)):::uc
+    U31((حساب القيمة الدفترية)):::uc
+    U32((خطة الجرد)):::uc
+    U33((الجرد الميداني)):::uc
+    U34((معالجة الفروقات)):::uc
+    U35((اعتماد نتائج الجرد)):::uc
+    U36((استبعاد الأصل)):::uc
+    U37((شطب الأصل)):::uc
+    U38((أرشفة)):::uc
+    U39((تقارير الأصول)):::uc
+    U40((تنبيهات الصيانة)):::uc
+    U41((تحليل ROI)):::uc
+
+    A0 --> U0
+    A1 -.-> U0
+    A1 --> U1
+    A2 --> U2
+    A3 --> U3
+    A4 -.-> U3
+    A4 --> U4
+    A5 --> U5
+    A6 --> U6
+    A0 -.-> U6
+    A0 --> U7
+    A1 --> U8
+    A2 --> U9
+    A3 -.-> U9
+    A3 --> U10
+    A4 --> U11
+    A5 --> U12
+    A6 -.-> U12
+    A6 --> U13
+    A0 --> U14
+    A1 --> U15
+    A2 -.-> U15
+    A2 --> U16
+    A3 --> U17
+    A4 --> U18
+    A5 -.-> U18
+    A5 --> U19
+    A6 --> U20
+    A0 --> U21
+    A1 -.-> U21
+    A1 --> U22
+    A2 --> U23
+    A3 --> U24
+    A4 -.-> U24
+    A4 --> U25
+    A5 --> U26
+    A6 --> U27
+    A0 -.-> U27
+    A0 --> U28
+    A1 --> U29
+    A2 --> U30
+    A3 -.-> U30
+    A3 --> U31
+    A4 --> U32
+    A5 --> U33
+    A6 -.-> U33
+    A6 --> U34
+    A0 --> U35
+    A1 --> U36
+    A2 -.-> U36
+    A2 --> U37
+    A3 --> U38
+    A4 --> U39
+    A5 -.-> U39
+    A5 --> U40
+    A6 --> U41
+
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'UC-M4_Assets-mer')">📊 Mermaid</button>
+      <button class="code-tab" onclick="showCode(this,'UC-M4_Assets-pu')">🌳 PlantUML</button>
+    </div>
+    <pre class="code-block active" id="UC-M4_Assets-mer">flowchart LR
+    classDef actor fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef uc fill:#dbeafe,color:#1e3a8a,stroke:#1e3a8a,rx:30,ry:30,stroke-width:1px
+
+    A0[👤 موظف المشتريات]:::actor
+    A1[👤 رئيس القسم]:::actor
+    A2[👤 الفني]:::actor
+    A3[👤 المستخدم]:::actor
+    A4[👤 المراجع]:::actor
+    A5[👤 المورد]:::actor
+    A6[👤 مدير الصيانة]:::actor
+
+    U0((تحليل الاحتياج)):::uc
+    U1((اقتراح أصل)):::uc
+    U2((إعداد طلب احتياج)):::uc
+    U3((اعتماد طلب الاحتياج)):::uc
+    U4((إعداد المواصفات)):::uc
+    U5((تقدير التكلفة)):::uc
+    U6((إنشاء طلب شراء)):::uc
+    U7((اعتماد الشراء)):::uc
+    U8((اختيار المورد)):::uc
+    U9((إصدار أمر الشراء)):::uc
+    U10((استلام الأصل)):::uc
+    U11((فحص الجودة)):::uc
+    U12((تسجيل أصل جديد)):::uc
+    U13((توليد رقم تعريفي)):::uc
+    U14((توليد باركود/QR)):::uc
+    U15((تحديد النوع والفئة)):::uc
+    U16((ربط بالموقع المكاني)):::uc
+    U17((تفعيل الأصل)):::uc
+    U18((تخصيص لقسم)):::uc
+    U19((نقل بين الأقسام)):::uc
+    U20((إعارة الأصل)):::uc
+    U21((إعادة الأصل)):::uc
+    U22((تسجيل الاستخدام)):::uc
+    U23((بلاغ عطل)):::uc
+    U24((اعتماد طلب صيانة)):::uc
+    U25((جدولة صيانة دورية)):::uc
+    U26((تنفيذ الصيانة)):::uc
+    U27((اختبار بعد الصيانة)):::uc
+    U28((إعادة للخدمة)):::uc
+    U29((تسجيل الإهلاك)):::uc
+    U30((إعادة التقييم)):::uc
+    U31((حساب القيمة الدفترية)):::uc
+    U32((خطة الجرد)):::uc
+    U33((الجرد الميداني)):::uc
+    U34((معالجة الفروقات)):::uc
+    U35((اعتماد نتائج الجرد)):::uc
+    U36((استبعاد الأصل)):::uc
+    U37((شطب الأصل)):::uc
+    U38((أرشفة)):::uc
+    U39((تقارير الأصول)):::uc
+    U40((تنبيهات الصيانة)):::uc
+    U41((تحليل ROI)):::uc
+
+    A0 --&gt; U0
+    A1 -.-&gt; U0
+    A1 --&gt; U1
+    A2 --&gt; U2
+    A3 --&gt; U3
+    A4 -.-&gt; U3
+    A4 --&gt; U4
+    A5 --&gt; U5
+    A6 --&gt; U6
+    A0 -.-&gt; U6
+    A0 --&gt; U7
+    A1 --&gt; U8
+    A2 --&gt; U9
+    A3 -.-&gt; U9
+    A3 --&gt; U10
+    A4 --&gt; U11
+    A5 --&gt; U12
+    A6 -.-&gt; U12
+    A6 --&gt; U13
+    A0 --&gt; U14
+    A1 --&gt; U15
+    A2 -.-&gt; U15
+    A2 --&gt; U16
+    A3 --&gt; U17
+    A4 --&gt; U18
+    A5 -.-&gt; U18
+    A5 --&gt; U19
+    A6 --&gt; U20
+    A0 --&gt; U21
+    A1 -.-&gt; U21
+    A1 --&gt; U22
+    A2 --&gt; U23
+    A3 --&gt; U24
+    A4 -.-&gt; U24
+    A4 --&gt; U25
+    A5 --&gt; U26
+    A6 --&gt; U27
+    A0 -.-&gt; U27
+    A0 --&gt; U28
+    A1 --&gt; U29
+    A2 --&gt; U30
+    A3 -.-&gt; U30
+    A3 --&gt; U31
+    A4 --&gt; U32
+    A5 --&gt; U33
+    A6 -.-&gt; U33
+    A6 --&gt; U34
+    A0 --&gt; U35
+    A1 --&gt; U36
+    A2 -.-&gt; U36
+    A2 --&gt; U37
+    A3 --&gt; U38
+    A4 --&gt; U39
+    A5 -.-&gt; U39
+    A5 --&gt; U40
+    A6 --&gt; U41
+</pre>
+    <pre class="code-block" id="UC-M4_Assets-pu">@startuml
+left to right direction
+actor &quot;موظف المشتريات&quot; as A0
+actor &quot;رئيس القسم&quot; as A1
+actor &quot;الفني&quot; as A2
+actor &quot;المستخدم&quot; as A3
+actor &quot;المراجع&quot; as A4
+actor &quot;المورد&quot; as A5
+actor &quot;مدير الصيانة&quot; as A6
+usecase &quot;تحليل الاحتياج&quot; as U0
+usecase &quot;اقتراح أصل&quot; as U1
+usecase &quot;إعداد طلب احتياج&quot; as U2
+usecase &quot;اعتماد طلب الاحتياج&quot; as U3
+usecase &quot;إعداد المواصفات&quot; as U4
+usecase &quot;تقدير التكلفة&quot; as U5
+usecase &quot;إنشاء طلب شراء&quot; as U6
+usecase &quot;اعتماد الشراء&quot; as U7
+usecase &quot;اختيار المورد&quot; as U8
+usecase &quot;إصدار أمر الشراء&quot; as U9
+usecase &quot;استلام الأصل&quot; as U10
+usecase &quot;فحص الجودة&quot; as U11
+usecase &quot;تسجيل أصل جديد&quot; as U12
+usecase &quot;توليد رقم تعريفي&quot; as U13
+usecase &quot;توليد باركود/QR&quot; as U14
+usecase &quot;تحديد النوع والفئة&quot; as U15
+usecase &quot;ربط بالموقع المكاني&quot; as U16
+usecase &quot;تفعيل الأصل&quot; as U17
+usecase &quot;تخصيص لقسم&quot; as U18
+usecase &quot;نقل بين الأقسام&quot; as U19
+usecase &quot;إعارة الأصل&quot; as U20
+usecase &quot;إعادة الأصل&quot; as U21
+usecase &quot;تسجيل الاستخدام&quot; as U22
+usecase &quot;بلاغ عطل&quot; as U23
+usecase &quot;اعتماد طلب صيانة&quot; as U24
+usecase &quot;جدولة صيانة دورية&quot; as U25
+usecase &quot;تنفيذ الصيانة&quot; as U26
+usecase &quot;اختبار بعد الصيانة&quot; as U27
+usecase &quot;إعادة للخدمة&quot; as U28
+usecase &quot;تسجيل الإهلاك&quot; as U29
+usecase &quot;إعادة التقييم&quot; as U30
+usecase &quot;حساب القيمة الدفترية&quot; as U31
+usecase &quot;خطة الجرد&quot; as U32
+usecase &quot;الجرد الميداني&quot; as U33
+usecase &quot;معالجة الفروقات&quot; as U34
+usecase &quot;اعتماد نتائج الجرد&quot; as U35
+usecase &quot;استبعاد الأصل&quot; as U36
+usecase &quot;شطب الأصل&quot; as U37
+usecase &quot;أرشفة&quot; as U38
+usecase &quot;تقارير الأصول&quot; as U39
+usecase &quot;تنبيهات الصيانة&quot; as U40
+usecase &quot;تحليل ROI&quot; as U41
+
+@enduml</pre>
+  </div>
+</article>
+
+<article class="diagram-card" id="UC-M5_Finance">
+  <div class="diagram-header">
+    <span class="id-badge">UC-M5_Finance</span>
+    <h3>Use Case Diagram تفصيلي — Use Case — الإدارة المالية</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Use Case Diagram (Detailed)</span>
+      <span class="tag level">🎯 Module</span>
+       <span class="tag mod">💰 الإدارة المالية</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>عرض شامل لجميع حالات الاستخدام في Use Case — الإدارة المالية.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>5 ممثل + 20 حالة استخدام.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart LR
+    classDef actor fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef uc fill:#dbeafe,color:#1e3a8a,stroke:#1e3a8a,rx:30,ry:30,stroke-width:1px
+
+    A0[👤 المحاسب]:::actor
+    A1[👤 ولي الأمر]:::actor
+    A2[👤 الطالب]:::actor
+    A3[👤 المدير المالي]:::actor
+    A4[👤 البنك]:::actor
+
+    U0((إنشاء حساب طالب)):::uc
+    U1((تحديد أنواع الرسوم)):::uc
+    U2((إصدار فاتورة)):::uc
+    U3((تعديل فاتورة)):::uc
+    U4((تطبيق خصم/إعفاء)):::uc
+    U5((تقسيط رسوم)):::uc
+    U6((استلام دفعة)):::uc
+    U7((تأكيد الدفع)):::uc
+    U8((إلغاء دفعة)):::uc
+    U9((استرداد مبلغ)):::uc
+    U10((إصدار إيصال)):::uc
+    U11((إصدار كشف حساب)):::uc
+    U12((تقارير المستحقات)):::uc
+    U13((تقارير المسددة)):::uc
+    U14((تقارير المتأخرين)):::uc
+    U15((تقارير الصندوق)):::uc
+    U16((تقارير الخصومات)):::uc
+    U17((تقارير المنح)):::uc
+    U18((ضمان وعقود الأصول)):::uc
+    U19((الأرشفة المالية)):::uc
+
+    A0 --> U0
+    A1 -.-> U0
+    A1 --> U1
+    A2 --> U2
+    A3 --> U3
+    A4 -.-> U3
+    A4 --> U4
+    A0 --> U5
+    A1 --> U6
+    A2 -.-> U6
+    A2 --> U7
+    A3 --> U8
+    A4 --> U9
+    A0 -.-> U9
+    A0 --> U10
+    A1 --> U11
+    A2 --> U12
+    A3 -.-> U12
+    A3 --> U13
+    A4 --> U14
+    A0 --> U15
+    A1 -.-> U15
+    A1 --> U16
+    A2 --> U17
+    A3 --> U18
+    A4 -.-> U18
+    A4 --> U19
+
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'UC-M5_Finance-mer')">📊 Mermaid</button>
+      <button class="code-tab" onclick="showCode(this,'UC-M5_Finance-pu')">🌳 PlantUML</button>
+    </div>
+    <pre class="code-block active" id="UC-M5_Finance-mer">flowchart LR
+    classDef actor fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef uc fill:#dbeafe,color:#1e3a8a,stroke:#1e3a8a,rx:30,ry:30,stroke-width:1px
+
+    A0[👤 المحاسب]:::actor
+    A1[👤 ولي الأمر]:::actor
+    A2[👤 الطالب]:::actor
+    A3[👤 المدير المالي]:::actor
+    A4[👤 البنك]:::actor
+
+    U0((إنشاء حساب طالب)):::uc
+    U1((تحديد أنواع الرسوم)):::uc
+    U2((إصدار فاتورة)):::uc
+    U3((تعديل فاتورة)):::uc
+    U4((تطبيق خصم/إعفاء)):::uc
+    U5((تقسيط رسوم)):::uc
+    U6((استلام دفعة)):::uc
+    U7((تأكيد الدفع)):::uc
+    U8((إلغاء دفعة)):::uc
+    U9((استرداد مبلغ)):::uc
+    U10((إصدار إيصال)):::uc
+    U11((إصدار كشف حساب)):::uc
+    U12((تقارير المستحقات)):::uc
+    U13((تقارير المسددة)):::uc
+    U14((تقارير المتأخرين)):::uc
+    U15((تقارير الصندوق)):::uc
+    U16((تقارير الخصومات)):::uc
+    U17((تقارير المنح)):::uc
+    U18((ضمان وعقود الأصول)):::uc
+    U19((الأرشفة المالية)):::uc
+
+    A0 --&gt; U0
+    A1 -.-&gt; U0
+    A1 --&gt; U1
+    A2 --&gt; U2
+    A3 --&gt; U3
+    A4 -.-&gt; U3
+    A4 --&gt; U4
+    A0 --&gt; U5
+    A1 --&gt; U6
+    A2 -.-&gt; U6
+    A2 --&gt; U7
+    A3 --&gt; U8
+    A4 --&gt; U9
+    A0 -.-&gt; U9
+    A0 --&gt; U10
+    A1 --&gt; U11
+    A2 --&gt; U12
+    A3 -.-&gt; U12
+    A3 --&gt; U13
+    A4 --&gt; U14
+    A0 --&gt; U15
+    A1 -.-&gt; U15
+    A1 --&gt; U16
+    A2 --&gt; U17
+    A3 --&gt; U18
+    A4 -.-&gt; U18
+    A4 --&gt; U19
+</pre>
+    <pre class="code-block" id="UC-M5_Finance-pu">@startuml
+left to right direction
+actor &quot;المحاسب&quot; as A0
+actor &quot;ولي الأمر&quot; as A1
+actor &quot;الطالب&quot; as A2
+actor &quot;المدير المالي&quot; as A3
+actor &quot;البنك&quot; as A4
+usecase &quot;إنشاء حساب طالب&quot; as U0
+usecase &quot;تحديد أنواع الرسوم&quot; as U1
+usecase &quot;إصدار فاتورة&quot; as U2
+usecase &quot;تعديل فاتورة&quot; as U3
+usecase &quot;تطبيق خصم/إعفاء&quot; as U4
+usecase &quot;تقسيط رسوم&quot; as U5
+usecase &quot;استلام دفعة&quot; as U6
+usecase &quot;تأكيد الدفع&quot; as U7
+usecase &quot;إلغاء دفعة&quot; as U8
+usecase &quot;استرداد مبلغ&quot; as U9
+usecase &quot;إصدار إيصال&quot; as U10
+usecase &quot;إصدار كشف حساب&quot; as U11
+usecase &quot;تقارير المستحقات&quot; as U12
+usecase &quot;تقارير المسددة&quot; as U13
+usecase &quot;تقارير المتأخرين&quot; as U14
+usecase &quot;تقارير الصندوق&quot; as U15
+usecase &quot;تقارير الخصومات&quot; as U16
+usecase &quot;تقارير المنح&quot; as U17
+usecase &quot;ضمان وعقود الأصول&quot; as U18
+usecase &quot;الأرشفة المالية&quot; as U19
+
+@enduml</pre>
+  </div>
+</article>
+
+<article class="diagram-card" id="UC-M6_Statistics">
+  <div class="diagram-header">
+    <span class="id-badge">UC-M6_Statistics</span>
+    <h3>Use Case Diagram تفصيلي — Use Case — البيانات والإحصاء</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Use Case Diagram (Detailed)</span>
+      <span class="tag level">🎯 Module</span>
+       <span class="tag mod">📊 إدارة البيانات والإحصاء</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>عرض شامل لجميع حالات الاستخدام في Use Case — البيانات والإحصاء.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>4 ممثل + 15 حالة استخدام.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart LR
+    classDef actor fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef uc fill:#dbeafe,color:#1e3a8a,stroke:#1e3a8a,rx:30,ry:30,stroke-width:1px
+
+    A0[👤 محلل البيانات]:::actor
+    A1[👤 المدير]:::actor
+    A2[👤 مكتب التربية]:::actor
+    A3[👤 الوزارة]:::actor
+
+    U0((إعداد مسودة إحصائية)):::uc
+    U1((مراجعة الإحصائية)):::uc
+    U2((رفع الإحصائية)):::uc
+    U3((اعتماد الإحصائية)):::uc
+    U4((أرشفة الإحصائيات)):::uc
+    U5((سجل التحديثات)):::uc
+    U6((توليد تقرير دوري)):::uc
+    U7((اعتماد التقارير)):::uc
+    U8((تقارير مقارنة)):::uc
+    U9((تحليل الفجوة)):::uc
+    U10((تقارير امتثال)):::uc
+    U11((تقارير مالية مجمعة)):::uc
+    U12((أرشفة التقارير)):::uc
+    U13((لوحة مؤشرات الأداء)):::uc
+    U14((استخراج إحصائيات استثنائية)):::uc
+
+    A0 --> U0
+    A1 -.-> U0
+    A1 --> U1
+    A2 --> U2
+    A3 --> U3
+    A0 -.-> U3
+    A0 --> U4
+    A1 --> U5
+    A2 --> U6
+    A3 -.-> U6
+    A3 --> U7
+    A0 --> U8
+    A1 --> U9
+    A2 -.-> U9
+    A2 --> U10
+    A3 --> U11
+    A0 --> U12
+    A1 -.-> U12
+    A1 --> U13
+    A2 --> U14
+
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'UC-M6_Statistics-mer')">📊 Mermaid</button>
+      <button class="code-tab" onclick="showCode(this,'UC-M6_Statistics-pu')">🌳 PlantUML</button>
+    </div>
+    <pre class="code-block active" id="UC-M6_Statistics-mer">flowchart LR
+    classDef actor fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef uc fill:#dbeafe,color:#1e3a8a,stroke:#1e3a8a,rx:30,ry:30,stroke-width:1px
+
+    A0[👤 محلل البيانات]:::actor
+    A1[👤 المدير]:::actor
+    A2[👤 مكتب التربية]:::actor
+    A3[👤 الوزارة]:::actor
+
+    U0((إعداد مسودة إحصائية)):::uc
+    U1((مراجعة الإحصائية)):::uc
+    U2((رفع الإحصائية)):::uc
+    U3((اعتماد الإحصائية)):::uc
+    U4((أرشفة الإحصائيات)):::uc
+    U5((سجل التحديثات)):::uc
+    U6((توليد تقرير دوري)):::uc
+    U7((اعتماد التقارير)):::uc
+    U8((تقارير مقارنة)):::uc
+    U9((تحليل الفجوة)):::uc
+    U10((تقارير امتثال)):::uc
+    U11((تقارير مالية مجمعة)):::uc
+    U12((أرشفة التقارير)):::uc
+    U13((لوحة مؤشرات الأداء)):::uc
+    U14((استخراج إحصائيات استثنائية)):::uc
+
+    A0 --&gt; U0
+    A1 -.-&gt; U0
+    A1 --&gt; U1
+    A2 --&gt; U2
+    A3 --&gt; U3
+    A0 -.-&gt; U3
+    A0 --&gt; U4
+    A1 --&gt; U5
+    A2 --&gt; U6
+    A3 -.-&gt; U6
+    A3 --&gt; U7
+    A0 --&gt; U8
+    A1 --&gt; U9
+    A2 -.-&gt; U9
+    A2 --&gt; U10
+    A3 --&gt; U11
+    A0 --&gt; U12
+    A1 -.-&gt; U12
+    A1 --&gt; U13
+    A2 --&gt; U14
+</pre>
+    <pre class="code-block" id="UC-M6_Statistics-pu">@startuml
+left to right direction
+actor &quot;محلل البيانات&quot; as A0
+actor &quot;المدير&quot; as A1
+actor &quot;مكتب التربية&quot; as A2
+actor &quot;الوزارة&quot; as A3
+usecase &quot;إعداد مسودة إحصائية&quot; as U0
+usecase &quot;مراجعة الإحصائية&quot; as U1
+usecase &quot;رفع الإحصائية&quot; as U2
+usecase &quot;اعتماد الإحصائية&quot; as U3
+usecase &quot;أرشفة الإحصائيات&quot; as U4
+usecase &quot;سجل التحديثات&quot; as U5
+usecase &quot;توليد تقرير دوري&quot; as U6
+usecase &quot;اعتماد التقارير&quot; as U7
+usecase &quot;تقارير مقارنة&quot; as U8
+usecase &quot;تحليل الفجوة&quot; as U9
+usecase &quot;تقارير امتثال&quot; as U10
+usecase &quot;تقارير مالية مجمعة&quot; as U11
+usecase &quot;أرشفة التقارير&quot; as U12
+usecase &quot;لوحة مؤشرات الأداء&quot; as U13
+usecase &quot;استخراج إحصائيات استثنائية&quot; as U14
+
+@enduml</pre>
+  </div>
+</article>
+
+<article class="diagram-card" id="UC-M7_Auth">
+  <div class="diagram-header">
+    <span class="id-badge">UC-M7_Auth</span>
+    <h3>Use Case Diagram تفصيلي — Use Case — الأمن والصلاحيات</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Use Case Diagram (Detailed)</span>
+      <span class="tag level">🎯 Module</span>
+       <span class="tag mod">🔐 الأمن والصلاحيات والمستخد</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>عرض شامل لجميع حالات الاستخدام في Use Case — الأمن والصلاحيات.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>4 ممثل + 22 حالة استخدام.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart LR
+    classDef actor fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef uc fill:#dbeafe,color:#1e3a8a,stroke:#1e3a8a,rx:30,ry:30,stroke-width:1px
+
+    A0[👤 مدير النظام]:::actor
+    A1[👤 مسؤول الأمن]:::actor
+    A2[👤 المستخدم]:::actor
+    A3[👤 المدقق]:::actor
+
+    U0((إنشاء حساب مستخدم)):::uc
+    U1((تفعيل/تعطيل الحساب)):::uc
+    U2((إعادة تعيين كلمة المرور)):::uc
+    U3((تسجيل الدخول)):::uc
+    U4((تسجيل الخروج)):::uc
+    U5((إنشاء دور)):::uc
+    U6((تعديل الدور)):::uc
+    U7((ربط مستخدم بدور)):::uc
+    U8((إنشاء صلاحية)):::uc
+    U9((ربط صلاحية بدور)):::uc
+    U10((صلاحية مباشرة لمستخدم)):::uc
+    U11((سياسات الوصول)):::uc
+    U12((حوكمة الأدوار)):::uc
+    U13((تتبع نشاط المستخدم)):::uc
+    U14((سجل التدقيق)):::uc
+    U15((تقرير محاولات الاختراق)):::uc
+    U16((إدارة الجلسات)):::uc
+    U17((قواعد الامتيازات)):::uc
+    U18((مصفوفة الأدوار)):::uc
+    U19((صلاحيات الطالب)):::uc
+    U20((صلاحيات السلوك)):::uc
+    U21((صلاحيات المالية للطالب)):::uc
+
+    A0 --> U0
+    A1 -.-> U0
+    A1 --> U1
+    A2 --> U2
+    A3 --> U3
+    A0 -.-> U3
+    A0 --> U4
+    A1 --> U5
+    A2 --> U6
+    A3 -.-> U6
+    A3 --> U7
+    A0 --> U8
+    A1 --> U9
+    A2 -.-> U9
+    A2 --> U10
+    A3 --> U11
+    A0 --> U12
+    A1 -.-> U12
+    A1 --> U13
+    A2 --> U14
+    A3 --> U15
+    A0 -.-> U15
+    A0 --> U16
+    A1 --> U17
+    A2 --> U18
+    A3 -.-> U18
+    A3 --> U19
+    A0 --> U20
+    A1 --> U21
+    A2 -.-> U21
+
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'UC-M7_Auth-mer')">📊 Mermaid</button>
+      <button class="code-tab" onclick="showCode(this,'UC-M7_Auth-pu')">🌳 PlantUML</button>
+    </div>
+    <pre class="code-block active" id="UC-M7_Auth-mer">flowchart LR
+    classDef actor fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef uc fill:#dbeafe,color:#1e3a8a,stroke:#1e3a8a,rx:30,ry:30,stroke-width:1px
+
+    A0[👤 مدير النظام]:::actor
+    A1[👤 مسؤول الأمن]:::actor
+    A2[👤 المستخدم]:::actor
+    A3[👤 المدقق]:::actor
+
+    U0((إنشاء حساب مستخدم)):::uc
+    U1((تفعيل/تعطيل الحساب)):::uc
+    U2((إعادة تعيين كلمة المرور)):::uc
+    U3((تسجيل الدخول)):::uc
+    U4((تسجيل الخروج)):::uc
+    U5((إنشاء دور)):::uc
+    U6((تعديل الدور)):::uc
+    U7((ربط مستخدم بدور)):::uc
+    U8((إنشاء صلاحية)):::uc
+    U9((ربط صلاحية بدور)):::uc
+    U10((صلاحية مباشرة لمستخدم)):::uc
+    U11((سياسات الوصول)):::uc
+    U12((حوكمة الأدوار)):::uc
+    U13((تتبع نشاط المستخدم)):::uc
+    U14((سجل التدقيق)):::uc
+    U15((تقرير محاولات الاختراق)):::uc
+    U16((إدارة الجلسات)):::uc
+    U17((قواعد الامتيازات)):::uc
+    U18((مصفوفة الأدوار)):::uc
+    U19((صلاحيات الطالب)):::uc
+    U20((صلاحيات السلوك)):::uc
+    U21((صلاحيات المالية للطالب)):::uc
+
+    A0 --&gt; U0
+    A1 -.-&gt; U0
+    A1 --&gt; U1
+    A2 --&gt; U2
+    A3 --&gt; U3
+    A0 -.-&gt; U3
+    A0 --&gt; U4
+    A1 --&gt; U5
+    A2 --&gt; U6
+    A3 -.-&gt; U6
+    A3 --&gt; U7
+    A0 --&gt; U8
+    A1 --&gt; U9
+    A2 -.-&gt; U9
+    A2 --&gt; U10
+    A3 --&gt; U11
+    A0 --&gt; U12
+    A1 -.-&gt; U12
+    A1 --&gt; U13
+    A2 --&gt; U14
+    A3 --&gt; U15
+    A0 -.-&gt; U15
+    A0 --&gt; U16
+    A1 --&gt; U17
+    A2 --&gt; U18
+    A3 -.-&gt; U18
+    A3 --&gt; U19
+    A0 --&gt; U20
+    A1 --&gt; U21
+    A2 -.-&gt; U21
+</pre>
+    <pre class="code-block" id="UC-M7_Auth-pu">@startuml
+left to right direction
+actor &quot;مدير النظام&quot; as A0
+actor &quot;مسؤول الأمن&quot; as A1
+actor &quot;المستخدم&quot; as A2
+actor &quot;المدقق&quot; as A3
+usecase &quot;إنشاء حساب مستخدم&quot; as U0
+usecase &quot;تفعيل/تعطيل الحساب&quot; as U1
+usecase &quot;إعادة تعيين كلمة المرور&quot; as U2
+usecase &quot;تسجيل الدخول&quot; as U3
+usecase &quot;تسجيل الخروج&quot; as U4
+usecase &quot;إنشاء دور&quot; as U5
+usecase &quot;تعديل الدور&quot; as U6
+usecase &quot;ربط مستخدم بدور&quot; as U7
+usecase &quot;إنشاء صلاحية&quot; as U8
+usecase &quot;ربط صلاحية بدور&quot; as U9
+usecase &quot;صلاحية مباشرة لمستخدم&quot; as U10
+usecase &quot;سياسات الوصول&quot; as U11
+usecase &quot;حوكمة الأدوار&quot; as U12
+usecase &quot;تتبع نشاط المستخدم&quot; as U13
+usecase &quot;سجل التدقيق&quot; as U14
+usecase &quot;تقرير محاولات الاختراق&quot; as U15
+usecase &quot;إدارة الجلسات&quot; as U16
+usecase &quot;قواعد الامتيازات&quot; as U17
+usecase &quot;مصفوفة الأدوار&quot; as U18
+usecase &quot;صلاحيات الطالب&quot; as U19
+usecase &quot;صلاحيات السلوك&quot; as U20
+usecase &quot;صلاحيات المالية للطالب&quot; as U21
+
+@enduml</pre>
+  </div>
+</article>
+
+<article class="diagram-card" id="UC-M8_Emergency">
+  <div class="diagram-header">
+    <span class="id-badge">UC-M8_Emergency</span>
+    <h3>Use Case Diagram تفصيلي — Use Case — الطوارئ والتميز</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Use Case Diagram (Detailed)</span>
+      <span class="tag level">🎯 Module</span>
+       <span class="tag mod">🚨 إدارة الطوارئ والتميز</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>عرض شامل لجميع حالات الاستخدام في Use Case — الطوارئ والتميز.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>5 ممثل + 12 حالة استخدام.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart LR
+    classDef actor fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef uc fill:#dbeafe,color:#1e3a8a,stroke:#1e3a8a,rx:30,ry:30,stroke-width:1px
+
+    A0[👤 مدير المدرسة]:::actor
+    A1[👤 موظف الطوارئ]:::actor
+    A2[👤 فريق الاستجابة]:::actor
+    A3[👤 مكتب التربية]:::actor
+    A4[👤 لجنة التميز]:::actor
+
+    U0((تسجيل حالة طارئة)):::uc
+    U1((تصنيف الطوارئ)):::uc
+    U2((تفعيل خطة استجابة)):::uc
+    U3((تنفيذ إخلاء)):::uc
+    U4((تقييم الأضرار)):::uc
+    U5((رفع تقرير للمكتب)):::uc
+    U6((خطة تعويض أكاديمي)):::uc
+    U7((تنفيذ التعويض)):::uc
+    U8((ترشيح لجائزة)):::uc
+    U9((تسجيل الجائزة)):::uc
+    U10((توثيق إنجاز)):::uc
+    U11((رفع تقرير التميز)):::uc
+
+    A0 --> U0
+    A1 -.-> U0
+    A1 --> U1
+    A2 --> U2
+    A3 --> U3
+    A4 -.-> U3
+    A4 --> U4
+    A0 --> U5
+    A1 --> U6
+    A2 -.-> U6
+    A2 --> U7
+    A3 --> U8
+    A4 --> U9
+    A0 -.-> U9
+    A0 --> U10
+    A1 --> U11
+
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'UC-M8_Emergency-mer')">📊 Mermaid</button>
+      <button class="code-tab" onclick="showCode(this,'UC-M8_Emergency-pu')">🌳 PlantUML</button>
+    </div>
+    <pre class="code-block active" id="UC-M8_Emergency-mer">flowchart LR
+    classDef actor fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef uc fill:#dbeafe,color:#1e3a8a,stroke:#1e3a8a,rx:30,ry:30,stroke-width:1px
+
+    A0[👤 مدير المدرسة]:::actor
+    A1[👤 موظف الطوارئ]:::actor
+    A2[👤 فريق الاستجابة]:::actor
+    A3[👤 مكتب التربية]:::actor
+    A4[👤 لجنة التميز]:::actor
+
+    U0((تسجيل حالة طارئة)):::uc
+    U1((تصنيف الطوارئ)):::uc
+    U2((تفعيل خطة استجابة)):::uc
+    U3((تنفيذ إخلاء)):::uc
+    U4((تقييم الأضرار)):::uc
+    U5((رفع تقرير للمكتب)):::uc
+    U6((خطة تعويض أكاديمي)):::uc
+    U7((تنفيذ التعويض)):::uc
+    U8((ترشيح لجائزة)):::uc
+    U9((تسجيل الجائزة)):::uc
+    U10((توثيق إنجاز)):::uc
+    U11((رفع تقرير التميز)):::uc
+
+    A0 --&gt; U0
+    A1 -.-&gt; U0
+    A1 --&gt; U1
+    A2 --&gt; U2
+    A3 --&gt; U3
+    A4 -.-&gt; U3
+    A4 --&gt; U4
+    A0 --&gt; U5
+    A1 --&gt; U6
+    A2 -.-&gt; U6
+    A2 --&gt; U7
+    A3 --&gt; U8
+    A4 --&gt; U9
+    A0 -.-&gt; U9
+    A0 --&gt; U10
+    A1 --&gt; U11
+</pre>
+    <pre class="code-block" id="UC-M8_Emergency-pu">@startuml
+left to right direction
+actor &quot;مدير المدرسة&quot; as A0
+actor &quot;موظف الطوارئ&quot; as A1
+actor &quot;فريق الاستجابة&quot; as A2
+actor &quot;مكتب التربية&quot; as A3
+actor &quot;لجنة التميز&quot; as A4
+usecase &quot;تسجيل حالة طارئة&quot; as U0
+usecase &quot;تصنيف الطوارئ&quot; as U1
+usecase &quot;تفعيل خطة استجابة&quot; as U2
+usecase &quot;تنفيذ إخلاء&quot; as U3
+usecase &quot;تقييم الأضرار&quot; as U4
+usecase &quot;رفع تقرير للمكتب&quot; as U5
+usecase &quot;خطة تعويض أكاديمي&quot; as U6
+usecase &quot;تنفيذ التعويض&quot; as U7
+usecase &quot;ترشيح لجائزة&quot; as U8
+usecase &quot;تسجيل الجائزة&quot; as U9
+usecase &quot;توثيق إنجاز&quot; as U10
+usecase &quot;رفع تقرير التميز&quot; as U11
+
+@enduml</pre>
+  </div>
+</article>
+
+<article class="diagram-card" id="UC-MASTER">
+  <div class="diagram-header">
+    <span class="id-badge">UC-MASTER</span>
+    <h3>Master Use Case — حزم Use Cases المؤسسية</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Use Case Packages</span>
+      <span class="tag level">🎯 Enterprise</span>
+      
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>نظرة عامة على الـ 8 حزم من Use Cases وأي ممثل يستخدمها.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>9 Actors + 8 Packages.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart LR
+    classDef actor fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef pkg fill:#f3f4f6,color:#374151,stroke:#374151,stroke-dasharray:5 5
+
+    A1[👨‍🎓 الطالب]:::actor
+    A2[👨‍👩 ولي الأمر]:::actor
+    A3[👨‍🏫 المعلم]:::actor
+    A4[👔 مدير المدرسة]:::actor
+    A5[💼 موظف إداري]:::actor
+    A6[🛠️ فني]:::actor
+    A7[💰 محاسب]:::actor
+    A8[🏛️ مراجع المكتب]:::actor
+    A9[🔐 مدير النظام]:::actor
+
+    PKG1[🏛️ Package: إدارة المدرسة]:::pkg
+    PKG2[🎓 Package: إدارة الطلاب]:::pkg
+    PKG3[👥 Package: إدارة الموظفين]:::pkg
+    PKG4[📦 Package: الأصول]:::pkg
+    PKG5[💰 Package: المالية]:::pkg
+    PKG6[📊 Package: الإحصاء]:::pkg
+    PKG7[🔐 Package: الأمن]:::pkg
+    PKG8[🚨 Package: الطوارئ]:::pkg
+
+    A4 --> PKG1
+    A8 --> PKG1
+    A1 --> PKG2
+    A2 --> PKG2
+    A3 --> PKG2
+    A4 --> PKG2
+    A5 --> PKG3
+    A3 --> PKG3
+    A6 --> PKG4
+    A4 --> PKG4
+    A7 --> PKG5
+    A2 --> PKG5
+    A4 --> PKG6
+    A8 --> PKG6
+    A9 --> PKG7
+    A4 --> PKG8
+
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'UC-MASTER-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="UC-MASTER-mer">flowchart LR
+    classDef actor fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef pkg fill:#f3f4f6,color:#374151,stroke:#374151,stroke-dasharray:5 5
+
+    A1[👨‍🎓 الطالب]:::actor
+    A2[👨‍👩 ولي الأمر]:::actor
+    A3[👨‍🏫 المعلم]:::actor
+    A4[👔 مدير المدرسة]:::actor
+    A5[💼 موظف إداري]:::actor
+    A6[🛠️ فني]:::actor
+    A7[💰 محاسب]:::actor
+    A8[🏛️ مراجع المكتب]:::actor
+    A9[🔐 مدير النظام]:::actor
+
+    PKG1[🏛️ Package: إدارة المدرسة]:::pkg
+    PKG2[🎓 Package: إدارة الطلاب]:::pkg
+    PKG3[👥 Package: إدارة الموظفين]:::pkg
+    PKG4[📦 Package: الأصول]:::pkg
+    PKG5[💰 Package: المالية]:::pkg
+    PKG6[📊 Package: الإحصاء]:::pkg
+    PKG7[🔐 Package: الأمن]:::pkg
+    PKG8[🚨 Package: الطوارئ]:::pkg
+
+    A4 --&gt; PKG1
+    A8 --&gt; PKG1
+    A1 --&gt; PKG2
+    A2 --&gt; PKG2
+    A3 --&gt; PKG2
+    A4 --&gt; PKG2
+    A5 --&gt; PKG3
+    A3 --&gt; PKG3
+    A6 --&gt; PKG4
+    A4 --&gt; PKG4
+    A7 --&gt; PKG5
+    A2 --&gt; PKG5
+    A4 --&gt; PKG6
+    A8 --&gt; PKG6
+    A9 --&gt; PKG7
+    A4 --&gt; PKG8
+</pre>
+    
+  </div>
+</article>
+
+<div class="nav-buttons"><a href="01_dfd.html" class="nav-btn">→ 🌐 مخططات السياق وتدفق البيانات (DFD)</a><a href="index.html" class="nav-btn" style="background:#f59e0b">🏠 الفهرس الرئيسي</a><a href="03_sequence.html" class="nav-btn">🔄 مخططات التسلسل (Sequence) ←</a></div>
+</div>
+
+<a href="#top" class="back-to-top" title="أعلى">⬆</a>
+<script>
+mermaid.initialize({
+  startOnLoad: true,
+  theme: 'default',
+  maxTextSize: 200000,
+  maxEdges: 2500,
+  themeVariables:{fontFamily:'Cairo, sans-serif',primaryColor:'#dbeafe',primaryTextColor:'#1e3a8a',primaryBorderColor:'#1e3a8a',lineColor:'#475569',secondaryColor:'#fef3c7',tertiaryColor:'#dcfce7'},
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  sequence:{useMaxWidth:true,wrap:true},
+  er:{useMaxWidth:true,layoutDirection:'TB'},
+  class:{useMaxWidth:true},
+  state:{useMaxWidth:true}
+});
+function showCode(btn, id){
+  const card = btn.closest('.diagram-card');
+  card.querySelectorAll('.code-tab').forEach(b => b.classList.remove('active'));
+  card.querySelectorAll('.code-block').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+</script>
+</body></html>

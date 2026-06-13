@@ -1,0 +1,124 @@
+erDiagram
+    %% =====================================================
+    %% M6_Statistics - ERD
+    %% Mermaid 10.9.1 Compliant - SLIM VIEW (PK + FK only)
+    %% =====================================================
+
+    DashboardConfiguration {
+        INT configId PK "إعدادات لوحات المؤشرات"
+        INT schoolId "معرف المدرسة FK School.schoolId - يمكن أن يكون NULL للإعدادات العام..."
+    }
+
+    KPI_Metrics {
+        INT metricId PK "المؤشرات التشغيلية"
+        INT configId FK "معرف إعداد المؤشر FK DashboardConfiguration.configId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT calculatedByUserId "معرف من قام بالحساب FK SystemUser.userId"
+        INT verifiedByUserId "معرف من تحقق FK SystemUser.userId"
+    }
+
+    TrendAnalysisResult {
+        INT analysisId PK "نتائج تحليل الاتجاهات"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR kpiCode "كود المؤشر من DashboardConfiguration FK DashboardConfiguration.kpiC..."
+        INT analyzedByUserId "معرف من قام بالتحليل FK SystemUser.userId - غالباً النظام آلياً"
+        INT approvedByUserId "معرف من اعتمد التحليل FK SystemUser.userId"
+    }
+
+    SchoolStatisticsDraft {
+        INT draftId PK "مسودات الإحصائية المدرسية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId - اختياري"
+    }
+
+    SubmittedStatistics {
+        INT submissionId PK "الإحصائيات المرفوعة"
+        INT draftId FK "معرف المسودة المصدر FK SchoolStatisticsDraft.draftId - علاقة 1-1"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT submittedByUserId "معرف من قام بالرفع FK SystemUser.userId"
+        INT reviewedByUserId "معرف مراجع المكتب FK SystemUser.userId - من القسم الأول Office"
+    }
+
+    StatisticsUpdateHistory {
+        INT historyId PK "سجل تحديثات الإحصاء"
+        INT draftId FK "معرف المسودة المتأثرة FK SchoolStatisticsDraft.draftId - اختياري"
+        INT submissionId FK "معرف الإحصاء المرفوع المتأثر FK SubmittedStatistics.submissionId - ..."
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT changedByUserId "معرف من قام بالتعديل FK SystemUser.userId"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+    }
+
+    StatisticsArchive {
+        INT archiveId PK "أرشيف الإحصائيات التاريخية"
+        INT submissionId FK "معرف الإحصاء المرفوع المصدر FK SubmittedStatistics.submissionId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT archivedByUserId "معرف من قام بالأرشفة FK SystemUser.userId"
+    }
+
+    SystemReports {
+        INT reportId PK "سجل التقارير الدورية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT generatedByUserId "معرف من قام بالتوليد إذا يدوياً FK SystemUser.userId"
+    }
+
+    ReportApprovals {
+        INT approvalId PK "اعتمادات التقارير"
+        INT reportId FK "معرف التقرير المراد اعتماده FK SystemReports.reportId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT submittedByUserId "معرف من رفع التقرير FK SystemUser.userId"
+        INT reviewerId "معرف المراجع FK SystemUser.userId - اختياري"
+        INT approvedByUserId "معرف المعتمد FK SystemUser.userId"
+    }
+
+    ComparativeReport {
+        INT comparativeId PK "التقارير المقارنة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT generatedByUserId "معرف من قام بالتوليد FK SystemUser.userId"
+    }
+
+    FinancialSummaryReports {
+        INT summaryId PK "تقارير القيمة المالية المجمعة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+    }
+
+    ExternalComplianceReports {
+        INT reportId PK "تقارير الامتثال والرفع الخارجي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT generatedByUserId "معرف من أنشأ التقرير FK SystemUser.userId"
+    }
+
+    GapAnalysisReports {
+        INT analysisId PK "تحليلات الفجوة والاحتياج"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetCategoryId "معرف فئة الأصول FK AssetCategory.categoryId - إذا كان التحليل لأصول"
+        INT gradeLevelId "معرف الصف FK GradeCapacity.gradeLevelId - إذا كان التحليل لصف معين"
+        INT departmentId "معرف القسم FK SchoolDepartment.deptId - إذا كان التحليل لقسم"
+        INT analyzedByUserId "معرف من قام بالتحليل FK SystemUser.userId"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+    }
+
+    ReportsArchive {
+        INT archiveId PK "أرشفة التقارير"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT archivedByUserId "معرف من قام بالأرشفة FK SystemUser.userId"
+    }
+
+    ExceptionalStatistics {
+        INT statisticsId PK "الإحصائيات الاستثنائية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT generatedByUserId "معرف من أنشأ الإحصاء FK SystemUser.userId"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+    }
+
+    %% ===== Relationships =====
+    DashboardConfiguration ||--o{ KPI_Metrics : "معرف إعداد المؤشر FK Dash"
+    SchoolStatisticsDraft ||--o{ SubmittedStatistics : "معرف المسودة المصدر FK Sc"
+    SchoolStatisticsDraft ||--o{ StatisticsUpdateHistory : "معرف المسودة المتأثرة FK "
+    SubmittedStatistics ||--o{ StatisticsUpdateHistory : "معرف الإحصاء المرفوع المت"
+    SubmittedStatistics ||--o{ StatisticsArchive : "معرف الإحصاء المرفوع المص"
+    SystemReports ||--o{ ReportApprovals : "معرف التقرير المراد اعتما"

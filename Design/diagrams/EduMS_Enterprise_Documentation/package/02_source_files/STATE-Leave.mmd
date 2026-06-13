@@ -1,0 +1,16 @@
+stateDiagram-v2
+    [*] --> Draft
+    Draft --> Submitted
+    Submitted --> ManagerReview
+    ManagerReview --> ManagerApproved
+    ManagerReview --> Rejected
+    ManagerApproved --> HRReview
+    HRReview --> Approved
+    HRReview --> Rejected
+    Approved --> InEffect : بدء الإجازة
+    InEffect --> Active : العودة قبل الانتهاء (طوارئ)
+    Active --> Resumed : إلغاء/استئناف
+    InEffect --> Completed : انتهاء الفترة
+    Completed --> Archived
+    Rejected --> [*]
+    Archived --> [*]

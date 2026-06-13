@@ -1,0 +1,39 @@
+flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P4_1((4.1<br/>التخطيط والاحتياج)):::proc
+    P4_2((4.2<br/>الشراء والاقتناء)):::proc
+    P4_3((4.3<br/>التسجيل والترقيم)):::proc
+    P4_4((4.4<br/>التخصيص والإعارة)):::proc
+    P4_5((4.5<br/>الصيانة)):::proc
+    P4_6((4.6<br/>الإهلاك والتقييم)):::proc
+    P4_7((4.7<br/>الجرد والرقابة)):::proc
+    P4_8((4.8<br/>الشطب والأرشفة)):::proc
+
+    DS_AssetRequirementRequest[("AssetRequirementRequest")]:::ds
+    DS_PurchaseOrders[("PurchaseOrders")]:::ds
+    DS_Asset[("Asset")]:::ds
+    DS_AssetAssignment[("AssetAssignment")]:::ds
+    DS_MaintenanceTickets[("MaintenanceTickets")]:::ds
+    DS_AssetFinancials[("AssetFinancials")]:::ds
+    DS_InventoryPlans[("InventoryPlans")]:::ds
+
+    Ext1 --> P4_1
+    P4_1 --> P4_2
+    P4_2 --> P4_3
+    P4_3 --> P4_4
+    P4_4 --> P4_5
+    P4_5 --> P4_6
+    P4_6 --> P4_7
+    P4_7 --> P4_8
+    P4_1 <--> DS_AssetRequirementRequest
+    P4_2 <--> DS_PurchaseOrders
+    P4_3 <--> DS_Asset
+    P4_4 <--> DS_AssetAssignment
+    P4_5 <--> DS_MaintenanceTickets
+    P4_6 <--> DS_AssetFinancials
+    P4_7 <--> DS_InventoryPlans

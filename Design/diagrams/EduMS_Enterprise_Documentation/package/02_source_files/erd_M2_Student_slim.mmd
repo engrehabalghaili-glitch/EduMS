@@ -1,0 +1,468 @@
+erDiagram
+    Application {
+        BIGINT applicationId "PK"
+        BIGINT ParentId "FK"
+        BIGINT schoolId "FK"
+        DATE birthDate
+        VARCHAR(200) birthPlace
+        VARCHAR(200) gender
+        VARCHAR(200) nationality
+        VARCHAR(200) address
+        VARCHAR more__fields "+43 fields"
+    }
+    Student {
+        INT schoolStudentNumber
+        BIGINT nationalId "PK FK"
+        VARCHAR(200) fullNameAr
+        VARCHAR(200) fullNameEn
+        DATE birthDate
+        VARCHAR(200) birthPlace
+        VARCHAR(200) gender
+        VARCHAR(200) nationality
+        VARCHAR more__fields "+96 fields"
+    }
+    Guardian {
+        BIGINT nationalId "FK"
+        VARCHAR(200) fullNameAr
+        VARCHAR(200) relationship
+        VARCHAR(20) phonePrimary
+        VARCHAR(20) phoneSecondary
+        VARCHAR(100) email
+        VARCHAR(200) jobTitle
+        BOOLEAN isPrimary
+        VARCHAR more__fields "+93 fields"
+    }
+    Enrollment {
+        VARCHAR(50) enrollmentType
+        DATE enrollmentDate
+        INT enrollmentNumber
+        VARCHAR(50) enrollmentStatus
+        VARCHAR(50) approvalStatus
+        DATE createdAt
+        BIGINT studentId "PK FK"
+        BIGINT academicYearId "FK"
+        VARCHAR more__fields "+65 fields"
+    }
+    StudentDocument {
+        VARCHAR(50) documentType
+        VARCHAR(200) documentName
+        VARCHAR(200) filePath
+        VARCHAR(50) mimeType
+        BOOLEAN isVerified
+        VARCHAR(50) status
+        DATE uploadedAt
+        BIGINT studentId "PK FK"
+        VARCHAR more__fields "+57 fields"
+    }
+    StudentHealthRecord {
+        VARCHAR(50) bloodType
+        VARCHAR(200) height
+        VARCHAR(200) weight
+        VARCHAR(200) chronicDiseases
+        VARCHAR(200) allergies
+        VARCHAR(50) vaccinationStatus
+        DATE lastCheckupDate
+        DATE createdAt
+        VARCHAR more__fields "+93 fields"
+    }
+    StudentTransportPreference {
+        BIGINT preferenceId "PK"
+        BIGINT studentId "FK"
+        BIGINT academicYearId "FK"
+        VARCHAR(50) transportType
+        BIGINT busSubscriptionId "FK"
+        BIGINT preferredBusRouteId "FK"
+        BIGINT preferredBusStopId "FK"
+        BIGINT alternativeBusRouteId "FK"
+        VARCHAR more__fields "+37 fields"
+    }
+    StudentInventory {
+        BIGINT inventoryId "PK"
+        BIGINT studentId "FK"
+        BIGINT academicYearId "FK"
+        VARCHAR(50) itemType
+        BIGINT itemId "FK"
+        VARCHAR(50) itemCode
+        VARCHAR(200) itemName
+        TEXT itemDescription
+        VARCHAR more__fields "+41 fields"
+    }
+    Transportation {
+        BIGINT transportId "PK"
+        BIGINT schoolId "FK"
+        BIGINT routeId "FK"
+        VARCHAR(200) routeName
+        VARCHAR(50) routeCode
+        TEXT routeDescription
+        BIGINT busId "FK"
+        INT busPlateNumber
+        VARCHAR more__fields "+37 fields"
+    }
+    Course {
+        BIGINT courseId "PK"
+        BIGINT schoolId "FK"
+        BIGINT curriculumId "FK"
+        BIGINT departmentId "FK"
+        VARCHAR(50) courseCode
+        VARCHAR(200) courseNameAr
+        VARCHAR(200) courseNameEn
+        VARCHAR(200) courseNameArNormalized
+        VARCHAR more__fields "+48 fields"
+    }
+    Curriculum {
+        BIGINT curriculumId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) curriculumCode
+        VARCHAR(200) curriculumNameAr
+        VARCHAR(200) curriculumNameEn
+        VARCHAR(50) curriculumType
+        VARCHAR(200) educationSystem
+        TEXT descriptionAr
+        VARCHAR more__fields "+20 fields"
+    }
+    CoursePlan {
+        BIGINT planId "PK"
+        BIGINT courseId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        BIGINT teacherId "FK"
+        BIGINT gradeLevelId "FK"
+        VARCHAR(50) planCode
+        VARCHAR(200) planVersion
+        VARCHAR more__fields "+24 fields"
+    }
+    ClassSection {
+        BIGINT sectionId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        BIGINT gradeLevelId "FK"
+        VARCHAR(50) sectionCode
+        VARCHAR(200) sectionNameAr
+        VARCHAR(200) sectionNameEn
+        VARCHAR more__fields "+24 fields"
+    }
+    CourseRegistration {
+        BIGINT registrationId "PK"
+        BIGINT studentId "FK"
+        BIGINT enrollmentId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        BIGINT courseId "FK"
+        BIGINT sectionId "FK"
+        BIGINT teacherId "FK"
+        VARCHAR more__fields "+54 fields"
+    }
+    Grade {
+        BIGINT gradeId "PK"
+        BIGINT registrationId "FK"
+        BIGINT studentId "FK"
+        BIGINT courseId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        DECIMAL(5,2) gradeType
+        DECIMAL(5,2) gradeCategory
+        VARCHAR more__fields "+36 fields"
+    }
+    Evaluation {
+        BIGINT evaluationId "PK"
+        BIGINT courseId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        VARCHAR(200) evaluationNameAr
+        VARCHAR(200) evaluationNameEn
+        VARCHAR(50) evaluationType
+        VARCHAR(200) components
+        VARCHAR more__fields "+15 fields"
+    }
+    ExamResult {
+        BIGINT examResultId "PK"
+        BIGINT registrationId "FK"
+        BIGINT studentId "FK"
+        BIGINT courseId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        BIGINT examId "FK"
+        VARCHAR(200) examName
+        VARCHAR more__fields "+32 fields"
+    }
+    Activity {
+        BIGINT activityId "PK"
+        BIGINT courseId "FK"
+        BIGINT activityTypeId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        VARCHAR(200) activityNameAr
+        VARCHAR(200) activityNameEn
+        VARCHAR(50) activityCode
+        VARCHAR more__fields "+33 fields"
+    }
+    ActivityDetail {
+        BIGINT detailId "PK"
+        BIGINT activityId "FK"
+        BIGINT studentId "FK"
+        DATE registrationDate
+        VARCHAR(50) registrationStatus
+        VARCHAR(200) role
+        VARCHAR(50) attendanceStatus
+        DATE attendanceDates
+        VARCHAR more__fields "+18 fields"
+    }
+    ActivityType {
+        BIGINT activityTypeId "PK"
+        VARCHAR(50) typeCode
+        VARCHAR(50) typeNameAr
+        VARCHAR(50) typeNameEn
+        TEXT descriptionAr
+        TEXT descriptionEn
+        VARCHAR(50) category
+        VARCHAR(50) colorCode
+        VARCHAR more__fields "+11 fields"
+    }
+    LeaveType {
+        BIGINT leaveTypeId "PK"
+        VARCHAR(50) typeCode
+        VARCHAR(50) typeNameAr
+        VARCHAR(50) typeNameEn
+        TEXT descriptionAr
+        TEXT descriptionEn
+        VARCHAR(50) category
+        BIGINT isPaid "FK"
+        VARCHAR more__fields "+14 fields"
+    }
+    Attendance {
+        BIGINT attendanceId "PK"
+        BIGINT studentId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        BIGINT gradeLevelId "FK"
+        BIGINT classSectionId "FK"
+        DATE attendanceDate
+        VARCHAR(200) dayOfWeek
+        VARCHAR more__fields "+34 fields"
+    }
+    AttendanceDetail {
+        BIGINT attendanceDetailId "PK"
+        BIGINT attendanceId "FK"
+        BIGINT studentId "FK"
+        BIGINT timetableSlotId "FK"
+        BIGINT periodId "FK"
+        BIGINT courseId "FK"
+        BIGINT teacherId "FK"
+        BIGINT classSectionId "FK"
+        VARCHAR more__fields "+17 fields"
+    }
+    StudentLeave {
+        BIGINT leaveId "PK"
+        BIGINT studentId "FK"
+        BIGINT leaveTypeId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        DATE requestDate
+        DATE startDate
+        DATE endDate
+        VARCHAR more__fields "+33 fields"
+    }
+    Discipline {
+        BIGINT disciplineId "PK"
+        BIGINT studentId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        INT caseNumber
+        DATE incidentDate
+        TIME incidentTime
+        VARCHAR(200) location
+        VARCHAR more__fields "+43 fields"
+    }
+    StudentComplaint {
+        BIGINT complaintId "PK"
+        INT complaintNumber
+        BIGINT studentId "FK"
+        BIGINT guardianId "FK"
+        VARCHAR(50) complainantType
+        VARCHAR(200) complainantName
+        VARCHAR(20) complainantPhone
+        VARCHAR(100) complainantEmail
+        VARCHAR more__fields "+47 fields"
+    }
+    GuidanceSession {
+        BIGINT sessionId "PK"
+        INT sessionNumber
+        BIGINT counselorId "FK"
+        VARCHAR(50) sessionType
+        VARCHAR(50) category
+        VARCHAR(200) title
+        VARCHAR(200) objectives
+        DATE plannedDate
+        VARCHAR more__fields "+35 fields"
+    }
+    LibraryLoan {
+        BIGINT loanId "PK"
+        BIGINT resourceId "FK"
+        VARCHAR(50) borrowerType
+        BIGINT borrowerId "FK"
+        VARCHAR(200) borrowerName
+        VARCHAR(200) borrowerClass
+        VARCHAR(20) borrowerPhone
+        DATE loanDate
+        VARCHAR more__fields "+37 fields"
+    }
+    StudentActivityRegistration {
+        BIGINT registrationId "PK"
+        BIGINT studentId "FK"
+        BIGINT activityId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        DATE registrationDate
+        VARCHAR(200) registrationSource
+        VARCHAR(50) status
+        VARCHAR more__fields "+28 fields"
+    }
+    SchoolActivity {
+        BIGINT activityId "PK"
+        VARCHAR(50) activityCode
+        VARCHAR(200) activityNameAr
+        VARCHAR(200) activityNameEn
+        BIGINT activityTypeId "FK"
+        VARCHAR(50) category
+        VARCHAR(50) subCategory
+        TEXT descriptionAr
+        VARCHAR more__fields "+53 fields"
+    }
+    ClassPeriod {
+        BIGINT periodId "PK"
+        BIGINT schoolId "FK"
+        BIGINT shiftId "FK"
+        INT periodNumber
+        VARCHAR(50) periodCode
+        VARCHAR(200) nameAr
+        VARCHAR(200) nameEn
+        VARCHAR(50) periodType
+        VARCHAR more__fields "+12 fields"
+    }
+    TimetableSlot {
+        BIGINT slotId "PK"
+        BIGINT timetableId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        BIGINT gradeLevelId "FK"
+        BIGINT sectionId "FK"
+        VARCHAR(200) dayOfWeek
+        BIGINT periodId "FK"
+        VARCHAR more__fields "+22 fields"
+    }
+    ActivityAttendance {
+        BIGINT attendanceId "PK"
+        BIGINT activityRegistrationId "FK"
+        BIGINT activityId "FK"
+        BIGINT studentId "FK"
+        DATE sessionDate
+        INT sessionNumber
+        VARCHAR(200) sessionTitle
+        TIME startTime
+        VARCHAR more__fields "+21 fields"
+    }
+    Classroom {
+        BIGINT classroomId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) classroomCode
+        VARCHAR(200) classroomNameAr
+        VARCHAR(200) classroomNameEn
+        INT classroomNumber
+        BIGINT buildingId "FK"
+        VARCHAR(200) buildingName
+        VARCHAR more__fields "+61 fields"
+    }
+    Timetable {
+        BIGINT timetableId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        BIGINT gradeLevelId "FK"
+        BIGINT sectionId "FK"
+        TIME timetableCode
+        TIME timetableNameAr
+        VARCHAR more__fields "+21 fields"
+    }
+    FacilityDepartmentAssignment {
+        BIGINT assignmentId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) facilityType
+        BIGINT facilityId "FK"
+        BIGINT departmentId "FK"
+        VARCHAR(50) assignmentType
+        BIGINT responsibleUserId "FK"
+        VARCHAR(200) responsibleRole
+        VARCHAR more__fields "+26 fields"
+    }
+    AcademicAssetMapping {
+        BIGINT mappingId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT courseId "FK"
+        BIGINT curriculumId "FK"
+        BIGINT gradeLevelId "FK"
+        BIGINT semesterId "FK"
+        VARCHAR(50) assetType
+        VARCHAR more__fields "+29 fields"
+    }
+    Guardian ||--o{ Application : "ParentId"
+    Student ||--o{ Application : "convertedToStudentId"
+    Student ||--o{ Guardian : "studentId"
+    Guardian ||--o{ Guardian : "guardianId"
+    Student ||--o{ Enrollment : "studentId"
+    ClassSection ||--o{ Enrollment : "classSectionId"
+    Student ||--o{ StudentDocument : "studentId"
+    Enrollment ||--o{ StudentDocument : "enrollmentId"
+    Student ||--o{ StudentHealthRecord : "studentId"
+    Student ||--o{ StudentTransportPreference : "studentId"
+    Transportation ||--o{ StudentTransportPreference : "preferredBusRouteId"
+    Student ||--o{ StudentInventory : "studentId"
+    Curriculum ||--o{ Course : "curriculumId"
+    Course ||--o{ CoursePlan : "courseId"
+    Classroom ||--o{ ClassSection : "classroomId"
+    Student ||--o{ CourseRegistration : "studentId"
+    Enrollment ||--o{ CourseRegistration : "enrollmentId"
+    Course ||--o{ CourseRegistration : "courseId"
+    ClassSection ||--o{ CourseRegistration : "sectionId"
+    CourseRegistration ||--o{ Grade : "registrationId"
+    Student ||--o{ Grade : "studentId"
+    Course ||--o{ Grade : "courseId"
+    Course ||--o{ Evaluation : "courseId"
+    CourseRegistration ||--o{ ExamResult : "registrationId"
+    Student ||--o{ ExamResult : "studentId"
+    Course ||--o{ ExamResult : "courseId"
+    Course ||--o{ Activity : "courseId"
+    ActivityType ||--o{ Activity : "activityTypeId"
+    Activity ||--o{ ActivityDetail : "activityId"
+    Student ||--o{ ActivityDetail : "studentId"
+    Student ||--o{ Attendance : "studentId"
+    ClassSection ||--o{ Attendance : "classSectionId"
+    StudentLeave ||--o{ Attendance : "excuseId"
+    Attendance ||--o{ AttendanceDetail : "attendanceId"
+    Student ||--o{ AttendanceDetail : "studentId"
+    TimetableSlot ||--o{ AttendanceDetail : "timetableSlotId"
+    ClassPeriod ||--o{ AttendanceDetail : "periodId"
+    Course ||--o{ AttendanceDetail : "courseId"
+    ClassSection ||--o{ AttendanceDetail : "classSectionId"
+    Student ||--o{ StudentLeave : "studentId"
+    LeaveType ||--o{ StudentLeave : "leaveTypeId"
+    Student ||--o{ Discipline : "studentId"
+    Student ||--o{ StudentComplaint : "studentId"
+    Guardian ||--o{ StudentComplaint : "guardianId"
+    Discipline ||--o{ GuidanceSession : "relatedDisciplineId"
+    Student ||--o{ StudentActivityRegistration : "studentId"
+    SchoolActivity ||--o{ StudentActivityRegistration : "activityId"
+    ActivityType ||--o{ SchoolActivity : "activityTypeId"
+    Timetable ||--o{ TimetableSlot : "timetableId"
+    ClassSection ||--o{ TimetableSlot : "sectionId"
+    ClassPeriod ||--o{ TimetableSlot : "periodId"
+    Course ||--o{ TimetableSlot : "courseId"
+    Classroom ||--o{ TimetableSlot : "classroomId"
+    StudentActivityRegistration ||--o{ ActivityAttendance : "activityRegistrationId"
+    SchoolActivity ||--o{ ActivityAttendance : "activityId"
+    Student ||--o{ ActivityAttendance : "studentId"
+    ClassSection ||--o{ Timetable : "sectionId"
+    Classroom ||--o{ FacilityDepartmentAssignment : "facilityId"
+    Course ||--o{ AcademicAssetMapping : "courseId"
+    Curriculum ||--o{ AcademicAssetMapping : "curriculumId"

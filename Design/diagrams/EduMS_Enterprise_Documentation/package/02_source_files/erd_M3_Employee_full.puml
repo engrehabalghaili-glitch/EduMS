@@ -1,0 +1,1327 @@
+@startuml M3_Employee
+!define PK <b><color:red>PK</color></b>
+!define FK <i><color:blue>FK</color></i>
+skinparam linetype ortho
+skinparam class {
+  BackgroundColor #FEF3C7
+  BorderColor #92400E
+  ArrowColor #1E3A8A
+}
+hide methods
+
+entity "Employee" as Employee {
+  * employeeId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  employeeCode : VARCHAR(50)
+  nationalId : BIGINT <<FK>>
+  nationalIdType : VARCHAR(50)
+  nationalIdExpiryDate : DATE
+  passportNumber : INT
+  passportExpiryDate : DATE
+  residenceNumber : INT
+  residenceExpiryDate : DATE
+  residenceSponsor : VARCHAR(200)
+  firstNameAr : VARCHAR(200)
+  fatherNameAr : VARCHAR(200)
+  grandfatherNameAr : VARCHAR(200)
+  familyNameAr : VARCHAR(200)
+  fullNameAr : VARCHAR(200)
+  firstNameEn : VARCHAR(200)
+  fatherNameEn : VARCHAR(200)
+  grandfatherNameEn : VARCHAR(200)
+  familyNameEn : VARCHAR(200)
+  fullNameEn : VARCHAR(200)
+  fullNameArNormalized : VARCHAR(200)
+  fullNameEnNormalized : VARCHAR(200)
+  gender : VARCHAR(200)
+  birthDate : DATE
+  birthPlace : VARCHAR(200)
+  nationality : VARCHAR(200)
+  maritalStatus : VARCHAR(50)
+  numberOfDependents : INT
+  numberOfChildren : INT
+  spouseName : VARCHAR(200)
+  spousePhone : VARCHAR(20)
+  emergencyContactName : VARCHAR(200)
+  emergencyContactPhone : VARCHAR(20)
+  emergencyContactRelation : VARCHAR(200)
+  bloodType : VARCHAR(50)
+  hasSpecialNeeds : BOOLEAN
+  specialNeedsDetails : TEXT
+  medicalConditions : VARCHAR(200)
+  allergies : VARCHAR(200)
+  phonePrimary : VARCHAR(20)
+  phoneSecondary : VARCHAR(20)
+  emailPersonal : VARCHAR(100)
+  emailOfficial : VARCHAR(100)
+  address : VARCHAR(200)
+  city : VARCHAR(200)
+  district : VARCHAR(200)
+  street : VARCHAR(200)
+  buildingNumber : INT
+  unitNumber : INT
+  postalCode : VARCHAR(100)
+  additionalNumber : INT
+  profilePhoto : VARCHAR(200)
+  idCardImage : VARCHAR(200)
+  passportImage : VARCHAR(200)
+  contractType : VARCHAR(50)
+  employeeType : VARCHAR(50)
+  category : VARCHAR(50)
+  departmentId : BIGINT <<FK>>
+  jobTitle : VARCHAR(200)
+  jobGrade : DECIMAL(5,2)
+  jobRank : VARCHAR(200)
+  specialization : VARCHAR(200)
+  qualification : BOOLEAN
+  qualificationSource : VARCHAR(200)
+  graduationYear : VARCHAR(200)
+  graduationGrade : DECIMAL(5,2)
+  experienceYears : INT
+  previousEmployer : VARCHAR(200)
+  hireDate : DATE
+  startDate : DATE
+  endDate : DATE
+  employmentStatus : VARCHAR(50)
+  statusReason : VARCHAR(50)
+  statusDate : DATE
+  isActive : BOOLEAN
+  canLogin : BOOLEAN
+  portalUsername : VARCHAR(200)
+  portalPasswordHash : VARCHAR(200)
+  lastLoginDate : DATE
+  lastLoginIp : VARCHAR(200)
+  twoFactorEnabled : BOOLEAN
+  preferredLanguage : VARCHAR(200)
+  notificationPreference : VARCHAR(200)
+  bankName : VARCHAR(200)
+  bankAccountNumber : INT
+  bankIban : VARCHAR(50)
+  bankAccountName : INT
+  hasDrivingLicense : BOOLEAN
+  drivingLicenseNumber : INT
+  drivingLicenseExpiry : DATE
+  hasCar : BOOLEAN
+  carPlateNumber : INT
+  parkingPermit : VARCHAR(200)
+  dataSource : VARCHAR(200)
+  importBatchId : BIGINT <<FK>>
+  verificationStatus : VARCHAR(50)
+  verifiedByUserId : BIGINT <<FK>>
+  verificationDate : DATE
+  verificationNotes : TEXT
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+  deletedAt : DATE
+  deletedByUserId : BIGINT <<FK>>
+}
+
+entity "AppointmentDecision" as AppointmentDecision {
+  * decisionId : BIGINT <<PK>>
+  --
+  employeeId : BIGINT <<FK>>
+  decisionNumber : INT
+  decisionDate : DATE
+  decisionDateGregorian : DATE
+  decisionSource : VARCHAR(200)
+  decisionType : VARCHAR(50)
+  jobTitle : VARCHAR(200)
+  jobGrade : DECIMAL(5,2)
+  jobRank : VARCHAR(200)
+  departmentId : BIGINT <<FK>>
+  employmentType : VARCHAR(50)
+  contractType : VARCHAR(50)
+  startDate : DATE
+  probationPeriod : VARCHAR(200)
+  probationEndDate : DATE
+  salaryAmount : DECIMAL(15,2)
+  allowanceDetails : TEXT
+  otherBenefits : VARCHAR(200)
+  attachmentPath : VARCHAR(200)
+  attachmentName : VARCHAR(200)
+  attachmentType : VARCHAR(50)
+  approvedBy : VARCHAR(200)
+  approvedByName : VARCHAR(200)
+  approvedByTitle : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "EmployeeDocuments" as EmployeeDocuments {
+  * documentId : BIGINT <<PK>>
+  --
+  employeeId : BIGINT <<FK>>
+  documentType : VARCHAR(50)
+  documentSubType : VARCHAR(50)
+  documentName : VARCHAR(200)
+  documentNumber : INT
+  issuingAuthority : BOOLEAN
+  issuingCountry : BOOLEAN
+  issueDate : DATE
+  expiryDate : DATE
+  isExpiryRequired : DATE
+  expiryReminderSent : BOOLEAN
+  expiryReminderDate : DATE
+  filePath : VARCHAR(200)
+  fileName : VARCHAR(200)
+  fileSize : VARCHAR(200)
+  fileType : VARCHAR(50)
+  fileHash : VARCHAR(200)
+  thumbnailPath : VARCHAR(200)
+  description : TEXT
+  tags : VARCHAR(200)
+  isRequired : BOOLEAN
+  isVerified : BOOLEAN
+  verifiedByUserId : BIGINT <<FK>>
+  verificationDate : DATE
+  verificationNotes : TEXT
+  rejectionReason : VARCHAR(200)
+  status : VARCHAR(50)
+  accessLevel : VARCHAR(50)
+  isConfidential : BOOLEAN
+  sharedWith : VARCHAR(200)
+  downloadCount : INT
+  lastDownloadedAt : DATE
+  lastDownloadedByUserId : BIGINT <<FK>>
+  isArchived : BOOLEAN
+  archivedAt : DATE
+  archivedByUserId : BIGINT <<FK>>
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "EmployeeInventoryCustody" as EmployeeInventoryCustody {
+  * custodyId : BIGINT <<PK>>
+  --
+  employeeId : BIGINT <<FK>>
+  assetId : BIGINT <<FK>>
+  itemType : VARCHAR(50)
+  itemName : VARCHAR(200)
+  itemDescription : TEXT
+  itemBrand : VARCHAR(200)
+  itemModel : VARCHAR(200)
+  itemSerial : VARCHAR(50)
+  itemCode : VARCHAR(50)
+  itemColor : VARCHAR(200)
+  estimatedValue : VARCHAR(200)
+  conditionAtHandover : VARCHAR(200)
+  handoverDate : DATE
+  handoverNotes : TEXT
+  issuedByUserId : BIGINT <<FK>>
+  receivedByUserId : BIGINT <<FK>>
+  receiptSignature : VARCHAR(200)
+  receiptFormPath : VARCHAR(200)
+  expectedReturnDate : DATE
+  actualReturnDate : DATE
+  conditionAtReturn : VARCHAR(200)
+  returnNotes : TEXT
+  returnedToUserId : BIGINT <<FK>>
+  returnReceiptSignature : VARCHAR(200)
+  isReturned : BOOLEAN
+  isDamaged : BOOLEAN
+  damageDescription : TEXT
+  damageDate : DATE
+  damageReportedByUserId : BIGINT <<FK>>
+  damagePhotos : VARCHAR(200)
+  penaltyAmount : DECIMAL(15,2)
+  penaltyStatus : VARCHAR(50)
+  isLost : BOOLEAN
+  lostDate : DATE
+  lostNotes : TEXT
+  replacementRequired : BOOLEAN
+  replacementDate : DATE
+  replacementCustodyId : BIGINT <<FK>>
+  status : VARCHAR(50)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "StaffCustody" as StaffCustody {
+  * staffCustodyId : BIGINT <<PK>>
+  --
+  employeeId : BIGINT <<FK>>
+  custodySummary : VARCHAR(200)
+  totalItems : INT
+  totalEstimatedValue : VARCHAR(200)
+  issueDate : DATE
+  lastUpdateDate : DATE
+  custodyStatus : VARCHAR(50)
+  clearanceDate : DATE
+  clearedByUserId : BIGINT <<FK>>
+  clearanceNotes : TEXT
+  documentPath : VARCHAR(200)
+  documentName : VARCHAR(200)
+  documentUploadedAt : DATE
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "EmployeeAttendance" as EmployeeAttendance {
+  * attendanceId : BIGINT <<PK>>
+  --
+  employeeId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  academicYearId : BIGINT <<FK>>
+  semesterId : BIGINT <<FK>>
+  attendanceDate : DATE
+  dayOfWeek : VARCHAR(200)
+  shiftId : BIGINT <<FK>>
+  expectedCheckIn : VARCHAR(200)
+  expectedCheckOut : VARCHAR(200)
+  checkInTime : TIME
+  checkOutTime : TIME
+  checkInMethod : VARCHAR(200)
+  checkOutMethod : VARCHAR(200)
+  deviceId : BIGINT <<FK>>
+  deviceName : VARCHAR(200)
+  locationVerified : BOOLEAN
+  checkInLocation : VARCHAR(200)
+  checkOutLocation : VARCHAR(200)
+  checkInIP : VARCHAR(200)
+  checkOutIP : VARCHAR(200)
+  checkInPhoto : VARCHAR(200)
+  checkOutPhoto : VARCHAR(200)
+  status : VARCHAR(50)
+  lateMinutes : VARCHAR(200)
+  earlyDepartureMinutes : VARCHAR(200)
+  overtimeMinutes : TIME
+  overtimeRate : TIME
+  isOvertimeApproved : TIME
+  overtimeApprovedByUserId : BIGINT <<FK>>
+  totalWorkHours : VARCHAR(200)
+  breakHours : VARCHAR(200)
+  netWorkHours : VARCHAR(200)
+  isExcused : BOOLEAN
+  excuseId : BIGINT <<FK>>
+  excuseDocument : VARCHAR(200)
+  excuseApprovedByUserId : BIGINT <<FK>>
+  excuseApprovedAt : DATE
+  absenceReason : VARCHAR(200)
+  absenceType : VARCHAR(50)
+  isHoliday : BOOLEAN
+  isWeekend : BOOLEAN
+  isWorkingDay : BOOLEAN
+  replacementEmployeeId : BIGINT <<FK>>
+  notes : TEXT
+  recordedById : BIGINT <<FK>>
+  verifiedById : BIGINT <<FK>>
+  verifiedAt : VARCHAR(200)
+  isOverridden : BOOLEAN
+  overrideReason : VARCHAR(200)
+  overriddenByUserId : BIGINT <<FK>>
+  overrideAt : VARCHAR(200)
+  previousCheckIn : VARCHAR(200)
+  previousCheckOut : VARCHAR(200)
+  isSyncedWithPayroll : BOOLEAN
+  syncedAt : VARCHAR(200)
+  payrollId : BIGINT <<FK>>
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "TeacherSchedule" as TeacherSchedule {
+  * scheduleId : BIGINT <<PK>>
+  --
+  teacherId : BIGINT <<FK>>
+  academicYearId : BIGINT <<FK>>
+  semesterId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  dayOfWeek : VARCHAR(200)
+  periodId : BIGINT <<FK>>
+  periodNumber : INT
+  courseId : BIGINT <<FK>>
+  sectionId : BIGINT <<FK>>
+  gradeLevelId : BIGINT <<FK>>
+  classroomId : BIGINT <<FK>>
+  isSubstitute : BOOLEAN
+  originalTeacherId : BIGINT <<FK>>
+  substituteDate : DATE
+  substituteReason : VARCHAR(200)
+  isActive : BOOLEAN
+  isCancelled : BOOLEAN
+  cancellationReason : VARCHAR(200)
+  cancelledAt : DATE
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "EmployeePayroll" as EmployeePayroll {
+  * payrollId : BIGINT <<PK>>
+  --
+  employeeId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  payrollMonth : VARCHAR(200)
+  payrollYear : VARCHAR(200)
+  payrollPeriod : DECIMAL(15,2)
+  payrollCode : DECIMAL(15,2)
+  generationDate : DATE
+  paymentDate : DATE
+  basicSalary : DECIMAL(15,2)
+  contractualSalary : DECIMAL(15,2)
+  positionAllowance : VARCHAR(200)
+  transportationAllowance : VARCHAR(200)
+  housingAllowance : VARCHAR(200)
+  communicationAllowance : VARCHAR(200)
+  foodAllowance : VARCHAR(200)
+  educationAllowance : VARCHAR(200)
+  professionalAllowance : VARCHAR(200)
+  dangerAllowance : VARCHAR(200)
+  overtimeAmount : TIME
+  overtimeHours : TIME
+  overtimeRate : TIME
+  bonusAmount : DECIMAL(15,2)
+  bonusReason : VARCHAR(200)
+  incentiveAmount : DECIMAL(15,2)
+  otherEarnings : VARCHAR(200)
+  totalEarnings : VARCHAR(200)
+  socialInsuranceDeduction : VARCHAR(200)
+  socialInsuranceNumber : INT
+  taxDeduction : VARCHAR(200)
+  taxId : BIGINT <<FK>>
+  absenceDeduction : VARCHAR(200)
+  lateDeduction : VARCHAR(200)
+  penaltyDeduction : VARCHAR(200)
+  loanDeduction : VARCHAR(200)
+  advanceDeduction : VARCHAR(200)
+  healthInsuranceDeduction : VARCHAR(200)
+  otherDeductions : VARCHAR(200)
+  totalDeductions : VARCHAR(200)
+  netSalary : DECIMAL(15,2)
+  bankName : VARCHAR(200)
+  bankAccountNumber : INT
+  bankIban : VARCHAR(50)
+  transferReference : VARCHAR(50)
+  transferDate : DATE
+  transferStatus : VARCHAR(50)
+  paymentMethod : VARCHAR(200)
+  checkNumber : INT
+  receiptIssued : BOOLEAN
+  receiptNumber : INT
+  receiptPath : VARCHAR(200)
+  status : DECIMAL(15,2)
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  approvalNotes : TEXT
+  paidByUserId : BIGINT <<FK>>
+  paidAt : DATE
+  attendanceSummary : DECIMAL(15,2)
+  attendanceFromDate : DATE
+  attendanceToDate : DATE
+  workingDays : INT
+  actualWorkingDays : VARCHAR(200)
+  absenceDays : VARCHAR(200)
+  lateDays : VARCHAR(200)
+  notes : TEXT
+  previousPayrollId : BIGINT <<FK>>
+  isAdjusted : BOOLEAN
+  adjustmentReason : VARCHAR(200)
+  adjustedAt : DATE
+  adjustedByUserId : BIGINT <<FK>>
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "EmployeeLeave" as EmployeeLeave {
+  * leaveId : BIGINT <<PK>>
+  --
+  employeeId : BIGINT <<FK>>
+  leaveType : DECIMAL(15,2)
+  leaveSubType : VARCHAR(50)
+  academicYearId : BIGINT <<FK>>
+  requestDate : DATE
+  startDate : DATE
+  endDate : DATE
+  totalDays : INT
+  actualDays : VARCHAR(200)
+  returnDate : DATE
+  actualReturnDate : DATE
+  reason : VARCHAR(200)
+  description : TEXT
+  attachmentPath : VARCHAR(200)
+  attachmentName : VARCHAR(200)
+  emergencyContact : VARCHAR(200)
+  emergencyPhone : VARCHAR(20)
+  workHandover : VARCHAR(200)
+  handoverToEmployeeId : BIGINT <<FK>>
+  handoverNotes : TEXT
+  status : VARCHAR(50)
+  reviewedByUserId : BIGINT <<FK>>
+  reviewDate : DATE
+  reviewNotes : TEXT
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  approvalNotes : TEXT
+  rejectionReason : VARCHAR(200)
+  isPaid : BIGINT <<FK>>
+  paidPercentage : DECIMAL(15,2)
+  salaryDeduction : DECIMAL(15,2)
+  balanceBefore : DECIMAL(15,2)
+  balanceAfter : DECIMAL(15,2)
+  consumedFromBalance : DECIMAL(15,2)
+  leaveBalanceId : BIGINT <<FK>>
+  isDeducted : BOOLEAN
+  attendanceIds : VARCHAR(200)
+  isLinkedToAttendance : BOOLEAN
+  linkedByUserId : BIGINT <<FK>>
+  linkedAt : DATE
+  isExpired : BOOLEAN
+  expiredAt : DATE
+  isAutoApproved : BOOLEAN
+  autoApprovalRule : VARCHAR(200)
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "PerformanceReview" as PerformanceReview {
+  * reviewId : BIGINT <<PK>>
+  --
+  employeeId : BIGINT <<FK>>
+  reviewerId : BIGINT <<FK>>
+  academicYearId : BIGINT <<FK>>
+  semesterId : BIGINT <<FK>>
+  reviewPeriod : VARCHAR(200)
+  reviewDate : DATE
+  reviewType : VARCHAR(50)
+  evaluationMethod : VARCHAR(200)
+  criteria : VARCHAR(200)
+  overallScore : DECIMAL(5,2)
+  overallRating : VARCHAR(200)
+  strengths : VARCHAR(200)
+  improvementAreas : VARCHAR(200)
+  achievements : VARCHAR(200)
+  challenges : VARCHAR(200)
+  goals : VARCHAR(200)
+  futureGoals : VARCHAR(200)
+  developmentPlan : VARCHAR(200)
+  trainingNeeds : VARCHAR(200)
+  promotionRecommendation : VARCHAR(200)
+  promotionTo : VARCHAR(200)
+  salaryIncrease : DECIMAL(15,2)
+  bonusRecommendation : VARCHAR(200)
+  bonusAmount : DECIMAL(15,2)
+  selfEvaluation : VARCHAR(200)
+  selfEvaluationScore : DECIMAL(5,2)
+  selfEvaluationNotes : TEXT
+  reviewerComments : TEXT
+  employeeComments : TEXT
+  employeeAcknowledged : BOOLEAN
+  acknowledgedAt : DATE
+  acknowledgedIP : VARCHAR(200)
+  status : VARCHAR(50)
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  approvalNotes : TEXT
+  isFinal : BOOLEAN
+  previousReviewId : BIGINT <<FK>>
+  attachments : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "EmployeeViolations" as EmployeeViolations {
+  * violationId : BIGINT <<PK>>
+  --
+  employeeId : BIGINT <<FK>>
+  reportedByUserId : BIGINT <<FK>>
+  reportedByRole : VARCHAR(200)
+  violationDate : DATE
+  violationTime : TIME
+  reportedDate : DATE
+  violationType : VARCHAR(50)
+  violationCategory : VARCHAR(50)
+  severityLevel : VARCHAR(50)
+  description : TEXT
+  location : VARCHAR(200)
+  witnesses : VARCHAR(200)
+  evidence : VARCHAR(200)
+  previousWarnings : BOOLEAN
+  previousViolationIds : VARCHAR(200)
+  policyViolated : VARCHAR(200)
+  policySection : VARCHAR(200)
+  action : VARCHAR(200)
+  actionDetails : TEXT
+  actionDate : DATE
+  actionByUserId : BIGINT <<FK>>
+  actionApprovedByUserId : BIGINT <<FK>>
+  actionApprovalDate : DATE
+  penaltyAmount : DECIMAL(15,2)
+  penaltyCurrency : VARCHAR(200)
+  penaltyPercentage : DECIMAL(15,2)
+  deductionFromSalary : BOOLEAN
+  deductionMonth : VARCHAR(200)
+  deductionYear : VARCHAR(200)
+  payrollId : BIGINT <<FK>>
+  suspensionStartDate : DATE
+  suspensionEndDate : DATE
+  suspensionDays : INT
+  demotionFrom : VARCHAR(200)
+  demotionTo : VARCHAR(200)
+  terminationDate : DATE
+  terminationReason : VARCHAR(200)
+  appealAllowed : BOOLEAN
+  appealDeadline : BOOLEAN
+  appealSubmitted : BOOLEAN
+  appealDate : DATE
+  appealReason : VARCHAR(200)
+  appealDocuments : VARCHAR(200)
+  appealReviewDate : DATE
+  appealReviewByUserId : BIGINT <<FK>>
+  appealDecision : VARCHAR(200)
+  appealDecisionDate : DATE
+  appealNotes : TEXT
+  finalDecision : VARCHAR(200)
+  isResolved : BOOLEAN
+  resolvedAt : DATE
+  resolvedByUserId : BIGINT <<FK>>
+  resolutionNotes : TEXT
+  notificationToEmployee : BOOLEAN
+  employeeNotifiedAt : VARCHAR(200)
+  employeeAcknowledged : BOOLEAN
+  employeeAcknowledgedAt : VARCHAR(200)
+  employeeSignature : VARCHAR(200)
+  isConfidential : BOOLEAN
+  status : VARCHAR(50)
+  attachments : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "EmployeeTraining" as EmployeeTraining {
+  * trainingId : BIGINT <<PK>>
+  --
+  employeeId : BIGINT <<FK>>
+  trainingName : VARCHAR(200)
+  trainingCode : VARCHAR(50)
+  trainingType : VARCHAR(50)
+  category : VARCHAR(50)
+  provider : VARCHAR(200)
+  providerType : VARCHAR(50)
+  trainerName : VARCHAR(200)
+  trainerTitle : BOOLEAN
+  location : VARCHAR(200)
+  country : INT
+  city : VARCHAR(200)
+  isOnline : BOOLEAN
+  onlineLink : VARCHAR(500)
+  startDate : DATE
+  endDate : DATE
+  totalHours : INT
+  totalDays : INT
+  hoursPerDay : VARCHAR(200)
+  creditHours : VARCHAR(200)
+  accreditation : VARCHAR(200)
+  objectives : VARCHAR(200)
+  topics : VARCHAR(200)
+  targetAudience : VARCHAR(200)
+  prerequisites : VARCHAR(200)
+  cost : DECIMAL(15,2)
+  currency : VARCHAR(200)
+  paidBy : VARCHAR(200)
+  registrationDate : DATE
+  registrationStatus : VARCHAR(50)
+  attendanceStatus : VARCHAR(50)
+  attendanceDays : VARCHAR(200)
+  completionStatus : VARCHAR(50)
+  completionDate : DATE
+  grade : DECIMAL(5,2)
+  gradePercentage : DECIMAL(5,2)
+  passingStatus : VARCHAR(50)
+  certificateIssued : BOOLEAN
+  certificateNumber : INT
+  certificateDate : DATE
+  certificateExpiryDate : DATE
+  certificatePath : VARCHAR(200)
+  certificateName : VARCHAR(200)
+  evaluation : VARCHAR(200)
+  evaluationFeedback : DECIMAL(15,2)
+  trainerEvaluation : VARCHAR(200)
+  skillsAcquired : VARCHAR(200)
+  impactOnWork : VARCHAR(200)
+  isRequired : BOOLEAN
+  isRecurring : BOOLEAN
+  recurringPeriod : VARCHAR(200)
+  recommendedBy : VARCHAR(200)
+  linkedToReviewId : BIGINT <<FK>>
+  linkedToGoal : VARCHAR(200)
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "EmployeeAdditionalTasks" as EmployeeAdditionalTasks {
+  * taskId : BIGINT <<PK>>
+  --
+  employeeId : BIGINT <<FK>>
+  taskName : VARCHAR(200)
+  taskCode : VARCHAR(50)
+  taskType : VARCHAR(50)
+  description : TEXT
+  objectives : VARCHAR(200)
+  deliverables : VARCHAR(200)
+  scope : VARCHAR(200)
+  assignedByUserId : BIGINT <<FK>>
+  assignedDate : DATE
+  startDate : DATE
+  endDate : DATE
+  actualEndDate : DATE
+  duration : VARCHAR(200)
+  isOngoing : BOOLEAN
+  isActive : BOOLEAN
+  priority : VARCHAR(200)
+  status : VARCHAR(50)
+  progressPercentage : DECIMAL(5,2)
+  accomplishments : VARCHAR(200)
+  challenges : VARCHAR(200)
+  performanceRating : VARCHAR(200)
+  ratingDate : DATE
+  ratedByUserId : BIGINT <<FK>>
+  ratingNotes : TEXT
+  allowanceAmount : DECIMAL(15,2)
+  allowanceType : DECIMAL(5,2)
+  isPaid : BIGINT <<FK>>
+  payrollIncluded : BOOLEAN
+  bonusAmount : DECIMAL(15,2)
+  bonusPaid : BIGINT <<FK>>
+  bonusPaidDate : DATE
+  completionNotes : TEXT
+  attachments : VARCHAR(200)
+  relatedTo : VARCHAR(200)
+  relatedId : BIGINT <<FK>>
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "Mentor" as Mentor {
+  * mentorId : BIGINT <<PK>>
+  --
+  mentorEmployeeId : BIGINT <<FK>>
+  menteeEmployeeId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  academicYearId : BIGINT <<FK>>
+  startDate : DATE
+  endDate : DATE
+  actualEndDate : DATE
+  mentorshipType : VARCHAR(50)
+  objectives : VARCHAR(200)
+  focusAreas : VARCHAR(200)
+  meetingFrequency : VARCHAR(200)
+  meetingDuration : VARCHAR(200)
+  meetingsCount : INT
+  actualMeetingsCount : INT
+  meetingsSchedule : VARCHAR(200)
+  nextMeetingDate : DATE
+  lastMeetingDate : DATE
+  lastMeetingNotes : TEXT
+  observations : VARCHAR(200)
+  strengths : VARCHAR(200)
+  areasForImprovement : VARCHAR(200)
+  progressReports : VARCHAR(200)
+  goalsAchieved : VARCHAR(200)
+  challenges : VARCHAR(200)
+  feedbackFromMentee : DECIMAL(15,2)
+  feedbackFromMentor : DECIMAL(15,2)
+  satisfactionRating : VARCHAR(200)
+  status : VARCHAR(50)
+  completionStatus : VARCHAR(50)
+  completionDate : DATE
+  completionNotes : TEXT
+  certificateIssued : BOOLEAN
+  certificateNumber : INT
+  certificatePath : VARCHAR(200)
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "SelfServicePortalRequests" as SelfServicePortalRequests {
+  * requestId : BIGINT <<PK>>
+  --
+  employeeId : BIGINT <<FK>>
+  schoolId : BIGINT <<FK>>
+  requestNumber : INT
+  requestType : VARCHAR(50)
+  requestSubType : VARCHAR(50)
+  category : VARCHAR(50)
+  title : VARCHAR(200)
+  description : TEXT
+  priority : VARCHAR(200)
+  impact : VARCHAR(200)
+  location : VARCHAR(200)
+  assetId : BIGINT <<FK>>
+  assetName : VARCHAR(200)
+  requestedDate : DATE
+  requestedTime : TIME
+  desiredCompletionDate : DATE
+  attachments : VARCHAR(200)
+  attachmentPaths : VARCHAR(200)
+  assignedToUserId : BIGINT <<FK>>
+  assignedToDepartment : VARCHAR(200)
+  assignedAt : DATE
+  assignedByUserId : BIGINT <<FK>>
+  estimatedCompletionDate : DATE
+  estimatedHours : VARCHAR(200)
+  status : VARCHAR(50)
+  progressPercentage : DECIMAL(5,2)
+  statusHistory : DATE
+  internalNotes : TEXT
+  actionTaken : VARCHAR(200)
+  completionDate : DATE
+  completionTime : TIME
+  completedByUserId : BIGINT <<FK>>
+  completionNotes : TEXT
+  responseToEmployee : VARCHAR(200)
+  responseDate : DATE
+  rejectionReason : VARCHAR(200)
+  cancelledByUserId : BIGINT <<FK>>
+  cancellationDate : DATE
+  cancellationReason : VARCHAR(200)
+  employeeRating : VARCHAR(200)
+  employeeFeedback : DECIMAL(15,2)
+  ratingDate : DATE
+  responseTime : TIME
+  isUrgent : BOOLEAN
+  requiresApproval : BOOLEAN
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  approvalNotes : TEXT
+  trackingNumber : INT
+  source : VARCHAR(100)
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "VacantPosition" as VacantPosition {
+  * positionId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  positionCode : VARCHAR(50)
+  jobTitle : VARCHAR(200)
+  jobGrade : DECIMAL(5,2)
+  jobRank : VARCHAR(200)
+  departmentId : BIGINT <<FK>>
+  employmentType : VARCHAR(50)
+  contractType : VARCHAR(50)
+  vacancyReason : VARCHAR(200)
+  replacedEmployeeId : BIGINT <<FK>>
+  qualifications : BOOLEAN
+  experienceYears : INT
+  skills : VARCHAR(200)
+  certifications : VARCHAR(200)
+  languages : VARCHAR(200)
+  ageFrom : VARCHAR(200)
+  ageTo : VARCHAR(200)
+  gender : VARCHAR(200)
+  nationality : VARCHAR(200)
+  salaryRangeFrom : DECIMAL(15,2)
+  salaryRangeTo : DECIMAL(15,2)
+  otherBenefits : VARCHAR(200)
+  jobDescription : TEXT
+  requirements : VARCHAR(200)
+  postingDate : DATE
+  postingEndDate : DATE
+  postingChannels : VARCHAR(200)
+  isInternalOnly : BOOLEAN
+  priority : VARCHAR(200)
+  urgency : VARCHAR(200)
+  numberOfPositions : INT
+  filledPositions : INT
+  remainingPositions : INT
+  status : VARCHAR(50)
+  applicationsCount : INT
+  shortlistedCount : INT
+  interviewedCount : INT
+  offeredCount : INT
+  hiredCount : INT
+  hiringDate : DATE
+  actualHiringDate : DATE
+  hiredEmployeeId : BIGINT <<FK>>
+  closedAt : DATE
+  closedByUserId : BIGINT <<FK>>
+  closingReason : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "JobApplicant" as JobApplicant {
+  * applicantId : BIGINT <<PK>>
+  --
+  positionId : BIGINT <<FK>>
+  applicationNumber : INT
+  applicationDate : DATE
+  firstNameAr : VARCHAR(200)
+  fatherNameAr : VARCHAR(200)
+  grandfatherNameAr : VARCHAR(200)
+  familyNameAr : VARCHAR(200)
+  fullNameAr : VARCHAR(200)
+  firstNameEn : VARCHAR(200)
+  fatherNameEn : VARCHAR(200)
+  familyNameEn : VARCHAR(200)
+  fullNameEn : VARCHAR(200)
+  nationalId : BIGINT <<FK>>
+  nationalIdType : VARCHAR(50)
+  passportNumber : INT
+  birthDate : DATE
+  birthPlace : VARCHAR(200)
+  gender : VARCHAR(200)
+  nationality : VARCHAR(200)
+  maritalStatus : VARCHAR(50)
+  phonePrimary : VARCHAR(20)
+  phoneSecondary : VARCHAR(20)
+  email : VARCHAR(100)
+  address : VARCHAR(200)
+  city : VARCHAR(200)
+  qualification : BOOLEAN
+  qualificationSource : VARCHAR(200)
+  graduationYear : VARCHAR(200)
+  graduationGrade : DECIMAL(5,2)
+  experienceYears : INT
+  currentEmployer : VARCHAR(200)
+  currentJobTitle : VARCHAR(200)
+  currentSalary : DECIMAL(15,2)
+  expectedSalary : DECIMAL(15,2)
+  skills : VARCHAR(200)
+  languages : VARCHAR(200)
+  certifications : VARCHAR(200)
+  cvPath : VARCHAR(200)
+  cvName : VARCHAR(200)
+  portfolioPath : VARCHAR(200)
+  coverLetterPath : VARCHAR(200)
+  attachments : VARCHAR(200)
+  source : VARCHAR(200)
+  referredBy : VARCHAR(200)
+  status : VARCHAR(50)
+  reviewDate : DATE
+  reviewedByUserId : BIGINT <<FK>>
+  reviewNotes : TEXT
+  shortlistDate : DATE
+  shortlistNotes : TEXT
+  interviewDate : DATE
+  interviewTime : TIME
+  interviewLocation : VARCHAR(200)
+  interviewers : VARCHAR(200)
+  interviewType : VARCHAR(50)
+  interviewLink : VARCHAR(500)
+  interviewScore : DECIMAL(5,2)
+  interviewFeedback : DECIMAL(15,2)
+  interviewNotes : TEXT
+  testDate : DATE
+  testType : VARCHAR(50)
+  testScore : DECIMAL(5,2)
+  testFeedback : DECIMAL(15,2)
+  offerExtended : BOOLEAN
+  offerDate : DATE
+  offerAmount : DECIMAL(15,2)
+  offerDetails : TEXT
+  offerAccepted : BOOLEAN
+  acceptanceDate : DATE
+  acceptanceNotes : TEXT
+  offerRejectionReason : VARCHAR(200)
+  hiredAsEmployeeId : BIGINT <<FK>>
+  hiredDate : DATE
+  isBlacklisted : BOOLEAN
+  blacklistReason : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "EmployeeCommittees" as EmployeeCommittees {
+  * committeeId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  committeeCode : VARCHAR(50)
+  committeeNameAr : VARCHAR(200)
+  committeeNameEn : VARCHAR(200)
+  committeeType : VARCHAR(50)
+  committeeCategory : VARCHAR(50)
+  formationDate : DATE
+  formationDecisionNumber : INT
+  formationDecisionDate : DATE
+  formationDecisionPath : VARCHAR(200)
+  startDate : DATE
+  endDate : DATE
+  actualEndDate : DATE
+  duration : VARCHAR(200)
+  objectives : VARCHAR(200)
+  responsibilities : VARCHAR(200)
+  meetingFrequency : VARCHAR(200)
+  reportingTo : VARCHAR(200)
+  parentCommitteeId : BIGINT <<FK>>
+  chairpersonId : BIGINT <<FK>>
+  viceChairpersonId : BIGINT <<FK>>
+  secretaryId : BIGINT <<FK>>
+  spokespersonId : BIGINT <<FK>>
+  membersCount : INT
+  quorum : VARCHAR(200)
+  decisionMakingMethod : VARCHAR(200)
+  budget : VARCHAR(200)
+  budgetSource : VARCHAR(200)
+  isActive : BOOLEAN
+  status : VARCHAR(50)
+  dissolutionDate : DATE
+  dissolutionReason : VARCHAR(200)
+  dissolutionDecisionNumber : INT
+  dissolutionDecisionPath : VARCHAR(200)
+  achievements : VARCHAR(200)
+  reports : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "CommitteeMembers" as CommitteeMembers {
+  * memberId : BIGINT <<PK>>
+  --
+  committeeId : BIGINT <<FK>>
+  employeeId : BIGINT <<FK>>
+  role : VARCHAR(200)
+  roleDetails : TEXT
+  appointmentDate : DATE
+  appointmentDecisionNumber : INT
+  startDate : DATE
+  endDate : DATE
+  actualEndDate : DATE
+  isActive : BOOLEAN
+  status : VARCHAR(50)
+  resignationDate : DATE
+  resignationReason : VARCHAR(200)
+  terminationDate : DATE
+  terminationReason : VARCHAR(200)
+  terminatedByUserId : BIGINT <<FK>>
+  attendanceRate : DECIMAL(5,2)
+  votingRights : BOOLEAN
+  signatureAuthority : BOOLEAN
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "EmployeeMeetings" as EmployeeMeetings {
+  * meetingId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  committeeId : BIGINT <<FK>>
+  meetingType : VARCHAR(50)
+  meetingNumber : INT
+  title : VARCHAR(200)
+  objectives : VARCHAR(200)
+  agenda : VARCHAR(200)
+  organizerId : BIGINT <<FK>>
+  organizerDepartment : VARCHAR(200)
+  chairpersonId : BIGINT <<FK>>
+  secretaryId : BIGINT <<FK>>
+  meetingDate : DATE
+  startTime : TIME
+  endTime : TIME
+  actualEndTime : TIME
+  duration : VARCHAR(200)
+  location : VARCHAR(200)
+  locationType : VARCHAR(50)
+  virtualMeetingLink : VARCHAR(500)
+  virtualMeetingPlatform : VARCHAR(200)
+  meetingPassword : VARCHAR(200)
+  isRecurring : BOOLEAN
+  recurringPattern : VARCHAR(200)
+  parentMeetingId : BIGINT <<FK>>
+  attendees : VARCHAR(200)
+  expectedAttendeesCount : INT
+  confirmedAttendeesCount : INT
+  actualAttendeesCount : INT
+  quorumAchieved : BOOLEAN
+  quorumPercentage : DECIMAL(5,2)
+  status : VARCHAR(50)
+  cancellationReason : VARCHAR(200)
+  cancelledByUserId : BIGINT <<FK>>
+  postponementDate : DATE
+  minutes : VARCHAR(200)
+  decisions : VARCHAR(200)
+  actionItems : DATE
+  recommendations : VARCHAR(200)
+  attachments : VARCHAR(200)
+  minutesFilePath : VARCHAR(200)
+  minutesApproved : BOOLEAN
+  minutesApprovedByUserId : BIGINT <<FK>>
+  minutesApprovalDate : DATE
+  isConfidential : BOOLEAN
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "MeetingAttendance" as MeetingAttendance {
+  * attendanceId : BIGINT <<PK>>
+  --
+  meetingId : BIGINT <<FK>>
+  employeeId : BIGINT <<FK>>
+  committeeId : BIGINT <<FK>>
+  invitationStatus : VARCHAR(50)
+  invitationSentDate : DATE
+  invitationResponseDate : DATE
+  invitationResponseNotes : TEXT
+  attendanceStatus : VARCHAR(50)
+  arrivalTime : TIME
+  departureTime : TIME
+  lateMinutes : VARCHAR(200)
+  earlyDepartureMinutes : VARCHAR(200)
+  durationAttended : VARCHAR(200)
+  excuseReason : VARCHAR(200)
+  excuseDocument : VARCHAR(200)
+  excuseApprovedByUserId : BIGINT <<FK>>
+  excuseApprovedAt : DATE
+  participatedInDiscussion : BOOLEAN
+  contributions : VARCHAR(200)
+  tasksAssigned : VARCHAR(200)
+  notes : TEXT
+  recordedByUserId : BIGINT <<FK>>
+  recordedAt : VARCHAR(200)
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "InternalTransfer" as InternalTransfer {
+  * transferId : BIGINT <<PK>>
+  --
+  employeeId : BIGINT <<FK>>
+  transferType : VARCHAR(50)
+  transferNumber : INT
+  transferDate : DATE
+  effectiveDate : DATE
+  fromSchoolId : BIGINT <<FK>>
+  toSchoolId : BIGINT <<FK>>
+  fromDepartmentId : BIGINT <<FK>>
+  toDepartmentId : BIGINT <<FK>>
+  fromJobTitle : VARCHAR(200)
+  toJobTitle : VARCHAR(200)
+  fromGrade : DECIMAL(5,2)
+  toGrade : DECIMAL(5,2)
+  fromSalary : DECIMAL(15,2)
+  toSalary : DECIMAL(15,2)
+  transferReason : VARCHAR(200)
+  transferDecisionPath : VARCHAR(200)
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  status : VARCHAR(50)
+  executionDate : DATE
+  executedByUserId : BIGINT <<FK>>
+  handoverCompleted : BOOLEAN
+  handoverDate : DATE
+  handoverNotes : TEXT
+  receivedInNewDepartment : BOOLEAN
+  receiveDate : DATE
+  receiveNotes : TEXT
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "ExternalTransfer" as ExternalTransfer {
+  * externalTransferId : BIGINT <<PK>>
+  --
+  employeeId : BIGINT <<FK>>
+  transferDirection : VARCHAR(200)
+  transferNumber : INT
+  transferDate : DATE
+  effectiveDate : DATE
+  fromEntity : VARCHAR(200)
+  fromEntityType : VARCHAR(50)
+  fromEntityAddress : VARCHAR(200)
+  toEntity : VARCHAR(200)
+  toEntityType : VARCHAR(50)
+  toEntityAddress : VARCHAR(200)
+  positionAtPrevious : VARCHAR(200)
+  positionAtNew : VARCHAR(200)
+  transferReason : VARCHAR(200)
+  transferDocumentPath : VARCHAR(200)
+  clearanceCompleted : BOOLEAN
+  clearanceDate : DATE
+  clearanceDocumentPath : VARCHAR(200)
+  joinedDate : DATE
+  joinedDocumentPath : VARCHAR(200)
+  newEmployeeId : BIGINT <<FK>>
+  terminationId : BIGINT <<FK>>
+  appointmentDecisionId : BIGINT <<FK>>
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  status : VARCHAR(50)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "EmployeeTermination" as EmployeeTermination {
+  * terminationId : BIGINT <<PK>>
+  --
+  employeeId : BIGINT <<FK>>
+  terminationType : VARCHAR(50)
+  terminationNumber : INT
+  terminationDate : DATE
+  lastWorkingDate : DATE
+  effectiveDate : DATE
+  reason : VARCHAR(200)
+  reasonCategory : VARCHAR(50)
+  resignationDate : DATE
+  resignationNoticePeriod : VARCHAR(200)
+  resignationNoticeServed : BOOLEAN
+  terminationInitiator : VARCHAR(200)
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  approvalDocumentPath : VARCHAR(200)
+  finalSettlementAmount : DECIMAL(15,2)
+  settlementBreakdown : DECIMAL(15,2)
+  settlementDate : DATE
+  settlementReceiptNumber : INT
+  settlementStatus : VARCHAR(50)
+  clearanceStatus : VARCHAR(50)
+  clearanceDate : DATE
+  clearanceCompletedByUserId : BIGINT <<FK>>
+  clearanceNotes : TEXT
+  inventoryReturned : BOOLEAN
+  inventoryReturnDate : DATE
+  inventoryVerifiedByUserId : BIGINT <<FK>>
+  documentsReturned : BOOLEAN
+  documentsReturnDate : DATE
+  exitInterviewConducted : BOOLEAN
+  exitInterviewDate : DATE
+  exitInterviewNotes : TEXT
+  exitInterviewerId : BIGINT <<FK>>
+  finalSettlementPaid : BIGINT <<FK>>
+  paymentDate : DATE
+  paymentMethod : VARCHAR(200)
+  bankTransferReference : VARCHAR(50)
+  socialInsuranceNotified : BOOLEAN
+  socialInsuranceNotificationDate : DATE
+  employeeFileClosed : BOOLEAN
+  fileClosureDate : DATE
+  fileClosureByUserId : BIGINT <<FK>>
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+Employee ||--o{ AppointmentDecision : "employeeId"
+Employee ||--o{ EmployeeDocuments : "employeeId"
+Employee ||--o{ EmployeeInventoryCustody : "employeeId"
+Employee ||--o{ EmployeeInventoryCustody : "issuedByUserId"
+Employee ||--o{ StaffCustody : "employeeId"
+Employee ||--o{ EmployeeAttendance : "employeeId"
+EmployeeLeave ||--o{ EmployeeAttendance : "excuseId"
+EmployeePayroll ||--o{ EmployeeAttendance : "payrollId"
+Employee ||--o{ TeacherSchedule : "teacherId"
+Employee ||--o{ EmployeePayroll : "employeeId"
+Employee ||--o{ EmployeeLeave : "employeeId"
+Employee ||--o{ EmployeeLeave : "handoverToEmployeeId"
+Employee ||--o{ PerformanceReview : "employeeId"
+Employee ||--o{ PerformanceReview : "reviewerId"
+Employee ||--o{ EmployeeViolations : "employeeId"
+EmployeePayroll ||--o{ EmployeeViolations : "payrollId"
+Employee ||--o{ EmployeeTraining : "employeeId"
+PerformanceReview ||--o{ EmployeeTraining : "linkedToReviewId"
+Employee ||--o{ EmployeeAdditionalTasks : "employeeId"
+Employee ||--o{ Mentor : "mentorEmployeeId"
+Employee ||--o{ Mentor : "menteeEmployeeId"
+Employee ||--o{ SelfServicePortalRequests : "employeeId"
+Employee ||--o{ SelfServicePortalRequests : "assignedToUserId"
+Employee ||--o{ VacantPosition : "replacedEmployeeId"
+Employee ||--o{ VacantPosition : "hiredEmployeeId"
+VacantPosition ||--o{ JobApplicant : "positionId"
+Employee ||--o{ JobApplicant : "hiredAsEmployeeId"
+Employee ||--o{ EmployeeCommittees : "chairpersonId"
+Employee ||--o{ EmployeeCommittees : "viceChairpersonId"
+Employee ||--o{ EmployeeCommittees : "secretaryId"
+EmployeeCommittees ||--o{ CommitteeMembers : "committeeId"
+Employee ||--o{ CommitteeMembers : "employeeId"
+EmployeeCommittees ||--o{ EmployeeMeetings : "committeeId"
+Employee ||--o{ EmployeeMeetings : "organizerId"
+Employee ||--o{ EmployeeMeetings : "chairpersonId"
+Employee ||--o{ EmployeeMeetings : "secretaryId"
+EmployeeMeetings ||--o{ MeetingAttendance : "meetingId"
+Employee ||--o{ MeetingAttendance : "employeeId"
+Employee ||--o{ InternalTransfer : "employeeId"
+Employee ||--o{ ExternalTransfer : "employeeId"
+EmployeeTermination ||--o{ ExternalTransfer : "terminationId"
+AppointmentDecision ||--o{ ExternalTransfer : "appointmentDecisionId"
+Employee ||--o{ EmployeeTermination : "employeeId"
+@enduml

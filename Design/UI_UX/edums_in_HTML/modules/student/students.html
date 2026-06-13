@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - قاعدة بيانات الطلاب الموحدة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">دورة حياة الطالب</div>
+                    <a href="index.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                    <a href="applications.html" class="nav-item">
+                        <span class="icon">📝</span>
+                        <span>القبول والتسجيل</span>
+                    </a>
+                    <a href="enrollment.html" class="nav-item">
+                        <span class="icon">🏫</span>
+                        <span>توزيع الصفوف</span>
+                    </a>
+                    <a href="attendance.html" class="nav-item">
+                        <span class="icon">✅</span>
+                        <span>الحضور والغياب</span>
+                    </a>
+                    <a href="grades.html" class="nav-item">
+                        <span class="icon">📋</span>
+                        <span>الدرجات والتقييم</span>
+                    </a>
+                    <a href="behavior.html" class="nav-item">
+                        <span class="icon">⚖️</span>
+                        <span>السلوك والانضباط</span>
+                    </a>
+                    <a href="health.html" class="nav-item">
+                        <span class="icon">🏥</span>
+                        <span>السجل الصحي</span>
+                    </a>
+                    <a href="activities.html" class="nav-item">
+                        <span class="icon">🏀</span>
+                        <span>الأنشطة المدرسية</span>
+                    </a>
+                    <a href="transfers.html" class="nav-item">
+                        <span class="icon">🔄</span>
+                        <span>الترقية والنقل</span>
+                    </a>
+                    <a href="graduation.html" class="nav-item">
+                        <span class="icon">🎓</span>
+                        <span>التخرج والأرشفة</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة الطلاب - قاعدة البيانات الموحدة</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">🔍</button>
+                        <button class="header-btn">🖨️</button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير النظام</h4>
+                            <p>تقنية المعلومات</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <h1 class="page-title">👥 قاعدة بيانات الطلاب الشاملة</h1>
+                            <div class="page-breadcrumb">
+                                <a href="../../index.html">الرئيسية</a>
+                                <span>/</span>
+                                <a href="index.html">إدارة الطلاب</a>
+                                <span>/</span>
+                                <span>الطلاب</span>
+                            </div>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-outline"><span>📥</span><span>تصدير البيانات</span></button>
+                            <button class="btn btn-primary" onclick="openModal('addStudentModal')"><span>➕</span><span>إضافة طالب يدوياً</span></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lifecycle Status Filters -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-body">
+                        <div class="lifecycle-status-grid">
+                            <div class="status-box active">
+                                <span class="count">850</span>
+                                <span class="label">نشط (Active)</span>
+                            </div>
+                            <div class="status-box">
+                                <span class="count">45</span>
+                                <span class="label">قيد (Pending)</span>
+                            </div>
+                            <div class="status-box">
+                                <span class="count">12</span>
+                                <span class="label">مجمد (Frozen)</span>
+                            </div>
+                            <div class="status-box">
+                                <span class="count">5</span>
+                                <span class="label">منقطع (Disc.)</span>
+                            </div>
+                            <div class="status-box danger">
+                                <span class="count">3</span>
+                                <span class="label">مستبعد (Expelled)</span>
+                            </div>
+                            <div class="status-box info">
+                                <span class="count">1,200</span>
+                                <span class="label">مؤرشف (Archived)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Students Registry Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">سجل الطلاب العام</h3>
+                        <div class="card-actions" style="display: flex; gap: 10px;">
+                            <input type="text" class="form-input" placeholder="بحث بالاسم أو الهوية..." style="width: 250px;">
+                            <select class="form-select" style="width: 150px;">
+                                <option>كل الصفوف</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>الرقم الأكاديمي</th>
+                                        <th>اسم الطالب</th>
+                                        <th>الصف الحقيقي</th>
+                                        <th>حالة دورة الحياة</th>
+                                        <th>تاريخ آخر تحديث</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>20240001</td>
+                                        <td><strong>أحمد فهد الحربي</strong></td>
+                                        <td>الأول الثانوي</td>
+                                        <td><span class="lifecycle-badge active">نشط</span></td>
+                                        <td>30 مايو 2026</td>
+                                        <td>
+                                            <div class="action-btns">
+                                                <a href="edit-student.html" class="btn-icon" title="تعديل البيانات">✏️</a>
+                                                <button class="btn-icon" title="حذف الطالب" style="color: var(--danger);">🗑️</button>
+                                                <button class="btn-icon" title="ملف الطالب">👁️</button>
+                                                <button class="btn-icon" title="تغيير حالة القيد">⚙️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>20240052</td>
+                                        <td><strong>خالد يوسف الشهري</strong></td>
+                                        <td>الأول المتوسط</td>
+                                        <td><span class="lifecycle-badge frozen">مجمد</span></td>
+                                        <td>15 مايو 2026</td>
+                                        <td>
+                                            <div class="action-btns">
+                                                <button class="btn-icon">👁️</button>
+                                                <button class="btn-icon">⚙️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <style>
+        .lifecycle-status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; }
+        .status-box { background: #f8fafc; border: 1px solid #e2e8f0; padding: 15px; border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .status-box:hover { border-color: var(--primary-light); transform: translateY(-3px); }
+        .status-box.active { background: #eff6ff; border-color: var(--primary); }
+        .status-box .count { display: block; font-size: 1.4em; font-weight: 800; color: var(--primary); }
+        .status-box .label { font-size: 0.75em; font-weight: 700; color: #64748b; }
+        
+        .status-box.danger .count { color: var(--danger); }
+        .status-box.info .count { color: var(--info); }
+
+        .lifecycle-badge { padding: 4px 10px; border-radius: 20px; font-size: 0.75em; font-weight: 700; }
+        .lifecycle-badge.active { background: #dcfce7; color: #166534; }
+        .lifecycle-badge.frozen { background: #dbeafe; color: #1e40af; }
+        .lifecycle-badge.expelled { background: #fee2e2; color: #991b1b; }
+    </style>
+</body>
+</html>

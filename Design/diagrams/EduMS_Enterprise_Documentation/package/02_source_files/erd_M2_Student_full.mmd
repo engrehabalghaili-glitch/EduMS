@@ -1,0 +1,1841 @@
+erDiagram
+    Application {
+        BIGINT applicationId "PK"
+        BIGINT ParentId "FK"
+        BIGINT schoolId "FK"
+        DATE birthDate
+        VARCHAR(200) birthPlace
+        VARCHAR(200) gender
+        VARCHAR(200) nationality
+        VARCHAR(200) address
+        VARCHAR(200) BirthCartificate
+        VARCHAR(200) PersonalPhoto
+        VARCHAR(200) IDCardImage
+        VARCHAR(200) requestStatue
+        DATE submissionDate
+        VARCHAR(200) firstNameAr
+        VARCHAR(200) fatherNameAr
+        VARCHAR(200) grandfatherNameAr
+        VARCHAR(200) familyNameAr
+        VARCHAR(200) firstNameEn
+        VARCHAR(200) fatherNameEn
+        VARCHAR(200) grandfatherNameEn
+        VARCHAR(200) familyNameEn
+        VARCHAR(200) placeOfBirth
+        INT countryOfBirth
+        VARCHAR(200) motherName
+        VARCHAR(200) motherNationality
+        VARCHAR(20) motherPhone
+        VARCHAR(200) previousSchool
+        DECIMAL(5,2) previousGrade
+        DECIMAL(5,2) requestedGradeLevel
+        BIGINT academicYearId "FK"
+        BOOLEAN hasSpecialNeeds
+        TEXT specialNeedsDetails
+        TEXT medicalNotes
+        BOOLEAN siblingInSchool
+        VARCHAR(200) siblingNames
+        VARCHAR(200) referralSource
+        VARCHAR(200) emergencyContactName
+        VARCHAR(20) emergencyContactPhone
+        VARCHAR(200) emergencyContactRelation
+        BIGINT reviewedByUserId "FK"
+        DATE reviewDate
+        VARCHAR(200) rejectionReason
+        DATE approvalDate
+        BIGINT convertedToStudentId "FK"
+        DATE createdAt
+        BIGINT createdByUserId "FK"
+        DATE updatedAt
+        BIGINT updatedByUserId "FK"
+        BOOLEAN isDeleted
+        DATE deletedAt
+        BIGINT deletedByUserId "FK"
+    }
+    Student {
+        INT schoolStudentNumber
+        BIGINT nationalId "PK FK"
+        VARCHAR(200) fullNameAr
+        VARCHAR(200) fullNameEn
+        DATE birthDate
+        VARCHAR(200) birthPlace
+        VARCHAR(200) gender
+        VARCHAR(200) nationality
+        VARCHAR(200) religion
+        VARCHAR(50) bloodType
+        VARCHAR(50) status
+        DATE enrollmentDate
+        DATE currentEnrollmentDate
+        VARCHAR(200) address
+        VARCHAR(20) phone
+        VARCHAR(100) email
+        BOOLEAN isSpecialNeeds
+        DATE createdAt
+        VARCHAR(200) studentPhoto
+        VARCHAR(200) studentPhotoThumb
+        VARCHAR(200) firstNameAr
+        VARCHAR(200) fatherNameAr
+        VARCHAR(200) grandfatherNameAr
+        VARCHAR(200) familyNameAr
+        VARCHAR(200) firstNameEn
+        VARCHAR(200) fatherNameEn
+        VARCHAR(200) grandfatherNameEn
+        VARCHAR(200) familyNameEn
+        VARCHAR(200) fullNameArNormalized
+        VARCHAR(200) fullNameEnNormalized
+        VARCHAR(200) placeOfBirth
+        INT countryOfBirth
+        VARCHAR(200) motherName
+        VARCHAR(200) motherNationality
+        VARCHAR(20) motherPhone
+        VARCHAR(100) motherEmail
+        VARCHAR(200) motherOccupation
+        INT familyNumber
+        INT passportNumber
+        DATE passportExpiryDate
+        INT residenceNumber
+        DATE residenceExpiryDate
+        INT socialSecurityNumber
+        BOOLEAN hasMedicalInsurance
+        VARCHAR(200) medicalInsuranceCompany
+        INT medicalInsuranceNumber
+        DATE medicalInsuranceExpiry
+        VARCHAR(50) specialNeedsType
+        TEXT specialNeedsDetails
+        VARCHAR(200) specialNeedsAttachment
+        BOOLEAN isOrphan
+        VARCHAR(50) orphanType
+        BOOLEAN isSponsored
+        VARCHAR(200) sponsorName
+        VARCHAR(50) sponsorType
+        BOOLEAN isFromLowIncomeFamily
+        VARCHAR(50) familyIncomeLevel
+        INT numberOfFamilyMembers
+        INT numberOfSiblings
+        INT siblingsInSchool
+        VARCHAR(200) siblingsNames
+        BIGINT busSubscriptionId "FK"
+        VARCHAR(200) busStopPoint
+        VARCHAR(50) busSubscriptionStatus
+        VARCHAR(200) previousSchool
+        VARCHAR(200) previousSchoolCity
+        DECIMAL(5,2) previousSchoolGrade
+        VARCHAR(200) previousSchoolYear
+        VARCHAR(200) transferReason
+        DATE joinDate
+        DATE graduationDate
+        DATE actualGraduationDate
+        BOOLEAN isGraduated
+        VARCHAR(200) graduationYear
+        DATE leavingDate
+        VARCHAR(200) leavingReason
+        VARCHAR(200) leavingDestination
+        DATE lastAttendanceDate
+        VARCHAR(50) studentCode
+        VARCHAR(50) qrCode
+        VARCHAR(50) barcode
+        VARCHAR(50) rfidTag
+        BOOLEAN studentCardIssued
+        DATE studentCardIssueDate
+        DATE studentCardExpiryDate
+        BOOLEAN canUsePortal
+        VARCHAR(200) portalUsername
+        VARCHAR(200) portalPasswordHash
+        VARCHAR(200) lastPortalLogin
+        VARCHAR(200) preferredLanguage
+        VARCHAR(200) notificationPreference
+        VARCHAR(200) dataSource
+        BIGINT importBatchId "FK"
+        VARCHAR(50) verificationStatus
+        BIGINT verifiedByUserId "FK"
+        DATE verificationDate
+        TEXT verificationNotes
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        DATE updatedAt
+        BIGINT updatedByUserId "FK"
+        BOOLEAN isDeleted
+        DATE deletedAt
+        BIGINT deletedByUserId "FK"
+    }
+    Guardian {
+        BIGINT nationalId "FK"
+        VARCHAR(200) fullNameAr
+        VARCHAR(200) relationship
+        VARCHAR(20) phonePrimary
+        VARCHAR(20) phoneSecondary
+        VARCHAR(100) email
+        VARCHAR(200) jobTitle
+        BOOLEAN isPrimary
+        BOOLEAN isEmergencyContact
+        DATE createdAt
+        VARCHAR(50) guardianCode
+        VARCHAR(200) firstNameAr
+        VARCHAR(200) fatherNameAr
+        VARCHAR(200) grandfatherNameAr
+        VARCHAR(200) familyNameAr
+        VARCHAR(200) firstNameEn
+        VARCHAR(200) fatherNameEn
+        VARCHAR(200) grandfatherNameEn
+        VARCHAR(200) familyNameEn
+        VARCHAR(200) fullNameEn
+        VARCHAR(200) fullNameArNormalized
+        VARCHAR(200) fullNameEnNormalized
+        DATE birthDate
+        VARCHAR(200) gender
+        VARCHAR(200) nationality
+        INT passportNumber
+        DATE passportExpiryDate
+        INT residenceNumber
+        DATE residenceExpiryDate
+        VARCHAR(200) address
+        VARCHAR(200) city
+        VARCHAR(200) district
+        VARCHAR(200) street
+        INT buildingNumber
+        INT unitNumber
+        VARCHAR(100) postalCode
+        INT additionalNumber
+        VARCHAR(20) workPhone
+        VARCHAR(200) workAddress
+        VARCHAR(50) educationLevel
+        VARCHAR(50) maritalStatus
+        INT numberOfChildren
+        VARCHAR(50) familyIncomeLevel
+        BOOLEAN canUsePortal
+        VARCHAR(200) portalUsername
+        VARCHAR(200) portalPasswordHash
+        VARCHAR(200) lastPortalLogin
+        VARCHAR(200) preferredLanguage
+        VARCHAR(200) notificationPreference
+        VARCHAR(100) communicationPreference
+        INT whatsappNumber
+        VARCHAR(500) facebookProfile
+        VARCHAR(200) twitterHandle
+        VARCHAR(200) profilePhoto
+        VARCHAR(200) idCardImage
+        VARCHAR(200) passportImage
+        VARCHAR(200) residencyImage
+        VARCHAR(50) verificationStatus
+        BIGINT verifiedByUserId "FK"
+        DATE verificationDate
+        VARCHAR(200) verifiedAt
+        TEXT verificationNotes
+        VARCHAR(200) dataSource
+        BIGINT importBatchId "FK"
+        TEXT notes
+        DATE lastCommunicationDate
+        VARCHAR(50) lastCommunicationType
+        VARCHAR(200) communicationHistory
+        INT complaintsCount
+        DATE lastComplaintDate
+        INT meetingsCount
+        DATE lastMeetingDate
+        BIGINT createdByUserId "FK"
+        DATE updatedAt
+        BIGINT updatedByUserId "FK"
+        BOOLEAN isDeleted
+        DATE deletedAt
+        BIGINT deletedByUserId "FK"
+        BIGINT studentGuardianId "PK"
+        BIGINT studentId "FK"
+        BIGINT guardianId "FK"
+        DECIMAL(5,2) custodyPercentage
+        BOOLEAN hasCustody
+        BOOLEAN canPickup
+        VARCHAR(200) authorizedBy
+        VARCHAR(200) authorizationDocument
+        DATE authorizationStartDate
+        DATE authorizationEndDate
+        BOOLEAN canAccessPortal
+        BOOLEAN canViewGrades
+        BOOLEAN canViewAttendance
+        BOOLEAN canViewBehavior
+        BOOLEAN canViewFinance
+        BOOLEAN canMakePayments
+        BOOLEAN receivesNotifications
+        VARCHAR(50) notificationTypes
+        VARCHAR(200) priority
+        BOOLEAN isActive
+        DATE deactivatedAt
+        BIGINT deactivatedByUserId "FK"
+        VARCHAR(200) deactivationReason
+    }
+    Enrollment {
+        VARCHAR(50) enrollmentType
+        DATE enrollmentDate
+        INT enrollmentNumber
+        VARCHAR(50) enrollmentStatus
+        VARCHAR(50) approvalStatus
+        DATE createdAt
+        BIGINT studentId "PK FK"
+        BIGINT academicYearId "FK"
+        BIGINT gradeLevelId "FK"
+        BIGINT classSectionId "FK"
+        BIGINT previousSchoolId "FK"
+        BIGINT previousEnrollmentId "FK"
+        VARCHAR(50) enrollmentCode
+        DATE enrollmentDateGregorian
+        VARCHAR(200) enrollmentSemester
+        VARCHAR(200) enrollmentSource
+        VARCHAR(200) transferReason
+        VARCHAR(200) transferFromSchool
+        VARCHAR(200) transferFromCity
+        INT transferFromCountry
+        VARCHAR(200) transferDocument
+        DECIMAL(5,2) previousGradeLevel
+        VARCHAR(200) previousAcademicYear
+        VARCHAR(200) previousAverage
+        DECIMAL(5,2) previousGrade
+        VARCHAR(200) previousBehavior
+        BOOLEAN hasPreviousRecord
+        VARCHAR(200) previousSchoolContact
+        VARCHAR(50) statusReason
+        DATE statusDate
+        DATE approvalDate
+        BIGINT approvedByUserId "FK"
+        TEXT approvalNotes
+        BOOLEAN isActive
+        BOOLEAN isCurrent
+        BIGINT enrollmentFeePaid "FK"
+        DECIMAL(15,2) enrollmentFeeAmount
+        DECIMAL(15,2) enrollmentFeeReceipt
+        DECIMAL(15,2) feeExemptionReason
+        VARCHAR(50) scholarshipType
+        DECIMAL(5,2) scholarshipPercentage
+        VARCHAR(200) scholarshipSource
+        BOOLEAN registrationComplete
+        DATE registrationCompletedAt
+        BOOLEAN documentsVerified
+        DATE documentsVerifiedAt
+        BIGINT documentsVerifiedByUserId "FK"
+        TEXT documentsNotes
+        BOOLEAN orientationSessionAttended
+        DATE orientationSessionDate
+        BOOLEAN contractSigned
+        DATE contractSignedDate
+        VARCHAR(200) contractFilePath
+        BOOLEAN studentHandbookAcknowledged
+        DATE handbookAcknowledgedDate
+        BOOLEAN medicalFormCompleted
+        BOOLEAN emergencyContactConfirmed
+        VARCHAR(200) pickupAuthorizedPersons
+        BOOLEAN busServiceSubscribed
+        BIGINT busRouteId "FK"
+        BIGINT busStopId "FK"
+        BOOLEAN mealPlanSubscribed
+        BIGINT mealPlanId "FK"
+        VARCHAR(200) specialMealRequirements
+        TEXT notes
+        VARCHAR(200) dataSource
+        BIGINT importBatchId "FK"
+        BIGINT createdByUserId "FK"
+        DATE updatedAt
+        BIGINT updatedByUserId "FK"
+        BOOLEAN isDeleted
+        DATE deletedAt
+        BIGINT deletedByUserId "FK"
+    }
+    StudentDocument {
+        VARCHAR(50) documentType
+        VARCHAR(200) documentName
+        VARCHAR(200) filePath
+        VARCHAR(50) mimeType
+        BOOLEAN isVerified
+        VARCHAR(50) status
+        DATE uploadedAt
+        BIGINT studentId "PK FK"
+        BIGINT enrollmentId "FK"
+        VARCHAR(50) documentCategory
+        VARCHAR(50) documentSubType
+        INT documentNumber
+        BOOLEAN issuingAuthority
+        BOOLEAN issuingCountry
+        BOOLEAN issuingCity
+        DATE issueDate
+        DATE expiryDate
+        DATE isExpiryRequired
+        INT reminderBeforeExpiry
+        BOOLEAN expiryNotificationSent
+        DATE expiryNotificationDate
+        VARCHAR(200) documentLanguage
+        BOOLEAN isOriginal
+        BOOLEAN hasTranslation
+        VARCHAR(200) translationFilePath
+        VARCHAR(200) fileSize
+        VARCHAR(200) fileHash
+        INT filePages
+        VARCHAR(200) thumbnailPath
+        TEXT description
+        VARCHAR(200) tags
+        BOOLEAN isRequired
+        DATE verificationDate
+        BIGINT verifiedByUserId "FK"
+        VARCHAR(200) verificationMethod
+        TEXT verificationNotes
+        VARCHAR(200) rejectionReason
+        DATE reviewedAt
+        BIGINT reviewedByUserId "FK"
+        VARCHAR(50) accessLevel
+        VARCHAR(200) sharedWith
+        BOOLEAN sharedWithExternal
+        VARCHAR(200) externalShareToken
+        DATE externalShareExpiry
+        INT downloadCount
+        DATE lastDownloadedAt
+        BIGINT lastDownloadedByUserId "FK"
+        BOOLEAN isArchived
+        DATE archivedAt
+        BIGINT archivedByUserId "FK"
+        VARCHAR(200) archiveReason
+        VARCHAR(200) retentionPeriod
+        DATE retentionEndDate
+        DATE disposalDate
+        VARCHAR(50) disposalStatus
+        VARCHAR(200) disposalMethod
+        TEXT notes
+        VARCHAR(200) dataSource
+        DATE createdAt
+        BIGINT createdByUserId "FK"
+        DATE updatedAt
+        BIGINT updatedByUserId "FK"
+        BOOLEAN isDeleted
+        DATE deletedAt
+        BIGINT deletedByUserId "FK"
+    }
+    StudentHealthRecord {
+        VARCHAR(50) bloodType
+        VARCHAR(200) height
+        VARCHAR(200) weight
+        VARCHAR(200) chronicDiseases
+        VARCHAR(200) allergies
+        VARCHAR(50) vaccinationStatus
+        DATE lastCheckupDate
+        DATE createdAt
+        BIGINT studentId "PK FK"
+        INT healthRecordNumber
+        VARCHAR(200) bmi
+        VARCHAR(50) bmiStatus
+        DECIMAL(5,2) heightPercentile
+        DECIMAL(5,2) weightPercentile
+        VARCHAR(200) visionLeft
+        VARCHAR(200) visionRight
+        DATE visionDate
+        VARCHAR(200) hearingLeft
+        VARCHAR(200) hearingRight
+        DATE hearingDate
+        VARCHAR(200) dentalHealth
+        VARCHAR(200) dentalLastVisit
+        TEXT dentalNotes
+        VARCHAR(200) chronicDiseasesList
+        TEXT chronicDiseasesDetails
+        VARCHAR(200) chronicDiseasesMedications
+        VARCHAR(200) chronicDiseasesDoctor
+        VARCHAR(200) chronicDiseasesHospital
+        VARCHAR(200) allergiesList
+        TEXT allergiesDetails
+        VARCHAR(200) allergiesReactions
+        VARCHAR(200) allergiesMedications
+        VARCHAR(200) allergiesEmergencyTreatment
+        BOOLEAN hasEpiPen
+        VARCHAR(200) vaccinationsList
+        DATE lastVaccinationDate
+        DATE nextVaccinationDate
+        VARCHAR(200) vaccinationReminder
+        VARCHAR(200) surgeries
+        TEXT surgeriesDetails
+        VARCHAR(200) medications
+        VARCHAR(200) currentMedications
+        VARCHAR(200) medicationDosage
+        VARCHAR(200) medicationSchedule
+        VARCHAR(200) medicalConditions
+        VARCHAR(200) physicalDisabilities
+        VARCHAR(200) learningDisabilities
+        VARCHAR(200) speechIssues
+        VARCHAR(200) psychologicalConditions
+        VARCHAR(200) psychologicalSupport
+        VARCHAR(200) dietaryRestrictions
+        VARCHAR(200) foodAllergies
+        BOOLEAN mealPlanRequired
+        VARCHAR(200) physicalActivityRestrictions
+        VARCHAR(200) sportsExemption
+        VARCHAR(200) sportsExemptionReason
+        VARCHAR(200) sportsExemptionDocument
+        VARCHAR(200) emergencyContactName
+        VARCHAR(20) emergencyContactPhone
+        VARCHAR(200) emergencyContactRelation
+        VARCHAR(200) primaryPhysician
+        VARCHAR(20) primaryPhysicianPhone
+        VARCHAR(200) primaryPhysicianClinic
+        VARCHAR(200) preferredHospital
+        VARCHAR(200) healthInsuranceProvider
+        INT healthInsuranceNumber
+        DATE healthInsuranceExpiry
+        VARCHAR(200) insuranceCardImage
+        VARCHAR(200) consentToShare
+        VARCHAR(200) consentSignedBy
+        DATE consentDate
+        VARCHAR(200) consentDocument
+        DATE lastVisitDate
+        VARCHAR(200) lastVisitReason
+        VARCHAR(200) lastVisitDiagnosis
+        INT visitCount
+        DATE hospitalizationHistory
+        TEXT healthNotes
+        VARCHAR(200) healthAlerts
+        VARCHAR(200) activeAlerts
+        BOOLEAN isSpecialNeedsConfirmed
+        VARCHAR(200) specialNeedsDiagnosis
+        VARCHAR(200) specialNeedsDoctor
+        DATE specialNeedsDate
+        VARCHAR(200) specialNeedsReport
+        BOOLEAN requiresNurse
+        BOOLEAN requiresMedicationAtSchool
+        TEXT medicationAtSchoolDetails
+        VARCHAR(200) medicationStorage
+        VARCHAR(200) medicationAuthorizedPerson
+        VARCHAR(200) healthDataVerifiedBy
+        DATE healthDataVerifiedAt
+        VARCHAR(50) healthDataVerifiedStatus
+        VARCHAR(200) dataSource
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        DATE updatedAt
+        BIGINT updatedByUserId "FK"
+        BOOLEAN isDeleted
+        DATE deletedAt
+        BIGINT deletedByUserId "FK"
+    }
+    StudentTransportPreference {
+        BIGINT preferenceId "PK"
+        BIGINT studentId "FK"
+        BIGINT academicYearId "FK"
+        VARCHAR(50) transportType
+        BIGINT busSubscriptionId "FK"
+        BIGINT preferredBusRouteId "FK"
+        BIGINT preferredBusStopId "FK"
+        BIGINT alternativeBusRouteId "FK"
+        BIGINT alternativeBusStopId "FK"
+        VARCHAR(200) pickupPoint
+        VARCHAR(200) pickupLatitude
+        VARCHAR(200) pickupLongitude
+        TIME pickupTimePreferred
+        TIME dropoffTimePreferred
+        BOOLEAN morningPickup
+        BOOLEAN afternoonDropoff
+        VARCHAR(200) daysOfWeek
+        BOOLEAN requiresEscort
+        VARCHAR(200) escortName
+        VARCHAR(20) escortPhone
+        VARCHAR(200) escortRelation
+        BOOLEAN specialNeedsTransport
+        TEXT specialNeedsTransportDetails
+        BOOLEAN wheelchairAccessible
+        BOOLEAN medicalEquipmentTransport
+        TEXT medicalEquipmentDetails
+        VARCHAR(50) subscriptionStatus
+        DATE subscriptionStartDate
+        DATE subscriptionEndDate
+        DECIMAL(15,2) subscriptionFee
+        VARCHAR(50) paymentStatus
+        VARCHAR(200) paymentMethod
+        DATE paymentDate
+        BOOLEAN contractSigned
+        VARCHAR(200) contractFilePath
+        VARCHAR(200) emergencyContactName
+        VARCHAR(20) emergencyContactPhone
+        VARCHAR(200) authorizedToPickup
+        VARCHAR(200) alternativeTransportArrangements
+        TEXT notes
+        DATE createdAt
+        BIGINT createdByUserId "FK"
+        DATE updatedAt
+        BIGINT updatedByUserId "FK"
+        BOOLEAN isDeleted
+    }
+    StudentInventory {
+        BIGINT inventoryId "PK"
+        BIGINT studentId "FK"
+        BIGINT academicYearId "FK"
+        VARCHAR(50) itemType
+        BIGINT itemId "FK"
+        VARCHAR(50) itemCode
+        VARCHAR(200) itemName
+        TEXT itemDescription
+        INT quantity
+        VARCHAR(200) unitOfMeasure
+        VARCHAR(200) conditionAtDelivery
+        TEXT conditionNotes
+        DATE deliveryDate
+        BIGINT deliveredByUserId "FK"
+        VARCHAR(200) receivedBy
+        VARCHAR(200) receivedByRelation
+        VARCHAR(200) receiptSignature
+        DATE expectedReturnDate
+        DATE actualReturnDate
+        VARCHAR(200) conditionAtReturn
+        TEXT returnNotes
+        BIGINT returnedToUserId "FK"
+        VARCHAR(200) returnReceiptSignature
+        BOOLEAN isReturned
+        BOOLEAN isDamaged
+        TEXT damageDescription
+        DATE damageDate
+        BIGINT damageReportedByUserId "FK"
+        VARCHAR(200) damagePhotos
+        BOOLEAN isLost
+        DATE lostDate
+        BIGINT lostReportedByUserId "FK"
+        TEXT lostNotes
+        DECIMAL(15,2) penaltyAmount
+        VARCHAR(50) penaltyStatus
+        DATE penaltyPaidDate
+        INT penaltyReceiptNumber
+        BOOLEAN isExempt
+        VARCHAR(200) exemptionReason
+        BIGINT exemptionApprovedByUserId "FK"
+        BOOLEAN replacementRequired
+        DATE replacementDate
+        BIGINT replacementItemId "FK"
+        TEXT notes
+        DATE createdAt
+        BIGINT createdByUserId "FK"
+        DATE updatedAt
+        BIGINT updatedByUserId "FK"
+        BOOLEAN isDeleted
+    }
+    Transportation {
+        BIGINT transportId "PK"
+        BIGINT schoolId "FK"
+        BIGINT routeId "FK"
+        VARCHAR(200) routeName
+        VARCHAR(50) routeCode
+        TEXT routeDescription
+        BIGINT busId "FK"
+        INT busPlateNumber
+        VARCHAR(200) busCapacity
+        VARCHAR(50) busType
+        VARCHAR(200) busFeatures
+        BIGINT driverId "FK"
+        VARCHAR(200) driverName
+        INT driverLicenseNumber
+        VARCHAR(20) driverPhone
+        BIGINT supervisorId "FK"
+        VARCHAR(200) supervisorName
+        BIGINT shiftId "FK"
+        VARCHAR(50) tripType
+        TIME startTime
+        TIME endTime
+        VARCHAR(200) estimatedDuration
+        VARCHAR(200) stops
+        VARCHAR(200) stopPoints
+        VARCHAR(200) stopSequence
+        VARCHAR(200) estimatedArrivalAtStop
+        VARCHAR(200) actualArrivalAtStop
+        INT studentsAssigned
+        VARCHAR(200) maxStudents
+        INT currentStudents
+        VARCHAR(500) routeMap
+        VARCHAR(200) routePolyline
+        BOOLEAN isActive
+        VARCHAR(50) status
+        VARCHAR(200) operatorCompany
+        BIGINT contractId "FK"
+        DATE contractStartDate
+        DATE contractEndDate
+        DECIMAL(15,2) serviceFee
+        TEXT notes
+        DATE createdAt
+        BIGINT createdByUserId "FK"
+        DATE updatedAt
+        BIGINT updatedByUserId "FK"
+        BOOLEAN isDeleted
+    }
+    Course {
+        BIGINT courseId "PK"
+        BIGINT schoolId "FK"
+        BIGINT curriculumId "FK"
+        BIGINT departmentId "FK"
+        VARCHAR(50) courseCode
+        VARCHAR(200) courseNameAr
+        VARCHAR(200) courseNameEn
+        VARCHAR(200) courseNameArNormalized
+        VARCHAR(200) courseNameEnNormalized
+        VARCHAR(200) shortNameAr
+        VARCHAR(200) shortNameEn
+        VARCHAR(50) courseType
+        VARCHAR(50) category
+        BIGINT gradeLevelId "FK"
+        VARCHAR(200) stage
+        VARCHAR(200) track
+        VARCHAR(200) creditHours
+        VARCHAR(200) theoreticalHours
+        VARCHAR(200) practicalHours
+        INT totalWeeks
+        DECIMAL(5,2) minPassingGrade
+        DECIMAL(5,2) maxGrade
+        VARCHAR(200) weight
+        BOOLEAN hasFinalExam
+        BOOLEAN hasMidtermExam
+        BOOLEAN hasPracticalExam
+        BOOLEAN hasOralExam
+        BOOLEAN hasProject
+        BOOLEAN hasActivity
+        VARCHAR(200) gradingMethod
+        DECIMAL(5,2) gradeScale
+        VARCHAR(200) prerequisites
+        VARCHAR(200) coRequisites
+        VARCHAR(200) learningOutcomes
+        TEXT descriptionAr
+        TEXT descriptionEn
+        VARCHAR(200) textbook
+        VARCHAR(50) textbookISBN
+        VARCHAR(200) textbookAuthor
+        VARCHAR(200) textbookPublisher
+        VARCHAR(200) textbookEdition
+        VARCHAR(200) textbookYear
+        VARCHAR(200) references
+        VARCHAR(200) referenceLinks
+        VARCHAR(200) syllabus
+        DATE syllabusLastUpdate
+        VARCHAR(200) teachingObjectives
+        DECIMAL(5,2) teachingStrategies
+        VARCHAR(200) assessmentMethods
+        VARCHAR(200) resourcesNeeded
+        BOOLEAN isActive
+        BOOLEAN isDeleted
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+    }
+    Curriculum {
+        BIGINT curriculumId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) curriculumCode
+        VARCHAR(200) curriculumNameAr
+        VARCHAR(200) curriculumNameEn
+        VARCHAR(50) curriculumType
+        VARCHAR(200) educationSystem
+        TEXT descriptionAr
+        TEXT descriptionEn
+        DECIMAL(5,2) gradeLevels
+        INT subjectsCount
+        VARCHAR(200) totalCreditHours
+        VARCHAR(200) durationYears
+        VARCHAR(200) version
+        DATE versionDate
+        VARCHAR(200) approvedBy
+        DATE approvalDate
+        VARCHAR(200) approvalDocument
+        BOOLEAN isActive
+        DATE startDate
+        DATE endDate
+        BOOLEAN isDefault
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    CoursePlan {
+        BIGINT planId "PK"
+        BIGINT courseId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        BIGINT teacherId "FK"
+        BIGINT gradeLevelId "FK"
+        VARCHAR(50) planCode
+        VARCHAR(200) planVersion
+        VARCHAR(200) totalWeeks
+        VARCHAR(200) teachingWeeks
+        VARCHAR(200) revisionWeeks
+        VARCHAR(200) examWeeks
+        VARCHAR(200) weeklyPlan
+        VARCHAR(200) topics
+        VARCHAR(200) learningOutcomes
+        VARCHAR(200) resources
+        VARCHAR(200) assessments
+        VARCHAR(200) activities
+        DATE startDate
+        DATE endDate
+        BOOLEAN isCompleted
+        DECIMAL(5,2) completionPercentage
+        VARCHAR(200) actualProgress
+        TEXT notes
+        VARCHAR(200) approvedBy
+        DATE approvalDate
+        BOOLEAN isActive
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    ClassSection {
+        BIGINT sectionId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        BIGINT gradeLevelId "FK"
+        VARCHAR(50) sectionCode
+        VARCHAR(200) sectionNameAr
+        VARCHAR(200) sectionNameEn
+        VARCHAR(50) sectionType
+        VARCHAR(200) capacity
+        INT currentStudents
+        VARCHAR(200) availableSeats
+        VARCHAR(200) gender
+        BIGINT shiftId "FK"
+        BIGINT classroomId "FK"
+        BIGINT homeroomTeacherId "FK"
+        BIGINT assistantTeacherId "FK"
+        BIGINT supervisorId "FK"
+        BOOLEAN isGraduating
+        BOOLEAN isActive
+        VARCHAR(50) status
+        DATE openingDate
+        DATE closingDate
+        VARCHAR(200) location
+        VARCHAR(50) colorCode
+        VARCHAR(50) scheduleType
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    CourseRegistration {
+        BIGINT registrationId "PK"
+        BIGINT studentId "FK"
+        BIGINT enrollmentId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        BIGINT courseId "FK"
+        BIGINT sectionId "FK"
+        BIGINT teacherId "FK"
+        DATE registrationDate
+        VARCHAR(50) registrationType
+        VARCHAR(50) registrationStatus
+        VARCHAR(200) registrationSource
+        BOOLEAN isApproved
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        BOOLEAN isRepeated
+        INT repeatCount
+        BIGINT previousRegistrationId "FK"
+        DECIMAL(5,2) previousGrade
+        DATE withdrawalDate
+        VARCHAR(200) withdrawalReason
+        VARCHAR(200) withdrawalApprovedBy
+        BOOLEAN isPassed
+        DATE passDate
+        DECIMAL(5,2) finalGrade
+        DECIMAL(5,2) gradeLetter
+        DECIMAL(5,2) gradePoints
+        DECIMAL(5,2) percentage
+        INT gradeValue
+        DECIMAL(5,2) maxGrade
+        DECIMAL(5,2) minPassingGrade
+        BOOLEAN isGraded
+        BIGINT gradedByUserId "FK"
+        DECIMAL(5,2) gradedAt
+        BIGINT gradeApprovedByUserId "FK"
+        DECIMAL(5,2) gradeApprovedAt
+        DECIMAL(5,2) gradeStatus
+        DECIMAL(5,2) attendanceRate
+        DECIMAL(5,2) attendancePercentage
+        VARCHAR(200) totalAbsences
+        VARCHAR(200) excusedAbsences
+        VARCHAR(200) unexcusedAbsences
+        BOOLEAN isEligibleForExam
+        VARCHAR(200) ineligibilityReason
+        VARCHAR(200) gpaContribution
+        VARCHAR(200) gpaBefore
+        VARCHAR(200) gpaAfter
+        DECIMAL(5,2) termWorkGrade
+        DECIMAL(5,2) midtermGrade
+        DECIMAL(5,2) practicalGrade
+        DECIMAL(5,2) oralGrade
+        DECIMAL(5,2) finalExamGrade
+        DECIMAL(5,2) projectGrade
+        DECIMAL(5,2) activityGrade
+        DECIMAL(5,2) gradesBreakdown
+        DECIMAL(5,2) gradeComponents
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    Grade {
+        BIGINT gradeId "PK"
+        BIGINT registrationId "FK"
+        BIGINT studentId "FK"
+        BIGINT courseId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        DECIMAL(5,2) gradeType
+        DECIMAL(5,2) gradeCategory
+        DECIMAL(5,2) gradeCode
+        DECIMAL(5,2) gradeNameAr
+        DECIMAL(5,2) gradeNameEn
+        DECIMAL(5,2) gradeValue
+        DECIMAL(5,2) maxGrade
+        DECIMAL(5,2) percentage
+        DECIMAL(5,2) weight
+        DATE gradeDate
+        DATE dueDate
+        DATE submissionDate
+        BOOLEAN isSubmitted
+        VARCHAR(50) submissionStatus
+        INT lateDays
+        BOOLEAN isGraded
+        BIGINT gradedByUserId "FK"
+        DECIMAL(5,2) gradedAt
+        BOOLEAN isAbsent
+        BOOLEAN isExcused
+        TEXT excuseDetails
+        VARCHAR(200) excuseDocument
+        VARCHAR(200) excuseApprovedBy
+        BOOLEAN isExempt
+        VARCHAR(200) exemptionReason
+        DECIMAL(5,2) gradeStatus
+        VARCHAR(200) modificationReason
+        DECIMAL(5,2) previousGradeValue
+        TEXT notes
+        TEXT teacherNotes
+        DECIMAL(15,2) feedbackToStudent
+        VARCHAR(200) attachments
+        BOOLEAN isActive
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    Evaluation {
+        BIGINT evaluationId "PK"
+        BIGINT courseId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        VARCHAR(200) evaluationNameAr
+        VARCHAR(200) evaluationNameEn
+        VARCHAR(50) evaluationType
+        VARCHAR(200) components
+        VARCHAR(200) totalWeight
+        DECIMAL(5,2) passingScore
+        VARCHAR(200) calculationMethod
+        DECIMAL(5,2) gradeScale
+        BOOLEAN isActive
+        DATE validFrom
+        DATE validTo
+        VARCHAR(200) approvedBy
+        DATE approvalDate
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    ExamResult {
+        BIGINT examResultId "PK"
+        BIGINT registrationId "FK"
+        BIGINT studentId "FK"
+        BIGINT courseId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        BIGINT examId "FK"
+        VARCHAR(200) examName
+        VARCHAR(50) examType
+        DATE examDate
+        TIME examTime
+        VARCHAR(200) examHall
+        INT examSeatNumber
+        INT examNumber
+        INT secretNumber
+        DECIMAL(5,2) maxGrade
+        DECIMAL(5,2) grade
+        DECIMAL(5,2) percentage
+        BOOLEAN isAbsent
+        BOOLEAN isExcused
+        VARCHAR(200) excuseReason
+        VARCHAR(200) excuseDocument
+        BOOLEAN isCheating
+        TEXT cheatingDetails
+        VARCHAR(200) cheatingPenalty
+        BOOLEAN isPassed
+        VARCHAR(50) passStatus
+        BIGINT correctedByUserId "FK"
+        VARCHAR(200) correctedAt
+        BIGINT reviewedByUserId "FK"
+        VARCHAR(200) reviewedAt
+        BIGINT approvedByUserId "FK"
+        VARCHAR(200) approvedAt
+        VARCHAR(50) resultStatus
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    Activity {
+        BIGINT activityId "PK"
+        BIGINT courseId "FK"
+        BIGINT activityTypeId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        VARCHAR(200) activityNameAr
+        VARCHAR(200) activityNameEn
+        VARCHAR(50) activityCode
+        TEXT descriptionAr
+        TEXT descriptionEn
+        VARCHAR(200) objectives
+        VARCHAR(200) targetAudience
+        DECIMAL(5,2) gradeLevelIds
+        VARCHAR(200) maxParticipants
+        VARCHAR(200) minParticipants
+        DATE registrationStartDate
+        DATE registrationEndDate
+        DATE startDate
+        DATE endDate
+        VARCHAR(200) location
+        BIGINT supervisorId "FK"
+        BIGINT assistantSupervisorId "FK"
+        DECIMAL(5,2) maxGrade
+        DECIMAL(5,2) passingGrade
+        VARCHAR(200) evaluationCriteria
+        VARCHAR(200) resources
+        VARCHAR(200) budget
+        BOOLEAN isMandatory
+        BOOLEAN isGraded
+        VARCHAR(200) weight
+        VARCHAR(50) status
+        DECIMAL(5,2) completionRate
+        VARCHAR(200) report
+        VARCHAR(200) photos
+        VARCHAR(200) attachments
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    ActivityDetail {
+        BIGINT detailId "PK"
+        BIGINT activityId "FK"
+        BIGINT studentId "FK"
+        DATE registrationDate
+        VARCHAR(50) registrationStatus
+        VARCHAR(200) role
+        VARCHAR(50) attendanceStatus
+        DATE attendanceDates
+        VARCHAR(200) totalAttendance
+        DECIMAL(5,2) obtainedGrade
+        DECIMAL(5,2) maxGrade
+        DECIMAL(5,2) percentage
+        VARCHAR(200) evaluation
+        BIGINT evaluationByUserId "FK"
+        DATE evaluationDate
+        DECIMAL(15,2) feedback
+        VARCHAR(200) achievements
+        BOOLEAN certificateIssued
+        INT certificateNumber
+        VARCHAR(200) certificatePath
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    ActivityType {
+        BIGINT activityTypeId "PK"
+        VARCHAR(50) typeCode
+        VARCHAR(50) typeNameAr
+        VARCHAR(50) typeNameEn
+        TEXT descriptionAr
+        TEXT descriptionEn
+        VARCHAR(50) category
+        VARCHAR(50) colorCode
+        VARCHAR(200) icon
+        BOOLEAN requiresApproval
+        VARCHAR(200) maxParticipantsPerActivity
+        BOOLEAN isActive
+        VARCHAR(200) sortOrder
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    LeaveType {
+        BIGINT leaveTypeId "PK"
+        VARCHAR(50) typeCode
+        VARCHAR(50) typeNameAr
+        VARCHAR(50) typeNameEn
+        TEXT descriptionAr
+        TEXT descriptionEn
+        VARCHAR(50) category
+        BIGINT isPaid "FK"
+        BOOLEAN isExcused
+        BOOLEAN requiresDocument
+        VARCHAR(200) maxDaysPerYear
+        VARCHAR(200) maxConsecutiveDays
+        BOOLEAN affectsAttendance
+        BOOLEAN affectsGrading
+        BOOLEAN isActive
+        VARCHAR(200) sortOrder
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    Attendance {
+        BIGINT attendanceId "PK"
+        BIGINT studentId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        BIGINT gradeLevelId "FK"
+        BIGINT classSectionId "FK"
+        DATE attendanceDate
+        VARCHAR(200) dayOfWeek
+        VARCHAR(50) attendanceType
+        VARCHAR(50) status
+        TIME arrivalTime
+        VARCHAR(200) lateMinutes
+        TIME departureTime
+        VARCHAR(200) earlyDepartureMinutes
+        BOOLEAN isExcused
+        BIGINT excuseId "FK"
+        VARCHAR(200) excuseDocument
+        VARCHAR(200) excuseApprovedBy "FK"
+        DATE excuseApprovedAt
+        BIGINT recordedById "FK"
+        VARCHAR(200) recordedAt
+        BIGINT verifiedById "FK"
+        VARCHAR(200) verifiedAt
+        VARCHAR(200) verificationMethod
+        BOOLEAN locationVerified
+        VARCHAR(200) gpsLocation
+        BIGINT deviceId "FK"
+        VARCHAR(200) ipAddress
+        TEXT notes
+        BOOLEAN isOverridden
+        VARCHAR(200) overrideReason
+        BIGINT overriddenByUserId "FK"
+        VARCHAR(200) overrideAt
+        BOOLEAN isSyncedWithParent
+        VARCHAR(200) parentNotifiedAt
+        BOOLEAN parentAcknowledged
+        VARCHAR(200) parentAcknowledgedAt
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AttendanceDetail {
+        BIGINT attendanceDetailId "PK"
+        BIGINT attendanceId "FK"
+        BIGINT studentId "FK"
+        BIGINT timetableSlotId "FK"
+        BIGINT periodId "FK"
+        BIGINT courseId "FK"
+        BIGINT teacherId "FK"
+        BIGINT classSectionId "FK"
+        INT periodNumber
+        TIME periodStartTime
+        TIME periodEndTime
+        VARCHAR(50) status
+        TIME arrivalTime
+        VARCHAR(200) lateMinutes
+        BOOLEAN isExcused
+        VARCHAR(200) excuseReason
+        VARCHAR(200) excuseDocument
+        BIGINT recordedById "FK"
+        VARCHAR(200) recordedAt
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    StudentLeave {
+        BIGINT leaveId "PK"
+        BIGINT studentId "FK"
+        BIGINT leaveTypeId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        DATE requestDate
+        DATE startDate
+        DATE endDate
+        INT totalDays
+        INT daysCount
+        VARCHAR(200) reason
+        TEXT description
+        VARCHAR(200) attachmentPath
+        VARCHAR(50) attachmentType
+        VARCHAR(200) attachmentName
+        BOOLEAN isUrgent
+        VARCHAR(200) contactDuringLeave
+        VARCHAR(20) emergencyPhone
+        VARCHAR(50) status
+        BIGINT reviewedByUserId "FK"
+        DATE reviewDate
+        TEXT reviewNotes
+        VARCHAR(200) rejectionReason
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        TEXT approvalNotes
+        BIGINT isPaid "FK"
+        BOOLEAN deductedFromBalance
+        DECIMAL(15,2) remainingBalanceBefore
+        DECIMAL(15,2) remainingBalanceAfter
+        VARCHAR(200) attendanceIds
+        BOOLEAN isLinkedToAttendance
+        BIGINT linkedByUserId "FK"
+        DATE linkedAt
+        BOOLEAN isExpired
+        DATE expiredAt
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    Discipline {
+        BIGINT disciplineId "PK"
+        BIGINT studentId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        INT caseNumber
+        DATE incidentDate
+        TIME incidentTime
+        VARCHAR(200) location
+        BIGINT reportedById "FK"
+        DECIMAL(15,2) reportedByRole
+        VARCHAR(50) caseType
+        VARCHAR(50) category
+        VARCHAR(50) subCategory
+        VARCHAR(50) severityLevel
+        TEXT description
+        VARCHAR(200) witnesses
+        VARCHAR(200) evidence
+        VARCHAR(200) penaltyPoints
+        VARCHAR(200) rewardPoints
+        VARCHAR(200) totalPoints
+        VARCHAR(200) action
+        TEXT actionDetails
+        DATE actionDate
+        BIGINT actionByUserId "FK"
+        BIGINT actionApprovedByUserId "FK"
+        DATE actionApprovalDate
+        BOOLEAN notificationToGuardian
+        VARCHAR(200) guardianNotifiedAt
+        VARCHAR(200) guardianResponse
+        BOOLEAN guardianAcknowledged
+        BOOLEAN meetingRequired
+        DATE meetingDate
+        TEXT meetingNotes
+        VARCHAR(200) meetingAttendees
+        BOOLEAN followUpRequired
+        DATE followUpDate
+        TEXT followUpNotes
+        BIGINT followUpByUserId "FK"
+        BOOLEAN isClosed
+        DATE closedAt
+        BIGINT closedByUserId "FK"
+        TEXT closingNotes
+        INT repeatCount
+        VARCHAR(200) linkedCases
+        VARCHAR(200) attachments
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    StudentComplaint {
+        BIGINT complaintId "PK"
+        INT complaintNumber
+        BIGINT studentId "FK"
+        BIGINT guardianId "FK"
+        VARCHAR(50) complainantType
+        VARCHAR(200) complainantName
+        VARCHAR(20) complainantPhone
+        VARCHAR(100) complainantEmail
+        VARCHAR(200) complainantRelation
+        DATE complaintDate
+        TIME complaintTime
+        VARCHAR(20) channel
+        VARCHAR(50) category
+        VARCHAR(50) subCategory
+        VARCHAR(50) againstType
+        BIGINT againstId "FK"
+        VARCHAR(200) againstName
+        VARCHAR(200) subject
+        TEXT description
+        VARCHAR(200) attachments
+        VARCHAR(200) desiredOutcome
+        VARCHAR(200) priority
+        VARCHAR(200) severity
+        BIGINT assignedToUserId "FK"
+        DATE assignedAt
+        BIGINT assignedByUserId "FK"
+        VARCHAR(50) status
+        TEXT internalNotes
+        VARCHAR(200) actionTaken
+        DATE actionDate
+        BIGINT actionByUserId "FK"
+        VARCHAR(200) responseToComplainant
+        DATE responseDate
+        BOOLEAN complainantSatisfied
+        DECIMAL(15,2) complainantFeedback
+        VARCHAR(50) escalationLevel
+        VARCHAR(200) escalatedTo
+        DATE escalatedAt
+        VARCHAR(200) escalationReason
+        VARCHAR(200) escalationDocument
+        DATE resolvedAt
+        BIGINT resolvedByUserId "FK"
+        VARCHAR(200) resolutionSummary
+        TEXT closingNotes
+        DATE closedAt
+        BIGINT closedByUserId "FK"
+        BOOLEAN isConfidential
+        BOOLEAN isAnonymous
+        VARCHAR(200) dataSource
+        BIGINT linkedComplaintId "FK"
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    GuidanceSession {
+        BIGINT sessionId "PK"
+        INT sessionNumber
+        BIGINT counselorId "FK"
+        VARCHAR(50) sessionType
+        VARCHAR(50) category
+        VARCHAR(200) title
+        VARCHAR(200) objectives
+        DATE plannedDate
+        DATE actualDate
+        TIME startTime
+        TIME endTime
+        VARCHAR(200) duration
+        VARCHAR(200) location
+        BOOLEAN isRecurring
+        VARCHAR(200) recurringPattern
+        BIGINT parentSessionId "FK"
+        VARCHAR(200) students
+        VARCHAR(200) studentIds
+        INT attendeesCount
+        VARCHAR(50) attendanceStatus
+        VARCHAR(200) topics
+        VARCHAR(200) summary
+        TEXT notes
+        VARCHAR(200) recommendations
+        VARCHAR(200) actionPlan
+        BOOLEAN followUpRequired
+        DATE followUpDate
+        TEXT followUpNotes
+        BIGINT relatedDisciplineId "FK"
+        VARCHAR(200) relatedAcademicIssue
+        VARCHAR(200) progressBefore
+        VARCHAR(200) progressAfter
+        VARCHAR(200) progressRating
+        BOOLEAN isConfidential
+        BOOLEAN sharedWithGuardian
+        BOOLEAN guardianNotified
+        DECIMAL(15,2) guardianFeedback
+        VARCHAR(200) attachments
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    LibraryLoan {
+        BIGINT loanId "PK"
+        BIGINT resourceId "FK"
+        VARCHAR(50) borrowerType
+        BIGINT borrowerId "FK"
+        VARCHAR(200) borrowerName
+        VARCHAR(200) borrowerClass
+        VARCHAR(20) borrowerPhone
+        DATE loanDate
+        DATE dueDate
+        DATE expectedReturnDate
+        DATE actualReturnDate
+        INT extensionCount
+        DATE lastExtensionDate
+        VARCHAR(200) extensionApprovedBy "FK"
+        VARCHAR(50) status
+        VARCHAR(200) conditionAtLoan
+        VARCHAR(200) conditionAtReturn
+        TEXT conditionNotes
+        BOOLEAN damageReported
+        TEXT damageDescription
+        VARCHAR(200) damagePhotos
+        DECIMAL(15,2) damageFee
+        BOOLEAN isOverdue
+        VARCHAR(200) overdueDays
+        DECIMAL(15,2) fineAmount
+        BIGINT finePaid "FK"
+        DATE finePaidDate
+        INT fineReceiptNumber
+        BOOLEAN isLost
+        DATE lostDate
+        DECIMAL(15,2) lostFee
+        BIGINT lostFeePaid "FK"
+        INT renewalCount
+        DATE renewedAt
+        VARCHAR(200) renewedBy "FK"
+        BIGINT issuedById "FK"
+        BIGINT receivedById "FK"
+        VARCHAR(200) purpose
+        BIGINT reservationId "FK"
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    StudentActivityRegistration {
+        BIGINT registrationId "PK"
+        BIGINT studentId "FK"
+        BIGINT activityId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        DATE registrationDate
+        VARCHAR(200) registrationSource
+        VARCHAR(50) status
+        VARCHAR(200) waitlistPosition
+        VARCHAR(200) role
+        TEXT roleDescription
+        BIGINT assignedByUserId "FK"
+        DATE assignedAt
+        BOOLEAN isActive
+        DATE startDate
+        DATE endDate
+        VARCHAR(50) completionStatus
+        DATE withdrawalDate
+        VARCHAR(200) withdrawalReason
+        VARCHAR(200) withdrawalApprovedBy
+        INT attendanceCount
+        INT totalSessions
+        DECIMAL(5,2) attendancePercentage
+        DECIMAL(5,2) finalScore
+        VARCHAR(200) evaluation
+        BIGINT evaluatedByUserId "FK"
+        DATE evaluationDate
+        BOOLEAN certificateIssued
+        INT certificateNumber
+        VARCHAR(200) certificatePath
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    SchoolActivity {
+        BIGINT activityId "PK"
+        VARCHAR(50) activityCode
+        VARCHAR(200) activityNameAr
+        VARCHAR(200) activityNameEn
+        BIGINT activityTypeId "FK"
+        VARCHAR(50) category
+        VARCHAR(50) subCategory
+        TEXT descriptionAr
+        TEXT descriptionEn
+        VARCHAR(200) objectives
+        VARCHAR(200) learningOutcomes
+        VARCHAR(200) targetAudience
+        DECIMAL(5,2) gradeLevelIds
+        VARCHAR(200) minParticipants
+        VARCHAR(200) maxParticipants
+        INT currentParticipants
+        BOOLEAN registrationRequired
+        DATE registrationStartDate
+        DATE registrationEndDate
+        DATE startDate
+        DATE endDate
+        VARCHAR(200) schedule
+        VARCHAR(200) sessionDuration
+        INT totalSessions
+        VARCHAR(200) location
+        VARCHAR(50) locationType
+        VARCHAR(500) virtualMeetingLink
+        BIGINT supervisorId "FK"
+        VARCHAR(200) supervisorName
+        VARCHAR(200) coSupervisors
+        VARCHAR(200) volunteers
+        BIGINT organizerId "FK"
+        VARCHAR(200) contactPerson
+        VARCHAR(20) contactPhone
+        VARCHAR(100) contactEmail
+        VARCHAR(200) budget
+        VARCHAR(200) expenses
+        VARCHAR(200) resources
+        VARCHAR(200) sponsors
+        BOOLEAN isGraded
+        VARCHAR(200) weight
+        VARCHAR(200) gradingCriteria
+        DECIMAL(5,2) maxGrade
+        BOOLEAN hasCertificate
+        VARCHAR(200) certificateTemplate
+        VARCHAR(50) status
+        DECIMAL(5,2) progressPercentage
+        VARCHAR(200) completionReport
+        VARCHAR(200) evaluationReport
+        VARCHAR(200) photos
+        VARCHAR(200) attachments
+        BOOLEAN isPublished
+        DATE publishedAt
+        BIGINT publishedByUserId "FK"
+        BOOLEAN isActive
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    ClassPeriod {
+        BIGINT periodId "PK"
+        BIGINT schoolId "FK"
+        BIGINT shiftId "FK"
+        INT periodNumber
+        VARCHAR(50) periodCode
+        VARCHAR(200) nameAr
+        VARCHAR(200) nameEn
+        VARCHAR(50) periodType
+        TIME startTime
+        TIME endTime
+        VARCHAR(200) durationMinutes
+        BOOLEAN isBreak
+        BOOLEAN isActive
+        VARCHAR(200) applicableDays
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    TimetableSlot {
+        BIGINT slotId "PK"
+        BIGINT timetableId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        BIGINT gradeLevelId "FK"
+        BIGINT sectionId "FK"
+        VARCHAR(200) dayOfWeek
+        BIGINT periodId "FK"
+        INT periodNumber
+        BIGINT courseId "FK"
+        BIGINT teacherId "FK"
+        BIGINT assistantTeacherId "FK"
+        BIGINT classroomId "FK"
+        BOOLEAN isActive
+        BOOLEAN isSubstituted
+        BIGINT substitutedByTeacherId "FK"
+        DATE substitutionDate
+        VARCHAR(200) substitutionReason
+        BOOLEAN isCancelled
+        VARCHAR(200) cancellationReason
+        DATE cancelledAt
+        BIGINT cancelledByUserId "FK"
+        BOOLEAN isExam
+        BIGINT examId "FK"
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    ActivityAttendance {
+        BIGINT attendanceId "PK"
+        BIGINT activityRegistrationId "FK"
+        BIGINT activityId "FK"
+        BIGINT studentId "FK"
+        DATE sessionDate
+        INT sessionNumber
+        VARCHAR(200) sessionTitle
+        TIME startTime
+        TIME endTime
+        VARCHAR(50) status
+        TIME checkInTime
+        TIME checkOutTime
+        VARCHAR(200) lateMinutes
+        BOOLEAN isExcused
+        VARCHAR(200) excuseReason
+        VARCHAR(200) excuseDocument
+        VARCHAR(200) excuseApprovedBy
+        DECIMAL(5,2) participationScore
+        TEXT participationNotes
+        BIGINT recordedById "FK"
+        VARCHAR(200) recordedAt
+        VARCHAR(200) locationVerified
+        VARCHAR(200) gpsLocation
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    Classroom {
+        BIGINT classroomId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) classroomCode
+        VARCHAR(200) classroomNameAr
+        VARCHAR(200) classroomNameEn
+        INT classroomNumber
+        BIGINT buildingId "FK"
+        VARCHAR(200) buildingName
+        INT floorNumber
+        VARCHAR(200) wing
+        INT roomNumber
+        TEXT locationDescription
+        VARCHAR(200) latitude
+        VARCHAR(200) longitude
+        INT capacity
+        VARCHAR(200) examCapacity
+        VARCHAR(200) area
+        VARCHAR(50) roomType
+        VARCHAR(50) roomSubType
+        BOOLEAN isLab
+        VARCHAR(50) labType
+        BOOLEAN isSpecialized
+        VARCHAR(200) specializations
+        BOOLEAN hasComputers
+        INT computersCount
+        BOOLEAN hasProjector
+        BOOLEAN hasSmartBoard
+        BOOLEAN hasWhiteBoard
+        BOOLEAN hasBlackBoard
+        BOOLEAN hasAirConditioning
+        BOOLEAN hasHeating
+        BOOLEAN hasInternet
+        BOOLEAN hasWifi
+        BOOLEAN hasPowerOutlets
+        BOOLEAN hasEmergencyExit
+        BOOLEAN hasFireExtinguisher
+        BOOLEAN hasFirstAidKit
+        BOOLEAN isAccessible
+        VARCHAR(200) accessibilityFeatures
+        VARCHAR(50) furnitureType
+        VARCHAR(200) furnitureCondition
+        VARCHAR(200) condition
+        DATE conditionLastUpdated
+        DATE lastMaintenanceDate
+        DATE nextMaintenanceDate
+        VARCHAR(50) maintenanceStatus
+        TEXT maintenanceNotes
+        BOOLEAN isActive
+        VARCHAR(50) status
+        VARCHAR(200) availableFrom
+        VARCHAR(200) availableTo
+        VARCHAR(200) availableDays
+        VARCHAR(200) reservations
+        BIGINT departmentId "FK"
+        BIGINT responsibleUserId "FK"
+        VARCHAR(20) contactPhone
+        BOOLEAN hasInventory
+        VARCHAR(200) inventoryItems
+        VARCHAR(200) photo
+        VARCHAR(200) floorPlan
+        VARCHAR(50) qrCode
+        VARCHAR(50) barcode
+        VARCHAR(50) rfidTag
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    Timetable {
+        BIGINT timetableId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        BIGINT gradeLevelId "FK"
+        BIGINT sectionId "FK"
+        TIME timetableCode
+        TIME timetableNameAr
+        TIME timetableNameEn
+        VARCHAR(200) version
+        DATE versionDate
+        DATE effectiveFrom
+        DATE effectiveTo
+        BOOLEAN isActive
+        BOOLEAN isDefault
+        VARCHAR(50) status
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        TEXT approvalNotes
+        INT totalPeriods
+        VARCHAR(200) workingDays
+        BIGINT shiftId "FK"
+        BIGINT createdFromTimetableId "FK"
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    FacilityDepartmentAssignment {
+        BIGINT assignmentId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) facilityType
+        BIGINT facilityId "FK"
+        BIGINT departmentId "FK"
+        VARCHAR(50) assignmentType
+        BIGINT responsibleUserId "FK"
+        VARCHAR(200) responsibleRole
+        BIGINT assistantResponsibleUserId "FK"
+        DATE assignmentDate
+        DATE startDate
+        DATE endDate
+        BOOLEAN isShared
+        VARCHAR(200) sharedWithDepartments
+        DECIMAL(5,2) sharingPercentage
+        VARCHAR(200) priority
+        VARCHAR(200) schedule
+        VARCHAR(200) purpose
+        BOOLEAN inventoryTransferred
+        VARCHAR(200) inventoryList
+        VARCHAR(200) handoverDocument
+        DATE handoverDate
+        VARCHAR(200) handoverAcceptedBy "FK"
+        TEXT handoverNotes
+        VARCHAR(50) status
+        DATE terminationDate
+        VARCHAR(200) terminationReason
+        BIGINT terminatedByUserId "FK"
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AcademicAssetMapping {
+        BIGINT mappingId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT courseId "FK"
+        BIGINT curriculumId "FK"
+        BIGINT gradeLevelId "FK"
+        BIGINT semesterId "FK"
+        VARCHAR(50) assetType
+        BIGINT assetCategoryId "FK"
+        BIGINT assetId "FK"
+        TEXT assetName
+        TEXT assetDescription
+        INT quantityPerStudent
+        INT quantityPerClass
+        INT quantityPerSchool
+        DECIMAL(5,2) ratio
+        DECIMAL(5,2) ratioType
+        INT minRequiredQty
+        INT recommendedQty
+        INT currentAvailableQty
+        INT shortageQty
+        VARCHAR(200) priority
+        BOOLEAN isCritical
+        BOOLEAN isNiceToHave
+        VARCHAR(50) preferredClassroomType
+        VARCHAR(200) requiredFacilities
+        VARCHAR(200) requiredSoftware
+        VARCHAR(200) requiredConsumables
+        VARCHAR(200) specifications
+        VARCHAR(200) standards
+        VARCHAR(200) alternativeOptions
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    Guardian ||--o{ Application : "ParentId"
+    Student ||--o{ Application : "convertedToStudentId"
+    Student ||--o{ Guardian : "studentId"
+    Guardian ||--o{ Guardian : "guardianId"
+    Student ||--o{ Enrollment : "studentId"
+    ClassSection ||--o{ Enrollment : "classSectionId"
+    Student ||--o{ StudentDocument : "studentId"
+    Enrollment ||--o{ StudentDocument : "enrollmentId"
+    Student ||--o{ StudentHealthRecord : "studentId"
+    Student ||--o{ StudentTransportPreference : "studentId"
+    Transportation ||--o{ StudentTransportPreference : "preferredBusRouteId"
+    Student ||--o{ StudentInventory : "studentId"
+    Curriculum ||--o{ Course : "curriculumId"
+    Course ||--o{ CoursePlan : "courseId"
+    Classroom ||--o{ ClassSection : "classroomId"
+    Student ||--o{ CourseRegistration : "studentId"
+    Enrollment ||--o{ CourseRegistration : "enrollmentId"
+    Course ||--o{ CourseRegistration : "courseId"
+    ClassSection ||--o{ CourseRegistration : "sectionId"
+    CourseRegistration ||--o{ Grade : "registrationId"
+    Student ||--o{ Grade : "studentId"
+    Course ||--o{ Grade : "courseId"
+    Course ||--o{ Evaluation : "courseId"
+    CourseRegistration ||--o{ ExamResult : "registrationId"
+    Student ||--o{ ExamResult : "studentId"
+    Course ||--o{ ExamResult : "courseId"
+    Course ||--o{ Activity : "courseId"
+    ActivityType ||--o{ Activity : "activityTypeId"
+    Activity ||--o{ ActivityDetail : "activityId"
+    Student ||--o{ ActivityDetail : "studentId"
+    Student ||--o{ Attendance : "studentId"
+    ClassSection ||--o{ Attendance : "classSectionId"
+    StudentLeave ||--o{ Attendance : "excuseId"
+    Attendance ||--o{ AttendanceDetail : "attendanceId"
+    Student ||--o{ AttendanceDetail : "studentId"
+    TimetableSlot ||--o{ AttendanceDetail : "timetableSlotId"
+    ClassPeriod ||--o{ AttendanceDetail : "periodId"
+    Course ||--o{ AttendanceDetail : "courseId"
+    ClassSection ||--o{ AttendanceDetail : "classSectionId"
+    Student ||--o{ StudentLeave : "studentId"
+    LeaveType ||--o{ StudentLeave : "leaveTypeId"
+    Student ||--o{ Discipline : "studentId"
+    Student ||--o{ StudentComplaint : "studentId"
+    Guardian ||--o{ StudentComplaint : "guardianId"
+    Discipline ||--o{ GuidanceSession : "relatedDisciplineId"
+    Student ||--o{ StudentActivityRegistration : "studentId"
+    SchoolActivity ||--o{ StudentActivityRegistration : "activityId"
+    ActivityType ||--o{ SchoolActivity : "activityTypeId"
+    Timetable ||--o{ TimetableSlot : "timetableId"
+    ClassSection ||--o{ TimetableSlot : "sectionId"
+    ClassPeriod ||--o{ TimetableSlot : "periodId"
+    Course ||--o{ TimetableSlot : "courseId"
+    Classroom ||--o{ TimetableSlot : "classroomId"
+    StudentActivityRegistration ||--o{ ActivityAttendance : "activityRegistrationId"
+    SchoolActivity ||--o{ ActivityAttendance : "activityId"
+    Student ||--o{ ActivityAttendance : "studentId"
+    ClassSection ||--o{ Timetable : "sectionId"
+    Classroom ||--o{ FacilityDepartmentAssignment : "facilityId"
+    Course ||--o{ AcademicAssetMapping : "courseId"
+    Curriculum ||--o{ AcademicAssetMapping : "curriculumId"

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - المستندات والوثائق</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item"><span class="icon">📊</span><span>لوحة التحكم</span></a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">إدارة الطلاب</div>
+                    <a href="index.html" class="nav-item"><span class="icon">👨‍🎓</span><span>لوحة التحكم</span></a>
+                    <a href="applications.html" class="nav-item"><span class="icon">📝</span><span>طلبات القبول</span></a>
+                    <a href="students.html" class="nav-item"><span class="icon">👥</span><span>قائمة الطلاب</span></a>
+                    <a href="enrollment.html" class="nav-item"><span class="icon">📚</span><span>التسجيل والتحويل</span></a>
+                    <a href="attendance.html" class="nav-item"><span class="icon">✅</span><span>الحضور والغياب</span></a>
+                    <a href="grades.html" class="nav-item"><span class="icon">📋</span><span>الدرجات والتقارير</span></a>
+                    <a href="behavior.html" class="nav-item"><span class="icon">⭐</span><span>السلوك والتقدير</span></a>
+                    <a href="documents.html" class="nav-item active"><span class="icon">📁</span><span>المستندات والوثائق</span></a>
+                    <a href="health.html" class="nav-item"><span class="icon">🏥</span><span>السجل الصحي</span></a>
+                    <a href="guardians.html" class="nav-item"><span class="icon">👨‍👩‍👧</span><span>أولياء الأمور</span></a>
+                    <a href="graduation.html" class="nav-item"><span class="icon">🎓</span><span>التخرج والشهادات</span></a>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left"><h2>إدارة الطلاب والشؤون الأكاديمية</h2></div>
+                <div class="header-right">
+                    <div class="header-actions"><button class="header-btn">🔔<span class="badge">12</span></button></div>
+                    <div class="user-profile"><div class="user-avatar">م</div><div class="user-info"><h4>مدير المدرسة</h4><p>الإدارة</p></div></div>
+                </div>
+            </header>
+            <div class="content-area">
+                <div class="page-header">
+                    <h1 class="page-title">📁 المستندات والوثائق</h1>
+                    <div class="page-breadcrumb"><a href="../../index.html">الرئيسية</a><span>/</span><a href="index.html">إدارة الطلاب</a><span>/</span><span>المستندات والوثائق</span></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">وثائق الطلاب</h3>
+                        <button class="btn btn-primary" onclick="openModal('addDocumentModal')">➕ رفع مستند</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr><th>الطالب</th><th>النوع</th><th>الملف</th><th>تاريخ الرفع</th><th>الحالة</th><th>الإجراءات</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td style="font-weight: 600;">أحمد محمد صالح</td><td>شهادة ميلاد</td><td>birth-cert.pdf</td><td>2024-01-15</td><td><span class="badge-status active">مرفوع</span></td><td><div class="table-actions"><button class="action-btn view">👁️</button><button class="action-btn edit">✏️</button><button class="action-btn delete">🗑️</button></div></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="modal-overlay" id="addDocumentModal"><div class="modal"><div class="modal-header"><h3>رفع مستند جديد</h3><button class="close-btn" onclick="closeModal('addDocumentModal')">&times;</button></div><div class="modal-body"><form class="form-group"><label>الطالب</label><select class="form-input"><option>أحمد محمد صالح</option><option>فاطمة عبدالله سعيد</option></select><label>نوع المستند</label><select class="form-input"><option>شهادة ميلاد</option><option>بطاقة الهوية</option></select><label>الملف</label><input type="file" class="form-input"></form></div><div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('addDocumentModal')">إلغاء</button><button class="btn btn-primary">رفع</button></div></div></div>
+    <script>function openModal(id){document.getElementById(id).classList.add('active');}function closeModal(id){document.getElementById(id).classList.remove('active');}</script>
+</body>
+</html>

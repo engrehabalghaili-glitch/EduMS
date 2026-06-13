@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - الانضباط والجزاءات للموظفين</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">إدارة الموظفين</div>
+                    <a href="index.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                    <a href="employees.html" class="nav-item">
+                        <span class="icon">👥</span>
+                        <span>قائمة الموظفين</span>
+                    </a>
+                    <a href="departments.html" class="nav-item">
+                        <span class="icon">🏢</span>
+                        <span>الأقسام والهيكل</span>
+                    </a>
+                    <a href="contracts.html" class="nav-item">
+                        <span class="icon">📄</span>
+                        <span>العقود والتوظيف</span>
+                    </a>
+                    <a href="attendance.html" class="nav-item">
+                        <span class="icon">📅</span>
+                        <span>الحضور والغياب</span>
+                    </a>
+                    <a href="tasks.html" class="nav-item">
+                        <span class="icon">📋</span>
+                        <span>المهام اليومية</span>
+                    </a>
+                    <a href="salary.html" class="nav-item">
+                        <span class="icon">💰</span>
+                        <span>الرواتب والمسيرات</span>
+                    </a>
+                    <a href="leave.html" class="nav-item">
+                        <span class="icon">🏖️</span>
+                        <span>الإجازات والمغادرات</span>
+                    </a>
+                    <a href="evaluation.html" class="nav-item">
+                        <span class="icon">📈</span>
+                        <span>تقييم الأداء</span>
+                    </a>
+                    <a href="training.html" class="nav-item">
+                        <span class="icon">🎓</span>
+                        <span>التدريب والتطوير</span>
+                    </a>
+                    <a href="discipline.html" class="nav-item active">
+                        <span class="icon">⚖️</span>
+                        <span>الانضباط والجزاءات</span>
+                    </a>
+                    <a href="termination.html" class="nav-item">
+                        <span class="icon">🚪</span>
+                        <span>إنهاء الخدمة</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة الموظفين - الانضباط والجزاءات</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">
+                            🔔
+                            <span class="badge">2</span>
+                        </button>
+                        <button class="header-btn">💬</button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير المدرسة</h4>
+                            <p>الإدارة</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <h1 class="page-title">⚖️ الانضباط والجزاءات الإدارية</h1>
+                            <div class="page-breadcrumb">
+                                <a href="../../index.html">الرئيسية</a>
+                                <span>/</span>
+                                <a href="index.html">إدارة الموظفين</a>
+                                <span>/</span>
+                                <span>الانضباط</span>
+                            </div>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-danger" onclick="openModal('addSanctionModal')">
+                                <span>➕</span>
+                                <span>إصدار جزاء جديد</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon warning">⚠️</div>
+                        <div class="stat-info">
+                            <h3>15</h3>
+                            <p>تنبيهات شفهية</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon danger">📝</div>
+                        <div class="stat-info">
+                            <h3>5</h3>
+                            <p>إنذارات كتابية</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon primary">💸</div>
+                        <div class="stat-info">
+                            <h3>2</h3>
+                            <p>حسم من الراتب</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon success">🛡️</div>
+                        <div class="stat-info">
+                            <h3>98%</h3>
+                            <p>معدل الانضباط العام</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sanctions Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">سجل الجزاءات والتدابير التأديبية</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>اسم الموظف</th>
+                                        <th>نوع المخالفة</th>
+                                        <th>الجزاء المتخذ</th>
+                                        <th>تاريخ القرار</th>
+                                        <th>بواسطة</th>
+                                        <th>تأثير مالي</th>
+                                        <th>الحالة</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>أ. فهد منصور</strong></td>
+                                        <td>تأخر متكرر عن الطابور</td>
+                                        <td>إنذار كتابي أول</td>
+                                        <td>20 مايو 2026</td>
+                                        <td>وكيل المدرسة</td>
+                                        <td>لا يوجد</td>
+                                        <td><span class="badge-status success">معتمد</span></td>
+                                        <td>
+                                            <div class="action-btns">
+                                                <button class="btn-icon">👁️</button>
+                                                <button class="btn-icon">📜</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>أ. منى العلي</strong></td>
+                                        <td>غياب بدون عذر مقبول</td>
+                                        <td>حسم يوم واحد</td>
+                                        <td>15 مايو 2026</td>
+                                        <td>مدير المدرسة</td>
+                                        <td><span style="color: var(--danger);">-350 ريال</span></td>
+                                        <td><span class="badge-status success">منفذ</span></td>
+                                        <td>
+                                            <div class="action-btns">
+                                                <button class="btn-icon">👁️</button>
+                                                <button class="btn-icon">📜</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="addSanctionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>إصدار قرار تأديبي / جزاء</h3>
+                <span class="close-modal" onclick="closeModal('addSanctionModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">اختيار الموظف</label>
+                        <select class="form-select">
+                            <option>ابحث عن موظف...</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">نوع المخالفة</label>
+                            <select class="form-select">
+                                <option>تأخر عن العمل</option>
+                                <option>غياب بدون عذر</option>
+                                <option>تقصير في أداء المهام</option>
+                                <option>سلوك غير لائق</option>
+                                <option>مخالفة الأنظمة والتعليمات</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">نوع الجزاء</label>
+                            <select class="form-select">
+                                <option>تنبيه شفهي</option>
+                                <option>إنذار كتابي</option>
+                                <option>حسم من الراتب</option>
+                                <option>إيقاف عن العمل مؤقتاً</option>
+                                <option>حرمان من العلاوة</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">تاريخ المخالفة</label>
+                            <input type="date" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">قيمة الحسم (إن وجد)</label>
+                            <input type="number" class="form-input" placeholder="عدد الأيام أو المبلغ">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">تفاصيل المخالفة</label>
+                        <textarea class="form-textarea" placeholder="اشرح تفاصيل ما حدث..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">المستندات المؤيدة (صور/محاضر)</label>
+                        <input type="file" class="form-input">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('addSanctionModal')">إلغاء</button>
+                <button class="btn btn-danger">اعتماد وإصدار القرار</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .badge-status.success { background: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 20px; font-size: 0.8em; font-weight: 700; }
+        .action-btns { display: flex; gap: 5px; }
+        .btn-icon { width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e5e7eb; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+        .modal-content { background-color: white; margin: 5% auto; width: 600px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); overflow: hidden; animation: modalSlideDown 0.3s ease-out; }
+        .modal-header { padding: 20px 24px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; }
+        .modal-header h3 { color: #1e3a8a; }
+        .close-modal { font-size: 24px; font-weight: bold; cursor: pointer; color: #6b7280; }
+        .modal-body { padding: 24px; max-height: 70vh; overflow-y: auto; }
+        .modal-footer { padding: 16px 24px; border-top: 1px solid #e5e7eb; display: flex; justify-content: flex-end; gap: 12px; background: #f8fafc; }
+    </style>
+
+    <script>
+        function openModal(id) { document.getElementById(id).style.display = "block"; }
+        function closeModal(id) { document.getElementById(id).style.display = "none"; }
+    </script>
+</body>
+</html>

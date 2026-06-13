@@ -1,0 +1,20 @@
+sequenceDiagram
+    actor G as ولي الأمر
+    participant SrcS as المدرسة الحالية
+    participant API
+    participant DB
+    participant OF as مكتب التربية
+    participant DestS as المدرسة المستقبلة
+    
+    G->>SrcS: طلب نقل
+    SrcS->>API: POST /transfers
+    API->>DB: INSERT TransferRequest
+    API->>OF: إشعار للمراجعة
+    OF->>API: مراجعة + اعتماد
+    API->>DB: UPDATE TransferRequest.status='Approved'
+    API->>DestS: إشعار باستقبال طالب
+    DestS->>API: قبول الاستقبال
+    API->>DB: UPDATE Student.schoolId=newSchool
+    API->>DB: INSERT new Enrollment
+    API->>DB: UPDATE old Enrollment.status='Transferred'
+    API->>G: تأكيد الانتقال

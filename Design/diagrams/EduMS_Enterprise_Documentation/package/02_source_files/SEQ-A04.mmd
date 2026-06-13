@@ -1,0 +1,15 @@
+sequenceDiagram
+    actor MGR
+    actor FIN
+    participant API
+    participant DB
+    
+    MGR->>API: طلب شطب أصل
+    API->>DB: INSERT DisposalRequest
+    API->>FIN: احتساب القيمة الدفترية
+    FIN->>API: القيمة الدفترية النهائية
+    API->>DB: UPDATE AssetFinancials
+    MGR->>API: اعتماد الشطب
+    API->>DB: UPDATE Asset.status='Disposed'
+    API->>DB: INSERT FinancialAuditArchive
+    API->>DB: أرشفة

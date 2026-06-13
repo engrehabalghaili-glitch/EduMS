@@ -1,0 +1,308 @@
+erDiagram
+    Employee {
+        BIGINT employeeId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) employeeCode
+        BIGINT nationalId "FK"
+        VARCHAR(50) nationalIdType
+        DATE nationalIdExpiryDate
+        INT passportNumber
+        DATE passportExpiryDate
+        VARCHAR more__fields "+100 fields"
+    }
+    AppointmentDecision {
+        BIGINT decisionId "PK"
+        BIGINT employeeId "FK"
+        INT decisionNumber
+        DATE decisionDate
+        DATE decisionDateGregorian
+        VARCHAR(200) decisionSource
+        VARCHAR(50) decisionType
+        VARCHAR(200) jobTitle
+        VARCHAR more__fields "+23 fields"
+    }
+    EmployeeDocuments {
+        BIGINT documentId "PK"
+        BIGINT employeeId "FK"
+        VARCHAR(50) documentType
+        VARCHAR(50) documentSubType
+        VARCHAR(200) documentName
+        INT documentNumber
+        BOOLEAN issuingAuthority
+        BOOLEAN issuingCountry
+        VARCHAR more__fields "+35 fields"
+    }
+    EmployeeInventoryCustody {
+        BIGINT custodyId "PK"
+        BIGINT employeeId "FK"
+        BIGINT assetId "FK"
+        VARCHAR(50) itemType
+        VARCHAR(200) itemName
+        TEXT itemDescription
+        VARCHAR(200) itemBrand
+        VARCHAR(200) itemModel
+        VARCHAR more__fields "+38 fields"
+    }
+    StaffCustody {
+        BIGINT staffCustodyId "PK"
+        BIGINT employeeId "FK"
+        VARCHAR(200) custodySummary
+        INT totalItems
+        VARCHAR(200) totalEstimatedValue
+        DATE issueDate
+        DATE lastUpdateDate
+        VARCHAR(50) custodyStatus
+        VARCHAR more__fields "+12 fields"
+    }
+    EmployeeAttendance {
+        BIGINT attendanceId "PK"
+        BIGINT employeeId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        DATE attendanceDate
+        VARCHAR(200) dayOfWeek
+        BIGINT shiftId "FK"
+        VARCHAR more__fields "+54 fields"
+    }
+    TeacherSchedule {
+        BIGINT scheduleId "PK"
+        BIGINT teacherId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) dayOfWeek
+        BIGINT periodId "FK"
+        INT periodNumber
+        VARCHAR more__fields "+18 fields"
+    }
+    EmployeePayroll {
+        BIGINT payrollId "PK"
+        BIGINT employeeId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) payrollMonth
+        VARCHAR(200) payrollYear
+        DECIMAL(15,2) payrollPeriod
+        DECIMAL(15,2) payrollCode
+        DATE generationDate
+        VARCHAR more__fields "+67 fields"
+    }
+    EmployeeLeave {
+        BIGINT leaveId "PK"
+        BIGINT employeeId "FK"
+        DECIMAL(15,2) leaveType
+        VARCHAR(50) leaveSubType
+        BIGINT academicYearId "FK"
+        DATE requestDate
+        DATE startDate
+        DATE endDate
+        VARCHAR more__fields "+42 fields"
+    }
+    PerformanceReview {
+        BIGINT reviewId "PK"
+        BIGINT employeeId "FK"
+        BIGINT reviewerId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        VARCHAR(200) reviewPeriod
+        DATE reviewDate
+        VARCHAR(50) reviewType
+        VARCHAR more__fields "+38 fields"
+    }
+    EmployeeViolations {
+        BIGINT violationId "PK"
+        BIGINT employeeId "FK"
+        BIGINT reportedByUserId "FK"
+        VARCHAR(200) reportedByRole
+        DATE violationDate
+        TIME violationTime
+        DATE reportedDate
+        VARCHAR(50) violationType
+        VARCHAR more__fields "+60 fields"
+    }
+    EmployeeTraining {
+        BIGINT trainingId "PK"
+        BIGINT employeeId "FK"
+        VARCHAR(200) trainingName
+        VARCHAR(50) trainingCode
+        VARCHAR(50) trainingType
+        VARCHAR(50) category
+        VARCHAR(200) provider
+        VARCHAR(50) providerType
+        VARCHAR more__fields "+55 fields"
+    }
+    EmployeeAdditionalTasks {
+        BIGINT taskId "PK"
+        BIGINT employeeId "FK"
+        VARCHAR(200) taskName
+        VARCHAR(50) taskCode
+        VARCHAR(50) taskType
+        TEXT description
+        VARCHAR(200) objectives
+        VARCHAR(200) deliverables
+        VARCHAR more__fields "+34 fields"
+    }
+    Mentor {
+        BIGINT mentorId "PK"
+        BIGINT mentorEmployeeId "FK"
+        BIGINT menteeEmployeeId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        DATE startDate
+        DATE endDate
+        DATE actualEndDate
+        VARCHAR more__fields "+32 fields"
+    }
+    SelfServicePortalRequests {
+        BIGINT requestId "PK"
+        BIGINT employeeId "FK"
+        BIGINT schoolId "FK"
+        INT requestNumber
+        VARCHAR(50) requestType
+        VARCHAR(50) requestSubType
+        VARCHAR(50) category
+        VARCHAR(200) title
+        VARCHAR more__fields "+48 fields"
+    }
+    VacantPosition {
+        BIGINT positionId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) positionCode
+        VARCHAR(200) jobTitle
+        DECIMAL(5,2) jobGrade
+        VARCHAR(200) jobRank
+        BIGINT departmentId "FK"
+        VARCHAR(50) employmentType
+        VARCHAR more__fields "+44 fields"
+    }
+    JobApplicant {
+        BIGINT applicantId "PK"
+        BIGINT positionId "FK"
+        INT applicationNumber
+        DATE applicationDate
+        VARCHAR(200) firstNameAr
+        VARCHAR(200) fatherNameAr
+        VARCHAR(200) grandfatherNameAr
+        VARCHAR(200) familyNameAr
+        VARCHAR more__fields "+74 fields"
+    }
+    EmployeeCommittees {
+        BIGINT committeeId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) committeeCode
+        VARCHAR(200) committeeNameAr
+        VARCHAR(200) committeeNameEn
+        VARCHAR(50) committeeType
+        VARCHAR(50) committeeCategory
+        DATE formationDate
+        VARCHAR more__fields "+35 fields"
+    }
+    CommitteeMembers {
+        BIGINT memberId "PK"
+        BIGINT committeeId "FK"
+        BIGINT employeeId "FK"
+        VARCHAR(200) role
+        TEXT roleDetails
+        DATE appointmentDate
+        INT appointmentDecisionNumber
+        DATE startDate
+        VARCHAR more__fields "+18 fields"
+    }
+    EmployeeMeetings {
+        BIGINT meetingId "PK"
+        BIGINT schoolId "FK"
+        BIGINT committeeId "FK"
+        VARCHAR(50) meetingType
+        INT meetingNumber
+        VARCHAR(200) title
+        VARCHAR(200) objectives
+        VARCHAR(200) agenda
+        VARCHAR more__fields "+43 fields"
+    }
+    MeetingAttendance {
+        BIGINT attendanceId "PK"
+        BIGINT meetingId "FK"
+        BIGINT employeeId "FK"
+        BIGINT committeeId "FK"
+        VARCHAR(50) invitationStatus
+        DATE invitationSentDate
+        DATE invitationResponseDate
+        TEXT invitationResponseNotes
+        VARCHAR more__fields "+21 fields"
+    }
+    InternalTransfer {
+        BIGINT transferId "PK"
+        BIGINT employeeId "FK"
+        VARCHAR(50) transferType
+        INT transferNumber
+        DATE transferDate
+        DATE effectiveDate
+        BIGINT fromSchoolId "FK"
+        BIGINT toSchoolId "FK"
+        VARCHAR more__fields "+27 fields"
+    }
+    ExternalTransfer {
+        BIGINT externalTransferId "PK"
+        BIGINT employeeId "FK"
+        VARCHAR(200) transferDirection
+        INT transferNumber
+        DATE transferDate
+        DATE effectiveDate
+        VARCHAR(200) fromEntity
+        VARCHAR(50) fromEntityType
+        VARCHAR more__fields "+25 fields"
+    }
+    EmployeeTermination {
+        BIGINT terminationId "PK"
+        BIGINT employeeId "FK"
+        VARCHAR(50) terminationType
+        INT terminationNumber
+        DATE terminationDate
+        DATE lastWorkingDate
+        DATE effectiveDate
+        VARCHAR(200) reason
+        VARCHAR more__fields "+41 fields"
+    }
+    Employee ||--o{ AppointmentDecision : "employeeId"
+    Employee ||--o{ EmployeeDocuments : "employeeId"
+    Employee ||--o{ EmployeeInventoryCustody : "employeeId"
+    Employee ||--o{ EmployeeInventoryCustody : "issuedByUserId"
+    Employee ||--o{ StaffCustody : "employeeId"
+    Employee ||--o{ EmployeeAttendance : "employeeId"
+    EmployeeLeave ||--o{ EmployeeAttendance : "excuseId"
+    EmployeePayroll ||--o{ EmployeeAttendance : "payrollId"
+    Employee ||--o{ TeacherSchedule : "teacherId"
+    Employee ||--o{ EmployeePayroll : "employeeId"
+    Employee ||--o{ EmployeeLeave : "employeeId"
+    Employee ||--o{ EmployeeLeave : "handoverToEmployeeId"
+    Employee ||--o{ PerformanceReview : "employeeId"
+    Employee ||--o{ PerformanceReview : "reviewerId"
+    Employee ||--o{ EmployeeViolations : "employeeId"
+    EmployeePayroll ||--o{ EmployeeViolations : "payrollId"
+    Employee ||--o{ EmployeeTraining : "employeeId"
+    PerformanceReview ||--o{ EmployeeTraining : "linkedToReviewId"
+    Employee ||--o{ EmployeeAdditionalTasks : "employeeId"
+    Employee ||--o{ Mentor : "mentorEmployeeId"
+    Employee ||--o{ Mentor : "menteeEmployeeId"
+    Employee ||--o{ SelfServicePortalRequests : "employeeId"
+    Employee ||--o{ SelfServicePortalRequests : "assignedToUserId"
+    Employee ||--o{ VacantPosition : "replacedEmployeeId"
+    Employee ||--o{ VacantPosition : "hiredEmployeeId"
+    VacantPosition ||--o{ JobApplicant : "positionId"
+    Employee ||--o{ JobApplicant : "hiredAsEmployeeId"
+    Employee ||--o{ EmployeeCommittees : "chairpersonId"
+    Employee ||--o{ EmployeeCommittees : "viceChairpersonId"
+    Employee ||--o{ EmployeeCommittees : "secretaryId"
+    EmployeeCommittees ||--o{ CommitteeMembers : "committeeId"
+    Employee ||--o{ CommitteeMembers : "employeeId"
+    EmployeeCommittees ||--o{ EmployeeMeetings : "committeeId"
+    Employee ||--o{ EmployeeMeetings : "organizerId"
+    Employee ||--o{ EmployeeMeetings : "chairpersonId"
+    Employee ||--o{ EmployeeMeetings : "secretaryId"
+    EmployeeMeetings ||--o{ MeetingAttendance : "meetingId"
+    Employee ||--o{ MeetingAttendance : "employeeId"
+    Employee ||--o{ InternalTransfer : "employeeId"
+    Employee ||--o{ ExternalTransfer : "employeeId"
+    EmployeeTermination ||--o{ ExternalTransfer : "terminationId"
+    AppointmentDecision ||--o{ ExternalTransfer : "appointmentDecisionId"
+    Employee ||--o{ EmployeeTermination : "employeeId"

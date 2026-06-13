@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - إدارة الدرجات والتقييم الأكاديمي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">دورة حياة الطالب</div>
+                    <a href="index.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                    <a href="applications.html" class="nav-item">
+                        <span class="icon">📝</span>
+                        <span>القبول والتسجيل</span>
+                    </a>
+                    <a href="enrollment.html" class="nav-item">
+                        <span class="icon">🏫</span>
+                        <span>توزيع الصفوف</span>
+                    </a>
+                    <a href="attendance.html" class="nav-item">
+                        <span class="icon">✅</span>
+                        <span>الحضور والغياب</span>
+                    </a>
+                    <a href="grades.html" class="nav-item active">
+                        <span class="icon">📋</span>
+                        <span>الدرجات والتقييم</span>
+                    </a>
+                    <a href="behavior.html" class="nav-item">
+                        <span class="icon">⚖️</span>
+                        <span>السلوك والانضباط</span>
+                    </a>
+                    <a href="health.html" class="nav-item">
+                        <span class="icon">🏥</span>
+                        <span>السجل الصحي</span>
+                    </a>
+                    <a href="activities.html" class="nav-item">
+                        <span class="icon">🏀</span>
+                        <span>الأنشطة المدرسية</span>
+                    </a>
+                    <a href="transfers.html" class="nav-item">
+                        <span class="icon">🔄</span>
+                        <span>الترقية والنقل</span>
+                    </a>
+                    <a href="graduation.html" class="nav-item">
+                        <span class="icon">🎓</span>
+                        <span>التخرج والأرشفة</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة الطلاب - الدرجات والتقييم</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">📊</button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير الكنترول</h4>
+                            <p>الشؤون التعليمية</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <h1 class="page-title">📊 رصد الدرجات وإدارة الاختبارات</h1>
+                            <div class="page-breadcrumb">
+                                <a href="../../index.html">الرئيسية</a>
+                                <span>/</span>
+                                <a href="index.html">إدارة الطلاب</a>
+                                <span>/</span>
+                                <span>الدرجات</span>
+                            </div>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-outline"><span>📥</span><span>استيراد درجات (Excel)</span></button>
+                            <button class="btn btn-primary" onclick="openModal('examSetupModal')"><span>➕</span><span>إعداد اختبار جديد</span></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Grade Filters -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-body">
+                        <div class="form-row" style="margin-bottom: 0;">
+                            <div class="form-group">
+                                <label class="form-label">الفصل الدراسي</label>
+                                <select class="form-select">
+                                    <option>الفصل الدراسي الأول</option>
+                                    <option>الفصل الدراسي الثاني</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">المادة</label>
+                                <select class="form-select">
+                                    <option>الرياضيات</option>
+                                    <option>اللغة العربية</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">الصف / الشعبة</label>
+                                <select class="form-select">
+                                    <option>الأول الثانوي - أ</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grades Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">كشف رصد الدرجات (أعمال السنة)</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>اسم الطالب</th>
+                                        <th>المشاركة (10)</th>
+                                        <th>الواجبات (10)</th>
+                                        <th>اختبار قصير (20)</th>
+                                        <th>الإجمالي المؤقت</th>
+                                        <th>الحالة</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>عبدالله خالد العتيبي</strong></td>
+                                        <td><input type="number" class="form-input grade-input" value="9"></td>
+                                        <td><input type="number" class="form-input grade-input" value="10"></td>
+                                        <td><input type="number" class="form-input grade-input" value="18"></td>
+                                        <td><strong>37/40</strong></td>
+                                        <td><span class="badge-status success">مرصود</span></td>
+                                        <td><button class="btn btn-outline btn-sm">حفظ</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>سليمان فهد القحطاني</strong></td>
+                                        <td><input type="number" class="form-input grade-input" placeholder="-"></td>
+                                        <td><input type="number" class="form-input grade-input" placeholder="-"></td>
+                                        <td><input type="number" class="form-input grade-input" placeholder="-"></td>
+                                        <td><strong>0/40</strong></td>
+                                        <td><span class="badge-status warning">غير مرصود</span></td>
+                                        <td><button class="btn btn-primary btn-sm">رصد</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <style>
+        .grade-input { width: 70px; text-align: center; padding: 5px; }
+        .badge-status.success { background: #dcfce7; color: #166534; }
+        .badge-status.warning { background: #fef3c7; color: #92400e; }
+    </style>
+</body>
+</html>

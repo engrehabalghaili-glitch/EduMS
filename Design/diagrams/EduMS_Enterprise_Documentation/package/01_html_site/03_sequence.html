@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔄 مخططات التسلسل (Sequence) | EduMS Documentation</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Cairo',sans-serif;background:#f8fafc;color:#1f2937;line-height:1.7;font-size:14.5px}
+header.top{background:linear-gradient(135deg,#1e3a8a,#3b82f6,#8b5cf6);color:#fff;padding:30px 24px;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+header.top h1{font-size:1.9em;font-weight:800;text-shadow:1px 1px 4px rgba(0,0,0,.3)}
+header.top .breadcrumb{margin-top:10px;font-size:.95em;opacity:.95}
+header.top .breadcrumb a{color:#fef3c7;text-decoration:none;font-weight:600}
+header.top .breadcrumb a:hover{text-decoration:underline}
+header.top .stats{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap}
+header.top .stat{background:rgba(255,255,255,.18);padding:8px 16px;border-radius:20px;font-size:.9em;font-weight:600;border:1px solid rgba(255,255,255,.3)}
+.container{max-width:1500px;margin:24px auto;padding:0 20px}
+.toc-side{background:#fff;border-radius:14px;padding:20px;margin-bottom:24px;box-shadow:0 2px 10px rgba(0,0,0,.06);position:sticky;top:0;z-index:50}
+.toc-side h3{color:#1e3a8a;font-size:1.15em;margin-bottom:12px}
+.toc-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:4px}
+.toc-list a{color:#374151;text-decoration:none;padding:5px 10px;border-radius:6px;font-size:.88em;display:block;font-weight:500}
+.toc-list a:hover{background:#dbeafe;color:#1e3a8a}
+.toc-list code{background:#f3f4f6;padding:1px 5px;border-radius:3px;font-size:.85em;color:#1e3a8a;font-weight:700}
+.diagram-card{background:#fff;border-radius:14px;margin-bottom:24px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.05)}
+.diagram-header{background:linear-gradient(90deg,#f8fafc,#e0e7ff);padding:18px 24px;border-bottom:2px solid #e5e7eb}
+.id-badge{display:inline-block;background:#1e3a8a;color:#fff;padding:4px 12px;border-radius:6px;font-size:.82em;font-weight:700;font-family:'Fira Code',monospace;margin-left:10px}
+.diagram-header h3{display:inline;color:#1e3a8a;font-size:1.3em;font-weight:700}
+.diagram-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tag{display:inline-block;padding:4px 10px;border-radius:18px;font-size:.82em;font-weight:600}
+.tag.type{background:#dbeafe;color:#1e3a8a}
+.tag.level{background:#fce7f3;color:#831843}
+.tag.mod{background:#f3e8ff;color:#6b21a8}
+.tag.stats{background:#fef3c7;color:#92400e}
+.diagram-body{padding:20px 24px}
+.info-block{margin-bottom:10px;font-size:.93em}
+.info-block strong{color:#1e3a8a;margin-left:5px}
+.mermaid-wrapper{background:#fafbfc;border:2px dashed #d1d5db;border-radius:10px;padding:20px 12px;margin:16px 0;overflow:auto;min-height:150px}
+.mermaid{text-align:center;direction:ltr;font-size:13px}
+.code-tabs{display:flex;gap:5px;margin-top:14px;border-bottom:2px solid #e5e7eb}
+.code-tab{background:#e5e7eb;color:#374151;padding:6px 14px;border-radius:6px 6px 0 0;cursor:pointer;font-weight:600;font-size:.85em;border:none;font-family:inherit}
+.code-tab.active{background:#1e3a8a;color:#fff}
+.code-block{background:#0f172a;color:#cbd5e1;border-radius:0 10px 10px 10px;padding:14px;overflow:auto;max-height:480px;font-family:'Fira Code',monospace;font-size:.78em;line-height:1.5;direction:ltr;text-align:left;display:none;white-space:pre}
+.code-block.active{display:block}
+.back-to-top{position:fixed;bottom:24px;left:24px;background:#1e3a8a;color:#fff;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.3em;box-shadow:0 4px 14px rgba(0,0,0,.25);z-index:100}
+.back-to-top:hover{background:#f59e0b}
+.nav-buttons{display:flex;gap:12px;justify-content:space-between;margin:30px 0}
+.nav-btn{background:#1e3a8a;color:#fff;padding:14px 22px;border-radius:10px;text-decoration:none;font-weight:700;flex:1;text-align:center;transition:all .2s}
+.nav-btn:hover{background:#3b82f6;transform:translateY(-2px)}
+.nav-btn.disabled{background:#9ca3af;cursor:not-allowed}
+@media(max-width:768px){
+  header.top h1{font-size:1.4em}
+  .container{padding:0 12px}
+  .diagram-header{padding:14px}
+  .diagram-body{padding:14px}
+}
+</style>
+</head>
+<body>
+
+<a id="top"></a>
+<header class="top">
+  <div class="breadcrumb"><a href="index.html">🏠 الفهرس الرئيسي</a> &nbsp;›&nbsp; 🔄 مخططات التسلسل (Sequence)</div>
+  <h1>🔄 مخططات التسلسل (Sequence)</h1>
+  <div class="stats">
+    <div class="stat">📊 23 مخطط</div>
+    <div class="stat">🎯 EduMS Enterprise</div>
+  </div>
+</header>
+<div class="container">
+<div class="toc-side"><h3>📑 محتويات هذا القسم</h3><div class="toc-list"><a href="#SEQ-S01"><code>SEQ-S01</code> Sequence — تسجيل طالب جديد (End-to-End)</a><a href="#SEQ-S02"><code>SEQ-S02</code> Sequence — تسجيل الحضور اليومي + احتساب الإنذارات</a><a href="#SEQ-S03"><code>SEQ-S03</code> Sequence — إدخال الدرجات واحتساب النتيجة</a><a href="#SEQ-S04"><code>SEQ-S04</code> Sequence — ترقية طالب لصف أعلى</a><a href="#SEQ-S05"><code>SEQ-S05</code> Sequence — نقل طالب بين مدرستين</a><a href="#SEQ-S06"><code>SEQ-S06</code> Sequence — عملية الدفع المالي الإلكتروني</a><a href="#SEQ-E01"><code>SEQ-E01</code> Sequence — تعيين موظف جديد</a><a href="#SEQ-E02"><code>SEQ-E02</code> Sequence — دورة احتساب الراتب الشهري</a><a href="#SEQ-E03"><code>SEQ-E03</code> Sequence — طلب واعتماد إجازة</a><a href="#SEQ-E04"><code>SEQ-E04</code> Sequence — نقل موظف بين المدارس</a><a href="#SEQ-E05"><code>SEQ-E05</code> Sequence — إنهاء خدمة موظف</a><a href="#SEQ-A01"><code>SEQ-A01</code> Sequence — تسجيل أصل جديد وتوليد الباركود</a><a href="#SEQ-A02"><code>SEQ-A02</code> Sequence — طلب وتنفيذ صيانة</a><a href="#SEQ-A03"><code>SEQ-A03</code> Sequence — الجرد السنوي للأصول</a><a href="#SEQ-A04"><code>SEQ-A04</code> Sequence — شطب أصل</a><a href="#SEQ-SA01"><code>SEQ-SA01</code> Sequence — إنشاء وتفعيل مدرسة جديدة</a><a href="#SEQ-SA02"><code>SEQ-SA02</code> Sequence — رفع تقرير سنوي شامل</a><a href="#SEQ-SA03"><code>SEQ-SA03</code> Sequence — تنفيذ تعميم من المكتب</a><a href="#SEQ-AU01"><code>SEQ-AU01</code> Sequence — تسجيل دخول المستخدم وتطبيق RBAC</a><a href="#SEQ-AU02"><code>SEQ-AU02</code> Sequence — تطبيق سياسة وصول على عملية</a><a href="#SEQ-EM01"><code>SEQ-EM01</code> Sequence — استجابة لحالة طارئة</a><a href="#SEQ-T01"><code>SEQ-T01</code> Sequence — تدريب موظف</a><a href="#SEQ-RPT01"><code>SEQ-RPT01</code> Sequence — توليد تقرير إحصائي</a></div></div>
+<div class="nav-buttons"><a href="02_usecase.html" class="nav-btn">→ 🎯 مخططات حالات الاستخدام</a><a href="index.html" class="nav-btn" style="background:#f59e0b">🏠 الفهرس الرئيسي</a><a href="04_activity.html" class="nav-btn">⚙️ مخططات النشاط ودورة الحياة ←</a></div>
+
+<article class="diagram-card" id="SEQ-S01">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-S01</span>
+    <h3>Sequence — تسجيل طالب جديد (End-to-End)</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">🎓 إدارة الطلاب والشؤون الأك</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: تسجيل طالب جديد (End-to-End).</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    autonumber
+    actor G as ولي الأمر
+    participant UI as Web Portal
+    participant API as Backend API
+    participant AUTH as Auth Service
+    participant DB as Database
+    participant NOT as Notifications
+    actor SA as إدارة المدرسة
+    actor OF as مكتب التربية
+
+    G->>UI: فتح نموذج التسجيل
+    UI->>API: GET /enrollment/form
+    API->>AUTH: التحقق من الجلسة
+    AUTH-->>API: OK
+    API-->>UI: نموذج + الحقول
+    G->>UI: إدخال البيانات + رفع الوثائق
+    UI->>API: POST /applications
+    API->>API: التحقق من اكتمال البيانات
+    API->>DB: INSERT Application(status='Pending')
+    DB-->>API: applicationId=APP-001
+    API->>DB: INSERT StudentDocument(s)
+    API->>NOT: إشعار للمدرسة
+    NOT-->>SA: طلب جديد APP-001
+    API-->>UI: 201 Created
+    UI-->>G: رقم الطلب
+    
+    SA->>API: GET /applications/APP-001
+    API->>DB: SELECT Application + Documents
+    DB-->>API: البيانات
+    API-->>SA: عرض الطلب
+    SA->>API: POST /applications/APP-001/approve
+    API->>DB: UPDATE status='SchoolApproved'
+    API->>DB: INSERT Student(status='Pending_Office')
+    API->>NOT: إشعار للمكتب
+    NOT-->>OF: طلب اعتماد
+    
+    OF->>API: POST /applications/APP-001/office-approve
+    API->>DB: UPDATE Student.status='Registered'
+    API->>DB: INSERT Enrollment
+    API->>DB: INSERT SchoolAuditLog
+    API->>NOT: إشعار ولي الأمر
+    NOT-->>G: تم اعتماد القيد
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-S01-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-S01-mer">sequenceDiagram
+    autonumber
+    actor G as ولي الأمر
+    participant UI as Web Portal
+    participant API as Backend API
+    participant AUTH as Auth Service
+    participant DB as Database
+    participant NOT as Notifications
+    actor SA as إدارة المدرسة
+    actor OF as مكتب التربية
+
+    G-&gt;&gt;UI: فتح نموذج التسجيل
+    UI-&gt;&gt;API: GET /enrollment/form
+    API-&gt;&gt;AUTH: التحقق من الجلسة
+    AUTH--&gt;&gt;API: OK
+    API--&gt;&gt;UI: نموذج + الحقول
+    G-&gt;&gt;UI: إدخال البيانات + رفع الوثائق
+    UI-&gt;&gt;API: POST /applications
+    API-&gt;&gt;API: التحقق من اكتمال البيانات
+    API-&gt;&gt;DB: INSERT Application(status=&#x27;Pending&#x27;)
+    DB--&gt;&gt;API: applicationId=APP-001
+    API-&gt;&gt;DB: INSERT StudentDocument(s)
+    API-&gt;&gt;NOT: إشعار للمدرسة
+    NOT--&gt;&gt;SA: طلب جديد APP-001
+    API--&gt;&gt;UI: 201 Created
+    UI--&gt;&gt;G: رقم الطلب
+    
+    SA-&gt;&gt;API: GET /applications/APP-001
+    API-&gt;&gt;DB: SELECT Application + Documents
+    DB--&gt;&gt;API: البيانات
+    API--&gt;&gt;SA: عرض الطلب
+    SA-&gt;&gt;API: POST /applications/APP-001/approve
+    API-&gt;&gt;DB: UPDATE status=&#x27;SchoolApproved&#x27;
+    API-&gt;&gt;DB: INSERT Student(status=&#x27;Pending_Office&#x27;)
+    API-&gt;&gt;NOT: إشعار للمكتب
+    NOT--&gt;&gt;OF: طلب اعتماد
+    
+    OF-&gt;&gt;API: POST /applications/APP-001/office-approve
+    API-&gt;&gt;DB: UPDATE Student.status=&#x27;Registered&#x27;
+    API-&gt;&gt;DB: INSERT Enrollment
+    API-&gt;&gt;DB: INSERT SchoolAuditLog
+    API-&gt;&gt;NOT: إشعار ولي الأمر
+    NOT--&gt;&gt;G: تم اعتماد القيد</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-S02">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-S02</span>
+    <h3>Sequence — تسجيل الحضور اليومي + احتساب الإنذارات</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">🎓 إدارة الطلاب والشؤون الأك</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: تسجيل الحضور اليومي + احتساب الإنذارات.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    autonumber
+    actor T as المعلم
+    participant UI as Mobile App
+    participant API as Backend
+    participant DB as DB
+    participant ENG as Rules Engine
+    participant NOT as Notifications
+    actor G as ولي الأمر
+
+    T->>UI: فتح كشف الشعبة
+    UI->>API: GET /classes/{id}/students
+    API->>DB: SELECT Students
+    DB-->>API: قائمة
+    API-->>UI: عرض
+    T->>UI: تعليم الغائبين
+    UI->>API: POST /attendance/batch
+    loop لكل طالب
+        API->>DB: INSERT Attendance
+        API->>DB: INSERT AttendanceDetail
+    end
+    API->>ENG: احتساب النسبة التراكمية
+    ENG->>DB: SELECT SUM(absences)
+    DB-->>ENG: 14 يوم
+    ENG->>ENG: 14/120 = 11.67% > 10%
+    ENG->>DB: INSERT WarningRecord(type='Second')
+    ENG->>NOT: تنبيه إنذار ثاني
+    NOT-->>G: ابنك تجاوز 10% غياب
+    API-->>UI: 200 OK
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-S02-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-S02-mer">sequenceDiagram
+    autonumber
+    actor T as المعلم
+    participant UI as Mobile App
+    participant API as Backend
+    participant DB as DB
+    participant ENG as Rules Engine
+    participant NOT as Notifications
+    actor G as ولي الأمر
+
+    T-&gt;&gt;UI: فتح كشف الشعبة
+    UI-&gt;&gt;API: GET /classes/{id}/students
+    API-&gt;&gt;DB: SELECT Students
+    DB--&gt;&gt;API: قائمة
+    API--&gt;&gt;UI: عرض
+    T-&gt;&gt;UI: تعليم الغائبين
+    UI-&gt;&gt;API: POST /attendance/batch
+    loop لكل طالب
+        API-&gt;&gt;DB: INSERT Attendance
+        API-&gt;&gt;DB: INSERT AttendanceDetail
+    end
+    API-&gt;&gt;ENG: احتساب النسبة التراكمية
+    ENG-&gt;&gt;DB: SELECT SUM(absences)
+    DB--&gt;&gt;ENG: 14 يوم
+    ENG-&gt;&gt;ENG: 14/120 = 11.67% &gt; 10%
+    ENG-&gt;&gt;DB: INSERT WarningRecord(type=&#x27;Second&#x27;)
+    ENG-&gt;&gt;NOT: تنبيه إنذار ثاني
+    NOT--&gt;&gt;G: ابنك تجاوز 10% غياب
+    API--&gt;&gt;UI: 200 OK</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-S03">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-S03</span>
+    <h3>Sequence — إدخال الدرجات واحتساب النتيجة</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">🎓 إدارة الطلاب والشؤون الأك</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: إدخال الدرجات واحتساب النتيجة.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor T as المعلم
+    participant UI
+    participant API
+    participant DB
+    participant CALC as Grade Engine
+    actor SA as مدير المدرسة
+    
+    T->>UI: شاشة إدخال الدرجات
+    UI->>API: GET /grades/template
+    API->>DB: SELECT CourseRegistration + GradeStructure
+    DB-->>API: قالب
+    API-->>UI: عرض القالب
+    T->>UI: إدخال الدرجات
+    UI->>API: POST /grades/batch
+    loop لكل طالب
+        API->>DB: INSERT/UPDATE Grade
+    end
+    API->>CALC: احتساب الدرجة النهائية
+    CALC->>CALC: تطبيق المعادلة
+    CALC->>DB: UPDATE Grade.finalScore
+    API-->>UI: ملخص
+    SA->>API: مراجعة وتثبيت
+    API->>DB: UPDATE Grade.status='Published'
+    API->>UI: نشر للأولياء
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-S03-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-S03-mer">sequenceDiagram
+    actor T as المعلم
+    participant UI
+    participant API
+    participant DB
+    participant CALC as Grade Engine
+    actor SA as مدير المدرسة
+    
+    T-&gt;&gt;UI: شاشة إدخال الدرجات
+    UI-&gt;&gt;API: GET /grades/template
+    API-&gt;&gt;DB: SELECT CourseRegistration + GradeStructure
+    DB--&gt;&gt;API: قالب
+    API--&gt;&gt;UI: عرض القالب
+    T-&gt;&gt;UI: إدخال الدرجات
+    UI-&gt;&gt;API: POST /grades/batch
+    loop لكل طالب
+        API-&gt;&gt;DB: INSERT/UPDATE Grade
+    end
+    API-&gt;&gt;CALC: احتساب الدرجة النهائية
+    CALC-&gt;&gt;CALC: تطبيق المعادلة
+    CALC-&gt;&gt;DB: UPDATE Grade.finalScore
+    API--&gt;&gt;UI: ملخص
+    SA-&gt;&gt;API: مراجعة وتثبيت
+    API-&gt;&gt;DB: UPDATE Grade.status=&#x27;Published&#x27;
+    API-&gt;&gt;UI: نشر للأولياء</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-S04">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-S04</span>
+    <h3>Sequence — ترقية طالب لصف أعلى</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">🎓 إدارة الطلاب والشؤون الأك</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: ترقية طالب لصف أعلى.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor SA as إدارة المدرسة
+    participant API
+    participant DB
+    participant POL as Policy Engine
+    
+    SA->>API: POST /students/{id}/promote
+    API->>DB: SELECT Grades + Attendance + Discipline
+    DB-->>API: البيانات
+    API->>POL: التحقق من اشتراطات الترقية
+    POL->>POL: نسبة النجاح؟ الحضور؟ السلوك؟
+    alt مستوفي
+        POL-->>API: OK
+        API->>DB: UPDATE Student.grade=newGrade
+        API->>DB: INSERT Enrollment(newYear)
+        API->>DB: UPDATE old Enrollment.status='Completed'
+    else غير مستوفي
+        POL-->>API: REJECT
+        API->>DB: تسجيل في الإعادة (Repeated)
+    end
+    API-->>SA: نتيجة
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-S04-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-S04-mer">sequenceDiagram
+    actor SA as إدارة المدرسة
+    participant API
+    participant DB
+    participant POL as Policy Engine
+    
+    SA-&gt;&gt;API: POST /students/{id}/promote
+    API-&gt;&gt;DB: SELECT Grades + Attendance + Discipline
+    DB--&gt;&gt;API: البيانات
+    API-&gt;&gt;POL: التحقق من اشتراطات الترقية
+    POL-&gt;&gt;POL: نسبة النجاح؟ الحضور؟ السلوك؟
+    alt مستوفي
+        POL--&gt;&gt;API: OK
+        API-&gt;&gt;DB: UPDATE Student.grade=newGrade
+        API-&gt;&gt;DB: INSERT Enrollment(newYear)
+        API-&gt;&gt;DB: UPDATE old Enrollment.status=&#x27;Completed&#x27;
+    else غير مستوفي
+        POL--&gt;&gt;API: REJECT
+        API-&gt;&gt;DB: تسجيل في الإعادة (Repeated)
+    end
+    API--&gt;&gt;SA: نتيجة</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-S05">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-S05</span>
+    <h3>Sequence — نقل طالب بين مدرستين</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">🎓 إدارة الطلاب والشؤون الأك</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: نقل طالب بين مدرستين.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor G as ولي الأمر
+    participant SrcS as المدرسة الحالية
+    participant API
+    participant DB
+    participant OF as مكتب التربية
+    participant DestS as المدرسة المستقبلة
+    
+    G->>SrcS: طلب نقل
+    SrcS->>API: POST /transfers
+    API->>DB: INSERT TransferRequest
+    API->>OF: إشعار للمراجعة
+    OF->>API: مراجعة + اعتماد
+    API->>DB: UPDATE TransferRequest.status='Approved'
+    API->>DestS: إشعار باستقبال طالب
+    DestS->>API: قبول الاستقبال
+    API->>DB: UPDATE Student.schoolId=newSchool
+    API->>DB: INSERT new Enrollment
+    API->>DB: UPDATE old Enrollment.status='Transferred'
+    API->>G: تأكيد الانتقال
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-S05-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-S05-mer">sequenceDiagram
+    actor G as ولي الأمر
+    participant SrcS as المدرسة الحالية
+    participant API
+    participant DB
+    participant OF as مكتب التربية
+    participant DestS as المدرسة المستقبلة
+    
+    G-&gt;&gt;SrcS: طلب نقل
+    SrcS-&gt;&gt;API: POST /transfers
+    API-&gt;&gt;DB: INSERT TransferRequest
+    API-&gt;&gt;OF: إشعار للمراجعة
+    OF-&gt;&gt;API: مراجعة + اعتماد
+    API-&gt;&gt;DB: UPDATE TransferRequest.status=&#x27;Approved&#x27;
+    API-&gt;&gt;DestS: إشعار باستقبال طالب
+    DestS-&gt;&gt;API: قبول الاستقبال
+    API-&gt;&gt;DB: UPDATE Student.schoolId=newSchool
+    API-&gt;&gt;DB: INSERT new Enrollment
+    API-&gt;&gt;DB: UPDATE old Enrollment.status=&#x27;Transferred&#x27;
+    API-&gt;&gt;G: تأكيد الانتقال</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-S06">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-S06</span>
+    <h3>Sequence — عملية الدفع المالي الإلكتروني</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">💰 الإدارة المالية</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: عملية الدفع المالي الإلكتروني.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    autonumber
+    actor G as ولي الأمر
+    participant UI as Portal
+    participant FIN as Finance Service
+    participant BANK as Payment Gateway
+    participant DB as DB
+    participant NOT
+    
+    G->>UI: عرض الفواتير المستحقة
+    UI->>FIN: GET /invoices?guardian=G123
+    FIN->>DB: SELECT Outstanding
+    DB-->>FIN: قائمة
+    FIN-->>UI: عرض
+    G->>UI: اختيار + الدفع
+    UI->>FIN: POST /payments/initiate
+    FIN->>DB: INSERT Payment(Pending)
+    FIN->>BANK: Create Session
+    BANK-->>FIN: paymentUrl
+    FIN-->>UI: redirect
+    UI->>BANK: redirect
+    G->>BANK: بيانات البطاقة + 3DS
+    BANK->>FIN: Webhook OK
+    FIN->>DB: UPDATE Payment(Paid)
+    FIN->>DB: UPDATE Invoice(Settled)
+    FIN->>NOT: إشعار
+    NOT-->>G: إيصال إلكتروني
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-S06-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-S06-mer">sequenceDiagram
+    autonumber
+    actor G as ولي الأمر
+    participant UI as Portal
+    participant FIN as Finance Service
+    participant BANK as Payment Gateway
+    participant DB as DB
+    participant NOT
+    
+    G-&gt;&gt;UI: عرض الفواتير المستحقة
+    UI-&gt;&gt;FIN: GET /invoices?guardian=G123
+    FIN-&gt;&gt;DB: SELECT Outstanding
+    DB--&gt;&gt;FIN: قائمة
+    FIN--&gt;&gt;UI: عرض
+    G-&gt;&gt;UI: اختيار + الدفع
+    UI-&gt;&gt;FIN: POST /payments/initiate
+    FIN-&gt;&gt;DB: INSERT Payment(Pending)
+    FIN-&gt;&gt;BANK: Create Session
+    BANK--&gt;&gt;FIN: paymentUrl
+    FIN--&gt;&gt;UI: redirect
+    UI-&gt;&gt;BANK: redirect
+    G-&gt;&gt;BANK: بيانات البطاقة + 3DS
+    BANK-&gt;&gt;FIN: Webhook OK
+    FIN-&gt;&gt;DB: UPDATE Payment(Paid)
+    FIN-&gt;&gt;DB: UPDATE Invoice(Settled)
+    FIN-&gt;&gt;NOT: إشعار
+    NOT--&gt;&gt;G: إيصال إلكتروني</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-E01">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-E01</span>
+    <h3>Sequence — تعيين موظف جديد</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">👥 إدارة الموظفين والكادر ال</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: تعيين موظف جديد.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor App as المتقدم
+    participant Portal
+    participant API
+    participant DB
+    actor HR
+    actor OF as مكتب التربية
+    
+    HR->>API: إعلان وظيفة شاغرة
+    API->>DB: INSERT VacantPosition
+    App->>Portal: تقديم طلب توظيف
+    Portal->>API: POST /applications
+    API->>DB: INSERT JobApplicant
+    HR->>API: فرز المتقدمين
+    HR->>App: استدعاء للمقابلة
+    HR->>API: تسجيل نتائج المقابلة
+    HR->>OF: رفع التوصية
+    OF->>API: قرار التعيين
+    API->>DB: INSERT AppointmentDecision
+    API->>DB: INSERT Employee(status='Inactive')
+    HR->>API: تفعيل الموظف
+    API->>DB: UPDATE Employee.status='Active'
+    API->>DB: INSERT EmployeeDocuments
+    HR->>API: تعيين معلم مرشد
+    API->>DB: INSERT Mentor relationship
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-E01-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-E01-mer">sequenceDiagram
+    actor App as المتقدم
+    participant Portal
+    participant API
+    participant DB
+    actor HR
+    actor OF as مكتب التربية
+    
+    HR-&gt;&gt;API: إعلان وظيفة شاغرة
+    API-&gt;&gt;DB: INSERT VacantPosition
+    App-&gt;&gt;Portal: تقديم طلب توظيف
+    Portal-&gt;&gt;API: POST /applications
+    API-&gt;&gt;DB: INSERT JobApplicant
+    HR-&gt;&gt;API: فرز المتقدمين
+    HR-&gt;&gt;App: استدعاء للمقابلة
+    HR-&gt;&gt;API: تسجيل نتائج المقابلة
+    HR-&gt;&gt;OF: رفع التوصية
+    OF-&gt;&gt;API: قرار التعيين
+    API-&gt;&gt;DB: INSERT AppointmentDecision
+    API-&gt;&gt;DB: INSERT Employee(status=&#x27;Inactive&#x27;)
+    HR-&gt;&gt;API: تفعيل الموظف
+    API-&gt;&gt;DB: UPDATE Employee.status=&#x27;Active&#x27;
+    API-&gt;&gt;DB: INSERT EmployeeDocuments
+    HR-&gt;&gt;API: تعيين معلم مرشد
+    API-&gt;&gt;DB: INSERT Mentor relationship</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-E02">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-E02</span>
+    <h3>Sequence — دورة احتساب الراتب الشهري</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">👥 إدارة الموظفين والكادر ال</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: دورة احتساب الراتب الشهري.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    autonumber
+    actor HR
+    participant API
+    participant ENG as Payroll Engine
+    participant DB
+    participant BANK
+    actor EMP as الموظف
+    
+    HR->>API: POST /payroll/cycles {month}
+    API->>ENG: تنفيذ الدورة
+    ENG->>DB: SELECT Employees(Active)
+    DB-->>ENG: 250 موظف
+    loop لكل موظف
+        ENG->>DB: SELECT Attendance, Leave, Violations
+        DB-->>ENG: البيانات
+        ENG->>ENG: راتب + بدلات
+        ENG->>ENG: - غياب - جزاءات
+        ENG->>ENG: - تأمينات
+        ENG->>DB: INSERT EmployeePayroll
+    end
+    ENG-->>API: تم
+    HR->>API: اعتماد المسير
+    API->>BANK: تحويلات
+    BANK-->>API: نجاح
+    API->>DB: UPDATE Payroll.status='Paid'
+    API->>EMP: كشف راتب PDF
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-E02-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-E02-mer">sequenceDiagram
+    autonumber
+    actor HR
+    participant API
+    participant ENG as Payroll Engine
+    participant DB
+    participant BANK
+    actor EMP as الموظف
+    
+    HR-&gt;&gt;API: POST /payroll/cycles {month}
+    API-&gt;&gt;ENG: تنفيذ الدورة
+    ENG-&gt;&gt;DB: SELECT Employees(Active)
+    DB--&gt;&gt;ENG: 250 موظف
+    loop لكل موظف
+        ENG-&gt;&gt;DB: SELECT Attendance, Leave, Violations
+        DB--&gt;&gt;ENG: البيانات
+        ENG-&gt;&gt;ENG: راتب + بدلات
+        ENG-&gt;&gt;ENG: - غياب - جزاءات
+        ENG-&gt;&gt;ENG: - تأمينات
+        ENG-&gt;&gt;DB: INSERT EmployeePayroll
+    end
+    ENG--&gt;&gt;API: تم
+    HR-&gt;&gt;API: اعتماد المسير
+    API-&gt;&gt;BANK: تحويلات
+    BANK--&gt;&gt;API: نجاح
+    API-&gt;&gt;DB: UPDATE Payroll.status=&#x27;Paid&#x27;
+    API-&gt;&gt;EMP: كشف راتب PDF</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-E03">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-E03</span>
+    <h3>Sequence — طلب واعتماد إجازة</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">👥 إدارة الموظفين والكادر ال</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: طلب واعتماد إجازة.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor EMP as الموظف
+    participant UI
+    participant API
+    participant DB
+    actor MGR as المدير المباشر
+    actor HR
+    
+    EMP->>UI: طلب إجازة
+    UI->>API: POST /leaves
+    API->>DB: SELECT EmployeeBalance
+    DB-->>API: الرصيد المتاح
+    alt الرصيد كافٍ
+        API->>DB: INSERT EmployeeLeave(Pending)
+        API->>MGR: إشعار
+        MGR->>API: اعتماد
+        API->>DB: UPDATE status='ManagerApproved'
+        API->>HR: للمراجعة
+        HR->>API: اعتماد نهائي
+        API->>DB: UPDATE status='Approved'
+        API->>DB: UPDATE EmployeeBalance
+        API->>EMP: موافقة + تاريخ البدء
+    else غير كافٍ
+        API->>EMP: رفض - الرصيد غير كافٍ
+    end
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-E03-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-E03-mer">sequenceDiagram
+    actor EMP as الموظف
+    participant UI
+    participant API
+    participant DB
+    actor MGR as المدير المباشر
+    actor HR
+    
+    EMP-&gt;&gt;UI: طلب إجازة
+    UI-&gt;&gt;API: POST /leaves
+    API-&gt;&gt;DB: SELECT EmployeeBalance
+    DB--&gt;&gt;API: الرصيد المتاح
+    alt الرصيد كافٍ
+        API-&gt;&gt;DB: INSERT EmployeeLeave(Pending)
+        API-&gt;&gt;MGR: إشعار
+        MGR-&gt;&gt;API: اعتماد
+        API-&gt;&gt;DB: UPDATE status=&#x27;ManagerApproved&#x27;
+        API-&gt;&gt;HR: للمراجعة
+        HR-&gt;&gt;API: اعتماد نهائي
+        API-&gt;&gt;DB: UPDATE status=&#x27;Approved&#x27;
+        API-&gt;&gt;DB: UPDATE EmployeeBalance
+        API-&gt;&gt;EMP: موافقة + تاريخ البدء
+    else غير كافٍ
+        API-&gt;&gt;EMP: رفض - الرصيد غير كافٍ
+    end</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-E04">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-E04</span>
+    <h3>Sequence — نقل موظف بين المدارس</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">👥 إدارة الموظفين والكادر ال</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: نقل موظف بين المدارس.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor EMP
+    actor SrcMgr as مدير المدرسة الحالية
+    participant API
+    participant DB
+    actor OF as مكتب التربية
+    actor DestMgr as مدير المدرسة المستقبلة
+    
+    EMP->>API: طلب نقل خارجي
+    API->>DB: INSERT ExternalTransfer(Pending)
+    SrcMgr->>API: مراجعة + توصية
+    OF->>API: مراجعة الطلب
+    OF->>DestMgr: استشارة
+    DestMgr->>OF: موافقة/رفض
+    OF->>API: قرار النقل
+    alt موافقة
+        API->>DB: UPDATE Employee.schoolId
+        API->>DB: UPDATE ExternalTransfer.status='Approved'
+        API->>DB: تنفيذ إخلاء طرف
+        API->>EMP: مباشرة العمل الجديد
+    else رفض
+        API->>EMP: تم الرفض
+    end
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-E04-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-E04-mer">sequenceDiagram
+    actor EMP
+    actor SrcMgr as مدير المدرسة الحالية
+    participant API
+    participant DB
+    actor OF as مكتب التربية
+    actor DestMgr as مدير المدرسة المستقبلة
+    
+    EMP-&gt;&gt;API: طلب نقل خارجي
+    API-&gt;&gt;DB: INSERT ExternalTransfer(Pending)
+    SrcMgr-&gt;&gt;API: مراجعة + توصية
+    OF-&gt;&gt;API: مراجعة الطلب
+    OF-&gt;&gt;DestMgr: استشارة
+    DestMgr-&gt;&gt;OF: موافقة/رفض
+    OF-&gt;&gt;API: قرار النقل
+    alt موافقة
+        API-&gt;&gt;DB: UPDATE Employee.schoolId
+        API-&gt;&gt;DB: UPDATE ExternalTransfer.status=&#x27;Approved&#x27;
+        API-&gt;&gt;DB: تنفيذ إخلاء طرف
+        API-&gt;&gt;EMP: مباشرة العمل الجديد
+    else رفض
+        API-&gt;&gt;EMP: تم الرفض
+    end</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-E05">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-E05</span>
+    <h3>Sequence — إنهاء خدمة موظف</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">👥 إدارة الموظفين والكادر ال</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: إنهاء خدمة موظف.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor MGR
+    actor HR
+    participant API
+    participant DB
+    actor FIN as الإدارة المالية
+    actor EMP
+    
+    MGR->>API: قرار إنهاء خدمة
+    API->>DB: INSERT EmployeeTermination
+    HR->>API: بدء إجراءات إخلاء الطرف
+    HR->>API: استرجاع العهد
+    API->>DB: UPDATE EmployeeInventoryCustody.returned
+    HR->>FIN: تسوية مالية
+    FIN->>API: احتساب المستحقات
+    API->>DB: INSERT FinalSettlement
+    FIN->>API: صرف
+    HR->>API: إصدار شهادة الخبرة
+    API->>DB: UPDATE Employee.status='Terminated'
+    API->>EMP: الوثائق النهائية
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-E05-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-E05-mer">sequenceDiagram
+    actor MGR
+    actor HR
+    participant API
+    participant DB
+    actor FIN as الإدارة المالية
+    actor EMP
+    
+    MGR-&gt;&gt;API: قرار إنهاء خدمة
+    API-&gt;&gt;DB: INSERT EmployeeTermination
+    HR-&gt;&gt;API: بدء إجراءات إخلاء الطرف
+    HR-&gt;&gt;API: استرجاع العهد
+    API-&gt;&gt;DB: UPDATE EmployeeInventoryCustody.returned
+    HR-&gt;&gt;FIN: تسوية مالية
+    FIN-&gt;&gt;API: احتساب المستحقات
+    API-&gt;&gt;DB: INSERT FinalSettlement
+    FIN-&gt;&gt;API: صرف
+    HR-&gt;&gt;API: إصدار شهادة الخبرة
+    API-&gt;&gt;DB: UPDATE Employee.status=&#x27;Terminated&#x27;
+    API-&gt;&gt;EMP: الوثائق النهائية</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-A01">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-A01</span>
+    <h3>Sequence — تسجيل أصل جديد وتوليد الباركود</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">📦 إدارة الأصول والمرافق</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: تسجيل أصل جديد وتوليد الباركود.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor PR as موظف المشتريات
+    participant UI
+    participant API
+    participant DB
+    participant BC as Barcode Service
+    participant PRT as Printer
+    
+    PR->>UI: استلام من المورد
+    UI->>API: POST /assets {type, source}
+    API->>DB: INSERT Asset(Inactive)
+    DB-->>API: AST-0001
+    API->>BC: توليد QR Code
+    BC-->>API: PNG URL
+    API->>DB: UPDATE Asset.barcode_url
+    API-->>UI: assetId + barcode
+    PR->>UI: طباعة
+    UI->>PRT: PRINT
+    PR->>UI: ربط بالغرفة/القسم
+    UI->>API: PUT /assets/{id}
+    API->>DB: UPDATE + INSERT MovementHistory
+    PR->>UI: تفعيل
+    UI->>API: POST /assets/{id}/activate
+    API->>DB: UPDATE status='Active'
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-A01-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-A01-mer">sequenceDiagram
+    actor PR as موظف المشتريات
+    participant UI
+    participant API
+    participant DB
+    participant BC as Barcode Service
+    participant PRT as Printer
+    
+    PR-&gt;&gt;UI: استلام من المورد
+    UI-&gt;&gt;API: POST /assets {type, source}
+    API-&gt;&gt;DB: INSERT Asset(Inactive)
+    DB--&gt;&gt;API: AST-0001
+    API-&gt;&gt;BC: توليد QR Code
+    BC--&gt;&gt;API: PNG URL
+    API-&gt;&gt;DB: UPDATE Asset.barcode_url
+    API--&gt;&gt;UI: assetId + barcode
+    PR-&gt;&gt;UI: طباعة
+    UI-&gt;&gt;PRT: PRINT
+    PR-&gt;&gt;UI: ربط بالغرفة/القسم
+    UI-&gt;&gt;API: PUT /assets/{id}
+    API-&gt;&gt;DB: UPDATE + INSERT MovementHistory
+    PR-&gt;&gt;UI: تفعيل
+    UI-&gt;&gt;API: POST /assets/{id}/activate
+    API-&gt;&gt;DB: UPDATE status=&#x27;Active&#x27;</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-A02">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-A02</span>
+    <h3>Sequence — طلب وتنفيذ صيانة</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">📦 إدارة الأصول والمرافق</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: طلب وتنفيذ صيانة.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor USR as المستخدم
+    participant API
+    participant DB
+    actor TECH as الفني
+    actor MGR as مدير الصيانة
+    
+    USR->>API: بلاغ عطل + صور
+    API->>DB: INSERT MaintenanceTickets(Open)
+    API->>TECH: إشعار
+    TECH->>API: تقدير العطل
+    alt عطل بسيط
+        TECH->>API: تنفيذ مباشر
+    else عطل معقد
+        TECH->>MGR: طلب اعتماد
+        MGR->>API: اعتماد
+        API->>DB: UPDATE Ticket(Approved)
+        TECH->>API: تنفيذ
+    end
+    API->>DB: INSERT MaintenanceExecution
+    API->>DB: INSERT MaintenanceSpareParts
+    TECH->>API: اختبار ونجاح
+    API->>DB: UPDATE Ticket(Closed)
+    API->>DB: UPDATE Asset.status='Active'
+    API->>USR: إشعار
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-A02-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-A02-mer">sequenceDiagram
+    actor USR as المستخدم
+    participant API
+    participant DB
+    actor TECH as الفني
+    actor MGR as مدير الصيانة
+    
+    USR-&gt;&gt;API: بلاغ عطل + صور
+    API-&gt;&gt;DB: INSERT MaintenanceTickets(Open)
+    API-&gt;&gt;TECH: إشعار
+    TECH-&gt;&gt;API: تقدير العطل
+    alt عطل بسيط
+        TECH-&gt;&gt;API: تنفيذ مباشر
+    else عطل معقد
+        TECH-&gt;&gt;MGR: طلب اعتماد
+        MGR-&gt;&gt;API: اعتماد
+        API-&gt;&gt;DB: UPDATE Ticket(Approved)
+        TECH-&gt;&gt;API: تنفيذ
+    end
+    API-&gt;&gt;DB: INSERT MaintenanceExecution
+    API-&gt;&gt;DB: INSERT MaintenanceSpareParts
+    TECH-&gt;&gt;API: اختبار ونجاح
+    API-&gt;&gt;DB: UPDATE Ticket(Closed)
+    API-&gt;&gt;DB: UPDATE Asset.status=&#x27;Active&#x27;
+    API-&gt;&gt;USR: إشعار</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-A03">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-A03</span>
+    <h3>Sequence — الجرد السنوي للأصول</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">📦 إدارة الأصول والمرافق</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: الجرد السنوي للأصول.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor MGR as مدير الأصول
+    participant API
+    participant DB
+    actor INSP as فريق الجرد
+    
+    MGR->>API: POST /inventory/plan
+    API->>DB: INSERT InventoryPlans
+    MGR->>INSP: تكليف بالجرد
+    loop لكل قسم
+        INSP->>API: مسح الباركودات
+        API->>DB: INSERT FieldInventoryLog
+    end
+    API->>API: مطابقة آلية
+    API->>DB: INSERT InventoryReconciliation
+    alt فروقات موجودة
+        API->>MGR: تنبيه فروقات
+        MGR->>API: تحقيق
+        MGR->>API: معالجة
+    end
+    MGR->>API: اعتماد النتائج
+    API->>DB: UPDATE Asset.lastInventoryDate
+    API->>DB: INSERT ComplianceAudit
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-A03-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-A03-mer">sequenceDiagram
+    actor MGR as مدير الأصول
+    participant API
+    participant DB
+    actor INSP as فريق الجرد
+    
+    MGR-&gt;&gt;API: POST /inventory/plan
+    API-&gt;&gt;DB: INSERT InventoryPlans
+    MGR-&gt;&gt;INSP: تكليف بالجرد
+    loop لكل قسم
+        INSP-&gt;&gt;API: مسح الباركودات
+        API-&gt;&gt;DB: INSERT FieldInventoryLog
+    end
+    API-&gt;&gt;API: مطابقة آلية
+    API-&gt;&gt;DB: INSERT InventoryReconciliation
+    alt فروقات موجودة
+        API-&gt;&gt;MGR: تنبيه فروقات
+        MGR-&gt;&gt;API: تحقيق
+        MGR-&gt;&gt;API: معالجة
+    end
+    MGR-&gt;&gt;API: اعتماد النتائج
+    API-&gt;&gt;DB: UPDATE Asset.lastInventoryDate
+    API-&gt;&gt;DB: INSERT ComplianceAudit</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-A04">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-A04</span>
+    <h3>Sequence — شطب أصل</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">📦 إدارة الأصول والمرافق</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: شطب أصل.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor MGR
+    actor FIN
+    participant API
+    participant DB
+    
+    MGR->>API: طلب شطب أصل
+    API->>DB: INSERT DisposalRequest
+    API->>FIN: احتساب القيمة الدفترية
+    FIN->>API: القيمة الدفترية النهائية
+    API->>DB: UPDATE AssetFinancials
+    MGR->>API: اعتماد الشطب
+    API->>DB: UPDATE Asset.status='Disposed'
+    API->>DB: INSERT FinancialAuditArchive
+    API->>DB: أرشفة
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-A04-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-A04-mer">sequenceDiagram
+    actor MGR
+    actor FIN
+    participant API
+    participant DB
+    
+    MGR-&gt;&gt;API: طلب شطب أصل
+    API-&gt;&gt;DB: INSERT DisposalRequest
+    API-&gt;&gt;FIN: احتساب القيمة الدفترية
+    FIN-&gt;&gt;API: القيمة الدفترية النهائية
+    API-&gt;&gt;DB: UPDATE AssetFinancials
+    MGR-&gt;&gt;API: اعتماد الشطب
+    API-&gt;&gt;DB: UPDATE Asset.status=&#x27;Disposed&#x27;
+    API-&gt;&gt;DB: INSERT FinancialAuditArchive
+    API-&gt;&gt;DB: أرشفة</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-SA01">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-SA01</span>
+    <h3>Sequence — إنشاء وتفعيل مدرسة جديدة</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">🏛️ إدارة المدرسة والبيئة الت</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: إنشاء وتفعيل مدرسة جديدة.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor OF as موظف المكتب
+    participant API
+    participant DB
+    actor PRIN as المدير المرشح
+    
+    OF->>API: POST /schools
+    API->>DB: INSERT School(Pending)
+    OF->>API: تحديد المراحل والصفوف
+    API->>DB: INSERT SchoolLevel, GradeCapacity
+    OF->>API: ترشيح القيادة
+    API->>DB: INSERT LeadershipNomination
+    PRIN->>API: قبول التعيين
+    API->>DB: INSERT LeadershipAssignment
+    API->>DB: UPDATE School.principalId
+    OF->>API: اعتماد المدرسة
+    API->>DB: UPDATE School.status='Active'
+    API->>DB: INSERT SchoolAuditLog
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-SA01-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-SA01-mer">sequenceDiagram
+    actor OF as موظف المكتب
+    participant API
+    participant DB
+    actor PRIN as المدير المرشح
+    
+    OF-&gt;&gt;API: POST /schools
+    API-&gt;&gt;DB: INSERT School(Pending)
+    OF-&gt;&gt;API: تحديد المراحل والصفوف
+    API-&gt;&gt;DB: INSERT SchoolLevel, GradeCapacity
+    OF-&gt;&gt;API: ترشيح القيادة
+    API-&gt;&gt;DB: INSERT LeadershipNomination
+    PRIN-&gt;&gt;API: قبول التعيين
+    API-&gt;&gt;DB: INSERT LeadershipAssignment
+    API-&gt;&gt;DB: UPDATE School.principalId
+    OF-&gt;&gt;API: اعتماد المدرسة
+    API-&gt;&gt;DB: UPDATE School.status=&#x27;Active&#x27;
+    API-&gt;&gt;DB: INSERT SchoolAuditLog</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-SA02">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-SA02</span>
+    <h3>Sequence — رفع تقرير سنوي شامل</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">🏛️ إدارة المدرسة والبيئة الت</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: رفع تقرير سنوي شامل.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor SA as إدارة المدرسة
+    participant API
+    participant DB
+    participant RPT as Reporting Engine
+    actor OF as مكتب التربية
+    participant ARC as Archive
+    
+    SA->>RPT: طلب توليد تقرير سنوي
+    RPT->>DB: تجميع (Stats, Plans, Outcomes)
+    DB-->>RPT: البيانات
+    RPT->>RPT: تركيب PDF + Charts
+    RPT-->>SA: مسودة
+    SA->>RPT: مراجعة وتعديل
+    SA->>API: اعتماد ورفع
+    API->>DB: INSERT AnnualComprehensiveReport
+    API->>OF: إشعار
+    OF->>API: مراجعة
+    alt اعتماد
+        OF->>API: approve
+        API->>DB: UPDATE Status='Approved'
+        API->>ARC: نسخة للأرشيف
+    else إعادة
+        OF->>API: ملاحظات
+        API->>DB: UPDATE Status='Returned'
+        API->>SA: مطلوب تعديل
+    end
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-SA02-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-SA02-mer">sequenceDiagram
+    actor SA as إدارة المدرسة
+    participant API
+    participant DB
+    participant RPT as Reporting Engine
+    actor OF as مكتب التربية
+    participant ARC as Archive
+    
+    SA-&gt;&gt;RPT: طلب توليد تقرير سنوي
+    RPT-&gt;&gt;DB: تجميع (Stats, Plans, Outcomes)
+    DB--&gt;&gt;RPT: البيانات
+    RPT-&gt;&gt;RPT: تركيب PDF + Charts
+    RPT--&gt;&gt;SA: مسودة
+    SA-&gt;&gt;RPT: مراجعة وتعديل
+    SA-&gt;&gt;API: اعتماد ورفع
+    API-&gt;&gt;DB: INSERT AnnualComprehensiveReport
+    API-&gt;&gt;OF: إشعار
+    OF-&gt;&gt;API: مراجعة
+    alt اعتماد
+        OF-&gt;&gt;API: approve
+        API-&gt;&gt;DB: UPDATE Status=&#x27;Approved&#x27;
+        API-&gt;&gt;ARC: نسخة للأرشيف
+    else إعادة
+        OF-&gt;&gt;API: ملاحظات
+        API-&gt;&gt;DB: UPDATE Status=&#x27;Returned&#x27;
+        API-&gt;&gt;SA: مطلوب تعديل
+    end</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-SA03">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-SA03</span>
+    <h3>Sequence — تنفيذ تعميم من المكتب</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">🏛️ إدارة المدرسة والبيئة الت</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: تنفيذ تعميم من المكتب.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor OF
+    participant API
+    participant DB
+    participant TASK as Tasks Engine
+    actor SA
+    actor EMP as الموظف المعني
+    
+    OF->>API: نشر تعميم + مهلة
+    API->>DB: INSERT ReceivedCircular
+    API->>SA: إشعار
+    SA->>API: تسجيل + التوزيع
+    API->>DB: INSERT CircularsInternalDistribution
+    API->>TASK: توليد مهام
+    TASK->>EMP: إشعار مهمة
+    EMP->>API: تنفيذ + إثبات
+    API->>DB: UPDATE CircularsImplementationStatus
+    SA->>API: رفع الإفادة
+    API->>DB: INSERT CircularsImplementationReports
+    API->>OF: إخطار
+    OF->>API: قبول
+    API->>DB: UPDATE status='Closed'
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-SA03-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-SA03-mer">sequenceDiagram
+    actor OF
+    participant API
+    participant DB
+    participant TASK as Tasks Engine
+    actor SA
+    actor EMP as الموظف المعني
+    
+    OF-&gt;&gt;API: نشر تعميم + مهلة
+    API-&gt;&gt;DB: INSERT ReceivedCircular
+    API-&gt;&gt;SA: إشعار
+    SA-&gt;&gt;API: تسجيل + التوزيع
+    API-&gt;&gt;DB: INSERT CircularsInternalDistribution
+    API-&gt;&gt;TASK: توليد مهام
+    TASK-&gt;&gt;EMP: إشعار مهمة
+    EMP-&gt;&gt;API: تنفيذ + إثبات
+    API-&gt;&gt;DB: UPDATE CircularsImplementationStatus
+    SA-&gt;&gt;API: رفع الإفادة
+    API-&gt;&gt;DB: INSERT CircularsImplementationReports
+    API-&gt;&gt;OF: إخطار
+    OF-&gt;&gt;API: قبول
+    API-&gt;&gt;DB: UPDATE status=&#x27;Closed&#x27;</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-AU01">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-AU01</span>
+    <h3>Sequence — تسجيل دخول المستخدم وتطبيق RBAC</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">🔐 الأمن والصلاحيات والمستخد</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: تسجيل دخول المستخدم وتطبيق RBAC.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor U as المستخدم
+    participant UI
+    participant AUTH as Auth Service
+    participant DB
+    participant TOKEN as JWT Service
+    
+    U->>UI: إدخال username + password
+    UI->>AUTH: POST /login
+    AUTH->>DB: SELECT SystemUser
+    DB-->>AUTH: hashed_password
+    AUTH->>AUTH: bcrypt.compare()
+    alt نجاح
+        AUTH->>DB: SELECT UserRole + RolePermission
+        DB-->>AUTH: roles + permissions
+        AUTH->>TOKEN: generateJWT(claims)
+        TOKEN-->>AUTH: token
+        AUTH->>DB: INSERT UserActivityLog
+        AUTH-->>UI: token + permissions
+        UI->>U: مرحبا
+    else فشل
+        AUTH->>DB: INSERT FailedLoginAttempt
+        AUTH-->>UI: 401 Unauthorized
+        UI->>U: خطأ
+    end
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-AU01-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-AU01-mer">sequenceDiagram
+    actor U as المستخدم
+    participant UI
+    participant AUTH as Auth Service
+    participant DB
+    participant TOKEN as JWT Service
+    
+    U-&gt;&gt;UI: إدخال username + password
+    UI-&gt;&gt;AUTH: POST /login
+    AUTH-&gt;&gt;DB: SELECT SystemUser
+    DB--&gt;&gt;AUTH: hashed_password
+    AUTH-&gt;&gt;AUTH: bcrypt.compare()
+    alt نجاح
+        AUTH-&gt;&gt;DB: SELECT UserRole + RolePermission
+        DB--&gt;&gt;AUTH: roles + permissions
+        AUTH-&gt;&gt;TOKEN: generateJWT(claims)
+        TOKEN--&gt;&gt;AUTH: token
+        AUTH-&gt;&gt;DB: INSERT UserActivityLog
+        AUTH--&gt;&gt;UI: token + permissions
+        UI-&gt;&gt;U: مرحبا
+    else فشل
+        AUTH-&gt;&gt;DB: INSERT FailedLoginAttempt
+        AUTH--&gt;&gt;UI: 401 Unauthorized
+        UI-&gt;&gt;U: خطأ
+    end</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-AU02">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-AU02</span>
+    <h3>Sequence — تطبيق سياسة وصول على عملية</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">🔐 الأمن والصلاحيات والمستخد</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: تطبيق سياسة وصول على عملية.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor U
+    participant UI
+    participant API
+    participant POL as Policy Engine
+    participant DB
+    
+    U->>UI: طلب عملية حساسة
+    UI->>API: POST /sensitive-op
+    API->>POL: checkAccess(user, action, resource)
+    POL->>DB: SELECT UserPermission + RolePermission + AccessPolicy
+    DB-->>POL: rules
+    POL->>POL: evaluate ABAC + RBAC
+    alt مسموح
+        POL-->>API: ALLOW
+        API->>DB: تنفيذ
+        API->>DB: INSERT AuditLog
+        API-->>U: نجاح
+    else مرفوض
+        POL-->>API: DENY
+        API->>DB: INSERT AuditLog(denied)
+        API-->>U: 403 Forbidden
+    end
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-AU02-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-AU02-mer">sequenceDiagram
+    actor U
+    participant UI
+    participant API
+    participant POL as Policy Engine
+    participant DB
+    
+    U-&gt;&gt;UI: طلب عملية حساسة
+    UI-&gt;&gt;API: POST /sensitive-op
+    API-&gt;&gt;POL: checkAccess(user, action, resource)
+    POL-&gt;&gt;DB: SELECT UserPermission + RolePermission + AccessPolicy
+    DB--&gt;&gt;POL: rules
+    POL-&gt;&gt;POL: evaluate ABAC + RBAC
+    alt مسموح
+        POL--&gt;&gt;API: ALLOW
+        API-&gt;&gt;DB: تنفيذ
+        API-&gt;&gt;DB: INSERT AuditLog
+        API--&gt;&gt;U: نجاح
+    else مرفوض
+        POL--&gt;&gt;API: DENY
+        API-&gt;&gt;DB: INSERT AuditLog(denied)
+        API--&gt;&gt;U: 403 Forbidden
+    end</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-EM01">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-EM01</span>
+    <h3>Sequence — استجابة لحالة طارئة</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">🚨 إدارة الطوارئ والتميز</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: استجابة لحالة طارئة.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor REP as المُبلغ
+    participant API
+    participant DB
+    actor MGR as مدير الطوارئ
+    participant NOT
+    actor TEAM as فريق الاستجابة
+    actor OF
+    
+    REP->>API: تسجيل حالة طارئة
+    API->>DB: INSERT EmergencyEvent
+    API->>MGR: تنبيه عاجل
+    MGR->>API: تصنيف الخطورة
+    MGR->>API: تفعيل خطة استجابة
+    API->>DB: INSERT ResponsePlan
+    API->>TEAM: تعليمات
+    TEAM->>API: تنفيذ الإجراءات
+    API->>DB: تحديث Status
+    MGR->>API: تقييم الأضرار
+    API->>DB: INSERT DamageAssessment
+    MGR->>OF: رفع تقرير
+    API->>DB: INSERT RemediationPlan
+    OF->>API: اعتماد خطة التعويض
+    API->>NOT: إشعارات للأهالي
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-EM01-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-EM01-mer">sequenceDiagram
+    actor REP as المُبلغ
+    participant API
+    participant DB
+    actor MGR as مدير الطوارئ
+    participant NOT
+    actor TEAM as فريق الاستجابة
+    actor OF
+    
+    REP-&gt;&gt;API: تسجيل حالة طارئة
+    API-&gt;&gt;DB: INSERT EmergencyEvent
+    API-&gt;&gt;MGR: تنبيه عاجل
+    MGR-&gt;&gt;API: تصنيف الخطورة
+    MGR-&gt;&gt;API: تفعيل خطة استجابة
+    API-&gt;&gt;DB: INSERT ResponsePlan
+    API-&gt;&gt;TEAM: تعليمات
+    TEAM-&gt;&gt;API: تنفيذ الإجراءات
+    API-&gt;&gt;DB: تحديث Status
+    MGR-&gt;&gt;API: تقييم الأضرار
+    API-&gt;&gt;DB: INSERT DamageAssessment
+    MGR-&gt;&gt;OF: رفع تقرير
+    API-&gt;&gt;DB: INSERT RemediationPlan
+    OF-&gt;&gt;API: اعتماد خطة التعويض
+    API-&gt;&gt;NOT: إشعارات للأهالي</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-T01">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-T01</span>
+    <h3>Sequence — تدريب موظف</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">👥 إدارة الموظفين والكادر ال</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: تدريب موظف.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor E as الموظف
+    participant UI
+    participant API
+    participant DB
+    actor MGR
+    actor HR
+    
+    E->>UI: تصفح البرامج
+    UI->>API: GET /trainings
+    API->>DB: SELECT
+    DB-->>API: قائمة
+    E->>UI: تقديم طلب
+    UI->>API: POST /training-requests
+    API->>DB: INSERT
+    API->>MGR: إشعار
+    MGR->>API: اعتماد
+    API->>HR: للمراجعة
+    HR->>API: تأكيد
+    API->>DB: INSERT EmployeeTraining
+    API->>E: تفاصيل
+    E->>API: تسجيل الحضور
+    E->>API: إنهاء
+    API->>DB: UPDATE completed=true
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-T01-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-T01-mer">sequenceDiagram
+    actor E as الموظف
+    participant UI
+    participant API
+    participant DB
+    actor MGR
+    actor HR
+    
+    E-&gt;&gt;UI: تصفح البرامج
+    UI-&gt;&gt;API: GET /trainings
+    API-&gt;&gt;DB: SELECT
+    DB--&gt;&gt;API: قائمة
+    E-&gt;&gt;UI: تقديم طلب
+    UI-&gt;&gt;API: POST /training-requests
+    API-&gt;&gt;DB: INSERT
+    API-&gt;&gt;MGR: إشعار
+    MGR-&gt;&gt;API: اعتماد
+    API-&gt;&gt;HR: للمراجعة
+    HR-&gt;&gt;API: تأكيد
+    API-&gt;&gt;DB: INSERT EmployeeTraining
+    API-&gt;&gt;E: تفاصيل
+    E-&gt;&gt;API: تسجيل الحضور
+    E-&gt;&gt;API: إنهاء
+    API-&gt;&gt;DB: UPDATE completed=true</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="SEQ-RPT01">
+  <div class="diagram-header">
+    <span class="id-badge">SEQ-RPT01</span>
+    <h3>Sequence — توليد تقرير إحصائي</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Sequence Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">📊 إدارة البيانات والإحصاء</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تتبع التفاعلات الزمنية لعملية: توليد تقرير إحصائي.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>Actors + Services + DB + Async events.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor U as المستخدم
+    participant UI
+    participant API
+    participant DW as Data Warehouse
+    participant RPT as Report Engine
+    
+    U->>UI: اختيار نوع التقرير + الفترة
+    UI->>API: POST /reports/generate
+    API->>DW: استعلام مجمعات
+    DW-->>API: aggregated data
+    API->>RPT: تركيب التقرير
+    RPT->>RPT: PDF + Charts
+    RPT-->>API: URL
+    API->>DB: INSERT SystemReports
+    API-->>U: رابط التحميل
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'SEQ-RPT01-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="SEQ-RPT01-mer">sequenceDiagram
+    actor U as المستخدم
+    participant UI
+    participant API
+    participant DW as Data Warehouse
+    participant RPT as Report Engine
+    
+    U-&gt;&gt;UI: اختيار نوع التقرير + الفترة
+    UI-&gt;&gt;API: POST /reports/generate
+    API-&gt;&gt;DW: استعلام مجمعات
+    DW--&gt;&gt;API: aggregated data
+    API-&gt;&gt;RPT: تركيب التقرير
+    RPT-&gt;&gt;RPT: PDF + Charts
+    RPT--&gt;&gt;API: URL
+    API-&gt;&gt;DB: INSERT SystemReports
+    API--&gt;&gt;U: رابط التحميل</pre>
+    
+  </div>
+</article>
+
+<div class="nav-buttons"><a href="02_usecase.html" class="nav-btn">→ 🎯 مخططات حالات الاستخدام</a><a href="index.html" class="nav-btn" style="background:#f59e0b">🏠 الفهرس الرئيسي</a><a href="04_activity.html" class="nav-btn">⚙️ مخططات النشاط ودورة الحياة ←</a></div>
+</div>
+
+<a href="#top" class="back-to-top" title="أعلى">⬆</a>
+<script>
+mermaid.initialize({
+  startOnLoad: true,
+  theme: 'default',
+  maxTextSize: 200000,
+  maxEdges: 2500,
+  themeVariables:{fontFamily:'Cairo, sans-serif',primaryColor:'#dbeafe',primaryTextColor:'#1e3a8a',primaryBorderColor:'#1e3a8a',lineColor:'#475569',secondaryColor:'#fef3c7',tertiaryColor:'#dcfce7'},
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  sequence:{useMaxWidth:true,wrap:true},
+  er:{useMaxWidth:true,layoutDirection:'TB'},
+  class:{useMaxWidth:true},
+  state:{useMaxWidth:true}
+});
+function showCode(btn, id){
+  const card = btn.closest('.diagram-card');
+  card.querySelectorAll('.code-tab').forEach(b => b.classList.remove('active'));
+  card.querySelectorAll('.code-block').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+</script>
+</body></html>

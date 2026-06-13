@@ -1,0 +1,39 @@
+flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P3_1((3.1<br/>الاستقطاب والتعيين)):::proc
+    P3_2((3.2<br/>التشغيل اليومي)):::proc
+    P3_3((3.3<br/>الرواتب والمالية)):::proc
+    P3_4((3.4<br/>الأداء والجزاءات)):::proc
+    P3_5((3.5<br/>التدريب والتطوير)):::proc
+    P3_6((3.6<br/>الإجازات والنقل)):::proc
+    P3_7((3.7<br/>إنهاء الخدمة)):::proc
+
+    DS_VacantPosition[("VacantPosition")]:::ds
+    DS_JobApplicant[("JobApplicant")]:::ds
+    DS_Employee[("Employee")]:::ds
+    DS_EmployeeAttendance[("EmployeeAttendance")]:::ds
+    DS_EmployeePayroll[("EmployeePayroll")]:::ds
+    DS_PerformanceReview[("PerformanceReview")]:::ds
+    DS_EmployeeLeave[("EmployeeLeave")]:::ds
+    DS_EmployeeTermination[("EmployeeTermination")]:::ds
+
+    Ext1 --> P3_1
+    P3_1 --> P3_2
+    P3_2 --> P3_3
+    P3_3 --> P3_4
+    P3_4 --> P3_5
+    P3_5 --> P3_6
+    P3_6 --> P3_7
+    P3_1 <--> DS_VacantPosition
+    P3_2 <--> DS_JobApplicant
+    P3_3 <--> DS_Employee
+    P3_4 <--> DS_EmployeeAttendance
+    P3_5 <--> DS_EmployeePayroll
+    P3_6 <--> DS_PerformanceReview
+    P3_7 <--> DS_EmployeeLeave
+    P3_7 <--> DS_EmployeeTermination

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - خطط الجرد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght=300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item"><span class="icon">📊</span><span>لوحة التحكم</span></a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">إدارة الأصول</div>
+                    <a href="index.html" class="nav-item"><span class="icon">📦</span><span>لوحة التحكم</span></a>
+                    <a href="requirements.html" class="nav-item"><span class="icon">📋</span><span>طلبات الاحتياج</span></a>
+                    <a href="inventory.html" class="nav-item"><span class="icon">🏢</span><span>الأصول</span></a>
+                    <a href="classification.html" class="nav-item"><span class="icon">📑</span><span>تصنيف الأصول</span></a>
+                    <a href="assignment.html" class="nav-item"><span class="icon">🔗</span><span>تخصيص الأصول</span></a>
+                    <a href="maintenance.html" class="nav-item"><span class="icon">🔧</span><span>الصيانة</span></a>
+                    <a href="rooms.html" class="nav-item"><span class="icon">🏫</span><span>القاعات والمرافق</span></a>
+                    <a href="procurement.html" class="nav-item"><span class="icon">🛒</span><span>المشتريات</span></a>
+                    <a href="suppliers.html" class="nav-item"><span class="icon">🏢</span><span>الموردون</span></a>
+                    <a href="financials.html" class="nav-item"><span class="icon">💰</span><span>المالية</span></a>
+                    <a href="inventory-plans.html" class="nav-item active"><span class="icon">📆</span><span>خطط الجرد</span></a>
+                    <a href="insurance.html" class="nav-item"><span class="icon">🛡️</span><span>التأمينات</span></a>
+                    <a href="disposal.html" class="nav-item"><span class="icon">🗑️</span><span>الشهادات والتصرف</span></a>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left"><h2>إدارة الأصول والمرافق</h2></div>
+                <div class="header-right">
+                    <div class="header-actions"><button class="header-btn">🔔<span class="badge">5</span></button></div>
+                    <div class="user-profile"><div class="user-avatar">م</div><div class="user-info"><h4>مدير المدرسة</h4><p>الإدارة</p></div></div>
+                </div>
+            </header>
+            <div class="content-area">
+                <div class="page-header">
+                    <h1 class="page-title">📆 خطط الجرد</h1>
+                    <div class="page-breadcrumb"><a href="../../index.html">الرئيسية</a><span>/</span><a href="index.html">إدارة الأصول</a><span>/</span><span>خطط الجرد</span></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">خطط الجرد</h3>
+                        <button class="btn btn-primary" onclick="openModal('addPlanModal')">➕ إضافة خطة</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr><th>الخطة</th><th>التاريخ</th><th>القسم</th><th>الحالة</th><th>الإجراءات</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td style="font-weight: 600;">جرد سنوي</td><td>2024-06-01</td><td>الكليات</td><td><span class="badge-status warning">مجدولة</span></td><td><div class="table-actions"><button class="action-btn view">👁️</button><button class="action-btn edit">✏️</button><button class="action-btn delete">🗑️</button></div></td></tr>
+                                    <tr><td style="font-weight: 600;">جرد فصلية</td><td>2024-05-30</td><td>المعامل</td><td><span class="badge-status approved">مكتمل</span></td><td><div class="table-actions"><button class="action-btn view">👁️</button><button class="action-btn edit">✏️</button><button class="action-btn delete">🗑️</button></div></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="modal-overlay" id="addPlanModal"><div class="modal"><div class="modal-header"><h3>إضافة خطة جرد</h3><button class="close-btn" onclick="closeModal('addPlanModal')">&times;</button></div><div class="modal-body"><form class="form-group"><label>الخطة</label><input type="text" class="form-input" placeholder="اسم الخطة"><label>التاريخ</label><input type="date" class="form-input"><label>القسم</label><select class="form-input"><option>الكليات</option><option>المعامل</option><option>الإدارة</option></select></form></div><div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('addPlanModal')">إلغاء</button><button class="btn btn-primary">حفظ</button></div></div></div>
+    <script>function openModal(id){document.getElementById(id).classList.add('active');}function closeModal(id){document.getElementById(id).classList.remove('active');}</script>
+</body>
+</html>

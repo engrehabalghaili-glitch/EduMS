@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الفهرس الرئيسي | EduMS Documentation</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Cairo',sans-serif;background:#f8fafc;color:#1f2937;line-height:1.7;font-size:14.5px}
+header.top{background:linear-gradient(135deg,#1e3a8a,#3b82f6,#8b5cf6);color:#fff;padding:30px 24px;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+header.top h1{font-size:1.9em;font-weight:800;text-shadow:1px 1px 4px rgba(0,0,0,.3)}
+header.top .breadcrumb{margin-top:10px;font-size:.95em;opacity:.95}
+header.top .breadcrumb a{color:#fef3c7;text-decoration:none;font-weight:600}
+header.top .breadcrumb a:hover{text-decoration:underline}
+header.top .stats{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap}
+header.top .stat{background:rgba(255,255,255,.18);padding:8px 16px;border-radius:20px;font-size:.9em;font-weight:600;border:1px solid rgba(255,255,255,.3)}
+.container{max-width:1500px;margin:24px auto;padding:0 20px}
+.toc-side{background:#fff;border-radius:14px;padding:20px;margin-bottom:24px;box-shadow:0 2px 10px rgba(0,0,0,.06);position:sticky;top:0;z-index:50}
+.toc-side h3{color:#1e3a8a;font-size:1.15em;margin-bottom:12px}
+.toc-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:4px}
+.toc-list a{color:#374151;text-decoration:none;padding:5px 10px;border-radius:6px;font-size:.88em;display:block;font-weight:500}
+.toc-list a:hover{background:#dbeafe;color:#1e3a8a}
+.toc-list code{background:#f3f4f6;padding:1px 5px;border-radius:3px;font-size:.85em;color:#1e3a8a;font-weight:700}
+.diagram-card{background:#fff;border-radius:14px;margin-bottom:24px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.05)}
+.diagram-header{background:linear-gradient(90deg,#f8fafc,#e0e7ff);padding:18px 24px;border-bottom:2px solid #e5e7eb}
+.id-badge{display:inline-block;background:#1e3a8a;color:#fff;padding:4px 12px;border-radius:6px;font-size:.82em;font-weight:700;font-family:'Fira Code',monospace;margin-left:10px}
+.diagram-header h3{display:inline;color:#1e3a8a;font-size:1.3em;font-weight:700}
+.diagram-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tag{display:inline-block;padding:4px 10px;border-radius:18px;font-size:.82em;font-weight:600}
+.tag.type{background:#dbeafe;color:#1e3a8a}
+.tag.level{background:#fce7f3;color:#831843}
+.tag.mod{background:#f3e8ff;color:#6b21a8}
+.tag.stats{background:#fef3c7;color:#92400e}
+.diagram-body{padding:20px 24px}
+.info-block{margin-bottom:10px;font-size:.93em}
+.info-block strong{color:#1e3a8a;margin-left:5px}
+.mermaid-wrapper{background:#fafbfc;border:2px dashed #d1d5db;border-radius:10px;padding:20px 12px;margin:16px 0;overflow:auto;min-height:150px}
+.mermaid{text-align:center;direction:ltr;font-size:13px}
+.code-tabs{display:flex;gap:5px;margin-top:14px;border-bottom:2px solid #e5e7eb}
+.code-tab{background:#e5e7eb;color:#374151;padding:6px 14px;border-radius:6px 6px 0 0;cursor:pointer;font-weight:600;font-size:.85em;border:none;font-family:inherit}
+.code-tab.active{background:#1e3a8a;color:#fff}
+.code-block{background:#0f172a;color:#cbd5e1;border-radius:0 10px 10px 10px;padding:14px;overflow:auto;max-height:480px;font-family:'Fira Code',monospace;font-size:.78em;line-height:1.5;direction:ltr;text-align:left;display:none;white-space:pre}
+.code-block.active{display:block}
+.back-to-top{position:fixed;bottom:24px;left:24px;background:#1e3a8a;color:#fff;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.3em;box-shadow:0 4px 14px rgba(0,0,0,.25);z-index:100}
+.back-to-top:hover{background:#f59e0b}
+.nav-buttons{display:flex;gap:12px;justify-content:space-between;margin:30px 0}
+.nav-btn{background:#1e3a8a;color:#fff;padding:14px 22px;border-radius:10px;text-decoration:none;font-weight:700;flex:1;text-align:center;transition:all .2s}
+.nav-btn:hover{background:#3b82f6;transform:translateY(-2px)}
+.nav-btn.disabled{background:#9ca3af;cursor:not-allowed}
+@media(max-width:768px){
+  header.top h1{font-size:1.4em}
+  .container{padding:0 12px}
+  .diagram-header{padding:14px}
+  .diagram-body{padding:14px}
+}
+</style>
+</head>
+<body>
+
+<a id="top"></a>
+<header class="top" style="padding:60px 24px;text-align:center">
+  <h1 style="font-size:2.8em">🏛️ EduMS Enterprise</h1>
+  <p style="font-size:1.3em;margin-top:10px;font-weight:600">التوثيق الهندسي الكامل والشامل</p>
+  <p style="font-size:1em;margin-top:6px;opacity:.85;font-family:'Fira Code',monospace">Complete Software Architecture Documentation</p>
+  <div class="stats" style="justify-content:center;margin-top:20px">
+    <div class="stat" style="padding:14px 22px;font-size:1.1em"><strong style="font-size:1.6em;color:#fef3c7">8</strong> وحدات</div>
+    <div class="stat" style="padding:14px 22px;font-size:1.1em"><strong style="font-size:1.6em;color:#fef3c7">205</strong> جدول</div>
+    <div class="stat" style="padding:14px 22px;font-size:1.1em"><strong style="font-size:1.6em;color:#fef3c7">6795</strong> حقل</div>
+    <div class="stat" style="padding:14px 22px;font-size:1.1em"><strong style="font-size:1.6em;color:#fef3c7">1285</strong> علاقة</div>
+    <div class="stat" style="padding:14px 22px;font-size:1.1em"><strong style="font-size:1.6em;color:#fef3c7">122</strong> مخطط</div>
+  </div>
+</header>
+<div class="container">
+
+<section style="background:#fff;border-radius:14px;padding:28px;margin-bottom:24px;box-shadow:0 4px 14px rgba(0,0,0,.05)">
+  <h2 style="color:#1e3a8a;font-size:1.5em;margin-bottom:14px;border-bottom:3px solid #f59e0b;padding-bottom:10px">📚 الوحدات الثمانية</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px">
+
+    <div style="background:linear-gradient(135deg,#f8fafc,#e0e7ff);border-right:5px solid #1e3a8a;padding:18px;border-radius:12px">
+      <div style="font-size:1.6em;margin-bottom:4px">🏛️</div>
+      <h3 style="color:#1e3a8a;font-size:1.05em;margin-bottom:6px">إدارة المدرسة والبيئة التنظيمية</h3>
+      <div style="color:#f59e0b;font-weight:800;font-size:1.3em">47 <small style="color:#6b7280;font-weight:500;font-size:.6em">جدول</small></div>
+      <div style="color:#6b7280;font-size:.82em;margin-top:4px">🔑 1505 حقل · 🔗 286 FK</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#f8fafc,#e0e7ff);border-right:5px solid #059669;padding:18px;border-radius:12px">
+      <div style="font-size:1.6em;margin-bottom:4px">🎓</div>
+      <h3 style="color:#1e3a8a;font-size:1.05em;margin-bottom:6px">إدارة الطلاب والشؤون الأكاديمية</h3>
+      <div style="color:#f59e0b;font-weight:800;font-size:1.3em">37 <small style="color:#6b7280;font-weight:500;font-size:.6em">جدول</small></div>
+      <div style="color:#6b7280;font-size:.82em;margin-top:4px">🔑 1706 حقل · 🔗 308 FK</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#f8fafc,#e0e7ff);border-right:5px solid #7c3aed;padding:18px;border-radius:12px">
+      <div style="font-size:1.6em;margin-bottom:4px">👥</div>
+      <h3 style="color:#1e3a8a;font-size:1.05em;margin-bottom:6px">إدارة الموظفين والكادر التعليمي</h3>
+      <div style="color:#f59e0b;font-weight:800;font-size:1.3em">24 <small style="color:#6b7280;font-weight:500;font-size:.6em">جدول</small></div>
+      <div style="color:#6b7280;font-size:.82em;margin-top:4px">🔑 1176 حقل · 🔗 192 FK</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#f8fafc,#e0e7ff);border-right:5px solid #d97706;padding:18px;border-radius:12px">
+      <div style="font-size:1.6em;margin-bottom:4px">📦</div>
+      <h3 style="color:#1e3a8a;font-size:1.05em;margin-bottom:6px">إدارة الأصول والمرافق</h3>
+      <div style="color:#f59e0b;font-weight:800;font-size:1.3em">41 <small style="color:#6b7280;font-weight:500;font-size:.6em">جدول</small></div>
+      <div style="color:#6b7280;font-size:.82em;margin-top:4px">🔑 984 حقل · 🔗 233 FK</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#f8fafc,#e0e7ff);border-right:5px solid #dc2626;padding:18px;border-radius:12px">
+      <div style="font-size:1.6em;margin-bottom:4px">💰</div>
+      <h3 style="color:#1e3a8a;font-size:1.05em;margin-bottom:6px">الإدارة المالية</h3>
+      <div style="color:#f59e0b;font-weight:800;font-size:1.3em">8 <small style="color:#6b7280;font-weight:500;font-size:.6em">جدول</small></div>
+      <div style="color:#6b7280;font-size:.82em;margin-top:4px">🔑 231 حقل · 🔗 40 FK</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#f8fafc,#e0e7ff);border-right:5px solid #0891b2;padding:18px;border-radius:12px">
+      <div style="font-size:1.6em;margin-bottom:4px">📊</div>
+      <h3 style="color:#1e3a8a;font-size:1.05em;margin-bottom:6px">إدارة البيانات والإحصاء</h3>
+      <div style="color:#f59e0b;font-weight:800;font-size:1.3em">15 <small style="color:#6b7280;font-weight:500;font-size:.6em">جدول</small></div>
+      <div style="color:#6b7280;font-size:.82em;margin-top:4px">🔑 397 حقل · 🔗 87 FK</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#f8fafc,#e0e7ff);border-right:5px solid #be185d;padding:18px;border-radius:12px">
+      <div style="font-size:1.6em;margin-bottom:4px">🔐</div>
+      <h3 style="color:#1e3a8a;font-size:1.05em;margin-bottom:6px">الأمن والصلاحيات والمستخدمين</h3>
+      <div style="color:#f59e0b;font-weight:800;font-size:1.3em">21 <small style="color:#6b7280;font-weight:500;font-size:.6em">جدول</small></div>
+      <div style="color:#6b7280;font-size:.82em;margin-top:4px">🔑 442 حقل · 🔗 81 FK</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#f8fafc,#e0e7ff);border-right:5px solid #ea580c;padding:18px;border-radius:12px">
+      <div style="font-size:1.6em;margin-bottom:4px">🚨</div>
+      <h3 style="color:#1e3a8a;font-size:1.05em;margin-bottom:6px">إدارة الطوارئ والتميز</h3>
+      <div style="color:#f59e0b;font-weight:800;font-size:1.3em">12 <small style="color:#6b7280;font-weight:500;font-size:.6em">جدول</small></div>
+      <div style="color:#6b7280;font-size:.82em;margin-top:4px">🔑 354 حقل · 🔗 58 FK</div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#fff;border-radius:14px;padding:28px;box-shadow:0 4px 14px rgba(0,0,0,.05)">
+  <h2 style="color:#1e3a8a;font-size:1.5em;margin-bottom:18px;border-bottom:3px solid #f59e0b;padding-bottom:10px">🗂️ أقسام التوثيق</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px">
+
+    <a href="01_dfd.html" style="text-decoration:none;color:inherit">
+      <div style="background:linear-gradient(135deg,#fff,#f0f9ff);border:2px solid #dbeafe;border-radius:14px;padding:22px;transition:all .25s" 
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.12)';this.style.borderColor='#3b82f6'"
+           onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';this.style.borderColor='#dbeafe'">
+        <h3 style="color:#1e3a8a;font-size:1.2em;margin-bottom:10px">🌐 مخططات السياق وتدفق البيانات (DFD)</h3>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+          <span style="background:#1e3a8a;color:#fff;padding:6px 14px;border-radius:20px;font-weight:700">10 مخطط</span>
+          <span style="color:#3b82f6;font-weight:700;font-size:1.1em">فتح ←</span>
+        </div>
+      </div>
+    </a>
+    <a href="02_usecase.html" style="text-decoration:none;color:inherit">
+      <div style="background:linear-gradient(135deg,#fff,#f0f9ff);border:2px solid #dbeafe;border-radius:14px;padding:22px;transition:all .25s" 
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.12)';this.style.borderColor='#3b82f6'"
+           onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';this.style.borderColor='#dbeafe'">
+        <h3 style="color:#1e3a8a;font-size:1.2em;margin-bottom:10px">🎯 مخططات حالات الاستخدام</h3>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+          <span style="background:#1e3a8a;color:#fff;padding:6px 14px;border-radius:20px;font-weight:700">9 مخطط</span>
+          <span style="color:#3b82f6;font-weight:700;font-size:1.1em">فتح ←</span>
+        </div>
+      </div>
+    </a>
+    <a href="03_sequence.html" style="text-decoration:none;color:inherit">
+      <div style="background:linear-gradient(135deg,#fff,#f0f9ff);border:2px solid #dbeafe;border-radius:14px;padding:22px;transition:all .25s" 
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.12)';this.style.borderColor='#3b82f6'"
+           onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';this.style.borderColor='#dbeafe'">
+        <h3 style="color:#1e3a8a;font-size:1.2em;margin-bottom:10px">🔄 مخططات التسلسل (Sequence)</h3>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+          <span style="background:#1e3a8a;color:#fff;padding:6px 14px;border-radius:20px;font-weight:700">23 مخطط</span>
+          <span style="color:#3b82f6;font-weight:700;font-size:1.1em">فتح ←</span>
+        </div>
+      </div>
+    </a>
+    <a href="04_activity.html" style="text-decoration:none;color:inherit">
+      <div style="background:linear-gradient(135deg,#fff,#f0f9ff);border:2px solid #dbeafe;border-radius:14px;padding:22px;transition:all .25s" 
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.12)';this.style.borderColor='#3b82f6'"
+           onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';this.style.borderColor='#dbeafe'">
+        <h3 style="color:#1e3a8a;font-size:1.2em;margin-bottom:10px">⚙️ مخططات النشاط ودورة الحياة</h3>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+          <span style="background:#1e3a8a;color:#fff;padding:6px 14px;border-radius:20px;font-weight:700">17 مخطط</span>
+          <span style="color:#3b82f6;font-weight:700;font-size:1.1em">فتح ←</span>
+        </div>
+      </div>
+    </a>
+    <a href="05_class.html" style="text-decoration:none;color:inherit">
+      <div style="background:linear-gradient(135deg,#fff,#f0f9ff);border:2px solid #dbeafe;border-radius:14px;padding:22px;transition:all .25s" 
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.12)';this.style.borderColor='#3b82f6'"
+           onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';this.style.borderColor='#dbeafe'">
+        <h3 style="color:#1e3a8a;font-size:1.2em;margin-bottom:10px">🧩 مخططات الكلاسات</h3>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+          <span style="background:#1e3a8a;color:#fff;padding:6px 14px;border-radius:20px;font-weight:700">8 مخطط</span>
+          <span style="color:#3b82f6;font-weight:700;font-size:1.1em">فتح ←</span>
+        </div>
+      </div>
+    </a>
+    <a href="06_erd.html" style="text-decoration:none;color:inherit">
+      <div style="background:linear-gradient(135deg,#fff,#f0f9ff);border:2px solid #dbeafe;border-radius:14px;padding:22px;transition:all .25s" 
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.12)';this.style.borderColor='#3b82f6'"
+           onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';this.style.borderColor='#dbeafe'">
+        <h3 style="color:#1e3a8a;font-size:1.2em;margin-bottom:10px">🗄️ مخططات قاعدة البيانات (ERD)</h3>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+          <span style="background:#1e3a8a;color:#fff;padding:6px 14px;border-radius:20px;font-weight:700">53 مخطط</span>
+          <span style="color:#3b82f6;font-weight:700;font-size:1.1em">فتح ←</span>
+        </div>
+      </div>
+    </a>
+    <a href="07_architecture.html" style="text-decoration:none;color:inherit">
+      <div style="background:linear-gradient(135deg,#fff,#f0f9ff);border:2px solid #dbeafe;border-radius:14px;padding:22px;transition:all .25s" 
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.12)';this.style.borderColor='#3b82f6'"
+           onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';this.style.borderColor='#dbeafe'">
+        <h3 style="color:#1e3a8a;font-size:1.2em;margin-bottom:10px">🏗️ مكونات النظام والتوزيع</h3>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+          <span style="background:#1e3a8a;color:#fff;padding:6px 14px;border-radius:20px;font-weight:700">2 مخطط</span>
+          <span style="color:#3b82f6;font-weight:700;font-size:1.1em">فتح ←</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section style="background:#fff;border-radius:14px;padding:28px;margin-top:24px;box-shadow:0 4px 14px rgba(0,0,0,.05)">
+  <h2 style="color:#1e3a8a;font-size:1.5em;margin-bottom:14px;border-bottom:3px solid #f59e0b;padding-bottom:10px">📦 الملفات والمصادر المرفقة</h2>
+  <ul style="padding-right:20px;line-height:2;list-style:none">
+    <li>🌐 <strong>7 ملفات HTML</strong> — قسم لكل نوع من المخططات (تحميل سريع لكل ملف)</li>
+    <li>📊 <strong>مصادر Mermaid (.mmd)</strong> — لكل مخطط (يمكن استخدامها مع Mermaid Live Editor)</li>
+    <li>🌳 <strong>مصادر PlantUML (.puml)</strong> — لكل مخطط (يمكن استخدامها مع PlantText أو IntelliJ)</li>
+    <li>🗄️ <strong>EduMS_Full_Schema.sql</strong> — DDL كامل لقاعدة البيانات (205 جدول)</li>
+    <li>📄 <strong>full_schema.json</strong> — قاعدة بيانات كاملة بالحقول والعلاقات</li>
+  </ul>
+</section>
+
+</div>
+
+<a href="#top" class="back-to-top" title="أعلى">⬆</a>
+<script>
+mermaid.initialize({
+  startOnLoad: true,
+  theme: 'default',
+  maxTextSize: 200000,
+  maxEdges: 2500,
+  themeVariables:{fontFamily:'Cairo, sans-serif',primaryColor:'#dbeafe',primaryTextColor:'#1e3a8a',primaryBorderColor:'#1e3a8a',lineColor:'#475569',secondaryColor:'#fef3c7',tertiaryColor:'#dcfce7'},
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  sequence:{useMaxWidth:true,wrap:true},
+  er:{useMaxWidth:true,layoutDirection:'TB'},
+  class:{useMaxWidth:true},
+  state:{useMaxWidth:true}
+});
+function showCode(btn, id){
+  const card = btn.closest('.diagram-card');
+  card.querySelectorAll('.code-tab').forEach(b => b.classList.remove('active'));
+  card.querySelectorAll('.code-block').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+</script>
+</body></html>

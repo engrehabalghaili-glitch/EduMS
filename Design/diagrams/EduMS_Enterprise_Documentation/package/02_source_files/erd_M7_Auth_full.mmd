@@ -1,0 +1,511 @@
+erDiagram
+    SystemUser {
+        BIGINT userId "PK"
+        BIGINT schoolId "FK"
+        BIGINT officeId "FK"
+        VARCHAR(200) username
+        VARCHAR(200) passwordHash
+        VARCHAR(200) passwordSalt
+        DATE passwordExpiryDate
+        DATE lastPasswordChangeDate
+        BOOLEAN mustChangePassword
+        INT failedAttempts
+        DATE lastFailedAttempt
+        BOOLEAN isLocked
+        VARCHAR(200) lockReason
+        DATE lockExpiryDate
+        BOOLEAN isActive
+        DATE activationDate
+        DATE deactivationDate
+        VARCHAR(200) deactivationReason
+        VARCHAR(200) fullNameAr
+        VARCHAR(200) fullNameEn
+        BIGINT nationalId "FK"
+        VARCHAR(100) email
+        BOOLEAN emailVerified
+        DATE emailVerifiedAt
+        VARCHAR(20) phone
+        BOOLEAN phoneVerified
+        DATE phoneVerifiedAt
+        VARCHAR(50) userType
+        BIGINT employeeId "FK"
+        BIGINT studentId "FK"
+        BIGINT guardianId "FK"
+        BOOLEAN twoFactorEnabled
+        VARCHAR(100) twoFactorMethod
+        VARCHAR(200) twoFactorSecret
+        VARCHAR(50) twoFactorBackupCodes
+        DATE lastLoginDate
+        VARCHAR(200) lastLoginIp
+        VARCHAR(200) lastLoginDevice
+        VARCHAR(200) lastLoginUserAgent
+        DATE previousLoginDate
+        VARCHAR(200) preferredLanguage
+        TIME timezone
+        DATE dateFormat
+        VARCHAR(200) theme
+        VARCHAR(200) profilePicture
+        VARCHAR(200) signatureImage
+        VARCHAR(200) notificationPreferences
+        VARCHAR(200) dashboardLayout
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        DATE deletedAt
+        BOOLEAN isDeleted
+    }
+    UserActivityLog {
+        BIGINT logId "PK"
+        BIGINT userId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(100) activityType
+        DATETIME activityTimestamp
+        VARCHAR(50) status
+        VARCHAR(200) failureReason
+        VARCHAR(200) ipAddress
+        VARCHAR(20) deviceType
+        VARCHAR(200) deviceName
+        VARCHAR(200) operatingSystem
+        VARCHAR(200) browser
+        VARCHAR(200) userAgent
+        VARCHAR(200) location
+        BIGINT sessionId "FK"
+        TEXT actionDetails
+        TEXT notes
+        DATE createdAt
+        BOOLEAN isDeleted
+    }
+    PermissionType {
+        BIGINT typeId "PK"
+        VARCHAR(50) typeCode
+        VARCHAR(50) typeNameAr
+        VARCHAR(50) typeNameEn
+        VARCHAR(50) category
+        VARCHAR(50) scopeType
+        VARCHAR(50) riskLevel
+        BOOLEAN requiresApproval
+        VARCHAR(50) approvalLevel
+        TEXT descriptionAr
+        TEXT descriptionEn
+        BOOLEAN isActive
+        BOOLEAN isSystem
+        VARCHAR(200) sortOrder
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    Permission {
+        BIGINT permissionId "PK"
+        VARCHAR(200) permissionKey
+        VARCHAR(200) module
+        VARCHAR(200) subModule
+        VARCHAR(200) action
+        BIGINT typeId "FK"
+        VARCHAR(200) scope
+        VARCHAR(200) nameAr
+        VARCHAR(200) nameEn
+        TEXT descriptionAr
+        TEXT descriptionEn
+        VARCHAR(50) riskLevel
+        BOOLEAN isSensitive
+        BOOLEAN requiresLogging
+        VARCHAR(200) conditions
+        BOOLEAN isActive
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    Role {
+        BIGINT roleId "PK"
+        VARCHAR(50) roleCode
+        VARCHAR(200) roleNameAr
+        VARCHAR(200) roleNameEn
+        VARCHAR(50) roleType
+        VARCHAR(50) hierarchyLevel
+        BIGINT parentRoleId "FK"
+        BOOLEAN isInheritable
+        BOOLEAN isAssignable
+        BOOLEAN isSystem
+        BOOLEAN isActive
+        TEXT descriptionAr
+        TEXT descriptionEn
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    RolePermission {
+        BIGINT rolePermissionId "PK"
+        BIGINT roleId "FK"
+        BIGINT permissionId "FK"
+        VARCHAR(200) scopeOverride
+        BOOLEAN isInherited
+        BIGINT inheritedFromRoleId "FK"
+        BOOLEAN isActive
+        DATE startDate
+        DATE endDate
+        BIGINT grantedByUserId "FK"
+        VARCHAR(200) grantedAt
+        TEXT notes
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    UserRole {
+        BIGINT userRoleId "PK"
+        BIGINT userId "FK"
+        BIGINT roleId "FK"
+        BIGINT schoolId "FK"
+        BOOLEAN isPrimary
+        VARCHAR(200) scopeContext
+        DATE startDate
+        DATE endDate
+        BOOLEAN isActive
+        BIGINT assignedByUserId "FK"
+        VARCHAR(200) assignedAt
+        TEXT notes
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    GovernanceRBAC {
+        BIGINT governanceId "PK"
+        BIGINT roleId "FK"
+        BIGINT targetRoleId "FK"
+        BIGINT targetPermissionId "FK"
+        VARCHAR(200) action
+        BOOLEAN canDelegate
+        BOOLEAN approvalRequired
+        BIGINT approvalRoleId "FK"
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    UserPermission {
+        BIGINT userPermissionId "PK"
+        BIGINT userId "FK"
+        BIGINT permissionId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) scopeOverride
+        BOOLEAN isActive
+        DATE startDate
+        DATE endDate
+        BIGINT grantedByUserId "FK"
+        VARCHAR(200) grantedAt
+        VARCHAR(200) reason
+        TEXT notes
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AccessPolicy {
+        BIGINT policyId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) policyCode
+        VARCHAR(200) policyNameAr
+        VARCHAR(200) policyNameEn
+        VARCHAR(50) policyType
+        VARCHAR(200) policyRule
+        VARCHAR(200) effect
+        VARCHAR(200) priority
+        VARCHAR(200) appliesTo
+        VARCHAR(200) appliesToIds
+        BOOLEAN isActive
+        DATE validFrom
+        DATE validTo
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    PermissionBase {
+        BIGINT baseId "PK"
+        VARCHAR(50) moduleCode
+        VARCHAR(200) moduleNameAr
+        VARCHAR(200) moduleNameEn
+        VARCHAR(50) sectionCode
+        VARCHAR(200) sectionNameAr
+        VARCHAR(200) sectionNameEn
+        TEXT description
+        VARCHAR(200) defaultPermissions
+        BOOLEAN isActive
+        VARCHAR(200) sortOrder
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    StudentBasePermissions {
+        BIGINT permissionId "PK"
+        BIGINT schoolId "FK"
+        BIGINT roleId "FK"
+        VARCHAR(50) permissionCode
+        VARCHAR(50) category
+        VARCHAR(50) resourceType
+        VARCHAR(200) action
+        VARCHAR(200) scope
+        TEXT descriptionAr
+        TEXT descriptionEn
+        BOOLEAN requiresApproval
+        BOOLEAN requireDocumentation
+        TEXT notes
+        BOOLEAN isActive
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+        VARCHAR(200) STUDENT_VIEW_OWN
+        VARCHAR(200) STUDENT_VIEW_ALL_ADMIN
+        VARCHAR(200) STUDENT_EDIT_BY_ADMIN
+        VARCHAR(200) STUDENT_VIEW_BY_TEACHER
+        VARCHAR(200) DOCUMENT_UPLOAD_BY_STUDENT
+        VARCHAR(200) DOCUMENT_VERIFY_BY_ADMIN
+        VARCHAR(50) ENROLLMENT_STATUS_BY_TOP_MANAGEMENT
+    }
+    StudentAcademicPermissions {
+        BIGINT permissionId "PK"
+        BIGINT schoolId "FK"
+        BIGINT roleId "FK"
+        VARCHAR(50) academicCategory
+        VARCHAR(50) permissionCode
+        VARCHAR(200) action
+        VARCHAR(200) scope
+        TIME timeRestriction
+        BOOLEAN requiresJustification
+        BOOLEAN justificationApprovalRequired
+        TEXT descriptionAr
+        TEXT descriptionEn
+        BOOLEAN isActive
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+        VARCHAR(200) ENROLLMENT_CREATE_BY_STUDENT
+        VARCHAR(200) ENROLLMENT_EDIT_BY_ADMIN
+        VARCHAR(200) ATTENDANCE_RECORD_BY_TEACHER
+        VARCHAR(200) ATTENDANCE_EDIT_BY_ADMIN
+        DECIMAL(5,2) GRADE_CREATE_BY_TEACHER
+        DECIMAL(5,2) GRADE_EDIT_BY_ADMIN
+        DECIMAL(5,2) GRADE_APPROVE_BY_PRINCIPAL
+        TIME TIMETABLE_VIEW_BY_TEACHER
+        TIME TIMETABLE_VIEW_BY_STUDENT
+    }
+    StudentFinancePermissions {
+        BIGINT permissionId "PK"
+        BIGINT schoolId "FK"
+        BIGINT roleId "FK"
+        VARCHAR(50) financeCategory
+        VARCHAR(50) permissionCode
+        VARCHAR(200) action
+        VARCHAR(200) scope
+        BOOLEAN requiresApproval
+        DECIMAL(15,2) maxAmountWithoutApproval
+        TEXT descriptionAr
+        TEXT descriptionEn
+        BOOLEAN isActive
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+        VARCHAR(200) INVOICE_VIEW_BY_GUARDIAN
+        VARCHAR(200) INVOICE_VIEW_BY_FINANCE
+        VARCHAR(200) PAYMENT_COLLECT_BY_CASHIER
+        VARCHAR(200) PAYMENT_REFUND_BY_FINANCE_MANAGER
+        INT DISCOUNT_APPLY_BY_FINANCE
+        VARCHAR(200) EXEMPTION_APPROVE_BY_PRINCIPAL
+        INT ACCOUNT_MANAGE_BY_FINANCE
+    }
+    OfficePermissions {
+        BIGINT permissionId "PK"
+        BIGINT officeId "FK"
+        BIGINT roleId "FK"
+        VARCHAR(50) officeCategory
+        VARCHAR(50) permissionCode
+        VARCHAR(200) action
+        VARCHAR(200) scope
+        VARCHAR(200) applicableSchoolIds
+        BOOLEAN requiresApproval
+        TEXT descriptionAr
+        TEXT descriptionEn
+        BOOLEAN isActive
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+        VARCHAR(200) SCHOOL_SUPERVISE_BY_OFFICE
+        VARCHAR(200) CERTIFICATE_APPROVE_BY_OFFICE
+        VARCHAR(200) CERTIFICATE_REVOKE_BY_OFFICE
+        VARCHAR(200) DATA_VIEW_BY_OFFICE
+    }
+    BehaviorPermissionMatrix {
+        BIGINT matrixId "PK"
+        BIGINT schoolId "FK"
+        BIGINT roleId "FK"
+        BIGINT permissionId "FK"
+        VARCHAR(50) category
+        VARCHAR(50) subCategory
+        VARCHAR(200) permissionKey
+        VARCHAR(200) allowedActions
+        VARCHAR(200) scope
+        BOOLEAN isSensitive
+        BOOLEAN requiresJustification
+        BOOLEAN justificationApprovalRequired
+        TEXT descriptionAr
+        TEXT descriptionEn
+        BOOLEAN isActive
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    BehaviorPermissions {
+        BIGINT permissionId "PK"
+        BIGINT schoolId "FK"
+        BIGINT roleId "FK"
+        VARCHAR(50) behaviorCategory
+        VARCHAR(50) permissionCode
+        VARCHAR(200) action
+        VARCHAR(200) scope
+        BOOLEAN requiresEvidence
+        BOOLEAN isSensitive
+        VARCHAR(200) accessibleBy
+        TEXT descriptionAr
+        TEXT descriptionEn
+        BOOLEAN isActive
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+        VARCHAR(200) BEHAVIOR_RECORD_POSITIVE
+        VARCHAR(200) BEHAVIOR_RECORD_NEGATIVE
+        VARCHAR(200) COMPLAINT_SUBMIT
+        VARCHAR(200) COMPLAINT_ESCALATE
+        VARCHAR(200) GUIDANCE_NOTE_ADD
+        VARCHAR(200) PROGRESS_MONITOR
+    }
+    AuditLog {
+        BIGINT auditId "PK"
+        BIGINT schoolId "FK"
+        BIGINT userId "FK"
+        VARCHAR(200) userRoleAtExecution
+        VARCHAR(200) action
+        VARCHAR(50) entityType
+        BIGINT entityId "FK"
+        VARCHAR(200) oldValue
+        VARCHAR(200) newValue
+        VARCHAR(200) changeSummary
+        VARCHAR(200) tableName
+        VARCHAR(200) fieldName
+        VARCHAR(200) ipAddress
+        VARCHAR(20) deviceType
+        VARCHAR(200) userAgent
+        BIGINT sessionId "FK"
+        VARCHAR(200) accessContext
+        VARCHAR(200) severity
+        DECIMAL(5,2) riskScore
+        BOOLEAN isSuspicious
+        BOOLEAN wasAllowed
+        VARCHAR(200) rejectionReason
+        TEXT notes
+        DATETIME createdAt
+        BOOLEAN isDeleted
+    }
+    StudentPermissionAudit {
+        BIGINT auditId "PK"
+        BIGINT studentId "FK"
+        BIGINT schoolId "FK"
+        BIGINT userId "FK"
+        VARCHAR(200) userRole
+        VARCHAR(200) permissionKey
+        VARCHAR(50) entityType
+        BIGINT entityId "FK"
+        VARCHAR(200) action
+        VARCHAR(200) accessContext
+        BOOLEAN wasAllowed
+        VARCHAR(200) rejectionReason
+        DECIMAL(5,2) riskScore
+        VARCHAR(200) createdAt
+        BOOLEAN isDeleted
+    }
+    RoleMatrix {
+        BIGINT matrixId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) roleCode
+        VARCHAR(200) roleNameAr
+        VARCHAR(200) roleNameEn
+        VARCHAR(50) roleType
+        VARCHAR(200) permissions
+        TEXT descriptionAr
+        TEXT descriptionEn
+        BOOLEAN isActive
+        VARCHAR(200) sortOrder
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    PrivilegeRules {
+        BIGINT ruleId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) ruleCode
+        VARCHAR(200) ruleNameAr
+        VARCHAR(200) ruleNameEn
+        VARCHAR(50) ruleCategory
+        VARCHAR(200) appliesTo
+        VARCHAR(200) appliesToValue
+        VARCHAR(200) condition
+        VARCHAR(200) action
+        VARCHAR(200) actionParameters
+        VARCHAR(200) priority
+        BOOLEAN isActive
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    SystemUser ||--o{ UserActivityLog : "userId"
+    PermissionType ||--o{ Permission : "typeId"
+    Role ||--o{ Role : "parentRoleId"
+    Role ||--o{ RolePermission : "roleId"
+    Permission ||--o{ RolePermission : "permissionId"
+    Role ||--o{ RolePermission : "inheritedFromRoleId"
+    SystemUser ||--o{ RolePermission : "grantedByUserId"
+    SystemUser ||--o{ UserRole : "userId"
+    Role ||--o{ UserRole : "roleId"
+    SystemUser ||--o{ UserRole : "assignedByUserId"
+    Role ||--o{ GovernanceRBAC : "roleId"
+    Role ||--o{ GovernanceRBAC : "targetRoleId"
+    Permission ||--o{ GovernanceRBAC : "targetPermissionId"
+    Role ||--o{ GovernanceRBAC : "approvalRoleId"
+    SystemUser ||--o{ UserPermission : "userId"
+    Permission ||--o{ UserPermission : "permissionId"
+    SystemUser ||--o{ UserPermission : "grantedByUserId"
+    Role ||--o{ StudentBasePermissions : "roleId"
+    Role ||--o{ StudentAcademicPermissions : "roleId"
+    Role ||--o{ StudentFinancePermissions : "roleId"
+    Role ||--o{ OfficePermissions : "roleId"
+    Role ||--o{ BehaviorPermissionMatrix : "roleId"
+    BehaviorPermissions ||--o{ BehaviorPermissionMatrix : "permissionId"
+    Role ||--o{ BehaviorPermissions : "roleId"
+    SystemUser ||--o{ AuditLog : "userId"
+    SystemUser ||--o{ StudentPermissionAudit : "userId"

@@ -1,0 +1,85 @@
+flowchart TB
+    classDef ui fill:#dbeafe,color:#1e3a8a,stroke:#1e3a8a,stroke-width:2px
+    classDef gw fill:#fce7f3,color:#831843,stroke:#831843,stroke-width:2px
+    classDef svc fill:#dcfce7,color:#166534,stroke:#166534,stroke-width:2px
+    classDef db fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d,stroke-width:2px
+    classDef mq fill:#ede9fe,color:#4c1d95,stroke:#4c1d95,stroke-width:2px
+
+    subgraph Clients["💻 طبقة العميل"]
+        WEB[🌐 Web App]:::ui
+        MOB[📱 Mobile App]:::ui
+        PORT[🪟 بوابة ولي الأمر]:::ui
+        TPORT[🪟 بوابة الموظفين]:::ui
+        AdminP[🪟 لوحة الإدارة]:::ui
+    end
+
+    subgraph Gateway["🛡️ البوابة"]
+        GW[API Gateway<br/>+ Rate Limit + JWT]:::gw
+        WAF[WAF + DDoS]:::gw
+    end
+
+    subgraph Services["⚙️ الخدمات"]
+        S1[School Service]:::svc
+        S2[Student Service]:::svc
+        S3[Employee Service]:::svc
+        S4[Asset Service]:::svc
+        S5[Finance Service]:::svc
+        S6[Reporting Service]:::svc
+        S7[Auth Service]:::svc
+        S8[Emergency Service]:::svc
+        NOT[Notification Service]:::svc
+        FILE[File Storage Service]:::svc
+        SEARCH[Search Service]:::svc
+        WORK[Workflow Engine]:::svc
+    end
+
+    subgraph MessageBus["📡 ناقل الرسائل"]
+        MQ[(RabbitMQ / Kafka)]:::mq
+    end
+
+    subgraph Data["💾 البيانات"]
+        DB1[(SchoolDB)]:::db
+        DB2[(StudentDB)]:::db
+        DB3[(EmployeeDB)]:::db
+        DB4[(AssetDB)]:::db
+        DB5[(FinanceDB)]:::db
+        DB6[(ReportingDW)]:::db
+        DB7[(AuthDB + Redis)]:::db
+        DB8[(EmergencyDB)]:::db
+        BLOB[(Blob Storage<br/>Documents)]:::db
+        ES[(ElasticSearch)]:::db
+    end
+
+    subgraph External["🌍 الأنظمة الخارجية"]
+        MIN[وزارة التربية API]:::ext
+        BANK[بوابة الدفع]:::ext
+        SMS[SMS Gateway]:::ext
+        EMAIL[Email Service]:::ext
+        BC[خدمة الباركود]:::ext
+        Bio[نظام البصمة]:::ext
+    end
+
+    WEB & MOB & PORT & TPORT & AdminP --> WAF
+    WAF --> GW
+    GW --> S1 & S2 & S3 & S4 & S5 & S6 & S7 & S8
+    S1 --> DB1
+    S2 --> DB2
+    S3 --> DB3
+    S4 --> DB4
+    S5 --> DB5
+    S6 --> DB6
+    S7 --> DB7
+    S8 --> DB8
+    S1 & S2 & S3 & S4 -.events.-> MQ
+    MQ -.->  S6
+    MQ -.-> NOT
+    MQ -.-> SEARCH
+    SEARCH --> ES
+    S1 & S2 & S3 & S4 --> BLOB
+    NOT --> SMS & EMAIL
+    S5 --> BANK
+    S6 --> MIN
+    S4 --> BC
+    S3 --> Bio
+    WORK <--> S1 & S2 & S3 & S5

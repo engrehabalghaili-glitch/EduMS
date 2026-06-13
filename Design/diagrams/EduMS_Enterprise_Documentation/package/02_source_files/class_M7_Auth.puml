@@ -1,0 +1,682 @@
+@startuml M7_Auth_class
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #DBEAFE
+  BorderColor #1E3A8A
+}
+
+class SystemUser {
+  + {static} userId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + officeId : BIGINT <<FK>>
+  + username : VARCHAR(200)
+  + passwordHash : VARCHAR(200)
+  + passwordSalt : VARCHAR(200)
+  + passwordExpiryDate : DATE
+  + lastPasswordChangeDate : DATE
+  + mustChangePassword : BOOLEAN
+  + failedAttempts : INT
+  + lastFailedAttempt : DATE
+  + isLocked : BOOLEAN
+  + lockReason : VARCHAR(200)
+  + lockExpiryDate : DATE
+  + isActive : BOOLEAN
+  + activationDate : DATE
+  + deactivationDate : DATE
+  + deactivationReason : VARCHAR(200)
+  + fullNameAr : VARCHAR(200)
+  + fullNameEn : VARCHAR(200)
+  + nationalId : BIGINT <<FK>>
+  + email : VARCHAR(100)
+  + emailVerified : BOOLEAN
+  + emailVerifiedAt : DATE
+  + phone : VARCHAR(20)
+  + phoneVerified : BOOLEAN
+  + phoneVerifiedAt : DATE
+  + userType : VARCHAR(50)
+  + employeeId : BIGINT <<FK>>
+  + studentId : BIGINT <<FK>>
+  + guardianId : BIGINT <<FK>>
+  + twoFactorEnabled : BOOLEAN
+  + twoFactorMethod : VARCHAR(100)
+  + twoFactorSecret : VARCHAR(200)
+  + twoFactorBackupCodes : VARCHAR(50)
+  + lastLoginDate : DATE
+  + lastLoginIp : VARCHAR(200)
+  + lastLoginDevice : VARCHAR(200)
+  + lastLoginUserAgent : VARCHAR(200)
+  + previousLoginDate : DATE
+  + preferredLanguage : VARCHAR(200)
+  + timezone : TIME
+  + dateFormat : DATE
+  + theme : VARCHAR(200)
+  + profilePicture : VARCHAR(200)
+  + signatureImage : VARCHAR(200)
+  + notificationPreferences : VARCHAR(200)
+  + dashboardLayout : VARCHAR(200)
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + deletedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+}
+class UserActivityLog {
+  + {static} logId : BIGINT <<PK>>
+  + userId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + activityType : VARCHAR(100)
+  + activityTimestamp : DATETIME
+  + status : VARCHAR(50)
+  + failureReason : VARCHAR(200)
+  + ipAddress : VARCHAR(200)
+  + deviceType : VARCHAR(20)
+  + deviceName : VARCHAR(200)
+  + operatingSystem : VARCHAR(200)
+  + browser : VARCHAR(200)
+  + userAgent : VARCHAR(200)
+  + location : VARCHAR(200)
+  + sessionId : BIGINT <<FK>>
+  + actionDetails : TEXT
+  + notes : TEXT
+  + createdAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + record(event)
+  + query(filters)
+}
+class PermissionType {
+  + {static} typeId : BIGINT <<PK>>
+  + typeCode : VARCHAR(50)
+  + typeNameAr : VARCHAR(50)
+  + typeNameEn : VARCHAR(50)
+  + category : VARCHAR(50)
+  + scopeType : VARCHAR(50)
+  + riskLevel : VARCHAR(50)
+  + requiresApproval : BOOLEAN
+  + approvalLevel : VARCHAR(50)
+  + descriptionAr : TEXT
+  + descriptionEn : TEXT
+  + isActive : BOOLEAN
+  + isSystem : BOOLEAN
+  + sortOrder : VARCHAR(200)
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + approve()
+  + reject(reason)
+  + grant(user)
+  + revoke(user)
+}
+class Permission {
+  + {static} permissionId : BIGINT <<PK>>
+  + permissionKey : VARCHAR(200)
+  + module : VARCHAR(200)
+  + subModule : VARCHAR(200)
+  + action : VARCHAR(200)
+  + typeId : BIGINT <<FK>>
+  + scope : VARCHAR(200)
+  + nameAr : VARCHAR(200)
+  + nameEn : VARCHAR(200)
+  + descriptionAr : TEXT
+  + descriptionEn : TEXT
+  + riskLevel : VARCHAR(50)
+  + isSensitive : BOOLEAN
+  + requiresLogging : BOOLEAN
+  + conditions : VARCHAR(200)
+  + isActive : BOOLEAN
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + grant(user)
+  + revoke(user)
+  + check(action, resource)
+}
+class Role {
+  + {static} roleId : BIGINT <<PK>>
+  + roleCode : VARCHAR(50)
+  + roleNameAr : VARCHAR(200)
+  + roleNameEn : VARCHAR(200)
+  + roleType : VARCHAR(50)
+  + hierarchyLevel : VARCHAR(50)
+  + parentRoleId : BIGINT <<FK>>
+  + isInheritable : BOOLEAN
+  + isAssignable : BOOLEAN
+  + isSystem : BOOLEAN
+  + isActive : BOOLEAN
+  + descriptionAr : TEXT
+  + descriptionEn : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + grant(user)
+  + revoke(user)
+  + check(action, resource)
+}
+class RolePermission {
+  + {static} rolePermissionId : BIGINT <<PK>>
+  + roleId : BIGINT <<FK>>
+  + permissionId : BIGINT <<FK>>
+  + scopeOverride : VARCHAR(200)
+  + isInherited : BOOLEAN
+  + inheritedFromRoleId : BIGINT <<FK>>
+  + isActive : BOOLEAN
+  + startDate : DATE
+  + endDate : DATE
+  + grantedByUserId : BIGINT <<FK>>
+  + grantedAt : VARCHAR(200)
+  + notes : TEXT
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + grant(user)
+  + revoke(user)
+  + check(action, resource)
+}
+class UserRole {
+  + {static} userRoleId : BIGINT <<PK>>
+  + userId : BIGINT <<FK>>
+  + roleId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + isPrimary : BOOLEAN
+  + scopeContext : VARCHAR(200)
+  + startDate : DATE
+  + endDate : DATE
+  + isActive : BOOLEAN
+  + assignedByUserId : BIGINT <<FK>>
+  + assignedAt : VARCHAR(200)
+  + notes : TEXT
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + grant(user)
+  + revoke(user)
+  + check(action, resource)
+}
+class GovernanceRBAC {
+  + {static} governanceId : BIGINT <<PK>>
+  + roleId : BIGINT <<FK>>
+  + targetRoleId : BIGINT <<FK>>
+  + targetPermissionId : BIGINT <<FK>>
+  + action : VARCHAR(200)
+  + canDelegate : BOOLEAN
+  + approvalRequired : BOOLEAN
+  + approvalRoleId : BIGINT <<FK>>
+  + notes : TEXT
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + approve()
+  + reject(reason)
+}
+class UserPermission {
+  + {static} userPermissionId : BIGINT <<PK>>
+  + userId : BIGINT <<FK>>
+  + permissionId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + scopeOverride : VARCHAR(200)
+  + isActive : BOOLEAN
+  + startDate : DATE
+  + endDate : DATE
+  + grantedByUserId : BIGINT <<FK>>
+  + grantedAt : VARCHAR(200)
+  + reason : VARCHAR(200)
+  + notes : TEXT
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + grant(user)
+  + revoke(user)
+  + check(action, resource)
+}
+class AccessPolicy {
+  + {static} policyId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + policyCode : VARCHAR(50)
+  + policyNameAr : VARCHAR(200)
+  + policyNameEn : VARCHAR(200)
+  + policyType : VARCHAR(50)
+  + policyRule : VARCHAR(200)
+  + effect : VARCHAR(200)
+  + priority : VARCHAR(200)
+  + appliesTo : VARCHAR(200)
+  + appliesToIds : VARCHAR(200)
+  + isActive : BOOLEAN
+  + validFrom : DATE
+  + validTo : DATE
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+}
+class PermissionBase {
+  + {static} baseId : BIGINT <<PK>>
+  + moduleCode : VARCHAR(50)
+  + moduleNameAr : VARCHAR(200)
+  + moduleNameEn : VARCHAR(200)
+  + sectionCode : VARCHAR(50)
+  + sectionNameAr : VARCHAR(200)
+  + sectionNameEn : VARCHAR(200)
+  + description : TEXT
+  + defaultPermissions : VARCHAR(200)
+  + isActive : BOOLEAN
+  + sortOrder : VARCHAR(200)
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + grant(user)
+  + revoke(user)
+  + check(action, resource)
+}
+class StudentBasePermissions {
+  + {static} permissionId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + roleId : BIGINT <<FK>>
+  + permissionCode : VARCHAR(50)
+  + category : VARCHAR(50)
+  + resourceType : VARCHAR(50)
+  + action : VARCHAR(200)
+  + scope : VARCHAR(200)
+  + descriptionAr : TEXT
+  + descriptionEn : TEXT
+  + requiresApproval : BOOLEAN
+  + requireDocumentation : BOOLEAN
+  + notes : TEXT
+  + isActive : BOOLEAN
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  + STUDENT_VIEW_OWN : VARCHAR(200)
+  + STUDENT_VIEW_ALL_ADMIN : VARCHAR(200)
+  + STUDENT_EDIT_BY_ADMIN : VARCHAR(200)
+  + STUDENT_VIEW_BY_TEACHER : VARCHAR(200)
+  + DOCUMENT_UPLOAD_BY_STUDENT : VARCHAR(200)
+  + DOCUMENT_VERIFY_BY_ADMIN : VARCHAR(200)
+  + ENROLLMENT_STATUS_BY_TOP_MANAGEMENT : VARCHAR(50)
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + changeStatus(newStatus)
+  + approve()
+  + reject(reason)
+  + grant(user)
+}
+class StudentAcademicPermissions {
+  + {static} permissionId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + roleId : BIGINT <<FK>>
+  + academicCategory : VARCHAR(50)
+  + permissionCode : VARCHAR(50)
+  + action : VARCHAR(200)
+  + scope : VARCHAR(200)
+  + timeRestriction : TIME
+  + requiresJustification : BOOLEAN
+  + justificationApprovalRequired : BOOLEAN
+  + descriptionAr : TEXT
+  + descriptionEn : TEXT
+  + isActive : BOOLEAN
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  + ENROLLMENT_CREATE_BY_STUDENT : VARCHAR(200)
+  + ENROLLMENT_EDIT_BY_ADMIN : VARCHAR(200)
+  + ATTENDANCE_RECORD_BY_TEACHER : VARCHAR(200)
+  + ATTENDANCE_EDIT_BY_ADMIN : VARCHAR(200)
+  + GRADE_CREATE_BY_TEACHER : DECIMAL(5,2)
+  + GRADE_EDIT_BY_ADMIN : DECIMAL(5,2)
+  + GRADE_APPROVE_BY_PRINCIPAL : DECIMAL(5,2)
+  + TIMETABLE_VIEW_BY_TEACHER : TIME
+  + TIMETABLE_VIEW_BY_STUDENT : TIME
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + approve()
+  + reject(reason)
+  + grant(user)
+  + revoke(user)
+}
+class StudentFinancePermissions {
+  + {static} permissionId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + roleId : BIGINT <<FK>>
+  + financeCategory : VARCHAR(50)
+  + permissionCode : VARCHAR(50)
+  + action : VARCHAR(200)
+  + scope : VARCHAR(200)
+  + requiresApproval : BOOLEAN
+  + maxAmountWithoutApproval : DECIMAL(15,2)
+  + descriptionAr : TEXT
+  + descriptionEn : TEXT
+  + isActive : BOOLEAN
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  + INVOICE_VIEW_BY_GUARDIAN : VARCHAR(200)
+  + INVOICE_VIEW_BY_FINANCE : VARCHAR(200)
+  + PAYMENT_COLLECT_BY_CASHIER : VARCHAR(200)
+  + PAYMENT_REFUND_BY_FINANCE_MANAGER : VARCHAR(200)
+  + DISCOUNT_APPLY_BY_FINANCE : INT
+  + EXEMPTION_APPROVE_BY_PRINCIPAL : VARCHAR(200)
+  + ACCOUNT_MANAGE_BY_FINANCE : INT
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + approve()
+  + reject(reason)
+  + grant(user)
+  + revoke(user)
+}
+class OfficePermissions {
+  + {static} permissionId : BIGINT <<PK>>
+  + officeId : BIGINT <<FK>>
+  + roleId : BIGINT <<FK>>
+  + officeCategory : VARCHAR(50)
+  + permissionCode : VARCHAR(50)
+  + action : VARCHAR(200)
+  + scope : VARCHAR(200)
+  + applicableSchoolIds : VARCHAR(200)
+  + requiresApproval : BOOLEAN
+  + descriptionAr : TEXT
+  + descriptionEn : TEXT
+  + isActive : BOOLEAN
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  + SCHOOL_SUPERVISE_BY_OFFICE : VARCHAR(200)
+  + CERTIFICATE_APPROVE_BY_OFFICE : VARCHAR(200)
+  + CERTIFICATE_REVOKE_BY_OFFICE : VARCHAR(200)
+  + DATA_VIEW_BY_OFFICE : VARCHAR(200)
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + approve()
+  + reject(reason)
+  + grant(user)
+  + revoke(user)
+}
+class BehaviorPermissionMatrix {
+  + {static} matrixId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + roleId : BIGINT <<FK>>
+  + permissionId : BIGINT <<FK>>
+  + category : VARCHAR(50)
+  + subCategory : VARCHAR(50)
+  + permissionKey : VARCHAR(200)
+  + allowedActions : VARCHAR(200)
+  + scope : VARCHAR(200)
+  + isSensitive : BOOLEAN
+  + requiresJustification : BOOLEAN
+  + justificationApprovalRequired : BOOLEAN
+  + descriptionAr : TEXT
+  + descriptionEn : TEXT
+  + isActive : BOOLEAN
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + approve()
+  + reject(reason)
+  + grant(user)
+  + revoke(user)
+}
+class BehaviorPermissions {
+  + {static} permissionId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + roleId : BIGINT <<FK>>
+  + behaviorCategory : VARCHAR(50)
+  + permissionCode : VARCHAR(50)
+  + action : VARCHAR(200)
+  + scope : VARCHAR(200)
+  + requiresEvidence : BOOLEAN
+  + isSensitive : BOOLEAN
+  + accessibleBy : VARCHAR(200)
+  + descriptionAr : TEXT
+  + descriptionEn : TEXT
+  + isActive : BOOLEAN
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  + BEHAVIOR_RECORD_POSITIVE : VARCHAR(200)
+  + BEHAVIOR_RECORD_NEGATIVE : VARCHAR(200)
+  + COMPLAINT_SUBMIT : VARCHAR(200)
+  + COMPLAINT_ESCALATE : VARCHAR(200)
+  + GUIDANCE_NOTE_ADD : VARCHAR(200)
+  + PROGRESS_MONITOR : VARCHAR(200)
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + grant(user)
+  + revoke(user)
+  + check(action, resource)
+}
+class AuditLog {
+  + {static} auditId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + userId : BIGINT <<FK>>
+  + userRoleAtExecution : VARCHAR(200)
+  + action : VARCHAR(200)
+  + entityType : VARCHAR(50)
+  + entityId : BIGINT <<FK>>
+  + oldValue : VARCHAR(200)
+  + newValue : VARCHAR(200)
+  + changeSummary : VARCHAR(200)
+  + tableName : VARCHAR(200)
+  + fieldName : VARCHAR(200)
+  + ipAddress : VARCHAR(200)
+  + deviceType : VARCHAR(20)
+  + userAgent : VARCHAR(200)
+  + sessionId : BIGINT <<FK>>
+  + accessContext : VARCHAR(200)
+  + severity : VARCHAR(200)
+  + riskScore : DECIMAL(5,2)
+  + isSuspicious : BOOLEAN
+  + wasAllowed : BOOLEAN
+  + rejectionReason : VARCHAR(200)
+  + notes : TEXT
+  + createdAt : DATETIME
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + record(event)
+  + query(filters)
+}
+class StudentPermissionAudit {
+  + {static} auditId : BIGINT <<PK>>
+  + studentId : BIGINT <<FK>>
+  + schoolId : BIGINT <<FK>>
+  + userId : BIGINT <<FK>>
+  + userRole : VARCHAR(200)
+  + permissionKey : VARCHAR(200)
+  + entityType : VARCHAR(50)
+  + entityId : BIGINT <<FK>>
+  + action : VARCHAR(200)
+  + accessContext : VARCHAR(200)
+  + wasAllowed : BOOLEAN
+  + rejectionReason : VARCHAR(200)
+  + riskScore : DECIMAL(5,2)
+  + createdAt : VARCHAR(200)
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + grant(user)
+  + revoke(user)
+  + check(action, resource)
+  + record(event)
+}
+class RoleMatrix {
+  + {static} matrixId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + roleCode : VARCHAR(50)
+  + roleNameAr : VARCHAR(200)
+  + roleNameEn : VARCHAR(200)
+  + roleType : VARCHAR(50)
+  + permissions : VARCHAR(200)
+  + descriptionAr : TEXT
+  + descriptionEn : TEXT
+  + isActive : BOOLEAN
+  + sortOrder : VARCHAR(200)
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+  + grant(user)
+  + revoke(user)
+  + check(action, resource)
+}
+class PrivilegeRules {
+  + {static} ruleId : BIGINT <<PK>>
+  + schoolId : BIGINT <<FK>>
+  + ruleCode : VARCHAR(50)
+  + ruleNameAr : VARCHAR(200)
+  + ruleNameEn : VARCHAR(200)
+  + ruleCategory : VARCHAR(50)
+  + appliesTo : VARCHAR(200)
+  + appliesToValue : VARCHAR(200)
+  + condition : VARCHAR(200)
+  + action : VARCHAR(200)
+  + actionParameters : VARCHAR(200)
+  + priority : VARCHAR(200)
+  + isActive : BOOLEAN
+  + createdByUserId : BIGINT <<FK>>
+  + updatedByUserId : BIGINT <<FK>>
+  + createdAt : DATE
+  + updatedAt : DATE
+  + isDeleted : BOOLEAN
+  --
+  + create()
+  + update()
+  + delete()
+  + findById(id)
+}
+SystemUser "1" o-- "*" UserActivityLog : userId
+PermissionType "1" o-- "*" Permission : typeId
+Role "1" o-- "*" Role : parentRoleId
+Role "1" o-- "*" RolePermission : roleId
+Permission "1" o-- "*" RolePermission : permissionId
+Role "1" o-- "*" RolePermission : inheritedFromRoleId
+SystemUser "1" o-- "*" RolePermission : grantedByUserId
+SystemUser "1" o-- "*" UserRole : userId
+Role "1" o-- "*" UserRole : roleId
+SystemUser "1" o-- "*" UserRole : assignedByUserId
+Role "1" o-- "*" GovernanceRBAC : roleId
+Role "1" o-- "*" GovernanceRBAC : targetRoleId
+Permission "1" o-- "*" GovernanceRBAC : targetPermissionId
+Role "1" o-- "*" GovernanceRBAC : approvalRoleId
+SystemUser "1" o-- "*" UserPermission : userId
+Permission "1" o-- "*" UserPermission : permissionId
+SystemUser "1" o-- "*" UserPermission : grantedByUserId
+Role "1" o-- "*" StudentBasePermissions : roleId
+Role "1" o-- "*" StudentAcademicPermissions : roleId
+Role "1" o-- "*" StudentFinancePermissions : roleId
+Role "1" o-- "*" OfficePermissions : roleId
+Role "1" o-- "*" BehaviorPermissionMatrix : roleId
+BehaviorPermissions "1" o-- "*" BehaviorPermissionMatrix : permissionId
+Role "1" o-- "*" BehaviorPermissions : roleId
+SystemUser "1" o-- "*" AuditLog : userId
+SystemUser "1" o-- "*" StudentPermissionAudit : userId
+@enduml

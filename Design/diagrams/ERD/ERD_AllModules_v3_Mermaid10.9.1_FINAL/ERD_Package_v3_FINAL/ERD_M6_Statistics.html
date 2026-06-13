@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERD - إدارة البيانات والإحصاء</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<style>
+*{box-sizing:border-box}
+body{font-family:'Cairo',sans-serif;background:#f8fafc;margin:0;padding:24px;color:#1f2937}
+.container{max-width:1500px;margin:0 auto}
+.header{background:linear-gradient(135deg,#7C3AED,#7C3AEDdd);color:#fff;padding:32px;border-radius:16px;margin-bottom:20px;box-shadow:0 8px 24px #7C3AED33}
+.header h1{margin:0 0 8px;font-size:28px;font-weight:900;display:flex;align-items:center;gap:12px}
+.header .subtitle{opacity:.92;font-size:15px;line-height:1.7}
+.header .badges{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+.badge{background:rgba(255,255,255,.2);padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;backdrop-filter:blur(10px)}
+.compliance{background:#D1FAE5;border-right:4px solid #10B981;padding:14px 18px;border-radius:10px;margin-bottom:16px;font-size:13px;color:#065F46;line-height:1.8}
+.compliance strong{color:#064E3B}
+.compliance code{background:#fff;padding:2px 8px;border-radius:4px;font-family:'Fira Code',monospace;font-size:12px}
+.nav-back{display:inline-block;color:#1E3A8A;text-decoration:none;font-weight:700;margin-bottom:12px;font-size:14px}
+.nav-back:hover{text-decoration:underline}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:14px 0}
+.info-card{background:#fff;border-right:4px solid #7C3AED;padding:14px 18px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.info-card .label{font-size:12px;color:#64748b;font-weight:600}
+.info-card .value{font-size:22px;color:#1E3A8A;font-weight:900;margin-top:4px}
+.toolbar{background:#fff;padding:14px 20px;border-radius:12px;margin-bottom:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.toolbar .group{display:flex;gap:6px;padding:4px;background:#F1F5F9;border-radius:10px}
+.toolbar .group button{background:transparent;border:none;padding:8px 14px;font-family:inherit;font-weight:600;font-size:13px;border-radius:6px;cursor:pointer;color:#475569}
+.toolbar .group button.active{background:#1E3A8A;color:#fff}
+.btn{background:#1E3A8A;color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;transition:all .2s}
+.btn:hover{background:#172554;transform:translateY(-1px)}
+.btn.outline{background:#fff;color:#1E3A8A;border:1.5px solid #1E3A8A}
+.btn.outline:hover{background:#EFF6FF}
+.diagram-card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 4px 20px rgba(0,0,0,.06);overflow:auto;min-height:400px}
+.diagram-card .mermaid{background:#fff;text-align:center}
+.view-pane{display:none}
+.view-pane.active{display:block}
+details{margin-top:18px}
+details summary{cursor:pointer;font-weight:700;color:#1E3A8A;padding:12px 16px;background:#EFF6FF;border-radius:10px;font-size:14px}
+pre.source-code{background:#0f172a;color:#e2e8f0;padding:18px;border-radius:8px;overflow-x:auto;font-family:'Fira Code',monospace;font-size:12px;line-height:1.6;max-height:520px;direction:ltr;text-align:left;margin-top:10px}
+.footer{text-align:center;padding:24px;color:#64748b;font-size:13px}
+.notice-slim{background:#FEF3C7;border-right:4px solid #D4AF37;padding:12px 16px;border-radius:8px;margin-bottom:14px;font-size:13px;color:#78350F}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a class="nav-back" href="index.html">← العودة لفهرس مخططات الأقسام</a>
+
+  <div class="header">
+    <h1>📊 ERD — إدارة البيانات والإحصاء</h1>
+    <div class="subtitle">القسم السادس — البيانات المرفوعة والتقارير والمقارنات وأرشيف الإحصائيات</div>
+    <div class="badges">
+      <span class="badge">📁 M6_Statistics</span>
+      <span class="badge">🗃️ 15 كيان</span>
+      <span class="badge">📊 397 حقل كامل</span>
+      <span class="badge">🔑 66 PK+FK</span>
+      <span class="badge">🔗 6 علاقة</span>
+      <span class="badge">✅ Mermaid 10.9.1</span>
+    </div>
+  </div>
+
+  <div class="compliance">
+    <strong>✔ متوافق مع Mermaid 10.9.1:</strong>
+    جميع الأسماء البرمجية ASCII فقط (مثال: <code>StudentAccount</code>) — كل النصوص العربية موضوعة داخل علامات تنصيص آمنة كتعليقات.
+    <br>كل قسم في مخطط <strong>مستقل تماماً</strong> دون دمج مع أقسام أخرى.
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card"><div class="label">عدد الجداول</div><div class="value">15</div></div>
+    <div class="info-card"><div class="label">الحقول الكلية</div><div class="value">397</div></div>
+    <div class="info-card"><div class="label">PK + FK فقط</div><div class="value">66</div></div>
+    <div class="info-card"><div class="label">العلاقات</div><div class="value">6</div></div>
+    <div class="info-card"><div class="label">المستوى</div><div class="value" style="font-size:14px">Module-Level</div></div>
+  </div>
+
+  <div class="toolbar">
+    <div class="group" role="tablist">
+      <button id="tab-slim" class="active" onclick="switchView('slim')">🔑 عرض مبسّط (PK + FK)</button>
+      <button id="tab-full" onclick="switchView('full')">📊 عرض كامل (جميع الحقول)</button>
+    </div>
+    <div style="flex:1"></div>
+    <button class="btn outline" onclick="copySource()">📋 نسخ كود Mermaid</button>
+    <button class="btn outline" onclick="downloadSource()">⬇ تنزيل .mmd</button>
+    <button class="btn outline" onclick="downloadSvg()">🖼 تنزيل SVG</button>
+  </div>
+
+  <div id="pane-slim" class="view-pane active">
+    <div class="notice-slim">
+      💡 <strong>العرض المبسّط</strong> — يُظهر فقط مفاتيح الجداول (PK) والمفاتيح الخارجية (FK)، مثالي لفهم العلاقات بسرعة. للحقول الكاملة، انقر على "عرض كامل".
+    </div>
+    <div class="diagram-card">
+      <div class="mermaid" id="diagram-slim">
+erDiagram
+    %% =====================================================
+    %% M6_Statistics - ERD
+    %% Mermaid 10.9.1 Compliant - SLIM VIEW (PK + FK only)
+    %% =====================================================
+
+    DashboardConfiguration {
+        INT configId PK "إعدادات لوحات المؤشرات"
+        INT schoolId "معرف المدرسة FK School.schoolId - يمكن أن يكون NULL للإعدادات العام..."
+    }
+
+    KPI_Metrics {
+        INT metricId PK "المؤشرات التشغيلية"
+        INT configId FK "معرف إعداد المؤشر FK DashboardConfiguration.configId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT calculatedByUserId "معرف من قام بالحساب FK SystemUser.userId"
+        INT verifiedByUserId "معرف من تحقق FK SystemUser.userId"
+    }
+
+    TrendAnalysisResult {
+        INT analysisId PK "نتائج تحليل الاتجاهات"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR kpiCode "كود المؤشر من DashboardConfiguration FK DashboardConfiguration.kpiC..."
+        INT analyzedByUserId "معرف من قام بالتحليل FK SystemUser.userId - غالباً النظام آلياً"
+        INT approvedByUserId "معرف من اعتمد التحليل FK SystemUser.userId"
+    }
+
+    SchoolStatisticsDraft {
+        INT draftId PK "مسودات الإحصائية المدرسية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId - اختياري"
+    }
+
+    SubmittedStatistics {
+        INT submissionId PK "الإحصائيات المرفوعة"
+        INT draftId FK "معرف المسودة المصدر FK SchoolStatisticsDraft.draftId - علاقة 1-1"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT submittedByUserId "معرف من قام بالرفع FK SystemUser.userId"
+        INT reviewedByUserId "معرف مراجع المكتب FK SystemUser.userId - من القسم الأول Office"
+    }
+
+    StatisticsUpdateHistory {
+        INT historyId PK "سجل تحديثات الإحصاء"
+        INT draftId FK "معرف المسودة المتأثرة FK SchoolStatisticsDraft.draftId - اختياري"
+        INT submissionId FK "معرف الإحصاء المرفوع المتأثر FK SubmittedStatistics.submissionId - ..."
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT changedByUserId "معرف من قام بالتعديل FK SystemUser.userId"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+    }
+
+    StatisticsArchive {
+        INT archiveId PK "أرشيف الإحصائيات التاريخية"
+        INT submissionId FK "معرف الإحصاء المرفوع المصدر FK SubmittedStatistics.submissionId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT archivedByUserId "معرف من قام بالأرشفة FK SystemUser.userId"
+    }
+
+    SystemReports {
+        INT reportId PK "سجل التقارير الدورية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT generatedByUserId "معرف من قام بالتوليد إذا يدوياً FK SystemUser.userId"
+    }
+
+    ReportApprovals {
+        INT approvalId PK "اعتمادات التقارير"
+        INT reportId FK "معرف التقرير المراد اعتماده FK SystemReports.reportId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT submittedByUserId "معرف من رفع التقرير FK SystemUser.userId"
+        INT reviewerId "معرف المراجع FK SystemUser.userId - اختياري"
+        INT approvedByUserId "معرف المعتمد FK SystemUser.userId"
+    }
+
+    ComparativeReport {
+        INT comparativeId PK "التقارير المقارنة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT generatedByUserId "معرف من قام بالتوليد FK SystemUser.userId"
+    }
+
+    FinancialSummaryReports {
+        INT summaryId PK "تقارير القيمة المالية المجمعة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+    }
+
+    ExternalComplianceReports {
+        INT reportId PK "تقارير الامتثال والرفع الخارجي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT generatedByUserId "معرف من أنشأ التقرير FK SystemUser.userId"
+    }
+
+    GapAnalysisReports {
+        INT analysisId PK "تحليلات الفجوة والاحتياج"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetCategoryId "معرف فئة الأصول FK AssetCategory.categoryId - إذا كان التحليل لأصول"
+        INT gradeLevelId "معرف الصف FK GradeCapacity.gradeLevelId - إذا كان التحليل لصف معين"
+        INT departmentId "معرف القسم FK SchoolDepartment.deptId - إذا كان التحليل لقسم"
+        INT analyzedByUserId "معرف من قام بالتحليل FK SystemUser.userId"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+    }
+
+    ReportsArchive {
+        INT archiveId PK "أرشفة التقارير"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT archivedByUserId "معرف من قام بالأرشفة FK SystemUser.userId"
+    }
+
+    ExceptionalStatistics {
+        INT statisticsId PK "الإحصائيات الاستثنائية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT generatedByUserId "معرف من أنشأ الإحصاء FK SystemUser.userId"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+    }
+
+    %% ===== Relationships =====
+    DashboardConfiguration ||--o{ KPI_Metrics : "معرف إعداد المؤشر FK Dash"
+    SchoolStatisticsDraft ||--o{ SubmittedStatistics : "معرف المسودة المصدر FK Sc"
+    SchoolStatisticsDraft ||--o{ StatisticsUpdateHistory : "معرف المسودة المتأثرة FK "
+    SubmittedStatistics ||--o{ StatisticsUpdateHistory : "معرف الإحصاء المرفوع المت"
+    SubmittedStatistics ||--o{ StatisticsArchive : "معرف الإحصاء المرفوع المص"
+    SystemReports ||--o{ ReportApprovals : "معرف التقرير المراد اعتما"
+      </div>
+    </div>
+    <details>
+      <summary>📝 كود Mermaid المصدر (Slim)</summary>
+      <pre class="source-code" id="src-slim">erDiagram
+    %% =====================================================
+    %% M6_Statistics - ERD
+    %% Mermaid 10.9.1 Compliant - SLIM VIEW (PK + FK only)
+    %% =====================================================
+
+    DashboardConfiguration {
+        INT configId PK "إعدادات لوحات المؤشرات"
+        INT schoolId "معرف المدرسة FK School.schoolId - يمكن أن يكون NULL للإعدادات العام..."
+    }
+
+    KPI_Metrics {
+        INT metricId PK "المؤشرات التشغيلية"
+        INT configId FK "معرف إعداد المؤشر FK DashboardConfiguration.configId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT calculatedByUserId "معرف من قام بالحساب FK SystemUser.userId"
+        INT verifiedByUserId "معرف من تحقق FK SystemUser.userId"
+    }
+
+    TrendAnalysisResult {
+        INT analysisId PK "نتائج تحليل الاتجاهات"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR kpiCode "كود المؤشر من DashboardConfiguration FK DashboardConfiguration.kpiC..."
+        INT analyzedByUserId "معرف من قام بالتحليل FK SystemUser.userId - غالباً النظام آلياً"
+        INT approvedByUserId "معرف من اعتمد التحليل FK SystemUser.userId"
+    }
+
+    SchoolStatisticsDraft {
+        INT draftId PK "مسودات الإحصائية المدرسية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId - اختياري"
+    }
+
+    SubmittedStatistics {
+        INT submissionId PK "الإحصائيات المرفوعة"
+        INT draftId FK "معرف المسودة المصدر FK SchoolStatisticsDraft.draftId - علاقة 1-1"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT submittedByUserId "معرف من قام بالرفع FK SystemUser.userId"
+        INT reviewedByUserId "معرف مراجع المكتب FK SystemUser.userId - من القسم الأول Office"
+    }
+
+    StatisticsUpdateHistory {
+        INT historyId PK "سجل تحديثات الإحصاء"
+        INT draftId FK "معرف المسودة المتأثرة FK SchoolStatisticsDraft.draftId - اختياري"
+        INT submissionId FK "معرف الإحصاء المرفوع المتأثر FK SubmittedStatistics.submissionId - ..."
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT changedByUserId "معرف من قام بالتعديل FK SystemUser.userId"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+    }
+
+    StatisticsArchive {
+        INT archiveId PK "أرشيف الإحصائيات التاريخية"
+        INT submissionId FK "معرف الإحصاء المرفوع المصدر FK SubmittedStatistics.submissionId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT archivedByUserId "معرف من قام بالأرشفة FK SystemUser.userId"
+    }
+
+    SystemReports {
+        INT reportId PK "سجل التقارير الدورية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT generatedByUserId "معرف من قام بالتوليد إذا يدوياً FK SystemUser.userId"
+    }
+
+    ReportApprovals {
+        INT approvalId PK "اعتمادات التقارير"
+        INT reportId FK "معرف التقرير المراد اعتماده FK SystemReports.reportId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT submittedByUserId "معرف من رفع التقرير FK SystemUser.userId"
+        INT reviewerId "معرف المراجع FK SystemUser.userId - اختياري"
+        INT approvedByUserId "معرف المعتمد FK SystemUser.userId"
+    }
+
+    ComparativeReport {
+        INT comparativeId PK "التقارير المقارنة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT generatedByUserId "معرف من قام بالتوليد FK SystemUser.userId"
+    }
+
+    FinancialSummaryReports {
+        INT summaryId PK "تقارير القيمة المالية المجمعة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+    }
+
+    ExternalComplianceReports {
+        INT reportId PK "تقارير الامتثال والرفع الخارجي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT generatedByUserId "معرف من أنشأ التقرير FK SystemUser.userId"
+    }
+
+    GapAnalysisReports {
+        INT analysisId PK "تحليلات الفجوة والاحتياج"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT assetCategoryId "معرف فئة الأصول FK AssetCategory.categoryId - إذا كان التحليل لأصول"
+        INT gradeLevelId "معرف الصف FK GradeCapacity.gradeLevelId - إذا كان التحليل لصف معين"
+        INT departmentId "معرف القسم FK SchoolDepartment.deptId - إذا كان التحليل لقسم"
+        INT analyzedByUserId "معرف من قام بالتحليل FK SystemUser.userId"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+    }
+
+    ReportsArchive {
+        INT archiveId PK "أرشفة التقارير"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT archivedByUserId "معرف من قام بالأرشفة FK SystemUser.userId"
+    }
+
+    ExceptionalStatistics {
+        INT statisticsId PK "الإحصائيات الاستثنائية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT generatedByUserId "معرف من أنشأ الإحصاء FK SystemUser.userId"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+    }
+
+    %% ===== Relationships =====
+    DashboardConfiguration ||--o{ KPI_Metrics : "معرف إعداد المؤشر FK Dash"
+    SchoolStatisticsDraft ||--o{ SubmittedStatistics : "معرف المسودة المصدر FK Sc"
+    SchoolStatisticsDraft ||--o{ StatisticsUpdateHistory : "معرف المسودة المتأثرة FK "
+    SubmittedStatistics ||--o{ StatisticsUpdateHistory : "معرف الإحصاء المرفوع المت"
+    SubmittedStatistics ||--o{ StatisticsArchive : "معرف الإحصاء المرفوع المص"
+    SystemReports ||--o{ ReportApprovals : "معرف التقرير المراد اعتما"</pre>
+    </details>
+  </div>
+
+  <div id="pane-full" class="view-pane">
+    <div class="notice-slim" style="background:#FEE2E2;border-right-color:#DC2626;color:#7F1D1D">
+      ⚠️ <strong>تنبيه:</strong> العرض الكامل يحوي 397 حقل وقد يأخذ بضع ثوانٍ للتصيير.
+    </div>
+    <div class="diagram-card">
+      <div class="mermaid" id="diagram-full">
+erDiagram
+    %% =====================================================
+    %% M6_Statistics - ERD
+    %% Mermaid 10.9.1 Compliant - ASCII identifiers only
+    %% =====================================================
+
+    DashboardConfiguration {
+        INT configId PK "إعدادات لوحات المؤشرات"
+        INT schoolId "معرف المدرسة FK School.schoolId - يمكن أن يكون NULL للإعدادات العام..."
+        DECIMAL kpiType "نوع المؤشر نسبة النجاح نسبة الحضور كثافة الفصول نسبة الإشغال معدل ا..."
+        VARCHAR kpiCode "كود المؤشر فريد"
+        VARCHAR kpiNameAr "اسم المؤشر بالعربية"
+        VARCHAR kpiNameEn "اسم المؤشر بالإنجليزية"
+        TEXT kpiDescription "وصف المؤشر وكيفية حسابه"
+        VARCHAR sourceModule "المصدر الرئيسي للبيانات Students Employees Assets Finance"
+        VARCHAR sourceTable "الجدول المصدر"
+        VARCHAR sourceField "الحقل المصدر أو صيغة الحساب"
+        DECIMAL aggregationMethod "طريقة التجميع متوسط مجموع عدد نسبة حد أدنى حد أقصى"
+        VARCHAR chartType "طريقة العرض أعمدة منحنيات دائري جدول عداد شريط تقدم"
+        VARCHAR refreshInterval "فترة تحديث البيانات بالدقائق - افتراضي 60"
+        DECIMAL targetValue "القيمة المستهدفة Benchmark"
+        VARCHAR thresholdGreen "الحد الأدنى للون الأخضر آمن"
+        VARCHAR thresholdYellow "الحد الأدنى للون الأصفر تنبيه"
+        DECIMAL thresholdRed "الحد الأدنى للون الأحمر خطر - أي قيمة أقل تكون حمراء"
+        BOOLEAN alertEnabled "هل يتم إرسال تنبيه عند تجاوز الحدود"
+        VARCHAR alertRecipients "المستلمون عند التنبيه JSON - قائمة معرفات المستخدمين"
+        BOOLEAN isActive "هل المؤشر مفعل"
+        VARCHAR displayOrder "ترتيب عرض المؤشر في لوحة التحكم"
+        INT dashboardId "معرف لوحة التحكم التي ينتمي إليها للوحات المتعددة"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    KPI_Metrics {
+        INT metricId PK "المؤشرات التشغيلية"
+        INT configId FK "معرف إعداد المؤشر FK DashboardConfiguration.configId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        VARCHAR periodType "نوع الفترة يومي أسبوعي شهري ربع سنوي نصف سنوي سنوي"
+        DECIMAL periodValue "قيمة الفترة مثال - شهر 1 ربع 2 أسبوع 3"
+        DATE periodStartDate "تاريخ بداية الفترة"
+        DATE periodEndDate "تاريخ نهاية الفترة"
+        DECIMAL actualValue "القيمة الحالية للمؤشر"
+        DECIMAL targetValue "القيمة المستهدفة Benchmark لهذه الفترة قد تختلف عن الافتراضية"
+        DECIMAL previousValue "القيمة في الفترة السابقة لحساب نسبة التغير"
+        DECIMAL changePercentage "نسبة التغير عن الفترة السابقة يُحسب آلياً"
+        VARCHAR statusColor "لون الحالة أخضر أصفر أحمر - يُحسب بناءً على actualValue مقارنة بـ t..."
+        VARCHAR calculationMethod "طريقة الحساب تلقائي يدوي مستورد"
+        DATE calculationDate "تاريخ حساب/تسجيل القيمة"
+        INT calculatedByUserId "معرف من قام بالحساب FK SystemUser.userId"
+        VARCHAR dataSource "مصدر البيانات مباشر من قاعدة البيانات ملف Excel إدخال يدوي"
+        DECIMAL notes "ملاحظات حول القيمة مثل - انخفاض غير طبيعي بسبب عطلة رسمية"
+        BOOLEAN isVerified "هل تم التحقق من صحة القيمة"
+        INT verifiedByUserId "معرف من تحقق FK SystemUser.userId"
+        DATETIME verifiedAt "وقت التحقق"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    TrendAnalysisResult {
+        INT analysisId PK "نتائج تحليل الاتجاهات"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR studyPeriod "فترة الدراسة السنوات الخمس الماضية السنوات الثلاث الماضية إلخ"
+        VARCHAR startYear "بداية فترة الدراسة"
+        VARCHAR endYear "نهاية فترة الدراسة"
+        DECIMAL kpiType "المؤشر المحلل نمو أعداد الطلاب نسبة النجاح نسبة الحضور كثافة الفصول..."
+        VARCHAR kpiCode "كود المؤشر من DashboardConfiguration FK DashboardConfiguration.kpiC..."
+        DATE historicalValues "القيم التاريخية JSON - year1 - value1 year2 - value2 ..."
+        VARCHAR trendDirection "اتجاه الاتجاه متزايد متناقض ثابت دوري"
+        VARCHAR slope "ميل الخط معدل التغير السنوي"
+        VARCHAR intercept "نقطة التقاطع مع المحور الصادي"
+        VARCHAR correlationCoefficient "معامل الارتباط قرب 1 يعني دقة عالية"
+        DECIMAL forecastedValue "القيمة التنبؤية للفترة القادمة السنة القادمة"
+        DECIMAL forecastedValueNext "القيمة التنبؤية للفترة التي تليها سنتين قادمة - اختياري"
+        DECIMAL confidenceLevel "نسبة الثقة في التوقع مثل 95"
+        DECIMAL lowerBound "الحد الأدنى للتوقع عند نسبة الثقة المحددة"
+        DECIMAL upperBound "الحد الأعلى للتوقع عند نسبة الثقة المحددة"
+        VARCHAR forecastingMethod "طريقة التنبؤ المستخدمة الانحدار الخطي المتوسط المتحرك إلخ"
+        DATE analysisDate "تاريخ إجراء التحليل"
+        INT analyzedByUserId "معرف من قام بالتحليل FK SystemUser.userId - غالباً النظام آلياً"
+        TEXT notes "ملاحظات حول التحليل مثل - تأثير جائحة كورونا على النتائج"
+        VARCHAR status "حالة التحليل مسودة معتمد"
+        INT approvedByUserId "معرف من اعتمد التحليل FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    SchoolStatisticsDraft {
+        INT draftId PK "مسودات الإحصائية المدرسية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId - اختياري"
+        VARCHAR periodType "نوع الفترة الإحصائية شهري ربع سنوي فصل دراسي سنوي"
+        DECIMAL periodValue "قيمة الفترة مثال - 1 للشهر الأول 2 للربع الثاني"
+        DATE periodStartDate "تاريخ بداية الفترة الإحصائية"
+        DATE periodEndDate "تاريخ نهاية الفترة الإحصائية"
+        INT draftNumber "رقم المسودة تسلسلي حسب المدرسة"
+        VARCHAR draftVersion "إصدار المسودة 1.0 1.1 2.0 - للتعديلات المتعددة"
+        VARCHAR studentDataJson "بيانات الطلاب أعداد فئات جنس - JSON مفصل"
+        VARCHAR staffDataJson "بيانات الكادر أعداد المعلمين والإداريين المؤهلات الجنسيات - JSON مفصل"
+        VARCHAR financialSummaryJson "ملخص مالي مختصر اختياري"
+        VARCHAR assetSummaryJson "ملخص الأصول والمرافق اختياري"
+        DECIMAL completenessPercentage "نسبة اكتمال البيانات يُحسب آلياً"
+        VARCHAR draftStatus "حالة المسودة جديد قيد الإعداد مكتمل جاهز للرفع قيد المراجعة تم الرفع"
+        BOOLEAN isLocked "هل المسودة مقفلة لمنع التعديل بعد الرفع"
+        DATE lockedAt "تاريخ القفل"
+        INT lockedByUserId "معرف من قفل المسودة"
+        DATE lastSavedAt "تاريخ آخر حفظ"
+        INT savedByUserId "معرف آخر من حفظ"
+        TEXT notes "ملاحظات إضافية"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    SubmittedStatistics {
+        INT submissionId PK "الإحصائيات المرفوعة"
+        INT draftId FK "معرف المسودة المصدر FK SchoolStatisticsDraft.draftId - علاقة 1-1"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT submissionNumber "رقم الإيداع يُولد آلياً"
+        DATETIME submissionTimestamp "وقت الرفع تاريخ ووقت"
+        VARCHAR submissionMethod "طريقة الرفع بوابة إلكترونية بريد رسمي يدوي"
+        INT submittedByUserId "معرف من قام بالرفع FK SystemUser.userId"
+        DECIMAL directorSignature "التوقيع الإلكتروني للمدير قيمة تجزئة أو مسار ملف"
+        DATE directorSignatureDate "تاريخ التوقيع"
+        DATETIME studentDataSnapshot "لقطة من بيانات الطلاب وقت الرفع JSON - نسخة محفوظة"
+        DATETIME staffDataSnapshot "لقطة من بيانات الكادر وقت الرفع JSON - نسخة محفوظة"
+        VARCHAR financialSummarySnapshot "لقطة من الملخص المالي JSON - اختياري"
+        VARCHAR assetSummarySnapshot "لقطة من الملخص الأصول JSON - اختياري"
+        VARCHAR approvalStatus "حالة الاعتماد معلق قيد المراجعة مقبول مرفوض للتعديل معتمد نهائياً"
+        TEXT reviewerNotes "ملاحظات المراجع من المكتب"
+        DATE reviewDate "تاريخ المراجعة"
+        INT reviewedByUserId "معرف مراجع المكتب FK SystemUser.userId - من القسم الأول Office"
+        TEXT rejectionReason "سبب الرفض إن وجد"
+        DATE approvalDate "تاريخ الاعتماد عند القبول"
+        INT approvalCertificateNumber "رقم شهادة الاعتماد إن وجد"
+        VARCHAR approvalCertificatePath "مسار ملف شهادة الاعتماد PDF"
+        BOOLEAN isFinal "هل هي النسخة النهائية المعتمدة"
+        BOOLEAN isArchived "هل تمت أرشفتها"
+        DATE archivedAt "تاريخ الأرشفة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    StatisticsUpdateHistory {
+        INT historyId PK "سجل تحديثات الإحصاء"
+        INT draftId FK "معرف المسودة المتأثرة FK SchoolStatisticsDraft.draftId - اختياري"
+        INT submissionId FK "معرف الإحصاء المرفوع المتأثر FK SubmittedStatistics.submissionId - ..."
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        DECIMAL changeType "نوع التغيير إضافة طالب انسحاب طالب تعيين معلم إنهاء خدمة معلم تعديل..."
+        VARCHAR changeCategory "فئة التغيير طلاب كادر مالية أصول"
+        DECIMAL oldValue "القيمة السابقة قبل التعديل - نص أو رقم"
+        DECIMAL newValue "القيمة الجديدة بعد التعديل"
+        DATE changeDate "تاريخ التغيير الفعلي حدث التغيير وليس تاريخ التسجيل"
+        DATE updateReason "سبب التعديل تبرير المدرسة لهذا التغيير الجوهري - نص طويل"
+        VARCHAR supportingDocument "مستند داعم مسار ملف - اختياري"
+        INT changedByUserId "معرف من قام بالتعديل FK SystemUser.userId"
+        BOOLEAN isApproved "هل تم اعتماد هذا التغيير من قبل المشرف"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        TEXT notes "ملاحظات إضافية"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    StatisticsArchive {
+        INT archiveId PK "أرشيف الإحصائيات التاريخية"
+        INT submissionId FK "معرف الإحصاء المرفوع المصدر FK SubmittedStatistics.submissionId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR archivedYear "العام المؤرشف السنة الدراسية أو التقويمية"
+        VARCHAR periodType "نوع الفترة المؤرشفة شهري ربع سنوي فصل دراسي سنوي"
+        DECIMAL periodValue "قيمة الفترة"
+        DATE archivedAt "تاريخ الأرشفة نقل البيانات للأرشيف"
+        INT archivedByUserId "معرف من قام بالأرشفة FK SystemUser.userId"
+        VARCHAR finalDataSnapshot "لقطة البيانات الكاملة JSON - نسخة غير قابلة للتعديل"
+        VARCHAR studentSnapshot "لقطة بيانات الطلاب JSON - نسخة فرعية"
+        VARCHAR staffSnapshot "لقطة بيانات الكادر JSON - نسخة فرعية"
+        VARCHAR financialSnapshot "لقطة بيانات مالية JSON - اختياري"
+        VARCHAR assetSnapshot "لقطة بيانات الأصول JSON - اختياري"
+        VARCHAR retentionPeriod "مدة الاحتفاظ بالسنوات - حسب السياسة"
+        DATE retentionEndDate "تاريخ انتهاء مدة الاحتفاظ بعدها يمكن الحذف"
+        BOOLEAN isReadOnly "دائماً True لمنع أي تعديل"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل نادراً ما يحدث"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي للحذف بعد انتهاء مدة الاحتفاظ"
+    }
+
+    SystemReports {
+        INT reportId PK "سجل التقارير الدورية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR reportType "نوع التقرير دوري إضافات حركات حالات تلف"
+        VARCHAR reportSubType "النوع الفرعي شؤون طلاب شؤون موظفين مالي أصول"
+        VARCHAR reportTitle "مسمى التقرير مثال - تقرير الأصول الربع سنوي"
+        VARCHAR reportFrequency "تكرار التقرير يومي أسبوعي شهري ربع سنوي سنوي حسب الطلب"
+        VARCHAR periodStart "بداية الفترة الزمنية التي يغطيها التقرير"
+        VARCHAR periodEnd "نهاية الفترة الزمنية"
+        DATETIME generationDate "تاريخ ووقت التوليد الآلي"
+        DECIMAL generatedBy "طريقة التوليد تلقائي - Scheduled يدوي - Manual"
+        INT generatedByUserId "معرف من قام بالتوليد إذا يدوياً FK SystemUser.userId"
+        VARCHAR fileFormat "صيغة الملف PDF Excel CSV"
+        VARCHAR filePath "مسار تخزين الملف في الأرشيف الرقمي"
+        VARCHAR fileSize "حجم الملف بايت"
+        VARCHAR status "حالة التقرير مسودة منشور مؤرشف"
+        BOOLEAN isPublished "هل تم نشره للمستخدمين"
+        DATE publishedAt "تاريخ النشر"
+        INT publishedByUserId "معرف من نشر"
+        INT viewCount "عدد مرات عرض التقرير"
+        DATE lastViewedAt "تاريخ آخر عرض"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    ReportApprovals {
+        INT approvalId PK "اعتمادات التقارير"
+        INT reportId FK "معرف التقرير المراد اعتماده FK SystemReports.reportId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        DATE submissionDate "تاريخ رفع التقرير للمراجعة"
+        INT submittedByUserId "معرف من رفع التقرير FK SystemUser.userId"
+        VARCHAR approvalStatus "حالة الاعتماد مسودة بانتظار المراجعة قيد المراجعة معتمد مرفوض ملغي"
+        INT reviewerId "معرف المراجع FK SystemUser.userId - اختياري"
+        DATE reviewDate "تاريخ المراجعة"
+        TEXT comments "ملاحظات الإدارة على صحة البيانات"
+        TEXT rejectionReason "سبب الرفض إن وجد"
+        DATE approvalDate "تاريخ الاعتماد الرسمي عند القبول"
+        INT approvedByUserId "معرف المعتمد FK SystemUser.userId"
+        DECIMAL digitalSignature "توقيع إلكتروني أو كود تأكيد قيمة تجزئة أو مسار ملف"
+        INT certificateNumber "رقم شهادة الاعتماد إن وجد"
+        VARCHAR certificatePath "مسار ملف شهادة الاعتماد"
+        BOOLEAN isFinal "هل هذا هو الاعتماد النهائي"
+        VARCHAR validUntil "صلاحية الاعتماد حتى للتقارير المؤقتة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    ComparativeReport {
+        INT comparativeId PK "التقارير المقارنة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT reportNumber "رقم التقرير تسلسلي"
+        VARCHAR comparisonTitle "عنوان المقارنة مثال - مقارنة نتائج الفصل الأول والثاني 2025"
+        VARCHAR firstPeriodLabel "تسمية الفترة الأولى مثال - الفصل الأول 2025"
+        VARCHAR firstPeriodStart "بداية الفترة الأولى"
+        VARCHAR firstPeriodEnd "نهاية الفترة الأولى"
+        VARCHAR secondPeriodLabel "تسمية الفترة الثانية مثال - الفصل الثاني 2025"
+        VARCHAR secondPeriodStart "بداية الفترة الثانية"
+        VARCHAR secondPeriodEnd "نهاية الفترة الثانية"
+        VARCHAR comparisonType "نوع المقارنة زمني بين مدارس بين فئات"
+        VARCHAR kpiCompared "المؤشرات التي تمت مقارنتها JSON"
+        VARCHAR comparisonData "بيانات المقارنة التفصيلية JSON"
+        VARCHAR autoInsights "الاستنتاجات الآلية ملخص ذكي يكتبه النظام للنتائج"
+        VARCHAR summary "ملخص عام للمقارنة"
+        DATE generationDate "تاريخ استخراج التقرير"
+        INT generatedByUserId "معرف من قام بالتوليد FK SystemUser.userId"
+        VARCHAR fileFormat "صيغة الملف PDF Excel"
+        VARCHAR filePath "مسار ملف التقرير PDF/Excel"
+        VARCHAR fileSize "حجم الملف"
+        INT viewCount "عدد مرات العرض"
+        DATE lastViewedAt "تاريخ آخر عرض"
+        VARCHAR status "حالة التقرير مسودة منشور مؤرشف"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    FinancialSummaryReports {
+        INT summaryId PK "تقارير القيمة المالية المجمعة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR fiscalYear "السنة المالية محل التقرير"
+        DATE reportDate "تاريخ إصدار التقرير"
+        VARCHAR reportType "نوع التقرير سنوي ربع سنوي حسب الطلب"
+        DECIMAL totalBookValue "إجمالي القيمة الدفترية لكافة الأصول"
+        DECIMAL totalDepreciation "إجمالي الإهلاك المتراكم للفترة"
+        DECIMAL totalAssetsCount "عدد الأصول التي شملها التقرير المالي"
+        DATE totalAcquisitionCost "إجمالي تكلفة الشراء للأصول التكلفة التاريخية"
+        DECIMAL totalRevaluationGains "إجمالي أرباح إعادة التقييم"
+        DECIMAL totalImpairmentLosses "إجمالي خسائر الانخفاض في القيمة"
+        DECIMAL totalRevenue "إجمالي الإيرادات من StudentInvoice"
+        DECIMAL totalExpenses "إجمالي المصروفات من AssetExpenses وغيرها"
+        VARCHAR netIncome "صافي الدخل totalRevenue - totalExpenses"
+        VARCHAR auditStatus "حالة تدقيق التقرير غير مدقق مدقق داخلياً مدقق خارجياً تحت التدقيق"
+        VARCHAR auditFirmName "اسم شركة التدقيق إن وجد"
+        VARCHAR auditorName "اسم المدقق إن وجد"
+        DATE auditDate "تاريخ التدقيق"
+        VARCHAR auditorSignature "توقيع المدقق الإلكتروني"
+        VARCHAR approvalStatus "حالة اعتماد التقرير مسودة معتمد"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        VARCHAR filePath "مسار ملف التقرير PDF/Excel"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    ExternalComplianceReports {
+        INT reportId PK "تقارير الامتثال والرفع الخارجي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT reportNumber "رقم التقرير تسلسلي حسب الجهة"
+        VARCHAR targetEntity "الجهة المستلمة وزارة التربية مكتب التعليم هيئة التقويم جهة خارجية أخرى"
+        VARCHAR entityType "نوع الجهة حكومية خاصة دولية"
+        VARCHAR standardType "المعيار المطبق المعايير المدرسية معايير الجودة متطلبات الترخيص"
+        VARCHAR standardVersion "إصدار المعيار"
+        VARCHAR reportType "نوع التقرير امتثال سنوي تقرير جودة تقرير ترخيص إحصاء رسمي"
+        VARCHAR periodStart "بداية فترة التقرير"
+        VARCHAR periodEnd "نهاية فترة التقرير"
+        DATE generationDate "تاريخ إنشاء التقرير"
+        INT generatedByUserId "معرف من أنشأ التقرير FK SystemUser.userId"
+        VARCHAR filePath "مسار ملف التقرير PDF"
+        VARCHAR fileSize "حجم الملف"
+        DATETIME submissionDate "تاريخ ووقت الإرسال الفعلي"
+        VARCHAR submissionMethod "طريقة الرفع ربط API بريد رسمي بوابة إلكترونية يدوي"
+        VARCHAR apiEndpoint "رابط API إذا كانت الطريقة API"
+        INT apiRequestId "معرف طلب API للتتبع"
+        VARCHAR receiptReference "رقم إيصال الاستلام من الجهة الخارجية"
+        DATE receiptDate "تاريخ استلام الإيصال"
+        VARCHAR receiptAttachment "مسار ملف الإيصال PDF"
+        VARCHAR submissionStatus "حالة الرفع قيد الإعداد تم الإرسال قيد الاستلام تم الاستلام مرفوض فشل"
+        TEXT rejectionReason "سبب الرفض إن وجد"
+        DATE resubmissionDate "تاريخ إعادة الرفع إن وجد"
+        BOOLEAN isFinal "هل هو التقرير النهائي المعتمد وزارياً"
+        DATE finalApprovalDate "تاريخ الاعتماد النهائي"
+        INT finalApprovalNumber "رقم الاعتماد النهائي"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    GapAnalysisReports {
+        INT analysisId PK "تحليلات الفجوة والاحتياج"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT analysisNumber "رقم التحليل تسلسلي"
+        VARCHAR analysisType "نوع التحليل طلاب -معلمين طلاب -فصول أصول -منهج تجهيزات -معايير"
+        INT assetCategoryId "معرف فئة الأصول FK AssetCategory.categoryId - إذا كان التحليل لأصول"
+        INT gradeLevelId "معرف الصف FK GradeCapacity.gradeLevelId - إذا كان التحليل لصف معين"
+        INT departmentId "معرف القسم FK SchoolDepartment.deptId - إذا كان التحليل لقسم"
+        INT requiredQty "الكمية المطلوبة حسب المنهج/الطاقة/المعيار"
+        INT availableQty "الكمية المتوفرة حالياً في النظام"
+        DECIMAL gapValue "الفرق بالزيادة أو النقص - availableQty - requiredQty"
+        DECIMAL gapPercentage "نسبة الفرق من requiredQty"
+        VARCHAR gapType "نوع الفجوة نقص زيادة مطابق"
+        VARCHAR recommendation "توصية التقرير شراء جديد نقل من قسم آخر استبدال لا حاجة لإجراء"
+        VARCHAR priority "أولوية معالجة الفجوة عالية متوسطة منخفضة"
+        DECIMAL estimatedCost "التكلفة التقديرية لمعالجة الفجوة إن كانت نقصاً"
+        DATE analysisDate "تاريخ التحليل"
+        INT analyzedByUserId "معرف من قام بالتحليل FK SystemUser.userId"
+        VARCHAR filePath "مسار ملف التقرير PDF/Excel"
+        VARCHAR status "حالة التحليل مسودة معتمد منفذ"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    ReportsArchive {
+        INT archiveId PK "أرشفة التقارير"
+        VARCHAR sourceReportType "نوع التقرير المصدر SystemReport ComparativeReport FinancialSummaryR..."
+        INT sourceReportId "معرف التقرير المصدر حسب النوع"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        DATE archivedAt "تاريخ النقل للأرشيف"
+        INT archivedByUserId "معرف من قام بالأرشفة FK SystemUser.userId"
+        VARCHAR retentionPeriod "مدة الاحتفاظ القانونية بالسنوات"
+        DATE retentionEndDate "تاريخ انتهاء مدة الاحتفاظ يُحسب = archivedAt + retentionPeriod"
+        INT storageLocation "المسار السحابي أو الفيزيائي للأرشيف"
+        VARCHAR filePath "مسار الملف في موقع التخزين"
+        VARCHAR fileSize "حجم الملف"
+        BOOLEAN isReadOnly "دائماً True لمنع أي تعديل"
+        DATE disposalDate "تاريخ الإتلاف المتوقع بعد retentionEndDate"
+        VARCHAR disposalStatus "حالة الإتلاف في الانتظار تم الإتلاف"
+        VARCHAR disposalMethod "طريقة الإتلاف حذف آمن تمزيق إرجاع لجهة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    ExceptionalStatistics {
+        INT statisticsId PK "الإحصائيات الاستثنائية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT reportNumber "رقم التقرير تسلسلي"
+        DECIMAL totalIncidents "إجمالي الحالات المسجلة من EmergencyIncidents"
+        DECIMAL totalClosureDays "مجموع الأيام التي تعطلت فيها الدراسة من EmergencyClosures"
+        DECIMAL totalDamageCost "تقدير مالي للخسائر المادية من EmergencyIncidents و MaintenanceTickets"
+        DECIMAL totalAwardsCount "عدد الجوائز التي حصلت عليها المدرسة من SchoolAwards"
+        DECIMAL totalParticipationsCount "عدد المشاركات الخارجية من ExternalParticipations"
+        DECIMAL totalDeficitCount "عدد حالات العجز التعليمي المسجلة من SchoolDeficit"
+        DECIMAL totalSurplusCount "عدد حالات الفائض التعليمي المسجلة من SchoolSurplus"
+        VARCHAR emergencySummary "ملخص حالات الطوارئ JSON"
+        VARCHAR closureSummary "ملخص أيام الإغلاق JSON"
+        VARCHAR awardSummary "ملخص الجوائز JSON"
+        DATE generationDate "تاريخ إنشاء الإحصاء"
+        INT generatedByUserId "معرف من أنشأ الإحصاء FK SystemUser.userId"
+        VARCHAR filePath "مسار ملف التقرير PDF/Excel"
+        VARCHAR status "حالة الإحصاء مسودة معتمد"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    %% ===== Relationships =====
+    DashboardConfiguration ||--o{ KPI_Metrics : "معرف إعداد المؤشر FK Dash"
+    SchoolStatisticsDraft ||--o{ SubmittedStatistics : "معرف المسودة المصدر FK Sc"
+    SchoolStatisticsDraft ||--o{ StatisticsUpdateHistory : "معرف المسودة المتأثرة FK "
+    SubmittedStatistics ||--o{ StatisticsUpdateHistory : "معرف الإحصاء المرفوع المت"
+    SubmittedStatistics ||--o{ StatisticsArchive : "معرف الإحصاء المرفوع المص"
+    SystemReports ||--o{ ReportApprovals : "معرف التقرير المراد اعتما"
+      </div>
+    </div>
+    <details>
+      <summary>📝 كود Mermaid المصدر (Full)</summary>
+      <pre class="source-code" id="src-full">erDiagram
+    %% =====================================================
+    %% M6_Statistics - ERD
+    %% Mermaid 10.9.1 Compliant - ASCII identifiers only
+    %% =====================================================
+
+    DashboardConfiguration {
+        INT configId PK "إعدادات لوحات المؤشرات"
+        INT schoolId "معرف المدرسة FK School.schoolId - يمكن أن يكون NULL للإعدادات العام..."
+        DECIMAL kpiType "نوع المؤشر نسبة النجاح نسبة الحضور كثافة الفصول نسبة الإشغال معدل ا..."
+        VARCHAR kpiCode "كود المؤشر فريد"
+        VARCHAR kpiNameAr "اسم المؤشر بالعربية"
+        VARCHAR kpiNameEn "اسم المؤشر بالإنجليزية"
+        TEXT kpiDescription "وصف المؤشر وكيفية حسابه"
+        VARCHAR sourceModule "المصدر الرئيسي للبيانات Students Employees Assets Finance"
+        VARCHAR sourceTable "الجدول المصدر"
+        VARCHAR sourceField "الحقل المصدر أو صيغة الحساب"
+        DECIMAL aggregationMethod "طريقة التجميع متوسط مجموع عدد نسبة حد أدنى حد أقصى"
+        VARCHAR chartType "طريقة العرض أعمدة منحنيات دائري جدول عداد شريط تقدم"
+        VARCHAR refreshInterval "فترة تحديث البيانات بالدقائق - افتراضي 60"
+        DECIMAL targetValue "القيمة المستهدفة Benchmark"
+        VARCHAR thresholdGreen "الحد الأدنى للون الأخضر آمن"
+        VARCHAR thresholdYellow "الحد الأدنى للون الأصفر تنبيه"
+        DECIMAL thresholdRed "الحد الأدنى للون الأحمر خطر - أي قيمة أقل تكون حمراء"
+        BOOLEAN alertEnabled "هل يتم إرسال تنبيه عند تجاوز الحدود"
+        VARCHAR alertRecipients "المستلمون عند التنبيه JSON - قائمة معرفات المستخدمين"
+        BOOLEAN isActive "هل المؤشر مفعل"
+        VARCHAR displayOrder "ترتيب عرض المؤشر في لوحة التحكم"
+        INT dashboardId "معرف لوحة التحكم التي ينتمي إليها للوحات المتعددة"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    KPI_Metrics {
+        INT metricId PK "المؤشرات التشغيلية"
+        INT configId FK "معرف إعداد المؤشر FK DashboardConfiguration.configId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        VARCHAR periodType "نوع الفترة يومي أسبوعي شهري ربع سنوي نصف سنوي سنوي"
+        DECIMAL periodValue "قيمة الفترة مثال - شهر 1 ربع 2 أسبوع 3"
+        DATE periodStartDate "تاريخ بداية الفترة"
+        DATE periodEndDate "تاريخ نهاية الفترة"
+        DECIMAL actualValue "القيمة الحالية للمؤشر"
+        DECIMAL targetValue "القيمة المستهدفة Benchmark لهذه الفترة قد تختلف عن الافتراضية"
+        DECIMAL previousValue "القيمة في الفترة السابقة لحساب نسبة التغير"
+        DECIMAL changePercentage "نسبة التغير عن الفترة السابقة يُحسب آلياً"
+        VARCHAR statusColor "لون الحالة أخضر أصفر أحمر - يُحسب بناءً على actualValue مقارنة بـ t..."
+        VARCHAR calculationMethod "طريقة الحساب تلقائي يدوي مستورد"
+        DATE calculationDate "تاريخ حساب/تسجيل القيمة"
+        INT calculatedByUserId "معرف من قام بالحساب FK SystemUser.userId"
+        VARCHAR dataSource "مصدر البيانات مباشر من قاعدة البيانات ملف Excel إدخال يدوي"
+        DECIMAL notes "ملاحظات حول القيمة مثل - انخفاض غير طبيعي بسبب عطلة رسمية"
+        BOOLEAN isVerified "هل تم التحقق من صحة القيمة"
+        INT verifiedByUserId "معرف من تحقق FK SystemUser.userId"
+        DATETIME verifiedAt "وقت التحقق"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    TrendAnalysisResult {
+        INT analysisId PK "نتائج تحليل الاتجاهات"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR studyPeriod "فترة الدراسة السنوات الخمس الماضية السنوات الثلاث الماضية إلخ"
+        VARCHAR startYear "بداية فترة الدراسة"
+        VARCHAR endYear "نهاية فترة الدراسة"
+        DECIMAL kpiType "المؤشر المحلل نمو أعداد الطلاب نسبة النجاح نسبة الحضور كثافة الفصول..."
+        VARCHAR kpiCode "كود المؤشر من DashboardConfiguration FK DashboardConfiguration.kpiC..."
+        DATE historicalValues "القيم التاريخية JSON - year1 - value1 year2 - value2 ..."
+        VARCHAR trendDirection "اتجاه الاتجاه متزايد متناقض ثابت دوري"
+        VARCHAR slope "ميل الخط معدل التغير السنوي"
+        VARCHAR intercept "نقطة التقاطع مع المحور الصادي"
+        VARCHAR correlationCoefficient "معامل الارتباط قرب 1 يعني دقة عالية"
+        DECIMAL forecastedValue "القيمة التنبؤية للفترة القادمة السنة القادمة"
+        DECIMAL forecastedValueNext "القيمة التنبؤية للفترة التي تليها سنتين قادمة - اختياري"
+        DECIMAL confidenceLevel "نسبة الثقة في التوقع مثل 95"
+        DECIMAL lowerBound "الحد الأدنى للتوقع عند نسبة الثقة المحددة"
+        DECIMAL upperBound "الحد الأعلى للتوقع عند نسبة الثقة المحددة"
+        VARCHAR forecastingMethod "طريقة التنبؤ المستخدمة الانحدار الخطي المتوسط المتحرك إلخ"
+        DATE analysisDate "تاريخ إجراء التحليل"
+        INT analyzedByUserId "معرف من قام بالتحليل FK SystemUser.userId - غالباً النظام آلياً"
+        TEXT notes "ملاحظات حول التحليل مثل - تأثير جائحة كورونا على النتائج"
+        VARCHAR status "حالة التحليل مسودة معتمد"
+        INT approvedByUserId "معرف من اعتمد التحليل FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    SchoolStatisticsDraft {
+        INT draftId PK "مسودات الإحصائية المدرسية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT semesterId "معرف الفصل الدراسي FK SchoolSemester.semesterId - اختياري"
+        VARCHAR periodType "نوع الفترة الإحصائية شهري ربع سنوي فصل دراسي سنوي"
+        DECIMAL periodValue "قيمة الفترة مثال - 1 للشهر الأول 2 للربع الثاني"
+        DATE periodStartDate "تاريخ بداية الفترة الإحصائية"
+        DATE periodEndDate "تاريخ نهاية الفترة الإحصائية"
+        INT draftNumber "رقم المسودة تسلسلي حسب المدرسة"
+        VARCHAR draftVersion "إصدار المسودة 1.0 1.1 2.0 - للتعديلات المتعددة"
+        VARCHAR studentDataJson "بيانات الطلاب أعداد فئات جنس - JSON مفصل"
+        VARCHAR staffDataJson "بيانات الكادر أعداد المعلمين والإداريين المؤهلات الجنسيات - JSON مفصل"
+        VARCHAR financialSummaryJson "ملخص مالي مختصر اختياري"
+        VARCHAR assetSummaryJson "ملخص الأصول والمرافق اختياري"
+        DECIMAL completenessPercentage "نسبة اكتمال البيانات يُحسب آلياً"
+        VARCHAR draftStatus "حالة المسودة جديد قيد الإعداد مكتمل جاهز للرفع قيد المراجعة تم الرفع"
+        BOOLEAN isLocked "هل المسودة مقفلة لمنع التعديل بعد الرفع"
+        DATE lockedAt "تاريخ القفل"
+        INT lockedByUserId "معرف من قفل المسودة"
+        DATE lastSavedAt "تاريخ آخر حفظ"
+        INT savedByUserId "معرف آخر من حفظ"
+        TEXT notes "ملاحظات إضافية"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    SubmittedStatistics {
+        INT submissionId PK "الإحصائيات المرفوعة"
+        INT draftId FK "معرف المسودة المصدر FK SchoolStatisticsDraft.draftId - علاقة 1-1"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT submissionNumber "رقم الإيداع يُولد آلياً"
+        DATETIME submissionTimestamp "وقت الرفع تاريخ ووقت"
+        VARCHAR submissionMethod "طريقة الرفع بوابة إلكترونية بريد رسمي يدوي"
+        INT submittedByUserId "معرف من قام بالرفع FK SystemUser.userId"
+        DECIMAL directorSignature "التوقيع الإلكتروني للمدير قيمة تجزئة أو مسار ملف"
+        DATE directorSignatureDate "تاريخ التوقيع"
+        DATETIME studentDataSnapshot "لقطة من بيانات الطلاب وقت الرفع JSON - نسخة محفوظة"
+        DATETIME staffDataSnapshot "لقطة من بيانات الكادر وقت الرفع JSON - نسخة محفوظة"
+        VARCHAR financialSummarySnapshot "لقطة من الملخص المالي JSON - اختياري"
+        VARCHAR assetSummarySnapshot "لقطة من الملخص الأصول JSON - اختياري"
+        VARCHAR approvalStatus "حالة الاعتماد معلق قيد المراجعة مقبول مرفوض للتعديل معتمد نهائياً"
+        TEXT reviewerNotes "ملاحظات المراجع من المكتب"
+        DATE reviewDate "تاريخ المراجعة"
+        INT reviewedByUserId "معرف مراجع المكتب FK SystemUser.userId - من القسم الأول Office"
+        TEXT rejectionReason "سبب الرفض إن وجد"
+        DATE approvalDate "تاريخ الاعتماد عند القبول"
+        INT approvalCertificateNumber "رقم شهادة الاعتماد إن وجد"
+        VARCHAR approvalCertificatePath "مسار ملف شهادة الاعتماد PDF"
+        BOOLEAN isFinal "هل هي النسخة النهائية المعتمدة"
+        BOOLEAN isArchived "هل تمت أرشفتها"
+        DATE archivedAt "تاريخ الأرشفة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    StatisticsUpdateHistory {
+        INT historyId PK "سجل تحديثات الإحصاء"
+        INT draftId FK "معرف المسودة المتأثرة FK SchoolStatisticsDraft.draftId - اختياري"
+        INT submissionId FK "معرف الإحصاء المرفوع المتأثر FK SubmittedStatistics.submissionId - ..."
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        DECIMAL changeType "نوع التغيير إضافة طالب انسحاب طالب تعيين معلم إنهاء خدمة معلم تعديل..."
+        VARCHAR changeCategory "فئة التغيير طلاب كادر مالية أصول"
+        DECIMAL oldValue "القيمة السابقة قبل التعديل - نص أو رقم"
+        DECIMAL newValue "القيمة الجديدة بعد التعديل"
+        DATE changeDate "تاريخ التغيير الفعلي حدث التغيير وليس تاريخ التسجيل"
+        DATE updateReason "سبب التعديل تبرير المدرسة لهذا التغيير الجوهري - نص طويل"
+        VARCHAR supportingDocument "مستند داعم مسار ملف - اختياري"
+        INT changedByUserId "معرف من قام بالتعديل FK SystemUser.userId"
+        BOOLEAN isApproved "هل تم اعتماد هذا التغيير من قبل المشرف"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        TEXT notes "ملاحظات إضافية"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    StatisticsArchive {
+        INT archiveId PK "أرشيف الإحصائيات التاريخية"
+        INT submissionId FK "معرف الإحصاء المرفوع المصدر FK SubmittedStatistics.submissionId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR archivedYear "العام المؤرشف السنة الدراسية أو التقويمية"
+        VARCHAR periodType "نوع الفترة المؤرشفة شهري ربع سنوي فصل دراسي سنوي"
+        DECIMAL periodValue "قيمة الفترة"
+        DATE archivedAt "تاريخ الأرشفة نقل البيانات للأرشيف"
+        INT archivedByUserId "معرف من قام بالأرشفة FK SystemUser.userId"
+        VARCHAR finalDataSnapshot "لقطة البيانات الكاملة JSON - نسخة غير قابلة للتعديل"
+        VARCHAR studentSnapshot "لقطة بيانات الطلاب JSON - نسخة فرعية"
+        VARCHAR staffSnapshot "لقطة بيانات الكادر JSON - نسخة فرعية"
+        VARCHAR financialSnapshot "لقطة بيانات مالية JSON - اختياري"
+        VARCHAR assetSnapshot "لقطة بيانات الأصول JSON - اختياري"
+        VARCHAR retentionPeriod "مدة الاحتفاظ بالسنوات - حسب السياسة"
+        DATE retentionEndDate "تاريخ انتهاء مدة الاحتفاظ بعدها يمكن الحذف"
+        BOOLEAN isReadOnly "دائماً True لمنع أي تعديل"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل نادراً ما يحدث"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي للحذف بعد انتهاء مدة الاحتفاظ"
+    }
+
+    SystemReports {
+        INT reportId PK "سجل التقارير الدورية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR reportType "نوع التقرير دوري إضافات حركات حالات تلف"
+        VARCHAR reportSubType "النوع الفرعي شؤون طلاب شؤون موظفين مالي أصول"
+        VARCHAR reportTitle "مسمى التقرير مثال - تقرير الأصول الربع سنوي"
+        VARCHAR reportFrequency "تكرار التقرير يومي أسبوعي شهري ربع سنوي سنوي حسب الطلب"
+        VARCHAR periodStart "بداية الفترة الزمنية التي يغطيها التقرير"
+        VARCHAR periodEnd "نهاية الفترة الزمنية"
+        DATETIME generationDate "تاريخ ووقت التوليد الآلي"
+        DECIMAL generatedBy "طريقة التوليد تلقائي - Scheduled يدوي - Manual"
+        INT generatedByUserId "معرف من قام بالتوليد إذا يدوياً FK SystemUser.userId"
+        VARCHAR fileFormat "صيغة الملف PDF Excel CSV"
+        VARCHAR filePath "مسار تخزين الملف في الأرشيف الرقمي"
+        VARCHAR fileSize "حجم الملف بايت"
+        VARCHAR status "حالة التقرير مسودة منشور مؤرشف"
+        BOOLEAN isPublished "هل تم نشره للمستخدمين"
+        DATE publishedAt "تاريخ النشر"
+        INT publishedByUserId "معرف من نشر"
+        INT viewCount "عدد مرات عرض التقرير"
+        DATE lastViewedAt "تاريخ آخر عرض"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    ReportApprovals {
+        INT approvalId PK "اعتمادات التقارير"
+        INT reportId FK "معرف التقرير المراد اعتماده FK SystemReports.reportId"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        DATE submissionDate "تاريخ رفع التقرير للمراجعة"
+        INT submittedByUserId "معرف من رفع التقرير FK SystemUser.userId"
+        VARCHAR approvalStatus "حالة الاعتماد مسودة بانتظار المراجعة قيد المراجعة معتمد مرفوض ملغي"
+        INT reviewerId "معرف المراجع FK SystemUser.userId - اختياري"
+        DATE reviewDate "تاريخ المراجعة"
+        TEXT comments "ملاحظات الإدارة على صحة البيانات"
+        TEXT rejectionReason "سبب الرفض إن وجد"
+        DATE approvalDate "تاريخ الاعتماد الرسمي عند القبول"
+        INT approvedByUserId "معرف المعتمد FK SystemUser.userId"
+        DECIMAL digitalSignature "توقيع إلكتروني أو كود تأكيد قيمة تجزئة أو مسار ملف"
+        INT certificateNumber "رقم شهادة الاعتماد إن وجد"
+        VARCHAR certificatePath "مسار ملف شهادة الاعتماد"
+        BOOLEAN isFinal "هل هذا هو الاعتماد النهائي"
+        VARCHAR validUntil "صلاحية الاعتماد حتى للتقارير المؤقتة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    ComparativeReport {
+        INT comparativeId PK "التقارير المقارنة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT reportNumber "رقم التقرير تسلسلي"
+        VARCHAR comparisonTitle "عنوان المقارنة مثال - مقارنة نتائج الفصل الأول والثاني 2025"
+        VARCHAR firstPeriodLabel "تسمية الفترة الأولى مثال - الفصل الأول 2025"
+        VARCHAR firstPeriodStart "بداية الفترة الأولى"
+        VARCHAR firstPeriodEnd "نهاية الفترة الأولى"
+        VARCHAR secondPeriodLabel "تسمية الفترة الثانية مثال - الفصل الثاني 2025"
+        VARCHAR secondPeriodStart "بداية الفترة الثانية"
+        VARCHAR secondPeriodEnd "نهاية الفترة الثانية"
+        VARCHAR comparisonType "نوع المقارنة زمني بين مدارس بين فئات"
+        VARCHAR kpiCompared "المؤشرات التي تمت مقارنتها JSON"
+        VARCHAR comparisonData "بيانات المقارنة التفصيلية JSON"
+        VARCHAR autoInsights "الاستنتاجات الآلية ملخص ذكي يكتبه النظام للنتائج"
+        VARCHAR summary "ملخص عام للمقارنة"
+        DATE generationDate "تاريخ استخراج التقرير"
+        INT generatedByUserId "معرف من قام بالتوليد FK SystemUser.userId"
+        VARCHAR fileFormat "صيغة الملف PDF Excel"
+        VARCHAR filePath "مسار ملف التقرير PDF/Excel"
+        VARCHAR fileSize "حجم الملف"
+        INT viewCount "عدد مرات العرض"
+        DATE lastViewedAt "تاريخ آخر عرض"
+        VARCHAR status "حالة التقرير مسودة منشور مؤرشف"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    FinancialSummaryReports {
+        INT summaryId PK "تقارير القيمة المالية المجمعة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        VARCHAR fiscalYear "السنة المالية محل التقرير"
+        DATE reportDate "تاريخ إصدار التقرير"
+        VARCHAR reportType "نوع التقرير سنوي ربع سنوي حسب الطلب"
+        DECIMAL totalBookValue "إجمالي القيمة الدفترية لكافة الأصول"
+        DECIMAL totalDepreciation "إجمالي الإهلاك المتراكم للفترة"
+        DECIMAL totalAssetsCount "عدد الأصول التي شملها التقرير المالي"
+        DATE totalAcquisitionCost "إجمالي تكلفة الشراء للأصول التكلفة التاريخية"
+        DECIMAL totalRevaluationGains "إجمالي أرباح إعادة التقييم"
+        DECIMAL totalImpairmentLosses "إجمالي خسائر الانخفاض في القيمة"
+        DECIMAL totalRevenue "إجمالي الإيرادات من StudentInvoice"
+        DECIMAL totalExpenses "إجمالي المصروفات من AssetExpenses وغيرها"
+        VARCHAR netIncome "صافي الدخل totalRevenue - totalExpenses"
+        VARCHAR auditStatus "حالة تدقيق التقرير غير مدقق مدقق داخلياً مدقق خارجياً تحت التدقيق"
+        VARCHAR auditFirmName "اسم شركة التدقيق إن وجد"
+        VARCHAR auditorName "اسم المدقق إن وجد"
+        DATE auditDate "تاريخ التدقيق"
+        VARCHAR auditorSignature "توقيع المدقق الإلكتروني"
+        VARCHAR approvalStatus "حالة اعتماد التقرير مسودة معتمد"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        VARCHAR filePath "مسار ملف التقرير PDF/Excel"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    ExternalComplianceReports {
+        INT reportId PK "تقارير الامتثال والرفع الخارجي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT reportNumber "رقم التقرير تسلسلي حسب الجهة"
+        VARCHAR targetEntity "الجهة المستلمة وزارة التربية مكتب التعليم هيئة التقويم جهة خارجية أخرى"
+        VARCHAR entityType "نوع الجهة حكومية خاصة دولية"
+        VARCHAR standardType "المعيار المطبق المعايير المدرسية معايير الجودة متطلبات الترخيص"
+        VARCHAR standardVersion "إصدار المعيار"
+        VARCHAR reportType "نوع التقرير امتثال سنوي تقرير جودة تقرير ترخيص إحصاء رسمي"
+        VARCHAR periodStart "بداية فترة التقرير"
+        VARCHAR periodEnd "نهاية فترة التقرير"
+        DATE generationDate "تاريخ إنشاء التقرير"
+        INT generatedByUserId "معرف من أنشأ التقرير FK SystemUser.userId"
+        VARCHAR filePath "مسار ملف التقرير PDF"
+        VARCHAR fileSize "حجم الملف"
+        DATETIME submissionDate "تاريخ ووقت الإرسال الفعلي"
+        VARCHAR submissionMethod "طريقة الرفع ربط API بريد رسمي بوابة إلكترونية يدوي"
+        VARCHAR apiEndpoint "رابط API إذا كانت الطريقة API"
+        INT apiRequestId "معرف طلب API للتتبع"
+        VARCHAR receiptReference "رقم إيصال الاستلام من الجهة الخارجية"
+        DATE receiptDate "تاريخ استلام الإيصال"
+        VARCHAR receiptAttachment "مسار ملف الإيصال PDF"
+        VARCHAR submissionStatus "حالة الرفع قيد الإعداد تم الإرسال قيد الاستلام تم الاستلام مرفوض فشل"
+        TEXT rejectionReason "سبب الرفض إن وجد"
+        DATE resubmissionDate "تاريخ إعادة الرفع إن وجد"
+        BOOLEAN isFinal "هل هو التقرير النهائي المعتمد وزارياً"
+        DATE finalApprovalDate "تاريخ الاعتماد النهائي"
+        INT finalApprovalNumber "رقم الاعتماد النهائي"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    GapAnalysisReports {
+        INT analysisId PK "تحليلات الفجوة والاحتياج"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT analysisNumber "رقم التحليل تسلسلي"
+        VARCHAR analysisType "نوع التحليل طلاب -معلمين طلاب -فصول أصول -منهج تجهيزات -معايير"
+        INT assetCategoryId "معرف فئة الأصول FK AssetCategory.categoryId - إذا كان التحليل لأصول"
+        INT gradeLevelId "معرف الصف FK GradeCapacity.gradeLevelId - إذا كان التحليل لصف معين"
+        INT departmentId "معرف القسم FK SchoolDepartment.deptId - إذا كان التحليل لقسم"
+        INT requiredQty "الكمية المطلوبة حسب المنهج/الطاقة/المعيار"
+        INT availableQty "الكمية المتوفرة حالياً في النظام"
+        DECIMAL gapValue "الفرق بالزيادة أو النقص - availableQty - requiredQty"
+        DECIMAL gapPercentage "نسبة الفرق من requiredQty"
+        VARCHAR gapType "نوع الفجوة نقص زيادة مطابق"
+        VARCHAR recommendation "توصية التقرير شراء جديد نقل من قسم آخر استبدال لا حاجة لإجراء"
+        VARCHAR priority "أولوية معالجة الفجوة عالية متوسطة منخفضة"
+        DECIMAL estimatedCost "التكلفة التقديرية لمعالجة الفجوة إن كانت نقصاً"
+        DATE analysisDate "تاريخ التحليل"
+        INT analyzedByUserId "معرف من قام بالتحليل FK SystemUser.userId"
+        VARCHAR filePath "مسار ملف التقرير PDF/Excel"
+        VARCHAR status "حالة التحليل مسودة معتمد منفذ"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    ReportsArchive {
+        INT archiveId PK "أرشفة التقارير"
+        VARCHAR sourceReportType "نوع التقرير المصدر SystemReport ComparativeReport FinancialSummaryR..."
+        INT sourceReportId "معرف التقرير المصدر حسب النوع"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        DATE archivedAt "تاريخ النقل للأرشيف"
+        INT archivedByUserId "معرف من قام بالأرشفة FK SystemUser.userId"
+        VARCHAR retentionPeriod "مدة الاحتفاظ القانونية بالسنوات"
+        DATE retentionEndDate "تاريخ انتهاء مدة الاحتفاظ يُحسب = archivedAt + retentionPeriod"
+        INT storageLocation "المسار السحابي أو الفيزيائي للأرشيف"
+        VARCHAR filePath "مسار الملف في موقع التخزين"
+        VARCHAR fileSize "حجم الملف"
+        BOOLEAN isReadOnly "دائماً True لمنع أي تعديل"
+        DATE disposalDate "تاريخ الإتلاف المتوقع بعد retentionEndDate"
+        VARCHAR disposalStatus "حالة الإتلاف في الانتظار تم الإتلاف"
+        VARCHAR disposalMethod "طريقة الإتلاف حذف آمن تمزيق إرجاع لجهة"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    ExceptionalStatistics {
+        INT statisticsId PK "الإحصائيات الاستثنائية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT academicYearId "معرف السنة الدراسية FK SchoolAcademicYear.academicYearId"
+        INT reportNumber "رقم التقرير تسلسلي"
+        DECIMAL totalIncidents "إجمالي الحالات المسجلة من EmergencyIncidents"
+        DECIMAL totalClosureDays "مجموع الأيام التي تعطلت فيها الدراسة من EmergencyClosures"
+        DECIMAL totalDamageCost "تقدير مالي للخسائر المادية من EmergencyIncidents و MaintenanceTickets"
+        DECIMAL totalAwardsCount "عدد الجوائز التي حصلت عليها المدرسة من SchoolAwards"
+        DECIMAL totalParticipationsCount "عدد المشاركات الخارجية من ExternalParticipations"
+        DECIMAL totalDeficitCount "عدد حالات العجز التعليمي المسجلة من SchoolDeficit"
+        DECIMAL totalSurplusCount "عدد حالات الفائض التعليمي المسجلة من SchoolSurplus"
+        VARCHAR emergencySummary "ملخص حالات الطوارئ JSON"
+        VARCHAR closureSummary "ملخص أيام الإغلاق JSON"
+        VARCHAR awardSummary "ملخص الجوائز JSON"
+        DATE generationDate "تاريخ إنشاء الإحصاء"
+        INT generatedByUserId "معرف من أنشأ الإحصاء FK SystemUser.userId"
+        VARCHAR filePath "مسار ملف التقرير PDF/Excel"
+        VARCHAR status "حالة الإحصاء مسودة معتمد"
+        INT approvedByUserId "معرف من اعتمد FK SystemUser.userId"
+        DATE approvalDate "تاريخ الاعتماد"
+        TEXT notes "ملاحظات"
+        INT createdByUserId "منشئ السجل"
+        INT updatedByUserId "آخر من عدل"
+        DATE createdAt "تاريخ الإنشاء"
+        DATE updatedAt "آخر تحديث"
+        BOOLEAN isDeleted "حذف منطقي"
+    }
+
+    %% ===== Relationships =====
+    DashboardConfiguration ||--o{ KPI_Metrics : "معرف إعداد المؤشر FK Dash"
+    SchoolStatisticsDraft ||--o{ SubmittedStatistics : "معرف المسودة المصدر FK Sc"
+    SchoolStatisticsDraft ||--o{ StatisticsUpdateHistory : "معرف المسودة المتأثرة FK "
+    SubmittedStatistics ||--o{ StatisticsUpdateHistory : "معرف الإحصاء المرفوع المت"
+    SubmittedStatistics ||--o{ StatisticsArchive : "معرف الإحصاء المرفوع المص"
+    SystemReports ||--o{ ReportApprovals : "معرف التقرير المراد اعتما"</pre>
+    </details>
+  </div>
+
+  <div class="footer">
+    EduMS Enterprise © 2026 • ERD M6_Statistics • Mermaid 10.9.1 Strict-Compliant • Independent Per-Module Diagram
+  </div>
+
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'default',
+    securityLevel: 'loose',
+    er: { fontSize: 13, diagramPadding: 30, entityPadding: 16, minEntityWidth: 200 },
+    fontFamily: 'Cairo, "Fira Code", sans-serif'
+  });
+
+  let fullRendered = false;
+  function renderSlim() { mermaid.run({ querySelector: '#diagram-slim' }); }
+  function renderFull() {
+    if (fullRendered) return;
+    fullRendered = true;
+    mermaid.run({ querySelector: '#diagram-full' });
+  }
+  // Initial: render slim only
+  renderSlim();
+
+  function switchView(view) {
+    document.getElementById('tab-slim').classList.toggle('active', view === 'slim');
+    document.getElementById('tab-full').classList.toggle('active', view === 'full');
+    document.getElementById('pane-slim').classList.toggle('active', view === 'slim');
+    document.getElementById('pane-full').classList.toggle('active', view === 'full');
+    if (view === 'full') renderFull();
+  }
+
+  function currentSource() {
+    const active = document.querySelector('.view-pane.active');
+    return active.querySelector('.source-code').innerText;
+  }
+  function copySource() {
+    navigator.clipboard.writeText(currentSource()).then(() => alert('✓ تم نسخ كود Mermaid'));
+  }
+  function downloadSource() {
+    const view = document.getElementById('pane-slim').classList.contains('active') ? 'slim' : 'full';
+    const blob = new Blob([currentSource()], { type: 'text/plain;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'ERD_M6_Statistics_' + view + '.mmd';
+    a.click();
+  }
+  function downloadSvg() {
+    const active = document.querySelector('.view-pane.active');
+    const svg = active.querySelector('.mermaid svg');
+    if (!svg) { alert('المخطط لم يُحمَّل بعد'); return; }
+    const view = document.getElementById('pane-slim').classList.contains('active') ? 'slim' : 'full';
+    const blob = new Blob([svg.outerHTML], { type: 'image/svg+xml' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'ERD_M6_Statistics_' + view + '.svg';
+    a.click();
+  }
+</script>
+
+</body>
+</html>

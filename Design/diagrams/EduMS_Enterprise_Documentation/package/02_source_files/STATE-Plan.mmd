@@ -1,0 +1,18 @@
+stateDiagram-v2
+    [*] --> Draft : إعداد مسودة
+    Draft --> InReview : إرسال للمراجعة الداخلية
+    InReview --> Draft : مرفوض داخلياً
+    InReview --> Submitted : رفع للمكتب
+    Submitted --> OfficeReview
+    OfficeReview --> Returned : ملاحظات
+    Returned --> Draft
+    OfficeReview --> Approved
+    OfficeReview --> Rejected
+    Approved --> InExecution
+    InExecution --> Amended : طلب تعديل
+    Amended --> OfficeReview
+    InExecution --> Completed : نهاية العام
+    Completed --> Evaluated : تقييم نهائي
+    Evaluated --> Archived
+    Rejected --> [*]
+    Archived --> [*]

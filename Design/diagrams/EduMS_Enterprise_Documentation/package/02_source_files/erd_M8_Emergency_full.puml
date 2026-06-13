@@ -1,0 +1,419 @@
+@startuml M8_Emergency
+!define PK <b><color:red>PK</color></b>
+!define FK <i><color:blue>FK</color></i>
+skinparam linetype ortho
+skinparam class {
+  BackgroundColor #FEF3C7
+  BorderColor #92400E
+  ArrowColor #1E3A8A
+}
+hide methods
+
+entity "EmergencyHosting" as EmergencyHosting {
+  * hostingId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  hostingNumber : INT
+  hostingType : VARCHAR(50)
+  hostingDate : DATE
+  endDate : DATE
+  expectedEndDate : DATE
+  actualCount : INT
+  maxCapacity : VARCHAR(200)
+  utilizationPercentage : DECIMAL(5,2)
+  reason : VARCHAR(200)
+  sourceLocation : VARCHAR(200)
+  supportOrg : VARCHAR(200)
+  supportOrgContact : VARCHAR(200)
+  facilitiesUsed : VARCHAR(200)
+  resourcesProvided : VARCHAR(200)
+  resourcesReceived : VARCHAR(200)
+  expenses : VARCHAR(200)
+  totalExpenses : VARCHAR(200)
+  status : VARCHAR(50)
+  closureNotes : TEXT
+  lessonsLearned : VARCHAR(200)
+  reportedByUserId : BIGINT <<FK>>
+  attachments : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "EmergencyIncidents" as EmergencyIncidents {
+  * incidentId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  incidentNumber : INT
+  incidentType : VARCHAR(50)
+  incidentDate : DATE
+  incidentTime : TIME
+  severity : VARCHAR(200)
+  description : TEXT
+  location : VARCHAR(200)
+  reportedByUserId : BIGINT <<FK>>
+  reportedAt : VARCHAR(200)
+  isPlanActive : BOOLEAN
+  emergencyPlanId : BIGINT <<FK>>
+  affectedCount : INT
+  studentsAffected : INT
+  employeesAffected : INT
+  injuriesCount : INT
+  severeInjuriesCount : INT
+  fatalitiesCount : INT
+  propertyDamage : VARCHAR(200)
+  propertyDamageDescription : TEXT
+  emergencyResponse : VARCHAR(200)
+  externalAgencies : VARCHAR(200)
+  externalResponseTime : TIME
+  status : VARCHAR(50)
+  closureDate : DATE
+  closureNotes : TEXT
+  investigationReport : VARCHAR(500)
+  lessonsLearned : VARCHAR(200)
+  recommendations : VARCHAR(200)
+  attachments : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "EmergencyClosures" as EmergencyClosures {
+  * closureId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  closureNumber : INT
+  closureReason : VARCHAR(200)
+  authority : VARCHAR(200)
+  authorityDecisionNumber : INT
+  startDate : DATE
+  endDate : DATE
+  actualEndDate : DATE
+  totalClosureDays : INT
+  schoolDaysAffected : INT
+  alternativeEducation : BOOLEAN
+  alternativeEducationType : VARCHAR(50)
+  altEducationPlatform : VARCHAR(200)
+  altEducationDetails : TEXT
+  wasCompensated : BOOLEAN
+  compensationPlanId : BIGINT <<FK>>
+  parentNotificationSent : BOOLEAN
+  parentNotificationDate : DATE
+  parentNotificationMethod : VARCHAR(100)
+  status : VARCHAR(50)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "TransportationServices" as TransportationServices {
+  * serviceId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  routeId : BIGINT <<FK>>
+  routeName : VARCHAR(200)
+  routeCode : VARCHAR(50)
+  routeDescription : TEXT
+  busId : BIGINT <<FK>>
+  busPlateNumber : INT
+  busCapacity : INT
+  busModel : VARCHAR(200)
+  busYear : VARCHAR(200)
+  driverId : BIGINT <<FK>>
+  driverName : VARCHAR(200)
+  driverLicenseNumber : INT
+  driverPhone : VARCHAR(20)
+  supervisorId : BIGINT <<FK>>
+  supervisorName : VARCHAR(200)
+  supervisorPhone : VARCHAR(20)
+  shiftId : BIGINT <<FK>>
+  tripType : VARCHAR(50)
+  startTime : TIME
+  endTime : TIME
+  estimatedDuration : VARCHAR(200)
+  stops : VARCHAR(200)
+  isActive : BOOLEAN
+  status : VARCHAR(50)
+  operatorCompany : VARCHAR(200)
+  contractId : BIGINT <<FK>>
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "SchoolMergers" as SchoolMergers {
+  * mergerId : BIGINT <<PK>>
+  --
+  mergerNumber : INT
+  mergerDate : DATE
+  effectiveDate : DATE
+  sourceSchoolIds : VARCHAR(200)
+  targetSchoolId : BIGINT <<FK>>
+  mergerReason : INT
+  decisionAuthority : VARCHAR(200)
+  decisionDocumentPath : VARCHAR(200)
+  studentsTransferStatus : VARCHAR(50)
+  employeesTransferStatus : VARCHAR(50)
+  assetsTransferStatus : VARCHAR(50)
+  status : VARCHAR(50)
+  completionDate : DATE
+  completionNotes : TEXT
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "SchoolAwards" as SchoolAwards {
+  * awardId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  awardNumber : INT
+  awardName : VARCHAR(200)
+  awardCategory : VARCHAR(50)
+  level : VARCHAR(50)
+  issuingBody : BOOLEAN
+  issuingBodyType : BOOLEAN
+  awardDate : DATE
+  awardPlace : VARCHAR(200)
+  ranking : VARCHAR(200)
+  participantsJson : VARCHAR(200)
+  studentParticipants : INT
+  teacherParticipants : INT
+  awardDetails : TEXT
+  certificatePath : VARCHAR(200)
+  photosPath : VARCHAR(200)
+  videoPath : VARCHAR(200)
+  impact : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "ExternalParticipations" as ExternalParticipations {
+  * participationId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  participationNumber : INT
+  eventName : VARCHAR(200)
+  eventType : VARCHAR(50)
+  organizer : VARCHAR(200)
+  organizerType : VARCHAR(50)
+  location : VARCHAR(200)
+  startDate : DATE
+  endDate : DATE
+  results : VARCHAR(200)
+  ranking : VARCHAR(200)
+  participantsJson : VARCHAR(200)
+  studentParticipants : INT
+  teacherParticipants : INT
+  expenses : VARCHAR(200)
+  fundingSource : VARCHAR(200)
+  attachments : VARCHAR(200)
+  lessonsLearned : VARCHAR(200)
+  recommendations : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "CommunityPartnerships" as CommunityPartnerships {
+  * partnershipId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  partnershipNumber : INT
+  partnerName : VARCHAR(200)
+  partnerType : VARCHAR(50)
+  supportType : VARCHAR(50)
+  agreementDate : DATE
+  startDate : DATE
+  endDate : DATE
+  isRenewable : BOOLEAN
+  agreementDocumentPath : VARCHAR(200)
+  supportValue : VARCHAR(200)
+  supportValueCurrency : VARCHAR(200)
+  supportInKind : VARCHAR(50)
+  impact : VARCHAR(200)
+  impactRating : VARCHAR(200)
+  responsibleUserId : BIGINT <<FK>>
+  partnerContactPerson : VARCHAR(200)
+  partnerContactEmail : VARCHAR(100)
+  partnerContactPhone : VARCHAR(20)
+  status : VARCHAR(50)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "SafetySecurityReports" as SafetySecurityReports {
+  * reportId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  reportNumber : INT
+  reportDate : DATE
+  reportPeriod : VARCHAR(200)
+  safetyLevel : VARCHAR(50)
+  extinguisherExp : DATE
+  extinguishersCount : INT
+  extinguishersLastInspection : DATE
+  extinguishersNextInspection : DATE
+  alarmStatus : VARCHAR(50)
+  alarmLastTest : DATE
+  emergencyLightsStatus : VARCHAR(50)
+  fireAlarmSystem : VARCHAR(200)
+  fireHosesStatus : VARCHAR(50)
+  evacuationMaps : BOOLEAN
+  evacuationMapLocations : VARCHAR(200)
+  emergencyExitsStatus : VARCHAR(50)
+  drillCount : INT
+  drillDates : DATE
+  drillAverageTime : TIME
+  drillEvaluation : VARCHAR(200)
+  safetyCommitteeFormed : BOOLEAN
+  safetyCommitteeMembers : VARCHAR(200)
+  safetyTrainingHours : INT
+  incidentsCount : INT
+  recommendations : VARCHAR(200)
+  actionPlan : VARCHAR(200)
+  attachments : VARCHAR(200)
+  approvedByUserId : BIGINT <<FK>>
+  approvalDate : DATE
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "SchoolDeficit" as SchoolDeficit {
+  * deficitId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  deficitNumber : INT
+  deficitType : VARCHAR(50)
+  deficitCategory : VARCHAR(50)
+  deficitAmount : DECIMAL(15,2)
+  requiredAmount : DECIMAL(15,2)
+  availableAmount : DECIMAL(15,2)
+  deficitDescription : TEXT
+  educationalImpact : TEXT
+  impactLevel : VARCHAR(50)
+  detectionDate : DATE
+  detectedByUserId : BIGINT <<FK>>
+  currentStatus : VARCHAR(50)
+  statusUpdateDate : DATE
+  proposedSolution : VARCHAR(200)
+  estimatedCost : DECIMAL(15,2)
+  estimatedResolutionDate : DATE
+  actualResolutionDate : DATE
+  resolvedByUserId : BIGINT <<FK>>
+  resolutionNotes : TEXT
+  relatedRemediationPlanId : BIGINT <<FK>>
+  attachments : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "SchoolSurplus" as SchoolSurplus {
+  * surplusId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  surplusNumber : INT
+  surplusType : VARCHAR(50)
+  surplusCategory : VARCHAR(50)
+  surplusAmount : DECIMAL(15,2)
+  availableAmount : DECIMAL(15,2)
+  requiredAmount : DECIMAL(15,2)
+  surplusDescription : TEXT
+  utilizationPlan : VARCHAR(200)
+  utilizationType : VARCHAR(50)
+  potentialBeneficiary : VARCHAR(200)
+  discoveryDate : DATE
+  discoveredByUserId : BIGINT <<FK>>
+  currentStatus : VARCHAR(50)
+  statusUpdateDate : DATE
+  utilizationDate : DATE
+  actualUtilizationDate : DATE
+  utilizedByUserId : BIGINT <<FK>>
+  utilizationNotes : TEXT
+  relatedRemediationPlanId : BIGINT <<FK>>
+  attachments : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+entity "RemediationPlan" as RemediationPlan {
+  * planId : BIGINT <<PK>>
+  --
+  schoolId : BIGINT <<FK>>
+  planNumber : INT
+  planName : VARCHAR(200)
+  relatedDeficitId : BIGINT <<FK>>
+  relatedSurplusId : BIGINT <<FK>>
+  planType : VARCHAR(50)
+  selectedOption : VARCHAR(200)
+  optionDetails : TEXT
+  objectives : VARCHAR(200)
+  actionSteps : VARCHAR(200)
+  startDate : DATE
+  endDate : DATE
+  actualStartDate : DATE
+  actualEndDate : DATE
+  estimatedBudget : DECIMAL(15,2)
+  actualCost : DECIMAL(15,2)
+  currency : VARCHAR(200)
+  executionLead : VARCHAR(200)
+  executionLeadUserId : BIGINT <<FK>>
+  executionTeam : VARCHAR(200)
+  progressPercentage : DECIMAL(5,2)
+  status : VARCHAR(50)
+  approvalDate : DATE
+  approvedByUserId : BIGINT <<FK>>
+  completionReport : VARCHAR(200)
+  lessonsLearned : VARCHAR(200)
+  notes : TEXT
+  createdByUserId : BIGINT <<FK>>
+  updatedByUserId : BIGINT <<FK>>
+  createdAt : DATE
+  updatedAt : DATE
+  isDeleted : BOOLEAN
+}
+
+RemediationPlan ||--o{ EmergencyClosures : "compensationPlanId"
+RemediationPlan ||--o{ SchoolDeficit : "relatedRemediationPlanId"
+RemediationPlan ||--o{ SchoolSurplus : "relatedRemediationPlanId"
+SchoolDeficit ||--o{ RemediationPlan : "relatedDeficitId"
+SchoolSurplus ||--o{ RemediationPlan : "relatedSurplusId"
+@enduml

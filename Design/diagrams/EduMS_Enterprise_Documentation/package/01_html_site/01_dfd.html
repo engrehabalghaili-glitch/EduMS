@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌐 مخططات السياق وتدفق البيانات (DFD) | EduMS Documentation</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Cairo',sans-serif;background:#f8fafc;color:#1f2937;line-height:1.7;font-size:14.5px}
+header.top{background:linear-gradient(135deg,#1e3a8a,#3b82f6,#8b5cf6);color:#fff;padding:30px 24px;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+header.top h1{font-size:1.9em;font-weight:800;text-shadow:1px 1px 4px rgba(0,0,0,.3)}
+header.top .breadcrumb{margin-top:10px;font-size:.95em;opacity:.95}
+header.top .breadcrumb a{color:#fef3c7;text-decoration:none;font-weight:600}
+header.top .breadcrumb a:hover{text-decoration:underline}
+header.top .stats{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap}
+header.top .stat{background:rgba(255,255,255,.18);padding:8px 16px;border-radius:20px;font-size:.9em;font-weight:600;border:1px solid rgba(255,255,255,.3)}
+.container{max-width:1500px;margin:24px auto;padding:0 20px}
+.toc-side{background:#fff;border-radius:14px;padding:20px;margin-bottom:24px;box-shadow:0 2px 10px rgba(0,0,0,.06);position:sticky;top:0;z-index:50}
+.toc-side h3{color:#1e3a8a;font-size:1.15em;margin-bottom:12px}
+.toc-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:4px}
+.toc-list a{color:#374151;text-decoration:none;padding:5px 10px;border-radius:6px;font-size:.88em;display:block;font-weight:500}
+.toc-list a:hover{background:#dbeafe;color:#1e3a8a}
+.toc-list code{background:#f3f4f6;padding:1px 5px;border-radius:3px;font-size:.85em;color:#1e3a8a;font-weight:700}
+.diagram-card{background:#fff;border-radius:14px;margin-bottom:24px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.05)}
+.diagram-header{background:linear-gradient(90deg,#f8fafc,#e0e7ff);padding:18px 24px;border-bottom:2px solid #e5e7eb}
+.id-badge{display:inline-block;background:#1e3a8a;color:#fff;padding:4px 12px;border-radius:6px;font-size:.82em;font-weight:700;font-family:'Fira Code',monospace;margin-left:10px}
+.diagram-header h3{display:inline;color:#1e3a8a;font-size:1.3em;font-weight:700}
+.diagram-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tag{display:inline-block;padding:4px 10px;border-radius:18px;font-size:.82em;font-weight:600}
+.tag.type{background:#dbeafe;color:#1e3a8a}
+.tag.level{background:#fce7f3;color:#831843}
+.tag.mod{background:#f3e8ff;color:#6b21a8}
+.tag.stats{background:#fef3c7;color:#92400e}
+.diagram-body{padding:20px 24px}
+.info-block{margin-bottom:10px;font-size:.93em}
+.info-block strong{color:#1e3a8a;margin-left:5px}
+.mermaid-wrapper{background:#fafbfc;border:2px dashed #d1d5db;border-radius:10px;padding:20px 12px;margin:16px 0;overflow:auto;min-height:150px}
+.mermaid{text-align:center;direction:ltr;font-size:13px}
+.code-tabs{display:flex;gap:5px;margin-top:14px;border-bottom:2px solid #e5e7eb}
+.code-tab{background:#e5e7eb;color:#374151;padding:6px 14px;border-radius:6px 6px 0 0;cursor:pointer;font-weight:600;font-size:.85em;border:none;font-family:inherit}
+.code-tab.active{background:#1e3a8a;color:#fff}
+.code-block{background:#0f172a;color:#cbd5e1;border-radius:0 10px 10px 10px;padding:14px;overflow:auto;max-height:480px;font-family:'Fira Code',monospace;font-size:.78em;line-height:1.5;direction:ltr;text-align:left;display:none;white-space:pre}
+.code-block.active{display:block}
+.back-to-top{position:fixed;bottom:24px;left:24px;background:#1e3a8a;color:#fff;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.3em;box-shadow:0 4px 14px rgba(0,0,0,.25);z-index:100}
+.back-to-top:hover{background:#f59e0b}
+.nav-buttons{display:flex;gap:12px;justify-content:space-between;margin:30px 0}
+.nav-btn{background:#1e3a8a;color:#fff;padding:14px 22px;border-radius:10px;text-decoration:none;font-weight:700;flex:1;text-align:center;transition:all .2s}
+.nav-btn:hover{background:#3b82f6;transform:translateY(-2px)}
+.nav-btn.disabled{background:#9ca3af;cursor:not-allowed}
+@media(max-width:768px){
+  header.top h1{font-size:1.4em}
+  .container{padding:0 12px}
+  .diagram-header{padding:14px}
+  .diagram-body{padding:14px}
+}
+</style>
+</head>
+<body>
+
+<a id="top"></a>
+<header class="top">
+  <div class="breadcrumb"><a href="index.html">🏠 الفهرس الرئيسي</a> &nbsp;›&nbsp; 🌐 مخططات السياق وتدفق البيانات (DFD)</div>
+  <h1>🌐 مخططات السياق وتدفق البيانات (DFD)</h1>
+  <div class="stats">
+    <div class="stat">📊 10 مخطط</div>
+    <div class="stat">🎯 EduMS Enterprise</div>
+  </div>
+</header>
+<div class="container">
+<div class="toc-side"><h3>📑 محتويات هذا القسم</h3><div class="toc-list"><a href="#CTX-01"><code>CTX-01</code> Context Diagram — مخطط السياق المؤسسي العام</a><a href="#DFD-L0"><code>DFD-L0</code> DFD Level 0 — تفجير النظام إلى الـ 8 وحدات الرئيسية</a><a href="#DFD-L1-M1_SchoolAdmin"><code>DFD-L1-M1_SchoolAdmin</code> DFD Level 1 — وحدة إدارة المدرسة</a><a href="#DFD-L1-M2_Student"><code>DFD-L1-M2_Student</code> DFD Level 1 — وحدة إدارة الطلاب</a><a href="#DFD-L1-M3_Employee"><code>DFD-L1-M3_Employee</code> DFD Level 1 — وحدة إدارة الموظفين</a><a href="#DFD-L1-M4_Assets"><code>DFD-L1-M4_Assets</code> DFD Level 1 — وحدة الأصول</a><a href="#DFD-L1-M5_Finance"><code>DFD-L1-M5_Finance</code> DFD Level 1 — الإدارة المالية</a><a href="#DFD-L1-M6_Statistics"><code>DFD-L1-M6_Statistics</code> DFD Level 1 — البيانات والإحصاء</a><a href="#DFD-L1-M7_Auth"><code>DFD-L1-M7_Auth</code> DFD Level 1 — الأمن والصلاحيات</a><a href="#DFD-L1-M8_Emergency"><code>DFD-L1-M8_Emergency</code> DFD Level 1 — الطوارئ والتميز</a></div></div>
+<div class="nav-buttons"><a href="index.html" class="nav-btn" style="background:#f59e0b">🏠 الفهرس الرئيسي</a><a href="02_usecase.html" class="nav-btn">🎯 مخططات حالات الاستخدام ←</a></div>
+
+<article class="diagram-card" id="CTX-01">
+  <div class="diagram-header">
+    <span class="id-badge">CTX-01</span>
+    <h3>Context Diagram — مخطط السياق المؤسسي العام</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Context Diagram</span>
+      <span class="tag level">🎯 Enterprise</span>
+      
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>إظهار النظام كصندوق أسود وعلاقاته مع 12 كياناً خارجياً.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>12 External Entities + النظام المركزي + 20+ تدفق بيانات.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TB
+    classDef sys fill:#1e3a8a,color:#fff,stroke:#fff,stroke-width:3px,font-weight:bold
+    classDef ext fill:#fef3c7,color:#92400e,stroke:#92400e,stroke-width:2px
+    classDef gov fill:#dcfce7,color:#166534,stroke:#166534,stroke-width:2px
+    classDef tech fill:#e0e7ff,color:#3730a3,stroke:#3730a3,stroke-width:2px
+
+    SYS[("🏛️<br/>EduMS Enterprise<br/>نظام أتمتة العمليات<br/>التعليمية والإدارية")]:::sys
+
+    Student[👨‍🎓 الطالب]:::ext
+    Guardian[👨‍👩‍👧 ولي الأمر]:::ext
+    Teacher[👨‍🏫 المعلم]:::ext
+    Admin[👔 الموظف الإداري]:::ext
+    Principal[🏫 مدير المدرسة]:::ext
+    Office[🏛️ مكتب التربية والتعليم]:::gov
+    Ministry[🏢 وزارة التربية والتعليم]:::gov
+    Vendor[🏭 الموردون والمقاولون]:::ext
+    Bank[🏦 البنوك وقنوات الدفع]:::tech
+    SMS[📱 SMS / Email Gateway]:::tech
+    SmartCard[💳 البطاقة الذكية / الباركود]:::tech
+    Inspector[🔍 المفتش التربوي]:::gov
+
+    Student -->|طلبات / حضور / تقييمات| SYS
+    SYS -->|نتائج / شهادات / إشعارات| Student
+    Guardian -->|طلب تسجيل / استفسارات / دفع رسوم| SYS
+    SYS -->|تقارير الأبناء / فواتير| Guardian
+    Teacher -->|درجات / حضور / تقييمات سلوك| SYS
+    SYS -->|جداول / مهام / كشوف رواتب| Teacher
+    Admin -->|إجازات / مهام إدارية| SYS
+    SYS -->|تقارير إدارية| Admin
+    Principal -->|قرارات / خطط / اعتمادات| SYS
+    SYS -->|Dashboards / تقارير شاملة| Principal
+    SYS -->|تقارير دورية / إحصائيات| Office
+    Office -->|تعاميم / اعتمادات / قرارات| SYS
+    Inspector -->|زيارات إشرافية / ملاحظات| SYS
+    SYS -->|تقارير المدارس| Inspector
+    SYS <-->|API تكامل وطني| Ministry
+    Vendor -->|عروض أسعار / فواتير / تسليم أصول| SYS
+    SYS -->|طلبات شراء / مدفوعات| Vendor
+    Bank <-->|بوابة دفع / تسويات بنكية| SYS
+    SYS -->|إشعارات SMS / Email| SMS
+    SmartCard <-->|قراءة باركود / تتبع أصول وحضور| SYS
+
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'CTX-01-mer')">📊 Mermaid</button>
+      <button class="code-tab" onclick="showCode(this,'CTX-01-pu')">🌳 PlantUML</button>
+    </div>
+    <pre class="code-block active" id="CTX-01-mer">flowchart TB
+    classDef sys fill:#1e3a8a,color:#fff,stroke:#fff,stroke-width:3px,font-weight:bold
+    classDef ext fill:#fef3c7,color:#92400e,stroke:#92400e,stroke-width:2px
+    classDef gov fill:#dcfce7,color:#166534,stroke:#166534,stroke-width:2px
+    classDef tech fill:#e0e7ff,color:#3730a3,stroke:#3730a3,stroke-width:2px
+
+    SYS[(&quot;🏛️&lt;br/&gt;EduMS Enterprise&lt;br/&gt;نظام أتمتة العمليات&lt;br/&gt;التعليمية والإدارية&quot;)]:::sys
+
+    Student[👨‍🎓 الطالب]:::ext
+    Guardian[👨‍👩‍👧 ولي الأمر]:::ext
+    Teacher[👨‍🏫 المعلم]:::ext
+    Admin[👔 الموظف الإداري]:::ext
+    Principal[🏫 مدير المدرسة]:::ext
+    Office[🏛️ مكتب التربية والتعليم]:::gov
+    Ministry[🏢 وزارة التربية والتعليم]:::gov
+    Vendor[🏭 الموردون والمقاولون]:::ext
+    Bank[🏦 البنوك وقنوات الدفع]:::tech
+    SMS[📱 SMS / Email Gateway]:::tech
+    SmartCard[💳 البطاقة الذكية / الباركود]:::tech
+    Inspector[🔍 المفتش التربوي]:::gov
+
+    Student --&gt;|طلبات / حضور / تقييمات| SYS
+    SYS --&gt;|نتائج / شهادات / إشعارات| Student
+    Guardian --&gt;|طلب تسجيل / استفسارات / دفع رسوم| SYS
+    SYS --&gt;|تقارير الأبناء / فواتير| Guardian
+    Teacher --&gt;|درجات / حضور / تقييمات سلوك| SYS
+    SYS --&gt;|جداول / مهام / كشوف رواتب| Teacher
+    Admin --&gt;|إجازات / مهام إدارية| SYS
+    SYS --&gt;|تقارير إدارية| Admin
+    Principal --&gt;|قرارات / خطط / اعتمادات| SYS
+    SYS --&gt;|Dashboards / تقارير شاملة| Principal
+    SYS --&gt;|تقارير دورية / إحصائيات| Office
+    Office --&gt;|تعاميم / اعتمادات / قرارات| SYS
+    Inspector --&gt;|زيارات إشرافية / ملاحظات| SYS
+    SYS --&gt;|تقارير المدارس| Inspector
+    SYS &lt;--&gt;|API تكامل وطني| Ministry
+    Vendor --&gt;|عروض أسعار / فواتير / تسليم أصول| SYS
+    SYS --&gt;|طلبات شراء / مدفوعات| Vendor
+    Bank &lt;--&gt;|بوابة دفع / تسويات بنكية| SYS
+    SYS --&gt;|إشعارات SMS / Email| SMS
+    SmartCard &lt;--&gt;|قراءة باركود / تتبع أصول وحضور| SYS
+</pre>
+    <pre class="code-block" id="CTX-01-pu">@startuml ContextDiagram
+left to right direction
+actor &quot;الطالب&quot; as Student
+actor &quot;ولي الأمر&quot; as Guardian
+actor &quot;المعلم&quot; as Teacher
+actor &quot;موظف إداري&quot; as Admin
+actor &quot;مدير المدرسة&quot; as Principal
+actor &quot;مكتب التربية&quot; as Office
+actor &quot;وزارة التربية&quot; as Ministry
+actor &quot;المفتش التربوي&quot; as Inspector
+actor &quot;الموردون&quot; as Vendor
+actor &quot;البنوك&quot; as Bank
+actor &quot;SMS/Email&quot; as SMS
+actor &quot;البطاقة الذكية&quot; as SmartCard
+
+rectangle &quot;**EduMS Enterprise**&quot; as SYS
+
+Student --&gt; SYS
+SYS --&gt; Student
+Guardian --&gt; SYS
+SYS --&gt; Guardian
+Teacher --&gt; SYS
+SYS --&gt; Teacher
+Admin --&gt; SYS
+SYS --&gt; Admin
+Principal --&gt; SYS
+SYS --&gt; Principal
+SYS --&gt; Office
+Office --&gt; SYS
+Inspector --&gt; SYS
+SYS --&gt; Inspector
+SYS &lt;--&gt; Ministry
+Vendor --&gt; SYS
+SYS --&gt; Vendor
+Bank &lt;--&gt; SYS
+SYS --&gt; SMS
+SmartCard &lt;--&gt; SYS
+@enduml</pre>
+  </div>
+</article>
+
+<article class="diagram-card" id="DFD-L0">
+  <div class="diagram-header">
+    <span class="id-badge">DFD-L0</span>
+    <h3>DFD Level 0 — تفجير النظام إلى الـ 8 وحدات الرئيسية</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Data Flow Diagram (Level 0)</span>
+      <span class="tag level">🎯 System</span>
+      
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>عرض الوحدات الرئيسية الثمانية والتدفقات بينها وبين الكيانات الخارجية ومخازن البيانات.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>8 عمليات رئيسية + 8 مخازن بيانات + 6 كيانات خارجية + 40+ تدفق.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TB
+    classDef proc fill:#3b82f6,color:#fff,stroke:#1e3a8a,stroke-width:2px,rx:30,ry:30
+    classDef ds fill:#fde68a,color:#78350f,stroke:#92400e,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d,stroke-width:2px
+
+    P1((1.0<br/>إدارة المدرسة)):::proc
+    P2((2.0<br/>إدارة الطلاب)):::proc
+    P3((3.0<br/>إدارة الموظفين)):::proc
+    P4((4.0<br/>إدارة الأصول)):::proc
+    P5((5.0<br/>الإدارة المالية)):::proc
+    P6((6.0<br/>البيانات والإحصاء)):::proc
+    P7((7.0<br/>الصلاحيات والأمن)):::proc
+    P8((8.0<br/>الطوارئ والتميز)):::proc
+
+    DS1[(D1: SchoolDB<br/>47 جدول)]:::ds
+    DS2[(D2: StudentDB<br/>37 جدول)]:::ds
+    DS3[(D3: EmployeeDB<br/>24 جدول)]:::ds
+    DS4[(D4: AssetsDB<br/>41 جدول)]:::ds
+    DS5[(D5: FinanceDB<br/>8 جدول)]:::ds
+    DS6[(D6: StatisticsDB<br/>15 جدول)]:::ds
+    DS7[(D7: AuthDB<br/>21 جدول)]:::ds
+    DS8[(D8: EmergencyDB<br/>12 جدول)]:::ds
+
+    E1[ولي الأمر/الطالب]:::ext
+    E2[الموظفون]:::ext
+    E3[مدير المدرسة]:::ext
+    E4[مكتب التربية]:::ext
+    E5[الموردون]:::ext
+    E6[الوزارة]:::ext
+
+    E3 -->|قرارات+خطط| P1
+    P1 <--> DS1
+    E1 -->|طلبات التحاق| P2
+    P2 <--> DS2
+    P2 -->|تقارير| E1
+    E2 -->|حضور+درجات| P3
+    P3 <--> DS3
+    P3 -->|كشوف رواتب| E2
+    E5 -->|أصول+فواتير| P4
+    P4 <--> DS4
+    P3 -->|مستحقات HR| P5
+    P2 -->|رسوم| P5
+    P4 -->|فواتير الأصول| P5
+    P5 <--> DS5
+    P5 -->|إيصالات| E1
+    P1 -->|بيانات| P6
+    P2 -->|بيانات| P6
+    P3 -->|بيانات| P6
+    P4 -->|بيانات| P6
+    P5 -->|بيانات| P6
+    P6 <--> DS6
+    P6 -->|تقارير مرفوعة| E4
+    P6 -->|تقارير وطنية| E6
+    E4 -->|تعاميم/اعتمادات| P1
+    P7 <--> DS7
+    P1 -.audit.-> P7
+    P2 -.audit.-> P7
+    P3 -.audit.-> P7
+    P4 -.audit.-> P7
+    P5 -.audit.-> P7
+    P8 <--> DS8
+    P1 <-->|طوارئ| P8
+    P8 -->|تقارير الحالات| E4
+
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'DFD-L0-mer')">📊 Mermaid</button>
+      <button class="code-tab" onclick="showCode(this,'DFD-L0-pu')">🌳 PlantUML</button>
+    </div>
+    <pre class="code-block active" id="DFD-L0-mer">flowchart TB
+    classDef proc fill:#3b82f6,color:#fff,stroke:#1e3a8a,stroke-width:2px,rx:30,ry:30
+    classDef ds fill:#fde68a,color:#78350f,stroke:#92400e,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d,stroke-width:2px
+
+    P1((1.0&lt;br/&gt;إدارة المدرسة)):::proc
+    P2((2.0&lt;br/&gt;إدارة الطلاب)):::proc
+    P3((3.0&lt;br/&gt;إدارة الموظفين)):::proc
+    P4((4.0&lt;br/&gt;إدارة الأصول)):::proc
+    P5((5.0&lt;br/&gt;الإدارة المالية)):::proc
+    P6((6.0&lt;br/&gt;البيانات والإحصاء)):::proc
+    P7((7.0&lt;br/&gt;الصلاحيات والأمن)):::proc
+    P8((8.0&lt;br/&gt;الطوارئ والتميز)):::proc
+
+    DS1[(D1: SchoolDB&lt;br/&gt;47 جدول)]:::ds
+    DS2[(D2: StudentDB&lt;br/&gt;37 جدول)]:::ds
+    DS3[(D3: EmployeeDB&lt;br/&gt;24 جدول)]:::ds
+    DS4[(D4: AssetsDB&lt;br/&gt;41 جدول)]:::ds
+    DS5[(D5: FinanceDB&lt;br/&gt;8 جدول)]:::ds
+    DS6[(D6: StatisticsDB&lt;br/&gt;15 جدول)]:::ds
+    DS7[(D7: AuthDB&lt;br/&gt;21 جدول)]:::ds
+    DS8[(D8: EmergencyDB&lt;br/&gt;12 جدول)]:::ds
+
+    E1[ولي الأمر/الطالب]:::ext
+    E2[الموظفون]:::ext
+    E3[مدير المدرسة]:::ext
+    E4[مكتب التربية]:::ext
+    E5[الموردون]:::ext
+    E6[الوزارة]:::ext
+
+    E3 --&gt;|قرارات+خطط| P1
+    P1 &lt;--&gt; DS1
+    E1 --&gt;|طلبات التحاق| P2
+    P2 &lt;--&gt; DS2
+    P2 --&gt;|تقارير| E1
+    E2 --&gt;|حضور+درجات| P3
+    P3 &lt;--&gt; DS3
+    P3 --&gt;|كشوف رواتب| E2
+    E5 --&gt;|أصول+فواتير| P4
+    P4 &lt;--&gt; DS4
+    P3 --&gt;|مستحقات HR| P5
+    P2 --&gt;|رسوم| P5
+    P4 --&gt;|فواتير الأصول| P5
+    P5 &lt;--&gt; DS5
+    P5 --&gt;|إيصالات| E1
+    P1 --&gt;|بيانات| P6
+    P2 --&gt;|بيانات| P6
+    P3 --&gt;|بيانات| P6
+    P4 --&gt;|بيانات| P6
+    P5 --&gt;|بيانات| P6
+    P6 &lt;--&gt; DS6
+    P6 --&gt;|تقارير مرفوعة| E4
+    P6 --&gt;|تقارير وطنية| E6
+    E4 --&gt;|تعاميم/اعتمادات| P1
+    P7 &lt;--&gt; DS7
+    P1 -.audit.-&gt; P7
+    P2 -.audit.-&gt; P7
+    P3 -.audit.-&gt; P7
+    P4 -.audit.-&gt; P7
+    P5 -.audit.-&gt; P7
+    P8 &lt;--&gt; DS8
+    P1 &lt;--&gt;|طوارئ| P8
+    P8 --&gt;|تقارير الحالات| E4
+</pre>
+    <pre class="code-block" id="DFD-L0-pu">@startuml DFD_L0
+@enduml</pre>
+  </div>
+</article>
+
+<article class="diagram-card" id="DFD-L1-M1_SchoolAdmin">
+  <div class="diagram-header">
+    <span class="id-badge">DFD-L1-M1_SchoolAdmin</span>
+    <h3>DFD Level 1 — وحدة إدارة المدرسة</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Data Flow Diagram (Level 1)</span>
+      <span class="tag level">🎯 Module</span>
+       <span class="tag mod">🏛️ إدارة المدرسة والبيئة الت</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تفجير وحدة M1_SchoolAdmin إلى عملياتها الفرعية مع مخازن البيانات.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>8 عمليات فرعية + 8 مخزن بيانات.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P1_1((1.1<br/>تأسيس المدرسة)):::proc
+    P1_2((1.2<br/>إعداد العام الدراسي)):::proc
+    P1_3((1.3<br/>إدارة القيادة والهيكل)):::proc
+    P1_4((1.4<br/>الاعتماد والإشراف التربوي)):::proc
+    P1_5((1.5<br/>الإحصاء والتقارير الدورية)):::proc
+    P1_6((1.6<br/>التخطيط الاستراتيجي)):::proc
+    P1_7((1.7<br/>التعاميم والمراسلات)):::proc
+    P1_8((1.8<br/>العمليات الاستثنائية)):::proc
+
+    DS_Office[("Office")]:::ds
+    DS_School[("School")]:::ds
+    DS_SchoolAcademicYear[("SchoolAcademicYear")]:::ds
+    DS_SchoolCalendar[("SchoolCalendar")]:::ds
+    DS_ApprovedPlan[("ApprovedPlan")]:::ds
+    DS_ReceivedCirculars[("ReceivedCirculars")]:::ds
+    DS_AnnualReport[("AnnualReport")]:::ds
+    DS_SchoolDecision[("SchoolDecision")]:::ds
+
+    Ext1 --> P1_1
+    P1_1 --> P1_2
+    P1_2 --> P1_3
+    P1_3 --> P1_4
+    P1_4 --> P1_5
+    P1_5 --> P1_6
+    P1_6 --> P1_7
+    P1_7 --> P1_8
+    P1_1 <--> DS_Office
+    P1_2 <--> DS_School
+    P1_3 <--> DS_SchoolAcademicYear
+    P1_4 <--> DS_SchoolCalendar
+    P1_5 <--> DS_ApprovedPlan
+    P1_6 <--> DS_ReceivedCirculars
+    P1_7 <--> DS_AnnualReport
+    P1_8 <--> DS_SchoolDecision
+
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'DFD-L1-M1_SchoolAdmin-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="DFD-L1-M1_SchoolAdmin-mer">flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P1_1((1.1&lt;br/&gt;تأسيس المدرسة)):::proc
+    P1_2((1.2&lt;br/&gt;إعداد العام الدراسي)):::proc
+    P1_3((1.3&lt;br/&gt;إدارة القيادة والهيكل)):::proc
+    P1_4((1.4&lt;br/&gt;الاعتماد والإشراف التربوي)):::proc
+    P1_5((1.5&lt;br/&gt;الإحصاء والتقارير الدورية)):::proc
+    P1_6((1.6&lt;br/&gt;التخطيط الاستراتيجي)):::proc
+    P1_7((1.7&lt;br/&gt;التعاميم والمراسلات)):::proc
+    P1_8((1.8&lt;br/&gt;العمليات الاستثنائية)):::proc
+
+    DS_Office[(&quot;Office&quot;)]:::ds
+    DS_School[(&quot;School&quot;)]:::ds
+    DS_SchoolAcademicYear[(&quot;SchoolAcademicYear&quot;)]:::ds
+    DS_SchoolCalendar[(&quot;SchoolCalendar&quot;)]:::ds
+    DS_ApprovedPlan[(&quot;ApprovedPlan&quot;)]:::ds
+    DS_ReceivedCirculars[(&quot;ReceivedCirculars&quot;)]:::ds
+    DS_AnnualReport[(&quot;AnnualReport&quot;)]:::ds
+    DS_SchoolDecision[(&quot;SchoolDecision&quot;)]:::ds
+
+    Ext1 --&gt; P1_1
+    P1_1 --&gt; P1_2
+    P1_2 --&gt; P1_3
+    P1_3 --&gt; P1_4
+    P1_4 --&gt; P1_5
+    P1_5 --&gt; P1_6
+    P1_6 --&gt; P1_7
+    P1_7 --&gt; P1_8
+    P1_1 &lt;--&gt; DS_Office
+    P1_2 &lt;--&gt; DS_School
+    P1_3 &lt;--&gt; DS_SchoolAcademicYear
+    P1_4 &lt;--&gt; DS_SchoolCalendar
+    P1_5 &lt;--&gt; DS_ApprovedPlan
+    P1_6 &lt;--&gt; DS_ReceivedCirculars
+    P1_7 &lt;--&gt; DS_AnnualReport
+    P1_8 &lt;--&gt; DS_SchoolDecision
+</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="DFD-L1-M2_Student">
+  <div class="diagram-header">
+    <span class="id-badge">DFD-L1-M2_Student</span>
+    <h3>DFD Level 1 — وحدة إدارة الطلاب</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Data Flow Diagram (Level 1)</span>
+      <span class="tag level">🎯 Module</span>
+       <span class="tag mod">🎓 إدارة الطلاب والشؤون الأك</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تفجير وحدة M2_Student إلى عملياتها الفرعية مع مخازن البيانات.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>8 عمليات فرعية + 8 مخزن بيانات.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P2_1((2.1<br/>التسجيل والقبول)):::proc
+    P2_2((2.2<br/>الحضور والغياب)):::proc
+    P2_3((2.3<br/>الدرجات والتقييم)):::proc
+    P2_4((2.4<br/>السلوك والإرشاد)):::proc
+    P2_5((2.5<br/>الأنشطة اللاصفية)):::proc
+    P2_6((2.6<br/>الترقية والنقل)):::proc
+    P2_7((2.7<br/>التخرج والأرشفة)):::proc
+    P2_8((2.8<br/>الصحة والنقل المدرسي)):::proc
+
+    DS_Application[("Application")]:::ds
+    DS_Student[("Student")]:::ds
+    DS_Enrollment[("Enrollment")]:::ds
+    DS_Attendance[("Attendance")]:::ds
+    DS_Grade[("Grade")]:::ds
+    DS_Discipline[("Discipline")]:::ds
+    DS_SchoolActivity[("SchoolActivity")]:::ds
+    DS_StudentHealthRecord[("StudentHealthRecord")]:::ds
+
+    Ext1 --> P2_1
+    P2_1 --> P2_2
+    P2_2 --> P2_3
+    P2_3 --> P2_4
+    P2_4 --> P2_5
+    P2_5 --> P2_6
+    P2_6 --> P2_7
+    P2_7 --> P2_8
+    P2_1 <--> DS_Application
+    P2_2 <--> DS_Student
+    P2_3 <--> DS_Enrollment
+    P2_4 <--> DS_Attendance
+    P2_5 <--> DS_Grade
+    P2_6 <--> DS_Discipline
+    P2_7 <--> DS_SchoolActivity
+    P2_8 <--> DS_StudentHealthRecord
+
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'DFD-L1-M2_Student-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="DFD-L1-M2_Student-mer">flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P2_1((2.1&lt;br/&gt;التسجيل والقبول)):::proc
+    P2_2((2.2&lt;br/&gt;الحضور والغياب)):::proc
+    P2_3((2.3&lt;br/&gt;الدرجات والتقييم)):::proc
+    P2_4((2.4&lt;br/&gt;السلوك والإرشاد)):::proc
+    P2_5((2.5&lt;br/&gt;الأنشطة اللاصفية)):::proc
+    P2_6((2.6&lt;br/&gt;الترقية والنقل)):::proc
+    P2_7((2.7&lt;br/&gt;التخرج والأرشفة)):::proc
+    P2_8((2.8&lt;br/&gt;الصحة والنقل المدرسي)):::proc
+
+    DS_Application[(&quot;Application&quot;)]:::ds
+    DS_Student[(&quot;Student&quot;)]:::ds
+    DS_Enrollment[(&quot;Enrollment&quot;)]:::ds
+    DS_Attendance[(&quot;Attendance&quot;)]:::ds
+    DS_Grade[(&quot;Grade&quot;)]:::ds
+    DS_Discipline[(&quot;Discipline&quot;)]:::ds
+    DS_SchoolActivity[(&quot;SchoolActivity&quot;)]:::ds
+    DS_StudentHealthRecord[(&quot;StudentHealthRecord&quot;)]:::ds
+
+    Ext1 --&gt; P2_1
+    P2_1 --&gt; P2_2
+    P2_2 --&gt; P2_3
+    P2_3 --&gt; P2_4
+    P2_4 --&gt; P2_5
+    P2_5 --&gt; P2_6
+    P2_6 --&gt; P2_7
+    P2_7 --&gt; P2_8
+    P2_1 &lt;--&gt; DS_Application
+    P2_2 &lt;--&gt; DS_Student
+    P2_3 &lt;--&gt; DS_Enrollment
+    P2_4 &lt;--&gt; DS_Attendance
+    P2_5 &lt;--&gt; DS_Grade
+    P2_6 &lt;--&gt; DS_Discipline
+    P2_7 &lt;--&gt; DS_SchoolActivity
+    P2_8 &lt;--&gt; DS_StudentHealthRecord
+</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="DFD-L1-M3_Employee">
+  <div class="diagram-header">
+    <span class="id-badge">DFD-L1-M3_Employee</span>
+    <h3>DFD Level 1 — وحدة إدارة الموظفين</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Data Flow Diagram (Level 1)</span>
+      <span class="tag level">🎯 Module</span>
+       <span class="tag mod">👥 إدارة الموظفين والكادر ال</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تفجير وحدة M3_Employee إلى عملياتها الفرعية مع مخازن البيانات.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>7 عمليات فرعية + 8 مخزن بيانات.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P3_1((3.1<br/>الاستقطاب والتعيين)):::proc
+    P3_2((3.2<br/>التشغيل اليومي)):::proc
+    P3_3((3.3<br/>الرواتب والمالية)):::proc
+    P3_4((3.4<br/>الأداء والجزاءات)):::proc
+    P3_5((3.5<br/>التدريب والتطوير)):::proc
+    P3_6((3.6<br/>الإجازات والنقل)):::proc
+    P3_7((3.7<br/>إنهاء الخدمة)):::proc
+
+    DS_VacantPosition[("VacantPosition")]:::ds
+    DS_JobApplicant[("JobApplicant")]:::ds
+    DS_Employee[("Employee")]:::ds
+    DS_EmployeeAttendance[("EmployeeAttendance")]:::ds
+    DS_EmployeePayroll[("EmployeePayroll")]:::ds
+    DS_PerformanceReview[("PerformanceReview")]:::ds
+    DS_EmployeeLeave[("EmployeeLeave")]:::ds
+    DS_EmployeeTermination[("EmployeeTermination")]:::ds
+
+    Ext1 --> P3_1
+    P3_1 --> P3_2
+    P3_2 --> P3_3
+    P3_3 --> P3_4
+    P3_4 --> P3_5
+    P3_5 --> P3_6
+    P3_6 --> P3_7
+    P3_1 <--> DS_VacantPosition
+    P3_2 <--> DS_JobApplicant
+    P3_3 <--> DS_Employee
+    P3_4 <--> DS_EmployeeAttendance
+    P3_5 <--> DS_EmployeePayroll
+    P3_6 <--> DS_PerformanceReview
+    P3_7 <--> DS_EmployeeLeave
+    P3_7 <--> DS_EmployeeTermination
+
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'DFD-L1-M3_Employee-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="DFD-L1-M3_Employee-mer">flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P3_1((3.1&lt;br/&gt;الاستقطاب والتعيين)):::proc
+    P3_2((3.2&lt;br/&gt;التشغيل اليومي)):::proc
+    P3_3((3.3&lt;br/&gt;الرواتب والمالية)):::proc
+    P3_4((3.4&lt;br/&gt;الأداء والجزاءات)):::proc
+    P3_5((3.5&lt;br/&gt;التدريب والتطوير)):::proc
+    P3_6((3.6&lt;br/&gt;الإجازات والنقل)):::proc
+    P3_7((3.7&lt;br/&gt;إنهاء الخدمة)):::proc
+
+    DS_VacantPosition[(&quot;VacantPosition&quot;)]:::ds
+    DS_JobApplicant[(&quot;JobApplicant&quot;)]:::ds
+    DS_Employee[(&quot;Employee&quot;)]:::ds
+    DS_EmployeeAttendance[(&quot;EmployeeAttendance&quot;)]:::ds
+    DS_EmployeePayroll[(&quot;EmployeePayroll&quot;)]:::ds
+    DS_PerformanceReview[(&quot;PerformanceReview&quot;)]:::ds
+    DS_EmployeeLeave[(&quot;EmployeeLeave&quot;)]:::ds
+    DS_EmployeeTermination[(&quot;EmployeeTermination&quot;)]:::ds
+
+    Ext1 --&gt; P3_1
+    P3_1 --&gt; P3_2
+    P3_2 --&gt; P3_3
+    P3_3 --&gt; P3_4
+    P3_4 --&gt; P3_5
+    P3_5 --&gt; P3_6
+    P3_6 --&gt; P3_7
+    P3_1 &lt;--&gt; DS_VacantPosition
+    P3_2 &lt;--&gt; DS_JobApplicant
+    P3_3 &lt;--&gt; DS_Employee
+    P3_4 &lt;--&gt; DS_EmployeeAttendance
+    P3_5 &lt;--&gt; DS_EmployeePayroll
+    P3_6 &lt;--&gt; DS_PerformanceReview
+    P3_7 &lt;--&gt; DS_EmployeeLeave
+    P3_7 &lt;--&gt; DS_EmployeeTermination
+</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="DFD-L1-M4_Assets">
+  <div class="diagram-header">
+    <span class="id-badge">DFD-L1-M4_Assets</span>
+    <h3>DFD Level 1 — وحدة الأصول</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Data Flow Diagram (Level 1)</span>
+      <span class="tag level">🎯 Module</span>
+       <span class="tag mod">📦 إدارة الأصول والمرافق</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تفجير وحدة M4_Assets إلى عملياتها الفرعية مع مخازن البيانات.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>8 عمليات فرعية + 7 مخزن بيانات.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P4_1((4.1<br/>التخطيط والاحتياج)):::proc
+    P4_2((4.2<br/>الشراء والاقتناء)):::proc
+    P4_3((4.3<br/>التسجيل والترقيم)):::proc
+    P4_4((4.4<br/>التخصيص والإعارة)):::proc
+    P4_5((4.5<br/>الصيانة)):::proc
+    P4_6((4.6<br/>الإهلاك والتقييم)):::proc
+    P4_7((4.7<br/>الجرد والرقابة)):::proc
+    P4_8((4.8<br/>الشطب والأرشفة)):::proc
+
+    DS_AssetRequirementRequest[("AssetRequirementRequest")]:::ds
+    DS_PurchaseOrders[("PurchaseOrders")]:::ds
+    DS_Asset[("Asset")]:::ds
+    DS_AssetAssignment[("AssetAssignment")]:::ds
+    DS_MaintenanceTickets[("MaintenanceTickets")]:::ds
+    DS_AssetFinancials[("AssetFinancials")]:::ds
+    DS_InventoryPlans[("InventoryPlans")]:::ds
+
+    Ext1 --> P4_1
+    P4_1 --> P4_2
+    P4_2 --> P4_3
+    P4_3 --> P4_4
+    P4_4 --> P4_5
+    P4_5 --> P4_6
+    P4_6 --> P4_7
+    P4_7 --> P4_8
+    P4_1 <--> DS_AssetRequirementRequest
+    P4_2 <--> DS_PurchaseOrders
+    P4_3 <--> DS_Asset
+    P4_4 <--> DS_AssetAssignment
+    P4_5 <--> DS_MaintenanceTickets
+    P4_6 <--> DS_AssetFinancials
+    P4_7 <--> DS_InventoryPlans
+
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'DFD-L1-M4_Assets-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="DFD-L1-M4_Assets-mer">flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P4_1((4.1&lt;br/&gt;التخطيط والاحتياج)):::proc
+    P4_2((4.2&lt;br/&gt;الشراء والاقتناء)):::proc
+    P4_3((4.3&lt;br/&gt;التسجيل والترقيم)):::proc
+    P4_4((4.4&lt;br/&gt;التخصيص والإعارة)):::proc
+    P4_5((4.5&lt;br/&gt;الصيانة)):::proc
+    P4_6((4.6&lt;br/&gt;الإهلاك والتقييم)):::proc
+    P4_7((4.7&lt;br/&gt;الجرد والرقابة)):::proc
+    P4_8((4.8&lt;br/&gt;الشطب والأرشفة)):::proc
+
+    DS_AssetRequirementRequest[(&quot;AssetRequirementRequest&quot;)]:::ds
+    DS_PurchaseOrders[(&quot;PurchaseOrders&quot;)]:::ds
+    DS_Asset[(&quot;Asset&quot;)]:::ds
+    DS_AssetAssignment[(&quot;AssetAssignment&quot;)]:::ds
+    DS_MaintenanceTickets[(&quot;MaintenanceTickets&quot;)]:::ds
+    DS_AssetFinancials[(&quot;AssetFinancials&quot;)]:::ds
+    DS_InventoryPlans[(&quot;InventoryPlans&quot;)]:::ds
+
+    Ext1 --&gt; P4_1
+    P4_1 --&gt; P4_2
+    P4_2 --&gt; P4_3
+    P4_3 --&gt; P4_4
+    P4_4 --&gt; P4_5
+    P4_5 --&gt; P4_6
+    P4_6 --&gt; P4_7
+    P4_7 --&gt; P4_8
+    P4_1 &lt;--&gt; DS_AssetRequirementRequest
+    P4_2 &lt;--&gt; DS_PurchaseOrders
+    P4_3 &lt;--&gt; DS_Asset
+    P4_4 &lt;--&gt; DS_AssetAssignment
+    P4_5 &lt;--&gt; DS_MaintenanceTickets
+    P4_6 &lt;--&gt; DS_AssetFinancials
+    P4_7 &lt;--&gt; DS_InventoryPlans
+</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="DFD-L1-M5_Finance">
+  <div class="diagram-header">
+    <span class="id-badge">DFD-L1-M5_Finance</span>
+    <h3>DFD Level 1 — الإدارة المالية</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Data Flow Diagram (Level 1)</span>
+      <span class="tag level">🎯 Module</span>
+       <span class="tag mod">💰 الإدارة المالية</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تفجير وحدة M5_Finance إلى عملياتها الفرعية مع مخازن البيانات.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>5 عمليات فرعية + 5 مخزن بيانات.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P5_1((5.1<br/>إنشاء الحسابات)):::proc
+    P5_2((5.2<br/>إصدار الفواتير)):::proc
+    P5_3((5.3<br/>تحصيل المدفوعات)):::proc
+    P5_4((5.4<br/>إدارة الأقساط)):::proc
+    P5_5((5.5<br/>التقارير المالية)):::proc
+
+    DS_StudentAccount[("StudentAccount")]:::ds
+    DS_StudentInvoice[("StudentInvoice")]:::ds
+    DS_InvoiceItem[("InvoiceItem")]:::ds
+    DS_Payment[("Payment")]:::ds
+    DS_Installment[("Installment")]:::ds
+
+    Ext1 --> P5_1
+    P5_1 --> P5_2
+    P5_2 --> P5_3
+    P5_3 --> P5_4
+    P5_4 --> P5_5
+    P5_1 <--> DS_StudentAccount
+    P5_2 <--> DS_StudentInvoice
+    P5_3 <--> DS_InvoiceItem
+    P5_4 <--> DS_Payment
+    P5_5 <--> DS_Installment
+
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'DFD-L1-M5_Finance-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="DFD-L1-M5_Finance-mer">flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P5_1((5.1&lt;br/&gt;إنشاء الحسابات)):::proc
+    P5_2((5.2&lt;br/&gt;إصدار الفواتير)):::proc
+    P5_3((5.3&lt;br/&gt;تحصيل المدفوعات)):::proc
+    P5_4((5.4&lt;br/&gt;إدارة الأقساط)):::proc
+    P5_5((5.5&lt;br/&gt;التقارير المالية)):::proc
+
+    DS_StudentAccount[(&quot;StudentAccount&quot;)]:::ds
+    DS_StudentInvoice[(&quot;StudentInvoice&quot;)]:::ds
+    DS_InvoiceItem[(&quot;InvoiceItem&quot;)]:::ds
+    DS_Payment[(&quot;Payment&quot;)]:::ds
+    DS_Installment[(&quot;Installment&quot;)]:::ds
+
+    Ext1 --&gt; P5_1
+    P5_1 --&gt; P5_2
+    P5_2 --&gt; P5_3
+    P5_3 --&gt; P5_4
+    P5_4 --&gt; P5_5
+    P5_1 &lt;--&gt; DS_StudentAccount
+    P5_2 &lt;--&gt; DS_StudentInvoice
+    P5_3 &lt;--&gt; DS_InvoiceItem
+    P5_4 &lt;--&gt; DS_Payment
+    P5_5 &lt;--&gt; DS_Installment
+</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="DFD-L1-M6_Statistics">
+  <div class="diagram-header">
+    <span class="id-badge">DFD-L1-M6_Statistics</span>
+    <h3>DFD Level 1 — البيانات والإحصاء</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Data Flow Diagram (Level 1)</span>
+      <span class="tag level">🎯 Module</span>
+       <span class="tag mod">📊 إدارة البيانات والإحصاء</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تفجير وحدة M6_Statistics إلى عملياتها الفرعية مع مخازن البيانات.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>6 عمليات فرعية + 6 مخزن بيانات.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P6_1((6.1<br/>جمع البيانات من الوحدات)):::proc
+    P6_2((6.2<br/>إعداد المسودات)):::proc
+    P6_3((6.3<br/>مراجعة واعتماد)):::proc
+    P6_4((6.4<br/>رفع التقارير الخارجية)):::proc
+    P6_5((6.5<br/>تحليل الفجوة والمقارنات)):::proc
+    P6_6((6.6<br/>الأرشفة)):::proc
+
+    DS_SchoolStatisticsDraft[("SchoolStatisticsDraft")]:::ds
+    DS_SubmittedStatistics[("SubmittedStatistics")]:::ds
+    DS_SystemReports[("SystemReports")]:::ds
+    DS_ComparativeReport[("ComparativeReport")]:::ds
+    DS_GapAnalysisReports[("GapAnalysisReports")]:::ds
+    DS_ReportsArchive[("ReportsArchive")]:::ds
+
+    Ext1 --> P6_1
+    P6_1 --> P6_2
+    P6_2 --> P6_3
+    P6_3 --> P6_4
+    P6_4 --> P6_5
+    P6_5 --> P6_6
+    P6_1 <--> DS_SchoolStatisticsDraft
+    P6_2 <--> DS_SubmittedStatistics
+    P6_3 <--> DS_SystemReports
+    P6_4 <--> DS_ComparativeReport
+    P6_5 <--> DS_GapAnalysisReports
+    P6_6 <--> DS_ReportsArchive
+
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'DFD-L1-M6_Statistics-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="DFD-L1-M6_Statistics-mer">flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P6_1((6.1&lt;br/&gt;جمع البيانات من الوحدات)):::proc
+    P6_2((6.2&lt;br/&gt;إعداد المسودات)):::proc
+    P6_3((6.3&lt;br/&gt;مراجعة واعتماد)):::proc
+    P6_4((6.4&lt;br/&gt;رفع التقارير الخارجية)):::proc
+    P6_5((6.5&lt;br/&gt;تحليل الفجوة والمقارنات)):::proc
+    P6_6((6.6&lt;br/&gt;الأرشفة)):::proc
+
+    DS_SchoolStatisticsDraft[(&quot;SchoolStatisticsDraft&quot;)]:::ds
+    DS_SubmittedStatistics[(&quot;SubmittedStatistics&quot;)]:::ds
+    DS_SystemReports[(&quot;SystemReports&quot;)]:::ds
+    DS_ComparativeReport[(&quot;ComparativeReport&quot;)]:::ds
+    DS_GapAnalysisReports[(&quot;GapAnalysisReports&quot;)]:::ds
+    DS_ReportsArchive[(&quot;ReportsArchive&quot;)]:::ds
+
+    Ext1 --&gt; P6_1
+    P6_1 --&gt; P6_2
+    P6_2 --&gt; P6_3
+    P6_3 --&gt; P6_4
+    P6_4 --&gt; P6_5
+    P6_5 --&gt; P6_6
+    P6_1 &lt;--&gt; DS_SchoolStatisticsDraft
+    P6_2 &lt;--&gt; DS_SubmittedStatistics
+    P6_3 &lt;--&gt; DS_SystemReports
+    P6_4 &lt;--&gt; DS_ComparativeReport
+    P6_5 &lt;--&gt; DS_GapAnalysisReports
+    P6_6 &lt;--&gt; DS_ReportsArchive
+</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="DFD-L1-M7_Auth">
+  <div class="diagram-header">
+    <span class="id-badge">DFD-L1-M7_Auth</span>
+    <h3>DFD Level 1 — الأمن والصلاحيات</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Data Flow Diagram (Level 1)</span>
+      <span class="tag level">🎯 Module</span>
+       <span class="tag mod">🔐 الأمن والصلاحيات والمستخد</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تفجير وحدة M7_Auth إلى عملياتها الفرعية مع مخازن البيانات.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>6 عمليات فرعية + 6 مخزن بيانات.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P7_1((7.1<br/>تسجيل المستخدمين)):::proc
+    P7_2((7.2<br/>إدارة الأدوار)):::proc
+    P7_3((7.3<br/>منح/سحب الصلاحيات)):::proc
+    P7_4((7.4<br/>تطبيق السياسات)):::proc
+    P7_5((7.5<br/>تسجيل التدقيق)):::proc
+    P7_6((7.6<br/>المراقبة الأمنية)):::proc
+
+    DS_SystemUser[("SystemUser")]:::ds
+    DS_Role[("Role")]:::ds
+    DS_Permission[("Permission")]:::ds
+    DS_UserRole[("UserRole")]:::ds
+    DS_AccessPolicy[("AccessPolicy")]:::ds
+    DS_AuditLog[("AuditLog")]:::ds
+
+    Ext1 --> P7_1
+    P7_1 --> P7_2
+    P7_2 --> P7_3
+    P7_3 --> P7_4
+    P7_4 --> P7_5
+    P7_5 --> P7_6
+    P7_1 <--> DS_SystemUser
+    P7_2 <--> DS_Role
+    P7_3 <--> DS_Permission
+    P7_4 <--> DS_UserRole
+    P7_5 <--> DS_AccessPolicy
+    P7_6 <--> DS_AuditLog
+
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'DFD-L1-M7_Auth-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="DFD-L1-M7_Auth-mer">flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P7_1((7.1&lt;br/&gt;تسجيل المستخدمين)):::proc
+    P7_2((7.2&lt;br/&gt;إدارة الأدوار)):::proc
+    P7_3((7.3&lt;br/&gt;منح/سحب الصلاحيات)):::proc
+    P7_4((7.4&lt;br/&gt;تطبيق السياسات)):::proc
+    P7_5((7.5&lt;br/&gt;تسجيل التدقيق)):::proc
+    P7_6((7.6&lt;br/&gt;المراقبة الأمنية)):::proc
+
+    DS_SystemUser[(&quot;SystemUser&quot;)]:::ds
+    DS_Role[(&quot;Role&quot;)]:::ds
+    DS_Permission[(&quot;Permission&quot;)]:::ds
+    DS_UserRole[(&quot;UserRole&quot;)]:::ds
+    DS_AccessPolicy[(&quot;AccessPolicy&quot;)]:::ds
+    DS_AuditLog[(&quot;AuditLog&quot;)]:::ds
+
+    Ext1 --&gt; P7_1
+    P7_1 --&gt; P7_2
+    P7_2 --&gt; P7_3
+    P7_3 --&gt; P7_4
+    P7_4 --&gt; P7_5
+    P7_5 --&gt; P7_6
+    P7_1 &lt;--&gt; DS_SystemUser
+    P7_2 &lt;--&gt; DS_Role
+    P7_3 &lt;--&gt; DS_Permission
+    P7_4 &lt;--&gt; DS_UserRole
+    P7_5 &lt;--&gt; DS_AccessPolicy
+    P7_6 &lt;--&gt; DS_AuditLog
+</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="DFD-L1-M8_Emergency">
+  <div class="diagram-header">
+    <span class="id-badge">DFD-L1-M8_Emergency</span>
+    <h3>DFD Level 1 — الطوارئ والتميز</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Data Flow Diagram (Level 1)</span>
+      <span class="tag level">🎯 Module</span>
+       <span class="tag mod">🚨 إدارة الطوارئ والتميز</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>تفجير وحدة M8_Emergency إلى عملياتها الفرعية مع مخازن البيانات.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>6 عمليات فرعية + 6 مخزن بيانات.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P8_1((8.1<br/>رصد الحالات الطارئة)):::proc
+    P8_2((8.2<br/>تفعيل خطط الاستجابة)):::proc
+    P8_3((8.3<br/>تقييم الأضرار)):::proc
+    P8_4((8.4<br/>خطط التعويض)):::proc
+    P8_5((8.5<br/>تسجيل الجوائز)):::proc
+    P8_6((8.6<br/>توثيق الإنجازات)):::proc
+
+    DS_EmergencyEvent[("EmergencyEvent")]:::ds
+    DS_ResponsePlan[("ResponsePlan")]:::ds
+    DS_DamageAssessment[("DamageAssessment")]:::ds
+    DS_RemediationPlan[("RemediationPlan")]:::ds
+    DS_Award[("Award")]:::ds
+    DS_Achievement[("Achievement")]:::ds
+
+    Ext1 --> P8_1
+    P8_1 --> P8_2
+    P8_2 --> P8_3
+    P8_3 --> P8_4
+    P8_4 --> P8_5
+    P8_5 --> P8_6
+    P8_1 <--> DS_EmergencyEvent
+    P8_2 <--> DS_ResponsePlan
+    P8_3 <--> DS_DamageAssessment
+    P8_4 <--> DS_RemediationPlan
+    P8_5 <--> DS_Award
+    P8_6 <--> DS_Achievement
+
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'DFD-L1-M8_Emergency-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="DFD-L1-M8_Emergency-mer">flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P8_1((8.1&lt;br/&gt;رصد الحالات الطارئة)):::proc
+    P8_2((8.2&lt;br/&gt;تفعيل خطط الاستجابة)):::proc
+    P8_3((8.3&lt;br/&gt;تقييم الأضرار)):::proc
+    P8_4((8.4&lt;br/&gt;خطط التعويض)):::proc
+    P8_5((8.5&lt;br/&gt;تسجيل الجوائز)):::proc
+    P8_6((8.6&lt;br/&gt;توثيق الإنجازات)):::proc
+
+    DS_EmergencyEvent[(&quot;EmergencyEvent&quot;)]:::ds
+    DS_ResponsePlan[(&quot;ResponsePlan&quot;)]:::ds
+    DS_DamageAssessment[(&quot;DamageAssessment&quot;)]:::ds
+    DS_RemediationPlan[(&quot;RemediationPlan&quot;)]:::ds
+    DS_Award[(&quot;Award&quot;)]:::ds
+    DS_Achievement[(&quot;Achievement&quot;)]:::ds
+
+    Ext1 --&gt; P8_1
+    P8_1 --&gt; P8_2
+    P8_2 --&gt; P8_3
+    P8_3 --&gt; P8_4
+    P8_4 --&gt; P8_5
+    P8_5 --&gt; P8_6
+    P8_1 &lt;--&gt; DS_EmergencyEvent
+    P8_2 &lt;--&gt; DS_ResponsePlan
+    P8_3 &lt;--&gt; DS_DamageAssessment
+    P8_4 &lt;--&gt; DS_RemediationPlan
+    P8_5 &lt;--&gt; DS_Award
+    P8_6 &lt;--&gt; DS_Achievement
+</pre>
+    
+  </div>
+</article>
+
+<div class="nav-buttons"><a href="index.html" class="nav-btn" style="background:#f59e0b">🏠 الفهرس الرئيسي</a><a href="02_usecase.html" class="nav-btn">🎯 مخططات حالات الاستخدام ←</a></div>
+</div>
+
+<a href="#top" class="back-to-top" title="أعلى">⬆</a>
+<script>
+mermaid.initialize({
+  startOnLoad: true,
+  theme: 'default',
+  maxTextSize: 200000,
+  maxEdges: 2500,
+  themeVariables:{fontFamily:'Cairo, sans-serif',primaryColor:'#dbeafe',primaryTextColor:'#1e3a8a',primaryBorderColor:'#1e3a8a',lineColor:'#475569',secondaryColor:'#fef3c7',tertiaryColor:'#dcfce7'},
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  sequence:{useMaxWidth:true,wrap:true},
+  er:{useMaxWidth:true,layoutDirection:'TB'},
+  class:{useMaxWidth:true},
+  state:{useMaxWidth:true}
+});
+function showCode(btn, id){
+  const card = btn.closest('.diagram-card');
+  card.querySelectorAll('.code-tab').forEach(b => b.classList.remove('active'));
+  card.querySelectorAll('.code-block').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+</script>
+</body></html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - إدارة الموظفين والكادر التعليمي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">إدارة الموظفين</div>
+                    <a href="index.html" class="nav-item active">
+                        <span class="icon">👨‍🏫</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                    <a href="employees.html" class="nav-item">
+                        <span class="icon">👥</span>
+                        <span>قائمة الموظفين</span>
+                    </a>
+                    <a href="recruitment.html" class="nav-item">
+                        <span class="icon">📝</span>
+                        <span>التوظيف والقبول</span>
+                    </a>
+                    <a href="attendance.html" class="nav-item">
+                        <span class="icon">✅</span>
+                        <span>الحضور والانصراف</span>
+                    </a>
+                    <a href="leave.html" class="nav-item">
+                        <span class="icon">🏖️</span>
+                        <span>الإجازات</span>
+                    </a>
+                    <a href="salary.html" class="nav-item">
+                        <span class="icon">💰</span>
+                        <span>الرواتب والبدلات</span>
+                    </a>
+                    <a href="evaluation.html" class="nav-item">
+                        <span class="icon">⭐</span>
+                        <span>التقييمات</span>
+                    </a>
+                    <a href="training.html" class="nav-item">
+                        <span class="icon">📚</span>
+                        <span>التدريب والتطوير</span>
+                    </a>
+                    <a href="contracts.html" class="nav-item">
+                        <span class="icon">📄</span>
+                        <span>العقود والوثائق</span>
+                    </a>
+                    <a href="departments.html" class="nav-item">
+                        <span class="icon">🏢</span>
+                        <span>الأقسام والتخصصات</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة الموظفين والكادر التعليمي</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">
+                            🔔
+                            <span class="badge">8</span>
+                        </button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير المدرسة</h4>
+                            <p>الإدارة</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h1 class="page-title">👨‍🏫 إدارة الموظفين</h1>
+                    <div class="page-breadcrumb">
+                        <a href="../../index.html">الرئيسية</a>
+                        <span>/</span>
+                        <span>إدارة الموظفين</span>
+                    </div>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon primary">👥</div>
+                        <div class="stat-info">
+                            <h3>156</h3>
+                            <p>إجمالي الموظفين</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon success">👨‍🏫</div>
+                        <div class="stat-info">
+                            <h3>98</h3>
+                            <p>معلمين</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon warning">👔</div>
+                        <div class="stat-info">
+                            <h3>58</h3>
+                            <p>إداريين</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon danger">🏖️</div>
+                        <div class="stat-info">
+                            <h3>24</h3>
+                            <p>على إجازة اليوم</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header">
+                        <h3 class="card-title">إجراءات سريعة</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="quick-actions">
+                            <a href="employees.html" class="quick-action">
+                                <div class="icon">➕</div>
+                                <h4>إضافة موظف</h4>
+                                <p>تسجيل موظف جديد</p>
+                            </a>
+                            <a href="attendance.html" class="quick-action">
+                                <div class="icon">✅</div>
+                                <h4>تسجيل حضور</h4>
+                                <p>حضور الموظفين اليوم</p>
+                            </a>
+                            <a href="leave.html" class="quick-action">
+                                <div class="icon">📝</div>
+                                <h4>طلب إجازة</h4>
+                                <p>إدارة طلبات الإجازات</p>
+                            </a>
+                            <a href="salary.html" class="quick-action">
+                                <div class="icon">💰</div>
+                                <h4>كشوف الرواتب</h4>
+                                <p>إصدار رواتب الشهر</p>
+                            </a>
+                            <a href="evaluation.html" class="quick-action">
+                                <div class="icon">⭐</div>
+                                <h4>تقييم أداء</h4>
+                                <p>التقييم السنوي</p>
+                            </a>
+                            <a href="training.html" class="quick-action">
+                                <div class="icon">📚</div>
+                                <h4>برامج تدريب</h4>
+                                <p>التطوير المهني</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Grid -->
+                <div class="grid-2">
+                    <!-- Employees By Department -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">توزيع الموظفين حسب الأقسام</h3>
+                            <button class="btn btn-outline btn-sm">📊 عرض التقرير</button>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="employeesByDept" height="200"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- Attendance Overview -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">نظرة عامة على الحضور</h3>
+                            <button class="btn btn-outline btn-sm">📅 عرض التفاصيل</button>
+                        </div>
+                        <div class="card-body">
+                            <div style="display: grid; gap: 16px;">
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+                                    <div style="background: linear-gradient(135deg, #dcfce7, #bbf7d0); padding: 20px; border-radius: 12px; text-align: center;">
+                                        <div style="font-size: 2.5em; font-weight: 800; color: #166534;">132</div>
+                                        <div style="color: #166534; font-weight: 600; margin-top: 8px;">حاضر</div>
+                                    </div>
+                                    <div style="background: linear-gradient(135deg, #fee2e2, #fecaca); padding: 20px; border-radius: 12px; text-align: center;">
+                                        <div style="font-size: 2.5em; font-weight: 800; color: #991b1b;">24</div>
+                                        <div style="color: #991b1b; font-weight: 600; margin-top: 8px;">غائب/على إجازة</div>
+                                    </div>
+                                </div>
+                                <div style="display: grid; gap: 8px;">
+                                    <div style="display: flex; justify-content: space-between; padding: 12px; background: #fef3c7; border-radius: 8px;">
+                                        <span style="font-weight: 600; color: #92400e;">🏖️ على إجازة سنوية</span>
+                                        <span style="font-weight: 800; color: #92400e;">12</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; padding: 12px; background: #fce7f3; border-radius: 8px;">
+                                        <span style="font-weight: 600; color: #9d174d;">🏥 إجازة مرضية</span>
+                                        <span style="font-weight: 800; color: #9d174d;">8</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; padding: 12px; background: #fef9c3; border-radius: 8px;">
+                                        <span style="font-weight: 600; color: #854d0e;">🕐 متأخر</span>
+                                        <span style="font-weight: 800; color: #854d0e;">4</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Activity & Pending Leave Requests -->
+                <div class="grid-2" style="margin-top: 24px;">
+                    <!-- Pending Leave Requests -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">طلبات الإجازة المعلقة</h3>
+                            <a href="leave.html" class="btn btn-primary btn-sm">عرض الكل</a>
+                        </div>
+                        <div class="card-body">
+                            <div style="display: grid; gap: 12px;">
+                                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; border-right: 4px solid #f59e0b;">
+                                    <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #3b82f6, #1e40af); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.2em;">أح</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 600;">أحمد محمد صالح</div>
+                                        <div style="color: #6b7280; font-size: 0.9em;">معلم رياضيات - إجازة سنوية من 15-20 مايو</div>
+                                    </div>
+                                    <span class="badge-status pending">قيد المراجعة</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; border-right: 4px solid #f59e0b;">
+                                    <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #10b981, #059669); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.2em;">فط</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 600;">فاطمة عبدالله سعيد</div>
+                                        <div style="color: #6b7280; font-size: 0.9em;">مستشارة تربوية - إجازة مرضية 22-25 مايو</div>
+                                    </div>
+                                    <span class="badge-status pending">قيد المراجعة</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; border-right: 4px solid #10b981;">
+                                    <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #8b5cf6, #6d28d9); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.2em;">مح</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 600;">محمد يوسف أحمد</div>
+                                        <div style="color: #6b7280; font-size: 0.9em;">محاسب - إجازة طارئة 10-11 مايو</div>
+                                    </div>
+                                    <span class="badge-status approved">موافق</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Activity -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">النشاط الأخير</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="activity-list">
+                                <li class="activity-item">
+                                    <div class="activity-icon" style="background: #dcfce7; color: #166534;">✅</div>
+                                    <div class="activity-content">
+                                        <h4>تم تسجيل الحضور</h4>
+                                        <p>لـ 45 موظف صباح اليوم</p>
+                                        <div class="activity-time">منذ 2 ساعات</div>
+                                    </div>
+                                </li>
+                                <li class="activity-item">
+                                    <div class="activity-icon" style="background: #dbeafe; color: #1e40af;">💰</div>
+                                    <div class="activity-content">
+                                        <h4>تم إصدار كشوف رواتب</h4>
+                                        <p>لشهر مايو 2024</p>
+                                        <div class="activity-time">منذ 3 ساعات</div>
+                                    </div>
+                                </li>
+                                <li class="activity-item">
+                                    <div class="activity-icon" style="background: #fef3c7; color: #92400e;">📝</div>
+                                    <div class="activity-content">
+                                        <h4>تم إضافة تقييم أداء</h4>
+                                        <p>للمعلم أحمد محمد</p>
+                                        <div class="activity-time">منذ 5 ساعات</div>
+                                    </div>
+                                </li>
+                                <li class="activity-item">
+                                    <div class="activity-icon" style="background: #fce7f3; color: #9d174d;">📄</div>
+                                    <div class="activity-content">
+                                        <h4>تم تجديد عقد</h4>
+                                        <p>لـ 3 موظفين</p>
+                                        <div class="activity-time">أمس</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Employees -->
+                <div class="card" style="margin-top: 24px;">
+                    <div class="card-header">
+                        <h3 class="card-title">آخر الموظفين المضافين</h3>
+                        <a href="employees.html" class="btn btn-outline btn-sm">عرض الكل</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>رقم الموظف</th>
+                                        <th>الاسم</th>
+                                        <th>الوظيفة</th>
+                                        <th>القسم</th>
+                                        <th>تاريخ التعيين</th>
+                                        <th>الحالة</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">EMP-2024-001</code></td>
+                                        <td style="font-weight: 600;">أحمد محمد صالح</td>
+                                        <td>معلم رياضيات</td>
+                                        <td>الرياضيات</td>
+                                        <td>2024-01-15</td>
+                                        <td><span class="badge-status active">نشط</span></td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="action-btn view">👁️</button>
+                                                <button class="action-btn edit">✏️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">EMP-2024-002</code></td>
+                                        <td style="font-weight: 600;">فاطمة عبدالله سعيد</td>
+                                        <td>مستشارة تربوية</td>
+                                        <td>الإرشاد</td>
+                                        <td>2024-02-20</td>
+                                        <td><span class="badge-status active">نشط</span></td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="action-btn view">👁️</button>
+                                                <button class="action-btn edit">✏️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">EMP-2024-003</code></td>
+                                        <td style="font-weight: 600;">محمد يوسف أحمد</td>
+                                        <td>محاسب</td>
+                                        <td>المالية</td>
+                                        <td>2024-03-10</td>
+                                        <td><span class="badge-status active">نشط</span></td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="action-btn view">👁️</button>
+                                                <button class="action-btn edit">✏️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">EMP-2023-456</code></td>
+                                        <td style="font-weight: 600;">سارة عبدالرحمن خالد</td>
+                                        <td>معلم لغة عربية</td>
+                                        <td>اللغة العربية</td>
+                                        <td>2023-09-01</td>
+                                        <td><span class="badge-status active">نشط</span></td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="action-btn view">👁️</button>
+                                                <button class="action-btn edit">✏️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">EMP-2023-457</code></td>
+                                        <td style="font-weight: 600;">عمر سعيد سالم</td>
+                                        <td>محامي</td>
+                                        <td>الشؤون الطلاب</td>
+                                        <td>2023-10-15</td>
+                                        <td><span class="badge-status active">نشط</span></td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="action-btn view">👁️</button>
+                                                <button class="action-btn edit">✏️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Initialize Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Employees By Department Chart
+            const ctx = document.getElementById('employeesByDept').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['تعليمي', 'إداري', 'تقني', 'صحي', 'خدمات'],
+                    datasets: [{
+                    data: [98, 58, 25, 15, 10],
+                    backgroundColor: [
+                        '#3b82f6',
+                        '#10b981',
+                        '#f59e0b',
+                        '#ef4444',
+                        '#8b5cf6'
+                    ]
+                }]
+            });
+        });
+    </script>
+</body>
+</html>

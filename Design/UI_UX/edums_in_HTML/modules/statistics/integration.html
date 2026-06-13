@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - التكامل الوطني وربط الوزارة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">البيانات والإحصاء</div>
+                    <a href="index.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                    <a href="dashboard.html" class="nav-item">
+                        <span class="icon">📈</span>
+                        <span>لوحات التحكم</span>
+                    </a>
+                    <a href="analytics.html" class="nav-item">
+                        <span class="icon">🔍</span>
+                        <span>التحليل المتقدم</span>
+                    </a>
+                    <a href="custom-reports.html" class="nav-item">
+                        <span class="icon">⚙️</span>
+                        <span>منشئ التقارير</span>
+                    </a>
+                    <a href="students-report.html" class="nav-item">
+                        <span class="icon">👨‍🎓</span>
+                        <span>تقارير الطلاب</span>
+                    </a>
+                    <a href="employees-report.html" class="nav-item">
+                        <span class="icon">👨‍🏫</span>
+                        <span>تقارير الموظفين</span>
+                    </a>
+                    <a href="finance-report.html" class="nav-item">
+                        <span class="icon">💰</span>
+                        <span>التقارير المالية</span>
+                    </a>
+                    <a href="attendance-report.html" class="nav-item">
+                        <span class="icon">📅</span>
+                        <span>تقارير الحضور</span>
+                    </a>
+                    <a href="integration.html" class="nav-item active">
+                        <span class="icon">🌐</span>
+                        <span>التكامل الوطني</span>
+                    </a>
+                    <a href="export.html" class="nav-item">
+                        <span class="icon">📤</span>
+                        <span>تصدير البيانات</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة البيانات - التكامل الوطني</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">
+                            🔔
+                            <span class="badge">1</span>
+                        </button>
+                        <button class="header-btn">💬</button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير المدرسة</h4>
+                            <p>الإدارة</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h1 class="page-title">🌐 التكامل الوطني وربط الوزارة</h1>
+                    <div class="page-breadcrumb">
+                        <a href="../../index.html">الرئيسية</a>
+                        <span>/</span>
+                        <a href="index.html">البيانات والإحصاء</a>
+                        <span>/</span>
+                        <span>التكامل الوطني</span>
+                    </div>
+                </div>
+                
+                <!-- API Status Card -->
+                <div class="card" style="margin-bottom: 32px; border-right: 6px solid #10b981;">
+                    <div class="card-body" style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; gap: 24px; align-items: center;">
+                            <div style="font-size: 3em;">📡</div>
+                            <div>
+                                <h2 style="color: var(--primary);">حالة الاتصال بالبوابة الوطنية (نور/مسار)</h2>
+                                <p style="color: #6b7280; margin-top: 4px;">آخر مزامنة ناجحة: اليوم، 10:30 صباحاً</p>
+                            </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="status-indicator online">متصل</div>
+                            <button class="btn btn-primary btn-sm" style="margin-top: 10px;">مزامنة يدوية الآن</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Integration Logs -->
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">عمليات الرفع والمزامنة الأخيرة</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="sync-logs">
+                                <div class="log-item success">
+                                    <div class="log-icon">✅</div>
+                                    <div class="log-info">
+                                        <h4>مزامنة بيانات الطلاب</h4>
+                                        <p>تم رفع 1,248 سجلاً بنجاح</p>
+                                        <span class="time">منذ ساعتين</span>
+                                    </div>
+                                </div>
+                                <div class="log-item success">
+                                    <div class="log-icon">✅</div>
+                                    <div class="log-info">
+                                        <h4>رفع نتائج الفصل الدراسي</h4>
+                                        <p>تم اعتماد 15,000 درجة</p>
+                                        <span class="time">أمس</span>
+                                    </div>
+                                </div>
+                                <div class="log-item error">
+                                    <div class="log-icon">❌</div>
+                                    <div class="log-info">
+                                        <h4>مزامنة بيانات الموظفين</h4>
+                                        <p>خطأ في 3 سجلات (رقم الهوية غير صالح)</p>
+                                        <span class="time">أمس</span>
+                                    </div>
+                                    <button class="btn btn-outline btn-sm">إصلاح</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">إعدادات التكامل (API Config)</h3>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label class="form-label">عنوان البوابة (API Endpoint)</label>
+                                    <input type="text" class="form-input" value="https://api.moe.gov.sa/v1/integration" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">مفتاح الوصول (Client Key)</label>
+                                    <input type="password" class="form-input" value="*************" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">تكرار المزامنة الآلية</label>
+                                    <select class="form-select">
+                                        <option>كل ساعة</option>
+                                        <option selected>يومياً (الساعة 1 صباحاً)</option>
+                                        <option>أسبوعياً</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">تنبيهات الأخطاء</label>
+                                    <div style="display: flex; gap: 20px;">
+                                        <label><input type="checkbox" checked> بريد إلكتروني</label>
+                                        <label><input type="checkbox" checked> رسالة SMS</label>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary btn-block" style="width: 100%;">حفظ التغييرات</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <style>
+        .status-indicator { padding: 6px 16px; border-radius: 20px; font-weight: 800; font-size: 0.9em; }
+        .status-indicator.online { background: #dcfce7; color: #166534; }
+        .status-indicator.online::before { content: '●'; margin-left: 8px; animation: blink 1s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+        .sync-logs { display: grid; gap: 12px; }
+        .log-item { display: flex; gap: 15px; align-items: center; padding: 15px; background: #f8fafc; border-radius: 12px; border: 1px solid #e5e7eb; }
+        .log-item.error { border-right: 4px solid var(--danger); }
+        .log-item.success { border-right: 4px solid var(--success); }
+        .log-icon { font-size: 1.5em; }
+        .log-info { flex: 1; }
+        .log-info h4 { font-size: 0.95em; margin-bottom: 2px; }
+        .log-info p { font-size: 0.8em; color: var(--text-secondary); }
+        .log-info .time { font-size: 0.7em; color: var(--text-light); font-weight: 600; }
+    </style>
+</body>
+</html>

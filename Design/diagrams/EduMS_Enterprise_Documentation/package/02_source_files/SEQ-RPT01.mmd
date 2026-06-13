@@ -1,0 +1,16 @@
+sequenceDiagram
+    actor U as المستخدم
+    participant UI
+    participant API
+    participant DW as Data Warehouse
+    participant RPT as Report Engine
+    
+    U->>UI: اختيار نوع التقرير + الفترة
+    UI->>API: POST /reports/generate
+    API->>DW: استعلام مجمعات
+    DW-->>API: aggregated data
+    API->>RPT: تركيب التقرير
+    RPT->>RPT: PDF + Charts
+    RPT-->>API: URL
+    API->>DB: INSERT SystemReports
+    API-->>U: رابط التحميل

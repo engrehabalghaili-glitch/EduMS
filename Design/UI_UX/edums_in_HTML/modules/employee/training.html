@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - التدريب والتطوير</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=300;400;500;600;700;800;900&family=Tajawal:wght=300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item"><span class="icon">📊</span><span>لوحة التحكم</span></a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">إدارة الموظفين</div>
+                    <a href="index.html" class="nav-item"><span class="icon">👨‍🏫</span><span>لوحة التحكم</span></a>
+                    <a href="employees.html" class="nav-item"><span class="icon">👥</span><span>قائمة الموظفين</span></a>
+                    <a href="recruitment.html" class="nav-item"><span class="icon">📝</span><span>التوظيف والقبول</span></a>
+                    <a href="attendance.html" class="nav-item"><span class="icon">✅</span><span>الحضور والانصراف</span></a>
+                    <a href="leave.html" class="nav-item"><span class="icon">🏖️</span><span>الإجازات</span></a>
+                    <a href="salary.html" class="nav-item"><span class="icon">💰</span><span>الرواتب والبدلات</span></a>
+                    <a href="evaluation.html" class="nav-item"><span class="icon">⭐</span><span>التقييمات</span></a>
+                    <a href="training.html" class="nav-item active"><span class="icon">📚</span><span>التدريب والتطوير</span></a>
+                    <a href="contracts.html" class="nav-item"><span class="icon">📄</span><span>العقود والوثائق</span></a>
+                    <a href="departments.html" class="nav-item"><span class="icon">🏢</span><span>الأقسام والتخصصات</span></a>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left"><h2>إدارة الموظفين والكادر التعليمي</h2></div>
+                <div class="header-right">
+                    <div class="header-actions"><button class="header-btn">🔔<span class="badge">8</span></button></div>
+                    <div class="user-profile"><div class="user-avatar">م</div><div class="user-info"><h4>مدير المدرسة</h4><p>الإدارة</p></div></div>
+                </div>
+            </header>
+            <div class="content-area">
+                <div class="page-header">
+                    <h1 class="page-title">📚 التدريب والتطوير</h1>
+                    <div class="page-breadcrumb"><a href="../../index.html">الرئيسية</a><span>/</span><a href="index.html">إدارة الموظفين</a><span>/</span><span>التدريب والتطوير</span></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">البرامج التدريبية</h3>
+                        <button class="btn btn-primary" onclick="openModal('addTrainingModal')">➕ إضافة برنامج</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr><th>البرنامج</th><th>التاريخ</th><th>المكان</th><th>المشاركون</th><th>الحالة</th><th>الإجراءات</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td style="font-weight: 600;">تدريب تقنيات التدريس الحديثة</td><td>2024-06-10</td><td>قاعة التدريب</td><td>15</td><td><span class="badge-status pending">قيد التسجيل</span></td><td><div class="table-actions"><button class="action-btn view">👁️</button><button class="action-btn edit">✏️</button></div></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="addTrainingModal"><div class="modal"><div class="modal-header"><h3>إضافة برنامج تدريبي</h3><button class="close-btn" onclick="closeModal('addTrainingModal')">&times;</button></div><div class="modal-body"><form class="form-group"><label>البرنامج</label><input type="text" class="form-input" placeholder="اسم البرنامج"><label>التاريخ</label><input type="date" class="form-input"><label>المكان</label><input type="text" class="form-input" placeholder="المكان"></form></div><div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('addTrainingModal')">إلغاء</button><button class="btn btn-primary">حفظ</button></div></div></div>
+    <script>function openModal(id){document.getElementById(id).classList.add('active');}function closeModal(id){document.getElementById(id).classList.remove('active');}</script>
+</body>
+</html>

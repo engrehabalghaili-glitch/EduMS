@@ -1,0 +1,33 @@
+flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P6_1((6.1<br/>جمع البيانات من الوحدات)):::proc
+    P6_2((6.2<br/>إعداد المسودات)):::proc
+    P6_3((6.3<br/>مراجعة واعتماد)):::proc
+    P6_4((6.4<br/>رفع التقارير الخارجية)):::proc
+    P6_5((6.5<br/>تحليل الفجوة والمقارنات)):::proc
+    P6_6((6.6<br/>الأرشفة)):::proc
+
+    DS_SchoolStatisticsDraft[("SchoolStatisticsDraft")]:::ds
+    DS_SubmittedStatistics[("SubmittedStatistics")]:::ds
+    DS_SystemReports[("SystemReports")]:::ds
+    DS_ComparativeReport[("ComparativeReport")]:::ds
+    DS_GapAnalysisReports[("GapAnalysisReports")]:::ds
+    DS_ReportsArchive[("ReportsArchive")]:::ds
+
+    Ext1 --> P6_1
+    P6_1 --> P6_2
+    P6_2 --> P6_3
+    P6_3 --> P6_4
+    P6_4 --> P6_5
+    P6_5 --> P6_6
+    P6_1 <--> DS_SchoolStatisticsDraft
+    P6_2 <--> DS_SubmittedStatistics
+    P6_3 <--> DS_SystemReports
+    P6_4 <--> DS_ComparativeReport
+    P6_5 <--> DS_GapAnalysisReports
+    P6_6 <--> DS_ReportsArchive

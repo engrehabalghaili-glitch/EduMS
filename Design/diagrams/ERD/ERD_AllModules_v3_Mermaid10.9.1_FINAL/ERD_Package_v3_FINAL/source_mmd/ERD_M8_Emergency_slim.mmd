@@ -1,0 +1,91 @@
+erDiagram
+    %% =====================================================
+    %% M8_Emergency - ERD
+    %% Mermaid 10.9.1 Compliant - SLIM VIEW (PK + FK only)
+    %% =====================================================
+
+    EmergencyHosting {
+        INT hostingId PK "الاستضافة الطارئة"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT reportedByUserId "معرف من سجل الحالة FK SystemUser.userId"
+    }
+
+    EmergencyIncidents {
+        INT incidentId PK "حوادث الطوارئ"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT reportedByUserId "معرف من أبلغ عن الحادثة FK SystemUser.userId"
+        INT emergencyPlanId "معرف خطة الطوارئ المستخدمة FK من جدول خطط الطوارئ - خارج هذا القسم"
+    }
+
+    EmergencyClosures {
+        INT closureId PK "الإغلاق الطارئ"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT compensationPlanId FK "معرف خطة التعويض المرتبطة FK RemediationPlan.planId - من المجموعة 8-ج"
+    }
+
+    TransportationServices {
+        INT serviceId PK "خدمات النقل المدرسي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT driverId "معرف السائق FK Employee.employeeId"
+        INT supervisorId "معرف المشرف FK Employee.employeeId"
+        INT shiftId "معرف الفترة صباحي مسائي FK SchoolShiftSetting.shiftId"
+    }
+
+    SchoolMergers {
+        INT mergerId PK "عمليات الدمج المدرسي"
+        INT targetSchoolId "المدرسة الدامجة المدرسة الناتجة FK School.schoolId"
+    }
+
+    SchoolAwards {
+        INT awardId PK "الجوائز والتميز"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+    }
+
+    ExternalParticipations {
+        INT participationId PK "المشاركات والتمثيل الخارجي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+    }
+
+    CommunityPartnerships {
+        INT partnershipId PK "الشراكات المجتمعية"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT responsibleUserId "معرف المسؤول عن الشراكة من المدرسة FK Employee.employeeId"
+    }
+
+    SafetySecurityReports {
+        INT reportId PK "تقارير السلامة والأمان"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT approvedByUserId "معرف من اعتمد التقرير FK SystemUser.userId"
+    }
+
+    SchoolDeficit {
+        INT deficitId PK "حالات العجز التعليمي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT detectedByUserId "معرف من اكتشف العجز FK SystemUser.userId"
+        INT resolvedByUserId "معرف من قام بحل العجز FK SystemUser.userId"
+        INT relatedRemediationPlanId FK "معرف خطة المعالجة المرتبطة FK RemediationPlan.planId"
+    }
+
+    SchoolSurplus {
+        INT surplusId PK "حالات الفائض التعليمي"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT discoveredByUserId "معرف من اكتشف الفائض FK SystemUser.userId"
+        INT utilizedByUserId "معرف من قام بالاستغلال FK SystemUser.userId"
+        INT relatedRemediationPlanId FK "معرف خطة المعالجة المرتبطة قد تكون خطة للاستفادة من الفائض FK Remed..."
+    }
+
+    RemediationPlan {
+        INT planId PK "خطط معالجة العجز/الفائض"
+        INT schoolId "معرف المدرسة FK School.schoolId"
+        INT relatedDeficitId FK "معرف العجز المرتبط FK SchoolDeficit.deficitId - اختياري"
+        INT relatedSurplusId FK "معرف الفائض المرتبط FK SchoolSurplus.surplusId - اختياري"
+        INT executionLeadUserId "معرف المسؤول FK Employee.employeeId"
+        INT approvedByUserId "معرف من اعتمد الخطة FK SystemUser.userId"
+    }
+
+    %% ===== Relationships =====
+    RemediationPlan ||--o{ EmergencyClosures : "معرف خطة التعويض المرتبطة"
+    RemediationPlan ||--o{ SchoolDeficit : "معرف خطة المعالجة المرتبط"
+    RemediationPlan ||--o{ SchoolSurplus : "معرف خطة المعالجة المرتبط"
+    SchoolDeficit ||--o{ RemediationPlan : "معرف العجز المرتبط FK Sch"
+    SchoolSurplus ||--o{ RemediationPlan : "معرف الفائض المرتبط FK Sc"

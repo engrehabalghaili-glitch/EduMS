@@ -1,0 +1,27 @@
+sequenceDiagram
+    actor SA as إدارة المدرسة
+    participant API
+    participant DB
+    participant RPT as Reporting Engine
+    actor OF as مكتب التربية
+    participant ARC as Archive
+    
+    SA->>RPT: طلب توليد تقرير سنوي
+    RPT->>DB: تجميع (Stats, Plans, Outcomes)
+    DB-->>RPT: البيانات
+    RPT->>RPT: تركيب PDF + Charts
+    RPT-->>SA: مسودة
+    SA->>RPT: مراجعة وتعديل
+    SA->>API: اعتماد ورفع
+    API->>DB: INSERT AnnualComprehensiveReport
+    API->>OF: إشعار
+    OF->>API: مراجعة
+    alt اعتماد
+        OF->>API: approve
+        API->>DB: UPDATE Status='Approved'
+        API->>ARC: نسخة للأرشيف
+    else إعادة
+        OF->>API: ملاحظات
+        API->>DB: UPDATE Status='Returned'
+        API->>SA: مطلوب تعديل
+    end

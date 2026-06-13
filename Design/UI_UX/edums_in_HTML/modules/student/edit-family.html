@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - تحديث البيانات الأسرية والاجتماعية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">إدارة البيانات</div>
+                    <a href="guardians.html" class="nav-item">
+                        <span class="icon">⬅️</span>
+                        <span>العودة لأولياء الأمور</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة الطلاب - تحديث البيانات الأسرية</h2>
+                </div>
+                <div class="header-right">
+                    <div class="user-profile">
+                        <div class="user-avatar">س</div>
+                        <div class="user-info">
+                            <h4>سارة يوسف القحطاني</h4>
+                            <p>طالبة - الرابع الابتدائي</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <div class="page-header">
+                    <h1 class="page-title">👨‍👩‍👧 تحديث البيانات الأسرية والاجتماعية</h1>
+                </div>
+                
+                <div class="grid-2">
+                    <!-- Section 1: Social Status -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">الوضع الاجتماعي للأسرة</h3>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label class="form-label">حالة الوالدين</label>
+                                    <select class="form-select">
+                                        <option selected>معاً (أسرة مستقرة)</option>
+                                        <option>منفصلان (طلاق)</option>
+                                        <option>أب متوفى</option>
+                                        <option>أم متوفاة</option>
+                                        <option>كلاهما متوفى (يتيم)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">يعيش الطالب مع</label>
+                                    <select class="form-select">
+                                        <option selected>كلا الوالدين</option>
+                                        <option>الأب</option>
+                                        <option>الأم</option>
+                                        <option>الجد/الجدة</option>
+                                        <option>وصي آخر</option>
+                                    </select>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">عدد الإخوة في المدرسة</label>
+                                        <input type="number" class="form-input" value="2">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">ترتيب الطالب بين إخوته</label>
+                                        <input type="number" class="form-input" value="1">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Financial & Support -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">الدعم المادي والاحتياجات الخاصة</h3>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label class="form-label">هل الأسرة مستفيدة من الضمان الاجتماعي؟</label>
+                                    <div style="display: flex; gap: 20px;">
+                                        <label><input type="radio" name="social_aid" value="yes"> نعم</label>
+                                        <label><input type="radio" name="social_aid" value="no" checked> لا</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">مستوى الدخل المادي (تقديري)</label>
+                                    <select class="form-select">
+                                        <option>مرتفع</option>
+                                        <option selected>متوسط</option>
+                                        <option>محدود</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">ملاحظات الأخصائي الاجتماعي</label>
+                                    <textarea class="form-textarea" placeholder="أية ملاحظات حول وضع الطالب الأسري..."></textarea>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Siblings Links -->
+                <div class="card" style="margin-top: 24px;">
+                    <div class="card-header">
+                        <h3 class="card-title">الربط مع الإخوة (Siblings)</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>اسم الأخ/الأخت</th>
+                                        <th>الرقم الأكاديمي</th>
+                                        <th>الصف</th>
+                                        <th>العلاقة</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>خالد يوسف القحطاني</td>
+                                        <td>20240052</td>
+                                        <td>الأول المتوسط</td>
+                                        <td>أخ</td>
+                                        <td>
+                                            <div class="action-btns">
+                                                <button class="btn-icon">👁️ عرض</button>
+                                                <button class="btn-icon" style="color: var(--danger);">🗑️ فك الارتباط</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button class="btn btn-outline btn-sm" style="margin-top: 15px;">🔗 ربط أخ جديد</button>
+                    </div>
+                </div>
+
+                <!-- Footer Actions -->
+                <div class="card-footer" style="margin-top: 30px; display: flex; justify-content: flex-end; gap: 15px;">
+                    <button class="btn btn-outline">إلغاء</button>
+                    <button class="btn btn-primary">حفظ البيانات الأسرية</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <style>
+        .action-btns { display: flex; gap: 5px; }
+        .btn-icon { border: 1px solid #e5e7eb; background: white; padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: 0.85em; }
+    </style>
+</body>
+</html>

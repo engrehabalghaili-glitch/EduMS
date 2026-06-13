@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - إنهاء الخدمة وتصفية المستحقات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">إدارة الموظفين</div>
+                    <a href="index.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                    <a href="employees.html" class="nav-item">
+                        <span class="icon">👥</span>
+                        <span>قائمة الموظفين</span>
+                    </a>
+                    <a href="departments.html" class="nav-item">
+                        <span class="icon">🏢</span>
+                        <span>الأقسام والهيكل</span>
+                    </a>
+                    <a href="contracts.html" class="nav-item">
+                        <span class="icon">📄</span>
+                        <span>العقود والتوظيف</span>
+                    </a>
+                    <a href="attendance.html" class="nav-item">
+                        <span class="icon">📅</span>
+                        <span>الحضور والغياب</span>
+                    </a>
+                    <a href="tasks.html" class="nav-item">
+                        <span class="icon">📋</span>
+                        <span>المهام اليومية</span>
+                    </a>
+                    <a href="salary.html" class="nav-item">
+                        <span class="icon">💰</span>
+                        <span>الرواتب والمسيرات</span>
+                    </a>
+                    <a href="leave.html" class="nav-item">
+                        <span class="icon">🏖️</span>
+                        <span>الإجازات والمغادرات</span>
+                    </a>
+                    <a href="evaluation.html" class="nav-item">
+                        <span class="icon">📈</span>
+                        <span>تقييم الأداء</span>
+                    </a>
+                    <a href="training.html" class="nav-item">
+                        <span class="icon">🎓</span>
+                        <span>التدريب والتطوير</span>
+                    </a>
+                    <a href="discipline.html" class="nav-item">
+                        <span class="icon">⚖️</span>
+                        <span>الانضباط والجزاءات</span>
+                    </a>
+                    <a href="termination.html" class="nav-item active">
+                        <span class="icon">🚪</span>
+                        <span>إنهاء الخدمة</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة الموظفين - إنهاء الخدمة</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">
+                            🔔
+                            <span class="badge">0</span>
+                        </button>
+                        <button class="header-btn">💬</button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير المدرسة</h4>
+                            <p>الإدارة</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <h1 class="page-title">🚪 إنهاء الخدمة وإخلاء الطرف</h1>
+                            <div class="page-breadcrumb">
+                                <a href="../../index.html">الرئيسية</a>
+                                <span>/</span>
+                                <a href="index.html">إدارة الموظفين</a>
+                                <span>/</span>
+                                <span>إنهاء الخدمة</span>
+                            </div>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-primary" onclick="openModal('startTerminationModal')">
+                                <span>➕</span>
+                                <span>بدء إجراءات إنهاء خدمة</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Termination Status -->
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">طلبات إنهاء الخدمة الحالية</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="termination-requests">
+                                <div class="termination-item">
+                                    <div class="employee-info">
+                                        <div class="avatar">ع</div>
+                                        <div>
+                                            <h4>أ. علي السعيد</h4>
+                                            <p>معلم لغة عربية</p>
+                                        </div>
+                                    </div>
+                                    <div class="process-info">
+                                        <span class="label">سبب الإنهاء: استقالة</span>
+                                        <span class="status-badge warning">قيد إخلاء الطرف (60%)</span>
+                                        <div class="progress-bar"><div class="progress" style="width: 60%; background: var(--accent);"></div></div>
+                                    </div>
+                                    <button class="btn btn-outline btn-sm">متابعة</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">إحصائيات إنهاء الخدمة (هذا العام)</h3>
+                        </div>
+                        <div class="card-body">
+                            <div style="display: flex; justify-content: space-around; text-align: center; padding: 20px 0;">
+                                <div>
+                                    <h2 style="color: var(--primary);">8</h2>
+                                    <p style="font-size: 0.8em; color: var(--text-secondary);">استقالات</p>
+                                </div>
+                                <div>
+                                    <h2 style="color: var(--success);">12</h2>
+                                    <p style="font-size: 0.8em; color: var(--text-secondary);">تقاعد</p>
+                                </div>
+                                <div>
+                                    <h2 style="color: var(--danger);">2</h2>
+                                    <p style="font-size: 0.8em; color: var(--text-secondary);">إنهاء عقد</p>
+                                </div>
+                                <div>
+                                    <h2 style="color: var(--info);">5</h2>
+                                    <p style="font-size: 0.8em; color: var(--text-secondary);">نقل قيد</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settlement Table -->
+                <div class="card" style="margin-top: 32px;">
+                    <div class="card-header">
+                        <h3 class="card-title">سجل التسويات المالية النهائية</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>اسم الموظف</th>
+                                        <th>تاريخ آخر عمل</th>
+                                        <th>نوع الإنهاء</th>
+                                        <th>مكافأة نهاية الخدمة</th>
+                                        <th>المستحقات الأخرى</th>
+                                        <th>إجمالي التسوية</th>
+                                        <th>الحالة</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>أ. منيرة خالد</strong></td>
+                                        <td>15 يونيو 2026</td>
+                                        <td>تقاعد</td>
+                                        <td>125,000 ريال</td>
+                                        <td>12,500 ريال</td>
+                                        <td><strong>137,500 ريال</strong></td>
+                                        <td><span class="badge-status success">تم الصرف</span></td>
+                                        <td>
+                                            <div class="action-btns">
+                                                <button class="btn-icon">👁️</button>
+                                                <button class="btn-icon">📄</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="startTerminationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>بدء إجراءات إنهاء الخدمة</h3>
+                <span class="close-modal" onclick="closeModal('startTerminationModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">اختيار الموظف</label>
+                        <select class="form-select">
+                            <option>ابحث عن موظف...</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">سبب إنهاء الخدمة</label>
+                            <select class="form-select">
+                                <option>استقالة رغبة الموظف</option>
+                                <option>تقاعد لبلوغ السن القانوني</option>
+                                <option>تقاعد مبكر</option>
+                                <option>إنهاء العقد من قبل المدرسة</option>
+                                <option>عدم تجديد العقد</option>
+                                <option>أسباب تأديبية (فصل)</option>
+                                <option>وفاة الموظف</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">تاريخ آخر يوم عمل</label>
+                            <input type="date" class="form-input">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">تعبئة نموذج إخلاء الطرف المبدئي</label>
+                        <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px dashed #cbd5e1;">
+                            <label><input type="checkbox"> تسليم العهد (أجهزة/مفاتيح)</label><br>
+                            <label><input type="checkbox"> إغلاق حسابات النظام</label><br>
+                            <label><input type="checkbox"> تسليم السجلات والوثائق</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">مرفقات (خطاب الاستقالة/القرار)</label>
+                        <input type="file" class="form-input">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('startTerminationModal')">إلغاء</button>
+                <button class="btn btn-primary">بدء الإجراءات</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .termination-requests { display: grid; gap: 15px; }
+        .termination-item { display: flex; align-items: center; justify-content: space-between; padding: 16px; background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 12px; }
+        .employee-info { display: flex; gap: 12px; align-items: center; }
+        .employee-info .avatar { width: 40px; height: 40px; background: #fee2e2; color: var(--danger); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; }
+        .employee-info h4 { font-size: 0.9em; margin-bottom: 2px; }
+        .employee-info p { font-size: 0.75em; color: var(--text-secondary); }
+        .process-info { flex: 1; margin: 0 20px; }
+        .process-info .label { font-size: 0.8em; font-weight: 600; display: block; margin-bottom: 5px; }
+        .process-info .status-badge { font-size: 0.75em; font-weight: 700; color: var(--accent); margin-bottom: 8px; display: block; }
+        .progress-bar { width: 100%; height: 6px; background: #e5e7eb; border-radius: 3px; overflow: hidden; }
+        .progress { height: 100%; }
+
+        .badge-status.success { background: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 20px; font-size: 0.8em; font-weight: 700; }
+        .action-btns { display: flex; gap: 5px; }
+        .btn-icon { width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e5e7eb; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+        .modal-content { background-color: white; margin: 5% auto; width: 600px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); overflow: hidden; animation: modalSlideDown 0.3s ease-out; }
+        .modal-header { padding: 20px 24px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; }
+        .modal-header h3 { color: #1e3a8a; }
+        .close-modal { font-size: 24px; font-weight: bold; cursor: pointer; color: #6b7280; }
+        .modal-body { padding: 24px; max-height: 70vh; overflow-y: auto; }
+        .modal-footer { padding: 16px 24px; border-top: 1px solid #e5e7eb; display: flex; justify-content: flex-end; gap: 12px; background: #f8fafc; }
+    </style>
+
+    <script>
+        function openModal(id) { document.getElementById(id).style.display = "block"; }
+        function closeModal(id) { document.getElementById(id).style.display = "none"; }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1709 @@
+erDiagram
+    Office {
+        BIGINT officeId "PK"
+        VARCHAR(50) officeCode
+        VARCHAR(200) officeNameAr
+        VARCHAR(200) officeNameEn
+        VARCHAR(50) officeType
+        VARCHAR(50) level
+        BIGINT parentOfficeId "FK"
+        VARCHAR(200) region
+        VARCHAR(200) city
+        VARCHAR(200) managerName
+        VARCHAR(100) managerEmail
+        VARCHAR(20) managerPhone
+        VARCHAR(20) contactPhone
+        VARCHAR(100) email
+        VARCHAR(200) address
+        VARCHAR(200) latitude
+        VARCHAR(200) longitude
+        VARCHAR(50) officeStatus
+        BOOLEAN isActive
+        BOOLEAN approvalAuthority
+        VARCHAR(500) apiEndpoint
+        BOOLEAN isApiEnabled
+        VARCHAR(200) syncFrequency
+        INT totalSchools
+        VARCHAR(200) logoPath
+        TEXT notes
+        VARCHAR(200) dataSource
+        BIGINT importBatchId "FK"
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+        DATE deletedAt
+        BIGINT deletedByUserId "FK"
+    }
+    School {
+        BIGINT schoolId "PK"
+        VARCHAR(50) schoolCode
+        VARCHAR(50) institutionalCode
+        VARCHAR(200) schoolNameAr
+        VARCHAR(200) schoolNameEn
+        VARCHAR(50) schoolType
+        VARCHAR(200) schoolGender
+        VARCHAR(50) educationLevel
+        VARCHAR(200) classification
+        VARCHAR(50) schoolStatus
+        BOOLEAN isActive
+        BOOLEAN isApproved
+        BOOLEAN isArchived
+        DATE establishmentDate
+        INT licenseNumber
+        VARCHAR(200) principalName
+        VARCHAR(100) principalEmail
+        VARCHAR(20) principalPhone
+        VARCHAR(200) vicePrincipalName
+        VARCHAR(20) phone
+        VARCHAR(100) email
+        VARCHAR(200) address
+        VARCHAR(200) city
+        VARCHAR(200) district
+        VARCHAR(100) postalCode
+        VARCHAR(200) maxCapacity
+        INT currentStudents
+        BIGINT officeId "FK"
+        VARCHAR(200) logoPath
+        VARCHAR(500) website
+        VARCHAR(500) facebookPage
+        VARCHAR(500) twitterAccount
+        VARCHAR(500) instagramAccount
+        VARCHAR(200) workingHours
+        TIME timezone
+        VARCHAR(200) academicCalendar
+        DECIMAL(5,2) gradingSystem
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    SchoolLevel {
+        BIGINT schoolLevelId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) levelName
+        VARCHAR(50) levelOrder
+        DECIMAL(5,2) startGrade
+        DECIMAL(5,2) endGrade
+        VARCHAR(200) academicTrack
+        BOOLEAN isActive
+        VARCHAR(200) minAge
+        VARCHAR(200) maxAge
+        BIGINT defaultShiftId "FK"
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    SchoolContactInfo {
+        BIGINT contactInfoId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(20) officialPhone
+        VARCHAR(20) landline
+        INT faxNumber
+        VARCHAR(100) officialEmail
+        VARCHAR(100) alternativeEmail
+        VARCHAR(200) fullAddress
+        VARCHAR(200) streetName
+        INT buildingNumber
+        INT unitNumber
+        VARCHAR(100) postalCode
+        INT additionalNumber
+        VARCHAR(200) districtName
+        VARCHAR(200) city
+        VARCHAR(200) latitude
+        VARCHAR(200) longitude
+        VARCHAR(500) locationUrl
+        VARCHAR(200) socialLinks
+        VARCHAR(200) workingHours
+        VARCHAR(200) emergencyContact
+        VARCHAR(20) emergencyPhone
+        DATE updatedAt
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        BOOLEAN isDeleted
+    }
+    SchoolShiftSetting {
+        BIGINT shiftId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) shiftName
+        VARCHAR(50) shiftCode
+        TIME startTime
+        TIME endTime
+        VARCHAR(200) lessonDuration
+        VARCHAR(200) breakDuration
+        TIME breakStartTime
+        TIME breakEndTime
+        VARCHAR(200) gracePeriod
+        BOOLEAN isDefault
+        VARCHAR(50) shiftStatus
+        VARCHAR(200) workingDays
+        INT maxPeriods
+        DECIMAL(5,2) applicableGrades
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    SchoolAcademicYear {
+        BIGINT academicYearId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) yearCode
+        VARCHAR(200) yearNameAr
+        VARCHAR(200) yearNameEn
+        DATE startDate
+        DATE endDate
+        DATE registrationStart
+        DATE registrationEnd
+        DATE addDropStart
+        DATE addDropEnd
+        VARCHAR(200) withdrawalDeadline
+        DATE examsStart
+        DATE examsEnd
+        BOOLEAN isCurrentYear
+        VARCHAR(50) yearStatus
+        BIGINT previousYearId "FK"
+        BOOLEAN isArchived
+        DATE archivedAt
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    SchoolSemester {
+        BIGINT semesterId "PK"
+        BIGINT academicYearId "FK"
+        BIGINT schoolId "FK"
+        INT semesterNumber
+        VARCHAR(200) semesterOrder
+        VARCHAR(50) semesterType
+        VARCHAR(200) semesterNameAr
+        VARCHAR(200) semesterNameEn
+        DATE startDate
+        DATE endDate
+        INT teachingWeeks
+        INT examWeeks
+        INT totalWeeks
+        DATE regStartDate
+        DATE regEndDate
+        DATE addDropStartDate
+        DATE addDropEndDate
+        VARCHAR(200) withdrawalDeadline
+        DATE examStartDate
+        DATE examEndDate
+        DATE gradingStartDate
+        DATE gradingEndDate
+        VARCHAR(50) approvalStatus
+        DATE closureDate
+        BOOLEAN isActive
+        BOOLEAN isCurrent
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    SchoolCalendar {
+        BIGINT calendarId "PK"
+        BIGINT schoolId "FK"
+        BIGINT semesterId "FK"
+        VARCHAR(200) eventTitle
+        VARCHAR(50) eventType
+        VARCHAR(50) category
+        DATETIME startDate
+        DATETIME endDate
+        BOOLEAN isHoliday
+        BOOLEAN noAttendance
+        BOOLEAN affectsSchedule
+        VARCHAR(200) alternativeSchedule
+        VARCHAR(200) targetAudience
+        DECIMAL(5,2) targetGrades
+        BOOLEAN isPublic
+        TEXT description
+        VARCHAR(200) location
+        VARCHAR(200) attachments
+        BOOLEAN notificationSent
+        DATE notificationDate
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    SchoolCurriculumPlan {
+        BIGINT curriculumPlanId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) planNameAr
+        VARCHAR(200) planNameEn
+        VARCHAR(50) planCode
+        BIGINT gradeLevelId "FK"
+        BIGINT schoolLevelId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        VARCHAR(200) version
+        DATE adoptionDate
+        VARCHAR(200) totalCreditHours
+        VARCHAR(50) planStatus
+        VARCHAR(200) ministerialApproval
+        VARCHAR(200) approvalDocument
+        BOOLEAN isActive
+        DATE effectiveDate
+        DATE expiryDate
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    GradeCapacity {
+        BIGINT gradeCapacityId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT schoolLevelId "FK"
+        DECIMAL(5,2) gradeLevel
+        DECIMAL(5,2) gradeNameAr
+        DECIMAL(5,2) gradeNameEn
+        VARCHAR(200) maxStudentsPerClass
+        INT maxSectionsCount
+        VARCHAR(200) totalCapacity
+        INT availableCapacity
+        INT currentEnrolled
+        VARCHAR(200) genderAllocation
+        BOOLEAN isActive
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    SchoolAuditLog {
+        BIGINT auditId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) tableName
+        BIGINT entityId "FK"
+        VARCHAR(50) operationType
+        VARCHAR(50) changeType
+        VARCHAR(200) oldValue
+        VARCHAR(200) newValue
+        VARCHAR(200) changeSummary
+        BIGINT userId "FK"
+        VARCHAR(200) userName
+        VARCHAR(200) userRole
+        VARCHAR(200) ipAddress
+        VARCHAR(200) deviceInfo
+        DATE actionDate
+        VARCHAR(200) severity
+        BOOLEAN isSuspicious
+        VARCHAR(200) decisionDocPath
+        TEXT notes
+        DATE createdAt
+        BOOLEAN isDeleted
+    }
+    ReferenceCoding {
+        BIGINT referenceId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) codeType
+        VARCHAR(50) codeKey
+        VARCHAR(50) codeValueAr
+        VARCHAR(50) codeValueEn
+        TEXT descriptionAr
+        TEXT descriptionEn
+        VARCHAR(200) sortOrder
+        BOOLEAN isSystemCode
+        BOOLEAN isActive
+        BIGINT parentCodeId "FK"
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    CommitmentDeviation {
+        BIGINT deviationId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        VARCHAR(50) type
+        VARCHAR(200) title
+        DATE deviationDate
+        TEXT description
+        VARCHAR(200) affectedItems
+        VARCHAR(200) reason
+        VARCHAR(50) impactLevel
+        VARCHAR(200) compensatoryPlan
+        BOOLEAN isCompensatoryPlanApproved
+        VARCHAR(200) digitalSignature
+        DATE signedAt
+        VARCHAR(50) status
+        DATE submittedAt
+        BIGINT reviewedByUserId "FK"
+        DATE reviewDate
+        TEXT reviewNotes
+        VARCHAR(200) officeDecision
+        DATE decisionDate
+        TEXT decisionNotes
+        VARCHAR(200) attachmentPath
+        BIGINT linkedCalendarId "FK"
+        BIGINT linkedPlanId "FK"
+        VARCHAR(50) complianceStatus
+        DATE complianceDueDate
+        DATE complianceSubmittedAt
+        DATE createdAt
+        BIGINT createdByUserId "FK"
+        DATE updatedAt
+        BIGINT updatedByUserId "FK"
+        BOOLEAN isDeleted
+        DATE deletedAt
+        BIGINT deletedByUserId "FK"
+    }
+    AcademicException {
+        BIGINT exceptionId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        VARCHAR(50) requestType
+        BIGINT studentId "FK"
+        VARCHAR(200) affectedGroup
+        VARCHAR(200) justification
+        VARCHAR(200) supportingDocuments
+        DATE requestedStartDate
+        DATE requestedEndDate
+        VARCHAR(200) expectedImpact
+        VARCHAR(200) alternativePlan
+        VARCHAR(50) status
+        DATE submittedAt
+        BIGINT submittedByUserId "FK"
+        VARCHAR(200) officeDecision
+        TEXT decisionNotes
+        VARCHAR(50) decisionReference
+        DATE decisionDate
+        BIGINT approvedByUserId "FK"
+        DATE expirationDate
+        BOOLEAN isRenewable
+        INT renewalCount
+        BIGINT parentExceptionId "FK"
+        BIGINT linkToWorkflowId "FK"
+        TEXT notes
+        DATE createdAt
+        BIGINT createdByUserId "FK"
+        DATE updatedAt
+        BIGINT updatedByUserId "FK"
+        BOOLEAN isDeleted
+    }
+    LeadershipNomination {
+        BIGINT nominationId "PK"
+        BIGINT schoolId "FK"
+        BIGINT officeId "FK"
+        BIGINT candidateEmployeeId "FK"
+        DATE candidateName
+        VARCHAR(200) targetPosition
+        VARCHAR(50) nominationType
+        VARCHAR(200) nominationSource
+        DATE nominationDate
+        VARCHAR(200) nominationDocumentPath
+        VARCHAR(200) cvAttachment
+        VARCHAR(200) coverLetter
+        BOOLEAN qualifications
+        VARCHAR(200) experienceSummary
+        BOOLEAN finalShortlist
+        DATE interviewDate
+        TIME interviewTime
+        VARCHAR(200) interviewLocation
+        VARCHAR(200) interviewPanel
+        DECIMAL(5,2) interviewScore
+        DECIMAL(15,2) interviewFeedback
+        VARCHAR(200) interviewDecision
+        BOOLEAN placementTestRequired
+        DATE placementTestDate
+        DECIMAL(5,2) placementTestScore
+        VARCHAR(200) evaluationSummary
+        VARCHAR(200) finalDecision
+        VARCHAR(200) rejectionReason
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        BIGINT linkedAssignmentId "FK"
+        VARCHAR(50) status
+        TEXT notes
+        DATE createdAt
+        BIGINT createdByUserId "FK"
+        DATE updatedAt
+        BIGINT updatedByUserId "FK"
+        BOOLEAN isDeleted
+    }
+    LeadershipAssignment {
+        BIGINT assignmentId "PK"
+        BIGINT nomineeId "FK"
+        BIGINT employeeId "FK"
+        BIGINT schoolId "FK"
+        BIGINT officeId "FK"
+        INT decisionNumber
+        DATE decisionDate
+        VARCHAR(200) decisionDocumentPath
+        VARCHAR(200) position
+        VARCHAR(50) positionLevel
+        DATE startDate
+        DATE endDate
+        DATE actualEndDate
+        BOOLEAN isActive
+        VARCHAR(200) assignmentNature
+        VARCHAR(50) handoverStatus
+        DATE handoverDate
+        VARCHAR(200) handoverDocumentPath
+        DECIMAL(15,2) salaryGrade
+        VARCHAR(200) allowance
+        TEXT notes
+        DATE createdAt
+        BIGINT createdByUserId "FK"
+        DATE updatedAt
+        BIGINT updatedByUserId "FK"
+        BOOLEAN isDeleted
+    }
+    OrganizationalStructure {
+        BIGINT structureId "PK"
+        BIGINT schoolId "FK"
+        BIGINT officeId "FK"
+        VARCHAR(200) structureName
+        INT versionNumber
+        DATE versionDate
+        TEXT description
+        VARCHAR(50) approvalStatus
+        DATE approvalDate
+        VARCHAR(200) approvalDocumentPath
+        VARCHAR(200) structureFile
+        DATE effectiveDate
+        BOOLEAN isActive
+        BIGINT createdByUserId "FK"
+        BIGINT previousVersionId "FK"
+        TEXT notes
+        DATE createdAt
+        DATE updatedAt
+        BIGINT updatedByUserId "FK"
+        BOOLEAN isDeleted
+    }
+    SchoolDepartment {
+        BIGINT deptId "PK"
+        BIGINT schoolId "FK"
+        BIGINT structureId "FK"
+        VARCHAR(50) deptCode
+        VARCHAR(200) deptName
+        VARCHAR(200) deptNameEn
+        VARCHAR(50) deptType
+        BIGINT parentDeptId "FK"
+        BIGINT managerId "FK"
+        BIGINT actingManagerId "FK"
+        INT maxCapacity
+        INT currentEmployeeCount
+        VARCHAR(50) budgetCode
+        VARCHAR(200) location
+        VARCHAR(20) phone
+        VARCHAR(100) email
+        VARCHAR(50) status
+        BIGINT mergedIntoDeptId "FK"
+        TEXT notes
+        DATE createdAt
+        BIGINT createdByUserId "FK"
+        DATE updatedAt
+        BIGINT updatedByUserId "FK"
+        BOOLEAN isDeleted
+    }
+    OrganizationalPermission {
+        BIGINT permissionId "PK"
+        BIGINT schoolId "FK"
+        BIGINT departmentId "FK"
+        VARCHAR(200) positionTitle
+        VARCHAR(200) systemModule
+        VARCHAR(50) accessLevel
+        BOOLEAN canSign
+        VARCHAR(200) financialLimit
+        BIGINT roleId "FK"
+        BOOLEAN isActive
+        TEXT notes
+        DATE createdAt
+        BIGINT createdByUserId "FK"
+        DATE updatedAt
+        BIGINT updatedByUserId "FK"
+        BOOLEAN isDeleted
+    }
+    SchoolDecision {
+        BIGINT decisionId "PK"
+        BIGINT schoolId "FK"
+        INT decisionNumber
+        DATE decisionDate
+        VARCHAR(50) decisionType
+        VARCHAR(200) subject
+        VARCHAR(200) decisionText
+        DATE effectiveDate
+        DATE expiryDate
+        VARCHAR(200) pdfAttachment
+        VARCHAR(50) status
+        VARCHAR(200) targetEmployees
+        BIGINT issuedByUserId "FK"
+        BIGINT approvedByOfficeId "FK"
+        BIGINT linkedWorkflowId "FK"
+        TEXT notes
+        DATE createdAt
+        BIGINT createdByUserId "FK"
+        DATE updatedAt
+        BIGINT updatedByUserId "FK"
+        BOOLEAN isDeleted
+    }
+    OrganizationalManual {
+        BIGINT manualId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) manualVersion
+        DATE lastUpdated
+        VARCHAR(200) filePath
+        VARCHAR(200) fileName
+        VARCHAR(50) approvalRef
+        BIGINT approvedByOfficeId "FK"
+        DATE approvalDate
+        VARCHAR(200) requiresAcknowledgment
+        VARCHAR(50) status
+        DATE publishedAt
+        BIGINT publishedByUserId "FK"
+        TEXT notes
+        DATE createdAt
+        BIGINT createdByUserId "FK"
+        DATE updatedAt
+        BIGINT updatedByUserId "FK"
+        BOOLEAN isDeleted
+    }
+    Workflow {
+        BIGINT workflowId "PK"
+        VARCHAR(200) workflowName
+        TEXT description
+        VARCHAR(200) entityName
+        VARCHAR(200) totalSteps
+        BOOLEAN isActive
+        BOOLEAN isDefault
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    WorkflowStep {
+        BIGINT stepId "PK"
+        BIGINT workflowId "FK"
+        VARCHAR(200) stepOrder
+        VARCHAR(200) stepNameAr
+        VARCHAR(200) stepNameEn
+        VARCHAR(200) assignedToPosition
+        BIGINT assignedToRoleId "FK"
+        VARCHAR(200) slaHours
+        VARCHAR(50) actionType
+        BOOLEAN isFinalStep
+        BIGINT escalationStepId "FK"
+        BOOLEAN isActive
+        TEXT notes
+        DATE createdAt
+        BIGINT createdByUserId "FK"
+        DATE updatedAt
+        BIGINT updatedByUserId "FK"
+        BOOLEAN isDeleted
+    }
+    AnnualPlanDraft {
+        BIGINT draftId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT draftNumber
+        VARCHAR(200) draftVersion
+        VARCHAR(200) titleAr
+        VARCHAR(200) titleEn
+        VARCHAR(50) draftStatus
+        DECIMAL(5,2) completionPercentage
+        DATE lastSavedAt
+        BIGINT lastSavedByUserId "FK"
+        VARCHAR(200) goalsActivitiesJson
+        DECIMAL(5,2) strategicGoals
+        VARCHAR(200) operationalGoals
+        VARCHAR(200) kpis
+        VARCHAR(200) requiredResources
+        VARCHAR(200) risksAndChallenges
+        VARCHAR(200) successCriteria
+        VARCHAR(200) attachments
+        DATE internalReviewDate
+        BIGINT internalReviewByUserId "FK"
+        TEXT internalReviewNotes
+        VARCHAR(50) internalReviewStatus
+        BOOLEAN isReadyForSubmission
+        BIGINT submittedToPlanId "FK"
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    SubmittedPlan {
+        BIGINT planId "PK"
+        BIGINT draftId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT submissionNumber
+        DATETIME submissionTimestamp
+        VARCHAR(200) directorSignature
+        DATE signatureDate
+        VARCHAR(200) signatureMethod
+        VARCHAR(200) planFilePath
+        VARCHAR(200) planFileName
+        VARCHAR(200) planFileSize
+        VARCHAR(200) planHash
+        BIGINT assignedReviewerId "FK"
+        VARCHAR(200) priority
+        VARCHAR(200) priorityReason
+        VARCHAR(50) submissionType
+        BOOLEAN isResubmission
+        BIGINT previousSubmissionId "FK"
+        VARCHAR(200) resubmissionReason
+        VARCHAR(50) status
+        DATE reviewStartDate
+        DATE reviewEndDate
+        TEXT reviewerNotes
+        VARCHAR(200) rejectionReason
+        TEXT rejectionDetails
+        VARCHAR(200) requiredModifications
+        BOOLEAN modificationDeadline
+        DATE resubmissionDate
+        VARCHAR(200) resubmissionFilePath
+        BIGINT approvedPlanId "FK"
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    ApprovedPlan {
+        BIGINT approvedPlanId "PK"
+        BIGINT submittedPlanId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT approvalReferenceNumber
+        DATE approvalReferenceDate
+        VARCHAR(200) approvalReferenceDocument
+        VARCHAR(200) approvalRefNo
+        DATE effectiveDate
+        DATE effectiveDateHijri
+        DATE expiryDate
+        VARCHAR(50) planStatus
+        TEXT approvalNotes
+        TEXT approvalDetails
+        BIGINT approvedByOfficeId "FK"
+        VARCHAR(200) finalPlanFilePath
+        VARCHAR(200) finalPlanFileName
+        VARCHAR(200) finalPlanHash
+        VARCHAR(200) signedPlanPath
+        BOOLEAN hasDigitalSignature
+        TEXT digitalSignatureDetails
+        BOOLEAN isActive
+        BIGINT replacedByPlanId "FK"
+        VARCHAR(200) suspensionReason
+        DATE suspendedAt
+        BIGINT suspendedByUserId "FK"
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    PlanAmendment {
+        BIGINT amendmentId "PK"
+        BIGINT approvedPlanId "FK"
+        VARCHAR(50) amendmentType
+        INT amendmentNumber
+        VARCHAR(200) amendmentTitle
+        TEXT amendmentDescription
+        TEXT changesDescription
+        VARCHAR(200) affectedSections
+        VARCHAR(200) impactAnalysis
+        VARCHAR(50) impactLevel
+        DECIMAL(15,2) estimatedCostChange
+        TIME estimatedTimelineChange
+        BIGINT requestedByUserId "FK"
+        DATE requestDate
+        VARCHAR(50) approvalStatus
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        TEXT approvalNotes
+        VARCHAR(200) rejectionReason
+        DATE implementationDate
+        BIGINT implementedByUserId "FK"
+        TEXT implementationNotes
+        BIGINT linkedToRequestId "FK"
+        BOOLEAN isPermanent
+        DATE effectiveFrom
+        DATE effectiveUntil
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AmendmentRequest {
+        BIGINT requestId "PK"
+        BIGINT approvedPlanId "FK"
+        BIGINT schoolId "FK"
+        INT requestNumber
+        DATE requestDate
+        VARCHAR(200) requestTitle
+        TEXT requestDescription
+        VARCHAR(200) reasonForRequest
+        VARCHAR(200) proposedChanges
+        VARCHAR(200) affectedActivities
+        VARCHAR(200) expectedImpact
+        VARCHAR(200) supportingDocs
+        TEXT supportingDocsDescription
+        VARCHAR(200) priority
+        BIGINT submittedByUserId "FK"
+        VARCHAR(200) submittedByRole
+        BIGINT assignedToOfficeId "FK"
+        BIGINT assignedToReviewerId "FK"
+        DATE reviewStartDate
+        DATE reviewEndDate
+        TEXT reviewNotes
+        VARCHAR(50) status
+        VARCHAR(200) approvalDecision
+        DATE decisionDate
+        INT decisionReferenceNumber
+        TEXT decisionNotes
+        VARCHAR(200) rejectionReason
+        VARCHAR(200) requiredModifications
+        BOOLEAN resubmissionDeadline
+        DATE resubmittedAt
+        VARCHAR(200) resubmittedFile
+        BIGINT linkedToAmendmentId "FK"
+        DATE closedAt
+        BIGINT closedByUserId "FK"
+        TEXT closingNotes
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    ProgressReport {
+        BIGINT reportId "PK"
+        BIGINT approvedPlanId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) reportingPeriod
+        VARCHAR(200) periodSequence
+        DATE startDate
+        DATE endDate
+        INT reportNumber
+        DATE reportDate
+        DECIMAL(5,2) completionRate
+        INT plannedActivitiesCount
+        INT completedActivitiesCount
+        INT partiallyCompletedCount
+        INT notStartedCount
+        INT cancelledActivitiesCount
+        TEXT activitiesProgress
+        VARCHAR(200) kpiProgress
+        VARCHAR(200) budgetConsumed
+        DECIMAL(5,2) budgetPercentage
+        VARCHAR(200) achievements
+        VARCHAR(200) challenges
+        VARCHAR(200) correctiveActions
+        VARCHAR(200) recommendations
+        TEXT deviationNotes
+        VARCHAR(200) attachments
+        VARCHAR(200) reportFilePath
+        VARCHAR(200) reportFileName
+        BIGINT submittedByUserId "FK"
+        DATE submissionDate
+        VARCHAR(200) directorSignature
+        VARCHAR(50) status
+        BIGINT reviewedByUserId "FK"
+        DATE reviewDate
+        TEXT reviewerNotes
+        VARCHAR(200) reviewerRecommendations
+        VARCHAR(200) rejectionReason
+        VARCHAR(200) requiredModifications
+        DATE resubmissionDate
+        BOOLEAN isFinal
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    FinalEvaluation {
+        BIGINT evaluationId "PK"
+        BIGINT approvedPlanId "FK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        DATE evaluationDate
+        VARCHAR(200) evaluationPeriod
+        VARCHAR(200) goalsAnalysis
+        DECIMAL(5,2) goalsAchievementRate
+        DECIMAL(5,2) activitiesCompletionRate
+        DECIMAL(5,2) kpiAchievementRate
+        VARCHAR(200) budgetAnalysis
+        VARCHAR(200) resourceEfficiency
+        DECIMAL(5,2) resourceEfficiencyScore
+        VARCHAR(200) humanResourcesEfficiency
+        TIME timelineAdherence
+        VARCHAR(200) deviationsSummary
+        VARCHAR(200) positiveDeviations
+        VARCHAR(200) negativeDeviations
+        VARCHAR(200) deviationReasons
+        VARCHAR(200) lessonsLearned
+        VARCHAR(200) bestPractices
+        INT challengesEncountered
+        VARCHAR(200) recommendationsForNextYear
+        DECIMAL(5,2) finalScore
+        VARCHAR(200) rating
+        VARCHAR(200) evaluationTeam
+        TEXT evaluationNotes
+        VARCHAR(200) attachments
+        VARCHAR(200) evaluationReportPath
+        VARCHAR(200) evaluationReportName
+        BIGINT approvedByOfficeId "FK"
+        DATE approvalDate
+        VARCHAR(50) approvalStatus
+        TEXT approvalNotes
+        BOOLEAN isPublished
+        DATE publishedAt
+        BOOLEAN exportedToNextYearPlan
+        BIGINT nextYearPlanDraftId "FK"
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    HistoricalRecords {
+        BIGINT recordId "PK"
+        VARCHAR(200) tableName
+        BIGINT entityId "FK"
+        VARCHAR(50) operationType
+        VARCHAR(200) oldValue
+        VARCHAR(200) newValue
+        VARCHAR(200) fieldName
+        VARCHAR(200) oldFieldValue
+        VARCHAR(200) newFieldValue
+        VARCHAR(200) changeReason
+        VARCHAR(50) changeReasonCategory
+        BIGINT userId "FK"
+        VARCHAR(200) userRole
+        VARCHAR(200) userName
+        DATETIME operationDate
+        VARCHAR(200) ipAddress
+        VARCHAR(200) deviceInfo
+        VARCHAR(200) location
+        BIGINT sessionId "FK"
+        INT affectedRowsCount
+        BOOLEAN isReversible
+        BIGINT reversalRecordId "FK"
+        DATE reversedAt
+        BIGINT reversedByUserId "FK"
+        VARCHAR(200) digitalSignature
+        DECIMAL(5,2) riskScore
+        BOOLEAN isHighRisk
+        BOOLEAN reviewedByAudit
+        DATE auditReviewDate
+        TEXT auditReviewNotes
+        VARCHAR(200) retentionPeriodYears
+        DATE expiresAt
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        DATE createdAt
+        BOOLEAN isDeleted
+    }
+    ReceivedCirculars {
+        BIGINT circularId "PK"
+        BIGINT schoolId "FK"
+        BIGINT officeId "FK"
+        INT circularNumber
+        INT circularNumberFull
+        DATE circularDate
+        DATE circularDateGregorian
+        VARCHAR(200) subject
+        VARCHAR(200) subjectNormalized
+        VARCHAR(200) summary
+        VARCHAR(200) content
+        VARCHAR(50) priorityLevel
+        VARCHAR(200) priorityColor
+        BOOLEAN requiresReply
+        VARCHAR(200) replyDeadline
+        BOOLEAN requiresAction
+        VARCHAR(200) actionDeadline
+        VARCHAR(200) relatedToEntity
+        BIGINT relatedEntityId "FK"
+        BOOLEAN isConfidential
+        BOOLEAN isUrgent
+        DATETIME receivedAt
+        BIGINT receivedByUserId "FK"
+        VARCHAR(100) receivedMethod
+        VARCHAR(50) receivedReference
+        VARCHAR(50) documentType
+        VARCHAR(200) documentPath
+        VARCHAR(200) documentName
+        VARCHAR(200) documentSize
+        VARCHAR(200) documentHash
+        VARCHAR(200) physicalLocation
+        VARCHAR(50) status
+        DATE statusHistory
+        BIGINT acknowledgedById "FK"
+        DATE acknowledgedAt
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+        DATE deletedAt
+        BIGINT deletedByUserId "FK"
+    }
+    CircularsDocumentation {
+        BIGINT documentationId "PK"
+        BIGINT circularId "FK"
+        BIGINT schoolId "FK"
+        INT registrationNumber
+        DATE registrationDate
+        DATE registrationDateGregorian
+        BIGINT registeredByUserId "FK"
+        VARCHAR(200) registeredAt
+        VARCHAR(50) documentCategory
+        VARCHAR(50) subCategory
+        VARCHAR(200) keywords
+        VARCHAR(50) physicalArchiveBox
+        VARCHAR(50) physicalArchiveShelf
+        VARCHAR(50) physicalArchivePage
+        TEXT physicalArchiveNotes
+        VARCHAR(200) digitalCopyPath
+        VARCHAR(200) digitalBackupPath
+        BOOLEAN hasDigitalSignature
+        BOOLEAN digitalSignatureVerified
+        VARCHAR(200) retentionPeriodYears
+        DATE retentionEndDate
+        DATE disposalDate
+        VARCHAR(50) disposalStatus
+        VARCHAR(200) disposalMethod
+        BIGINT disposalAuthorizedByUserId "FK"
+        TEXT disposalNotes
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    CircularsInternalDistribution {
+        BIGINT distributionId "PK"
+        BIGINT circularId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) distributionType
+        BIGINT departmentId "FK"
+        BIGINT employeeId "FK"
+        VARCHAR(50) accessType
+        BOOLEAN isRequiredToAct
+        BOOLEAN isRequiredToReply
+        TEXT distributionNotes
+        TIME distributionTime
+        BIGINT distributedByUserId "FK"
+        BOOLEAN isAcknowledged
+        VARCHAR(200) acknowledgedAt
+        BIGINT acknowledgedByUserId "FK"
+        VARCHAR(200) acknowledgedMethod
+        TEXT acknowledgmentNotes
+        VARCHAR(200) readAt
+        VARCHAR(200) readDuration
+        BOOLEAN hasQuestions
+        VARCHAR(200) questionsText
+        VARCHAR(200) questionsRepliedAt
+        BIGINT questionsRepliedByUserId "FK"
+        BOOLEAN isForwarded
+        BIGINT forwardedToEmployeeId "FK"
+        VARCHAR(200) forwardingReason
+        DATE forwardingDate
+        VARCHAR(50) status
+        INT reminderSentCount
+        VARCHAR(200) lastReminderSentAt
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    CircularsImplementationStatus {
+        BIGINT implementationId "PK"
+        BIGINT circularId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) currentStage
+        DATE stageStartDate
+        DECIMAL(5,2) progressRate
+        DECIMAL(5,2) previousProgressRate
+        DATE lastProgressUpdate
+        BIGINT responsibleEmployeeId "FK"
+        BIGINT responsibleDepartmentId "FK"
+        DATE executionStartDate
+        DATE expectedCompletionDate
+        DATE actualCompletionDate
+        VARCHAR(50) statusNotes
+        VARCHAR(200) challenges
+        TEXT challengesDetails
+        VARCHAR(200) actionsTaken
+        TEXT actionsTakenDetails
+        VARCHAR(200) pendingActions
+        TEXT pendingActionsDetails
+        VARCHAR(200) resourcesNeeded
+        BOOLEAN isOnTrack
+        VARCHAR(200) deviationReason
+        INT delayDays
+        BOOLEAN isCompleted
+        DECIMAL(5,2) completionPercentage
+        TEXT completionNotes
+        BIGINT verifiedByUserId "FK"
+        VARCHAR(200) verifiedAt
+        TEXT verificationNotes
+        BOOLEAN reportedToOffice
+        VARCHAR(200) reportedToOfficeAt
+        VARCHAR(50) status
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    CircularsImplementationReports {
+        BIGINT reportId "PK"
+        BIGINT circularId "FK"
+        BIGINT schoolId "FK"
+        INT reportNumber
+        DATE reportDate
+        VARCHAR(50) reportType
+        VARCHAR(200) version
+        DATE submissionDate
+        BIGINT submittedByUserId "FK"
+        VARCHAR(100) submissionMethod
+        VARCHAR(50) submissionReference
+        VARCHAR(200) resultsSummary
+        VARCHAR(200) achievements
+        VARCHAR(200) challenges
+        VARCHAR(200) recommendations
+        VARCHAR(200) evidencePath
+        VARCHAR(50) evidenceTypes
+        TEXT evidenceDescription
+        VARCHAR(200) directorSignature
+        DATE signatureDate
+        VARCHAR(200) signatureMethod
+        VARCHAR(200) officeDecision
+        DATE officeDecisionDate
+        BIGINT officeDecisionByUserId "FK"
+        TEXT decisionNotes
+        BOOLEAN modificationRequired
+        TEXT modificationNotes
+        DATE resubmissionDate
+        DATE finalApprovalDate
+        BIGINT finalApprovedByUserId "FK"
+        VARCHAR(50) status
+        BOOLEAN isFinal
+        BIGINT relatedReportId "FK"
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    ArchivedCirculars {
+        BIGINT archiveId "PK"
+        BIGINT circularId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) archiveCategory
+        VARCHAR(50) archiveSubCategory
+        DATE archiveDate
+        BIGINT archivedByUserId "FK"
+        VARCHAR(200) archivedAt
+        VARCHAR(200) archiveReason
+        DATE closureDate
+        BIGINT closedByUserId "FK"
+        TEXT closureNotes
+        VARCHAR(200) retentionPeriodYears
+        DATE retentionPeriodStart
+        DATE retentionPeriodEnd
+        VARCHAR(200) retentionReason
+        BOOLEAN disposalAllowed
+        DATE disposalDateScheduled
+        DATE disposalActualDate
+        VARCHAR(200) disposalMethod
+        BIGINT disposalAuthorizedByUserId "FK"
+        TEXT disposalNotes
+        BOOLEAN isDestroyed
+        DATE destroyedAt
+        BOOLEAN restoredFromArchive
+        DATE restoredAt
+        BIGINT restoredByUserId "FK"
+        VARCHAR(200) restoreReason
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    CircularsDeadlinesTracking {
+        BIGINT deadlineId "PK"
+        BIGINT circularId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) deadlineType
+        DATE deadlineDate
+        DATE originalDeadline
+        INT extensionCount
+        VARCHAR(200) extensionReason
+        VARCHAR(200) extensionApprovedBy
+        DATE extensionApprovedAt
+        INT daysRemaining
+        VARCHAR(50) alertLevel
+        VARCHAR(50) alertLevelReason
+        VARCHAR(200) lastAlertSentAt
+        INT alertSentCount
+        VARCHAR(200) alertRecipients
+        BOOLEAN isResponded
+        DATE responseDate
+        VARCHAR(50) responseType
+        TEXT responseDetails
+        BIGINT responseByUserId "FK"
+        BOOLEAN isOverdue
+        INT overdueDays
+        VARCHAR(200) overdueAction
+        DATE overdueActionDate
+        VARCHAR(50) escalationLevel
+        DATE escalatedAt
+        BIGINT escalatedToUserId "FK"
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    ParentMeeting {
+        BIGINT meetingId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        VARCHAR(50) meetingType
+        INT meetingNumber
+        VARCHAR(200) title
+        VARCHAR(200) objectives
+        VARCHAR(200) agenda
+        BIGINT organizerId "FK"
+        VARCHAR(200) organizerRole
+        DATE meetingDate
+        TIME startTime
+        TIME endTime
+        TIME actualEndTime
+        VARCHAR(200) duration
+        VARCHAR(200) location
+        VARCHAR(50) locationType
+        VARCHAR(500) virtualMeetingLink
+        BIGINT studentId "FK"
+        BIGINT gradeLevelId "FK"
+        BIGINT classSectionId "FK"
+        VARCHAR(200) targetGuardians
+        INT invitedGuardiansCount
+        INT confirmedGuardiansCount
+        INT actualAttendeesCount
+        VARCHAR(200) attendees
+        DECIMAL(15,2) guardiansFeedback
+        VARCHAR(200) minutes
+        VARCHAR(200) discussionTopics
+        VARCHAR(200) decisions
+        VARCHAR(200) recommendations
+        DATE actionItems
+        VARCHAR(200) attachments
+        VARCHAR(200) minutesFilePath
+        BOOLEAN minutesApproved
+        BIGINT minutesApprovedByUserId "FK"
+        DATE minutesApprovalDate
+        DATE followUpDate
+        VARCHAR(50) followUpStatus
+        TEXT followUpNotes
+        BIGINT relatedComplaintId "FK"
+        BIGINT relatedDisciplineId "FK"
+        VARCHAR(50) status
+        VARCHAR(200) cancellationReason
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    Notifications {
+        BIGINT notificationId "PK"
+        BIGINT schoolId "FK"
+        BIGINT userId "FK"
+        VARCHAR(50) userType
+        VARCHAR(50) notificationType
+        VARCHAR(50) category
+        VARCHAR(200) priority
+        VARCHAR(200) title
+        VARCHAR(200) message
+        VARCHAR(200) body
+        VARCHAR(500) actionLink
+        VARCHAR(50) actionType
+        VARCHAR(50) relatedEntityType
+        BIGINT relatedEntityId "FK"
+        VARCHAR(200) senderEntity
+        BIGINT senderUserId "FK"
+        DATE sendDate
+        TIME sendTime
+        VARCHAR(100) deliveryChannel
+        BOOLEAN emailSent
+        DATE emailSentAt
+        BOOLEAN smsSent
+        DATE smsSentAt
+        BOOLEAN appSent
+        DATE appSentAt
+        BOOLEAN isRead
+        DATE readAt
+        VARCHAR(200) readDevice
+        BOOLEAN isActionTaken
+        DATE actionTakenAt
+        BIGINT actionTakenByUserId "FK"
+        BOOLEAN isDismissed
+        DATE dismissedAt
+        DATE expiresAt
+        BOOLEAN reminderSent
+        INT reminderCount
+        DATE lastReminderSentAt
+        VARCHAR(50) status
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    QuarterlyReport {
+        BIGINT reportId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT quarterNumber
+        INT reportNumber
+        DATE generationDate
+        VARCHAR(200) reportingPeriodStart
+        VARCHAR(200) reportingPeriodEnd
+        VARCHAR(200) achievementsJson
+        INT studentStats
+        INT staffStats
+        DECIMAL(5,2) attendanceStats
+        VARCHAR(200) financialStats
+        INT activityStats
+        INT disciplineStats
+        DECIMAL(5,2) achievementRate
+        VARCHAR(200) challenges
+        VARCHAR(200) recommendations
+        INT filingNumber
+        DATE submissionDate
+        VARCHAR(100) submissionMethod
+        BIGINT submittedByUserId "FK"
+        VARCHAR(200) directorSignature
+        VARCHAR(50) officeReviewStatus
+        DATE officeReviewDate
+        BIGINT officeReviewerId "FK"
+        TEXT officeReviewNotes
+        VARCHAR(200) officeDecision
+        INT officeDecisionNumber
+        DATE officeDecisionDate
+        VARCHAR(200) reportFilePath
+        VARCHAR(200) attachments
+        VARCHAR(50) status
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        DATE submittedAt
+        BOOLEAN isDeleted
+    }
+    CalendarComplianceReport {
+        BIGINT reportId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        VARCHAR(200) academicMonth
+        INT monthNumber
+        INT reportNumber
+        DATE generationDate
+        INT plannedStudyDays
+        INT actualStudyDays
+        INT plannedHolidays
+        INT actualHolidays
+        INT emergencyClosures
+        VARCHAR(200) closureReasons
+        INT deviationDays
+        DECIMAL(5,2) deviationPercentage
+        VARCHAR(200) deviationDetails
+        DECIMAL(5,2) affectedGrades
+        VARCHAR(200) affectedSubjects
+        DECIMAL(5,2) learningLoss
+        VARCHAR(200) compensationPlan
+        TEXT compensationPlanDetails
+        DATE compensationPlanStartDate
+        DATE compensationPlanEndDate
+        INT compensationHours
+        VARCHAR(50) compensationStatus
+        DATE submissionDate
+        BIGINT submittedByUserId "FK"
+        VARCHAR(200) directorSignature
+        VARCHAR(50) officeReviewStatus
+        TEXT officeReviewNotes
+        VARCHAR(50) officeApprovalStatus
+        DATE officeApprovalDate
+        INT officeDecisionNumber
+        VARCHAR(200) reportFilePath
+        VARCHAR(50) status
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    WeeklyProcessReport {
+        BIGINT reportId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        INT weekNumber
+        DATE startDate
+        DATE endDate
+        INT reportNumber
+        DATE generationDate
+        DECIMAL(5,2) curriculumProgress
+        TEXT subjectProgressDetails
+        VARCHAR(200) averageProgress
+        VARCHAR(200) completedTopics
+        VARCHAR(200) pendingTopics
+        VARCHAR(200) educationalObstacles
+        DATE obstaclesDetails
+        VARCHAR(200) obstaclesCategories
+        VARCHAR(200) teacherAbsences
+        VARCHAR(200) substituteTeachers
+        DECIMAL(5,2) studentAttendanceRate
+        DECIMAL(5,2) teacherAttendanceRate
+        VARCHAR(200) recommendations
+        VARCHAR(200) internalApproval
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        TEXT approvalNotes
+        VARCHAR(200) rejectionReason
+        VARCHAR(50) status
+        VARCHAR(200) attachments
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    MonthlyDisciplineReport {
+        BIGINT reportId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        VARCHAR(200) month
+        VARCHAR(200) year
+        INT reportNumber
+        DATE generationDate
+        DECIMAL(5,2) studentAttendanceRate
+        DECIMAL(5,2) studentAttendanceByGrade
+        DECIMAL(5,2) staffAttendanceRate
+        VARCHAR(200) staffAttendanceByDepartment
+        INT totalPositiveBehaviors
+        TEXT positiveBehaviorDetails
+        INT totalViolations
+        VARCHAR(50) violationsByType
+        VARCHAR(200) violationsBySeverity
+        DECIMAL(5,2) violationsByGrade
+        VARCHAR(200) topViolations
+        DECIMAL(5,2) mostAffectedGrades
+        VARCHAR(200) violationsSummary
+        VARCHAR(200) penaltiesApplied
+        VARCHAR(200) guidancePrograms
+        INT guidanceProgramsCount
+        INT guidanceProgramsBeneficiaries
+        VARCHAR(200) recommendations
+        VARCHAR(200) comparisonWithPreviousMonth
+        DATE submissionDate
+        BIGINT submittedByUserId "FK"
+        VARCHAR(200) directorSignature
+        VARCHAR(50) status
+        BIGINT approvedByUserId "FK"
+        DATE approvalDate
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    SemesterEndReport {
+        BIGINT reportId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        BIGINT semesterId "FK"
+        INT reportNumber
+        DATE generationDate
+        VARCHAR(200) semesterStatsJson
+        INT studentsStartCount
+        INT studentsEndCount
+        INT studentsNewCount
+        INT studentsWithdrawnCount
+        INT teachersCount
+        INT staffCount
+        INT classesCount
+        VARCHAR(200) examResultsSummary
+        DECIMAL(5,2) successRateByGrade
+        DECIMAL(5,2) successRateBySubject
+        VARCHAR(200) topPerformingSubjects
+        VARCHAR(200) lowestPerformingSubjects
+        DECIMAL(5,2) gradeDistribution
+        VARCHAR(200) studentRanking
+        VARCHAR(200) teacherPerformanceSummary
+        VARCHAR(200) classPerformance
+        VARCHAR(200) comparisonWithPreviousSemester
+        VARCHAR(200) strengths
+        VARCHAR(200) weaknesses
+        VARCHAR(200) challenges
+        VARCHAR(200) futureRecommendations
+        VARCHAR(200) actionPlan
+        DATE submissionDate
+        BIGINT submittedByUserId "FK"
+        VARCHAR(200) directorSignature
+        VARCHAR(50) officeReviewStatus
+        TEXT officeReviewNotes
+        VARCHAR(50) officeApprovalStatus
+        DATE officeApprovalDate
+        VARCHAR(200) reportFilePath
+        VARCHAR(50) status
+        VARCHAR(200) attachments
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    AnnualComprehensiveReport {
+        BIGINT reportId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT reportNumber
+        DATE generationDate
+        VARCHAR(200) executiveSummary
+        VARCHAR(200) schoolVision
+        VARCHAR(200) schoolMission
+        DECIMAL(5,2) strategicGoals
+        INT academicAchievement
+        INT studentStats
+        INT staffStats
+        VARCHAR(200) financialSummary
+        VARCHAR(50) facilityStatus
+        INT activitiesSummary
+        VARCHAR(200) selfEvaluationResults
+        TEXT selfEvaluationDetails
+        VARCHAR(200) goalAchievementAnalysis
+        DECIMAL(5,2) goalAchievementRate
+        VARCHAR(200) achievedGoals
+        VARCHAR(200) partiallyAchievedGoals
+        VARCHAR(200) unachievedGoals
+        VARCHAR(200) challenges
+        VARCHAR(200) lessonsLearned
+        TEXT lessonsLearnedDetails
+        VARCHAR(200) futureRecommendations
+        VARCHAR(500) signedPdfPath
+        VARCHAR(200) reportLanguage
+        DATE submissionDate
+        BIGINT submittedByUserId "FK"
+        VARCHAR(200) directorName
+        VARCHAR(200) directorSignature
+        DATE directorSignatureDate
+        VARCHAR(50) officeReviewStatus
+        DATE officeReviewDate
+        BIGINT officeReviewerId "FK"
+        TEXT officeReviewNotes
+        VARCHAR(50) officeApprovalStatus
+        DATE officeApprovalDate
+        INT officeDecisionNumber
+        VARCHAR(200) reportFilePath
+        VARCHAR(50) status
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    EducationalOutcomesReport {
+        BIGINT reportId "PK"
+        BIGINT schoolId "FK"
+        BIGINT academicYearId "FK"
+        INT reportNumber
+        DATE generationDate
+        DECIMAL(5,2) generalSuccessRates
+        DECIMAL(5,2) successRateByGrade
+        DECIMAL(5,2) successRateBySubject
+        DECIMAL(5,2) successRateByCategory
+        VARCHAR(200) topPerformingSubjects
+        VARCHAR(200) lowestPerformingSubjects
+        DECIMAL(5,2) gradeTrendAnalysis
+        VARCHAR(200) comparisonWithPreviousYear
+        VARCHAR(200) comparisonWithLast3Years
+        VARCHAR(200) subjectsImprovement
+        VARCHAR(200) subjectsDecline
+        VARCHAR(200) educationalImpact
+        VARCHAR(200) initiativesImpact
+        VARCHAR(200) programsEffectiveness
+        VARCHAR(200) correlationAnalysis
+        VARCHAR(200) correlationWithAttendance
+        VARCHAR(200) recommendations
+        VARCHAR(200) actionPlan
+        DATE submissionDate
+        BIGINT submittedByUserId "FK"
+        VARCHAR(200) directorSignature
+        DATE officialApprovalDate
+        VARCHAR(50) officeApprovalStatus
+        INT officeApprovalNumber
+        TEXT officeApprovalNotes
+        VARCHAR(200) reportFilePath
+        VARCHAR(50) status
+        VARCHAR(200) attachments
+        TEXT notes
+        BIGINT createdByUserId "FK"
+        BIGINT updatedByUserId "FK"
+        DATE createdAt
+        DATE updatedAt
+        BOOLEAN isDeleted
+    }
+    Office ||--o{ Office : "parentOfficeId"
+    Office ||--o{ School : "officeId"
+    School ||--o{ SchoolLevel : "schoolId"
+    SchoolShiftSetting ||--o{ SchoolLevel : "defaultShiftId"
+    School ||--o{ SchoolContactInfo : "schoolId"
+    School ||--o{ SchoolShiftSetting : "schoolId"
+    School ||--o{ SchoolAcademicYear : "schoolId"
+    SchoolAcademicYear ||--o{ SchoolAcademicYear : "previousYearId"
+    SchoolAcademicYear ||--o{ SchoolSemester : "academicYearId"
+    School ||--o{ SchoolSemester : "schoolId"
+    School ||--o{ SchoolCalendar : "schoolId"
+    SchoolSemester ||--o{ SchoolCalendar : "semesterId"
+    School ||--o{ SchoolCurriculumPlan : "schoolId"
+    GradeCapacity ||--o{ SchoolCurriculumPlan : "gradeLevelId"
+    SchoolLevel ||--o{ SchoolCurriculumPlan : "schoolLevelId"
+    SchoolAcademicYear ||--o{ SchoolCurriculumPlan : "academicYearId"
+    SchoolSemester ||--o{ SchoolCurriculumPlan : "semesterId"
+    School ||--o{ GradeCapacity : "schoolId"
+    SchoolAcademicYear ||--o{ GradeCapacity : "academicYearId"
+    SchoolLevel ||--o{ GradeCapacity : "schoolLevelId"
+    School ||--o{ SchoolAuditLog : "schoolId"
+    School ||--o{ ReferenceCoding : "schoolId"
+    ReferenceCoding ||--o{ ReferenceCoding : "parentCodeId"
+    School ||--o{ CommitmentDeviation : "schoolId"
+    SchoolAcademicYear ||--o{ CommitmentDeviation : "academicYearId"
+    SchoolCalendar ||--o{ CommitmentDeviation : "linkedCalendarId"
+    ApprovedPlan ||--o{ CommitmentDeviation : "linkedPlanId"
+    School ||--o{ AcademicException : "schoolId"
+    SchoolAcademicYear ||--o{ AcademicException : "academicYearId"
+    Workflow ||--o{ AcademicException : "linkToWorkflowId"
+    School ||--o{ LeadershipNomination : "schoolId"
+    Office ||--o{ LeadershipNomination : "officeId"
+    LeadershipAssignment ||--o{ LeadershipNomination : "linkedAssignmentId"
+    LeadershipNomination ||--o{ LeadershipAssignment : "nomineeId"
+    School ||--o{ LeadershipAssignment : "schoolId"
+    Office ||--o{ LeadershipAssignment : "officeId"
+    School ||--o{ OrganizationalStructure : "schoolId"
+    Office ||--o{ OrganizationalStructure : "officeId"
+    School ||--o{ SchoolDepartment : "schoolId"
+    OrganizationalStructure ||--o{ SchoolDepartment : "structureId"
+    SchoolDepartment ||--o{ SchoolDepartment : "parentDeptId"
+    School ||--o{ OrganizationalPermission : "schoolId"
+    SchoolDepartment ||--o{ OrganizationalPermission : "departmentId"
+    School ||--o{ SchoolDecision : "schoolId"
+    Office ||--o{ SchoolDecision : "approvedByOfficeId"
+    Workflow ||--o{ SchoolDecision : "linkedWorkflowId"
+    School ||--o{ OrganizationalManual : "schoolId"
+    Office ||--o{ OrganizationalManual : "approvedByOfficeId"
+    Workflow ||--o{ WorkflowStep : "workflowId"
+    School ||--o{ AnnualPlanDraft : "schoolId"
+    SchoolAcademicYear ||--o{ AnnualPlanDraft : "academicYearId"
+    AnnualPlanDraft ||--o{ SubmittedPlan : "draftId"
+    School ||--o{ SubmittedPlan : "schoolId"
+    SchoolAcademicYear ||--o{ SubmittedPlan : "academicYearId"
+    ApprovedPlan ||--o{ SubmittedPlan : "approvedPlanId"
+    SubmittedPlan ||--o{ ApprovedPlan : "submittedPlanId"
+    School ||--o{ ApprovedPlan : "schoolId"
+    SchoolAcademicYear ||--o{ ApprovedPlan : "academicYearId"
+    Office ||--o{ ApprovedPlan : "approvedByOfficeId"
+    ApprovedPlan ||--o{ PlanAmendment : "approvedPlanId"
+    AmendmentRequest ||--o{ PlanAmendment : "linkedToRequestId"
+    ApprovedPlan ||--o{ AmendmentRequest : "approvedPlanId"
+    School ||--o{ AmendmentRequest : "schoolId"
+    Office ||--o{ AmendmentRequest : "assignedToOfficeId"
+    PlanAmendment ||--o{ AmendmentRequest : "linkedToAmendmentId"
+    ApprovedPlan ||--o{ ProgressReport : "approvedPlanId"
+    School ||--o{ ProgressReport : "schoolId"
+    ApprovedPlan ||--o{ FinalEvaluation : "approvedPlanId"
+    School ||--o{ FinalEvaluation : "schoolId"
+    SchoolAcademicYear ||--o{ FinalEvaluation : "academicYearId"
+    Office ||--o{ FinalEvaluation : "approvedByOfficeId"
+    School ||--o{ ReceivedCirculars : "schoolId"
+    Office ||--o{ ReceivedCirculars : "officeId"
+    ReceivedCirculars ||--o{ CircularsDocumentation : "circularId"
+    School ||--o{ CircularsDocumentation : "schoolId"
+    ReceivedCirculars ||--o{ CircularsInternalDistribution : "circularId"
+    School ||--o{ CircularsInternalDistribution : "schoolId"
+    SchoolDepartment ||--o{ CircularsInternalDistribution : "departmentId"
+    ReceivedCirculars ||--o{ CircularsImplementationStatus : "circularId"
+    School ||--o{ CircularsImplementationStatus : "schoolId"
+    SchoolDepartment ||--o{ CircularsImplementationStatus : "responsibleDepartmentId"
+    ReceivedCirculars ||--o{ CircularsImplementationReports : "circularId"
+    School ||--o{ CircularsImplementationReports : "schoolId"
+    ReceivedCirculars ||--o{ ArchivedCirculars : "circularId"
+    School ||--o{ ArchivedCirculars : "schoolId"
+    ReceivedCirculars ||--o{ CircularsDeadlinesTracking : "circularId"
+    School ||--o{ CircularsDeadlinesTracking : "schoolId"
+    School ||--o{ ParentMeeting : "schoolId"
+    SchoolAcademicYear ||--o{ ParentMeeting : "academicYearId"
+    SchoolSemester ||--o{ ParentMeeting : "semesterId"
+    GradeCapacity ||--o{ ParentMeeting : "gradeLevelId"
+    School ||--o{ Notifications : "schoolId"
+    School ||--o{ QuarterlyReport : "schoolId"
+    SchoolAcademicYear ||--o{ QuarterlyReport : "academicYearId"
+    School ||--o{ CalendarComplianceReport : "schoolId"
+    SchoolAcademicYear ||--o{ CalendarComplianceReport : "academicYearId"
+    School ||--o{ WeeklyProcessReport : "schoolId"
+    SchoolAcademicYear ||--o{ WeeklyProcessReport : "academicYearId"
+    SchoolSemester ||--o{ WeeklyProcessReport : "semesterId"
+    School ||--o{ MonthlyDisciplineReport : "schoolId"
+    SchoolAcademicYear ||--o{ MonthlyDisciplineReport : "academicYearId"
+    SchoolSemester ||--o{ MonthlyDisciplineReport : "semesterId"
+    School ||--o{ SemesterEndReport : "schoolId"
+    SchoolAcademicYear ||--o{ SemesterEndReport : "academicYearId"
+    SchoolSemester ||--o{ SemesterEndReport : "semesterId"
+    School ||--o{ AnnualComprehensiveReport : "schoolId"
+    SchoolAcademicYear ||--o{ AnnualComprehensiveReport : "academicYearId"
+    School ||--o{ EducationalOutcomesReport : "schoolId"
+    SchoolAcademicYear ||--o{ EducationalOutcomesReport : "academicYearId"

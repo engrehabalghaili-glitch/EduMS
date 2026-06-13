@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - الإدارة المالية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">الإدارة المالية</div>
+                    <a href="index.html" class="nav-item active">
+                        <span class="icon">💰</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                    <a href="fees.html" class="nav-item">
+                        <span class="icon">💵</span>
+                        <span>الرسوم الدراسية</span>
+                    </a>
+                    <a href="invoices.html" class="nav-item">
+                        <span class="icon">📄</span>
+                        <span>الفواتير</span>
+                    </a>
+                    <a href="payments.html" class="nav-item">
+                        <span class="icon">💳</span>
+                        <span>المدفوعات</span>
+                    </a>
+                    <a href="salaries.html" class="nav-item">
+                        <span class="icon">👥</span>
+                        <span>الرواتب</span>
+                    </a>
+                    <a href="expenses.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>المصروفات</span>
+                    </a>
+                    <a href="budget.html" class="nav-item">
+                        <span class="icon">📋</span>
+                        <span>الميزانية</span>
+                    </a>
+                    <a href="treasury.html" class="nav-item">
+                        <span class="icon">🏛️</span>
+                        <span>الخزنة</span>
+                    </a>
+                    <a href="reports.html" class="nav-item">
+                        <span class="icon">📈</span>
+                        <span>التقارير المالية</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>الإدارة المالية</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">
+                            🔔
+                            <span class="badge">5</span>
+                        </button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير المدرسة</h4>
+                            <p>الإدارة</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h1 class="page-title">💰 الإدارة المالية</h1>
+                    <div class="page-breadcrumb">
+                        <a href="../../index.html">الرئيسية</a>
+                        <span>/</span>
+                        <span>الإدارة المالية</span>
+                    </div>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon primary">💰</div>
+                        <div class="stat-info">
+                            <h3>2.4M</h3>
+                            <p>إجمالي الإيرادات</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon success">💵</div>
+                        <div class="stat-info">
+                            <h3>1.8M</h3>
+                            <p>المستحصل</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon warning">📊</div>
+                        <div class="stat-info">
+                            <h3>600K</h3>
+                            <p>المتبقي</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon danger">📉</div>
+                        <div class="stat-info">
+                            <h3>890K</h3>
+                            <p>المصروفات</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header">
+                        <h3 class="card-title">إجراءات سريعة</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="quick-actions">
+                            <a href="fees.html" class="quick-action">
+                                <div class="icon">➕</div>
+                                <h4>إنشاء فاتورة</h4>
+                                <p>رسوم دراسية</p>
+                            </a>
+                            <a href="payments.html" class="quick-action">
+                                <div class="icon">💳</div>
+                                <h4>تسجيل دفعة</h4>
+                                <p>دفع رسوم</p>
+                            </a>
+                            <a href="salaries.html" class="quick-action">
+                                <div class="icon">👥</div>
+                                <h4>إصدار رواتب</h4>
+                                <p>شهر مايو</p>
+                            </a>
+                            <a href="expenses.html" class="quick-action">
+                                <div class="icon">📊</div>
+                                <h4>تسجيل مصروف</h4>
+                                <p>مصروفات يومية</p>
+                            </a>
+                            <a href="treasury.html" class="quick-action">
+                                <div class="icon">🏛️</div>
+                                <h4>الخزنة</h4>
+                                <p>حركات الخزنة</p>
+                            </a>
+                            <a href="reports.html" class="quick-action">
+                                <div class="icon">📈</div>
+                                <h4>تقارير مالية</h4>
+                                <p>تقارير شاملة</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Grid -->
+                <div class="grid-2">
+                    <!-- Revenue Overview -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">الإيرادات الشهرية</h3>
+                            <button class="btn btn-outline btn-sm">📊 عرض التقرير</button>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="revenueChart" height="200"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- Outstanding Payments -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">المدفوعات المتبقية</h3>
+                            <button class="btn btn-outline btn-sm">📅 عرض التفاصيل</button>
+                        </div>
+                        <div class="card-body">
+                            <div style="display: grid; gap: 16px;">
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+                                    <div style="background: linear-gradient(135deg, #fee2e2, #fecaca); padding: 20px; border-radius: 12px; text-align: center;">
+                                        <div style="font-size: 2.5em; font-weight: 800; color: #991b1b;">234</div>
+                                        <div style="color: #991b1b; font-weight: 600; margin-top: 8px;">طلاب متأخرين</div>
+                                    </div>
+                                    <div style="background: linear-gradient(135deg, #fef3c7, #fde68a); padding: 20px; border-radius: 12px; text-align: center;">
+                                        <div style="font-size: 2.5em; font-weight: 800; color: #92400e;">600K</div>
+                                        <div style="color: #92400e; font-weight: 600; margin-top: 8px;">المتبقي</div>
+                                    </div>
+                                </div>
+                                <div style="display: grid; gap: 8px;">
+                                    <div style="display: flex; justify-content: space-between; padding: 12px; background: #f8fafc; border-radius: 8px;">
+                                        <span style="font-weight: 600; color: #1e3a8a;">📊 المخصصات المرحلة الابتدائية</span>
+                                        <span style="font-weight: 800; color: #1e3a8a;">180K</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; padding: 12px; background: #f8fafc; border-radius: 8px;">
+                                        <span style="font-weight: 600; color: #10b981;">📊 المخصصات المرحلة المتوسطة</span>
+                                        <span style="font-weight: 800; color: #10b981;">220K</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; padding: 12px; background: #f8fafc; border-radius: 8px;">
+                                        <span style="font-weight: 600; color: #f59e0b;">📊 المخصصات المرحلة الثانوية</span>
+                                        <span style="font-weight: 800; color: #f59e0b;">200K</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Transactions -->
+                <div class="card" style="margin-top: 24px;">
+                    <div class="card-header">
+                        <h3 class="card-title">آخر المعاملات المالية</h3>
+                        <a href="payments.html" class="btn btn-outline btn-sm">عرض الكل</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>رقم العملية</th>
+                                        <th>النوع</th>
+                                        <th>الطالب/الموظف</th>
+                                        <th>المبلغ</th>
+                                        <th>تاريخ</th>
+                                        <th>الحالة</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">PAY-2024-001</code></td>
+                                        <td style="font-weight: 600;">رسوم دراسية</td>
+                                        <td>أحمد محمد صالح</td>
+                                        <td style="color: #10b981; font-weight: 700;">+ 5,000 SAR</td>
+                                        <td>2024-05-15</td>
+                                        <td><span class="badge-status active">مستلم</span></td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="action-btn view">👁️</button>
+                                                <button class="action-btn edit">✏️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">PAY-2024-002</code></td>
+                                        <td style="font-weight: 600;">راتب موظف</td>
+                                        <td>فاطمة عبدالله سعيد</td>
+                                        <td style="color: #ef4444; font-weight: 700;">- 8,500 SAR</td>
+                                        <td>2024-05-14</td>
+                                        <td><span class="badge-status active">مسحوب</span></td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="action-btn view">👁️</button>
+                                                <button class="action-btn edit">✏️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">PAY-2024-003</code></td>
+                                        <td style="font-weight: 600;">مصروفات</td>
+                                        <td>شركة التوريدات</td>
+                                        <td style="color: #ef4444; font-weight: 700;">- 3,200 SAR</td>
+                                        <td>2024-05-13</td>
+                                        <td><span class="badge-status active">مسحوب</span></td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="action-btn view">👁️</button>
+                                                <button class="action-btn edit">✏️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Initialize Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Revenue Chart
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['محرم', 'صفر', 'ربيع 1', 'ربيع 2', 'جماد 1', 'جماد 2'],
+                    datasets: [{
+                        label: 'الإيرادات',
+                        data: [180000, 210000, 195000, 220000, 245000, 260000],
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        borderColor: '#3b82f6',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

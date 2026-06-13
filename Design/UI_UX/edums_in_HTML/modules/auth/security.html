@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - إعدادات الأمان</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=300;400;500;600;700;800;900&family=Tajawal:wght=300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            <div class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item"><span class="icon">📊</span><span>لوحة التحكم</span></a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">الأمن والصلاحيات</div>
+                    <a href="index.html" class="nav-item"><span class="icon">🔐</span><span>لوحة التحكم</span></a>
+                    <a href="users.html" class="nav-item"><span class="icon">👥</span><span>المستخدمين</span></a>
+                    <a href="roles.html" class="nav-item"><span class="icon">🔑</span><span>الأدوار والصلاحيات</span></a>
+                    <a href="permissions.html" class="nav-item"><span class="icon">🛡️</span><span>الصلاحيات</span></a>
+                    <a href="audit.html" class="nav-item"><span class="icon">📜</span><span>سجل النشاط</span></a>
+                    <a href="security.html" class="nav-item active"><span class="icon">🔒</span><span>إعدادات الأمان</span></a>
+                </div>
+            </div>
+        </aside>
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left"><h2>الأمن والصلاحيات والمستخدمين</h2></div>
+                <div class="header-right">
+                    <div class="header-actions"><button class="header-btn">🔔<span class="badge">3</span></button></div>
+                    <div class="user-profile"><div class="user-avatar">م</div><div class="user-info"><h4>مدير المدرسة</h4><p>الإدارة</p></div></div>
+                </div>
+            </header>
+            <div class="content-area">
+                <div class="page-header">
+                    <h1 class="page-title">🔒 إعدادات الأمان</h1>
+                    <div class="page-breadcrumb"><a href="../../index.html">الرئيسية</a><span>/</span><a href="index.html">الأمن والصلاحيات</a><span>/</span><span>إعدادات الأمان</span></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                    <h3 class="card-title">إعدادات الأمان</h3>
+                    </div>
+                    <div class="card-body">
+                        <form class="form-group">
+                        <label>تفعيل المصادقة الثنائية</label>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" checked style="width: 20px; height: 20px;">
+                            <span>تفعيل المصادقة الثنائية</span>
+                        </div>
+                        <label>مدة صلاحية كلمة المرور</label>
+                        <input type="text" class="form-input" placeholder="عدد الأيام (مثال: 90">
+                        <label>مدة صلاحية الجلسة</label>
+                        <input type="text" class="form-input" placeholder="عدد الدقائق (مثال: 60">
+                        <label>إشعارات الأمان</label>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" checked style="width: 20px; height: 20px;">
+                            <span>إشعارات تسجيل دخول من جهاز جديد</span>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 20px;">💾 حفظ الإعدادات</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+stateDiagram-v2
+    [*] --> Reported
+    Reported --> Acknowledged : استلام الفني
+    Acknowledged --> Assessing
+    Assessing --> InProgress : بدء الإصلاح
+    Assessing --> WaitingApproval : يحتاج اعتماد
+    WaitingApproval --> InProgress : موافقة
+    WaitingApproval --> Rejected
+    InProgress --> WaitingParts : قطع غيار
+    WaitingParts --> InProgress : وصلت
+    InProgress --> Testing
+    Testing --> Closed : ناجح
+    Testing --> InProgress : فاشل (إعادة)
+    Rejected --> [*]
+    Closed --> [*]

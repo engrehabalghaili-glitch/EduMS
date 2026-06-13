@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - الحسابات والقيود المحاسبية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">الإدارة المالية</div>
+                    <a href="index.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>لوحة التحكم</span>
+                    </a>
+                    <a href="accounts.html" class="nav-item active">
+                        <span class="icon">🗄️</span>
+                        <span>دليل الحسابات والقيود</span>
+                    </a>
+                    <a href="budget.html" class="nav-item">
+                        <span class="icon">📅</span>
+                        <span>الميزانية التقديرية</span>
+                    </a>
+                    <a href="fees.html" class="nav-item">
+                        <span class="icon">🎓</span>
+                        <span>رسوم الطلاب</span>
+                    </a>
+                    <a href="invoices.html" class="nav-item">
+                        <span class="icon">📄</span>
+                        <span>الفواتير</span>
+                    </a>
+                    <a href="payments.html" class="nav-item">
+                        <span class="icon">💳</span>
+                        <span>سندات القبض</span>
+                    </a>
+                    <a href="expenses.html" class="nav-item">
+                        <span class="icon">💸</span>
+                        <span>سندات الصرف</span>
+                    </a>
+                    <a href="salaries.html" class="nav-item">
+                        <span class="icon">👥</span>
+                        <span>رواتب الموظفين</span>
+                    </a>
+                    <a href="treasury.html" class="nav-item">
+                        <span class="icon">🏦</span>
+                        <span>الخزينة والبنوك</span>
+                    </a>
+                    <a href="audit.html" class="nav-item">
+                        <span class="icon">🔍</span>
+                        <span>التدقيق المالي</span>
+                    </a>
+                    <a href="reports.html" class="nav-item">
+                        <span class="icon">📊</span>
+                        <span>التقارير المالية</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>الإدارة المالية - الحسابات والقيود</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">
+                            🔔
+                            <span class="badge">0</span>
+                        </button>
+                        <button class="header-btn">💬</button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير المدرسة</h4>
+                            <p>الإدارة</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <h1 class="page-title">🗄️ دليل الحسابات والقيود اليومية</h1>
+                            <div class="page-breadcrumb">
+                                <a href="../../index.html">الرئيسية</a>
+                                <span>/</span>
+                                <a href="index.html">الإدارة المالية</a>
+                                <span>/</span>
+                                <span>الحسابات</span>
+                            </div>
+                        </div>
+                        <div class="page-actions" style="display: flex; gap: 10px;">
+                            <button class="btn btn-outline" onclick="openModal('chartOfAccountsModal')">
+                                <span>📂</span>
+                                <span>دليل الحسابات</span>
+                            </button>
+                            <button class="btn btn-primary" onclick="openModal('newJournalVoucherModal')">
+                                <span>➕</span>
+                                <span>قيد محاسبي جديد</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Accounts Summary -->
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">هيكلية دليل الحسابات (نظرة عامة)</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="accounts-tree">
+                                <li>
+                                    <strong>1. الأصول (Assets)</strong>
+                                    <ul>
+                                        <li>11 الأصول المتداولة (الصندوق، البنك)</li>
+                                        <li>12 الأصول الثابتة (المباني، الأجهزة)</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <strong>2. الخصوم (Liabilities)</strong>
+                                    <ul>
+                                        <li>21 الدائنون</li>
+                                        <li>22 القروض</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <strong>3. حقوق الملكية</strong>
+                                </li>
+                                <li>
+                                    <strong>4. الإيرادات (Revenues)</strong>
+                                    <ul>
+                                        <li>41 رسوم دراسية</li>
+                                        <li>42 إيرادات أخرى</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <strong>5. المصروفات (Expenses)</strong>
+                                    <ul>
+                                        <li>51 الرواتب والأجور</li>
+                                        <li>52 الإيجارات والمرافق</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">إحصائيات القيود (هذا الشهر)</h3>
+                        </div>
+                        <div class="card-body">
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                                <div style="text-align: center; padding: 20px; background: #f8fafc; border-radius: 12px;">
+                                    <h2 style="color: var(--primary);">124</h2>
+                                    <p style="font-size: 0.85em; color: var(--text-secondary);">قيد آلي (من النظام)</p>
+                                </div>
+                                <div style="text-align: center; padding: 20px; background: #f8fafc; border-radius: 12px;">
+                                    <h2 style="color: var(--accent);">15</h2>
+                                    <p style="font-size: 0.85em; color: var(--text-secondary);">قيد يدوي</p>
+                                </div>
+                                <div style="text-align: center; padding: 20px; background: #f8fafc; border-radius: 12px;">
+                                    <h2 style="color: var(--success);">139</h2>
+                                    <p style="font-size: 0.85em; color: var(--text-secondary);">إجمالي القيود المرحلة</p>
+                                </div>
+                                <div style="text-align: center; padding: 20px; background: #f8fafc; border-radius: 12px;">
+                                    <h2 style="color: var(--danger);">0</h2>
+                                    <p style="font-size: 0.85em; color: var(--text-secondary);">قيود غير متوازنة</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Journal Vouchers Table -->
+                <div class="card" style="margin-top: 32px;">
+                    <div class="card-header">
+                        <h3 class="card-title">سجل القيود اليومية</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>رقم القيد</th>
+                                        <th>التاريخ</th>
+                                        <th>البيان (الوصف)</th>
+                                        <th>النوع</th>
+                                        <th>إجمالي المدين</th>
+                                        <th>إجمالي الدائن</th>
+                                        <th>الحالة</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>JV-2024-00125</strong></td>
+                                        <td>28 مايو 2026</td>
+                                        <td>إثبات رواتب شهر مايو 2026</td>
+                                        <td>آلي</td>
+                                        <td><strong>450,000 ريال</strong></td>
+                                        <td><strong>450,000 ريال</strong></td>
+                                        <td><span class="badge-status success">مرحّل</span></td>
+                                        <td>
+                                            <div class="action-btns">
+                                                <button class="btn-icon">👁️</button>
+                                                <button class="btn-icon">📄</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>JV-2024-00124</strong></td>
+                                        <td>25 مايو 2026</td>
+                                        <td>شراء أدوات مكتبية وقرطاسية</td>
+                                        <td>يدوي</td>
+                                        <td><strong>2,500 ريال</strong></td>
+                                        <td><strong>2,500 ريال</strong></td>
+                                        <td><span class="badge-status success">مرحّل</span></td>
+                                        <td>
+                                            <div class="action-btns">
+                                                <button class="btn-icon">👁️</button>
+                                                <button class="btn-icon">📄</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="newJournalVoucherModal" class="modal">
+        <div class="modal-content" style="width: 800px;">
+            <div class="modal-header">
+                <h3>إنشاء قيد محاسبي يدوي</h3>
+                <span class="close-modal" onclick="closeModal('newJournalVoucherModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">تاريخ القيد</label>
+                            <input type="date" class="form-input" value="2026-05-30">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">العملة</label>
+                            <select class="form-select">
+                                <option>ريال سعودي</option>
+                                <option>دولار أمريكي</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">البيان العام (Description)</label>
+                        <input type="text" class="form-input" placeholder="وصف موجز للعملية">
+                    </div>
+                    
+                    <div class="voucher-details" style="margin-top: 20px;">
+                        <h4 style="margin-bottom: 15px;">تفاصيل القيد (مدين / دائن)</h4>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th width="40%">الحساب</th>
+                                    <th>مدين (Debit)</th>
+                                    <th>دائن (Credit)</th>
+                                    <th>شرح السطر</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><select class="form-select"><option>51101 - رواتب المعلمين</option></select></td>
+                                    <td><input type="number" class="form-input" value="1000"></td>
+                                    <td><input type="number" class="form-input" value="0" disabled></td>
+                                    <td><input type="text" class="form-input"></td>
+                                    <td>❌</td>
+                                </tr>
+                                <tr>
+                                    <td><select class="form-select"><option>11101 - البنك الراجحي</option></select></td>
+                                    <td><input type="number" class="form-input" value="0" disabled></td>
+                                    <td><input type="number" class="form-input" value="1000"></td>
+                                    <td><input type="text" class="form-input"></td>
+                                    <td>❌</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="btn btn-outline btn-sm" style="margin-top: 10px;">➕ إضافة سطر</button>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 15px; background: #f8fafc; border-radius: 8px; display: flex; justify-content: space-between;">
+                        <div>إجمالي المدين: <span style="font-weight: 800; color: var(--primary);">1000.00</span></div>
+                        <div>إجمالي الدائن: <span style="font-weight: 800; color: var(--primary);">1000.00</span></div>
+                        <div>الفرق: <span style="font-weight: 800; color: var(--success);">0.00 (متوازن)</span></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('newJournalVoucherModal')">إلغاء</button>
+                <button class="btn btn-primary">حفظ وترحيل</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .accounts-tree { list-style: none; padding-right: 10px; }
+        .accounts-tree ul { list-style: none; padding-right: 20px; border-right: 1px dashed #cbd5e1; margin-top: 10px; }
+        .accounts-tree li { margin-bottom: 10px; color: #475569; }
+        .accounts-tree strong { color: var(--primary); }
+
+        .badge-status.success { background: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 20px; font-size: 0.8em; font-weight: 700; }
+        .action-btns { display: flex; gap: 5px; }
+        .btn-icon { width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e5e7eb; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+        .modal-content { background-color: white; margin: 5% auto; width: 600px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); overflow: hidden; animation: modalSlideDown 0.3s ease-out; }
+        .modal-header { padding: 20px 24px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; }
+        .modal-header h3 { color: #1e3a8a; }
+        .close-modal { font-size: 24px; font-weight: bold; cursor: pointer; color: #6b7280; }
+        .modal-body { padding: 24px; max-height: 70vh; overflow-y: auto; }
+        .modal-footer { padding: 16px 24px; border-top: 1px solid #e5e7eb; display: flex; justify-content: flex-end; gap: 12px; background: #f8fafc; }
+    </style>
+
+    <script>
+        function openModal(id) { document.getElementById(id).style.display = "block"; }
+        function closeModal(id) { document.getElementById(id).style.display = "none"; }
+    </script>
+</body>
+</html>

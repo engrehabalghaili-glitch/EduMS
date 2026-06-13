@@ -1,0 +1,258 @@
+erDiagram
+    SystemUser {
+        BIGINT userId "PK"
+        BIGINT schoolId "FK"
+        BIGINT officeId "FK"
+        VARCHAR(200) username
+        VARCHAR(200) passwordHash
+        VARCHAR(200) passwordSalt
+        DATE passwordExpiryDate
+        DATE lastPasswordChangeDate
+        VARCHAR more__fields "+47 fields"
+    }
+    UserActivityLog {
+        BIGINT logId "PK"
+        BIGINT userId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(100) activityType
+        DATETIME activityTimestamp
+        VARCHAR(50) status
+        VARCHAR(200) failureReason
+        VARCHAR(200) ipAddress
+        VARCHAR more__fields "+11 fields"
+    }
+    PermissionType {
+        BIGINT typeId "PK"
+        VARCHAR(50) typeCode
+        VARCHAR(50) typeNameAr
+        VARCHAR(50) typeNameEn
+        VARCHAR(50) category
+        VARCHAR(50) scopeType
+        VARCHAR(50) riskLevel
+        BOOLEAN requiresApproval
+        VARCHAR more__fields "+11 fields"
+    }
+    Permission {
+        BIGINT permissionId "PK"
+        VARCHAR(200) permissionKey
+        VARCHAR(200) module
+        VARCHAR(200) subModule
+        VARCHAR(200) action
+        BIGINT typeId "FK"
+        VARCHAR(200) scope
+        VARCHAR(200) nameAr
+        VARCHAR more__fields "+13 fields"
+    }
+    Role {
+        BIGINT roleId "PK"
+        VARCHAR(50) roleCode
+        VARCHAR(200) roleNameAr
+        VARCHAR(200) roleNameEn
+        VARCHAR(50) roleType
+        VARCHAR(50) hierarchyLevel
+        BIGINT parentRoleId "FK"
+        BOOLEAN isInheritable
+        VARCHAR more__fields "+10 fields"
+    }
+    RolePermission {
+        BIGINT rolePermissionId "PK"
+        BIGINT roleId "FK"
+        BIGINT permissionId "FK"
+        VARCHAR(200) scopeOverride
+        BOOLEAN isInherited
+        BIGINT inheritedFromRoleId "FK"
+        BOOLEAN isActive
+        DATE startDate
+        VARCHAR more__fields "+7 fields"
+    }
+    UserRole {
+        BIGINT userRoleId "PK"
+        BIGINT userId "FK"
+        BIGINT roleId "FK"
+        BIGINT schoolId "FK"
+        BOOLEAN isPrimary
+        VARCHAR(200) scopeContext
+        DATE startDate
+        DATE endDate
+        VARCHAR more__fields "+7 fields"
+    }
+    GovernanceRBAC {
+        BIGINT governanceId "PK"
+        BIGINT roleId "FK"
+        BIGINT targetRoleId "FK"
+        BIGINT targetPermissionId "FK"
+        VARCHAR(200) action
+        BOOLEAN canDelegate
+        BOOLEAN approvalRequired
+        BIGINT approvalRoleId "FK"
+        VARCHAR more__fields "+6 fields"
+    }
+    UserPermission {
+        BIGINT userPermissionId "PK"
+        BIGINT userId "FK"
+        BIGINT permissionId "FK"
+        BIGINT schoolId "FK"
+        VARCHAR(200) scopeOverride
+        BOOLEAN isActive
+        DATE startDate
+        DATE endDate
+        VARCHAR more__fields "+7 fields"
+    }
+    AccessPolicy {
+        BIGINT policyId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) policyCode
+        VARCHAR(200) policyNameAr
+        VARCHAR(200) policyNameEn
+        VARCHAR(50) policyType
+        VARCHAR(200) policyRule
+        VARCHAR(200) effect
+        VARCHAR more__fields "+11 fields"
+    }
+    PermissionBase {
+        BIGINT baseId "PK"
+        VARCHAR(50) moduleCode
+        VARCHAR(200) moduleNameAr
+        VARCHAR(200) moduleNameEn
+        VARCHAR(50) sectionCode
+        VARCHAR(200) sectionNameAr
+        VARCHAR(200) sectionNameEn
+        TEXT description
+        VARCHAR more__fields "+8 fields"
+    }
+    StudentBasePermissions {
+        BIGINT permissionId "PK"
+        BIGINT schoolId "FK"
+        BIGINT roleId "FK"
+        VARCHAR(50) permissionCode
+        VARCHAR(50) category
+        VARCHAR(50) resourceType
+        VARCHAR(200) action
+        VARCHAR(200) scope
+        VARCHAR more__fields "+18 fields"
+    }
+    StudentAcademicPermissions {
+        BIGINT permissionId "PK"
+        BIGINT schoolId "FK"
+        BIGINT roleId "FK"
+        VARCHAR(50) academicCategory
+        VARCHAR(50) permissionCode
+        VARCHAR(200) action
+        VARCHAR(200) scope
+        TIME timeRestriction
+        VARCHAR more__fields "+19 fields"
+    }
+    StudentFinancePermissions {
+        BIGINT permissionId "PK"
+        BIGINT schoolId "FK"
+        BIGINT roleId "FK"
+        VARCHAR(50) financeCategory
+        VARCHAR(50) permissionCode
+        VARCHAR(200) action
+        VARCHAR(200) scope
+        BOOLEAN requiresApproval
+        VARCHAR more__fields "+16 fields"
+    }
+    OfficePermissions {
+        BIGINT permissionId "PK"
+        BIGINT officeId "FK"
+        BIGINT roleId "FK"
+        VARCHAR(50) officeCategory
+        VARCHAR(50) permissionCode
+        VARCHAR(200) action
+        VARCHAR(200) scope
+        VARCHAR(200) applicableSchoolIds
+        VARCHAR more__fields "+13 fields"
+    }
+    BehaviorPermissionMatrix {
+        BIGINT matrixId "PK"
+        BIGINT schoolId "FK"
+        BIGINT roleId "FK"
+        BIGINT permissionId "FK"
+        VARCHAR(50) category
+        VARCHAR(50) subCategory
+        VARCHAR(200) permissionKey
+        VARCHAR(200) allowedActions
+        VARCHAR more__fields "+12 fields"
+    }
+    BehaviorPermissions {
+        BIGINT permissionId "PK"
+        BIGINT schoolId "FK"
+        BIGINT roleId "FK"
+        VARCHAR(50) behaviorCategory
+        VARCHAR(50) permissionCode
+        VARCHAR(200) action
+        VARCHAR(200) scope
+        BOOLEAN requiresEvidence
+        VARCHAR more__fields "+16 fields"
+    }
+    AuditLog {
+        BIGINT auditId "PK"
+        BIGINT schoolId "FK"
+        BIGINT userId "FK"
+        VARCHAR(200) userRoleAtExecution
+        VARCHAR(200) action
+        VARCHAR(50) entityType
+        BIGINT entityId "FK"
+        VARCHAR(200) oldValue
+        VARCHAR more__fields "+17 fields"
+    }
+    StudentPermissionAudit {
+        BIGINT auditId "PK"
+        BIGINT studentId "FK"
+        BIGINT schoolId "FK"
+        BIGINT userId "FK"
+        VARCHAR(200) userRole
+        VARCHAR(200) permissionKey
+        VARCHAR(50) entityType
+        BIGINT entityId "FK"
+        VARCHAR more__fields "+7 fields"
+    }
+    RoleMatrix {
+        BIGINT matrixId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) roleCode
+        VARCHAR(200) roleNameAr
+        VARCHAR(200) roleNameEn
+        VARCHAR(50) roleType
+        VARCHAR(200) permissions
+        TEXT descriptionAr
+        VARCHAR more__fields "+8 fields"
+    }
+    PrivilegeRules {
+        BIGINT ruleId "PK"
+        BIGINT schoolId "FK"
+        VARCHAR(50) ruleCode
+        VARCHAR(200) ruleNameAr
+        VARCHAR(200) ruleNameEn
+        VARCHAR(50) ruleCategory
+        VARCHAR(200) appliesTo
+        VARCHAR(200) appliesToValue
+        VARCHAR more__fields "+10 fields"
+    }
+    SystemUser ||--o{ UserActivityLog : "userId"
+    PermissionType ||--o{ Permission : "typeId"
+    Role ||--o{ Role : "parentRoleId"
+    Role ||--o{ RolePermission : "roleId"
+    Permission ||--o{ RolePermission : "permissionId"
+    Role ||--o{ RolePermission : "inheritedFromRoleId"
+    SystemUser ||--o{ RolePermission : "grantedByUserId"
+    SystemUser ||--o{ UserRole : "userId"
+    Role ||--o{ UserRole : "roleId"
+    SystemUser ||--o{ UserRole : "assignedByUserId"
+    Role ||--o{ GovernanceRBAC : "roleId"
+    Role ||--o{ GovernanceRBAC : "targetRoleId"
+    Permission ||--o{ GovernanceRBAC : "targetPermissionId"
+    Role ||--o{ GovernanceRBAC : "approvalRoleId"
+    SystemUser ||--o{ UserPermission : "userId"
+    Permission ||--o{ UserPermission : "permissionId"
+    SystemUser ||--o{ UserPermission : "grantedByUserId"
+    Role ||--o{ StudentBasePermissions : "roleId"
+    Role ||--o{ StudentAcademicPermissions : "roleId"
+    Role ||--o{ StudentFinancePermissions : "roleId"
+    Role ||--o{ OfficePermissions : "roleId"
+    Role ||--o{ BehaviorPermissionMatrix : "roleId"
+    BehaviorPermissions ||--o{ BehaviorPermissionMatrix : "permissionId"
+    Role ||--o{ BehaviorPermissions : "roleId"
+    SystemUser ||--o{ AuditLog : "userId"
+    SystemUser ||--o{ StudentPermissionAudit : "userId"

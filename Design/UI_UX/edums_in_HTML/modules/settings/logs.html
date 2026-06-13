@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - سجلات النظام</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=300;400;500;600;700;800;900&family=Tajawal:wght=300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item"><span class="icon">📊</span><span>لوحة التحكم</span></a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">إعدادات النظام</div>
+                    <a href="index.html" class="nav-item"><span class="icon">⚙️</span><span>لوحة الإعدادات</span></a>
+                    <a href="general.html" class="nav-item"><span class="icon">🏫</span><span>إعدادات عامة</span></a>
+                    <a href="academic.html" class="nav-item"><span class="icon">📅</span><span>إعدادات أكاديمية</span></a>
+                    <a href="finance.html" class="nav-item"><span class="icon">💰</span><span>إعدادات مالية</span></a>
+                    <a href="notifications.html" class="nav-item"><span class="icon">🔔</span><span>الإشعارات</span></a>
+                    <a href="backup.html" class="nav-item"><span class="icon">💾</span><span>النسخ الاحتياطي</span></a>
+                    <a href="logs.html" class="nav-item active"><span class="icon">📝</span><span>سجلات النظام</span></a>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left"><h2>إعدادات النظام</h2></div>
+                <div class="header-right">
+                    <div class="header-actions"><button class="header-btn">🔔</button></div>
+                    <div class="user-profile"><div class="user-avatar">م</div><div class="user-info"><h4>مدير المدرسة</h4><p>الإدارة</p></div></div>
+                </div>
+            </header>
+            <div class="content-area">
+                <div class="page-header">
+                    <h1 class="page-title">📝 سجلات النظام</h1>
+                    <div class="page-breadcrumb"><a href="../../index.html">الرئيسية</a><span>/</span><a href="index.html">إعدادات النظام</a><span>/</span><span>سجلات النظام</span></div>
+                </div>
+                <div class="filters">
+                    <div class="filter-group"><label>النوع</label><select class="form-input"><option>الكل</option><option>خطأ</option><option>تحذير</option><option>معلومات</option></select></div>
+                    <div class="filter-group"><label>المستخدم</label><select class="form-input"><option>الكل</option><option>مدير المدرسة</option><option>أمين المدرسة</option></select></div>
+                    <div class="filter-group"><label>من التاريخ</label><input type="date" class="form-input"></div>
+                    <div class="filter-group"><label>إلى التاريخ</label><input type="date" class="form-input"></div>
+                </div>
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header"><h3 class="card-title">سجل الأحداث</h3></div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr><th>التاريخ والوقت</th><th>النوع</th><th>المستخدم</th><th>الرسالة</th><th>التفاصيل</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>2024-05-28 10:45</td><td><span class="badge-status active">معلومات</span></td><td>مدير المدرسة</td><td>تم تسجيل الدخول بنجاح</td><td>-</td></tr>
+                                    <tr><td>2024-05-28 10:30</td><td><span class="badge-status active">معلومات</span></td><td>أمين المدرسة</td><td>تم إنشاء فاتورة جديدة</td><td>فاتورة #2024-001</td></tr>
+                                    <tr><td>2024-05-28 10:00</td><td><span class="badge-status warning">تحذير</span></td><td>النظام</td><td>انخفاض مساحة التخزين</td><td>المساحة المتبقية: 2 GB</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

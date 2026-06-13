@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚙️ مخططات النشاط ودورة الحياة | EduMS Documentation</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Cairo',sans-serif;background:#f8fafc;color:#1f2937;line-height:1.7;font-size:14.5px}
+header.top{background:linear-gradient(135deg,#1e3a8a,#3b82f6,#8b5cf6);color:#fff;padding:30px 24px;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+header.top h1{font-size:1.9em;font-weight:800;text-shadow:1px 1px 4px rgba(0,0,0,.3)}
+header.top .breadcrumb{margin-top:10px;font-size:.95em;opacity:.95}
+header.top .breadcrumb a{color:#fef3c7;text-decoration:none;font-weight:600}
+header.top .breadcrumb a:hover{text-decoration:underline}
+header.top .stats{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap}
+header.top .stat{background:rgba(255,255,255,.18);padding:8px 16px;border-radius:20px;font-size:.9em;font-weight:600;border:1px solid rgba(255,255,255,.3)}
+.container{max-width:1500px;margin:24px auto;padding:0 20px}
+.toc-side{background:#fff;border-radius:14px;padding:20px;margin-bottom:24px;box-shadow:0 2px 10px rgba(0,0,0,.06);position:sticky;top:0;z-index:50}
+.toc-side h3{color:#1e3a8a;font-size:1.15em;margin-bottom:12px}
+.toc-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:4px}
+.toc-list a{color:#374151;text-decoration:none;padding:5px 10px;border-radius:6px;font-size:.88em;display:block;font-weight:500}
+.toc-list a:hover{background:#dbeafe;color:#1e3a8a}
+.toc-list code{background:#f3f4f6;padding:1px 5px;border-radius:3px;font-size:.85em;color:#1e3a8a;font-weight:700}
+.diagram-card{background:#fff;border-radius:14px;margin-bottom:24px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.05)}
+.diagram-header{background:linear-gradient(90deg,#f8fafc,#e0e7ff);padding:18px 24px;border-bottom:2px solid #e5e7eb}
+.id-badge{display:inline-block;background:#1e3a8a;color:#fff;padding:4px 12px;border-radius:6px;font-size:.82em;font-weight:700;font-family:'Fira Code',monospace;margin-left:10px}
+.diagram-header h3{display:inline;color:#1e3a8a;font-size:1.3em;font-weight:700}
+.diagram-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tag{display:inline-block;padding:4px 10px;border-radius:18px;font-size:.82em;font-weight:600}
+.tag.type{background:#dbeafe;color:#1e3a8a}
+.tag.level{background:#fce7f3;color:#831843}
+.tag.mod{background:#f3e8ff;color:#6b21a8}
+.tag.stats{background:#fef3c7;color:#92400e}
+.diagram-body{padding:20px 24px}
+.info-block{margin-bottom:10px;font-size:.93em}
+.info-block strong{color:#1e3a8a;margin-left:5px}
+.mermaid-wrapper{background:#fafbfc;border:2px dashed #d1d5db;border-radius:10px;padding:20px 12px;margin:16px 0;overflow:auto;min-height:150px}
+.mermaid{text-align:center;direction:ltr;font-size:13px}
+.code-tabs{display:flex;gap:5px;margin-top:14px;border-bottom:2px solid #e5e7eb}
+.code-tab{background:#e5e7eb;color:#374151;padding:6px 14px;border-radius:6px 6px 0 0;cursor:pointer;font-weight:600;font-size:.85em;border:none;font-family:inherit}
+.code-tab.active{background:#1e3a8a;color:#fff}
+.code-block{background:#0f172a;color:#cbd5e1;border-radius:0 10px 10px 10px;padding:14px;overflow:auto;max-height:480px;font-family:'Fira Code',monospace;font-size:.78em;line-height:1.5;direction:ltr;text-align:left;display:none;white-space:pre}
+.code-block.active{display:block}
+.back-to-top{position:fixed;bottom:24px;left:24px;background:#1e3a8a;color:#fff;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.3em;box-shadow:0 4px 14px rgba(0,0,0,.25);z-index:100}
+.back-to-top:hover{background:#f59e0b}
+.nav-buttons{display:flex;gap:12px;justify-content:space-between;margin:30px 0}
+.nav-btn{background:#1e3a8a;color:#fff;padding:14px 22px;border-radius:10px;text-decoration:none;font-weight:700;flex:1;text-align:center;transition:all .2s}
+.nav-btn:hover{background:#3b82f6;transform:translateY(-2px)}
+.nav-btn.disabled{background:#9ca3af;cursor:not-allowed}
+@media(max-width:768px){
+  header.top h1{font-size:1.4em}
+  .container{padding:0 12px}
+  .diagram-header{padding:14px}
+  .diagram-body{padding:14px}
+}
+</style>
+</head>
+<body>
+
+<a id="top"></a>
+<header class="top">
+  <div class="breadcrumb"><a href="index.html">🏠 الفهرس الرئيسي</a> &nbsp;›&nbsp; ⚙️ مخططات النشاط ودورة الحياة</div>
+  <h1>⚙️ مخططات النشاط ودورة الحياة</h1>
+  <div class="stats">
+    <div class="stat">📊 17 مخطط</div>
+    <div class="stat">🎯 EduMS Enterprise</div>
+  </div>
+</header>
+<div class="container">
+<div class="toc-side"><h3>📑 محتويات هذا القسم</h3><div class="toc-list"><a href="#STATE-Student"><code>STATE-Student</code> State Machine — دورة حياة الطالب الكاملة</a><a href="#STATE-Employee"><code>STATE-Employee</code> State Machine — دورة حياة الموظف</a><a href="#STATE-Asset"><code>STATE-Asset</code> State Machine — دورة حياة الأصل</a><a href="#STATE-Application"><code>STATE-Application</code> State Machine — طلب التسجيل/التحاق</a><a href="#STATE-Invoice"><code>STATE-Invoice</code> State Machine — الفاتورة المالية</a><a href="#STATE-Maintenance"><code>STATE-Maintenance</code> State Machine — تذكرة الصيانة</a><a href="#STATE-Plan"><code>STATE-Plan</code> State Machine — الخطة السنوية</a><a href="#STATE-Leave"><code>STATE-Leave</code> State Machine — طلب الإجازة</a><a href="#ACT-S01"><code>ACT-S01</code> Activity — احتساب درجة طالب</a><a href="#ACT-S02"><code>ACT-S02</code> Activity — سيناريو نقل طالب</a><a href="#ACT-A01"><code>ACT-A01</code> Activity — صيانة كاملة للأصل</a><a href="#ACT-A02"><code>ACT-A02</code> Activity — الجرد السنوي</a><a href="#ACT-SA01"><code>ACT-SA01</code> Activity — اعتماد خطة سنوية</a><a href="#ACT-E01"><code>ACT-E01</code> Activity — الإجازة الكاملة</a><a href="#ACT-EM01"><code>ACT-EM01</code> Activity — حالة طوارئ</a><a href="#ACT-AU01"><code>ACT-AU01</code> Activity — إدارة الأدوار والصلاحيات</a><a href="#ACT-RPT01"><code>ACT-RPT01</code> Activity — توليد تقرير</a></div></div>
+<div class="nav-buttons"><a href="03_sequence.html" class="nav-btn">→ 🔄 مخططات التسلسل (Sequence)</a><a href="index.html" class="nav-btn" style="background:#f59e0b">🏠 الفهرس الرئيسي</a><a href="05_class.html" class="nav-btn">🧩 مخططات الكلاسات ←</a></div>
+
+<article class="diagram-card" id="STATE-Student">
+  <div class="diagram-header">
+    <span class="id-badge">STATE-Student</span>
+    <h3>State Machine — دورة حياة الطالب الكاملة</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 State Diagram</span>
+      <span class="tag level">🎯 Module</span>
+       <span class="tag mod">🎓 إدارة الطلاب والشؤون الأك</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>State Machine الرسمي للطالب — 12 حالة وانتقالاتها.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>12 حالة + 20+ انتقال.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+stateDiagram-v2
+    [*] --> Pending : تقديم طلب
+    Pending --> SchoolApproved : قبول المدرسة
+    Pending --> Rejected : رفض
+    SchoolApproved --> Registered : اعتماد المكتب
+    SchoolApproved --> Returned : إرجاع للتعديل
+    Returned --> Pending
+    Registered --> Active : توزيع على فصل
+    Active --> Active : عام دراسي/درجات/حضور
+    Active --> Frozen : تجميد قيد
+    Frozen --> Active : إعادة تفعيل
+    Frozen --> Withdrawn : انسحاب أثناء التجميد
+    Active --> Disconnected : انقطاع مزمن
+    Disconnected --> Active : عودة
+    Disconnected --> Withdrawn
+    Active --> Promoted : نهاية العام (نجاح)
+    Promoted --> Active : عام جديد
+    Active --> Repeated : رسوب
+    Repeated --> Active : عام جديد بنفس الصف
+    Active --> Transferred : نقل خارجي
+    Active --> Withdrawn : انسحاب
+    Active --> Expelled : استبعاد تأديبي
+    Active --> Graduated : تخرج
+    Active --> Deceased : وفاة
+    Transferred --> Archived
+    Withdrawn --> Archived
+    Expelled --> Archived
+    Graduated --> Archived
+    Deceased --> Archived
+    Rejected --> [*]
+    Archived --> [*]
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'STATE-Student-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="STATE-Student-mer">stateDiagram-v2
+    [*] --&gt; Pending : تقديم طلب
+    Pending --&gt; SchoolApproved : قبول المدرسة
+    Pending --&gt; Rejected : رفض
+    SchoolApproved --&gt; Registered : اعتماد المكتب
+    SchoolApproved --&gt; Returned : إرجاع للتعديل
+    Returned --&gt; Pending
+    Registered --&gt; Active : توزيع على فصل
+    Active --&gt; Active : عام دراسي/درجات/حضور
+    Active --&gt; Frozen : تجميد قيد
+    Frozen --&gt; Active : إعادة تفعيل
+    Frozen --&gt; Withdrawn : انسحاب أثناء التجميد
+    Active --&gt; Disconnected : انقطاع مزمن
+    Disconnected --&gt; Active : عودة
+    Disconnected --&gt; Withdrawn
+    Active --&gt; Promoted : نهاية العام (نجاح)
+    Promoted --&gt; Active : عام جديد
+    Active --&gt; Repeated : رسوب
+    Repeated --&gt; Active : عام جديد بنفس الصف
+    Active --&gt; Transferred : نقل خارجي
+    Active --&gt; Withdrawn : انسحاب
+    Active --&gt; Expelled : استبعاد تأديبي
+    Active --&gt; Graduated : تخرج
+    Active --&gt; Deceased : وفاة
+    Transferred --&gt; Archived
+    Withdrawn --&gt; Archived
+    Expelled --&gt; Archived
+    Graduated --&gt; Archived
+    Deceased --&gt; Archived
+    Rejected --&gt; [*]
+    Archived --&gt; [*]</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="STATE-Employee">
+  <div class="diagram-header">
+    <span class="id-badge">STATE-Employee</span>
+    <h3>State Machine — دورة حياة الموظف</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 State Diagram</span>
+      <span class="tag level">🎯 Module</span>
+       <span class="tag mod">👥 إدارة الموظفين والكادر ال</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>State Machine للموظف — من المتقدم حتى الأرشفة.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>13 حالة + الانتقالات.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+stateDiagram-v2
+    [*] --> Applicant : تقديم طلب
+    Applicant --> Interviewed : مقابلة
+    Applicant --> Rejected : رفض
+    Interviewed --> Selected : اختيار
+    Interviewed --> Rejected
+    Selected --> Inactive : تعيين رسمي
+    Inactive --> Active : تفعيل
+    Active --> OnLeave : إجازة معتمدة
+    OnLeave --> Active : عودة
+    Active --> Suspended : إيقاف مؤقت
+    Suspended --> Active : إعادة
+    Active --> InTransfer : نقل قيد التنفيذ
+    InTransfer --> Active : نقل ناجح (مدرسة جديدة)
+    Active --> Resigned : استقالة
+    Active --> Terminated : إنهاء خدمة
+    Active --> Retired : تقاعد
+    Resigned --> ClearanceInProgress
+    Terminated --> ClearanceInProgress
+    Retired --> ClearanceInProgress
+    ClearanceInProgress --> FinallySettled : تسوية مالية
+    FinallySettled --> Archived
+    Rejected --> [*]
+    Archived --> [*]
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'STATE-Employee-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="STATE-Employee-mer">stateDiagram-v2
+    [*] --&gt; Applicant : تقديم طلب
+    Applicant --&gt; Interviewed : مقابلة
+    Applicant --&gt; Rejected : رفض
+    Interviewed --&gt; Selected : اختيار
+    Interviewed --&gt; Rejected
+    Selected --&gt; Inactive : تعيين رسمي
+    Inactive --&gt; Active : تفعيل
+    Active --&gt; OnLeave : إجازة معتمدة
+    OnLeave --&gt; Active : عودة
+    Active --&gt; Suspended : إيقاف مؤقت
+    Suspended --&gt; Active : إعادة
+    Active --&gt; InTransfer : نقل قيد التنفيذ
+    InTransfer --&gt; Active : نقل ناجح (مدرسة جديدة)
+    Active --&gt; Resigned : استقالة
+    Active --&gt; Terminated : إنهاء خدمة
+    Active --&gt; Retired : تقاعد
+    Resigned --&gt; ClearanceInProgress
+    Terminated --&gt; ClearanceInProgress
+    Retired --&gt; ClearanceInProgress
+    ClearanceInProgress --&gt; FinallySettled : تسوية مالية
+    FinallySettled --&gt; Archived
+    Rejected --&gt; [*]
+    Archived --&gt; [*]</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="STATE-Asset">
+  <div class="diagram-header">
+    <span class="id-badge">STATE-Asset</span>
+    <h3>State Machine — دورة حياة الأصل</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 State Diagram</span>
+      <span class="tag level">🎯 Module</span>
+       <span class="tag mod">📦 إدارة الأصول والمرافق</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>State Machine للأصل — 14+ حالة (يعكس ISO 55000).</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>14 حالة.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+stateDiagram-v2
+    [*] --> Proposed : اقتراح اقتناء
+    Proposed --> Approved : اعتماد ميزانية
+    Proposed --> Rejected
+    Approved --> InPurchase
+    InPurchase --> Received : استلام
+    Received --> Inactive : تسجيل
+    Inactive --> Active : تفعيل
+    Active --> InUse : تخصيص
+    InUse --> Maintenance : عطل
+    Maintenance --> InUse : إصلاح
+    Maintenance --> OutOfService : إصلاح فاشل
+    InUse --> Loaned : إعارة
+    Loaned --> InUse : إعادة
+    InUse --> Transferred : نقل
+    Transferred --> InUse
+    Active --> Suspended : تعليق إداري
+    Suspended --> Active
+    OutOfService --> Disposal : قرار شطب
+    InUse --> Disposal
+    Active --> Lost : مفقود (جرد)
+    Lost --> Investigated
+    Investigated --> Recovered : عثور
+    Investigated --> Disposal : إثبات الفقدان
+    Recovered --> Active
+    Disposal --> Archived
+    Archived --> [*]
+    Rejected --> [*]
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'STATE-Asset-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="STATE-Asset-mer">stateDiagram-v2
+    [*] --&gt; Proposed : اقتراح اقتناء
+    Proposed --&gt; Approved : اعتماد ميزانية
+    Proposed --&gt; Rejected
+    Approved --&gt; InPurchase
+    InPurchase --&gt; Received : استلام
+    Received --&gt; Inactive : تسجيل
+    Inactive --&gt; Active : تفعيل
+    Active --&gt; InUse : تخصيص
+    InUse --&gt; Maintenance : عطل
+    Maintenance --&gt; InUse : إصلاح
+    Maintenance --&gt; OutOfService : إصلاح فاشل
+    InUse --&gt; Loaned : إعارة
+    Loaned --&gt; InUse : إعادة
+    InUse --&gt; Transferred : نقل
+    Transferred --&gt; InUse
+    Active --&gt; Suspended : تعليق إداري
+    Suspended --&gt; Active
+    OutOfService --&gt; Disposal : قرار شطب
+    InUse --&gt; Disposal
+    Active --&gt; Lost : مفقود (جرد)
+    Lost --&gt; Investigated
+    Investigated --&gt; Recovered : عثور
+    Investigated --&gt; Disposal : إثبات الفقدان
+    Recovered --&gt; Active
+    Disposal --&gt; Archived
+    Archived --&gt; [*]
+    Rejected --&gt; [*]</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="STATE-Application">
+  <div class="diagram-header">
+    <span class="id-badge">STATE-Application</span>
+    <h3>State Machine — طلب التسجيل/التحاق</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 State Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">🎓 إدارة الطلاب والشؤون الأك</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>State Machine لطلب الالتحاق.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>9 حالات.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+stateDiagram-v2
+    [*] --> Draft
+    Draft --> Submitted : إرسال
+    Submitted --> UnderReview : بدء المراجعة
+    UnderReview --> SchoolApproved : قبول مبدئي
+    UnderReview --> NeedsDocuments : وثائق ناقصة
+    NeedsDocuments --> Submitted : رفع الوثائق
+    UnderReview --> Rejected : رفض
+    SchoolApproved --> OfficeReview : إحالة للمكتب
+    OfficeReview --> Approved : اعتماد نهائي
+    OfficeReview --> Rejected
+    Approved --> StudentCreated
+    Rejected --> [*]
+    StudentCreated --> [*]
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'STATE-Application-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="STATE-Application-mer">stateDiagram-v2
+    [*] --&gt; Draft
+    Draft --&gt; Submitted : إرسال
+    Submitted --&gt; UnderReview : بدء المراجعة
+    UnderReview --&gt; SchoolApproved : قبول مبدئي
+    UnderReview --&gt; NeedsDocuments : وثائق ناقصة
+    NeedsDocuments --&gt; Submitted : رفع الوثائق
+    UnderReview --&gt; Rejected : رفض
+    SchoolApproved --&gt; OfficeReview : إحالة للمكتب
+    OfficeReview --&gt; Approved : اعتماد نهائي
+    OfficeReview --&gt; Rejected
+    Approved --&gt; StudentCreated
+    Rejected --&gt; [*]
+    StudentCreated --&gt; [*]</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="STATE-Invoice">
+  <div class="diagram-header">
+    <span class="id-badge">STATE-Invoice</span>
+    <h3>State Machine — الفاتورة المالية</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 State Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">💰 الإدارة المالية</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>State Machine للفاتورة.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>9 حالات.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+stateDiagram-v2
+    [*] --> Draft
+    Draft --> Issued
+    Issued --> PartiallyPaid : دفعة جزئية
+    Issued --> Paid : دفع كامل
+    Issued --> Overdue : تأخر السداد
+    PartiallyPaid --> Paid
+    PartiallyPaid --> Overdue
+    Overdue --> InCollection : إحالة للتحصيل
+    InCollection --> Paid
+    InCollection --> Written_off
+    Paid --> Refunded : استرداد
+    Refunded --> [*]
+    Paid --> Archived
+    Written_off --> Archived
+    Draft --> Cancelled
+    Cancelled --> [*]
+    Archived --> [*]
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'STATE-Invoice-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="STATE-Invoice-mer">stateDiagram-v2
+    [*] --&gt; Draft
+    Draft --&gt; Issued
+    Issued --&gt; PartiallyPaid : دفعة جزئية
+    Issued --&gt; Paid : دفع كامل
+    Issued --&gt; Overdue : تأخر السداد
+    PartiallyPaid --&gt; Paid
+    PartiallyPaid --&gt; Overdue
+    Overdue --&gt; InCollection : إحالة للتحصيل
+    InCollection --&gt; Paid
+    InCollection --&gt; Written_off
+    Paid --&gt; Refunded : استرداد
+    Refunded --&gt; [*]
+    Paid --&gt; Archived
+    Written_off --&gt; Archived
+    Draft --&gt; Cancelled
+    Cancelled --&gt; [*]
+    Archived --&gt; [*]</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="STATE-Maintenance">
+  <div class="diagram-header">
+    <span class="id-badge">STATE-Maintenance</span>
+    <h3>State Machine — تذكرة الصيانة</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 State Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">📦 إدارة الأصول والمرافق</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>State Machine لتذكرة الصيانة.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>10 حالات.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+stateDiagram-v2
+    [*] --> Reported
+    Reported --> Acknowledged : استلام الفني
+    Acknowledged --> Assessing
+    Assessing --> InProgress : بدء الإصلاح
+    Assessing --> WaitingApproval : يحتاج اعتماد
+    WaitingApproval --> InProgress : موافقة
+    WaitingApproval --> Rejected
+    InProgress --> WaitingParts : قطع غيار
+    WaitingParts --> InProgress : وصلت
+    InProgress --> Testing
+    Testing --> Closed : ناجح
+    Testing --> InProgress : فاشل (إعادة)
+    Rejected --> [*]
+    Closed --> [*]
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'STATE-Maintenance-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="STATE-Maintenance-mer">stateDiagram-v2
+    [*] --&gt; Reported
+    Reported --&gt; Acknowledged : استلام الفني
+    Acknowledged --&gt; Assessing
+    Assessing --&gt; InProgress : بدء الإصلاح
+    Assessing --&gt; WaitingApproval : يحتاج اعتماد
+    WaitingApproval --&gt; InProgress : موافقة
+    WaitingApproval --&gt; Rejected
+    InProgress --&gt; WaitingParts : قطع غيار
+    WaitingParts --&gt; InProgress : وصلت
+    InProgress --&gt; Testing
+    Testing --&gt; Closed : ناجح
+    Testing --&gt; InProgress : فاشل (إعادة)
+    Rejected --&gt; [*]
+    Closed --&gt; [*]</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="STATE-Plan">
+  <div class="diagram-header">
+    <span class="id-badge">STATE-Plan</span>
+    <h3>State Machine — الخطة السنوية</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 State Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">🏛️ إدارة المدرسة والبيئة الت</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>State Machine للخطة السنوية المدرسية.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>10 حالات.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+stateDiagram-v2
+    [*] --> Draft : إعداد مسودة
+    Draft --> InReview : إرسال للمراجعة الداخلية
+    InReview --> Draft : مرفوض داخلياً
+    InReview --> Submitted : رفع للمكتب
+    Submitted --> OfficeReview
+    OfficeReview --> Returned : ملاحظات
+    Returned --> Draft
+    OfficeReview --> Approved
+    OfficeReview --> Rejected
+    Approved --> InExecution
+    InExecution --> Amended : طلب تعديل
+    Amended --> OfficeReview
+    InExecution --> Completed : نهاية العام
+    Completed --> Evaluated : تقييم نهائي
+    Evaluated --> Archived
+    Rejected --> [*]
+    Archived --> [*]
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'STATE-Plan-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="STATE-Plan-mer">stateDiagram-v2
+    [*] --&gt; Draft : إعداد مسودة
+    Draft --&gt; InReview : إرسال للمراجعة الداخلية
+    InReview --&gt; Draft : مرفوض داخلياً
+    InReview --&gt; Submitted : رفع للمكتب
+    Submitted --&gt; OfficeReview
+    OfficeReview --&gt; Returned : ملاحظات
+    Returned --&gt; Draft
+    OfficeReview --&gt; Approved
+    OfficeReview --&gt; Rejected
+    Approved --&gt; InExecution
+    InExecution --&gt; Amended : طلب تعديل
+    Amended --&gt; OfficeReview
+    InExecution --&gt; Completed : نهاية العام
+    Completed --&gt; Evaluated : تقييم نهائي
+    Evaluated --&gt; Archived
+    Rejected --&gt; [*]
+    Archived --&gt; [*]</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="STATE-Leave">
+  <div class="diagram-header">
+    <span class="id-badge">STATE-Leave</span>
+    <h3>State Machine — طلب الإجازة</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 State Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">👥 إدارة الموظفين والكادر ال</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>State Machine لطلب الإجازة.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>9 حالات.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+stateDiagram-v2
+    [*] --> Draft
+    Draft --> Submitted
+    Submitted --> ManagerReview
+    ManagerReview --> ManagerApproved
+    ManagerReview --> Rejected
+    ManagerApproved --> HRReview
+    HRReview --> Approved
+    HRReview --> Rejected
+    Approved --> InEffect : بدء الإجازة
+    InEffect --> Active : العودة قبل الانتهاء (طوارئ)
+    Active --> Resumed : إلغاء/استئناف
+    InEffect --> Completed : انتهاء الفترة
+    Completed --> Archived
+    Rejected --> [*]
+    Archived --> [*]
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'STATE-Leave-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="STATE-Leave-mer">stateDiagram-v2
+    [*] --&gt; Draft
+    Draft --&gt; Submitted
+    Submitted --&gt; ManagerReview
+    ManagerReview --&gt; ManagerApproved
+    ManagerReview --&gt; Rejected
+    ManagerApproved --&gt; HRReview
+    HRReview --&gt; Approved
+    HRReview --&gt; Rejected
+    Approved --&gt; InEffect : بدء الإجازة
+    InEffect --&gt; Active : العودة قبل الانتهاء (طوارئ)
+    Active --&gt; Resumed : إلغاء/استئناف
+    InEffect --&gt; Completed : انتهاء الفترة
+    Completed --&gt; Archived
+    Rejected --&gt; [*]
+    Archived --&gt; [*]</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="ACT-S01">
+  <div class="diagram-header">
+    <span class="id-badge">ACT-S01</span>
+    <h3>Activity — احتساب درجة طالب</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Activity Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">🎓 إدارة الطلاب والشؤون الأك</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>التدفق المنطقي لعملية: احتساب درجة طالب.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>قرارات + تفرعات + مسارات بديلة.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TD
+    Start([بداية الفصل]) --> A1[إدخال أعمال السنة]
+    A1 --> A2[إدخال الشفهي]
+    A2 --> A3[إدخال التحريري]
+    A3 --> C1{اكتمال الدرجات؟}
+    C1 -- لا --> N1[إشعار المعلم]
+    N1 --> A1
+    C1 -- نعم --> CALC[احتساب الدرجة النهائية]
+    CALC --> V1{المجموع <= الحد الأقصى؟}
+    V1 -- لا --> ERR[خطأ + مراجعة]
+    ERR --> A1
+    V1 -- نعم --> P1{اجتاز الحد الأدنى؟}
+    P1 -- نعم --> PASS[ناجح]
+    P1 -- لا --> FAIL[راسب + جدولة الدور الثاني]
+    PASS --> APR[اعتماد رئيس القسم]
+    FAIL --> APR
+    APR --> ISS[إصدار كشف الدرجات]
+    ISS --> SEND[إرسال لولي الأمر]
+    SEND --> End([نهاية])
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'ACT-S01-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="ACT-S01-mer">flowchart TD
+    Start([بداية الفصل]) --&gt; A1[إدخال أعمال السنة]
+    A1 --&gt; A2[إدخال الشفهي]
+    A2 --&gt; A3[إدخال التحريري]
+    A3 --&gt; C1{اكتمال الدرجات؟}
+    C1 -- لا --&gt; N1[إشعار المعلم]
+    N1 --&gt; A1
+    C1 -- نعم --&gt; CALC[احتساب الدرجة النهائية]
+    CALC --&gt; V1{المجموع &lt;= الحد الأقصى؟}
+    V1 -- لا --&gt; ERR[خطأ + مراجعة]
+    ERR --&gt; A1
+    V1 -- نعم --&gt; P1{اجتاز الحد الأدنى؟}
+    P1 -- نعم --&gt; PASS[ناجح]
+    P1 -- لا --&gt; FAIL[راسب + جدولة الدور الثاني]
+    PASS --&gt; APR[اعتماد رئيس القسم]
+    FAIL --&gt; APR
+    APR --&gt; ISS[إصدار كشف الدرجات]
+    ISS --&gt; SEND[إرسال لولي الأمر]
+    SEND --&gt; End([نهاية])</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="ACT-S02">
+  <div class="diagram-header">
+    <span class="id-badge">ACT-S02</span>
+    <h3>Activity — سيناريو نقل طالب</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Activity Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">🎓 إدارة الطلاب والشؤون الأك</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>التدفق المنطقي لعملية: سيناريو نقل طالب.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>قرارات + تفرعات + مسارات بديلة.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TD
+    Start([ولي الأمر يطلب النقل]) --> R1[تعبئة الطلب]
+    R1 --> R2[تقديم الوثائق]
+    R2 --> S1[مراجعة المدرسة الحالية]
+    S1 --> C1{يوجد مديونيات؟}
+    C1 -- نعم --> P1[تسوية المديونيات]
+    P1 --> S2
+    C1 -- لا --> S2[إرسال للمكتب]
+    S2 --> O1[المكتب يراجع]
+    O1 --> C2{المدرسة الجديدة لديها مقعد؟}
+    C2 -- لا --> REJ[رفض / اقتراح بدائل]
+    C2 -- نعم --> O2[تأكيد]
+    O2 --> NS[استقبال المدرسة الجديدة]
+    NS --> NS1[تقييم الطالب]
+    NS1 --> NS2[تحديد صف+شعبة]
+    NS2 --> UPD[تحديث Student.schoolId]
+    UPD --> Close[إخلاء طرف من القديمة]
+    Close --> Notify[إشعار الأهل]
+    Notify --> End([انتهاء])
+    REJ --> End
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'ACT-S02-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="ACT-S02-mer">flowchart TD
+    Start([ولي الأمر يطلب النقل]) --&gt; R1[تعبئة الطلب]
+    R1 --&gt; R2[تقديم الوثائق]
+    R2 --&gt; S1[مراجعة المدرسة الحالية]
+    S1 --&gt; C1{يوجد مديونيات؟}
+    C1 -- نعم --&gt; P1[تسوية المديونيات]
+    P1 --&gt; S2
+    C1 -- لا --&gt; S2[إرسال للمكتب]
+    S2 --&gt; O1[المكتب يراجع]
+    O1 --&gt; C2{المدرسة الجديدة لديها مقعد؟}
+    C2 -- لا --&gt; REJ[رفض / اقتراح بدائل]
+    C2 -- نعم --&gt; O2[تأكيد]
+    O2 --&gt; NS[استقبال المدرسة الجديدة]
+    NS --&gt; NS1[تقييم الطالب]
+    NS1 --&gt; NS2[تحديد صف+شعبة]
+    NS2 --&gt; UPD[تحديث Student.schoolId]
+    UPD --&gt; Close[إخلاء طرف من القديمة]
+    Close --&gt; Notify[إشعار الأهل]
+    Notify --&gt; End([انتهاء])
+    REJ --&gt; End</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="ACT-A01">
+  <div class="diagram-header">
+    <span class="id-badge">ACT-A01</span>
+    <h3>Activity — صيانة كاملة للأصل</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Activity Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">📦 إدارة الأصول والمرافق</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>التدفق المنطقي لعملية: صيانة كاملة للأصل.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>قرارات + تفرعات + مسارات بديلة.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TD
+    Start([المستخدم يكتشف عطل]) --> Report[تسجيل بلاغ + صور]
+    Report --> Ticket[توليد تذكرة]
+    Ticket --> Notify[إشعار الفني]
+    Notify --> Assess{تقدير الفني}
+    Assess -- بسيط --> InHouse[إصلاح داخلي]
+    Assess -- معقد --> Approve{اعتماد مدير الصيانة}
+    Approve -- نعم --> External[طلب صيانة خارجية]
+    Approve -- لا --> Reject[رفض]
+    External --> Vendor[تنفيذ المورد]
+    Vendor --> Test1[اختبار]
+    InHouse --> Test1
+    Test1 --> Quality{نجح؟}
+    Quality -- لا --> Repeat[إعادة]
+    Repeat --> Test1
+    Quality -- نعم --> Update[تحديث سجل الأصل]
+    Update --> Cost[تسجيل التكلفة]
+    Cost --> Return[إعادة للخدمة]
+    Return --> Eval[تقييم الكفاءة]
+    Eval --> Decision{معدل الفشل عالٍ؟}
+    Decision -- نعم --> Replace[توصية بالاستبدال]
+    Decision -- لا --> End([انتهاء])
+    Replace --> End
+    Reject --> End
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'ACT-A01-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="ACT-A01-mer">flowchart TD
+    Start([المستخدم يكتشف عطل]) --&gt; Report[تسجيل بلاغ + صور]
+    Report --&gt; Ticket[توليد تذكرة]
+    Ticket --&gt; Notify[إشعار الفني]
+    Notify --&gt; Assess{تقدير الفني}
+    Assess -- بسيط --&gt; InHouse[إصلاح داخلي]
+    Assess -- معقد --&gt; Approve{اعتماد مدير الصيانة}
+    Approve -- نعم --&gt; External[طلب صيانة خارجية]
+    Approve -- لا --&gt; Reject[رفض]
+    External --&gt; Vendor[تنفيذ المورد]
+    Vendor --&gt; Test1[اختبار]
+    InHouse --&gt; Test1
+    Test1 --&gt; Quality{نجح؟}
+    Quality -- لا --&gt; Repeat[إعادة]
+    Repeat --&gt; Test1
+    Quality -- نعم --&gt; Update[تحديث سجل الأصل]
+    Update --&gt; Cost[تسجيل التكلفة]
+    Cost --&gt; Return[إعادة للخدمة]
+    Return --&gt; Eval[تقييم الكفاءة]
+    Eval --&gt; Decision{معدل الفشل عالٍ؟}
+    Decision -- نعم --&gt; Replace[توصية بالاستبدال]
+    Decision -- لا --&gt; End([انتهاء])
+    Replace --&gt; End
+    Reject --&gt; End</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="ACT-A02">
+  <div class="diagram-header">
+    <span class="id-badge">ACT-A02</span>
+    <h3>Activity — الجرد السنوي</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Activity Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">📦 إدارة الأصول والمرافق</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>التدفق المنطقي لعملية: الجرد السنوي.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>قرارات + تفرعات + مسارات بديلة.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TD
+    Start([بدء العام]) --> P[إعداد الخطة]
+    P --> SC[توزيع لجان الجرد]
+    SC --> N[إشعار الأقسام]
+    N --> EX[تنفيذ الجرد الميداني<br/>قراءة الباركود]
+    EX --> M[مطابقة مع النظام]
+    M --> D{فروقات؟}
+    D -- لا --> AP[اعتماد]
+    D -- نعم --> I[تحليل السبب]
+    I --> R{السبب}
+    R -- خطأ ترقيم --> F1[تصحيح]
+    R -- مفقود --> L[بلاغ مفقودات]
+    R -- زيادة --> AD[تسجيل أصل جديد]
+    L --> INV[تحقيق]
+    F1 --> AP
+    AD --> AP
+    INV --> AP
+    AP --> S[توقيع لجنة الجرد]
+    S --> SUB[رفع للإدارة]
+    SUB --> End([انتهاء])
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'ACT-A02-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="ACT-A02-mer">flowchart TD
+    Start([بدء العام]) --&gt; P[إعداد الخطة]
+    P --&gt; SC[توزيع لجان الجرد]
+    SC --&gt; N[إشعار الأقسام]
+    N --&gt; EX[تنفيذ الجرد الميداني&lt;br/&gt;قراءة الباركود]
+    EX --&gt; M[مطابقة مع النظام]
+    M --&gt; D{فروقات؟}
+    D -- لا --&gt; AP[اعتماد]
+    D -- نعم --&gt; I[تحليل السبب]
+    I --&gt; R{السبب}
+    R -- خطأ ترقيم --&gt; F1[تصحيح]
+    R -- مفقود --&gt; L[بلاغ مفقودات]
+    R -- زيادة --&gt; AD[تسجيل أصل جديد]
+    L --&gt; INV[تحقيق]
+    F1 --&gt; AP
+    AD --&gt; AP
+    INV --&gt; AP
+    AP --&gt; S[توقيع لجنة الجرد]
+    S --&gt; SUB[رفع للإدارة]
+    SUB --&gt; End([انتهاء])</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="ACT-SA01">
+  <div class="diagram-header">
+    <span class="id-badge">ACT-SA01</span>
+    <h3>Activity — اعتماد خطة سنوية</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Activity Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">🏛️ إدارة المدرسة والبيئة الت</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>التدفق المنطقي لعملية: اعتماد خطة سنوية.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>قرارات + تفرعات + مسارات بديلة.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TD
+    Start([بدء العام]) --> D[إعداد مسودة]
+    D --> Fork{{Fork}}
+    Fork --> P1[خطة أكاديمية]
+    Fork --> P2[خطة إدارية]
+    Fork --> P3[خطة مالية]
+    Fork --> P4[خطة أنشطة]
+    P1 --> Join{{Join}}
+    P2 --> Join
+    P3 --> Join
+    P4 --> Join
+    Join --> Cons[توحيد الخطة]
+    Cons --> Rev[مراجعة داخلية]
+    Rev --> CI{موافقة المجلس؟}
+    CI -- لا --> D
+    CI -- نعم --> Sub[رفع للمكتب]
+    Sub --> OR[مراجعة المكتب]
+    OR --> Dec{قرار}
+    Dec -- اعتماد --> AP[معتمدة]
+    Dec -- تعديل --> Mod[ملاحظات]
+    Mod --> D
+    Dec -- رفض --> Rej[رفض نهائي]
+    AP --> Pub[نشر داخلي]
+    Pub --> Track[متابعة دورية]
+    Track --> Eval[تقييم نهاية العام]
+    Eval --> End([انتهاء])
+    Rej --> End
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'ACT-SA01-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="ACT-SA01-mer">flowchart TD
+    Start([بدء العام]) --&gt; D[إعداد مسودة]
+    D --&gt; Fork{{Fork}}
+    Fork --&gt; P1[خطة أكاديمية]
+    Fork --&gt; P2[خطة إدارية]
+    Fork --&gt; P3[خطة مالية]
+    Fork --&gt; P4[خطة أنشطة]
+    P1 --&gt; Join{{Join}}
+    P2 --&gt; Join
+    P3 --&gt; Join
+    P4 --&gt; Join
+    Join --&gt; Cons[توحيد الخطة]
+    Cons --&gt; Rev[مراجعة داخلية]
+    Rev --&gt; CI{موافقة المجلس؟}
+    CI -- لا --&gt; D
+    CI -- نعم --&gt; Sub[رفع للمكتب]
+    Sub --&gt; OR[مراجعة المكتب]
+    OR --&gt; Dec{قرار}
+    Dec -- اعتماد --&gt; AP[معتمدة]
+    Dec -- تعديل --&gt; Mod[ملاحظات]
+    Mod --&gt; D
+    Dec -- رفض --&gt; Rej[رفض نهائي]
+    AP --&gt; Pub[نشر داخلي]
+    Pub --&gt; Track[متابعة دورية]
+    Track --&gt; Eval[تقييم نهاية العام]
+    Eval --&gt; End([انتهاء])
+    Rej --&gt; End</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="ACT-E01">
+  <div class="diagram-header">
+    <span class="id-badge">ACT-E01</span>
+    <h3>Activity — الإجازة الكاملة</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Activity Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">👥 إدارة الموظفين والكادر ال</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>التدفق المنطقي لعملية: الإجازة الكاملة.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>قرارات + تفرعات + مسارات بديلة.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TD
+    Start([الموظف]) --> R[تعبئة طلب الإجازة]
+    R --> C1{الرصيد متوفر؟}
+    C1 -- لا --> Rej[رفض]
+    C1 -- نعم --> Sub[إرسال للمدير]
+    Sub --> MR{قرار المدير}
+    MR -- رفض --> Rej
+    MR -- موافقة --> HR[مراجعة شؤون الموظفين]
+    HR --> HRD{قرار}
+    HRD -- رفض --> Rej
+    HRD -- موافقة --> Sched[جدولة في النظام]
+    Sched --> Bal[خصم من الرصيد]
+    Bal --> Cov[ترتيب بديل (إن لزم)]
+    Cov --> Notify[إشعار الموظف]
+    Notify --> Start2{بدء الإجازة}
+    Start2 --> InEff[الإجازة فعّالة]
+    InEff --> Ret[عودة الموظف]
+    Ret --> Close[إغلاق الإجازة]
+    Close --> End([انتهاء])
+    Rej --> End
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'ACT-E01-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="ACT-E01-mer">flowchart TD
+    Start([الموظف]) --&gt; R[تعبئة طلب الإجازة]
+    R --&gt; C1{الرصيد متوفر؟}
+    C1 -- لا --&gt; Rej[رفض]
+    C1 -- نعم --&gt; Sub[إرسال للمدير]
+    Sub --&gt; MR{قرار المدير}
+    MR -- رفض --&gt; Rej
+    MR -- موافقة --&gt; HR[مراجعة شؤون الموظفين]
+    HR --&gt; HRD{قرار}
+    HRD -- رفض --&gt; Rej
+    HRD -- موافقة --&gt; Sched[جدولة في النظام]
+    Sched --&gt; Bal[خصم من الرصيد]
+    Bal --&gt; Cov[ترتيب بديل (إن لزم)]
+    Cov --&gt; Notify[إشعار الموظف]
+    Notify --&gt; Start2{بدء الإجازة}
+    Start2 --&gt; InEff[الإجازة فعّالة]
+    InEff --&gt; Ret[عودة الموظف]
+    Ret --&gt; Close[إغلاق الإجازة]
+    Close --&gt; End([انتهاء])
+    Rej --&gt; End</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="ACT-EM01">
+  <div class="diagram-header">
+    <span class="id-badge">ACT-EM01</span>
+    <h3>Activity — حالة طوارئ</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Activity Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">🚨 إدارة الطوارئ والتميز</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>التدفق المنطقي لعملية: حالة طوارئ.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>قرارات + تفرعات + مسارات بديلة.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TD
+    Start([رصد حالة]) --> Type{نوع الحالة}
+    Type -- صحية --> H1[تفعيل الإسعاف]
+    Type -- حريق --> F1[تفعيل الإخلاء]
+    Type -- زلزال --> Q1[التحرك إلى نقطة آمنة]
+    Type -- أمنية --> S1[الإغلاق]
+    H1 --> N[إشعار الطوارئ]
+    F1 --> N
+    Q1 --> N
+    S1 --> N
+    N --> O[إشعار المكتب]
+    O --> Damage[تقييم الأضرار]
+    Damage --> Inj{إصابات؟}
+    Inj -- نعم --> Hosp[نقل للمستشفى]
+    Inj -- لا --> Cont[متابعة الإجراءات]
+    Hosp --> Recover[خطة التعويض]
+    Cont --> Recover
+    Recover --> Report[تقرير الحادثة]
+    Report --> Lessons[الدروس المستفادة]
+    Lessons --> End([انتهاء])
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'ACT-EM01-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="ACT-EM01-mer">flowchart TD
+    Start([رصد حالة]) --&gt; Type{نوع الحالة}
+    Type -- صحية --&gt; H1[تفعيل الإسعاف]
+    Type -- حريق --&gt; F1[تفعيل الإخلاء]
+    Type -- زلزال --&gt; Q1[التحرك إلى نقطة آمنة]
+    Type -- أمنية --&gt; S1[الإغلاق]
+    H1 --&gt; N[إشعار الطوارئ]
+    F1 --&gt; N
+    Q1 --&gt; N
+    S1 --&gt; N
+    N --&gt; O[إشعار المكتب]
+    O --&gt; Damage[تقييم الأضرار]
+    Damage --&gt; Inj{إصابات؟}
+    Inj -- نعم --&gt; Hosp[نقل للمستشفى]
+    Inj -- لا --&gt; Cont[متابعة الإجراءات]
+    Hosp --&gt; Recover[خطة التعويض]
+    Cont --&gt; Recover
+    Recover --&gt; Report[تقرير الحادثة]
+    Report --&gt; Lessons[الدروس المستفادة]
+    Lessons --&gt; End([انتهاء])</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="ACT-AU01">
+  <div class="diagram-header">
+    <span class="id-badge">ACT-AU01</span>
+    <h3>Activity — إدارة الأدوار والصلاحيات</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Activity Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">🔐 الأمن والصلاحيات والمستخد</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>التدفق المنطقي لعملية: إدارة الأدوار والصلاحيات.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>قرارات + تفرعات + مسارات بديلة.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TD
+    Start([مدير النظام]) --> Need{ما المطلوب؟}
+    Need -- إنشاء دور --> CR[تعريف الدور]
+    CR --> CP[ربط بالصلاحيات]
+    Need -- تعديل دور --> ER[اختيار الدور]
+    ER --> EP[تعديل الصلاحيات]
+    EP --> Audit[تسجيل في AuditLog]
+    CP --> Audit
+    Need -- تعيين دور --> SU[اختيار مستخدم]
+    SU --> SR[اختيار الدور]
+    SR --> Audit
+    Need -- إلغاء دور --> RU[اختيار مستخدم+دور]
+    RU --> Confirm[تأكيد]
+    Confirm --> Audit
+    Audit --> End([انتهاء])
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'ACT-AU01-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="ACT-AU01-mer">flowchart TD
+    Start([مدير النظام]) --&gt; Need{ما المطلوب؟}
+    Need -- إنشاء دور --&gt; CR[تعريف الدور]
+    CR --&gt; CP[ربط بالصلاحيات]
+    Need -- تعديل دور --&gt; ER[اختيار الدور]
+    ER --&gt; EP[تعديل الصلاحيات]
+    EP --&gt; Audit[تسجيل في AuditLog]
+    CP --&gt; Audit
+    Need -- تعيين دور --&gt; SU[اختيار مستخدم]
+    SU --&gt; SR[اختيار الدور]
+    SR --&gt; Audit
+    Need -- إلغاء دور --&gt; RU[اختيار مستخدم+دور]
+    RU --&gt; Confirm[تأكيد]
+    Confirm --&gt; Audit
+    Audit --&gt; End([انتهاء])</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="ACT-RPT01">
+  <div class="diagram-header">
+    <span class="id-badge">ACT-RPT01</span>
+    <h3>Activity — توليد تقرير</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Activity Diagram</span>
+      <span class="tag level">🎯 Process</span>
+       <span class="tag mod">📊 إدارة البيانات والإحصاء</span>
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>التدفق المنطقي لعملية: توليد تقرير.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>قرارات + تفرعات + مسارات بديلة.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TD
+    Start([المستخدم]) --> Sel[اختيار نوع التقرير]
+    Sel --> Filter[تحديد الفلاتر]
+    Filter --> Coll[جمع البيانات من الوحدات]
+    Coll --> Agg[التجميع والحساب]
+    Agg --> Format{صيغة التقرير}
+    Format -- PDF --> Pdf[توليد PDF]
+    Format -- Excel --> Xls[توليد Excel]
+    Format -- Charts --> Ch[توليد رسوم]
+    Pdf --> Save[حفظ + ربط مستخدم]
+    Xls --> Save
+    Ch --> Save
+    Save --> Audit[تسجيل في النظام]
+    Audit --> Done{رفع للمكتب؟}
+    Done -- نعم --> Sub[رفع]
+    Done -- لا --> End([انتهاء])
+    Sub --> End
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'ACT-RPT01-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="ACT-RPT01-mer">flowchart TD
+    Start([المستخدم]) --&gt; Sel[اختيار نوع التقرير]
+    Sel --&gt; Filter[تحديد الفلاتر]
+    Filter --&gt; Coll[جمع البيانات من الوحدات]
+    Coll --&gt; Agg[التجميع والحساب]
+    Agg --&gt; Format{صيغة التقرير}
+    Format -- PDF --&gt; Pdf[توليد PDF]
+    Format -- Excel --&gt; Xls[توليد Excel]
+    Format -- Charts --&gt; Ch[توليد رسوم]
+    Pdf --&gt; Save[حفظ + ربط مستخدم]
+    Xls --&gt; Save
+    Ch --&gt; Save
+    Save --&gt; Audit[تسجيل في النظام]
+    Audit --&gt; Done{رفع للمكتب؟}
+    Done -- نعم --&gt; Sub[رفع]
+    Done -- لا --&gt; End([انتهاء])
+    Sub --&gt; End</pre>
+    
+  </div>
+</article>
+
+<div class="nav-buttons"><a href="03_sequence.html" class="nav-btn">→ 🔄 مخططات التسلسل (Sequence)</a><a href="index.html" class="nav-btn" style="background:#f59e0b">🏠 الفهرس الرئيسي</a><a href="05_class.html" class="nav-btn">🧩 مخططات الكلاسات ←</a></div>
+</div>
+
+<a href="#top" class="back-to-top" title="أعلى">⬆</a>
+<script>
+mermaid.initialize({
+  startOnLoad: true,
+  theme: 'default',
+  maxTextSize: 200000,
+  maxEdges: 2500,
+  themeVariables:{fontFamily:'Cairo, sans-serif',primaryColor:'#dbeafe',primaryTextColor:'#1e3a8a',primaryBorderColor:'#1e3a8a',lineColor:'#475569',secondaryColor:'#fef3c7',tertiaryColor:'#dcfce7'},
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  sequence:{useMaxWidth:true,wrap:true},
+  er:{useMaxWidth:true,layoutDirection:'TB'},
+  class:{useMaxWidth:true},
+  state:{useMaxWidth:true}
+});
+function showCode(btn, id){
+  const card = btn.closest('.diagram-card');
+  card.querySelectorAll('.code-tab').forEach(b => b.classList.remove('active'));
+  card.querySelectorAll('.code-block').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+</script>
+</body></html>

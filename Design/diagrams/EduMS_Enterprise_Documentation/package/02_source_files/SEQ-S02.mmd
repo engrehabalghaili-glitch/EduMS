@@ -1,0 +1,29 @@
+sequenceDiagram
+    autonumber
+    actor T as المعلم
+    participant UI as Mobile App
+    participant API as Backend
+    participant DB as DB
+    participant ENG as Rules Engine
+    participant NOT as Notifications
+    actor G as ولي الأمر
+
+    T->>UI: فتح كشف الشعبة
+    UI->>API: GET /classes/{id}/students
+    API->>DB: SELECT Students
+    DB-->>API: قائمة
+    API-->>UI: عرض
+    T->>UI: تعليم الغائبين
+    UI->>API: POST /attendance/batch
+    loop لكل طالب
+        API->>DB: INSERT Attendance
+        API->>DB: INSERT AttendanceDetail
+    end
+    API->>ENG: احتساب النسبة التراكمية
+    ENG->>DB: SELECT SUM(absences)
+    DB-->>ENG: 14 يوم
+    ENG->>ENG: 14/120 = 11.67% > 10%
+    ENG->>DB: INSERT WarningRecord(type='Second')
+    ENG->>NOT: تنبيه إنذار ثاني
+    NOT-->>G: ابنك تجاوز 10% غياب
+    API-->>UI: 200 OK

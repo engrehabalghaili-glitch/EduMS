@@ -1,0 +1,846 @@
+classDiagram
+    direction TB
+    class Asset {
+        +assetId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +assetUniqueCode : VARCHAR(50)
+        +assetNameAr : VARCHAR(200)
+        +assetNameEn : VARCHAR(200)
+        +assetTag : VARCHAR(200)
+        +serialNumber : INT
+        +modelNumber : INT
+        +manufacturer : VARCHAR(200)
+        +brand : VARCHAR(200)
+        +...(29 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +activate()
+        +deactivate()
+        +assign(department)
+    }
+    class AssetCategory {
+        +categoryId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +parentCategoryId : BIGINT «FK»
+        +categoryCode : VARCHAR(50)
+        +categoryNameAr : VARCHAR(50)
+        +categoryNameEn : VARCHAR(50)
+        +categoryLevel : VARCHAR(50)
+        +fullPath : VARCHAR(200)
+        +description : TEXT
+        +depreciationRate : DECIMAL(5,2)
+        +...(14 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class AssetLocation {
+        +locationId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +parentLocationId : BIGINT «FK»
+        +locationCode : VARCHAR(50)
+        +locationNameAr : VARCHAR(200)
+        +locationNameEn : VARCHAR(200)
+        +locationType : VARCHAR(50)
+        +buildingName : VARCHAR(200)
+        +floorNumber : INT
+        +roomNumber : INT
+        +...(15 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class AssetStatus {
+        +statusId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +statusCode : VARCHAR(50)
+        +statusNameAr : VARCHAR(50)
+        +statusNameEn : VARCHAR(50)
+        +statusType : VARCHAR(50)
+        +isOperational : BOOLEAN
+        +isAvailableForAssignment : BOOLEAN
+        +requiresApproval : BOOLEAN
+        +colorCode : VARCHAR(50)
+        +...(11 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class AssetWarrantyContract {
+        +contractId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +contractType : VARCHAR(50)
+        +contractNumber : INT
+        +contractName : VARCHAR(200)
+        +providerName : VARCHAR(200)
+        +providerContact : VARCHAR(20)
+        +startDate : DATE
+        +endDate : DATE
+        +coverageDetails : TEXT
+        +...(18 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class AssetDocument {
+        +documentId : BIGINT «PK»
+        +assetId : BIGINT «FK»
+        +contractId : BIGINT «FK»
+        +docType : VARCHAR(50)
+        +docCode : VARCHAR(50)
+        +docName : VARCHAR(200)
+        +description : TEXT
+        +fileName : VARCHAR(200)
+        +filePath : VARCHAR(200)
+        +fileSize : VARCHAR(200)
+        +...(10 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class AssetRequirementRequest {
+        +requestId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +requestNumber : INT
+        +requestType : VARCHAR(50)
+        +assetType : VARCHAR(50)
+        +assetCategoryId : BIGINT «FK»
+        +quantity : INT
+        +estimatedUnitCost : DECIMAL(15,2)
+        +estimatedTotalCost : DECIMAL(15,2)
+        +currency : VARCHAR(200)
+        +...(26 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class TechnicalSpecifications {
+        +specId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +specCode : VARCHAR(50)
+        +specNameAr : VARCHAR(200)
+        +specNameEn : VARCHAR(200)
+        +assetCategoryId : BIGINT «FK»
+        +assetType : VARCHAR(50)
+        +technicalDetails : TEXT
+        +requiredCertifications : VARCHAR(200)
+        +acceptanceCriteria : VARCHAR(200)
+        +...(16 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class FeasibilityRiskAnalysis {
+        +analysisId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +requestId : BIGINT «FK»
+        +analysisNumber : INT
+        +analysisDate : DATE
+        +analystUserId : BIGINT «FK»
+        +operationalRisks : TEXT
+        +financialRisks : TEXT
+        +riskLevel : VARCHAR(50)
+        +riskMitigationPlan : VARCHAR(200)
+        +...(18 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class AssetBudgetAllocation {
+        +allocationId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +fiscalYear : VARCHAR(200)
+        +budgetType : VARCHAR(50)
+        +assetCategoryId : BIGINT «FK»
+        +departmentId : BIGINT «FK»
+        +allocatedAmount : DECIMAL(15,2)
+        +spentAmount : DECIMAL(15,2)
+        +remainingAmount : DECIMAL(15,2)
+        +budgetLineCode : VARCHAR(50)
+        +...(7 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class PurchaseOrders {
+        +purchaseOrderId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +poNumber : INT
+        +poDate : DATE
+        +requestId : BIGINT «FK»
+        +supplierName : VARCHAR(200)
+        +supplierContact : VARCHAR(200)
+        +supplierAddress : VARCHAR(200)
+        +totalAmount : DECIMAL(15,2)
+        +taxAmount : DECIMAL(15,2)
+        +...(19 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class AssetReceiving {
+        +receivingId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +purchaseOrderId : BIGINT «FK»
+        +receivingNumber : INT
+        +receivedDate : DATE
+        +receivedByUserId : BIGINT «FK»
+        +inspectorUserId : BIGINT «FK»
+        +deliveryNoteNumber : INT
+        +deliveryCompany : VARCHAR(200)
+        +inspectionResult : VARCHAR(200)
+        +...(20 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class AssetUsageLog {
+        +usageLogId : BIGINT «PK»
+        +assetId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +usageType : VARCHAR(50)
+        +startDateTime : DATETIME
+        +endDateTime : DATETIME
+        +durationMinutes : DATETIME
+        +purpose : VARCHAR(200)
+        +purposeDetails : TEXT
+        +userId : BIGINT «FK»
+        +...(9 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +record(event)
+        +query(filters)
+    }
+    class MaintenanceTickets {
+        +ticketId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +ticketNumber : INT
+        +assetId : BIGINT «FK»
+        +reportedByUserId : BIGINT «FK»
+        +reportDate : DATETIME
+        +issueType : BOOLEAN
+        +severityLevel : VARCHAR(50)
+        +issueDescription : BOOLEAN
+        +reportedLocation : VARCHAR(200) «FK»
+        +...(22 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +schedule()
+        +execute()
+        +complete()
+    }
+    class PreventiveMaintenanceSchedule {
+        +scheduleId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +scheduleCode : VARCHAR(50)
+        +assetId : BIGINT «FK»
+        +assetCategoryId : BIGINT «FK»
+        +taskNameAr : VARCHAR(200)
+        +taskNameEn : VARCHAR(200)
+        +maintenanceType : VARCHAR(50)
+        +frequency : VARCHAR(200)
+        +frequencyValue : INT
+        +...(19 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +schedule()
+        +execute()
+        +complete()
+    }
+    class MaintenanceExecution {
+        +executionId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +executionNumber : INT
+        +ticketId : BIGINT «FK»
+        +scheduleId : BIGINT «FK»
+        +assetId : BIGINT «FK»
+        +executionType : VARCHAR(50)
+        +startDateTime : DATE
+        +endDateTime : DATE
+        +executedByUserId : BIGINT «FK»
+        +...(14 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +schedule()
+        +execute()
+        +complete()
+    }
+    class MaintenanceSpareParts {
+        +partId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +partCode : VARCHAR(50)
+        +partNameAr : VARCHAR(200)
+        +partNameEn : VARCHAR(200)
+        +partCategory : VARCHAR(50)
+        +manufacturer : VARCHAR(200)
+        +compatibleAssets : VARCHAR(200)
+        +unitOfMeasure : VARCHAR(200)
+        +currentStockQuantity : INT
+        +...(17 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +schedule()
+        +execute()
+        +complete()
+    }
+    class AssetSuspensionRequests {
+        +suspensionId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +requestNumber : INT
+        +assetId : BIGINT «FK»
+        +requestedByUserId : BIGINT «FK»
+        +requestDate : DATE
+        +reason : VARCHAR(200)
+        +reasonDetails : TEXT
+        +startDate : DATE
+        +expectedEndDate : DATE
+        +...(18 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class MaintenanceNotifications {
+        +notificationId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +relatedEntityType : VARCHAR(50)
+        +relatedEntityId : BIGINT «FK»
+        +notificationType : VARCHAR(50)
+        +title : VARCHAR(200)
+        +messageContent : VARCHAR(200)
+        +recipientUserId : BIGINT «FK»
+        +priority : VARCHAR(200)
+        +isRead : BOOLEAN
+        +...(9 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +schedule()
+        +execute()
+        +complete()
+    }
+    class UsageViolations {
+        +violationId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +assetId : BIGINT «FK»
+        +violationType : VARCHAR(50)
+        +violationDate : DATE
+        +reportedByUserId : BIGINT «FK»
+        +reportedDate : DATE
+        +violatingUserId : BIGINT «FK»
+        +description : TEXT
+        +evidence : VARCHAR(200)
+        +...(14 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class AssetFinancials {
+        +financialsId : BIGINT «PK»
+        +assetId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +purchasePrice : DECIMAL(15,2)
+        +shippingCosts : DECIMAL(15,2)
+        +customsFees : DECIMAL(15,2)
+        +installationCosts : DECIMAL(15,2)
+        +otherCosts : DECIMAL(15,2)
+        +totalInitialCost : DECIMAL(15,2)
+        +currency : VARCHAR(200)
+        +...(10 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class AssetDepreciation {
+        +depreciationId : BIGINT «PK»
+        +assetId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +methodType : VARCHAR(50)
+        +usefulLifeYears : VARCHAR(200)
+        +usefulLifeUnits : VARCHAR(200)
+        +depreciationRate : DECIMAL(5,2)
+        +currentBookValue : VARCHAR(200)
+        +accumulatedDepreciation : DATE
+        +netBookValue : VARCHAR(200)
+        +...(10 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class DepreciationTransactions {
+        +transactionId : BIGINT «PK»
+        +assetId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +depreciationId : BIGINT «FK»
+        +periodStart : VARCHAR(200)
+        +periodEnd : VARCHAR(200)
+        +periodType : VARCHAR(50)
+        +fiscalYear : VARCHAR(200)
+        +periodNumber : INT
+        +depreciationAmount : DECIMAL(15,2)
+        +...(11 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class RevaluationImpairment {
+        +revaluationId : BIGINT «PK»
+        +assetId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +type : VARCHAR(50)
+        +effectiveDate : DATE
+        +oldBookValue : VARCHAR(200)
+        +oldAccumulatedDepreciation : VARCHAR(200)
+        +oldNetBookValue : VARCHAR(200)
+        +newValue : VARCHAR(200)
+        +newAccumulatedDepreciation : VARCHAR(200)
+        +...(18 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class AssetExpenses {
+        +expenseId : BIGINT «PK»
+        +assetId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +expenseType : VARCHAR(50)
+        +expenseDate : DATE
+        +amount : DECIMAL(15,2)
+        +currency : VARCHAR(200)
+        +description : TEXT
+        +relatedExecutionId : BIGINT «FK»
+        +isCapitalized : BOOLEAN
+        +...(11 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +approve()
+        +reject(reason)
+    }
+    class FeasibilityComparison {
+        +comparisonId : BIGINT «PK»
+        +assetId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +comparisonDate : DATE
+        +repairEstimate : DECIMAL(15,2)
+        +repairEstimateBreakdown : DECIMAL(15,2)
+        +replacementAssetId : BIGINT «FK»
+        +replacementCost : DECIMAL(15,2)
+        +replacementCostBreakdown : DECIMAL(15,2)
+        +totalCostOfOwnershipAnalysis : DECIMAL(15,2)
+        +...(11 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class FinancialAuditArchive {
+        +archiveId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +reportType : VARCHAR(50)
+        +fiscalYear : VARCHAR(200)
+        +periodStart : VARCHAR(200)
+        +periodEnd : VARCHAR(200)
+        +generationDate : DATE
+        +archivedDate : DATE
+        +totalAssetsValue : VARCHAR(200)
+        +totalDepreciationValue : VARCHAR(200)
+        +...(6 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +archive()
+        +record(event)
+        +query(filters)
+    }
+    class FinancialSummaryReports {
+        +summaryId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +fiscalYear : VARCHAR(200)
+        +reportDate : DATE
+        +reportType : VARCHAR(50)
+        +assetCategoryId : BIGINT «FK»
+        +totalBookValue : VARCHAR(200)
+        +totalDepreciation : VARCHAR(200)
+        +totalAssetsCount : INT
+        +totalAcquisitionCost : DATE
+        +...(15 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +generate()
+        +export(format)
+        +publish()
+    }
+    class AssetAssignment {
+        +assignmentId : BIGINT «PK»
+        +assetId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +assigneeType : VARCHAR(50)
+        +assigneeId : BIGINT «FK»
+        +assigneeName : VARCHAR(200)
+        +assignerUserId : BIGINT «FK»
+        +assignmentDate : DATE
+        +expectedReturnDate : DATE
+        +actualReturnDate : DATE
+        +...(19 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class AssetLoans {
+        +loanId : BIGINT «PK»
+        +assetId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +borrowerType : VARCHAR(50)
+        +borrowerId : BIGINT «FK»
+        +borrowerName : VARCHAR(200)
+        +borrowerContact : VARCHAR(20)
+        +loanDate : DATE
+        +expectedReturnDate : DATE
+        +actualReturnDate : DATE
+        +...(16 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class AssetTransferRequests {
+        +transferRequestId : BIGINT «PK»
+        +assetId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +requestNumber : INT
+        +fromEntityType : VARCHAR(50)
+        +fromEntityId : BIGINT «FK»
+        +toEntityType : VARCHAR(50)
+        +toEntityId : BIGINT «FK»
+        +transferType : VARCHAR(50)
+        +requestReason : VARCHAR(200)
+        +...(16 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class AssetInspectionLog {
+        +inspectionId : BIGINT «PK»
+        +assetId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +relatedTransactionType : VARCHAR(50)
+        +relatedTransactionId : BIGINT «FK»
+        +inspectionType : VARCHAR(50)
+        +inspectionDate : DATE
+        +inspectorUserId : BIGINT «FK»
+        +physicalCondition : VARCHAR(200)
+        +damageDetails : TEXT
+        +...(12 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +record(event)
+        +query(filters)
+    }
+    class AssetMovementHistory {
+        +historyId : BIGINT «PK»
+        +assetId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +actionType : VARCHAR(50)
+        +actionDescription : TEXT
+        +oldValue : VARCHAR(200)
+        +newValue : VARCHAR(200)
+        +relatedEntityType : VARCHAR(50)
+        +relatedEntityId : BIGINT «FK»
+        +actionDate : DATETIME
+        +...(4 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class LoanTrackingAlerts {
+        +alertId : BIGINT «PK»
+        +loanId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +alertType : VARCHAR(50)
+        +alertDate : DATE
+        +alertMessage : VARCHAR(200)
+        +deliveryMethod : VARCHAR(100)
+        +isSent : BOOLEAN
+        +sentTo : VARCHAR(20)
+        +isAcknowledged : BOOLEAN
+        +...(7 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class InventoryPlans {
+        +planId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +planNumber : INT
+        +planName : VARCHAR(200)
+        +inventoryType : VARCHAR(50)
+        +scopeType : VARCHAR(50)
+        +scopeValue : VARCHAR(200)
+        +startDate : DATE
+        +endDate : DATE
+        +actualEndDate : DATE
+        +...(11 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +countPhysical()
+        +reconcile()
+    }
+    class FieldInventoryLog {
+        +logId : BIGINT «PK»
+        +planId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +scannerUserId : BIGINT «FK»
+        +scanTimestamp : DATE
+        +scannedCode : VARCHAR(50)
+        +assetId : BIGINT «FK»
+        +physicalLocation : VARCHAR(200) «FK»
+        +actualCondition : VARCHAR(200)
+        +conditionNotes : TEXT
+        +...(11 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +countPhysical()
+        +reconcile()
+        +record(event)
+        +query(filters)
+    }
+    class InventoryReconciliation {
+        +reconciliationId : BIGINT «PK»
+        +planId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +assetId : BIGINT «FK»
+        +discrepancyType : VARCHAR(50)
+        +systemLocationId : BIGINT «FK»
+        +actualLocationId : BIGINT «FK»
+        +systemCondition : VARCHAR(200)
+        +actualCondition : VARCHAR(200)
+        +reasonForDiff : VARCHAR(200)
+        +...(14 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +countPhysical()
+    }
+    class ComplianceAudit {
+        +auditId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +auditNumber : INT
+        +auditDate : DATE
+        +auditType : VARCHAR(50)
+        +standardType : VARCHAR(50)
+        +standardVersion : VARCHAR(200)
+        +auditedByUserId : BIGINT «FK»
+        +auditScope : VARCHAR(200)
+        +complianceScore : DECIMAL(5,2)
+        +...(16 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +record(event)
+    }
+    class FinalApprovalAudit {
+        +finalApprovalId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +planId : BIGINT «FK»
+        +auditId : BIGINT «FK»
+        +approvalType : VARCHAR(50)
+        +approvalDate : DATE
+        +approvedByUserId : BIGINT «FK»
+        +approvalDocPath : VARCHAR(200)
+        +summaryOfChanges : VARCHAR(200)
+        +finalStatusUpdate : DATE
+        +...(8 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +record(event)
+    }
+    class FacilityDepartmentAssignment {
+        +assignmentId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +facilityType : VARCHAR(50)
+        +facilityId : BIGINT «FK»
+        +departmentId : BIGINT «FK»
+        +responsibleUserId : BIGINT «FK»
+        +assignmentType : VARCHAR(50)
+        +startDate : DATE
+        +endDate : DATE
+        +isShared : BOOLEAN
+        +...(10 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class EducationalConsumablesTracking {
+        +consumptionId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +consumableId : BIGINT «FK»
+        +consumableName : VARCHAR(200)
+        +consumableCode : VARCHAR(50)
+        +category : VARCHAR(50)
+        +quantityConsumed : INT
+        +unitOfMeasure : VARCHAR(200)
+        +consumptionDate : DATE
+        +consumedByUserId : BIGINT «FK»
+        +...(13 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    AssetCategory "1" --o "0..*" Asset : assetCategoryId
+    AssetStatus "1" --o "0..*" Asset : assetStatusId
+    AssetLocation "1" --o "0..*" Asset : assetLocationId
+    PurchaseOrders "1" --o "0..*" Asset : purchaseOrderReference
+    AssetWarrantyContract "1" --o "0..*" Asset : warrantyContractId
+    AssetCategory "1" --o "0..*" AssetCategory : parentCategoryId
+    AssetLocation "1" --o "0..*" AssetLocation : parentLocationId
+    Asset "1" --o "0..*" AssetDocument : assetId
+    AssetWarrantyContract "1" --o "0..*" AssetDocument : contractId
+    AssetCategory "1" --o "0..*" AssetRequirementRequest : assetCategoryId
+    Asset "1" --o "0..*" AssetRequirementRequest : assetToReplaceId
+    PurchaseOrders "1" --o "0..*" AssetRequirementRequest : purchaseOrderId
+    AssetCategory "1" --o "0..*" TechnicalSpecifications : assetCategoryId
+    AssetRequirementRequest "1" --o "0..*" FeasibilityRiskAnalysis : requestId
+    AssetCategory "1" --o "0..*" AssetBudgetAllocation : assetCategoryId
+    AssetRequirementRequest "1" --o "0..*" PurchaseOrders : requestId
+    AssetBudgetAllocation "1" --o "0..*" PurchaseOrders : budgetAllocationId
+    PurchaseOrders "1" --o "0..*" AssetReceiving : purchaseOrderId
+    Asset "1" --o "0..*" AssetUsageLog : assetId
+    AssetLocation "1" --o "0..*" AssetUsageLog : locationId
+    Asset "1" --o "0..*" MaintenanceTickets : assetId
+    AssetLocation "1" --o "0..*" MaintenanceTickets : reportedLocation
+    MaintenanceExecution "1" --o "0..*" MaintenanceTickets : relatedExecutionId
+    Asset "1" --o "0..*" PreventiveMaintenanceSchedule : assetId
+    AssetCategory "1" --o "0..*" PreventiveMaintenanceSchedule : assetCategoryId
+    AssetWarrantyContract "1" --o "0..*" PreventiveMaintenanceSchedule : contractId
+    MaintenanceTickets "1" --o "0..*" MaintenanceExecution : ticketId
+    PreventiveMaintenanceSchedule "1" --o "0..*" MaintenanceExecution : scheduleId
+    Asset "1" --o "0..*" MaintenanceExecution : assetId
+    AssetStatus "1" --o "0..*" MaintenanceExecution : newAssetStatusId
+    Asset "1" --o "0..*" AssetSuspensionRequests : assetId
+    Asset "1" --o "0..*" UsageViolations : assetId
+    Asset "1" --o "0..*" AssetFinancials : assetId
+    Asset "1" --o "0..*" AssetDepreciation : assetId
+    Asset "1" --o "0..*" DepreciationTransactions : assetId
+    AssetDepreciation "1" --o "0..*" DepreciationTransactions : depreciationId
+    Asset "1" --o "0..*" RevaluationImpairment : assetId
+    Asset "1" --o "0..*" AssetExpenses : assetId
+    MaintenanceExecution "1" --o "0..*" AssetExpenses : relatedExecutionId
+    Asset "1" --o "0..*" FeasibilityComparison : assetId
+    Asset "1" --o "0..*" FeasibilityComparison : replacementAssetId
+    AssetCategory "1" --o "0..*" FinancialSummaryReports : assetCategoryId
+    Asset "1" --o "0..*" AssetAssignment : assetId
+    Asset "1" --o "0..*" AssetLoans : assetId
+    Asset "1" --o "0..*" AssetTransferRequests : assetId
+    Asset "1" --o "0..*" AssetInspectionLog : assetId
+    Asset "1" --o "0..*" AssetMovementHistory : assetId
+    AssetLoans "1" --o "0..*" LoanTrackingAlerts : loanId
+    UsageViolations "1" --o "0..*" LoanTrackingAlerts : violationId
+    InventoryPlans "1" --o "0..*" FieldInventoryLog : planId
+    Asset "1" --o "0..*" FieldInventoryLog : assetId
+    AssetLocation "1" --o "0..*" FieldInventoryLog : physicalLocation
+    InventoryPlans "1" --o "0..*" InventoryReconciliation : planId
+    Asset "1" --o "0..*" InventoryReconciliation : assetId
+    InventoryPlans "1" --o "0..*" FinalApprovalAudit : planId
+    ComplianceAudit "1" --o "0..*" FinalApprovalAudit : auditId

@@ -1,0 +1,24 @@
+flowchart TD
+    Start([المستخدم يكتشف عطل]) --> Report[تسجيل بلاغ + صور]
+    Report --> Ticket[توليد تذكرة]
+    Ticket --> Notify[إشعار الفني]
+    Notify --> Assess{تقدير الفني}
+    Assess -- بسيط --> InHouse[إصلاح داخلي]
+    Assess -- معقد --> Approve{اعتماد مدير الصيانة}
+    Approve -- نعم --> External[طلب صيانة خارجية]
+    Approve -- لا --> Reject[رفض]
+    External --> Vendor[تنفيذ المورد]
+    Vendor --> Test1[اختبار]
+    InHouse --> Test1
+    Test1 --> Quality{نجح؟}
+    Quality -- لا --> Repeat[إعادة]
+    Repeat --> Test1
+    Quality -- نعم --> Update[تحديث سجل الأصل]
+    Update --> Cost[تسجيل التكلفة]
+    Cost --> Return[إعادة للخدمة]
+    Return --> Eval[تقييم الكفاءة]
+    Eval --> Decision{معدل الفشل عالٍ؟}
+    Decision -- نعم --> Replace[توصية بالاستبدال]
+    Decision -- لا --> End([انتهاء])
+    Replace --> End
+    Reject --> End

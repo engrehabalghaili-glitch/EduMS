@@ -1,0 +1,511 @@
+classDiagram
+    direction TB
+    class Employee {
+        +employeeId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +employeeCode : VARCHAR(50)
+        +nationalId : BIGINT «FK»
+        +nationalIdType : VARCHAR(50)
+        +nationalIdExpiryDate : DATE
+        +passportNumber : INT
+        +passportExpiryDate : DATE
+        +residenceNumber : INT
+        +residenceExpiryDate : DATE
+        +...(98 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +activate()
+        +terminate(reason)
+        +transfer(targetDept)
+    }
+    class AppointmentDecision {
+        +decisionId : BIGINT «PK»
+        +employeeId : BIGINT «FK»
+        +decisionNumber : INT
+        +decisionDate : DATE
+        +decisionDateGregorian : DATE
+        +decisionSource : VARCHAR(200)
+        +decisionType : VARCHAR(50)
+        +jobTitle : VARCHAR(200)
+        +jobGrade : DECIMAL(5,2)
+        +jobRank : VARCHAR(200)
+        +...(21 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +approve()
+        +reject(reason)
+    }
+    class EmployeeDocuments {
+        +documentId : BIGINT «PK»
+        +employeeId : BIGINT «FK»
+        +documentType : VARCHAR(50)
+        +documentSubType : VARCHAR(50)
+        +documentName : VARCHAR(200)
+        +documentNumber : INT
+        +issuingAuthority : BOOLEAN
+        +issuingCountry : BOOLEAN
+        +issueDate : DATE
+        +expiryDate : DATE
+        +...(33 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +archive()
+    }
+    class EmployeeInventoryCustody {
+        +custodyId : BIGINT «PK»
+        +employeeId : BIGINT «FK»
+        +assetId : BIGINT «FK»
+        +itemType : VARCHAR(50)
+        +itemName : VARCHAR(200)
+        +itemDescription : TEXT
+        +itemBrand : VARCHAR(200)
+        +itemModel : VARCHAR(200)
+        +itemSerial : VARCHAR(50)
+        +itemCode : VARCHAR(50)
+        +...(36 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +countPhysical()
+        +reconcile()
+    }
+    class StaffCustody {
+        +staffCustodyId : BIGINT «PK»
+        +employeeId : BIGINT «FK»
+        +custodySummary : VARCHAR(200)
+        +totalItems : INT
+        +totalEstimatedValue : VARCHAR(200)
+        +issueDate : DATE
+        +lastUpdateDate : DATE
+        +custodyStatus : VARCHAR(50)
+        +clearanceDate : DATE
+        +clearedByUserId : BIGINT «FK»
+        +...(10 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class EmployeeAttendance {
+        +attendanceId : BIGINT «PK»
+        +employeeId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +attendanceDate : DATE
+        +dayOfWeek : VARCHAR(200)
+        +shiftId : BIGINT «FK»
+        +expectedCheckIn : VARCHAR(200)
+        +expectedCheckOut : VARCHAR(200)
+        +...(52 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +record(date, status)
+    }
+    class TeacherSchedule {
+        +scheduleId : BIGINT «PK»
+        +teacherId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +dayOfWeek : VARCHAR(200)
+        +periodId : BIGINT «FK»
+        +periodNumber : INT
+        +courseId : BIGINT «FK»
+        +sectionId : BIGINT «FK»
+        +...(16 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class EmployeePayroll {
+        +payrollId : BIGINT «PK»
+        +employeeId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +payrollMonth : VARCHAR(200)
+        +payrollYear : VARCHAR(200)
+        +payrollPeriod : DECIMAL(15,2)
+        +payrollCode : DECIMAL(15,2)
+        +generationDate : DATE
+        +paymentDate : DATE
+        +basicSalary : DECIMAL(15,2)
+        +...(65 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +calculate()
+    }
+    class EmployeeLeave {
+        +leaveId : BIGINT «PK»
+        +employeeId : BIGINT «FK»
+        +leaveType : DECIMAL(15,2)
+        +leaveSubType : VARCHAR(50)
+        +academicYearId : BIGINT «FK»
+        +requestDate : DATE
+        +startDate : DATE
+        +endDate : DATE
+        +totalDays : INT
+        +actualDays : VARCHAR(200)
+        +...(40 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +request()
+    }
+    class PerformanceReview {
+        +reviewId : BIGINT «PK»
+        +employeeId : BIGINT «FK»
+        +reviewerId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +reviewPeriod : VARCHAR(200)
+        +reviewDate : DATE
+        +reviewType : VARCHAR(50)
+        +evaluationMethod : VARCHAR(200)
+        +criteria : VARCHAR(200)
+        +...(36 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class EmployeeViolations {
+        +violationId : BIGINT «PK»
+        +employeeId : BIGINT «FK»
+        +reportedByUserId : BIGINT «FK»
+        +reportedByRole : VARCHAR(200)
+        +violationDate : DATE
+        +violationTime : TIME
+        +reportedDate : DATE
+        +violationType : VARCHAR(50)
+        +violationCategory : VARCHAR(50)
+        +severityLevel : VARCHAR(50)
+        +...(58 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class EmployeeTraining {
+        +trainingId : BIGINT «PK»
+        +employeeId : BIGINT «FK»
+        +trainingName : VARCHAR(200)
+        +trainingCode : VARCHAR(50)
+        +trainingType : VARCHAR(50)
+        +category : VARCHAR(50)
+        +provider : VARCHAR(200)
+        +providerType : VARCHAR(50)
+        +trainerName : VARCHAR(200)
+        +trainerTitle : BOOLEAN
+        +...(53 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class EmployeeAdditionalTasks {
+        +taskId : BIGINT «PK»
+        +employeeId : BIGINT «FK»
+        +taskName : VARCHAR(200)
+        +taskCode : VARCHAR(50)
+        +taskType : VARCHAR(50)
+        +description : TEXT
+        +objectives : VARCHAR(200)
+        +deliverables : VARCHAR(200)
+        +scope : VARCHAR(200)
+        +assignedByUserId : BIGINT «FK»
+        +...(32 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class Mentor {
+        +mentorId : BIGINT «PK»
+        +mentorEmployeeId : BIGINT «FK»
+        +menteeEmployeeId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +startDate : DATE
+        +endDate : DATE
+        +actualEndDate : DATE
+        +mentorshipType : VARCHAR(50)
+        +objectives : VARCHAR(200)
+        +...(30 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class SelfServicePortalRequests {
+        +requestId : BIGINT «PK»
+        +employeeId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +requestNumber : INT
+        +requestType : VARCHAR(50)
+        +requestSubType : VARCHAR(50)
+        +category : VARCHAR(50)
+        +title : VARCHAR(200)
+        +description : TEXT
+        +priority : VARCHAR(200)
+        +...(46 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class VacantPosition {
+        +positionId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +positionCode : VARCHAR(50)
+        +jobTitle : VARCHAR(200)
+        +jobGrade : DECIMAL(5,2)
+        +jobRank : VARCHAR(200)
+        +departmentId : BIGINT «FK»
+        +employmentType : VARCHAR(50)
+        +contractType : VARCHAR(50)
+        +vacancyReason : VARCHAR(200)
+        +...(42 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class JobApplicant {
+        +applicantId : BIGINT «PK»
+        +positionId : BIGINT «FK»
+        +applicationNumber : INT
+        +applicationDate : DATE
+        +firstNameAr : VARCHAR(200)
+        +fatherNameAr : VARCHAR(200)
+        +grandfatherNameAr : VARCHAR(200)
+        +familyNameAr : VARCHAR(200)
+        +fullNameAr : VARCHAR(200)
+        +firstNameEn : VARCHAR(200)
+        +...(72 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class EmployeeCommittees {
+        +committeeId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +committeeCode : VARCHAR(50)
+        +committeeNameAr : VARCHAR(200)
+        +committeeNameEn : VARCHAR(200)
+        +committeeType : VARCHAR(50)
+        +committeeCategory : VARCHAR(50)
+        +formationDate : DATE
+        +formationDecisionNumber : INT
+        +formationDecisionDate : DATE
+        +...(33 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class CommitteeMembers {
+        +memberId : BIGINT «PK»
+        +committeeId : BIGINT «FK»
+        +employeeId : BIGINT «FK»
+        +role : VARCHAR(200)
+        +roleDetails : TEXT
+        +appointmentDate : DATE
+        +appointmentDecisionNumber : INT
+        +startDate : DATE
+        +endDate : DATE
+        +actualEndDate : DATE
+        +...(16 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class EmployeeMeetings {
+        +meetingId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +committeeId : BIGINT «FK»
+        +meetingType : VARCHAR(50)
+        +meetingNumber : INT
+        +title : VARCHAR(200)
+        +objectives : VARCHAR(200)
+        +agenda : VARCHAR(200)
+        +organizerId : BIGINT «FK»
+        +organizerDepartment : VARCHAR(200)
+        +...(41 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class MeetingAttendance {
+        +attendanceId : BIGINT «PK»
+        +meetingId : BIGINT «FK»
+        +employeeId : BIGINT «FK»
+        +committeeId : BIGINT «FK»
+        +invitationStatus : VARCHAR(50)
+        +invitationSentDate : DATE
+        +invitationResponseDate : DATE
+        +invitationResponseNotes : TEXT
+        +attendanceStatus : VARCHAR(50)
+        +arrivalTime : TIME
+        +...(19 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +record(date, status)
+    }
+    class InternalTransfer {
+        +transferId : BIGINT «PK»
+        +employeeId : BIGINT «FK»
+        +transferType : VARCHAR(50)
+        +transferNumber : INT
+        +transferDate : DATE
+        +effectiveDate : DATE
+        +fromSchoolId : BIGINT «FK»
+        +toSchoolId : BIGINT «FK»
+        +fromDepartmentId : BIGINT «FK»
+        +toDepartmentId : BIGINT «FK»
+        +...(25 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class ExternalTransfer {
+        +externalTransferId : BIGINT «PK»
+        +employeeId : BIGINT «FK»
+        +transferDirection : VARCHAR(200)
+        +transferNumber : INT
+        +transferDate : DATE
+        +effectiveDate : DATE
+        +fromEntity : VARCHAR(200)
+        +fromEntityType : VARCHAR(50)
+        +fromEntityAddress : VARCHAR(200)
+        +toEntity : VARCHAR(200)
+        +...(23 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class EmployeeTermination {
+        +terminationId : BIGINT «PK»
+        +employeeId : BIGINT «FK»
+        +terminationType : VARCHAR(50)
+        +terminationNumber : INT
+        +terminationDate : DATE
+        +lastWorkingDate : DATE
+        +effectiveDate : DATE
+        +reason : VARCHAR(200)
+        +reasonCategory : VARCHAR(50)
+        +resignationDate : DATE
+        +...(39 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    Employee "1" --o "0..*" AppointmentDecision : employeeId
+    Employee "1" --o "0..*" EmployeeDocuments : employeeId
+    Employee "1" --o "0..*" EmployeeInventoryCustody : employeeId
+    Employee "1" --o "0..*" EmployeeInventoryCustody : issuedByUserId
+    Employee "1" --o "0..*" StaffCustody : employeeId
+    Employee "1" --o "0..*" EmployeeAttendance : employeeId
+    EmployeeLeave "1" --o "0..*" EmployeeAttendance : excuseId
+    EmployeePayroll "1" --o "0..*" EmployeeAttendance : payrollId
+    Employee "1" --o "0..*" TeacherSchedule : teacherId
+    Employee "1" --o "0..*" EmployeePayroll : employeeId
+    Employee "1" --o "0..*" EmployeeLeave : employeeId
+    Employee "1" --o "0..*" EmployeeLeave : handoverToEmployeeId
+    Employee "1" --o "0..*" PerformanceReview : employeeId
+    Employee "1" --o "0..*" PerformanceReview : reviewerId
+    Employee "1" --o "0..*" EmployeeViolations : employeeId
+    EmployeePayroll "1" --o "0..*" EmployeeViolations : payrollId
+    Employee "1" --o "0..*" EmployeeTraining : employeeId
+    PerformanceReview "1" --o "0..*" EmployeeTraining : linkedToReviewId
+    Employee "1" --o "0..*" EmployeeAdditionalTasks : employeeId
+    Employee "1" --o "0..*" Mentor : mentorEmployeeId
+    Employee "1" --o "0..*" Mentor : menteeEmployeeId
+    Employee "1" --o "0..*" SelfServicePortalRequests : employeeId
+    Employee "1" --o "0..*" SelfServicePortalRequests : assignedToUserId
+    Employee "1" --o "0..*" VacantPosition : replacedEmployeeId
+    Employee "1" --o "0..*" VacantPosition : hiredEmployeeId
+    VacantPosition "1" --o "0..*" JobApplicant : positionId
+    Employee "1" --o "0..*" JobApplicant : hiredAsEmployeeId
+    Employee "1" --o "0..*" EmployeeCommittees : chairpersonId
+    Employee "1" --o "0..*" EmployeeCommittees : viceChairpersonId
+    Employee "1" --o "0..*" EmployeeCommittees : secretaryId
+    EmployeeCommittees "1" --o "0..*" CommitteeMembers : committeeId
+    Employee "1" --o "0..*" CommitteeMembers : employeeId
+    EmployeeCommittees "1" --o "0..*" EmployeeMeetings : committeeId
+    Employee "1" --o "0..*" EmployeeMeetings : organizerId
+    Employee "1" --o "0..*" EmployeeMeetings : chairpersonId
+    Employee "1" --o "0..*" EmployeeMeetings : secretaryId
+    EmployeeMeetings "1" --o "0..*" MeetingAttendance : meetingId
+    Employee "1" --o "0..*" MeetingAttendance : employeeId
+    Employee "1" --o "0..*" InternalTransfer : employeeId
+    Employee "1" --o "0..*" ExternalTransfer : employeeId
+    EmployeeTermination "1" --o "0..*" ExternalTransfer : terminationId
+    AppointmentDecision "1" --o "0..*" ExternalTransfer : appointmentDecisionId
+    Employee "1" --o "0..*" EmployeeTermination : employeeId

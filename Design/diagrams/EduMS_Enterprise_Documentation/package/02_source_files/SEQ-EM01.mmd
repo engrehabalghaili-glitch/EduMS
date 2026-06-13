@@ -1,0 +1,24 @@
+sequenceDiagram
+    actor REP as المُبلغ
+    participant API
+    participant DB
+    actor MGR as مدير الطوارئ
+    participant NOT
+    actor TEAM as فريق الاستجابة
+    actor OF
+    
+    REP->>API: تسجيل حالة طارئة
+    API->>DB: INSERT EmergencyEvent
+    API->>MGR: تنبيه عاجل
+    MGR->>API: تصنيف الخطورة
+    MGR->>API: تفعيل خطة استجابة
+    API->>DB: INSERT ResponsePlan
+    API->>TEAM: تعليمات
+    TEAM->>API: تنفيذ الإجراءات
+    API->>DB: تحديث Status
+    MGR->>API: تقييم الأضرار
+    API->>DB: INSERT DamageAssessment
+    MGR->>OF: رفع تقرير
+    API->>DB: INSERT RemediationPlan
+    OF->>API: اعتماد خطة التعويض
+    API->>NOT: إشعارات للأهالي

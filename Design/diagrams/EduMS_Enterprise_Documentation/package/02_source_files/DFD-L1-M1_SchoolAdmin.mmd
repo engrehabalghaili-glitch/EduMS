@@ -1,0 +1,41 @@
+flowchart TB
+    classDef proc fill:#10b981,color:#fff,stroke:#064e3b,stroke-width:2px,rx:25
+    classDef ds fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d
+    
+    Ext1[الكيانات الخارجية]:::ext
+    
+    P1_1((1.1<br/>تأسيس المدرسة)):::proc
+    P1_2((1.2<br/>إعداد العام الدراسي)):::proc
+    P1_3((1.3<br/>إدارة القيادة والهيكل)):::proc
+    P1_4((1.4<br/>الاعتماد والإشراف التربوي)):::proc
+    P1_5((1.5<br/>الإحصاء والتقارير الدورية)):::proc
+    P1_6((1.6<br/>التخطيط الاستراتيجي)):::proc
+    P1_7((1.7<br/>التعاميم والمراسلات)):::proc
+    P1_8((1.8<br/>العمليات الاستثنائية)):::proc
+
+    DS_Office[("Office")]:::ds
+    DS_School[("School")]:::ds
+    DS_SchoolAcademicYear[("SchoolAcademicYear")]:::ds
+    DS_SchoolCalendar[("SchoolCalendar")]:::ds
+    DS_ApprovedPlan[("ApprovedPlan")]:::ds
+    DS_ReceivedCirculars[("ReceivedCirculars")]:::ds
+    DS_AnnualReport[("AnnualReport")]:::ds
+    DS_SchoolDecision[("SchoolDecision")]:::ds
+
+    Ext1 --> P1_1
+    P1_1 --> P1_2
+    P1_2 --> P1_3
+    P1_3 --> P1_4
+    P1_4 --> P1_5
+    P1_5 --> P1_6
+    P1_6 --> P1_7
+    P1_7 --> P1_8
+    P1_1 <--> DS_Office
+    P1_2 <--> DS_School
+    P1_3 <--> DS_SchoolAcademicYear
+    P1_4 <--> DS_SchoolCalendar
+    P1_5 <--> DS_ApprovedPlan
+    P1_6 <--> DS_ReceivedCirculars
+    P1_7 <--> DS_AnnualReport
+    P1_8 <--> DS_SchoolDecision

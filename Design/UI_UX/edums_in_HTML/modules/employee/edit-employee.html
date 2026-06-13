@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - تعديل بيانات موظف</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">إدارة الموارد البشرية</div>
+                    <a href="employees.html" class="nav-item">
+                        <span class="icon">⬅️</span>
+                        <span>العودة لقائمة الموظفين</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة الموظفين - تعديل ملف الموظف</h2>
+                </div>
+                <div class="header-right">
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>أ. محمد أحمد</h4>
+                            <p>مدير المدرسة - الإدارة</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h1 class="page-title">⚙️ تعديل بيانات الموظف: أ. فهد منصور</h1>
+                </div>
+                
+                <!-- Edit Form with Tabs -->
+                <div class="card">
+                    <div class="card-header" style="padding: 0;">
+                        <div class="tabs">
+                            <button class="tab-btn active" onclick="switchTab(event, 'personal')">البيانات الشخصية</button>
+                            <button class="tab-btn" onclick="switchTab(event, 'job')">البيانات الوظيفية</button>
+                            <button class="tab-btn" onclick="switchTab(event, 'finance')">البيانات المالية</button>
+                            <button class="tab-btn" onclick="switchTab(event, 'qualification')">المؤهلات</button>
+                            <button class="tab-btn" onclick="switchTab(event, 'documents')">المرفقات</button>
+                        </div>
+                    </div>
+                    <div class="card-body" style="padding: 30px;">
+                        <!-- Tab: Personal -->
+                        <div id="personal" class="tab-content active">
+                            <form>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">الاسم الكامل (عربي)</label>
+                                        <input type="text" class="form-input" value="فهد منصور العتيبي">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">الاسم الكامل (English)</label>
+                                        <input type="text" class="form-input" value="Fahad Mansour Al-Otaibi">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">رقم الهوية / الإقامة</label>
+                                        <input type="text" class="form-input" value="1056789123">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">تاريخ الميلاد</label>
+                                        <input type="date" class="form-input" value="1985-10-20">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">رقم الجوال</label>
+                                        <input type="tel" class="form-input" value="050XXXXXXXX">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">البريد الإلكتروني</label>
+                                        <input type="email" class="form-input" value="fahad@edums.edu.sa">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">العنوان الوطني</label>
+                                    <textarea class="form-textarea">الرياض - حي الملقا - شارع التخصصي</textarea>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Tab: Job -->
+                        <div id="job" class="tab-content">
+                            <form>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">الرقم الوظيفي</label>
+                                        <input type="text" class="form-input" value="EMP-0045" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">تاريخ التعيين</label>
+                                        <input type="date" class="form-input" value="2015-09-01">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">القسم</label>
+                                        <select class="form-select">
+                                            <option selected>قسم اللغة العربية</option>
+                                            <option>القسم الإداري</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">المسمى الوظيفي</label>
+                                        <select class="form-select">
+                                            <option selected>معلم أول</option>
+                                            <option>وكيل</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">حالة العمل</label>
+                                    <select class="form-select">
+                                        <option selected>على رأس العمل (Active)</option>
+                                        <option>إجازة طويلة</option>
+                                        <option>منتهى الخدمة</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Tab: Finance -->
+                        <div id="finance" class="tab-content">
+                            <form>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">الراتب الأساسي</label>
+                                        <input type="number" class="form-input" value="12000">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">بدل السكن</label>
+                                        <input type="number" class="form-input" value="3000">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">بدل النقل</label>
+                                        <input type="number" class="form-input" value="600">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">رقم الحساب البنكي (IBAN)</label>
+                                    <input type="text" class="form-input" value="SA84 8000 0000 XXXX XXXX XXXX">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-footer" style="padding: 20px 30px; border-top: 1px solid #e5e7eb; display: flex; justify-content: flex-end; gap: 10px;">
+                        <button class="btn btn-outline">إلغاء التغييرات</button>
+                        <button class="btn btn-primary">حفظ كافة التعديلات</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <style>
+        .tabs { display: flex; border-bottom: 1px solid #e5e7eb; background: #f8fafc; }
+        .tab-btn { padding: 15px 25px; border: none; background: none; font-weight: 700; color: #64748b; cursor: pointer; transition: all 0.2s; border-bottom: 3px solid transparent; }
+        .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); background: white; }
+        .tab-btn:hover { background: #eff6ff; }
+        
+        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content.active { display: block; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+
+    <script>
+        function switchTab(evt, tabId) {
+            var contents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+            var buttons = document.getElementsByClassName("tab-btn");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("active");
+            }
+            document.getElementById(tabId).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>

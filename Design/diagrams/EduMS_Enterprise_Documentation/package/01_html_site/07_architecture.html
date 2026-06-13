@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏗️ مكونات النظام والتوزيع | EduMS Documentation</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Cairo',sans-serif;background:#f8fafc;color:#1f2937;line-height:1.7;font-size:14.5px}
+header.top{background:linear-gradient(135deg,#1e3a8a,#3b82f6,#8b5cf6);color:#fff;padding:30px 24px;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+header.top h1{font-size:1.9em;font-weight:800;text-shadow:1px 1px 4px rgba(0,0,0,.3)}
+header.top .breadcrumb{margin-top:10px;font-size:.95em;opacity:.95}
+header.top .breadcrumb a{color:#fef3c7;text-decoration:none;font-weight:600}
+header.top .breadcrumb a:hover{text-decoration:underline}
+header.top .stats{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap}
+header.top .stat{background:rgba(255,255,255,.18);padding:8px 16px;border-radius:20px;font-size:.9em;font-weight:600;border:1px solid rgba(255,255,255,.3)}
+.container{max-width:1500px;margin:24px auto;padding:0 20px}
+.toc-side{background:#fff;border-radius:14px;padding:20px;margin-bottom:24px;box-shadow:0 2px 10px rgba(0,0,0,.06);position:sticky;top:0;z-index:50}
+.toc-side h3{color:#1e3a8a;font-size:1.15em;margin-bottom:12px}
+.toc-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:4px}
+.toc-list a{color:#374151;text-decoration:none;padding:5px 10px;border-radius:6px;font-size:.88em;display:block;font-weight:500}
+.toc-list a:hover{background:#dbeafe;color:#1e3a8a}
+.toc-list code{background:#f3f4f6;padding:1px 5px;border-radius:3px;font-size:.85em;color:#1e3a8a;font-weight:700}
+.diagram-card{background:#fff;border-radius:14px;margin-bottom:24px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.05)}
+.diagram-header{background:linear-gradient(90deg,#f8fafc,#e0e7ff);padding:18px 24px;border-bottom:2px solid #e5e7eb}
+.id-badge{display:inline-block;background:#1e3a8a;color:#fff;padding:4px 12px;border-radius:6px;font-size:.82em;font-weight:700;font-family:'Fira Code',monospace;margin-left:10px}
+.diagram-header h3{display:inline;color:#1e3a8a;font-size:1.3em;font-weight:700}
+.diagram-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tag{display:inline-block;padding:4px 10px;border-radius:18px;font-size:.82em;font-weight:600}
+.tag.type{background:#dbeafe;color:#1e3a8a}
+.tag.level{background:#fce7f3;color:#831843}
+.tag.mod{background:#f3e8ff;color:#6b21a8}
+.tag.stats{background:#fef3c7;color:#92400e}
+.diagram-body{padding:20px 24px}
+.info-block{margin-bottom:10px;font-size:.93em}
+.info-block strong{color:#1e3a8a;margin-left:5px}
+.mermaid-wrapper{background:#fafbfc;border:2px dashed #d1d5db;border-radius:10px;padding:20px 12px;margin:16px 0;overflow:auto;min-height:150px}
+.mermaid{text-align:center;direction:ltr;font-size:13px}
+.code-tabs{display:flex;gap:5px;margin-top:14px;border-bottom:2px solid #e5e7eb}
+.code-tab{background:#e5e7eb;color:#374151;padding:6px 14px;border-radius:6px 6px 0 0;cursor:pointer;font-weight:600;font-size:.85em;border:none;font-family:inherit}
+.code-tab.active{background:#1e3a8a;color:#fff}
+.code-block{background:#0f172a;color:#cbd5e1;border-radius:0 10px 10px 10px;padding:14px;overflow:auto;max-height:480px;font-family:'Fira Code',monospace;font-size:.78em;line-height:1.5;direction:ltr;text-align:left;display:none;white-space:pre}
+.code-block.active{display:block}
+.back-to-top{position:fixed;bottom:24px;left:24px;background:#1e3a8a;color:#fff;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.3em;box-shadow:0 4px 14px rgba(0,0,0,.25);z-index:100}
+.back-to-top:hover{background:#f59e0b}
+.nav-buttons{display:flex;gap:12px;justify-content:space-between;margin:30px 0}
+.nav-btn{background:#1e3a8a;color:#fff;padding:14px 22px;border-radius:10px;text-decoration:none;font-weight:700;flex:1;text-align:center;transition:all .2s}
+.nav-btn:hover{background:#3b82f6;transform:translateY(-2px)}
+.nav-btn.disabled{background:#9ca3af;cursor:not-allowed}
+@media(max-width:768px){
+  header.top h1{font-size:1.4em}
+  .container{padding:0 12px}
+  .diagram-header{padding:14px}
+  .diagram-body{padding:14px}
+}
+</style>
+</head>
+<body>
+
+<a id="top"></a>
+<header class="top">
+  <div class="breadcrumb"><a href="index.html">🏠 الفهرس الرئيسي</a> &nbsp;›&nbsp; 🏗️ مكونات النظام والتوزيع</div>
+  <h1>🏗️ مكونات النظام والتوزيع</h1>
+  <div class="stats">
+    <div class="stat">📊 2 مخطط</div>
+    <div class="stat">🎯 EduMS Enterprise</div>
+  </div>
+</header>
+<div class="container">
+<div class="toc-side"><h3>📑 محتويات هذا القسم</h3><div class="toc-list"><a href="#COMP-01"><code>COMP-01</code> Component Diagram — البنية المعمارية الكاملة</a><a href="#DEPLOY-01"><code>DEPLOY-01</code> Deployment Diagram — توزيع على البنية التحتية</a></div></div>
+<div class="nav-buttons"><a href="06_erd.html" class="nav-btn">→ 🗄️ مخططات قاعدة البيانات (ERD)</a><a href="index.html" class="nav-btn" style="background:#f59e0b">🏠 الفهرس الرئيسي</a></div>
+
+<article class="diagram-card" id="COMP-01">
+  <div class="diagram-header">
+    <span class="id-badge">COMP-01</span>
+    <h3>Component Diagram — البنية المعمارية الكاملة</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Component Diagram</span>
+      <span class="tag level">🎯 Enterprise</span>
+      
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>معمارية Microservices كاملة + Event-Driven + Cloud-native.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>5 Clients + Gateway + 12 Services + 10 DBs + 6 External.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TB
+    classDef ui fill:#dbeafe,color:#1e3a8a,stroke:#1e3a8a,stroke-width:2px
+    classDef gw fill:#fce7f3,color:#831843,stroke:#831843,stroke-width:2px
+    classDef svc fill:#dcfce7,color:#166534,stroke:#166534,stroke-width:2px
+    classDef db fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d,stroke-width:2px
+    classDef mq fill:#ede9fe,color:#4c1d95,stroke:#4c1d95,stroke-width:2px
+
+    subgraph Clients["💻 طبقة العميل"]
+        WEB[🌐 Web App]:::ui
+        MOB[📱 Mobile App]:::ui
+        PORT[🪟 بوابة ولي الأمر]:::ui
+        TPORT[🪟 بوابة الموظفين]:::ui
+        AdminP[🪟 لوحة الإدارة]:::ui
+    end
+
+    subgraph Gateway["🛡️ البوابة"]
+        GW[API Gateway<br/>+ Rate Limit + JWT]:::gw
+        WAF[WAF + DDoS]:::gw
+    end
+
+    subgraph Services["⚙️ الخدمات"]
+        S1[School Service]:::svc
+        S2[Student Service]:::svc
+        S3[Employee Service]:::svc
+        S4[Asset Service]:::svc
+        S5[Finance Service]:::svc
+        S6[Reporting Service]:::svc
+        S7[Auth Service]:::svc
+        S8[Emergency Service]:::svc
+        NOT[Notification Service]:::svc
+        FILE[File Storage Service]:::svc
+        SEARCH[Search Service]:::svc
+        WORK[Workflow Engine]:::svc
+    end
+
+    subgraph MessageBus["📡 ناقل الرسائل"]
+        MQ[(RabbitMQ / Kafka)]:::mq
+    end
+
+    subgraph Data["💾 البيانات"]
+        DB1[(SchoolDB)]:::db
+        DB2[(StudentDB)]:::db
+        DB3[(EmployeeDB)]:::db
+        DB4[(AssetDB)]:::db
+        DB5[(FinanceDB)]:::db
+        DB6[(ReportingDW)]:::db
+        DB7[(AuthDB + Redis)]:::db
+        DB8[(EmergencyDB)]:::db
+        BLOB[(Blob Storage<br/>Documents)]:::db
+        ES[(ElasticSearch)]:::db
+    end
+
+    subgraph External["🌍 الأنظمة الخارجية"]
+        MIN[وزارة التربية API]:::ext
+        BANK[بوابة الدفع]:::ext
+        SMS[SMS Gateway]:::ext
+        EMAIL[Email Service]:::ext
+        BC[خدمة الباركود]:::ext
+        Bio[نظام البصمة]:::ext
+    end
+
+    WEB & MOB & PORT & TPORT & AdminP --> WAF
+    WAF --> GW
+    GW --> S1 & S2 & S3 & S4 & S5 & S6 & S7 & S8
+    S1 --> DB1
+    S2 --> DB2
+    S3 --> DB3
+    S4 --> DB4
+    S5 --> DB5
+    S6 --> DB6
+    S7 --> DB7
+    S8 --> DB8
+    S1 & S2 & S3 & S4 -.events.-> MQ
+    MQ -.->  S6
+    MQ -.-> NOT
+    MQ -.-> SEARCH
+    SEARCH --> ES
+    S1 & S2 & S3 & S4 --> BLOB
+    NOT --> SMS & EMAIL
+    S5 --> BANK
+    S6 --> MIN
+    S4 --> BC
+    S3 --> Bio
+    WORK <--> S1 & S2 & S3 & S5
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'COMP-01-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="COMP-01-mer">flowchart TB
+    classDef ui fill:#dbeafe,color:#1e3a8a,stroke:#1e3a8a,stroke-width:2px
+    classDef gw fill:#fce7f3,color:#831843,stroke:#831843,stroke-width:2px
+    classDef svc fill:#dcfce7,color:#166534,stroke:#166534,stroke-width:2px
+    classDef db fill:#fef3c7,color:#78350f,stroke:#b45309,stroke-width:2px
+    classDef ext fill:#fee2e2,color:#7f1d1d,stroke:#7f1d1d,stroke-width:2px
+    classDef mq fill:#ede9fe,color:#4c1d95,stroke:#4c1d95,stroke-width:2px
+
+    subgraph Clients[&quot;💻 طبقة العميل&quot;]
+        WEB[🌐 Web App]:::ui
+        MOB[📱 Mobile App]:::ui
+        PORT[🪟 بوابة ولي الأمر]:::ui
+        TPORT[🪟 بوابة الموظفين]:::ui
+        AdminP[🪟 لوحة الإدارة]:::ui
+    end
+
+    subgraph Gateway[&quot;🛡️ البوابة&quot;]
+        GW[API Gateway&lt;br/&gt;+ Rate Limit + JWT]:::gw
+        WAF[WAF + DDoS]:::gw
+    end
+
+    subgraph Services[&quot;⚙️ الخدمات&quot;]
+        S1[School Service]:::svc
+        S2[Student Service]:::svc
+        S3[Employee Service]:::svc
+        S4[Asset Service]:::svc
+        S5[Finance Service]:::svc
+        S6[Reporting Service]:::svc
+        S7[Auth Service]:::svc
+        S8[Emergency Service]:::svc
+        NOT[Notification Service]:::svc
+        FILE[File Storage Service]:::svc
+        SEARCH[Search Service]:::svc
+        WORK[Workflow Engine]:::svc
+    end
+
+    subgraph MessageBus[&quot;📡 ناقل الرسائل&quot;]
+        MQ[(RabbitMQ / Kafka)]:::mq
+    end
+
+    subgraph Data[&quot;💾 البيانات&quot;]
+        DB1[(SchoolDB)]:::db
+        DB2[(StudentDB)]:::db
+        DB3[(EmployeeDB)]:::db
+        DB4[(AssetDB)]:::db
+        DB5[(FinanceDB)]:::db
+        DB6[(ReportingDW)]:::db
+        DB7[(AuthDB + Redis)]:::db
+        DB8[(EmergencyDB)]:::db
+        BLOB[(Blob Storage&lt;br/&gt;Documents)]:::db
+        ES[(ElasticSearch)]:::db
+    end
+
+    subgraph External[&quot;🌍 الأنظمة الخارجية&quot;]
+        MIN[وزارة التربية API]:::ext
+        BANK[بوابة الدفع]:::ext
+        SMS[SMS Gateway]:::ext
+        EMAIL[Email Service]:::ext
+        BC[خدمة الباركود]:::ext
+        Bio[نظام البصمة]:::ext
+    end
+
+    WEB &amp; MOB &amp; PORT &amp; TPORT &amp; AdminP --&gt; WAF
+    WAF --&gt; GW
+    GW --&gt; S1 &amp; S2 &amp; S3 &amp; S4 &amp; S5 &amp; S6 &amp; S7 &amp; S8
+    S1 --&gt; DB1
+    S2 --&gt; DB2
+    S3 --&gt; DB3
+    S4 --&gt; DB4
+    S5 --&gt; DB5
+    S6 --&gt; DB6
+    S7 --&gt; DB7
+    S8 --&gt; DB8
+    S1 &amp; S2 &amp; S3 &amp; S4 -.events.-&gt; MQ
+    MQ -.-&gt;  S6
+    MQ -.-&gt; NOT
+    MQ -.-&gt; SEARCH
+    SEARCH --&gt; ES
+    S1 &amp; S2 &amp; S3 &amp; S4 --&gt; BLOB
+    NOT --&gt; SMS &amp; EMAIL
+    S5 --&gt; BANK
+    S6 --&gt; MIN
+    S4 --&gt; BC
+    S3 --&gt; Bio
+    WORK &lt;--&gt; S1 &amp; S2 &amp; S3 &amp; S5</pre>
+    
+  </div>
+</article>
+
+<article class="diagram-card" id="DEPLOY-01">
+  <div class="diagram-header">
+    <span class="id-badge">DEPLOY-01</span>
+    <h3>Deployment Diagram — توزيع على البنية التحتية</h3>
+    <div class="diagram-meta">
+      <span class="tag type">📐 Deployment Diagram</span>
+      <span class="tag level">🎯 Enterprise</span>
+      
+      
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="info-block"><strong>🎯 الغرض:</strong>HA Deployment على Kubernetes مع DR.</div>
+    <div class="info-block"><strong>🧩 العناصر:</strong>CDN + DMZ + Web Tier + K8s Cluster + DB Cluster + Cache + Messaging + Monitoring + DR.</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TB
+    classDef cloud fill:#dbeafe,stroke:#1e3a8a,stroke-width:2px
+    classDef lb fill:#fce7f3,stroke:#831843,stroke-width:2px
+    classDef node fill:#dcfce7,stroke:#166534,stroke-width:2px
+    classDef db fill:#fef3c7,stroke:#b45309,stroke-width:2px
+
+    subgraph Users["👥 المستخدمون"]
+        U1[المتصفح]
+        U2[تطبيق الجوال]
+    end
+
+    subgraph CDN["☁️ CDN"]
+        CF[CloudFront]:::cloud
+    end
+
+    subgraph CloudRegion["☁️ Cloud Region - AWS/Azure"]
+        subgraph DMZ["🛡️ DMZ"]
+            WAF[WAF]:::lb
+            ALB[Application LB]:::lb
+        end
+
+        subgraph WebTier["🌐 Web Tier"]
+            WEB1[Web 1]:::node
+            WEB2[Web 2]:::node
+            WEB3[Web 3]:::node
+        end
+
+        subgraph K8S["☸️ Kubernetes Cluster"]
+            POD1[School Svc x2]:::node
+            POD2[Student Svc x3]:::node
+            POD3[Employee Svc x2]:::node
+            POD4[Asset Svc x2]:::node
+            POD5[Finance Svc x2]:::node
+            POD6[Reporting x2]:::node
+            POD7[Auth Svc x3]:::node
+            POD8[Notification x2]:::node
+            POD9[Emergency x1]:::node
+            POD10[Workflow x2]:::node
+        end
+
+        subgraph Cache["💨 Cache"]
+            REDIS[(Redis Cluster<br/>3 nodes)]:::db
+        end
+
+        subgraph DBTier["💾 Database Tier"]
+            PG_M[(PostgreSQL Primary)]:::db
+            PG_R1[(Replica 1)]:::db
+            PG_R2[(Replica 2)]:::db
+            DW[(Data Warehouse)]:::db
+            ES_C[(ElasticSearch Cluster)]:::db
+        end
+
+        subgraph Storage["📦 Storage"]
+            S3[(S3 / Azure Blob)]:::db
+            BACKUP[(Backup)]:::db
+        end
+
+        subgraph Messaging["📡 Messaging"]
+            RMQ[(RabbitMQ Cluster)]:::node
+        end
+
+        subgraph Monitor["📊 Monitoring"]
+            PROM[Prometheus]:::node
+            GRAF[Grafana]:::node
+            ELK[ELK Stack]:::node
+        end
+    end
+
+    subgraph DR["🆘 Disaster Recovery"]
+        DR_DB[(DR DB)]:::db
+        DR_S3[(DR Storage)]:::db
+    end
+
+    subgraph External["🌍 External"]
+        MIN_API[Ministry API]
+        BANK_API[Banks]
+        SMS_API[SMS]
+    end
+
+    U1 & U2 --> CF
+    CF --> WAF --> ALB --> WEB1 & WEB2 & WEB3
+    WEB1 & WEB2 & WEB3 --> POD1 & POD2 & POD7
+    K8S --> REDIS
+    POD1 & POD2 & POD3 & POD4 & POD5 --> PG_M
+    PG_M -.replicate.-> PG_R1 & PG_R2
+    POD6 --> DW
+    K8S -.index.-> ES_C
+    K8S -.events.-> RMQ
+    RMQ -.subscribe.-> POD6 & POD8 & POD9
+    POD8 --> SMS_API
+    POD5 --> BANK_API
+    POD6 --> MIN_API
+    K8S --> S3
+    PG_M -.backup.-> BACKUP
+    PG_M -.replicate.-> DR_DB
+    S3 -.replicate.-> DR_S3
+    K8S -.metrics.-> PROM --> GRAF
+    K8S -.logs.-> ELK
+      </pre>
+    </div>
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode(this,'DEPLOY-01-mer')">📊 Mermaid</button>
+      
+    </div>
+    <pre class="code-block active" id="DEPLOY-01-mer">flowchart TB
+    classDef cloud fill:#dbeafe,stroke:#1e3a8a,stroke-width:2px
+    classDef lb fill:#fce7f3,stroke:#831843,stroke-width:2px
+    classDef node fill:#dcfce7,stroke:#166534,stroke-width:2px
+    classDef db fill:#fef3c7,stroke:#b45309,stroke-width:2px
+
+    subgraph Users[&quot;👥 المستخدمون&quot;]
+        U1[المتصفح]
+        U2[تطبيق الجوال]
+    end
+
+    subgraph CDN[&quot;☁️ CDN&quot;]
+        CF[CloudFront]:::cloud
+    end
+
+    subgraph CloudRegion[&quot;☁️ Cloud Region - AWS/Azure&quot;]
+        subgraph DMZ[&quot;🛡️ DMZ&quot;]
+            WAF[WAF]:::lb
+            ALB[Application LB]:::lb
+        end
+
+        subgraph WebTier[&quot;🌐 Web Tier&quot;]
+            WEB1[Web 1]:::node
+            WEB2[Web 2]:::node
+            WEB3[Web 3]:::node
+        end
+
+        subgraph K8S[&quot;☸️ Kubernetes Cluster&quot;]
+            POD1[School Svc x2]:::node
+            POD2[Student Svc x3]:::node
+            POD3[Employee Svc x2]:::node
+            POD4[Asset Svc x2]:::node
+            POD5[Finance Svc x2]:::node
+            POD6[Reporting x2]:::node
+            POD7[Auth Svc x3]:::node
+            POD8[Notification x2]:::node
+            POD9[Emergency x1]:::node
+            POD10[Workflow x2]:::node
+        end
+
+        subgraph Cache[&quot;💨 Cache&quot;]
+            REDIS[(Redis Cluster&lt;br/&gt;3 nodes)]:::db
+        end
+
+        subgraph DBTier[&quot;💾 Database Tier&quot;]
+            PG_M[(PostgreSQL Primary)]:::db
+            PG_R1[(Replica 1)]:::db
+            PG_R2[(Replica 2)]:::db
+            DW[(Data Warehouse)]:::db
+            ES_C[(ElasticSearch Cluster)]:::db
+        end
+
+        subgraph Storage[&quot;📦 Storage&quot;]
+            S3[(S3 / Azure Blob)]:::db
+            BACKUP[(Backup)]:::db
+        end
+
+        subgraph Messaging[&quot;📡 Messaging&quot;]
+            RMQ[(RabbitMQ Cluster)]:::node
+        end
+
+        subgraph Monitor[&quot;📊 Monitoring&quot;]
+            PROM[Prometheus]:::node
+            GRAF[Grafana]:::node
+            ELK[ELK Stack]:::node
+        end
+    end
+
+    subgraph DR[&quot;🆘 Disaster Recovery&quot;]
+        DR_DB[(DR DB)]:::db
+        DR_S3[(DR Storage)]:::db
+    end
+
+    subgraph External[&quot;🌍 External&quot;]
+        MIN_API[Ministry API]
+        BANK_API[Banks]
+        SMS_API[SMS]
+    end
+
+    U1 &amp; U2 --&gt; CF
+    CF --&gt; WAF --&gt; ALB --&gt; WEB1 &amp; WEB2 &amp; WEB3
+    WEB1 &amp; WEB2 &amp; WEB3 --&gt; POD1 &amp; POD2 &amp; POD7
+    K8S --&gt; REDIS
+    POD1 &amp; POD2 &amp; POD3 &amp; POD4 &amp; POD5 --&gt; PG_M
+    PG_M -.replicate.-&gt; PG_R1 &amp; PG_R2
+    POD6 --&gt; DW
+    K8S -.index.-&gt; ES_C
+    K8S -.events.-&gt; RMQ
+    RMQ -.subscribe.-&gt; POD6 &amp; POD8 &amp; POD9
+    POD8 --&gt; SMS_API
+    POD5 --&gt; BANK_API
+    POD6 --&gt; MIN_API
+    K8S --&gt; S3
+    PG_M -.backup.-&gt; BACKUP
+    PG_M -.replicate.-&gt; DR_DB
+    S3 -.replicate.-&gt; DR_S3
+    K8S -.metrics.-&gt; PROM --&gt; GRAF
+    K8S -.logs.-&gt; ELK</pre>
+    
+  </div>
+</article>
+
+<div class="nav-buttons"><a href="06_erd.html" class="nav-btn">→ 🗄️ مخططات قاعدة البيانات (ERD)</a><a href="index.html" class="nav-btn" style="background:#f59e0b">🏠 الفهرس الرئيسي</a></div>
+</div>
+
+<a href="#top" class="back-to-top" title="أعلى">⬆</a>
+<script>
+mermaid.initialize({
+  startOnLoad: true,
+  theme: 'default',
+  maxTextSize: 200000,
+  maxEdges: 2500,
+  themeVariables:{fontFamily:'Cairo, sans-serif',primaryColor:'#dbeafe',primaryTextColor:'#1e3a8a',primaryBorderColor:'#1e3a8a',lineColor:'#475569',secondaryColor:'#fef3c7',tertiaryColor:'#dcfce7'},
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  sequence:{useMaxWidth:true,wrap:true},
+  er:{useMaxWidth:true,layoutDirection:'TB'},
+  class:{useMaxWidth:true},
+  state:{useMaxWidth:true}
+});
+function showCode(btn, id){
+  const card = btn.closest('.diagram-card');
+  card.querySelectorAll('.code-tab').forEach(b => b.classList.remove('active'));
+  card.querySelectorAll('.code-block').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+</script>
+</body></html>

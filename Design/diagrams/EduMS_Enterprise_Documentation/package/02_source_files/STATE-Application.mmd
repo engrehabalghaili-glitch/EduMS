@@ -1,0 +1,14 @@
+stateDiagram-v2
+    [*] --> Draft
+    Draft --> Submitted : إرسال
+    Submitted --> UnderReview : بدء المراجعة
+    UnderReview --> SchoolApproved : قبول مبدئي
+    UnderReview --> NeedsDocuments : وثائق ناقصة
+    NeedsDocuments --> Submitted : رفع الوثائق
+    UnderReview --> Rejected : رفض
+    SchoolApproved --> OfficeReview : إحالة للمكتب
+    OfficeReview --> Approved : اعتماد نهائي
+    OfficeReview --> Rejected
+    Approved --> StudentCreated
+    Rejected --> [*]
+    StudentCreated --> [*]

@@ -1,0 +1,152 @@
+classDiagram
+    direction TB
+    class StudentAccount {
+        +accountId : BIGINT «PK»
+        +studentId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +accountNumber : INT
+        +totalDebit : DECIMAL(15,2)
+        +totalCredit : VARCHAR(200)
+        +currentBalance : DECIMAL(15,2)
+        +balanceType : DECIMAL(15,2)
+        +lastTransactionDate : DATE
+        +...(20 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class StudentInvoice {
+        +invoiceId : BIGINT «PK»
+        +accountId : BIGINT «FK»
+        +studentId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +invoiceNumber : INT
+        +invoiceDate : DATE
+        +dueDate : DATE
+        +issueDate : DATE
+        +...(32 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +generate()
+    }
+    class InvoiceItem {
+        +itemId : BIGINT «PK»
+        +invoiceId : BIGINT «FK»
+        +feeTypeId : BIGINT «FK»
+        +itemCode : VARCHAR(50)
+        +itemDescription : DECIMAL(15,2)
+        +quantity : INT
+        +unitPrice : DECIMAL(15,2)
+        +totalPrice : DECIMAL(15,2)
+        +discountPercentage : INT
+        +discountAmount : DECIMAL(15,2)
+        +...(24 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +generate()
+        +settle(payment)
+        +void()
+    }
+    class Payment {
+        +paymentId : BIGINT «PK»
+        +accountId : BIGINT «FK»
+        +studentId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +paymentNumber : INT
+        +paymentDate : DATE
+        +paymentTime : TIME
+        +amount : DECIMAL(15,2)
+        +currency : VARCHAR(200)
+        +...(31 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +process()
+        +refund()
+        +verify()
+    }
+    class FeeType {
+        +feeTypeId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +feeCode : DECIMAL(15,2)
+        +feeNameAr : DECIMAL(15,2)
+        +feeNameEn : DECIMAL(15,2)
+        +feeCategory : DECIMAL(15,2)
+        +amount : DECIMAL(15,2)
+        +currency : VARCHAR(200)
+        +billingFrequency : VARCHAR(200)
+        +isTaxable : BOOLEAN
+        +...(22 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class Installment {
+        +installmentId : BIGINT «PK»
+        +invoiceId : BIGINT «FK»
+        +itemId : BIGINT «FK»
+        +accountId : BIGINT «FK»
+        +studentId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +installmentNumber : INT
+        +installmentTotal : INT
+        +installmentAmount : DECIMAL(15,2)
+        +...(33 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class AssetWarrantyContract {
+        +contractValue : VARCHAR(200) «PK»
+        +currency : VARCHAR(200)
+        +paymentTerms : VARCHAR(200)
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class FinancialAuditArchive {
+        +reportType : VARCHAR(50) «PK»
+        +fiscalYear : VARCHAR(200)
+        +totalAssetsValue : VARCHAR(200)
+        +totalDepreciationValue : VARCHAR(200)
+        +filePath : VARCHAR(200)
+        +isReadOnly : BOOLEAN
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +record(event)
+        +query(filters)
+    }
+    StudentAccount "1" --o "0..*" StudentInvoice : accountId
+    StudentInvoice "1" --o "0..*" InvoiceItem : invoiceId
+    FeeType "1" --o "0..*" InvoiceItem : feeTypeId
+    StudentAccount "1" --o "0..*" Payment : accountId
+    StudentInvoice "1" --o "0..*" Installment : invoiceId
+    InvoiceItem "1" --o "0..*" Installment : itemId
+    StudentAccount "1" --o "0..*" Installment : accountId

@@ -1,0 +1,1018 @@
+classDiagram
+    direction TB
+    class Office {
+        +officeId : BIGINT «PK»
+        +officeCode : VARCHAR(50)
+        +officeNameAr : VARCHAR(200)
+        +officeNameEn : VARCHAR(200)
+        +officeType : VARCHAR(50)
+        +level : VARCHAR(50)
+        +parentOfficeId : BIGINT «FK»
+        +region : VARCHAR(200)
+        +city : VARCHAR(200)
+        +managerName : VARCHAR(200)
+        +...(25 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class School {
+        +schoolId : BIGINT «PK»
+        +schoolCode : VARCHAR(50)
+        +institutionalCode : VARCHAR(50)
+        +schoolNameAr : VARCHAR(200)
+        +schoolNameEn : VARCHAR(200)
+        +schoolType : VARCHAR(50)
+        +schoolGender : VARCHAR(200)
+        +educationLevel : VARCHAR(50)
+        +classification : VARCHAR(200)
+        +schoolStatus : VARCHAR(50)
+        +...(32 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +archive()
+    }
+    class SchoolLevel {
+        +schoolLevelId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +levelName : VARCHAR(50)
+        +levelOrder : VARCHAR(50)
+        +startGrade : DECIMAL(5,2)
+        +endGrade : DECIMAL(5,2)
+        +academicTrack : VARCHAR(200)
+        +isActive : BOOLEAN
+        +minAge : VARCHAR(200)
+        +maxAge : VARCHAR(200)
+        +...(7 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class SchoolContactInfo {
+        +contactInfoId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +officialPhone : VARCHAR(20)
+        +landline : VARCHAR(20)
+        +faxNumber : INT
+        +officialEmail : VARCHAR(100)
+        +alternativeEmail : VARCHAR(100)
+        +fullAddress : VARCHAR(200)
+        +streetName : VARCHAR(200)
+        +buildingNumber : INT
+        +...(17 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class SchoolShiftSetting {
+        +shiftId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +shiftName : VARCHAR(200)
+        +shiftCode : VARCHAR(50)
+        +startTime : TIME
+        +endTime : TIME
+        +lessonDuration : VARCHAR(200)
+        +breakDuration : VARCHAR(200)
+        +breakStartTime : TIME
+        +breakEndTime : TIME
+        +...(12 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class SchoolAcademicYear {
+        +academicYearId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +yearCode : VARCHAR(50)
+        +yearNameAr : VARCHAR(200)
+        +yearNameEn : VARCHAR(200)
+        +startDate : DATE
+        +endDate : DATE
+        +registrationStart : DATE
+        +registrationEnd : DATE
+        +addDropStart : DATE
+        +...(15 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +archive()
+    }
+    class SchoolSemester {
+        +semesterId : BIGINT «PK»
+        +academicYearId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +semesterNumber : INT
+        +semesterOrder : VARCHAR(200)
+        +semesterType : VARCHAR(50)
+        +semesterNameAr : VARCHAR(200)
+        +semesterNameEn : VARCHAR(200)
+        +startDate : DATE
+        +endDate : DATE
+        +...(22 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class SchoolCalendar {
+        +calendarId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +eventTitle : VARCHAR(200)
+        +eventType : VARCHAR(50)
+        +category : VARCHAR(50)
+        +startDate : DATETIME
+        +endDate : DATETIME
+        +isHoliday : BOOLEAN
+        +noAttendance : BOOLEAN
+        +...(16 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class SchoolCurriculumPlan {
+        +curriculumPlanId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +planNameAr : VARCHAR(200)
+        +planNameEn : VARCHAR(200)
+        +planCode : VARCHAR(50)
+        +gradeLevelId : BIGINT «FK»
+        +schoolLevelId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +version : VARCHAR(200)
+        +...(14 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +draft()
+    }
+    class GradeCapacity {
+        +gradeCapacityId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +schoolLevelId : BIGINT «FK»
+        +gradeLevel : DECIMAL(5,2)
+        +gradeNameAr : DECIMAL(5,2)
+        +gradeNameEn : DECIMAL(5,2)
+        +maxStudentsPerClass : VARCHAR(200)
+        +maxSectionsCount : INT
+        +totalCapacity : VARCHAR(200)
+        +...(10 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class SchoolAuditLog {
+        +auditId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +tableName : VARCHAR(200)
+        +entityId : BIGINT «FK»
+        +operationType : VARCHAR(50)
+        +changeType : VARCHAR(50)
+        +oldValue : VARCHAR(200)
+        +newValue : VARCHAR(200)
+        +changeSummary : VARCHAR(200)
+        +userId : BIGINT «FK»
+        +...(11 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +record(event)
+        +query(filters)
+    }
+    class ReferenceCoding {
+        +referenceId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +codeType : VARCHAR(50)
+        +codeKey : VARCHAR(50)
+        +codeValueAr : VARCHAR(50)
+        +codeValueEn : VARCHAR(50)
+        +descriptionAr : TEXT
+        +descriptionEn : TEXT
+        +sortOrder : VARCHAR(200)
+        +isSystemCode : BOOLEAN
+        +...(8 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class CommitmentDeviation {
+        +deviationId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +type : VARCHAR(50)
+        +title : VARCHAR(200)
+        +deviationDate : DATE
+        +description : TEXT
+        +affectedItems : VARCHAR(200)
+        +reason : VARCHAR(200)
+        +impactLevel : VARCHAR(50)
+        +...(25 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class AcademicException {
+        +exceptionId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +requestType : VARCHAR(50)
+        +studentId : BIGINT «FK»
+        +affectedGroup : VARCHAR(200)
+        +justification : VARCHAR(200)
+        +supportingDocuments : VARCHAR(200)
+        +requestedStartDate : DATE
+        +requestedEndDate : DATE
+        +...(21 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class LeadershipNomination {
+        +nominationId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +officeId : BIGINT «FK»
+        +candidateEmployeeId : BIGINT «FK»
+        +candidateName : DATE
+        +targetPosition : VARCHAR(200)
+        +nominationType : VARCHAR(50)
+        +nominationSource : VARCHAR(200)
+        +nominationDate : DATE
+        +nominationDocumentPath : VARCHAR(200)
+        +...(28 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class LeadershipAssignment {
+        +assignmentId : BIGINT «PK»
+        +nomineeId : BIGINT «FK»
+        +employeeId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +officeId : BIGINT «FK»
+        +decisionNumber : INT
+        +decisionDate : DATE
+        +decisionDocumentPath : VARCHAR(200)
+        +position : VARCHAR(200)
+        +positionLevel : VARCHAR(50)
+        +...(16 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class OrganizationalStructure {
+        +structureId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +officeId : BIGINT «FK»
+        +structureName : VARCHAR(200)
+        +versionNumber : INT
+        +versionDate : DATE
+        +description : TEXT
+        +approvalStatus : VARCHAR(50)
+        +approvalDate : DATE
+        +approvalDocumentPath : VARCHAR(200)
+        +...(10 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class SchoolDepartment {
+        +deptId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +structureId : BIGINT «FK»
+        +deptCode : VARCHAR(50)
+        +deptName : VARCHAR(200)
+        +deptNameEn : VARCHAR(200)
+        +deptType : VARCHAR(50)
+        +parentDeptId : BIGINT «FK»
+        +managerId : BIGINT «FK»
+        +actingManagerId : BIGINT «FK»
+        +...(14 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class OrganizationalPermission {
+        +permissionId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +departmentId : BIGINT «FK»
+        +positionTitle : VARCHAR(200)
+        +systemModule : VARCHAR(200)
+        +accessLevel : VARCHAR(50)
+        +canSign : BOOLEAN
+        +financialLimit : VARCHAR(200)
+        +roleId : BIGINT «FK»
+        +isActive : BOOLEAN
+        +...(6 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +grant(user)
+        +revoke(user)
+        +check(action, resource)
+    }
+    class SchoolDecision {
+        +decisionId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +decisionNumber : INT
+        +decisionDate : DATE
+        +decisionType : VARCHAR(50)
+        +subject : VARCHAR(200)
+        +decisionText : VARCHAR(200)
+        +effectiveDate : DATE
+        +expiryDate : DATE
+        +pdfAttachment : VARCHAR(200)
+        +...(11 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class OrganizationalManual {
+        +manualId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +manualVersion : VARCHAR(200)
+        +lastUpdated : DATE
+        +filePath : VARCHAR(200)
+        +fileName : VARCHAR(200)
+        +approvalRef : VARCHAR(50)
+        +approvedByOfficeId : BIGINT «FK»
+        +approvalDate : DATE
+        +requiresAcknowledgment : VARCHAR(200)
+        +...(9 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class Workflow {
+        +workflowId : BIGINT «PK»
+        +workflowName : VARCHAR(200)
+        +description : TEXT
+        +entityName : VARCHAR(200)
+        +totalSteps : VARCHAR(200)
+        +isActive : BOOLEAN
+        +isDefault : BOOLEAN
+        +createdByUserId : BIGINT «FK»
+        +updatedByUserId : BIGINT «FK»
+        +createdAt : DATE
+        +...(2 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class WorkflowStep {
+        +stepId : BIGINT «PK»
+        +workflowId : BIGINT «FK»
+        +stepOrder : VARCHAR(200)
+        +stepNameAr : VARCHAR(200)
+        +stepNameEn : VARCHAR(200)
+        +assignedToPosition : VARCHAR(200)
+        +assignedToRoleId : BIGINT «FK»
+        +slaHours : VARCHAR(200)
+        +actionType : VARCHAR(50)
+        +isFinalStep : BOOLEAN
+        +...(8 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class AnnualPlanDraft {
+        +draftId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +draftNumber : INT
+        +draftVersion : VARCHAR(200)
+        +titleAr : VARCHAR(200)
+        +titleEn : VARCHAR(200)
+        +draftStatus : VARCHAR(50)
+        +completionPercentage : DECIMAL(5,2)
+        +lastSavedAt : DATE
+        +...(21 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class SubmittedPlan {
+        +planId : BIGINT «PK»
+        +draftId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +submissionNumber : INT
+        +submissionTimestamp : DATETIME
+        +directorSignature : VARCHAR(200)
+        +signatureDate : DATE
+        +signatureMethod : VARCHAR(200)
+        +planFilePath : VARCHAR(200)
+        +...(27 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +draft()
+    }
+    class ApprovedPlan {
+        +approvedPlanId : BIGINT «PK»
+        +submittedPlanId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +approvalReferenceNumber : INT
+        +approvalReferenceDate : DATE
+        +approvalReferenceDocument : VARCHAR(200)
+        +approvalRefNo : VARCHAR(200)
+        +effectiveDate : DATE
+        +effectiveDateHijri : DATE
+        +...(22 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +draft()
+    }
+    class PlanAmendment {
+        +amendmentId : BIGINT «PK»
+        +approvedPlanId : BIGINT «FK»
+        +amendmentType : VARCHAR(50)
+        +amendmentNumber : INT
+        +amendmentTitle : VARCHAR(200)
+        +amendmentDescription : TEXT
+        +changesDescription : TEXT
+        +affectedSections : VARCHAR(200)
+        +impactAnalysis : VARCHAR(200)
+        +impactLevel : VARCHAR(50)
+        +...(22 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class AmendmentRequest {
+        +requestId : BIGINT «PK»
+        +approvedPlanId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +requestNumber : INT
+        +requestDate : DATE
+        +requestTitle : VARCHAR(200)
+        +requestDescription : TEXT
+        +reasonForRequest : VARCHAR(200)
+        +proposedChanges : VARCHAR(200)
+        +affectedActivities : VARCHAR(200)
+        +...(31 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class ProgressReport {
+        +reportId : BIGINT «PK»
+        +approvedPlanId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +reportingPeriod : VARCHAR(200)
+        +periodSequence : VARCHAR(200)
+        +startDate : DATE
+        +endDate : DATE
+        +reportNumber : INT
+        +reportDate : DATE
+        +completionRate : DECIMAL(5,2)
+        +...(35 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +generate()
+    }
+    class FinalEvaluation {
+        +evaluationId : BIGINT «PK»
+        +approvedPlanId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +evaluationDate : DATE
+        +evaluationPeriod : VARCHAR(200)
+        +goalsAnalysis : VARCHAR(200)
+        +goalsAchievementRate : DECIMAL(5,2)
+        +activitiesCompletionRate : DECIMAL(5,2)
+        +kpiAchievementRate : DECIMAL(5,2)
+        +...(34 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class HistoricalRecords {
+        +recordId : BIGINT «PK»
+        +tableName : VARCHAR(200)
+        +entityId : BIGINT «FK»
+        +operationType : VARCHAR(50)
+        +oldValue : VARCHAR(200)
+        +newValue : VARCHAR(200)
+        +fieldName : VARCHAR(200)
+        +oldFieldValue : VARCHAR(200)
+        +newFieldValue : VARCHAR(200)
+        +changeReason : VARCHAR(200)
+        +...(26 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+    }
+    class ReceivedCirculars {
+        +circularId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +officeId : BIGINT «FK»
+        +circularNumber : INT
+        +circularNumberFull : INT
+        +circularDate : DATE
+        +circularDateGregorian : DATE
+        +subject : VARCHAR(200)
+        +subjectNormalized : VARCHAR(200)
+        +summary : VARCHAR(200)
+        +...(33 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class CircularsDocumentation {
+        +documentationId : BIGINT «PK»
+        +circularId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +registrationNumber : INT
+        +registrationDate : DATE
+        +registrationDateGregorian : DATE
+        +registeredByUserId : BIGINT «FK»
+        +registeredAt : VARCHAR(200)
+        +documentCategory : VARCHAR(50)
+        +subCategory : VARCHAR(50)
+        +...(22 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +archive()
+    }
+    class CircularsInternalDistribution {
+        +distributionId : BIGINT «PK»
+        +circularId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +distributionType : VARCHAR(50)
+        +departmentId : BIGINT «FK»
+        +employeeId : BIGINT «FK»
+        +accessType : VARCHAR(50)
+        +isRequiredToAct : BOOLEAN
+        +isRequiredToReply : BOOLEAN
+        +distributionNotes : TEXT
+        +...(26 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class CircularsImplementationStatus {
+        +implementationId : BIGINT «PK»
+        +circularId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +currentStage : VARCHAR(200)
+        +stageStartDate : DATE
+        +progressRate : DECIMAL(5,2)
+        +previousProgressRate : DECIMAL(5,2)
+        +lastProgressUpdate : DATE
+        +responsibleEmployeeId : BIGINT «FK»
+        +responsibleDepartmentId : BIGINT «FK»
+        +...(29 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class CircularsImplementationReports {
+        +reportId : BIGINT «PK»
+        +circularId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +reportNumber : INT
+        +reportDate : DATE
+        +reportType : VARCHAR(50)
+        +version : VARCHAR(200)
+        +submissionDate : DATE
+        +submittedByUserId : BIGINT «FK»
+        +submissionMethod : VARCHAR(100)
+        +...(29 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +generate()
+    }
+    class ArchivedCirculars {
+        +archiveId : BIGINT «PK»
+        +circularId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +archiveCategory : VARCHAR(50)
+        +archiveSubCategory : VARCHAR(50)
+        +archiveDate : DATE
+        +archivedByUserId : BIGINT «FK»
+        +archivedAt : VARCHAR(200)
+        +archiveReason : VARCHAR(200)
+        +closureDate : DATE
+        +...(24 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +archive()
+    }
+    class CircularsDeadlinesTracking {
+        +deadlineId : BIGINT «PK»
+        +circularId : BIGINT «FK»
+        +schoolId : BIGINT «FK»
+        +deadlineType : VARCHAR(50)
+        +deadlineDate : DATE
+        +originalDeadline : DATE
+        +extensionCount : INT
+        +extensionReason : VARCHAR(200)
+        +extensionApprovedBy : VARCHAR(200)
+        +extensionApprovedAt : DATE
+        +...(24 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +approve()
+        +reject(reason)
+    }
+    class ParentMeeting {
+        +meetingId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +meetingType : VARCHAR(50)
+        +meetingNumber : INT
+        +title : VARCHAR(200)
+        +objectives : VARCHAR(200)
+        +agenda : VARCHAR(200)
+        +organizerId : BIGINT «FK»
+        +...(40 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+    }
+    class Notifications {
+        +notificationId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +userId : BIGINT «FK»
+        +userType : VARCHAR(50)
+        +notificationType : VARCHAR(50)
+        +category : VARCHAR(50)
+        +priority : VARCHAR(200)
+        +title : VARCHAR(200)
+        +message : VARCHAR(200)
+        +body : VARCHAR(200)
+        +...(34 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+    }
+    class QuarterlyReport {
+        +reportId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +quarterNumber : INT
+        +reportNumber : INT
+        +generationDate : DATE
+        +reportingPeriodStart : VARCHAR(200)
+        +reportingPeriodEnd : VARCHAR(200)
+        +achievementsJson : VARCHAR(200)
+        +studentStats : INT
+        +...(30 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +generate()
+        +export(format)
+        +publish()
+    }
+    class CalendarComplianceReport {
+        +reportId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +academicMonth : VARCHAR(200)
+        +monthNumber : INT
+        +reportNumber : INT
+        +generationDate : DATE
+        +plannedStudyDays : INT
+        +actualStudyDays : INT
+        +plannedHolidays : INT
+        +...(31 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +generate()
+    }
+    class WeeklyProcessReport {
+        +reportId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +weekNumber : INT
+        +startDate : DATE
+        +endDate : DATE
+        +reportNumber : INT
+        +generationDate : DATE
+        +curriculumProgress : DECIMAL(5,2)
+        +...(25 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +generate()
+    }
+    class MonthlyDisciplineReport {
+        +reportId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +month : VARCHAR(200)
+        +year : VARCHAR(200)
+        +reportNumber : INT
+        +generationDate : DATE
+        +studentAttendanceRate : DECIMAL(5,2)
+        +studentAttendanceByGrade : DECIMAL(5,2)
+        +...(29 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +generate()
+    }
+    class SemesterEndReport {
+        +reportId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +semesterId : BIGINT «FK»
+        +reportNumber : INT
+        +generationDate : DATE
+        +semesterStatsJson : VARCHAR(200)
+        +studentsStartCount : INT
+        +studentsEndCount : INT
+        +studentsNewCount : INT
+        +...(35 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +generate()
+    }
+    class AnnualComprehensiveReport {
+        +reportId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +reportNumber : INT
+        +generationDate : DATE
+        +executiveSummary : VARCHAR(200)
+        +schoolVision : VARCHAR(200)
+        +schoolMission : VARCHAR(200)
+        +strategicGoals : DECIMAL(5,2)
+        +academicAchievement : INT
+        +...(38 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +generate()
+    }
+    class EducationalOutcomesReport {
+        +reportId : BIGINT «PK»
+        +schoolId : BIGINT «FK»
+        +academicYearId : BIGINT «FK»
+        +reportNumber : INT
+        +generationDate : DATE
+        +generalSuccessRates : DECIMAL(5,2)
+        +successRateByGrade : DECIMAL(5,2)
+        +successRateBySubject : DECIMAL(5,2)
+        +successRateByCategory : DECIMAL(5,2)
+        +topPerformingSubjects : VARCHAR(200)
+        +...(29 more) : ...
+        +create()
+        +update()
+        +delete()
+        +findById(id)
+        +changeStatus(newStatus)
+        +approve()
+        +reject(reason)
+        +generate()
+    }
+    Office "1" --o "0..*" Office : parentOfficeId
+    Office "1" --o "0..*" School : officeId
+    School "1" --o "0..*" SchoolLevel : schoolId
+    SchoolShiftSetting "1" --o "0..*" SchoolLevel : defaultShiftId
+    School "1" --o "0..*" SchoolContactInfo : schoolId
+    School "1" --o "0..*" SchoolShiftSetting : schoolId
+    School "1" --o "0..*" SchoolAcademicYear : schoolId
+    SchoolAcademicYear "1" --o "0..*" SchoolAcademicYear : previousYearId
+    SchoolAcademicYear "1" --o "0..*" SchoolSemester : academicYearId
+    School "1" --o "0..*" SchoolSemester : schoolId
+    School "1" --o "0..*" SchoolCalendar : schoolId
+    SchoolSemester "1" --o "0..*" SchoolCalendar : semesterId
+    School "1" --o "0..*" SchoolCurriculumPlan : schoolId
+    GradeCapacity "1" --o "0..*" SchoolCurriculumPlan : gradeLevelId
+    SchoolLevel "1" --o "0..*" SchoolCurriculumPlan : schoolLevelId
+    SchoolAcademicYear "1" --o "0..*" SchoolCurriculumPlan : academicYearId
+    SchoolSemester "1" --o "0..*" SchoolCurriculumPlan : semesterId
+    School "1" --o "0..*" GradeCapacity : schoolId
+    SchoolAcademicYear "1" --o "0..*" GradeCapacity : academicYearId
+    SchoolLevel "1" --o "0..*" GradeCapacity : schoolLevelId
+    School "1" --o "0..*" SchoolAuditLog : schoolId
+    School "1" --o "0..*" ReferenceCoding : schoolId
+    ReferenceCoding "1" --o "0..*" ReferenceCoding : parentCodeId
+    School "1" --o "0..*" CommitmentDeviation : schoolId
+    SchoolAcademicYear "1" --o "0..*" CommitmentDeviation : academicYearId
+    SchoolCalendar "1" --o "0..*" CommitmentDeviation : linkedCalendarId
+    ApprovedPlan "1" --o "0..*" CommitmentDeviation : linkedPlanId
+    School "1" --o "0..*" AcademicException : schoolId
+    SchoolAcademicYear "1" --o "0..*" AcademicException : academicYearId
+    Workflow "1" --o "0..*" AcademicException : linkToWorkflowId
+    School "1" --o "0..*" LeadershipNomination : schoolId
+    Office "1" --o "0..*" LeadershipNomination : officeId
+    LeadershipAssignment "1" --o "0..*" LeadershipNomination : linkedAssignmentId
+    LeadershipNomination "1" --o "0..*" LeadershipAssignment : nomineeId
+    School "1" --o "0..*" LeadershipAssignment : schoolId
+    Office "1" --o "0..*" LeadershipAssignment : officeId
+    School "1" --o "0..*" OrganizationalStructure : schoolId
+    Office "1" --o "0..*" OrganizationalStructure : officeId
+    School "1" --o "0..*" SchoolDepartment : schoolId
+    OrganizationalStructure "1" --o "0..*" SchoolDepartment : structureId
+    SchoolDepartment "1" --o "0..*" SchoolDepartment : parentDeptId
+    School "1" --o "0..*" OrganizationalPermission : schoolId
+    SchoolDepartment "1" --o "0..*" OrganizationalPermission : departmentId
+    School "1" --o "0..*" SchoolDecision : schoolId
+    Office "1" --o "0..*" SchoolDecision : approvedByOfficeId
+    Workflow "1" --o "0..*" SchoolDecision : linkedWorkflowId
+    School "1" --o "0..*" OrganizationalManual : schoolId
+    Office "1" --o "0..*" OrganizationalManual : approvedByOfficeId
+    Workflow "1" --o "0..*" WorkflowStep : workflowId
+    School "1" --o "0..*" AnnualPlanDraft : schoolId
+    SchoolAcademicYear "1" --o "0..*" AnnualPlanDraft : academicYearId
+    AnnualPlanDraft "1" --o "0..*" SubmittedPlan : draftId
+    School "1" --o "0..*" SubmittedPlan : schoolId
+    SchoolAcademicYear "1" --o "0..*" SubmittedPlan : academicYearId
+    ApprovedPlan "1" --o "0..*" SubmittedPlan : approvedPlanId
+    SubmittedPlan "1" --o "0..*" ApprovedPlan : submittedPlanId
+    School "1" --o "0..*" ApprovedPlan : schoolId
+    SchoolAcademicYear "1" --o "0..*" ApprovedPlan : academicYearId
+    Office "1" --o "0..*" ApprovedPlan : approvedByOfficeId
+    ApprovedPlan "1" --o "0..*" PlanAmendment : approvedPlanId
+    AmendmentRequest "1" --o "0..*" PlanAmendment : linkedToRequestId
+    ApprovedPlan "1" --o "0..*" AmendmentRequest : approvedPlanId
+    School "1" --o "0..*" AmendmentRequest : schoolId
+    Office "1" --o "0..*" AmendmentRequest : assignedToOfficeId
+    PlanAmendment "1" --o "0..*" AmendmentRequest : linkedToAmendmentId
+    ApprovedPlan "1" --o "0..*" ProgressReport : approvedPlanId
+    School "1" --o "0..*" ProgressReport : schoolId
+    ApprovedPlan "1" --o "0..*" FinalEvaluation : approvedPlanId
+    School "1" --o "0..*" FinalEvaluation : schoolId
+    SchoolAcademicYear "1" --o "0..*" FinalEvaluation : academicYearId
+    Office "1" --o "0..*" FinalEvaluation : approvedByOfficeId
+    School "1" --o "0..*" ReceivedCirculars : schoolId
+    Office "1" --o "0..*" ReceivedCirculars : officeId
+    ReceivedCirculars "1" --o "0..*" CircularsDocumentation : circularId
+    School "1" --o "0..*" CircularsDocumentation : schoolId
+    ReceivedCirculars "1" --o "0..*" CircularsInternalDistribution : circularId
+    School "1" --o "0..*" CircularsInternalDistribution : schoolId
+    SchoolDepartment "1" --o "0..*" CircularsInternalDistribution : departmentId
+    ReceivedCirculars "1" --o "0..*" CircularsImplementationStatus : circularId
+    School "1" --o "0..*" CircularsImplementationStatus : schoolId
+    SchoolDepartment "1" --o "0..*" CircularsImplementationStatus : responsibleDepartmentId
+    ReceivedCirculars "1" --o "0..*" CircularsImplementationReports : circularId
+    School "1" --o "0..*" CircularsImplementationReports : schoolId
+    ReceivedCirculars "1" --o "0..*" ArchivedCirculars : circularId
+    School "1" --o "0..*" ArchivedCirculars : schoolId
+    ReceivedCirculars "1" --o "0..*" CircularsDeadlinesTracking : circularId
+    School "1" --o "0..*" CircularsDeadlinesTracking : schoolId
+    School "1" --o "0..*" ParentMeeting : schoolId
+    SchoolAcademicYear "1" --o "0..*" ParentMeeting : academicYearId
+    SchoolSemester "1" --o "0..*" ParentMeeting : semesterId
+    GradeCapacity "1" --o "0..*" ParentMeeting : gradeLevelId
+    School "1" --o "0..*" Notifications : schoolId
+    School "1" --o "0..*" QuarterlyReport : schoolId
+    SchoolAcademicYear "1" --o "0..*" QuarterlyReport : academicYearId
+    School "1" --o "0..*" CalendarComplianceReport : schoolId
+    SchoolAcademicYear "1" --o "0..*" CalendarComplianceReport : academicYearId
+    School "1" --o "0..*" WeeklyProcessReport : schoolId
+    SchoolAcademicYear "1" --o "0..*" WeeklyProcessReport : academicYearId
+    SchoolSemester "1" --o "0..*" WeeklyProcessReport : semesterId
+    School "1" --o "0..*" MonthlyDisciplineReport : schoolId
+    SchoolAcademicYear "1" --o "0..*" MonthlyDisciplineReport : academicYearId
+    SchoolSemester "1" --o "0..*" MonthlyDisciplineReport : semesterId
+    School "1" --o "0..*" SemesterEndReport : schoolId
+    SchoolAcademicYear "1" --o "0..*" SemesterEndReport : academicYearId
+    SchoolSemester "1" --o "0..*" SemesterEndReport : semesterId
+    School "1" --o "0..*" AnnualComprehensiveReport : schoolId
+    SchoolAcademicYear "1" --o "0..*" AnnualComprehensiveReport : academicYearId
+    School "1" --o "0..*" EducationalOutcomesReport : schoolId
+    SchoolAcademicYear "1" --o "0..*" EducationalOutcomesReport : academicYearId

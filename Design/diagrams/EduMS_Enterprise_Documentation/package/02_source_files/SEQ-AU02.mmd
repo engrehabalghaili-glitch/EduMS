@@ -1,0 +1,23 @@
+sequenceDiagram
+    actor U
+    participant UI
+    participant API
+    participant POL as Policy Engine
+    participant DB
+    
+    U->>UI: طلب عملية حساسة
+    UI->>API: POST /sensitive-op
+    API->>POL: checkAccess(user, action, resource)
+    POL->>DB: SELECT UserPermission + RolePermission + AccessPolicy
+    DB-->>POL: rules
+    POL->>POL: evaluate ABAC + RBAC
+    alt مسموح
+        POL-->>API: ALLOW
+        API->>DB: تنفيذ
+        API->>DB: INSERT AuditLog
+        API-->>U: نجاح
+    else مرفوض
+        POL-->>API: DENY
+        API->>DB: INSERT AuditLog(denied)
+        API-->>U: 403 Forbidden
+    end

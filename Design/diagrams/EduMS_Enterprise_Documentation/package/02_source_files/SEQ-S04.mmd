@@ -1,0 +1,21 @@
+sequenceDiagram
+    actor SA as إدارة المدرسة
+    participant API
+    participant DB
+    participant POL as Policy Engine
+    
+    SA->>API: POST /students/{id}/promote
+    API->>DB: SELECT Grades + Attendance + Discipline
+    DB-->>API: البيانات
+    API->>POL: التحقق من اشتراطات الترقية
+    POL->>POL: نسبة النجاح؟ الحضور؟ السلوك؟
+    alt مستوفي
+        POL-->>API: OK
+        API->>DB: UPDATE Student.grade=newGrade
+        API->>DB: INSERT Enrollment(newYear)
+        API->>DB: UPDATE old Enrollment.status='Completed'
+    else غير مستوفي
+        POL-->>API: REJECT
+        API->>DB: تسجيل في الإعادة (Repeated)
+    end
+    API-->>SA: نتيجة

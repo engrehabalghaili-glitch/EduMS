@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - ربط الطلاب بأولياء الأمور</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span style="display: flex; align-items: center;">
+                            <span class="icon">📊</span>
+                            <span>لوحة التحكم</span>
+                        </span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">الوحدات الرئيسية</div>
+                    
+                    <!-- School Management -->
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🏫</span>
+                                <span>إدارة المدرسة</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../school/index.html">لوحة تحكم المدرسة</a></li>
+                            <li><a href="../school/school-profile.html">ملف المدرسة</a></li>
+                            <li><a href="../school/vision-mission.html">الرؤية والرسالة</a></li>
+                            <li><a href="../school/leadership.html">القيادة المدرسية</a></li>
+                            <li><a href="../school/org-chart.html">الهيكل التنظيمي</a></li>
+                            <li><a href="../school/committees.html">اللجان وفرق العمل</a></li>
+                            <li><a href="../school/meeting-minutes.html">محاضر الاجتماعات</a></li>
+                            <li><a href="../school/academic-year.html">العام الدراسي</a></li>
+                            <li><a href="../school/academic-tracks.html">المسارات الأكاديمية</a></li>
+                            <li><a href="../school/classes.html">الصفوف والفصول</a></li>
+                            <li><a href="../school/timetable.html">الجدول الدراسي</a></li>
+                            <li><a href="../school/subjects.html">المواد الدراسية</a></li>
+                            <li><a href="../school/internal-policies.html">اللوائح والسياسات</a></li>
+                            <li><a href="../school/quality-standards.html">الجودة والتميز</a></li>
+                            <li><a href="../school/events-calendar.html">أجندة الفعاليات</a></li>
+                            <li><a href="../school/circulars.html">التعاميم والمراسلات</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Student Management (Active) -->
+                    <div class="nav-item-dropdown active">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🎓</span>
+                                <span>إدارة الطلاب</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="students.html">قاعدة الطلاب</a></li>
+                            <li><a href="applications.html">طلبات القبول</a></li>
+                            <li><a href="registration-requests.html">طلبات القيد</a></li>
+                            <li><a href="health.html">السجل الصحي</a></li>
+                            <li><a href="guardians.html" class="active">أولياء الأمور</a></li>
+                            <li><a href="attendance.html">الحضور والغياب</a></li>
+                            <li><a href="grades.html">الدرجات والتقييم</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Employee Management -->
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🏫</span>
+                                <span>إدارة الموظفين</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../employee/employees.html">قائمة الموظفين</a></li>
+                            <li><a href="../employee/salary.html">الرواتب والأجور</a></li>
+                            <li><a href="../employee/attendance.html">الدوام والاجازات</a></li>
+                            <li><a href="../employee/contracts.html">العقود والوثائق</a></li>
+                            <li><a href="../employee/evaluation.html">تقييم الأداء</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Assets Management -->
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📦</span>
+                                <span>إدارة الأصول والمرافق</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../assets/index.html">لوحة تحكم الأصول</a></li>
+                            <li><a href="../assets/inventory.html">المخزون السلعي</a></li>
+                            <li><a href="../assets/procurement.html">المشتريات</a></li>
+                            <li><a href="../assets/maintenance.html">عمليات الصيانة</a></li>
+                            <li><a href="../assets/maintenance-schedules.html">جداول الصيانة</a></li>
+                            <li><a href="../assets/assignment.html">عهد الأصول</a></li>
+                            <li><a href="../assets/audits.html">جرد الأصول</a></li>
+                            <li><a href="../assets/inventory-plans.html">خطط الجرد</a></li>
+                            <li><a href="../assets/locations.html">مواقع الأصول</a></li>
+                            <li><a href="../assets/rooms.html">القاعات والغرف</a></li>
+                            <li><a href="../assets/suppliers.html">الموردين</a></li>
+                            <li><a href="../assets/tags.html">الترميز (Tags)</a></li>
+                            <li><a href="../assets/transfers.html">نقل الأصول</a></li>
+                            <li><a href="../assets/disposal.html">التخلص من الأصول</a></li>
+                            <li><a href="../assets/depreciation.html">الإهلاك المالي</a></li>
+                            <li><a href="../assets/valuations.html">تقييم الأصول</a></li>
+                            <li><a href="../assets/warranty.html">الضمانات</a></li>
+                            <li><a href="../assets/insurance.html">التأمين</a></li>
+                            <li><a href="../assets/service-contracts.html">عقود الخدمة</a></li>
+                            <li><a href="../assets/financials.html">البيانات المالية</a></li>
+                            <li><a href="../assets/documents.html">وثائق الأصول</a></li>
+                            <li><a href="../assets/types.html">أنواع الأصول</a></li>
+                            <li><a href="../assets/classification.html">تصنيف الأصول</a></li>
+                            <li><a href="../assets/conditions.html">حالة الأصول</a></li>
+                            <li><a href="../assets/compliance.html">الامتثال والمعايير</a></li>
+                            <li><a href="../assets/calibration.html">المعايرة</a></li>
+                            <li><a href="../assets/parts-inventory.html">قطع الغيار</a></li>
+                            <li><a href="../assets/reservations.html">حجز الأصول</a></li>
+                            <li><a href="../assets/requirements.html">الاحتياجات</a></li>
+                            <li><a href="../assets/retirement.html">تقاعد الأصول</a></li>
+                            <li><a href="../assets/reports.html">تقارير الأصول</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Finance Management -->
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">💰</span>
+                                <span>الإدارة المالية</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../finance/accounts.html">الحسابات والقيود</a></li>
+                            <li><a href="../finance/fees.html">الرسوم الدراسية</a></li>
+                            <li><a href="../finance/invoices.html">الفواتير والتحصيل</a></li>
+                            <li><a href="../finance/expenses.html">المصروفات</a></li>
+                            <li><a href="../finance/budget.html">الميزانية</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Security & Auth -->
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🔐</span>
+                                <span>الأمن والصلاحيات</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../auth/users.html">إدارة المستخدمين</a></li>
+                            <li><a href="../auth/roles.html">الأدوار والصلاحيات</a></li>
+                            <li><a href="../auth/audit.html">سجل النشاط</a></li>
+                            <li><a href="../auth/security.html">إعدادات الأمان</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Statistics & Reports -->
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📈</span>
+                                <span>الإحصاء والتقارير</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../statistics/dashboard.html">لوحة الإحصاءات</a></li>
+                            <li><a href="../statistics/analytics.html">التحليلات البيانية</a></li>
+                            <li><a href="../statistics/custom-reports.html">منشئ التقارير</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Emergency & Excellence -->
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🚨</span>
+                                <span>إدارة الطوارئ والتميز</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../emergency/procedures.html">إجراءات الطوارئ</a></li>
+                            <li><a href="../emergency/excellence.html">معايير التميز</a></li>
+                            <li><a href="../emergency/recovery.html">خطط التعافي</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">عام</div>
+                    <a href="../settings/index.html" class="nav-item">
+                        <span style="display: flex; align-items: center;">
+                            <span class="icon">⚙️</span>
+                            <span>الإعدادات</span>
+                        </span>
+                    </a>
+                    <a href="../help/index.html" class="nav-item">
+                        <span style="display: flex; align-items: center;">
+                            <span class="icon">❓</span>
+                            <span>المساعدة والدعم</span>
+                        </span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة الطلاب - ربط أولياء الأمور</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">🔔<span class="badge">3</span></button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير التسجيل</h4>
+                            <p>قسم الشؤون الطلابية</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <h1 class="page-title">👨‍👩‍👧 إدارة أولياء الأمور والربط</h1>
+                            <div class="page-breadcrumb">
+                                <a href="../../index.html">الرئيسية</a>
+                                <span>/</span>
+                                <a href="index.html">إدارة الطلاب</a>
+                                <span>/</span>
+                                <span>أولياء الأمور</span>
+                            </div>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-primary" onclick="openModal('linkGuardianModal')">
+                                <span>🔗</span>
+                                <span>ربط ولي أمر بطالب</span>
+                            </button>
+                            <button class="btn btn-success" onclick="openModal('addGuardianModal')">
+                                <span>➕</span>
+                                <span>إضافة ولي أمر جديد</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Search & Filters -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-body">
+                        <div class="form-row" style="margin-bottom: 0;">
+                            <div class="form-group" style="flex: 2;">
+                                <label class="form-label">بحث عن طالب أو ولي أمر</label>
+                                <input type="text" class="form-input" placeholder="الاسم، الهوية، أو رقم الجوال...">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">تصنيف العلاقة</label>
+                                <select class="form-select">
+                                    <option>الكل</option>
+                                    <option>أب</option>
+                                    <option>أم</option>
+                                    <option>وصي قانوني</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Students & Guardians Grid -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">سجل علاقات الطلاب وأولياء الأمور</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>الطالب</th>
+                                        <th>أولياء الأمور المرتبطين</th>
+                                        <th>ولي الأمر الأساسي</th>
+                                        <th>رقم التواصل الأساسي</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 10px;">
+                                                <div class="avatar-sm">أ</div>
+                                                <div>
+                                                    <strong>أحمد فهد الحربي</strong>
+                                                    <p style="font-size: 0.75em; color: #64748b;">الأول الثانوي - أ</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="guardian-chips">
+                                                <span class="chip">فهد الحربي (أب)</span>
+                                                <span class="chip">منيرة العلي (أم)</span>
+                                            </div>
+                                        </td>
+                                        <td>فهد الحربي</td>
+                                        <td>050XXXXXXX</td>
+                                        <td>
+                                            <div class="action-btns">
+                                                <a href="edit-family.html" class="btn-icon" title="تعديل البيانات الأسرية">👨‍👩‍👧</a>
+                                                <a href="edit-guardian.html" class="btn-icon" title="تعديل بيانات ولي الأمر">✏️</a>
+                                                <button class="btn-icon" title="تعديل الربط">🔗</button>
+                                                <button class="btn-icon" title="فك الارتباط" style="color: var(--danger);">🗑️</button>
+                                                <button class="btn-icon" title="عرض الملف">👁️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 10px;">
+                                                <div class="avatar-sm">س</div>
+                                                <div>
+                                                    <strong>سارة يوسف القحطاني</strong>
+                                                    <p style="font-size: 0.75em; color: #64748b;">الرابع الابتدائي - ب</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="guardian-chips">
+                                                <span class="chip">يوسف القحطاني (أب)</span>
+                                            </div>
+                                        </td>
+                                        <td>يوسف القحطاني</td>
+                                        <td>055XXXXXXX</td>
+                                        <td>
+                                            <div class="action-btns">
+                                                <a href="edit-guardian.html" class="btn-icon" title="تعديل بيانات ولي الأمر">✏️</a>
+                                                <button class="btn-icon" title="تعديل الربط">🔗</button>
+                                                <button class="btn-icon" title="فك الارتباط" style="color: var(--danger);">🗑️</button>
+                                                <button class="btn-icon" title="عرض الملف">👁️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal: Link Guardian -->
+    <div id="linkGuardianModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>ربط ولي أمر بطالب</h3>
+                <span class="close-modal" onclick="closeModal('linkGuardianModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">اختر الطالب</label>
+                        <select class="form-select">
+                            <option>ابحث عن طالب بالاسم أو الرقم...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">اختر ولي الأمر</label>
+                        <select class="form-select">
+                            <option>ابحث عن ولي أمر موجود مسبقاً...</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">صلة القرابة</label>
+                            <select class="form-select">
+                                <option>أب</option>
+                                <option>أم</option>
+                                <option>أخ</option>
+                                <option>أخت</option>
+                                <option>عم/خال</option>
+                                <option>وصي قانوني</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="display: flex; align-items: flex-end; padding-bottom: 10px;">
+                            <label><input type="checkbox"> ولي أمر أساسي</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">مستند إثبات العلاقة (اختياري)</label>
+                        <input type="file" class="form-input">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('linkGuardianModal')">إلغاء</button>
+                <button class="btn btn-primary">تأكيد الربط</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Add Guardian -->
+    <div id="addGuardianModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>إضافة ولي أمر جديد للنظام</h3>
+                <span class="close-modal" onclick="closeModal('addGuardianModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">الاسم الكامل</label>
+                            <input type="text" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">رقم الهوية</label>
+                            <input type="text" class="form-input">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">رقم الجوال</label>
+                            <input type="tel" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">المهنة</label>
+                            <input type="text" class="form-input">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">البريد الإلكتروني</label>
+                        <input type="email" class="form-input">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('addGuardianModal')">إلغاء</button>
+                <button class="btn btn-primary">حفظ ولي الأمر</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .avatar-sm { width: 35px; height: 35px; background: #dbeafe; color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9em; }
+        .guardian-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+        .chip { background: #f1f5f9; padding: 4px 10px; border-radius: 15px; font-size: 0.75em; font-weight: 600; color: #475569; border: 1px solid #e2e8f0; }
+        
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+        .modal-content { background-color: white; margin: 5% auto; width: 600px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); overflow: hidden; animation: modalSlideDown 0.3s ease-out; }
+        .modal-header { padding: 20px 24px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; }
+        .modal-header h3 { color: #1e3a8a; }
+        .close-modal { font-size: 24px; font-weight: bold; cursor: pointer; color: #6b7280; }
+        .modal-body { padding: 24px; max-height: 70vh; overflow-y: auto; }
+        .modal-footer { padding: 16px 24px; border-top: 1px solid #e5e7eb; display: flex; justify-content: flex-end; gap: 12px; background: #f8fafc; }
+        
+        .action-btns { display: flex; gap: 5px; }
+        .btn-icon { width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e5e7eb; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    </style>
+
+    <script>
+        function toggleDropdown(element) {
+            const dropdown = element.parentElement;
+            dropdown.classList.toggle('active');
+        }
+
+        function openModal(id) { document.getElementById(id).style.display = "block"; }
+        function closeModal(id) { document.getElementById(id).style.display = "none"; }
+    </script>
+</body>
+</html>
