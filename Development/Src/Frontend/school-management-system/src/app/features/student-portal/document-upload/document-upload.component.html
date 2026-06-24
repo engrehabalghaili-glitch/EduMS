@@ -1,0 +1,117 @@
+<div class="upload-wrapper" dir="rtl">
+
+  <div class="up-header">
+    <div class="header-content">
+      <div class="header-icon">
+        <i class="pi pi-cloud-upload"></i>
+      </div>
+      <div class="header-text">
+        <h2>رفع الوثائق والمستندات</h2>
+        <p>قم برفع المستندات المطلوبة لإتمام عملية التسجيل</p>
+      </div>
+    </div>
+    <div class="header-progress">
+      <div class="progress-badge">
+        <i class="pi pi-check-circle"></i>
+        <span>{{ acceptedCount }} / {{ totalCount }} وثيقة</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="upload-card">
+
+    <!-- قائمة الوثائق المطلوبة -->
+    <div class="docs-section">
+      <div class="section-title">
+        <i class="pi pi-list"></i>
+        <span>الوثائق المطلوبة</span>
+      </div>
+      <div class="docs-grid">
+        @for (doc of requiredDocs(); track doc.id) {
+          <div class="doc-card" [class.accepted]="doc.accepted">
+            <div class="doc-icon">
+              <i [class]="'pi ' + doc.icon"></i>
+            </div>
+            <div class="doc-info">
+              <span class="doc-label">{{ doc.label }}</span>
+              <span class="doc-desc">{{ doc.description }}</span>
+            </div>
+            @if (doc.accepted) {
+              <div class="doc-status done">
+                <i class="pi pi-check"></i>
+              </div>
+            } @else {
+              <div class="doc-status pending">
+                <i class="pi pi-upload"></i>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- منطقة الرفع الرئيسية -->
+    <div class="upload-section">
+      <div class="section-title">
+        <i class="pi pi-cloud-upload"></i>
+        <span>منطقة رفع الملفات</span>
+      </div>
+
+      <p-toast position="top-left" key="tl"></p-toast>
+
+      <div class="upload-hint">
+        <i class="pi pi-info-circle"></i>
+        <span>يجب أن يكون الملف بصيغة PDF أو JPG، وحجم الملف لا يتجاوز 5MB</span>
+      </div>
+
+      <p-fileUpload
+        mode="advanced"
+        [multiple]="false"
+        accept=".pdf,.jpg,.jpeg,.png"
+        [maxFileSize]="maxFileSize"
+        [auto]="false"
+        [customUpload]="true"
+        (uploadHandler)="onUpload($event, 'id-card')"
+        chooseLabel="اختر ملف"
+        uploadLabel="رفع"
+        cancelLabel="إلغاء"
+        styleClass="custom-fileupload">
+        <ng-template pTemplate="empty">
+          <div class="dropzone-content">
+            <i class="pi pi-cloud-upload dropzone-icon"></i>
+            <p>اسحب وأفلت الملفات هنا أو اضغط للاختيار</p>
+            <span class="dropzone-hint">PDF, JPG, PNG — حد أقصى 5MB</span>
+          </div>
+        </ng-template>
+      </p-fileUpload>
+    </div>
+
+    <!-- تعليمات إضافية -->
+    <div class="instructions-section">
+      <div class="section-title">
+        <i class="pi pi-info-circle"></i>
+        <span>تعليمات وإرشادات</span>
+      </div>
+      <div class="instructions-grid">
+        <div class="instruction-item">
+          <i class="pi pi-file-pdf"></i>
+          <span>الملفات بصيغة PDF أو JPG فقط</span>
+        </div>
+        <div class="instruction-item">
+          <i class="pi pi-database"></i>
+          <span>حجم الملف لا يتجاوز 5 ميجابايت</span>
+        </div>
+        <div class="instruction-item">
+          <i class="pi pi-image"></i>
+          <span>الصور يجب أن تكون واضحة ومضاءة جيداً</span>
+        </div>
+        <div class="instruction-item">
+          <i class="pi pi-shield"></i>
+          <span>جميع المستندات محمية ومشفرة</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

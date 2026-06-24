@@ -1,0 +1,44 @@
+.installments-wrapper{padding:1.5rem;direction:rtl;display:flex;flex-direction:column;gap:1.25rem;background:#F8F9FA;min-height:100%}
+.page-head{display:flex;align-items:center;justify-content:space-between;gap:.75rem}
+.page-head-text h2{margin:0;font-size:1.2rem;font-weight:800;color:#0f172a}.page-subtitle{font-size:.78rem;color:#94a3b8}
+.fab-btn{width:40px;height:40px;border-radius:50%;border:none;background:linear-gradient(135deg,#10B981,#059669);color:#fff;font-size:1.2rem;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 3px 10px rgba(16,185,129,0.3);transition:transform .2s,box-shadow .2s;flex-shrink:0}
+.fab-btn:hover{transform:scale(1.12);box-shadow:0 5px 18px rgba(16,185,129,0.4)}
+.fab-btn:active{transform:scale(.95)}
+.fab-btn.loading{pointer-events:none;opacity:.8}
+.fab-btn:disabled{cursor:not-allowed}
+.summary-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.summary-card{background:#fff;border-radius:12px;padding:1.25rem;display:flex;align-items:center;gap:1rem;box-shadow:0 4px 12px rgba(0,0,0,0.05)}
+.summary-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0}
+.summary-content{display:flex;flex-direction:column;gap:.15rem}
+.summary-label{font-size:.7rem;font-weight:600;color:#94a3b8}
+.summary-value{font-size:1.05rem;font-weight:800;color:#0f172a}.summary-value.success{color:#059669}.summary-value.warning{color:#D97706}
+.progress-card{background:#fff;border-radius:12px;padding:1.25rem;box-shadow:0 4px 12px rgba(0,0,0,0.05)}
+.progress-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem}
+.progress-title{font-size:.85rem;font-weight:700;color:#1e293b}
+.progress-pct{font-size:.9rem;font-weight:800;color:#4F46E5}
+.progress-bar-wrap{width:100%;height:10px;background:#E5E7EB;border-radius:6px;overflow:hidden}
+.progress-fill{height:100%;border-radius:6px}
+.progress-meta{display:flex;align-items:center;gap:1.25rem;margin-top:.65rem;font-size:.7rem;color:#64748b}.meta-item{display:flex;align-items:center;gap:.35rem}
+.table-card{background:#fff;border-radius:12px;padding:1.25rem;box-shadow:0 4px 12px rgba(0,0,0,0.05)}
+::v-deep .installments-table{border-radius:12px;overflow:hidden}
+::v-deep .installments-table .p-datatable-thead>tr>th{background:#F8F9FA;color:#1e293b;font-size:.78rem;font-weight:800;padding:.9rem 1.1rem;border:none;border-bottom:2px solid #E5E7EB}
+::v-deep .installments-table .p-datatable-tbody>tr>td{padding:.85rem 1.1rem;border:none;border-bottom:1px solid #F3F4F6;font-size:.78rem;color:#6B7280}
+::v-deep .installments-table .p-datatable-tbody>tr:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.06);background:#FAFBFC}
+::v-deep .installments-table .p-paginator{background:transparent;border:none;padding:.75rem 0 0}
+::v-deep .installments-table .p-paginator .p-paginator-page{font-size:.78rem;min-width:2.2rem;height:2.2rem;border-radius:.5rem}
+::v-deep .installments-table .p-paginator .p-paginator-page.p-highlight{background:#EEF2FF;color:#4F46E5;font-weight:700}
+.row-id{font-size:.72rem;font-weight:700;color:#9CA3AF}
+.student-name{font-size:.82rem;font-weight:700;color:#0f172a}
+.grade-text{font-size:.7rem;color:#6B7280}
+.amount-text{font-size:.78rem;font-weight:700;color:#374151}.amount-text.success{color:#059669}.amount-text.remaining-danger{color:#EF4444}
+.date-text{font-size:.72rem;color:#6B7280}
+.status-badge{display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .8rem;border-radius:2rem;font-size:.72rem;font-weight:700}.status-paid{background:#ECFDF5;color:#059669}.status-scheduled{background:#EFF6FF;color:#2563EB}.status-pending{background:#FFFBEB;color:#D97706}
+.payment-method{font-size:.72rem;color:#6B7280}.payment-method.dim{color:#D1D5DB}
+.student-progress{display:flex;align-items:center;gap:.5rem;min-width:90px}
+.sp-bar{flex:1;height:6px;background:#E5E7EB;border-radius:3px}
+.sp-fill{height:100%;border-radius:3px}.sp-pct{font-size:.68rem;min-width:28px;text-align:left}
+.not-private{display:flex;flex-direction:column;align-items:center;gap:.5rem;padding:4rem 2rem;background:#F8F9FA;border-radius:12px;text-align:center;min-height:60vh}
+.not-private i{font-size:2.5rem;color:#94a3b8}.not-private h3{margin:0;font-size:1.05rem;color:#475569}.not-private p{margin:0;font-size:.8rem;color:#94a3b8}
+.empty-message{text-align:center;padding:1.5rem;color:#9CA3AF}
+@media(max-width:1024px){.summary-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.summary-row{grid-template-columns:1fr}.installments-wrapper{padding:1rem}}

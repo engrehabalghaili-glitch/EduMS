@@ -1,0 +1,47 @@
+<div class="applications-wrapper">
+  <div class="glass-card">
+    <div class="header">
+      <div class="header-title">
+        <i class="pi pi-clipboard"></i>
+        <span>قائمة طلبات التسجيل</span>
+      </div>
+      <div class="search-box">
+        <i class="pi pi-search"></i>
+        <input pInputText [(ngModel)]="searchQuery" placeholder="بحث برقم الطلب أو اسم الطالب" class="search-input" />
+      </div>
+    </div>
+
+    <p-table [value]="filteredApplications()"
+             [scrollable]="true"
+             scrollHeight="450px"
+             styleClass="p-datatable-sm apps-table"
+             [rowHover]="true"
+             [paginator]="true"
+             [rows]="10"
+             [rowsPerPageOptions]="[5, 10, 20]">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>رقم الطلب</th>
+          <th>اسم الطالب</th>
+          <th>الحالة</th>
+          <th style="width:140px">الإجراءات</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-app>
+        <tr>
+          <td><span class="req-id">{{app.id}}</span></td>
+          <td><span class="student-name">{{app.studentName}}</span></td>
+          <td><p-tag [severity]="getStatusSeverity(app.status)" [value]="app.statusText" /></td>
+          <td>
+            <button pButton icon="pi pi-eye" label="عرض التفاصيل" class="p-button-sm p-button-outlined details-btn" (click)="viewDetails(app.id)"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="4" class="empty-msg">لا توجد طلبات تطابق بحثك</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

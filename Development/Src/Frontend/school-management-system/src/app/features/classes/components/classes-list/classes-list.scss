@@ -1,0 +1,201 @@
+@use '../../../../../styles/variables' as *;
+
+.dashboard-inner-container {
+  width: 100%;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  direction: rtl;
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e2e8f0;
+
+  .dashboard-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1e3a8a;
+  }
+  .dashboard-subtitle {
+    font-size: 14px;
+    color: #64748b;
+    margin-top: 4px;
+  }
+  ::v-deep .p-button {
+    background: #1e3a8a !important;
+    border: none !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-weight: 700 !important;
+    padding: 0.5rem 1.25rem !important;
+    border-radius: 0.5rem !important;
+    &:hover { background: #1d4ed8 !important; transform: translateY(-1px); }
+  }
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+
+  .table-header-start {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .table-header-end {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .search-input {
+    width: 300px;
+    font-family: 'Cairo', sans-serif;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid #cbd5e1;
+
+    &:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    }
+  }
+}
+
+::v-deep .p-datatable {
+  .p-datatable-thead > tr > th {
+    background: #f1f5f9;
+    color: #1e3a8a;
+    font-weight: 700;
+    font-size: 13px;
+    text-align: right;
+    padding: 0.75rem 1rem;
+    border-bottom: 2px solid #cbd5e1;
+  }
+  .p-datatable-tbody > tr > td {
+    padding: 0.75rem 1rem;
+    font-size: 13.5px;
+    color: #334155;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .p-datatable-tbody > tr:hover td {
+    background-color: #f8fafc;
+  }
+  .p-paginator {
+    direction: ltr;
+    .p-paginator-current { direction: rtl; }
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.badge {
+  display: inline-flex;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+
+  &.badge-info {
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #dbeafe;
+  }
+}
+
+.capacity-badge {
+  background: #ecfdf5;
+  color: #047857;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.font-mono {
+  font-family: 'Courier New', monospace;
+  direction: ltr;
+  text-align: left;
+}
+
+.text-center { text-align: center; }
+
+.dialog-body {
+  padding: 1rem 0;
+  direction: rtl;
+
+  form {
+    .field {
+      margin-bottom: 0.5rem;
+    }
+    label {
+      display: block;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 0.4rem;
+    }
+    input, ::v-deep .p-select, ::v-deep .p-inputnumber {
+      width: 100%;
+      font-family: 'Cairo', sans-serif;
+    }
+    .p-error {
+      font-size: 12px;
+      margin-top: 0.25rem;
+      display: block;
+    }
+  }
+}
+
+.dialog-footer-buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  direction: rtl;
+
+  button {
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 13.5px !important;
+    font-weight: 700 !important;
+    border-radius: 0.5rem !important;
+  }
+}
+
+::v-deep .custom-dialog {
+  border-radius: 1rem !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1) !important;
+  background: #ffffff !important;
+
+  .p-dialog-header {
+    direction: rtl !important;
+    border-top-right-radius: 1rem !important;
+    border-top-left-radius: 1rem !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    padding: 1.25rem !important;
+    background: #ffffff !important;
+    .p-dialog-title { font-size: 16.5px !important; font-weight: 800 !important; color: #1e3a8a !important; }
+    .p-dialog-header-icons { margin-right: auto !important; margin-left: 0 !important; }
+  }
+
+  .p-dialog-content {
+    background: #ffffff !important;
+  }
+}
+
+::v-deep .dialog-mask {
+  background: rgba(0, 0, 0, 0.4) !important;
+}

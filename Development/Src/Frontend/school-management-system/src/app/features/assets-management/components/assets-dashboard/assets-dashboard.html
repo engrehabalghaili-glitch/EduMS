@@ -1,0 +1,138 @@
+<div class="dashboard-inner-container">
+
+  <!-- الهيدر العلوي لإدارة الأصول والمشتريات -->
+  <div class="dashboard-header">
+    <div>
+      <div class="dashboard-title">⚙️ منظومة إدارة الأصول الثابتة والمستودعات والعهد</div>
+      <div class="dashboard-subtitle">مرحباً أ. يوسف الحربي • جرد العهد الشخصية، جدولة التكليفات الفنية، ومراقبة البنية التحتية والمخزون</div>
+    </div>
+    <div class="header-actions">
+      <button pButton label="تسجيل أصل جديد (QR Code)" icon="pi pi-plus" class="p-button-slate p-button-sm font-cairo" (click)="onAssetAction('new_asset', '')"></button>
+      <button pButton label="طباعة تقرير الجرد والهلاك" icon="pi pi-print" class="p-button-outlined p-button-secondary p-button-sm font-cairo" (click)="onAssetAction('print_inventory', '')"></button>
+    </div>
+  </div>
+
+  <!-- 📊 شبكة كروت الأداء والمراقبة اللحظية للبنية التحتية -->
+  <div class="stats-grid">
+    @for (stat of stats(); track stat.label) {
+      <div class="stat-card" [ngClass]="'card-' + stat.type">
+        <div class="stat-icon">
+          @if (stat.type === 'primary') { 🏢 }
+          @else if (stat.type === 'danger') { 🛠️ }
+          @else if (stat.type === 'info') { 👤 }
+          @else if (stat.type === 'success') { ✅ }
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">{{ stat.label }}</div>
+          <div class="stat-value">{{ stat.value }}</div>
+          <div class="stat-desc">{{ stat.desc }}</div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- 🧱 الصف الأول: جدول الجرد العام للأصول + مخطط توزيع فئات الأصول المستودعية -->
+  <div class="widgets-grid-main">
+
+    <!-- جدول جرد ومراقبة الأصول والعهد -->
+    <div class="widget-box">
+      <div class="widget-header-title">📦 سجل جرد الأصول والعهد المدرسية النشطة ومطابقة الجاهزية</div>
+      <div class="table-container">
+        <table class="enterprise-table">
+          <thead>
+            <tr>
+              <th>كود الأصل</th>
+              <th>اسم الأصل التفصيلي</th>
+              <th>الفئة</th>
+              <th>موقع ومكان الأصل</th>
+              <th>العهدة الحالية طرف</th>
+              <th>تاريخ الشراء</th>
+              <th>الحالة الفنية للتشغيل</th>
+              <th>إجراءات</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (asset of assetsInventory(); track asset.id) {
+              <tr>
+                <td class="font-mono text-slate-700"><strong>{{ asset.id }}</strong></td>
+                <td><strong>{{ asset.name }}</strong></td>
+                <td><span class="category-badge">{{ asset.category }}</span></td>
+                <td><span class="location-text-badge">📍 {{ asset.location }}</span></td>
+                <td><span class="custody-text">👤 {{ asset.custodyOf }}</span></td>
+                <td class="font-mono text-xs text-slate-500">{{ asset.purchaseDate }}</td>
+                <td>
+                  <span class="condition-badge" [ngClass]="asset.condition">{{ asset.conditionText }}</span>
+                </td>
+                <td>
+                  <button pButton label="نقل عهدة" class="p-button-text p-button-sm p-0 font-cairo text-slate-600 font-bold" (click)="onAssetAction('transfer_custody', asset.id)"></button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- كارت مخطط الدونات لتحليل فئات الأصول -->
+    <div class="widget-box">
+      <div class="widget-header-title">📊 الهيكل النسبي لتوزيع الأصول</div>
+      <div class="chart-wrapper-box" style="height: 230px;">
+        <p-chart type="doughnut" [data]="categoryPieData" [options]="categoryPieOptions" width="100%" height="100%"></p-chart>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 🧱 الصف الثاني: جدول أوامر الصيانة المفتوحة + مخطط الجاهزية حسب المباني -->
+  <div class="widgets-grid-secondary">
+
+    <!-- جدول أوامر الصيانة الفنية الفورية -->
+    <div class="widget-box">
+      <div class="widget-header-title">🛠️ أوامر الصيانة الفنية والتشغيلية المفتوحة للأصول وبلاغات الأعطال</div>
+      <div class="table-container">
+        <table class="enterprise-table">
+          <thead>
+            <tr>
+              <th>رقم الأمر</th>
+              <th>اسم الأصل المعتل</th>
+              <th>وصف الخلل الفني</th>
+              <th>الأولوية</th>
+              <th>الموعد المجدول</th>
+              <th>الحالة التنفيذية</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (order of maintenanceOrders(); track order.id) {
+              <tr>
+                <td class="font-mono text-xs text-slate-500">{{ order.id }}</td>
+                <td><strong>{{ order.assetName }}</strong></td>
+                <td class="issue-description-column"><span>{{ order.issueDescription }}</span></td>
+                <td>
+                  <span class="priority-tag" [ngClass]="order.priority">
+                    {{ order.priority === 'critical' ? '⚠️ حرجة' : 'عادية' }}
+                  </span>
+                </td>
+                <td class="font-mono text-xs text-slate-600">{{ order.scheduledDate }}</td>
+                <td>
+                  <span class="status-dot-badge" [ngClass]="order.status">
+                    ● {{ order.status === 'in_progress' ? 'جاري الإصلاح' : 'بانتظار الفني' }}
+                  </span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- كارت مخطط المقارنة للأصول النشطة وتلك التي تحت الصيانة -->
+    <div class="widget-box">
+      <div class="widget-header-title">📈 كفاءة وجاهزية الأصول حسب المباني الفروع</div>
+      <div class="chart-wrapper-box" style="height: 250px;">
+        <p-chart type="bar" [data]="groupedBarData" [options]="groupedBarOptions" width="100%" height="100%"></p-chart>
+      </div>
+    </div>
+
+  </div>
+
+</div>

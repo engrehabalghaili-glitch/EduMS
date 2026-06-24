@@ -1,0 +1,144 @@
+<div class="dashboard-inner-container">
+
+  <!-- الهيدر العلوي لمركز الإشراف على المكتبة -->
+  <div class="dashboard-header">
+    <div>
+      <div class="dashboard-title">📚 منظومة الفهرسة والتحكم المركزي بمصادر التعلم والمكتبات</div>
+      <div class="dashboard-subtitle">مرحباً أ. عبد الرحمن • جدولة الاستعارات، تتبع المدد النظامية، وتحديث مراجع المناهج الأكاديمية ونسب القراءة</div>
+    </div>
+    <div class="header-actions">
+      <button pButton label="تسجيل حركة إعارة جديدة" icon="pi pi-book" class="p-button-amber p-button-sm font-cairo" (click)="onLibraryAction('new_borrow', '')"></button>
+      <button pButton label="طباعة الباركود وقوائم الجرد" icon="pi pi-qrcode" class="p-button-outlined p-button-secondary p-button-sm font-cairo" (click)="onLibraryAction('print_barcode', '')"></button>
+    </div>
+  </div>
+
+  <!-- 📊 شبكة كروت المراقبة والأداء اللحظي لحركة ارتياد المكتبة -->
+  <div class="stats-grid">
+    @for (stat of stats(); track stat.label) {
+      <div class="stat-card" [ngClass]="'card-' + stat.type">
+        <div class="stat-icon">
+          @if (stat.type === 'primary') { 📚 }
+          @else if (stat.type === 'info') { 📖 }
+          @else if (stat.type === 'danger') { ⚠️ }
+          @else if (stat.type === 'success') { ✅ }
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">{{ stat.label }}</div>
+          <div class="stat-value">{{ stat.value }}</div>
+          <div class="stat-desc">{{ stat.desc }}</div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- 🧱 الصف الأول: جدول جرد الفهرس المركزي للكتب + مخطط تصنيفات أوعية المعلومات -->
+  <div class="widgets-grid-main">
+
+    <!-- جدول جرد الكتب وتواجدها على الرفوف -->
+    <div class="widget-box">
+      <div class="widget-header-title">📦 فهرس مصادر التعلم المتاحة وحالة النسخ المتبقية على الرفوف</div>
+      <div class="table-container">
+        <table class="enterprise-table">
+          <thead>
+            <tr>
+              <th>كود المرجع</th>
+              <th>عنوان الكتاب الرئيسي</th>
+              <th>المؤلف</th>
+              <th>رقم تصنيف ISBN</th>
+              <th>التصنيف الفني</th>
+              <th>النسخ الكلية</th>
+              <th>المتاحة للطلبة</th>
+              <th>موقع الرف الفعلي</th>
+              <th>إجراءات</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (book of booksInventoryList(); track book.id) {
+              <tr>
+                <td class="font-mono text-amber-800"><strong>{{ book.id }}</strong></td>
+                <td><strong class="book-title-text">📕 {{ book.title }}</strong></td>
+                <td><span class="author-text-badge">👤 {{ book.author }}</span></td>
+                <td class="font-mono text-xs text-slate-500">{{ book.isbn }}</td>
+                <td><span class="category-tag">{{ book.category }}</span></td>
+                <td class="font-mono text-xs font-bold text-slate-700 text-center">{{ book.totalCopies }}</td>
+                <td class="font-mono text-xs text-center">
+                  <span class="available-copies-badge" [ngClass]="{'empty': book.availableCopies === 0}">
+                    {{ book.availableCopies }} نسخ
+                  </span>
+                </td>
+                <td><span class="location-badge">📍 {{ book.shelfLocation }}</span></td>
+                <td>
+                  <button pButton label="تعديل رف" class="p-button-text p-button-sm p-0 font-cairo text-amber-700 font-bold" (click)="onLibraryAction('edit_shelf', book.id)"></button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- كارت مخطط الدونات لتوزيع أوعية المعرفة -->
+    <div class="widget-box">
+      <div class="widget-header-title">📊 تحليل ومكونات الفهرس المركزي</div>
+      <div class="chart-wrapper-box" style="height: 230px;">
+        <p-chart type="doughnut" [data]="resourceDoughnutData" [options]="resourceDoughnutOptions" width="100%" height="100%"></p-chart>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 🧱 الصف الثاني: جدول رقابة الإعارات المفتوحة والمتأخرة + مخطط مقارنة التدفق الأسبوعي -->
+  <div class="widgets-grid-secondary">
+
+    <!-- جدول الرقابة والتدقيق لعمليات استعارة الطلاب والمدرسين -->
+    <div class="widget-box">
+      <div class="widget-header-title">🛡️ سجل مراقبة الحركات النشطة وجداول مدد الإرجاع (Audit Loan Ledger)</div>
+      <div class="table-container">
+        <table class="enterprise-table">
+          <thead>
+            <tr>
+              <th>كود الحركة</th>
+              <th>اسم الكتاب المستعار</th>
+              <th>المستعير الحالي</th>
+              <th>الصفة</th>
+              <th>تاريخ الاستلام</th>
+              <th>موعد الإرجاع المقيد</th>
+              <th>الوضعية القانونية</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (log of recentBorrowingsList(); track log.id) {
+            <tr>
+              <td class="font-mono text-xs text-slate-400">{{ log.id }}</td>
+              <td class="book-title-column"><strong>{{ log.bookTitle }}</strong></td>
+              <td><strong>{{ log.borrowerName }}</strong></td>
+              <td>
+                <span class="role-badge" [ngClass]="log.borrowerRole">
+                  {{ log.borrowerRole === 'student' ? 'طالب' : 'عضو تدريس' }}
+                </span>
+              </td>
+              <td class="font-mono text-xs text-slate-500">{{ log.borrowDate }}</td>
+              <td class="font-mono text-xs font-bold" [ngClass]="{'text-rose-600': log.status === 'overdue'}">{{ log.dueDate }}</td>
+              <td>
+                <span class="borrowing-status-tag" [ngClass]="log.status">
+                  {{ log.status === 'active' ? 'نشطة ومتوفرة' : log.status === 'overdue' ? '🛑 متأخرة بالنظام' : '✓ أُرجع للمكتبة' }}
+                </span>
+              </td>
+            </tr>
+          }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- كارت مخطط الأعمدة المتداخلة لحركة التدفق الأسبوعي للكتب -->
+    <div class="widget-box">
+      <div class="widget-header-title">📈 مؤشرات حركة تداول الكتب المعرفية أسبوعياً</div>
+      <div class="chart-wrapper-box" style="height: 250px;">
+        <p-chart type="bar" [data]="borrowingChartData" [options]="borrowingChartOptions" width="100%" height="100%"></p-chart>
+      </div>
+    </div>
+
+  </div>
+
+</div>

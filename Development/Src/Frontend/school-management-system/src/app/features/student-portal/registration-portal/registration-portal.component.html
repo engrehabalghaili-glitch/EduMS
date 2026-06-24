@@ -1,0 +1,273 @@
+<div class="registration-wrapper" dir="rtl">
+  <p-toast position="top-left" key="tl"></p-toast>
+
+  <div class="reg-header">
+    <div class="header-content">
+      <div class="header-icon">
+        <i class="pi pi-pencil"></i>
+      </div>
+      <div class="header-text">
+        <h2>بوابة التسجيل الإلكترونية</h2>
+        <p>نظام وزارة التعليم - تسجيل الطلاب الجدد</p>
+      </div>
+    </div>
+    <div class="header-steps">
+      <div class="step-badge">
+        <i class="pi pi-check-circle"></i>
+        <span>الخطوة {{ activeStep }} من 3</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <p-stepper [(value)]="activeStep" [linear]="true">
+      <p-step-list>
+        <p-step [value]="1">بيانات ولي الأمر</p-step>
+        <p-step [value]="2">بيانات الطالب</p-step>
+        <p-step [value]="3">تأكيد الطلب</p-step>
+      </p-step-list>
+
+      <p-step-panels>
+        <!-- ===== الخطوة 1: بيانات ولي الأمر ===== -->
+        <p-step-panel [value]="1">
+          <ng-template pTemplate="content">
+            <div class="step-content" [formGroup]="parentForm">
+              <div class="step-title">
+                <i class="pi pi-user"></i>
+                <span>بيانات ولي الأمر الأساسية</span>
+              </div>
+              <div class="section-note">
+                <i class="pi pi-info-circle"></i>
+                <span>البيانات الموضحة أدناه إلزامية لتوثيق الطلب في نظام وزارة التعليم</span>
+              </div>
+              <div class="form-grid">
+                <div class="field-col">
+                  <p-floatLabel variant="on">
+                    <input pInputText id="parentFirstName" formControlName="firstName" class="input-field" />
+                    <label for="parentFirstName">اسم ولي الأمر الأول</label>
+                  </p-floatLabel>
+                </div>
+                <div class="field-col">
+                  <p-floatLabel variant="on">
+                    <input pInputText id="parentFatherName" formControlName="fatherName" class="input-field" />
+                    <label for="parentFatherName">اسم الأب</label>
+                  </p-floatLabel>
+                </div>
+                <div class="field-col">
+                  <p-floatLabel variant="on">
+                    <input pInputText id="parentGrandfatherName" formControlName="grandfatherName" class="input-field" />
+                    <label for="parentGrandfatherName">اسم الجد</label>
+                  </p-floatLabel>
+                </div>
+                <div class="field-col">
+                  <p-floatLabel variant="on">
+                    <input pInputText id="parentFamilyName" formControlName="familyName" class="input-field" />
+                    <label for="parentFamilyName">اسم العائلة</label>
+                  </p-floatLabel>
+                </div>
+                <div class="field-col">
+                  <p-floatLabel variant="on">
+                    <input pInputText id="parentIdNumber" formControlName="idNumber" class="input-field" />
+                    <label for="parentIdNumber">رقم الهوية / الإقامة</label>
+                  </p-floatLabel>
+                </div>
+                <div class="field-col">
+                  <p-floatLabel variant="on">
+                    <input pInputText id="parentPhone" formControlName="phone" class="input-field" placeholder="05xxxxxxxx" />
+                    <label for="parentPhone">رقم الجوال (مفعل لاستقبال رسائل التفعيل)</label>
+                  </p-floatLabel>
+                </div>
+                <div class="field-col">
+                  <p-floatLabel variant="on">
+                    <input pInputText id="parentEmail" formControlName="email" class="input-field" placeholder="example@email.com" />
+                    <label for="parentEmail">البريد الإلكتروني</label>
+                  </p-floatLabel>
+                </div>
+                <div class="field-col">
+                  <p-floatLabel variant="on">
+                    <p-select
+                      id="parentRelation"
+                      [options]="relations"
+                      formControlName="relation"
+                      optionLabel="label"
+                      optionValue="value"
+                      placeholder="اختر صلة القرابة"
+                      styleClass="select-field" />
+                    <label for="parentRelation">صلة القرابة بالطالب</label>
+                  </p-floatLabel>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </p-step-panel>
+
+        <!-- ===== الخطوة 2: بيانات الطالب ===== -->
+        <p-step-panel [value]="2">
+          <ng-template pTemplate="content">
+            <div class="step-content" [formGroup]="studentForm">
+              <div class="step-title">
+                <i class="pi pi-child"></i>
+                <span>بيانات الطالب الأولية</span>
+              </div>
+              <div class="section-note">
+                <i class="pi pi-info-circle"></i>
+                <span>سيتم التحقق من السن القانوني للقبول في الصف المطلوب بناءً على تاريخ الميلاد</span>
+              </div>
+              <div class="form-grid">
+                <div class="field-col">
+                  <p-floatLabel variant="on">
+                    <input pInputText id="studentFullName" formControlName="fullName" class="input-field" />
+                    <label for="studentFullName">الاسم الكامل للطالب (رباعي)</label>
+                  </p-floatLabel>
+                </div>
+                <div class="field-col">
+                  <p-floatLabel variant="on">
+                    <input pInputText id="studentBirthDate" formControlName="birthDate" class="input-field" placeholder="مثال: ١٤٣٥/٥/١٥" />
+                    <label for="studentBirthDate">تاريخ الميلاد</label>
+                  </p-floatLabel>
+                </div>
+                <div class="field-col">
+                  <p-floatLabel variant="on">
+                    <p-select
+                      id="studentGender"
+                      [options]="genders"
+                      formControlName="gender"
+                      optionLabel="label"
+                      optionValue="value"
+                      placeholder="اختر الجنس"
+                      styleClass="select-field" />
+                    <label for="studentGender">الجنس</label>
+                  </p-floatLabel>
+                </div>
+                <div class="field-col">
+                <p-floatLabel variant="on">
+                    @if (gradesLoading()) {
+                      <p-select
+                        [options]="[]"
+                        disabled
+                        styleClass="select-field"
+                        placeholder="جاري تحميل الصفوف..." />
+                    } @else {
+                      <p-select
+                        id="studentGrade"
+                        [options]="grades()"
+                        formControlName="grade"
+                        optionLabel="label"
+                        optionValue="value"
+                        placeholder="اختر الصف الدراسي"
+                        styleClass="select-field" />
+                    }
+                    <label for="studentGrade">الصف الدراسي المطلوب</label>
+                  </p-floatLabel>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </p-step-panel>
+
+        <!-- ===== الخطوة 3: تأكيد الطلب ===== -->
+        <p-step-panel [value]="3">
+          <ng-template pTemplate="content">
+            <div class="step-content">
+              <div class="step-title">
+                <i class="pi pi-check-circle"></i>
+                <span>مراجعة وتأكيد طلب التسجيل</span>
+              </div>
+              <div class="summary-card">
+                <div class="summary-section">
+                  <div class="summary-section-title">
+                    <i class="pi pi-user"></i>
+                    <span>بيانات ولي الأمر</span>
+                  </div>
+                  <div class="summary-body">
+                    <div class="summary-row">
+                      <span class="summary-label">الاسم الرباعي</span>
+                      <span class="summary-value">{{ parentForm.get('firstName')?.value || '—' }} {{ parentForm.get('fatherName')?.value || '—' }} {{ parentForm.get('grandfatherName')?.value || '—' }} {{ parentForm.get('familyName')?.value || '—' }}</span>
+                    </div>
+                    <div class="summary-row">
+                      <span class="summary-label">رقم الهوية</span>
+                      <span class="summary-value">{{ parentForm.get('idNumber')?.value || '—' }}</span>
+                    </div>
+                    <div class="summary-row">
+                      <span class="summary-label">رقم الجوال</span>
+                      <span class="summary-value">{{ parentForm.get('phone')?.value || '—' }}</span>
+                    </div>
+                    <div class="summary-row">
+                      <span class="summary-label">البريد الإلكتروني</span>
+                      <span class="summary-value">{{ parentForm.get('email')?.value || '—' }}</span>
+                    </div>
+                    <div class="summary-row">
+                      <span class="summary-label">صلة القرابة</span>
+                      <span class="summary-value">{{ getRelationLabel(parentForm.get('relation')?.value) }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="summary-divider"></div>
+                <div class="summary-section">
+                  <div class="summary-section-title">
+                    <i class="pi pi-child"></i>
+                    <span>بيانات الطالب</span>
+                  </div>
+                  <div class="summary-body">
+                    <div class="summary-row">
+                      <span class="summary-label">الاسم الكامل</span>
+                      <span class="summary-value">{{ studentForm.get('fullName')?.value || '—' }}</span>
+                    </div>
+                    <div class="summary-row">
+                      <span class="summary-label">تاريخ الميلاد</span>
+                      <span class="summary-value">{{ studentForm.get('birthDate')?.value || '—' }}</span>
+                    </div>
+                    <div class="summary-row">
+                      <span class="summary-label">الجنس</span>
+                      <span class="summary-value">{{ genders.find(g => g.value === studentForm.get('gender')?.value)?.label || '—' }}</span>
+                    </div>
+                    <div class="summary-row">
+                      <span class="summary-label">الصف المطلوب</span>
+                      <span class="summary-value">{{ grades().find(g => g.value === studentForm.get('grade')?.value)?.label || '—' }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </p-step-panel>
+      </p-step-panels>
+    </p-stepper>
+
+    <div class="nav-buttons">
+      <button
+        class="btn-nav btn-prev"
+        [class.hidden]="activeStep === 1"
+        (click)="onPrev()">
+        <i class="pi pi-chevron-right"></i>
+        <span>السابق</span>
+      </button>
+
+      <button class="btn-nav btn-cancel" [class.hidden]="activeStep !== 1" (click)="onCancel()">
+        <i class="pi pi-times"></i>
+        <span>إلغاء</span>
+      </button>
+
+      <div class="nav-spacer"></div>
+
+      @if (activeStep < 3) {
+        <button class="btn-nav btn-next" (click)="onNext()">
+          <span>التالي</span>
+          <i class="pi pi-chevron-left"></i>
+        </button>
+      }
+
+      @if (activeStep === 3) {
+        <button class="btn-nav btn-submit" (click)="onSubmit()" [disabled]="saving()">
+          @if (saving()) {
+            <i class="pi pi-spin pi-spinner"></i>
+          } @else {
+            <i class="pi pi-send"></i>
+          }
+          <span>إرسال طلب التسجيل</span>
+        </button>
+      }
+    </div>
+  </div>
+
+</div>

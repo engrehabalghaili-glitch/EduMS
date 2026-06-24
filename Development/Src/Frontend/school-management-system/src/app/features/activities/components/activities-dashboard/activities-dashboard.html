@@ -1,0 +1,95 @@
+<div class="dashboard-inner-container">
+
+  <!-- الهيدر العلوي لرائد النشاط -->
+  <div class="dashboard-header">
+    <div>
+      <div class="dashboard-title">🎨 إدارة الأندية الطلابية والفعاليات اللامنهجية</div>
+      <div class="dashboard-subtitle">أ. بدر • مشرف الأنشطة الطلابية ورائد النشاط المدرسي</div>
+    </div>
+    <div class="header-actions">
+      <button pButton label="إنشاء حدث / فعالية جديدة" icon="pi pi-plus-circle" class="p-button-pink p-button-sm font-cairo"></button>
+    </div>
+  </div>
+
+  <!-- 📊 شبكة كروت الأنشطة المحمية من الانهيار التنسيقي -->
+  <div class="stats-grid">
+    @for (stat of stats(); track stat.label) {
+      <div class="stat-card" [ngClass]="'card-' + stat.type">
+        <div class="stat-icon">
+          @if (stat.type === 'primary') { 🎨 }
+          @else if (stat.type === 'success') { 🏃‍♂️ }
+          @else if (stat.type === 'warning') { 📅 }
+          @else if (stat.type === 'info') { 💰 }
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">{{ stat.label }}</div>
+          <div class="stat-value">{{ stat.value }}</div>
+          <div class="stat-change" [ngClass]="stat.type === 'danger' ? 'down' : 'up'">{{ stat.change }}</div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- شبكة التوزيع الثنائية للوحة التحكم -->
+  <div class="widgets-grid-main">
+
+    <!-- قسم جدول جدول الفعاليات والمهرجانات المرصودة -->
+    <div class="widget-box">
+      <div class="widget-header-title">📥 جدول الفعاليات والمنافسات المدرسية المجدولة</div>
+      <div class="table-container">
+        <table class="enterprise-table">
+          <thead>
+            <tr>
+              <th>رمز الفعالية</th>
+              <th>عنوان الحدث / الفعالية</th>
+              <th>النادي المسؤول</th>
+              <th>تاريخ التنفيذ</th>
+              <th>الفئة المستهدفة</th>
+              <th>حالة التنفيذ</th>
+              <th>الإجراء</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (event of eventsList(); track event.id) {
+              <tr>
+                <td class="font-mono"><strong>{{ event.id }}</strong></td>
+                <td><strong>{{ event.title }}</strong></td>
+                <td><span class="club-badge">{{ event.clubName }}</span></td>
+                <td>📅 {{ event.eventDate }}</td>
+                <td>{{ event.targetAudience }}</td>
+                <td>
+                  <span class="status-badge" [ngClass]="event.status">
+                    {{ event.statusText }}
+                  </span>
+                </td>
+                <td>
+                  <button pButton label="إدارة المستندات"
+                          class="p-button-text p-button-sm p-0 font-cairo text-action-btn"
+                          (click)="onEventAction(event.id)">
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- قسم الإجراءات السريعة ومخطط الدوناتس الجانبي لتوزيع المسجلين بالأندية -->
+    <div class="widget-box">
+      <div class="widget-header-title">⚡ إجراءات سريعة لرائد النشاط</div>
+      <div class="quick-actions">
+        <a class="quick-action"><span class="qa-icon">🏆</span>رصد جوائز</a>
+        <a class="quick-action"><span class="qa-icon">📢</span>إعلان للطلاب</a>
+        <a class="quick-action"><span class="qa-icon">📑</span>طلب ميزانية</a>
+        <a class="quick-action"><span class="qa-icon">🤝</span>موافقة أولياء الأمور</a>
+      </div>
+
+      <div class="widget-header-title secondary">📊 نسبة الإقبال وتوزيع الطلاب على الأندية</div>
+      <div class="chart-wrapper-box" style="height: 230px;">
+        <p-chart type="doughnut" [data]="doughnutData" [options]="doughnutOptions" width="100%" height="100%"></p-chart>
+      </div>
+    </div>
+
+  </div>
+</div>

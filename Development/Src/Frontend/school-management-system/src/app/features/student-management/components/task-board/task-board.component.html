@@ -1,0 +1,129 @@
+@if (isEmployeeOrAdmin()) {
+@let tasks = (tasks$ | async) ?? [];
+<div class="board-wrapper">
+  <div class="page-head">
+    <h2>لوحة المهام</h2>
+    <span class="page-subtitle">إدارة ومتابعة المهام اليومية</span>
+  </div>
+
+  <div class="action-bar">
+    <div class="search-wrap">
+      <i class="pi pi-search search-icon"></i>
+      <input class="search-input" type="text" placeholder="ابحث عن مهمة..." (input)="onSearchInput($any($event.target).value)">
+    </div>
+    <button class="fab-btn" title="إضافة مهمة جديدة" (click)="openAddDialog()" [class.loading]="saving()" [disabled]="saving()">
+      @if (saving()) {
+        <i class="pi pi-spin pi-spinner"></i>
+      } @else {
+        <i class="pi pi-plus"></i>
+      }
+    </button>
+  </div>
+
+  <div class="board-columns">
+
+    <div class="board-col" (dragover)="onDragOver($event)" (drop)="onDrop('in-progress')">
+      <div class="col-head head-in-progress">
+        <i class="pi pi-spinner"></i>
+        <span class="col-title">{{ getColumnTitle('in-progress') }}</span>
+        <span class="col-count">{{ getColumnCount(tasks, 'in-progress') }}</span>
+      </div>
+      <div class="col-body">
+        @for (task of getTasksByStatus(tasks, 'in-progress'); track task.id) {
+          <div class="task-card" draggable="true" (dragstart)="onDragStart(task)" (dragend)="onDragEnd()">
+            <div class="task-top">
+              <span class="task-title">{{task.title}}</span>
+            </div>
+            <div class="task-meta">
+              <span class="task-priority" [ngClass]="getPriorityClass(task.priority)">{{ getPriorityLabel(task.priority) }}</span>
+              <span class="task-date"><i class="pi pi-calendar"></i>{{task.dueDate}}</span>
+            </div>
+            @if (task.assignee) {
+              <div class="task-footer">
+                <span class="task-assignee"><i class="pi pi-user"></i>{{task.assignee}}</span>
+              </div>
+            }
+          </div>
+        }
+        @empty {
+          <div class="col-empty">
+            <i class="pi pi-inbox"></i>
+            <span>لا توجد مهام حالياً</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="board-col" (dragover)="onDragOver($event)" (drop)="onDrop('on-hold')">
+      <div class="col-head head-on-hold">
+        <i class="pi pi-pause-circle"></i>
+        <span class="col-title">{{ getColumnTitle('on-hold') }}</span>
+        <span class="col-count">{{ getColumnCount(tasks, 'on-hold') }}</span>
+      </div>
+      <div class="col-body">
+        @for (task of getTasksByStatus(tasks, 'on-hold'); track task.id) {
+          <div class="task-card" draggable="true" (dragstart)="onDragStart(task)" (dragend)="onDragEnd()">
+            <div class="task-top">
+              <span class="task-title">{{task.title}}</span>
+            </div>
+            <div class="task-meta">
+              <span class="task-priority" [ngClass]="getPriorityClass(task.priority)">{{ getPriorityLabel(task.priority) }}</span>
+              <span class="task-date"><i class="pi pi-calendar"></i>{{task.dueDate}}</span>
+            </div>
+            @if (task.assignee) {
+              <div class="task-footer">
+                <span class="task-assignee"><i class="pi pi-user"></i>{{task.assignee}}</span>
+              </div>
+            }
+          </div>
+        }
+        @empty {
+          <div class="col-empty">
+            <i class="pi pi-inbox"></i>
+            <span>لا توجد مهام حالياً</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="board-col" (dragover)="onDragOver($event)" (drop)="onDrop('completed')">
+      <div class="col-head head-completed">
+        <i class="pi pi-check-circle"></i>
+        <span class="col-title">{{ getColumnTitle('completed') }}</span>
+        <span class="col-count">{{ getColumnCount(tasks, 'completed') }}</span>
+      </div>
+      <div class="col-body">
+        @for (task of getTasksByStatus(tasks, 'completed'); track task.id) {
+          <div class="task-card completed" draggable="true" (dragstart)="onDragStart(task)" (dragend)="onDragEnd()">
+            <div class="task-top">
+              <span class="task-title">{{task.title}}</span>
+            </div>
+            <div class="task-meta">
+              <span class="task-priority" [ngClass]="getPriorityClass(task.priority)">{{ getPriorityLabel(task.priority) }}</span>
+              <span class="task-date"><i class="pi pi-calendar"></i>{{task.dueDate}}</span>
+            </div>
+            @if (task.assignee) {
+              <div class="task-footer">
+                <span class="task-assignee"><i class="pi pi-user"></i>{{task.assignee}}</span>
+              </div>
+            }
+          </div>
+        }
+        @empty {
+          <div class="col-empty">
+            <i class="pi pi-inbox"></i>
+            <span>لا توجد مهام حالياً</span>
+          </div>
+        }
+      </div>
+    </div>
+
+  </div>
+</div>
+} @else {
+<div class="not-allowed">
+  <i class="pi pi-lock"></i>
+  <h3>لوحة المهام غير متاحة</h3>
+  <p>هذه الصفحة مخصصة للموظفين والإداريين فقط</p>
+</div>
+}

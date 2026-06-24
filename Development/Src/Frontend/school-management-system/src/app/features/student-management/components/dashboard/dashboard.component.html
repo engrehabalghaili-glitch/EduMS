@@ -1,0 +1,105 @@
+<div class="dashboard-wrapper">
+  <div class="page-head">
+    <h2>لوحة متابعة الأداء المدرسي</h2>
+    <span class="page-subtitle">الإدارة والإشراف على عمليات المدرسة</span>
+  </div>
+
+  @if (loading()) {
+    <div class="loading-state"><i class="pi pi-spin pi-spinner"></i><span>جاري تحميل البيانات...</span></div>
+  }
+
+  @if (!loading() && kpiCards().length === 0) {
+    <div class="empty-state"><i class="pi pi-inbox"></i><span>لا توجد بيانات حالياً</span></div>
+  }
+
+  @if (kpiCards().length > 0) {
+  <div class="kpi-grid">
+    @for (card of kpiCards(); track card.label) {
+      <div class="kpi-card">
+        <div class="kpi-icon" [style.background]="card.gradient">
+          <i [class]="card.icon"></i>
+        </div>
+        <div class="kpi-content">
+          <span class="kpi-label">{{card.label}}</span>
+          <span class="kpi-value">{{card.value}}</span>
+          <span class="kpi-change" [class.trend-up]="card.trend === 'up'" [class.trend-down]="card.trend === 'down'">
+            <i [class]="card.trend === 'up' ? 'pi pi-arrow-up' : 'pi pi-arrow-down'"></i>
+            {{card.change}}
+          </span>
+        </div>
+      </div>
+    }
+  </div>
+
+  @if (charts(); as ch) {
+  <div class="charts-row">
+    <div class="chart-box">
+      <div class="box-head"><i class="pi pi-chart-pie"></i><span>توزيع الطلاب حسب المرحلة الدراسية</span></div>
+      <div class="chart-body">
+        <p-chart type="pie" [data]="ch.pieData" [options]="ch.pieOptions" width="100%" height="260px"></p-chart>
+      </div>
+    </div>
+    <div class="chart-box">
+      <div class="box-head"><i class="pi pi-chart-line"></i><span>الملخص المالي الشهري</span></div>
+      <div class="chart-body">
+        <p-chart type="line" [data]="ch.lineData" [options]="ch.lineOptions" width="100%" height="260px"></p-chart>
+      </div>
+    </div>
+  </div>
+  }
+
+  <div class="bottom-row">
+    <div class="alerts-box">
+      <div class="box-head"><i class="pi pi-exclamation-triangle"></i><span>تنبيهات السعة</span><span class="badge-alert">{{capacityAlerts().length}}</span></div>
+      <div class="alerts-list">
+        @for (alert of capacityAlerts(); track alert.className) {
+          <div class="alert-item" [class.alert-danger]="alert.percentage >= 100">
+            <div class="alert-status" [style.background]="alert.percentage >= 100 ? '#ef4444' : '#f59e0b'"></div>
+            <div class="alert-info">
+              <span class="alert-class">{{alert.className}}</span>
+              <span class="alert-grade">{{alert.grade}}</span>
+            </div>
+            <div class="alert-bar-wrap">
+              <div class="alert-bar">
+                <div class="alert-fill" [style.width.%]="alert.percentage" [style.background]="alert.percentage >= 100 ? 'linear-gradient(90deg,#ef4444,#dc2626)' : 'linear-gradient(90deg,#f59e0b,#d97706)'"></div>
+              </div>
+              <span class="alert-pct" [style.color]="alert.percentage >= 100 ? '#ef4444' : '#d97706'">{{alert.percentage}}%</span>
+            </div>
+            <span class="alert-detail">{{alert.enrolled}} / {{alert.capacity}}</span>
+          </div>
+        }
+        @empty {
+          <div class="col-empty"><i class="pi pi-inbox"></i><span>لا توجد تنبيهات</span></div>
+        }
+      </div>
+    </div>
+
+    <div class="activity-box">
+      <div class="box-head"><i class="pi pi-history"></i><span>النشاط الأخير</span></div>
+      <div class="activity-list">
+        @for (act of recentActivities(); track $index) {
+          <div class="activity-item">
+            <div class="activity-dot" [ngClass]="getStatusClass(act.status)">
+              <i [class]="getStatusIcon(act.status)"></i>
+            </div>
+            <div class="activity-content">
+              <div class="activity-top">
+                <span class="activity-action">{{act.action}}</span>
+                <span class="activity-time">{{act.timestamp}}</span>
+              </div>
+              <div class="activity-meta">
+                <span class="activity-user"><i class="pi pi-user"></i>{{act.user}}</span>
+                <span class="activity-sep"></span>
+                <span class="activity-target"><i class="pi pi-tag"></i>{{act.target}}</span>
+              </div>
+            </div>
+          </div>
+        }
+        @empty {
+          <div class="col-empty"><i class="pi pi-inbox"></i><span>لا توجد نشاطات حديثة</span></div>
+        }
+      </div>
+    </div>
+  </div>
+  }
+</div>

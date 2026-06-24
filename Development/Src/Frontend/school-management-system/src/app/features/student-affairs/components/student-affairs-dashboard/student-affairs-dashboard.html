@@ -1,0 +1,140 @@
+<div class="dashboard-inner-container">
+
+  <!-- الهيدر العلوي لشؤون الطلاب -->
+  <div class="dashboard-header">
+    <div>
+      <div class="dashboard-title">🗂️ منظومة شؤون الطلاب والقبول والتسجيل المركزية</div>
+      <div class="dashboard-subtitle">مرحباً أ. أحمد الدوسري • مراجعة المستندات الثبوتية، طلبات النقل، وإصدار الإفادات الأكاديمية</div>
+    </div>
+    <div class="header-actions">
+      <button pButton label="استمارة قبول ذكية جديدة" icon="pi pi-user-plus" class="p-button-orange p-button-sm font-cairo" (click)="onActionTriggered('new_admission', '')"></button>
+      <button pButton label="تصدير مسيرات الطلاب (نور)" icon="pi pi-file-excel" class="p-button-outlined p-button-secondary p-button-sm font-cairo" (click)="onActionTriggered('export_noor', '')"></button>
+    </div>
+  </div>
+
+  <!-- 📊 شبكة كروت الأداء والمراقبة اليومية لمعاملات الطلاب -->
+  <div class="stats-grid">
+    @for (stat of stats(); track stat.label) {
+      <div class="stat-card" [ngClass]="'card-' + stat.type">
+        <div class="stat-icon">
+          @if (stat.type === 'primary') { 🏫 }
+          @else if (stat.type === 'warning') { 📥 }
+          @else if (stat.type === 'info') { 🔄 }
+          @else if (stat.type === 'success') { 📄 }
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">{{ stat.label }}</div>
+          <div class="stat-value">{{ stat.value }}</div>
+          <div class="stat-desc">{{ stat.desc }}</div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- 🧱 الصف الأول: جدول طلبات القبول والتسجيل الجارية + مخطط توزيع الحالات الأكاديمية للدفعات -->
+  <div class="widgets-grid-main">
+
+    <!-- جدول طلبات القبول والتسجيل الجارية -->
+    <div class="widget-box">
+      <div class="widget-header-title">📥 طلبات التسجيل والقبول الجديدة بانتظار الفحص والمطابقة الحركية</div>
+      <div class="table-container">
+        <table class="enterprise-table">
+          <thead>
+            <tr>
+              <th>رقم الطلب</th>
+              <th>اسم الطالب المتقدم</th>
+              <th>المرحلة والصف الدراسي</th>
+              <th>تاريخ التقديم</th>
+              <th>حالة المرفقات والثبوتيات</th>
+              <th>حالة الطلب العام</th>
+              <th>التحكم والمراجعة</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (req of admissionRequests(); track req.id) {
+              <tr>
+                <td class="font-mono text-orange-700"><strong>{{ req.id }}</strong></td>
+                <td><strong>{{ req.studentName }}</strong></td>
+                <td><span class="grade-badge">{{ req.gradeLevel }}</span></td>
+                <td class="font-mono text-xs text-slate-500">{{ req.submissionDate }}</td>
+                <td>
+                  <span class="doc-badge" [ngClass]="req.documentStatus">{{ req.documentStatusText }}</span>
+                </td>
+                <td>
+                  <span class="status-badge" [ngClass]="req.status">
+                    {{ req.status === 'under_review' ? 'تحت التدقيق الفني' : req.status === 'approved' ? 'مقبول مبدئياً' : 'مرفوض' }}
+                  </span>
+                </td>
+                <td>
+                  <button pButton label="مطابقة الوثائق" class="p-button-text p-button-sm p-0 font-cairo text-orange-600 font-bold" (click)="onActionTriggered('verify_docs', req.id)"></button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- كارت الدونات لتحليل الحالات الأكاديمية للطلاب -->
+    <div class="widget-box">
+      <div class="widget-header-title">📊 ديموغرافية وحالات الطلاب المقيدين</div>
+      <div class="chart-wrapper-box" style="height: 230px;">
+        <p-chart type="doughnut" [data]="doughnutData" [options]="doughnutOptions" width="100%" height="100%"></p-chart>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 🧱 الصف الثاني: كشف حركات النقل والمغادرة + مراقبة اكتمال المستندات لكل صف -->
+  <div class="widgets-grid-secondary">
+
+    <!-- جدول حركات نقل الطلاب بين الفروع والمدارس الخارجي -->
+    <div class="widget-box">
+      <div class="widget-header-title">🔄 طلبات الانتقال الخارجي والداخلي (تكامل نظام نور الوزاري)</div>
+      <div class="table-container">
+        <table class="enterprise-table">
+          <thead>
+            <tr>
+              <th>كود المعاملة</th>
+              <th>اسم الطالب</th>
+              <th>نوع الحركة</th>
+              <th>المدرسة المرتبطة</th>
+              <th>المرحلة الحالية للطلب</th>
+              <th>الحالة التنفيذية</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (trf of studentTransfers(); track trf.id) {
+              <tr>
+                <td class="font-mono text-xs text-slate-500">{{ trf.id }}</td>
+                <td><strong>{{ trf.studentName }}</strong></td>
+                <td>
+                  <span class="direction-tag" [ngClass]="trf.direction">
+                    {{ trf.direction === 'incoming' ? '📥 تحويل إلينا' : '📤 تحويل لخارج المنشأة' }}
+                  </span>
+                </td>
+                <td><span class="school-name-text">🏫 {{ trf.schoolName }}</span></td>
+                <td><span class="step-text-column">{{ trf.currentStep }}</span></td>
+                <td>
+                  <span class="status-dot-badge" [ngClass]="trf.status">
+                    ● {{ trf.status === 'pending' ? 'جاري التنفيذ' : 'مكتمل ومعتمد' }}
+                  </span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- كارت مخطط الأعمدة المتراكمة لمتابعة ملفات القبول الناقصة للطلاب المجدولين -->
+    <div class="widget-box">
+      <div class="widget-header-title">📈 جاهزية ملفات القبول حسب الصفوف</div>
+      <div class="chart-wrapper-box" style="height: 250px;">
+        <p-chart type="bar" [data]="stackedBarData" [options]="stackedBarOptions" width="100%" height="100%"></p-chart>
+      </div>
+    </div>
+
+  </div>
+
+</div>

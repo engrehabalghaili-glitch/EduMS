@@ -1,0 +1,179 @@
+<div class="details-wrapper">
+  <p-confirmDialog />
+  <p-toast position="top-right" />
+
+  @if (app(); as a) {
+    <div class="top-bar">
+      <button pButton icon="pi pi-arrow-right" label="عودة إلى القائمة" class="p-button-sm p-button-outlined back-btn" (click)="goBack()"></button>
+    </div>
+
+    <div class="hero-card">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <div class="hero-top">
+          <div class="hero-badges">
+            <span class="hero-badge app-id">{{a.id}}</span>
+            <span class="hero-badge date-badge"><i class="pi pi-calendar"></i>{{a.submittedAt}}</span>
+          </div>
+          <p-tag [severity]="getStatusSeverity(a.status)" [value]="a.statusText" class="hero-status" />
+        </div>
+        <div class="hero-main">
+          <div class="hero-avatar">{{a.studentName.charAt(0)}}</div>
+          <div class="hero-info">
+            <h1 class="hero-name">{{a.studentName}}</h1>
+            <div class="hero-meta">
+              <span><i class="pi pi-book"></i>{{a.grade}}</span>
+              <span><i class="pi pi-id-card"></i>{{a.studentId}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-bar">
+      @if (a.status === 'pending') {
+        <button pButton icon="pi pi-check" label="قبول الطلب" class="p-button-rounded accept-btn" (click)="confirmAccept()"></button>
+        <button pButton icon="pi pi-times" label="رفض الطلب" class="p-button-rounded p-button-danger reject-btn" (click)="confirmReject()"></button>
+      } @else {
+        <button pButton icon="pi pi-refresh" label="تعديل القرار" class="p-button-rounded p-button-outlined revise-btn" (click)="confirmRevise()"></button>
+      }
+    </div>
+
+    <p-tabs [(value)]="activeTab" class="custom-tabs">
+      <p-tablist>
+        <p-tab value="0"><i class="pi pi-user"></i><span>المعلومات الأساسية</span></p-tab>
+        <p-tab value="1"><i class="pi pi-users"></i><span>بيانات ولي الأمر</span></p-tab>
+        <p-tab value="2"><i class="pi pi-file"></i><span>المستندات ({{a.documents.length}})</span></p-tab>
+      </p-tablist>
+
+      <p-tabpanels>
+        <p-tabpanel value="0">
+          <div class="tab-content">
+            <div class="section-card personal-section">
+              <div class="section-head"><i class="pi pi-id-card"></i><span>البيانات الشخصية</span></div>
+              <div class="info-grid cols-3">
+                <div class="info-item"><span class="info-label">الاسم الرباعي</span><span class="info-value">{{a.fullName}}</span></div>
+                <div class="info-item"><span class="info-label">رقم الهوية</span><span class="info-value">{{a.studentId}}</span></div>
+                <div class="info-item"><span class="info-label">تاريخ الميلاد</span><span class="info-value">{{a.birthDate}}</span></div>
+                <div class="info-item"><span class="info-label">الجنس</span><span class="info-value">{{a.gender}}</span></div>
+                <div class="info-item"><span class="info-label">الجنسية</span><span class="info-value">{{a.nationality}}</span></div>
+                <div class="info-item"><span class="info-label">فصيلة الدم</span><span class="info-value">{{a.bloodType}}</span></div>
+              </div>
+            </div>
+            <div class="section-card contact-section">
+              <div class="section-head"><i class="pi pi-phone"></i><span>بيانات التواصل</span></div>
+              <div class="info-grid cols-3">
+                <div class="info-item"><span class="info-label">العنوان</span><span class="info-value">{{a.address}}</span></div>
+                <div class="info-item"><span class="info-label">رقم الهاتف</span><span class="info-value">{{a.phone}}</span></div>
+                <div class="info-item"><span class="info-label">البريد الإلكتروني</span><span class="info-value">{{a.email}}</span></div>
+              </div>
+            </div>
+            <div class="section-card academic-section">
+              <div class="section-head"><i class="pi pi-graduation-cap"></i><span>البيانات الأكاديمية</span></div>
+              <div class="info-grid cols-3">
+                <div class="info-item"><span class="info-label">الصف الدراسي</span><span class="info-value">{{a.grade}}</span></div>
+                <div class="info-item"><span class="info-label">القسم / التخصص</span><span class="info-value">{{a.department}}</span></div>
+                <div class="info-item"><span class="info-label">السنة الدراسية</span><span class="info-value">{{a.academicYear}}</span></div>
+              </div>
+            </div>
+            <div class="section-card health-section">
+              <div class="section-head"><i class="pi pi-heart"></i><span>البيانات الصحية</span></div>
+              <div class="info-grid cols-3">
+                <div class="info-item"><span class="info-label">الحساسية</span><span class="info-value">{{a.allergies}}</span></div>
+                <div class="info-item"><span class="info-label">الأمراض المزمنة</span><span class="info-value">{{a.chronicDiseases}}</span></div>
+              </div>
+            </div>
+          </div>
+        </p-tabpanel>
+
+        <p-tabpanel value="1">
+          <div class="tab-content">
+            <div class="section-card guardian-card">
+              <div class="section-head"><i class="pi pi-user"></i><span>معلومات ولي الأمر</span></div>
+              <div class="guardian-profile">
+                <div class="guardian-avatar">{{a.parentName.charAt(0)}}</div>
+                <div class="guardian-details">
+                  <div class="info-grid cols-2">
+                    <div class="info-item"><span class="info-label">الاسم الكامل</span><span class="info-value">{{a.parentName}}</span></div>
+                    <div class="info-item"><span class="info-label">صلة القرابة</span><span class="info-value">{{a.parentRelation}}</span></div>
+                    <div class="info-item"><span class="info-label">رقم الجوال</span><span class="info-value">{{a.parentPhone}}</span></div>
+                    <div class="info-item"><span class="info-label">البريد الإلكتروني</span><span class="info-value">{{a.parentEmail}}</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </p-tabpanel>
+
+        <p-tabpanel value="2">
+          <div class="tab-content">
+            <div class="section-card docs-card">
+              <div class="section-head"><i class="pi pi-file"></i><span>المستندات المرفوعة</span></div>
+              <div class="docs-grid">
+                @for (doc of a.documents; track doc.name) {
+                  <div class="doc-card">
+                    <div class="doc-icon">
+                      <i class="pi pi-file-pdf"></i>
+                    </div>
+                    <div class="doc-info">
+                      <span class="doc-name">{{doc.name}}</span>
+                      <p-tag [severity]="getDocSeverity(doc.status)" [value]="doc.status" class="doc-status" />
+                    </div>
+                    @if (doc.file) {
+                      <button pButton icon="pi pi-download" class="p-button-sm p-button-rounded p-button-text doc-dl" pTooltip="تحميل الملف"></button>
+                    } @else {
+                      <button pButton icon="pi pi-eye-slash" class="p-button-sm p-button-rounded p-button-text doc-na" disabled></button>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        </p-tabpanel>
+      </p-tabpanels>
+    </p-tabs>
+
+    <div class="section-card activity-log">
+      <div class="section-head"><i class="pi pi-history"></i><span>سجل العمليات</span></div>
+      @for (entry of activityLog(); track $index) {
+        <div class="log-entry">
+          <div class="log-dot"></div>
+          <div class="log-content">
+            <div class="log-header">
+              <span class="log-action">{{entry.action}}</span>
+              <span class="log-user">{{entry.user}}</span>
+              <span class="log-time">{{entry.date}}</span>
+            </div>
+            <div class="log-notes">{{entry.notes}}</div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="section-card system-msg">
+      <div class="section-head"><i class="pi pi-envelope"></i><span>رسائل النظام</span></div>
+      @for (msg of systemMessages(); track $index) {
+        <div class="msg-entry" [class.msg-success]="msg.type === 'success'" [class.msg-error]="msg.type === 'error'" [class.msg-info]="msg.type === 'info'">
+          <div class="msg-icon">
+            @if (msg.type === 'success') { <i class="pi pi-check-circle"></i> }
+            @else if (msg.type === 'error') { <i class="pi pi-times-circle"></i> }
+            @else { <i class="pi pi-info-circle"></i> }
+          </div>
+          <div class="msg-content">
+            <span class="msg-text">{{msg.text}}</span>
+            <span class="msg-time">{{msg.timestamp}}</span>
+          </div>
+        </div>
+      }
+      @empty {
+        <div class="msg-empty">لا توجد رسائل نظام حتى الآن</div>
+      }
+    </div>
+  } @else {
+    <div class="not-found">
+      <i class="pi pi-exclamation-circle"></i>
+      <h3>الطلب غير موجود</h3>
+      <button pButton label="العودة إلى القائمة" (click)="goBack()"></button>
+    </div>
+  }
+</div>

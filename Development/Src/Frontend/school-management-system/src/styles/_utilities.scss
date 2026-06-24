@@ -1,0 +1,173 @@
+/* =========================================================================
+   EduMS Enterprise — Clean Utilities & Layout Shell (SCSS)
+   ========================================================================= */
+@use './variables' as *;
+@use './mixins' as *;
+
+// ============================================================
+// 1. كروت الإحصاءات الذكية المطورة (Stat Cards)
+// ============================================================
+.stat-card {
+  @include flex(row, flex-start, center, var(--space-4));
+  padding: var(--space-5);
+  background: var(--neutral-bg-card);
+  border-radius: var(--border-radius-large);
+  border: 1px solid var(--neutral-border);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-base);
+  @include shadow('xs');
+
+  // الشريط الجمالي الجانبي (يتوافق مع الـ RTL تلقائياً عبر استخدام الحواف المنطقية)
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    inset-inline-start: 0; // يبدأ من اليمين في العربي ومن اليسار في الإنجليزي تلقائياً
+    width: 4px;
+    height: 100%;
+    background: var(--primary-base);
+  }
+
+  @include hover-focus {
+    transform: translateY(-2px);
+    @include shadow('md');
+  }
+
+  // الحالات الخاصة بالكروت بناءً على الألوان الوظيفية للنظام
+  &.stat-gold::before    { background: #D4AF37; } // لون مخصص للتميز
+  &.stat-success::before { background: var(--success-color); }
+  &.stat-danger::before  { background: var(--danger-color); }
+  &.stat-warning::before { background: var(--warning-color); }
+
+  .stat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--border-radius-medium);
+    @include flex-center;
+    font-size: var(--font-size-2xl);
+    background: var(--primary-light);
+    color: var(--primary-base);
+  }
+
+  &.stat-gold .stat-icon    { background: #FFFBEB; color: #B45309; }
+  &.stat-success .stat-icon { background: #ECFDF5; color: var(--success-color); }
+  &.stat-danger .stat-icon  { background: #FEF2F2; color: var(--danger-color); }
+  &.stat-warning .stat-icon { background: #FFFBEB; color: var(--warning-color); }
+
+  .stat-content {
+    flex: 1;
+
+    .stat-label {
+      font-size: var(--font-size-xs);
+      color: var(--neutral-text-secondary);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--space-1);
+    }
+    .stat-value {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--neutral-text-primary);
+      line-height: var(--line-height-tight);
+    }
+    .stat-change {
+      font-size: var(--font-size-xs);
+      margin-top: var(--space-1);
+      @include flex(row, flex-start, center, var(--space-1));
+
+      &.up { color: var(--success-color); }
+      &.down { color: var(--danger-color); }
+    }
+  }
+}
+
+// ============================================================
+// 2. هيكل شاشات المصادقة والدخول (Auth Screens Layout)
+// ============================================================
+.auth-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  @include respond-to('desktop') { // عند النزول عن شاشات الـ Desktop (1024px)
+    grid-template-columns: 1fr;
+    .auth-aside { display: none; } // إخفاء الجانب الجمالي في الجوال والتابلت
+  }
+}
+
+.auth-aside {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, #172554 100%);
+  color: #ffffff;
+  @include flex(column, center, normal);
+  padding: var(--space-12);
+  position: relative;
+  overflow: hidden;
+
+  // الدوائر الخلفية الجمالية مع ضبط انزياحها منطقياً لدعم الـ RTL
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    border-radius: var(--border-radius-full);
+  }
+  &::before {
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%);
+    top: -80px;
+    inset-inline-end: -80px; // يتغير حسب الاتجاه تلقائياً
+  }
+  &::after {
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(circle, rgba(59,130,246,0.25) 0%, transparent 70%);
+    bottom: -50px;
+    inset-inline-start: -50px;
+  }
+
+  .auth-aside-content {
+    position: relative;
+    z-index: 2;
+
+    h1 { color: #ffffff; font-size: var(--font-size-3xl); margin-bottom: var(--space-2); }
+    p { color: var(--primary-light); line-height: var(--line-height-loose); margin-bottom: var(--space-8); max-width: 480px; }
+  }
+}
+
+.auth-main {
+  @include flex-center;
+  padding: var(--space-8);
+  background: var(--neutral-bg-card);
+
+  .auth-form-wrap {
+    width: 100%;
+    max-width: 420px;
+
+    h2 { font-size: var(--font-size-3xl); margin-bottom: var(--space-2); color: var(--neutral-text-primary); }
+    p.lead { color: var(--neutral-text-secondary); margin-bottom: var(--space-6); }
+  }
+}
+
+// ============================================================
+// 3. شبكة الـ Grid المساعدات السريعة المستجيبة (Responsive Grid)
+// ============================================================
+.grid { display: grid; gap: var(--space-4); }
+.grid-cols-1 { grid-template-columns: 1fr; }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+// إعادة صياغة استجابة الشبكة باستخدام الميكسينز والنقاط الموحدة للنظام لضمان الثبات
+@include respond-to('wide') { .grid-cols-4 { grid-template-columns: repeat(3, 1fr); } }
+@include respond-to('desktop') { .grid-cols-4, .grid-cols-3 { grid-template-columns: repeat(2, 1fr); } }
+@include respond-to('tablet') { .grid-cols-4, .grid-cols-3, .grid-cols-2 { grid-template-columns: 1fr; } }
+
+// ============================================================
+// 4. كلاسات المحاذاة العامة (Flex & Utility Helpers)
+// ============================================================
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.w-full { width: 100%; }
+.text-muted-custom { color: var(--neutral-text-secondary); }

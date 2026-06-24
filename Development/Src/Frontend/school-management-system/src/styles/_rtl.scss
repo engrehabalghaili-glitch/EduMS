@@ -1,0 +1,69 @@
+// src/styles/_rtl.scss
+@use './variables' as *;
+@use './mixins' as *;
+
+// ============================================================
+// 1. إعدادات الاتجاه الجذري للموقع
+// ============================================================
+html, body {
+  direction: rtl;
+  text-align: right;
+}
+
+// ============================================================
+// 2. كلاسات مساعدة ذكية تعتمد على التخطيط المنطقي (Logical Utilities)
+// ============================================================
+// هذه الكلاسات تعمل في الـ RTL والـ LTR تلقائياً دون الحاجة لكتابة شروط @include rtl
+
+// الهوامش التلقائية (Margin Auto)
+.ms-auto { margin-inline-start: auto !important; } // بديل ml-auto و mr-auto
+.me-auto { margin-inline-end: auto !important; }   // يعكس نفسه حسب اتجاه الصفحة
+
+// الفراغات الداخلية (Paddings) القابلة لإعادة الاستخدام باستخدام Spacing Scale الخاص بنا
+.ps-1 { padding-inline-start: var(--space-1) !important; } // البداية (يمين في العربي / يسار في الإنجليزي)
+.pe-1 { padding-inline-end: var(--space-1) !important; }   // النهاية (يسار في العربي / يمين في الإنجليزي)
+
+.ps-2 { padding-inline-start: var(--space-2) !important; }
+.pe-2 { padding-inline-end: var(--space-2) !important; }
+
+.ps-3 { padding-inline-start: var(--space-3) !important; }
+.pe-3 { padding-inline-end: var(--space-3) !important; }
+
+.ps-4 { padding-inline-start: var(--space-4) !important; }
+.pe-4 { padding-inline-end: var(--space-4) !important; }
+
+// ============================================================
+// 3. كلاسات ترتيب الأزرار في النماذج (Form Actions)
+// ============================================================
+.form-actions {
+  display: flex;
+  gap: var(--space-3);
+  // نضع الأزرار في نهاية السطر بصرياً (يسار الشاشة في العربي وهو الطبيعي لأزرار الحفظ)
+  justify-content: flex-end;
+
+  @include respond-to('mobile') {
+    flex-direction: column-reverse; // في الجوال، زر الإلغاء يصبح أسفل زر الحفظ لسهولة الضغط بالإبهام
+    width: 100%;
+
+    .p-button {
+      width: 100%; // تمدد الأزرار لتملأ الشاشة في الجوال
+    }
+  }
+}
+
+// ============================================================
+// 4. استثناءات وتجاوزات خاصة بالاتجاه (RTL Specific Tweaks)
+// ============================================================
+// هنا نضع فقط الأشياء التي لا تدعم الخصائص المنطقية أو تحتاج تعديل بصرى في المحيط العربي
+@include rtl {
+
+  // لضمان التفاف أيقونات الأسهم (العودة، التالي) في نظام المدرسة عند التصفح بالعربي
+  .flip-icon-rtl {
+    transform: scaleX(-1);
+  }
+
+  // تعديل مؤشر القياس أو الأرقام لتظهر من اليمين بوضوح
+  .p-input-number-input {
+    text-align: right;
+  }
+}

@@ -1,0 +1,147 @@
+<div class="dashboard-inner-container">
+
+  <!-- الهيدر الاستراتيجي لمدير المدرسة -->
+  <div class="dashboard-header">
+    <div>
+      <div class="dashboard-title">🏛️ مركز القيادة والتحكم الإشرافي والأكاديمي للمنشأة</div>
+      <div class="dashboard-subtitle">مرحباً د. عبد العزيز بن فهد آل سعود • اللوحة التنفيذية الموحدة لمراقبة المؤشرات الحيوية وضمان جودة المخرجات</div>
+    </div>
+    <div class="header-actions">
+      <button pButton label="اعتماد ميزانية / قرارات الدورة" icon="pi pi-check-square" class="p-button-indigo p-button-sm font-cairo" (click)="executePrincipalAction('bulk_approve', '')"></button>
+      <button pButton label="تصدير تقرير الأداء الربعي الشامل" icon="pi pi-file-pdf" class="p-button-outlined p-button-secondary p-button-sm font-cairo" (click)="executePrincipalAction('export_pdf', '')"></button>
+    </div>
+  </div>
+
+  <!-- 📊 شبكة كروت الأداء ومؤشرات الحوكمة الفورية للمدير -->
+  <div class="stats-grid">
+    @for (stat of stats(); track stat.label) {
+      <div class="stat-card" [ngClass]="'card-' + stat.type">
+        <div class="stat-icon">
+          @if (stat.type === 'success') { ✅ }
+          @else if (stat.type === 'primary') { 👨‍🏫 }
+          @else if (stat.type === 'info') { 📈 }
+          @else if (stat.type === 'warning') { ⚠️ }
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">{{ stat.label }}</div>
+          <div class="stat-value">{{ stat.value }}</div>
+          <div class="stat-desc">{{ stat.desc }}</div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- 🧱 الصف الأول: جدول الحالات الحرجة الطارئة + مخطط انضباط الحضور والغياب الأسبوعي -->
+  <div class="widgets-grid-main">
+
+    <!-- جدول البلاغات والحالات الطارئة بانتظار توقيع المدير -->
+    <div class="widget-box">
+      <div class="widget-header-title">🚨 بلاغات سلوكية وإدارية وأكاديمية نشطة تتطلب اتخاذ قرار فوري</div>
+      <div class="table-container">
+        <table class="enterprise-table">
+          <thead>
+            <tr>
+              <th>كود البلاغ</th>
+              <th>تصنيف الحالة</th>
+              <th>بيان وتفاصيل الحادثة أو الطلب المرفوع</th>
+              <th>مستوى الخطورة</th>
+              <th>الجهة المُبلغة</th>
+              <th>الوقت</th>
+              <th>الحالة والقرار</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (inc of criticalIncidentsList(); track inc.id) {
+              <tr>
+                <td class="font-mono text-indigo-700"><strong>{{ inc.id }}</strong></td>
+                <td>
+                  <span class="incident-type-tag" [ngClass]="inc.type">
+                    {{ inc.type === 'behavioral' ? 'سلوكي / انضباط' : inc.type === 'academic' ? 'أكاديمي' : 'إداري / صيانة' }}
+                  </span>
+                </td>
+                <td class="incident-title-column"><strong>{{ inc.title }}</strong></td>
+                <td>
+                  <span class="severity-badge" [ngClass]="inc.severity">
+                    {{ inc.severity === 'high' ? '⚠️ حرجة جداً' : inc.severity === 'medium' ? 'متوسطة' : 'عادية' }}
+                  </span>
+                </td>
+                <td><span class="reporter-text-badge">👤 {{ inc.reportedBy }}</span></td>
+                <td class="font-mono text-xs text-slate-500">{{ inc.date }}</td>
+                <td>
+                  @if (inc.status === 'pending_action') {
+                    <button pButton label="اتخاذ قرار" class="p-button-text p-button-sm p-0 font-cairo text-indigo-600 font-bold" (click)="executePrincipalAction('resolve_incident', inc.id)"></button>
+                  } @else {
+                    <span class="resolved-badge">✓ تم التسوية والاقفال</span>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- كارت منحنى الحضور والانضباط الأسبوعي -->
+    <div class="widget-box">
+      <div class="widget-header-title">📊 منحنى انضباط حضور الطلاب والمعلمين (الأسابيع الـ 6 الماضية)</div>
+      <div class="chart-wrapper-box" style="height: 250px;">
+        <p-chart type="line" [data]="attendanceLineData" [options]="attendanceLineOptions" width="100%" height="100%"></p-chart>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 🧱 الصف الثاني: جدول أداء الكادر التعليمي + مخطط مقارنة التحصيل الأكاديمي الأفقي للوفود -->
+  <div class="widgets-grid-secondary">
+
+    <!-- جدول مراقبة كفاءة والتزام الكادر التعليمي في الفصول -->
+    <div class="widget-box">
+      <div class="widget-header-title">👨‍🏫 مؤشرات أداء المعلمين والتقدم في تدريس المقررات الدراسية</div>
+      <div class="table-container">
+        <table class="enterprise-table">
+          <thead>
+            <tr>
+              <th>المعرف</th>
+              <th>اسم عضو هيئة التدريس</th>
+              <th>المادة التخصصية</th>
+              <th>نسبة حضور المعلم</th>
+              <th>التقدم في الخطة المنهجية</th>
+              <th>مؤشر التقييم العام (KPI)</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (tch of teachersPerformanceList(); track tch.id) {
+              <tr>
+                <td class="font-mono text-xs text-slate-400">{{ tch.id }}</td>
+                <td><strong>{{ tch.teacherName }}</strong></td>
+                <td><span class="subject-tag">{{ tch.subject }}</span></td>
+                <td class="font-mono text-xs font-bold text-emerald-600">{{ tch.attendanceRate }}%</td>
+                <td>
+                  <div class="progress-bar-container">
+                    <div class="progress-bar-fill" [style.width.%]="tch.syllabusProgress"></div>
+                    <span class="progress-text">{{ tch.syllabusProgress }}%</span>
+                  </div>
+                </td>
+                <td>
+                  <span class="score-badge" [ngClass]="{'score-high': tch.evaluationScore >= 90, 'score-mid': tch.evaluationScore < 90}">
+                    ⭐ {{ tch.evaluationScore }} / 100
+                  </span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- كارت مخطط الأعمدة الأفقي لتحليل نسب التحصيل المعرفي -->
+    <div class="widget-box">
+      <div class="widget-header-title">📈 معدل التحصيل العلمي التراكمي حسب الصفوف</div>
+      <div class="chart-wrapper-box" style="height: 230px;">
+        <p-chart type="bar" [data]="academicBarData" [options]="academicBarOptions" width="100%" height="100%"></p-chart>
+      </div>
+    </div>
+
+  </div>
+
+</div>

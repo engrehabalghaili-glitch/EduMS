@@ -1,0 +1,223 @@
+<div class="manager-wrapper">
+  <div class="manager-card glass-card">
+    <div class="manager-header">
+      <div class="header-title">
+        <i class="pi pi-clipboard"></i>
+        <span>مركز التحكم في طلبات التسجيل</span>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-btn" [class.active]="selectedStatus==='all'" (click)="setFilter('all')">
+        <i class="pi pi-list"></i>
+        <span>الكل</span>
+        <span class="badge">{{statusCounts.all}}</span>
+      </button>
+      <button class="filter-btn pending-btn" [class.active]="selectedStatus==='pending'" (click)="setFilter('pending')">
+        <i class="pi pi-clock"></i>
+        <span>بانتظار الاعتماد</span>
+        <span class="badge">{{statusCounts.pending}}</span>
+      </button>
+      <button class="filter-btn accepted-btn" [class.active]="selectedStatus==='accepted'" (click)="setFilter('accepted')">
+        <i class="pi pi-check-circle"></i>
+        <span>مقبول</span>
+        <span class="badge">{{statusCounts.accepted}}</span>
+      </button>
+      <button class="filter-btn rejected-btn" [class.active]="selectedStatus==='rejected'" (click)="setFilter('rejected')">
+        <i class="pi pi-times-circle"></i>
+        <span>مرفوض</span>
+        <span class="badge">{{statusCounts.rejected}}</span>
+      </button>
+    </div>
+
+    <p-splitter [panelSizes]="[40, 60]" styleClass="custom-splitter" layout="horizontal">
+      <ng-template pTemplate>
+        <div class="table-panel">
+          <p-table [value]="filteredApplications"
+                   scrollHeight="400px"
+                   [scrollable]="true"
+                   selectionMode="single"
+                   [(selection)]="selectedRequest"
+                   (onRowSelect)="onRowSelect($event)"
+                   dataKey="id"
+                   styleClass="p-datatable-sm manager-table"
+                   [rowHover]="true">
+            <ng-template pTemplate="header">
+              <tr>
+                <th style="width:30%">رقم الطلب</th>
+                <th style="width:40%">اسم الطالب</th>
+                <th style="width:30%">الحالة</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-app>
+              <tr [pSelectableRow]="app">
+                <td><span class="req-num">{{app.requestNumber}}</span></td>
+                <td><span class="student-name">{{app.studentName}}</span></td>
+                <td>
+                  <p-tag [severity]="getStatusSeverity(app.status)" [value]="getStatusLabel(app.status)" />
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="3" class="empty-msg">لا توجد طلبات في هذه الفئة</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate>
+        <div class="detail-panel">
+          @if (selectedRequest) {
+            <p-card styleClass="detail-card glass-card">
+              <ng-template pTemplate="header">
+                <div class="detail-header">
+                  <div class="detail-header-top">
+                    <span class="detail-title">تفاصيل الطلب</span>
+                    <p-tag [severity]="getStatusSeverity(selectedRequest.status)" [value]="getStatusLabel(selectedRequest.status)" />
+                  </div>
+                  <span class="detail-subtitle">{{selectedRequest.requestNumber}} - {{selectedRequest.studentName}}</span>
+                </div>
+              </ng-template>
+              <div class="detail-body">
+                <div class="detail-section">
+                  <div class="section-title"><i class="pi pi-user"></i>بيانات الطالب الأساسية</div>
+                  <div class="detail-grid">
+                    <div class="detail-item">
+                      <span class="detail-label">الاسم الرباعي</span>
+                      <span class="detail-value">{{selectedRequest.studentName}}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">رقم الهوية</span>
+                      <span class="detail-value">{{selectedRequest.studentId}}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">تاريخ الميلاد</span>
+                      <span class="detail-value">{{selectedRequest.birthDate}}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">الجنس</span>
+                      <span class="detail-value">{{selectedRequest.gender}}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">الجنسية</span>
+                      <span class="detail-value">{{selectedRequest.nationality}}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="detail-section">
+                  <div class="section-title"><i class="pi pi-phone"></i>بيانات التواصل</div>
+                  <div class="detail-grid">
+                    <div class="detail-item">
+                      <span class="detail-label">العنوان</span>
+                      <span class="detail-value">{{selectedRequest.address}}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">رقم الهاتف</span>
+                      <span class="detail-value">{{selectedRequest.phone}}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">البريد الإلكتروني</span>
+                      <span class="detail-value">{{selectedRequest.email}}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="detail-section">
+                  <div class="section-title"><i class="pi pi-book"></i>البيانات الأكاديمية</div>
+                  <div class="detail-grid">
+                    <div class="detail-item">
+                      <span class="detail-label">الصف</span>
+                      <span class="detail-value">{{selectedRequest.grade}}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">القسم</span>
+                      <span class="detail-value">{{selectedRequest.department}}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">السنة</span>
+                      <span class="detail-value">{{selectedRequest.academicYear}}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="detail-section">
+                  <div class="section-title"><i class="pi pi-heart"></i>البيانات الصحية</div>
+                  <div class="detail-grid">
+                    <div class="detail-item">
+                      <span class="detail-label">فصيلة الدم</span>
+                      <span class="detail-value">{{selectedRequest.bloodType}}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">الحساسية</span>
+                      <span class="detail-value">{{selectedRequest.allergies}}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">الأمراض المزمنة</span>
+                      <span class="detail-value">{{selectedRequest.chronicDiseases}}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="detail-section">
+                  <div class="section-title"><i class="pi pi-file"></i>المستندات المرفوعة</div>
+                  <div class="docs-list">
+                    @for (doc of selectedRequest.documents; track doc.name) {
+                      <div class="doc-row">
+                        <span class="doc-name">{{doc.name}}</span>
+                        <p-tag [severity]="getDocSeverity(doc.status)" [value]="doc.status" />
+                      </div>
+                    }
+                  </div>
+                </div>
+
+                <div class="detail-section">
+                  <div class="section-title"><i class="pi pi-user"></i>بيانات ولي الأمر</div>
+                  <div class="detail-grid">
+                    <div class="detail-item">
+                      <span class="detail-label">الاسم</span>
+                      <span class="detail-value">{{selectedRequest.parentName}}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">رقم الجوال</span>
+                      <span class="detail-value">{{selectedRequest.parentPhone}}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">البريد</span>
+                      <span class="detail-value">{{selectedRequest.parentEmail}}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="detail-section timestamp">
+                  <i class="pi pi-calendar"></i>
+                  <span>تاريخ التقديم: {{selectedRequest.submittedAt}}</span>
+                </div>
+              </div>
+
+              @if (selectedRequest.status === 'pending') {
+                <ng-template pTemplate="footer">
+                  <div class="detail-actions">
+                    <button class="action-btn accept-btn" (click)="acceptRequest(selectedRequest)">
+                      <i class="pi pi-check"></i> قبول الطلب
+                    </button>
+                    <button class="action-btn reject-btn" (click)="rejectRequest(selectedRequest)">
+                      <i class="pi pi-times"></i> رفض الطلب
+                    </button>
+                  </div>
+                </ng-template>
+              }
+            </p-card>
+          } @else {
+            <div class="no-selection">
+              <i class="pi pi-inbox"></i>
+              <span>اختر طلباً من الجدول لعرض التفاصيل</span>
+            </div>
+          }
+        </div>
+      </ng-template>
+    </p-splitter>
+  </div>
+</div>

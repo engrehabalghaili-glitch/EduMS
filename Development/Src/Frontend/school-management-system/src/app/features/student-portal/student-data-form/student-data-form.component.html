@@ -1,0 +1,215 @@
+<div class="data-form-wrapper" dir="rtl">
+  <p-toast position="top-left" key="tl"></p-toast>
+
+  <div class="df-header">
+    <div class="header-content">
+      <div class="header-icon">
+        <i class="pi pi-user-edit"></i>
+      </div>
+      <div class="header-text">
+        <h2>بيانات الطالب الشخصية</h2>
+        <p>نموذج شامل لتسجيل بيانات الطالب من القبول حتى التخرج</p>
+      </div>
+    </div>
+    <div class="header-badge">
+      <i class="pi pi-check-circle"></i>
+      <span>نموذج معتمد من وزارة التعليم</span>
+    </div>
+  </div>
+
+  <p-card styleClass="glass-card">
+    <div class="form-body p-fluid">
+
+      <!-- ===== القسم الأول: البيانات الشخصية ===== -->
+      <p-fieldset legend="البيانات الشخصية" [toggleable]="true" styleClass="form-fieldset">
+        <div class="grid form-grid">
+          <div class="col-12 md:col-6 lg:col-3">
+            <p-floatLabel variant="on">
+              <input pInputText id="firstName" formControlName="firstName" class="input-field" />
+              <label for="firstName">الاسم الأول</label>
+            </p-floatLabel>
+          </div>
+          <div class="col-12 md:col-6 lg:col-3">
+            <p-floatLabel variant="on">
+              <input pInputText id="fatherName" formControlName="fatherName" class="input-field" />
+              <label for="fatherName">اسم الأب</label>
+            </p-floatLabel>
+          </div>
+          <div class="col-12 md:col-6 lg:col-3">
+            <p-floatLabel variant="on">
+              <input pInputText id="grandfatherName" formControlName="grandfatherName" class="input-field" />
+              <label for="grandfatherName">اسم الجد</label>
+            </p-floatLabel>
+          </div>
+          <div class="col-12 md:col-6 lg:col-3">
+            <p-floatLabel variant="on">
+              <input pInputText id="familyName" formControlName="familyName" class="input-field" />
+              <label for="familyName">اسم العائلة</label>
+            </p-floatLabel>
+          </div>
+          <div class="col-12 md:col-6 lg:col-4">
+            <p-floatLabel variant="on">
+              <input pInputText id="idNumber" formControlName="idNumber" class="input-field" />
+              <label for="idNumber">رقم الهوية / الإقامة</label>
+            </p-floatLabel>
+          </div>
+          <div class="col-12 md:col-6 lg:col-4">
+            <p-floatLabel variant="on">
+              <p-datepicker
+                id="birthDate"
+                formControlName="birthDate"
+                styleClass="date-field"
+                [showIcon]="true"
+                iconDisplay="input"
+                placeholder="اختر التاريخ"
+                selectionMode="single" />
+              <label for="birthDate">تاريخ الميلاد</label>
+            </p-floatLabel>
+          </div>
+          <div class="col-12 md:col-6 lg:col-4">
+            <p-floatLabel variant="on">
+              <p-select
+                id="gender"
+                [options]="genders"
+                formControlName="gender"
+                optionLabel="label"
+                optionValue="value"
+                styleClass="select-field"
+                placeholder="اختر الجنس" />
+              <label for="gender">الجنس</label>
+            </p-floatLabel>
+          </div>
+          <div class="col-12">
+            <p-floatLabel variant="on">
+              <p-select
+                id="nationality"
+                [options]="nationalities()"
+                formControlName="nationality"
+                optionLabel="label"
+                optionValue="value"
+                styleClass="select-field"
+                placeholder="اختر الجنسية" />
+              <label for="nationality">الجنسية</label>
+            </p-floatLabel>
+          </div>
+        </div>
+      </p-fieldset>
+
+      <!-- ===== القسم الثاني: بيانات التواصل ===== -->
+      <p-fieldset legend="بيانات التواصل" [toggleable]="true" styleClass="form-fieldset">
+        <div class="grid form-grid">
+          <div class="col-12">
+            <p-floatLabel variant="on">
+              <input pInputText id="address" formControlName="address" class="input-field" />
+              <label for="address">العنوان بالكامل</label>
+            </p-floatLabel>
+          </div>
+          <div class="col-12 md:col-6">
+            <p-floatLabel variant="on">
+              <input pInputText id="phone" formControlName="phone" class="input-field" />
+              <label for="phone">رقم هاتف الطالب</label>
+            </p-floatLabel>
+          </div>
+          <div class="col-12 md:col-6">
+            <p-floatLabel variant="on">
+              <input pInputText id="email" formControlName="email" class="input-field" />
+              <label for="email">البريد الإلكتروني</label>
+            </p-floatLabel>
+          </div>
+        </div>
+      </p-fieldset>
+
+      <!-- ===== القسم الثالث: البيانات الأكاديمية ===== -->
+      <p-fieldset legend="البيانات الأكاديمية" [toggleable]="true" styleClass="form-fieldset">
+        <div class="grid form-grid">
+          <div class="col-12 md:col-4">
+            <p-floatLabel variant="on">
+              @if (gradesLoading()) {
+                <p-select
+                  [options]="[]"
+                  disabled
+                  styleClass="select-field"
+                  placeholder="جاري تحميل الصفوف..." />
+              } @else {
+                <p-select
+                  id="grade"
+                  [options]="grades()"
+                  formControlName="grade"
+                  optionLabel="label"
+                  optionValue="value"
+                  styleClass="select-field"
+                  placeholder="اختر الصف" />
+              }
+              <label for="grade">الصف الدراسي الحالي</label>
+            </p-floatLabel>
+          </div>
+          <div class="col-12 md:col-4">
+            <p-floatLabel variant="on">
+              <p-select
+                id="department"
+                [options]="departments()"
+                formControlName="department"
+                optionLabel="label"
+                optionValue="value"
+                styleClass="select-field"
+                placeholder="اختر القسم" />
+              <label for="department">القسم / التخصص</label>
+            </p-floatLabel>
+          </div>
+          <div class="col-12 md:col-4">
+            <p-floatLabel variant="on">
+              <p-select
+                id="academicYear"
+                [options]="academicYears()"
+                formControlName="academicYear"
+                optionLabel="label"
+                optionValue="value"
+                styleClass="select-field"
+                placeholder="اختر السنة" />
+              <label for="academicYear">السنة الدراسية</label>
+            </p-floatLabel>
+          </div>
+        </div>
+      </p-fieldset>
+
+      <!-- ===== القسم الرابع: البيانات الصحية ===== -->
+      <p-fieldset legend="البيانات الصحية" [toggleable]="true" styleClass="form-fieldset">
+        <div class="grid form-grid">
+          <div class="col-12 md:col-4">
+            <p-floatLabel variant="on">
+              <p-select
+                id="bloodType"
+                [options]="bloodTypes()"
+                formControlName="bloodType"
+                optionLabel="label"
+                optionValue="value"
+                styleClass="select-field"
+                placeholder="اختر فصيلة الدم" />
+              <label for="bloodType">فصيلة الدم</label>
+            </p-floatLabel>
+          </div>
+          <div class="col-12 md:col-4">
+            <p-floatLabel variant="on">
+              <input pInputText id="allergies" formControlName="allergies" class="input-field" />
+              <label for="allergies">الحساسية (إن وجد)</label>
+            </p-floatLabel>
+          </div>
+          <div class="col-12 md:col-4">
+            <p-floatLabel variant="on">
+              <input pInputText id="chronicDiseases" formControlName="chronicDiseases" class="input-field" />
+              <label for="chronicDiseases">الأمراض المزمنة (إن وجد)</label>
+            </p-floatLabel>
+          </div>
+        </div>
+      </p-fieldset>
+
+      <!-- ===== الأزرار ===== -->
+      <div class="form-actions">
+        <p-button label="إلغاء" severity="secondary" icon="pi pi-times" (onClick)="onCancel()" [disabled]="saving()" />
+        <p-button label="حفظ البيانات" icon="pi pi-check" (onClick)="onSubmit()" [loading]="saving()" styleClass="p-button-success" />
+      </div>
+
+    </div>
+  </p-card>
+
+</div>

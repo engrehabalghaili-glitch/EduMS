@@ -1,0 +1,164 @@
+// src/styles/_prime-ng-overrides.scss
+@use './variables' as *;
+@use './mixins' as *;
+
+// ============================================================
+// 1. التخصيص الجذري الموحد (Global Component Base)
+// ============================================================
+.p-component {
+  font-family: var(--font-family-primary) !important;
+  font-size: var(--font-size-base);
+}
+
+// ============================================================
+// 2. تخصيص الجداول الاحترافية (Advanced Data Table)
+// ============================================================
+.p-datatable {
+  background: var(--neutral-bg-card);
+  border: 1px solid var(--neutral-border);
+  border-radius: var(--border-radius-md);
+  overflow: hidden; // لضمان عدم خروج الحواف الحادة للخلايا عن حدود الكرت المستدير
+  @include shadow('xs');
+
+  .p-datatable-thead > tr > th {
+    background-color: var(--neutral-hover-bg);
+    color: var(--neutral-text-primary);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-sm);
+    padding: var(--space-4);
+    border-bottom: 2px solid var(--neutral-border);
+    border-top: none;
+    text-align: right; // افتراضي للغة العربية
+  }
+
+  .p-datatable-tbody > tr {
+    background: var(--neutral-bg-card);
+    color: var(--neutral-text-secondary);
+    transition: var(--transition-fast);
+
+    > td {
+      padding: var(--space-3) var(--space-4);
+      border-bottom: 1px solid var(--neutral-border-light);
+      text-align: right;
+      font-size: var(--font-size-sm);
+    }
+
+    &:last-child > td {
+      border-bottom: none; // إزالة الخط السفلي لآخر صف للحفاظ على نظافة التصميم
+    }
+
+    &:hover {
+      background-color: var(--primary-light) !important;
+      color: var(--primary-dark);
+    }
+  }
+
+  // دعم التصفح المتجاوب والمرن لجداول المعطيات الضخمة
+  @include respond-to('mobile') {
+    .p-datatable-tbody > tr > td {
+      padding: var(--space-2) var(--space-3);
+    }
+  }
+}
+
+// ============================================================
+// 3. عناصر الإدخال والقوائم المنسدلة الحديثة (Inputs & Selects v21)
+// ============================================================
+.p-inputtext,
+.p-select,
+.p-dropdown,
+.p-datepicker, // البديل الحديث لـ p-calendar
+.p-multiselect {
+  width: 100%;
+  font-family: var(--font-family-primary) !important;
+  border: 1px solid var(--neutral-border) !important;
+  border-radius: var(--border-radius-sm) !important;
+  background: var(--neutral-bg-card) !important;
+  color: var(--neutral-text-primary) !important;
+  transition: var(--transition-fast);
+  padding: 0.5rem 0.75rem;
+
+  &:hover:not(.p-disabled) {
+    border-color: var(--neutral-text-secondary) !important;
+  }
+
+  &:focus, &.p-focus, &:focus-within {
+    border-color: var(--primary-base) !important;
+    box-shadow: 0 0 0 3px var(--primary-light) !important;
+    outline: none;
+  }
+}
+
+// ضبط محاذاة النصوص والأيقونات داخل حقول الإدخال والقوائم بنظام v21
+.p-select, .p-dropdown, .p-multiselect {
+  padding: 0 !important; // ترك المساحة لتنسيق المكون الداخلي لـ PrimeNG
+
+  .p-select-label, .p-dropdown-label, .p-multiselect-label {
+    padding: var(--space-2) var(--space-3);
+    text-align: right;
+    color: var(--neutral-text-primary);
+  }
+
+  // معالجة ذكية لموقع سهم القائمة المنسدلة في النظام العربي
+  .p-select-trigger, .p-dropdown-trigger, .p-multiselect-trigger {
+    margin-left: 0;
+    margin-right: auto;
+    padding-left: var(--space-3);
+    padding-right: var(--space-2);
+  }
+}
+
+// الحقول المعطلة (Disabled States) - هامة جداً لمنع تعديل البيانات الحساسة مثل درجات الطلاب المرصودة
+.p-disabled, [disabled] {
+  background-color: var(--neutral-bg-disabled) !important;
+  color: var(--neutral-text-disabled) !important;
+  border-color: var(--neutral-border) !important;
+  cursor: not-allowed !important;
+  opacity: 1 !important; // لمنع المتصفح من جعلها باهتة زيادة عن اللزوم
+}
+
+// ============================================================
+// 4. تخصيص الأزرار بنظام الألوان الديناميكي (Buttons)
+// ============================================================
+.p-button {
+  font-family: var(--font-family-primary) !important;
+  border-radius: var(--border-radius-sm) !important;
+  font-weight: var(--font-weight-medium);
+  padding: var(--space-2) var(--space-4);
+  transition: var(--transition-fast);
+  gap: var(--space-2); // مسافة ثابتة وأنيقة بين أيقونة الزر والنص
+
+  // الأزرار الأساسية (Primary)
+  &:not(.p-button-secondary):not(.p-button-success):not(.p-button-danger):not(.p-button-warning) {
+    background: var(--primary-base);
+    border: 1px solid var(--primary-base);
+    color: #ffffff;
+
+    &:hover {
+      background: var(--primary-dark) !important;
+      border-color: var(--primary-dark) !important;
+    }
+  }
+
+  // زر النجاح (مثل اعتماد حضور، قبول طالب، حفظ نهائي)
+  &.p-button-success {
+    background: var(--success-color) !important;
+    border-color: var(--success-color) !important;
+    &:hover { filter: brightness(0.9); }
+  }
+
+  // زر الخطر (مثل حذف سجل، طرد، إلغاء عملية مالية)
+  &.p-button-danger {
+    background: var(--danger-color) !important;
+    border-color: var(--danger-color) !important;
+    &:hover { filter: brightness(0.9); }
+  }
+
+  // زر التنبيه (مثل تجميد حساب، تأجيل قسط)
+  &.p-button-warning {
+    background: var(--warning-color) !important;
+    border-color: var(--warning-color) !important;
+    color: #ffffff !important;
+    &:hover { filter: brightness(0.9); }
+  }
+}

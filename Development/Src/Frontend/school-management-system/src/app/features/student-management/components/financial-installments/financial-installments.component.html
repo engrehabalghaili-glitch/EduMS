@@ -1,0 +1,126 @@
+@if (isPrivateSchool()) {
+<div class="installments-wrapper">
+  <p-toast position="top-left" key="tl"></p-toast>
+  <div class="page-head">
+    <div class="page-head-text">
+      <h2>جدول الأقساط الدراسية</h2>
+      <span class="page-subtitle">متابعة تحصيل الدفعات والمدفوعات المتبقية</span>
+    </div>
+    <button class="fab-btn" title="إضافة قسط جديد" (click)="openAddDialog()" [class.loading]="saving()" [disabled]="saving()">
+      @if (saving()) {
+        <i class="pi pi-spin pi-spinner"></i>
+      } @else {
+        <i class="pi pi-plus"></i>
+      }
+    </button>
+  </div>
+
+  <div class="summary-row">
+    <div class="summary-card">
+      <div class="summary-icon" style="background:#EEF2FF;color:#4F46E5"><i class="pi pi-wallet"></i></div>
+      <div class="summary-content">
+        <span class="summary-label">إجمالي الأقساط</span>
+        <span class="summary-value">{{totalAmount().toLocaleString('ar-SA')}} ر.ي</span>
+      </div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-icon" style="background:#ECFDF5;color:#059669"><i class="pi pi-check-circle"></i></div>
+      <div class="summary-content">
+        <span class="summary-label">المدفوع</span>
+        <span class="summary-value success">{{totalPaid().toLocaleString('ar-SA')}} ر.ي</span>
+      </div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-icon" style="background:#FFFBEB;color:#D97706"><i class="pi pi-clock"></i></div>
+      <div class="summary-content">
+        <span class="summary-label">المتبقي</span>
+        <span class="summary-value warning">{{remainingAmount().toLocaleString('ar-SA')}} ر.ي</span>
+      </div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-icon" style="background:#F0F9FF;color:#0284C7"><i class="pi pi-receipt"></i></div>
+      <div class="summary-content">
+        <span class="summary-label">الطلبات المدفوعة</span>
+        <span class="summary-value">{{paidCount()}} / {{installments().length}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress-card">
+    <div class="progress-head">
+      <span class="progress-title">نسبة التحصيل المالي الإجمالية</span>
+      <span class="progress-pct">{{progressPercent()}}%</span>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-fill" [style.width.%]="progressPercent()" [style.background]="'linear-gradient(90deg,#4F46E5,#3B82F6)'"></div>
+    </div>
+    <div class="progress-meta">
+      <span class="meta-item"><i class="pi pi-check-circle" style="color:#059669"></i> تم الدفع: {{paidCount()}} طالب</span>
+      <span class="meta-item"><i class="pi pi-calendar" style="color:#2563EB"></i> مجدول: {{scheduledCount()}} طالب</span>
+      <span class="meta-item"><i class="pi pi-hourglass" style="color:#D97706"></i> قيد الانتظار: {{pendingCount()}} طالب</span>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <p-table [value]="installments()" [tableStyle]="{'min-width': '65rem'}" styleClass="installments-table" [paginator]="true" [rows]="8">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>#</th>
+          <th>اسم الطالب</th>
+          <th>المرحلة</th>
+          <th>المبلغ</th>
+          <th>المدفوع</th>
+          <th>المتبقي</th>
+          <th>نسبة التحصيل</th>
+          <th>تاريخ الاستحقاق</th>
+          <th>الحالة</th>
+          <th>وسيلة الدفع</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-installment let-i="rowIndex">
+        <tr class="installment-row">
+          <td><span class="row-id">{{installment.id}}</span></td>
+          <td><span class="student-name">{{installment.studentName}}</span></td>
+          <td><span class="grade-text">{{installment.grade}}</span></td>
+          <td><span class="amount-text">{{installment.amount.toLocaleString('ar-SA')}}</span></td>
+          <td><span class="amount-text success">{{installment.paidAmount.toLocaleString('ar-SA')}}</span></td>
+          <td>
+            <span class="amount-text" [class.remaining-danger]="installment.status !== 'paid' && (installment.amount - installment.paidAmount) > 0">{{(installment.amount - installment.paidAmount).toLocaleString('ar-SA')}}</span>
+          </td>
+          <td>
+            <div class="student-progress">
+              <div class="sp-bar">
+                <div class="sp-fill" [style.width.%]="getStudentProgress(installment)" [style.background]="getProgressColor(getStudentProgress(installment))"></div>
+              </div>
+              <span class="sp-pct" [style.color]="getProgressColor(getStudentProgress(installment))">{{getStudentProgress(installment)}}%</span>
+            </div>
+          </td>
+          <td><span class="date-text">{{installment.dueDate}}</span></td>
+          <td>
+            <span class="status-badge" [ngClass]="getStatusClass(installment.status)">
+              <i [class]="getStatusIcon(installment.status)"></i>
+              {{getStatusLabel(installment.status)}}
+            </span>
+          </td>
+          <td>
+            @if (installment.paymentMethod) {
+              <span class="payment-method">{{installment.paymentMethod}}</span>
+            } @else {
+              <span class="payment-method dim">—</span>
+            }
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr><td colspan="10" class="empty-message">لا توجد أقساط لعرضها</td></tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+} @else {
+<div class="not-private">
+  <i class="pi pi-lock"></i>
+  <h3>هذه الخدمة متاحة فقط للمدارس الخاصة</h3>
+  <p>نظام الأقساط والمدفوعات مخصص للمؤسسات التعليمية الخاصة</p>
+</div>
+}

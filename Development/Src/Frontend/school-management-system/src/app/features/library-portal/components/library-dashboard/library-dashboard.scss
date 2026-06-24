@@ -1,0 +1,170 @@
+.dashboard-inner-container {
+  width: 100%;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  direction: rtl;
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+.font-cairo { font-family: 'Cairo', sans-serif !important; }
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 2px solid #e2e8f0;
+
+  .dashboard-title {
+    font-size: 24px;
+    font-weight: 900;
+    color: #78350f; // النحاسي/الترابي الفخم المتناسق مع طابع المكتبات الكبرى والمراجع
+    letter-spacing: -0.5px;
+  }
+  .dashboard-subtitle {
+    font-size: 13.5px;
+    color: #475569;
+    margin-top: 5px;
+    font-weight: 500;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 0.75rem;
+
+    ::v-deep .p-button {
+      font-family: 'Cairo', sans-serif !important;
+      font-weight: 700 !important;
+      border-radius: 0.5rem !important;
+      padding: 0.55rem 1.25rem !important;
+    }
+    ::v-deep .p-button-amber { background: #b45309 !important; border: none !important; color: #fff; &:hover { background: #78350f !important; } }
+    ::v-deep .p-button-secondary { border-color: #cbd5e1 !important; color: #334155 !important; &:hover { background: #f1f5f9 !important; } }
+  }
+}
+
+// 📊 شبكة كروت الأداء والمؤشرات العامة لرواد المعرفة
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.stat-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+
+  .stat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: #fef3c7;
+    color: #b45309;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .stat-content { display: flex; flex-direction: column; gap: 2px; }
+  .stat-label { font-size: 13.5px; color: #64748b; font-weight: 700; }
+  .stat-value { font-size: 25px; font-weight: 900; color: #451a03; }
+  .stat-desc { font-size: 11.5px; color: #64748b; font-weight: 500; }
+
+  &.card-primary { border-right: 5px solid #b45309; }
+  &.card-info { border-right: 5px solid #06b6d4; .stat-icon { background: #e0f2fe; color: #06b6d4; } }
+  &.card-danger { border-right: 5px solid #ef4444; .stat-icon { background: #fef2f2; color: #ef4444; } }
+  &.card-success { border-right: 5px solid #10b981; .stat-icon { background: #ecfdf5; color: #10b981; } }
+}
+
+// 🧱 هندسة لوحات العرض والتجاوب الكلي
+.widgets-grid-main, .widgets-grid-secondary {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  @media (max-width: 1200px) { grid-template-columns: 1fr; margin-bottom: 1rem; }
+}
+
+.widget-box {
+  background: #ffffff;
+  border-radius: 1.25rem;
+  border: 1px solid #e2e8f0;
+  padding: 1.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+
+  .widget-header-title {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 0.85rem;
+    position: relative;
+
+    &::after {
+      content: ''; position: absolute; bottom: -1px; right: 0; width: 60px; height: 2px; background: #b45309;
+    }
+  }
+}
+
+// 📋 الجداول التنفيذية الكثيفة البيانات (Enterprise Tables)
+.table-container { width: 100%; overflow-x: auto; }
+.enterprise-table {
+  width: 100%; border-collapse: separate; border-spacing: 0; text-align: right;
+
+  th {
+    background: #f8fafc; padding: 0.85rem 1rem; font-size: 13px; font-weight: 800; color: #451a03; border-bottom: 2px solid #cbd5e1;
+  }
+  td {
+    padding: 1rem; border-bottom: 1px solid #f1f5f9; font-size: 13.5px; color: #334155; vertical-align: middle;
+  }
+  tr:hover td { background-color: #f8fafc; }
+}
+
+// تخصيص شارات وطبقات الفهرسة والإعارات والكتب
+.book-title-text { color: #1e293b; font-size: 13.5px; font-weight: 700; }
+.author-text-badge { font-size: 12.5px; color: #475569; font-weight: 600; }
+.category-tag { background: #f1f5f9; color: #475569; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 700; font-size: 11.5px; }
+.location-badge { font-size: 12.5px; color: #1e3a8a; font-weight: 700; background: #eff6ff; padding: 0.2rem 0.5rem; border-radius: 4px; }
+.book-title-column { font-size: 13px; color: #1e293b; max-width: 250px; white-space: normal; line-height: 1.4; }
+
+.available-copies-badge {
+  background: #ecfdf5; color: #047857; font-weight: 800; padding: 0.25rem 0.5rem; border-radius: 6px; border: 1px solid #d1fae5;
+  &.empty { background: #fef2f2; color: #b91c1c; border: 1px solid #fee2e2; }
+}
+
+.role-badge {
+  font-size: 11px; font-weight: 800; padding: 0.2rem 0.4rem; border-radius: 4px;
+  &.student { background: #f0fdfa; color: #0d9488; }
+  &.teacher { background: #f5f3ff; color: #7c3aed; }
+}
+
+.borrowing-status-tag {
+  display: inline-flex; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 12px; font-weight: 700;
+  &.active { background: #eff6ff; color: #1e40af; }
+  &.overdue { background: #fff1f2; color: #9f1239; animation: pulse 2s infinite; }
+  &.returned { background: #f0fdf4; color: #166534; }
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.chart-wrapper-box { position: relative; width: 100%; margin-top: 0.5rem; }

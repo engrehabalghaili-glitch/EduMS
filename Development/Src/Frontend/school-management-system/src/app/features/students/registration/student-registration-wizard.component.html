@@ -1,0 +1,101 @@
+<div class="wiz-wrapper" dir="rtl">
+
+  <div class="wiz-header">
+    <div class="header-content">
+      <div class="header-icon">
+        <i class="pi pi-pencil"></i>
+      </div>
+      <div class="header-text">
+        <h2>بوابة التسجيل الإلكترونية</h2>
+        <p>نظام وزارة التعليم — تسجيل الطلاب الجدد</p>
+      </div>
+    </div>
+    <div class="header-progress">
+      <div class="progress-badge">
+        <i class="pi pi-check-circle"></i>
+        <span>الخطوة {{ activeStep() + 1 }} من 3</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Cards -->
+  <div class="nav-cards">
+    @for (step of steps; track step.num; let i = $index) {
+      <div
+        class="nav-card"
+        [class.active]="activeStep() === i"
+        [style]="{
+          '--card-bg': step.color,
+          '--card-border': activeStep() === i ? step.activeColor : '#e2e8f0',
+          '--card-shadow': activeStep() === i ? '0 4px 16px rgba(' + (i === 0 ? '59,130,246' : i === 1 ? '34,197,94' : '139,92,246') + ',0.2)' : 'none'
+        }"
+        (click)="goToStep(i)"
+        role="button"
+        tabindex="0">
+        <div class="card-num" [style.background]="activeStep() === i ? step.activeColor : '#e2e8f0'" [style.color]="activeStep() === i ? '#fff' : '#64748b'">
+          {{ step.num }}
+        </div>
+        <div class="card-text">
+          <span class="card-label">{{ step.label }}</span>
+          <span class="card-desc">{{ i === 0 ? 'ولي الأمر + الطالب' : i === 1 ? 'التفاصيل الكاملة' : 'رفع الملفات' }}</span>
+        </div>
+        @if (activeStep() > i) {
+          <div class="card-check"><i class="pi pi-check"></i></div>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Step Content -->
+  <div class="wiz-card">
+    @if (activeStep() === 0) {
+      <app-portal-step></app-portal-step>
+    } @else if (activeStep() === 1) {
+      <app-data-step></app-data-step>
+    } @else {
+      <app-docs-step></app-docs-step>
+    }
+
+    <div class="nav-buttons">
+      <button class="btn-nav btn-prev" [class.hidden]="activeStep() === 0" (click)="onPrev()">
+        <i class="pi pi-chevron-right"></i><span>السابق</span>
+      </button>
+
+      <button class="btn-nav btn-cancel" [class.hidden]="activeStep() !== 0" (click)="onCancel()">
+        <i class="pi pi-times"></i><span>إلغاء</span>
+      </button>
+
+      @if (activeStep() < 2) {
+        <button class="btn-nav btn-next" (click)="onNext()">
+          <span>التالي</span><i class="pi pi-chevron-left"></i>
+        </button>
+      }
+
+      @if (activeStep() === 2) {
+        <button class="btn-nav btn-submit" (click)="onSubmit()" [disabled]="saving()">
+          @if (saving()) {
+            <i class="pi pi-spin pi-spinner"></i>
+          } @else {
+            <i class="pi pi-send"></i>
+          }
+          <span>إرسال طلب التسجيل</span>
+        </button>
+      }
+    </div>
+  </div>
+
+  <p-toast position="top-left" key="tl"></p-toast>
+
+  @if (submitted()) {
+    <div class="success-overlay" (click)="submitted.set(false)">
+      <div class="success-card" (click)="$event.stopPropagation()">
+        <div class="success-icon"><i class="pi pi-check-circle"></i></div>
+        <h3>تم إرسال طلب التسجيل</h3>
+        <p>سيتم مراجعة طلبك والتواصل معك على الجوال أو البريد المسجل</p>
+        <button class="btn-done" (click)="resetAll()">تسجيل جديد</button>
+        <button class="btn-close" (click)="submitted.set(false)">إغلاق</button>
+      </div>
+    </div>
+  }
+
+</div>

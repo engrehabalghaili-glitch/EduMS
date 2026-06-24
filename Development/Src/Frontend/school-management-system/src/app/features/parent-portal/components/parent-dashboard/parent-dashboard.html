@@ -1,0 +1,128 @@
+<div class="dashboard-inner-container">
+
+  <div class="dashboard-header">
+    <div>
+      <div class="dashboard-title">👨‍👩‍👦 بوابة ولي الأمر الإلكترونية</div>
+      <div class="dashboard-subtitle">مرحباً بك أ. خالد بن عبد الرحمن الشمري • تتابع مستجدات أبنائك حياً</div>
+    </div>
+    <div class="header-actions">
+      <button pButton label="تواصل مع الإدارة" icon="pi pi-comments" class="p-button-info p-button-sm font-cairo"></button>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    @for (stat of stats(); track stat.label) {
+      <div class="stat-card" [ngClass]="'card-' + stat.type">
+        <div class="stat-icon">
+          @if (stat.type === 'primary') { 👨‍👩‍👦 }
+          @else if (stat.type === 'success') { 📈 }
+          @else if (stat.type === 'warning') { 💳 }
+          @else if (stat.type === 'info') { 🔔 }
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">{{ stat.label }}</div>
+          <div class="stat-value">{{ stat.value }}</div>
+          <div class="stat-change" [ngClass]="stat.type === 'warning' ? 'down' : 'up'">{{ stat.change }}</div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="widgets-grid-main">
+
+    <div class="widget-box">
+      <div class="widget-header-title">📥 السجل المباشر وبطاقات الأداء المدرسي للأبناء</div>
+
+      <div class="children-cards-container">
+        @for (child of childrenList(); track child.id) {
+          <div class="child-profile-card">
+            <div class="child-main-info">
+              <span class="child-avatar">{{ child.avatar }}</span>
+              <div>
+                <div class="child-name">{{ child.name }}</div>
+                <div class="child-grade">{{ child.grade }} ({{ child.id }})</div>
+              </div>
+            </div>
+
+            <div class="child-metrics">
+              <div class="metric-box">
+                <span class="m-label">المعدل العام</span>
+                <span class="m-val text-cyan-600">{{ child.latestGrade }}</span>
+              </div>
+              <div class="metric-box">
+                <span class="m-label">نسبة الحضور</span>
+                <span class="m-val text-green-600">{{ child.attendanceRate }}%</span>
+              </div>
+              <div class="metric-box">
+                <span class="m-label">السلوك</span>
+                <span class="m-val text-slate-700">{{ child.behaviorScore }}</span>
+              </div>
+            </div>
+
+            <div class="child-card-actions">
+              <button pButton label="الشهادة الرقمية" class="p-button-outlined p-button-sm font-cairo" (click)="onActionClick('report', child.id)"></button>
+              <button pButton label="جدول الحصص" class="p-button-outlined p-button-secondary p-button-sm font-cairo" (click)="onActionClick('schedule', child.id)"></button>
+              <button pButton label="الواجبات" class="p-button-outlined p-button-info p-button-sm font-cairo" (click)="onActionClick('homework', child.id)"></button>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="widget-header-title secondary">🔔 جدول الإجراءات والتنبيهات الموجهة لك</div>
+      <div class="table-container">
+        <table class="enterprise-table">
+          <thead>
+            <tr>
+              <th>رقم التنبيه</th>
+              <th>الابن المستهدف</th>
+              <th>نوع الإشعار</th>
+              <th>نص التنبيه والإجراء</th>
+              <th>التاريخ</th>
+              <th>الحالة</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (alert of alertsList(); track alert.id) {
+              <tr>
+                <td class="font-mono"><strong>{{ alert.id }}</strong></td>
+                <td><span class="child-tag">{{ alert.childName }}</span></td>
+                <td>
+                  <span class="alert-type" [ngClass]="alert.type">
+                    @if (alert.type === 'invoice') { فاتورة }
+                    @else if (alert.type === 'academic') { أكاديمي }
+                    @else if (alert.type === 'attendance') { غياب/تأخر }
+                  </span>
+                </td>
+                <td>{{ alert.title }}</td>
+                <td>{{ alert.date }}</td>
+                <td>
+                  @if (alert.resolved) {
+                    <span class="badge badge-success">تم الاطلاع</span>
+                  } @else {
+                    <span class="badge badge-danger">مطلوب إجراء</span>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="widget-box">
+      <div class="widget-header-title">⚡ خدمات ولي الأمر السريعة</div>
+      <div class="quick-actions-grid">
+        <a class="quick-action-item"><span class="qa-icon">💳</span>سداد الرسوم</a>
+        <a class="quick-action-item"><span class="qa-icon">🚗</span>أذونات الاستئذان</a>
+        <a class="quick-action-item"><span class="qa-icon">📝</span>تسجيل حافلة</a>
+        <a class="quick-action-item"><span class="qa-icon">✉️</span>صندوق الرسائل</a>
+      </div>
+
+      <div class="widget-header-title secondary">📊 رادار التقييم الشامل لأبعاد الأبناء</div>
+      <div class="chart-wrapper-box" style="height: 240px;">
+        <p-chart type="radar" [data]="radarData" [options]="radarOptions" width="100%" height="100%"></p-chart>
+      </div>
+    </div>
+
+  </div>
+</div>

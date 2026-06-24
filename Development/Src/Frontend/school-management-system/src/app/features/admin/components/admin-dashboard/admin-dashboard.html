@@ -1,0 +1,134 @@
+<div class="dashboard-inner-container">
+
+  <div class="dashboard-header">
+    <div>
+      <div class="dashboard-title">👑 لوحة التحكم والمراقبة الفنية لمدير المنظومة الكلي</div>
+      <div class="dashboard-subtitle">إدارة البنية التحتية السحابية • فحص وتدقيق الفروع والتراخيص والمزامنة والنسخ الآمن</div>
+    </div>
+    <div class="header-actions">
+      <button pButton label="جدار الحماية الفوري (Firewall)" icon="pi pi-shield" class="p-button-danger p-button-sm font-cairo" (click)="triggerSystemAction('firewall')"></button>
+      <button pButton label="تحديث كاش المنظومة" icon="pi pi-refresh" class="p-button-outlined p-button-secondary p-button-sm font-cairo" (click)="triggerSystemAction('clear_cache')"></button>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    @for (stat of stats(); track stat.label) {
+      <div class="stat-card" [ngClass]="'card-' + stat.type">
+        <div class="stat-icon">
+          @if (stat.type === 'primary') { 🌐 }
+          @else if (stat.type === 'success') { ⚡ }
+          @else if (stat.type === 'info') { 💾 }
+          @else if (stat.type === 'safe') { 🛡️ }
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">{{ stat.label }}</div>
+          <div class="stat-value">{{ stat.value }}</div>
+          <div class="stat-desc">{{ stat.desc }}</div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="widgets-grid-main">
+
+    <div class="widget-box">
+      <div class="widget-header-title">🏢 سجل ترخيص المنشآت والربط المتزامن للفروع ومساحاتها</div>
+      <div class="table-container">
+        <table class="enterprise-table">
+          <thead>
+            <tr>
+              <th>كود المنشأة</th>
+              <th>اسم المجمع / الفرع التعليمي</th>
+              <th>المستخدمين النشطين</th>
+              <th>حجم قاعدة البيانات</th>
+              <th>تاريخ انتهاء الرخصة</th>
+              <th>حالة الارتباط</th>
+              <th>الإجراء الفني</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (branch of branchesList(); track branch.id) {
+              <tr>
+                <td class="font-mono text-indigo-700"><strong>{{ branch.id }}</strong></td>
+                <td><strong>{{ branch.name }}</strong></td>
+                <td><span class="user-count-badge">👤 {{ branch.activeUsers | number }}</span></td>
+                <td><span class="db-size-tag">🗄️ {{ branch.databaseSize }}</span></td>
+                <td><span class="font-mono text-slate-600">{{ branch.licenseExpiry }}</span></td>
+                <td><span class="status-dot-badge active">● متصل ومتزامن</span></td>
+                <td>
+                  <button pButton label="إدارة النطاق" class="p-button-text p-button-sm p-0 font-cairo text-indigo-600 font-bold" (click)="triggerSystemAction('branch_settings:'+branch.id)"></button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="widget-box">
+      <div class="widget-header-title">⚡ إجراءات سريعة للنظام</div>
+      <div class="quick-actions-grid">
+        <a class="quick-action-item" (click)="triggerSystemAction('backup')"><span class="qa-icon">🛡️</span>نسخ احتياطي</a>
+        <a class="quick-action-item" (click)="triggerSystemAction('sync')"><span class="qa-icon">🔄</span>مزامنة الفروع</a>
+        <a class="quick-action-item" (click)="triggerSystemAction('logs')"><span class="qa-icon">📋</span>سجل الأحداث</a>
+        <a class="quick-action-item" (click)="triggerSystemAction('users')"><span class="qa-icon">👥</span>إدارة المستخدمين</a>
+      </div>
+
+      <div class="widget-header-title secondary">📊 رادار سلامة الأداء السحابي الكلي</div>
+      <div class="chart-wrapper-box" style="height: 220px;">
+        <p-chart type="radar" [data]="infraRadarData" [options]="infraRadarOptions" width="100%" height="100%"></p-chart>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="widgets-grid-secondary">
+
+    <div class="widget-box">
+      <div class="widget-header-title">🛡️ سجل الأمان والتدقيق الفوري للعمليات الحساسة (System Audit Trail)</div>
+      <div class="table-container">
+        <table class="enterprise-table">
+          <thead>
+            <tr>
+              <th>رمز السجل</th>
+              <th>الوقت</th>
+              <th>المنفذ</th>
+              <th>الوظيفة</th>
+              <th>العملية التفصيلية المنفذة</th>
+              <th>النظام والوحدة</th>
+              <th>عنوان IP للمنفذ</th>
+              <th>مستوى الخطورة</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (log of auditLogsList(); track log.id) {
+              <tr>
+                <td class="font-mono text-xs text-slate-500">{{ log.id }}</td>
+                <td class="font-mono text-xs">{{ log.timestamp }}</td>
+                <td><strong>{{ log.operator }}</strong></td>
+                <td><span class="role-tag-badge">{{ log.role }}</span></td>
+                <td class="action-text-column">{{ log.action }}</td>
+                <td><span class="module-tag">{{ log.module }}</span></td>
+                <td class="font-mono text-xs text-slate-600">🖥️ {{ log.ipAddress }}</td>
+                <td>
+                  <span class="severity-badge" [ngClass]="{'info-class': log.severity === 'info', 'warning-class': log.severity === 'warning'}">
+                    {{ log.severity === 'info' ? 'آمن' : 'مراجعة عاجلة' }}
+                  </span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="widget-box">
+      <div class="widget-header-title">📈 معدل الطلبات في الثانية (Requests/Sec) مقابل الاستجابة</div>
+      <div class="chart-wrapper-box" style="height: 280px;">
+        <p-chart type="bar" [data]="comboData" [options]="comboOptions" width="100%" height="100%"></p-chart>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,62 @@
+<div class="layout-wrapper">
+
+  <aside class="layout-sidebar" [class.collapsed]="isCollapsed()" [style.width]="sidebarWidth()">
+    <div class="sidebar-logo">
+      <div class="logo-full">
+        EduMS <span>ENTERPRISE</span>
+      </div>
+      <div class="logo-mini">E</div>
+    </div>
+
+    <nav class="sidebar-menu">
+      @for (item of menuItems(); track item.route) {
+        <a [routerLink]="item.route" routerLinkActive="active-route" class="menu-item" [pTooltip]="item.label" [tooltipDisabled]="!isCollapsed()" tooltipPosition="right">
+          <i [class]="item.icon"></i>
+          <span class="menu-label">{{ item.label }}</span>
+        </a>
+      }
+    </nav>
+
+    <div class="sidebar-footer">
+      <a class="menu-item logout-item" (click)="logout()" [pTooltip]="'تسجيل الخروج'" [tooltipDisabled]="!isCollapsed()" tooltipPosition="right">
+        <i class="pi pi-sign-out"></i>
+        <span class="menu-label">تسجيل الخروج</span>
+      </a>
+    </div>
+  </aside>
+
+  <div class="layout-main">
+
+    <header class="layout-topbar">
+      <div class="topbar-right">
+        <button class="toggle-btn" [class.active]="isCollapsed()" (click)="toggleSidebar()">
+          <i class="pi pi-bars toggle-icon"></i>
+        </button>
+        <span class="system-title">🏛️ نظام إدارة المدرسة الذكي</span>
+      </div>
+
+      <div class="topbar-left">
+        <div class="user-profile">
+          <div class="avatar-circle">م</div>
+          <div class="user-info">
+            <span class="user-name">المهندس الفول ستاك</span>
+            <span class="user-role">مدير النظام</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="layout-content">
+      <router-outlet></router-outlet>
+    </main>
+
+  </div>
+
+</div>
+
+@if (loadingService.isLoading()) {
+  <div class="loading-overlay">
+    <p-progress-spinner strokeWidth="4" animationDuration=".5s"></p-progress-spinner>
+    <span class="loading-text">جاري معالجة البيانات...</span>
+  </div>
+}

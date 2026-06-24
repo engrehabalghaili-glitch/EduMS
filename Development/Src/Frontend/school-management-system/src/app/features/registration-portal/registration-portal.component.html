@@ -1,0 +1,187 @@
+<div class="registration-wrapper" dir="rtl">
+  <p-toast position="top-left" key="tl"></p-toast>
+
+  <!-- Header -->
+  <div class="reg-header">
+    <div class="header-content">
+      <div class="header-icon">
+        <i class="pi pi-pencil"></i>
+      </div>
+      <div class="header-text">
+        <h2>بوابة التسجيل الإلكترونية</h2>
+        <p>تسجيل الطلاب الجدد بخطوات بسيطة وسهلة</p>
+      </div>
+    </div>
+    <div class="header-steps-indicator">
+      <div class="step-dot" [class.active]="activeStep >= 0" [class.done]="activeStep > 0"></div>
+      <div class="step-line" [class.done]="activeStep > 0"></div>
+      <div class="step-dot" [class.active]="activeStep >= 1" [class.done]="activeStep > 1"></div>
+      <div class="step-line" [class.done]="activeStep > 1"></div>
+      <div class="step-dot" [class.active]="activeStep >= 2"></div>
+    </div>
+  </div>
+
+  <!-- Form Card -->
+  <div class="form-card">
+    <p-stepper [(value)]="activeStep" [linear]="true">
+      <p-step-list>
+        <p-step [value]="0">البيانات الأساسية</p-step>
+        <p-step [value]="1">بيانات الاتصال</p-step>
+        <p-step [value]="2">تأكيد الطلب</p-step>
+      </p-step-list>
+
+      <p-step-panels>
+        <!-- Step 1 -->
+        <p-step-panel [value]="0">
+          <div class="step-content" [formGroup]="form">
+            <div class="step-title">
+              <i class="pi pi-user"></i>
+              <span>البيانات الأساسية للطالب</span>
+            </div>
+            <div class="form-grid">
+              <div class="form-field">
+                <p-floatLabel>
+                  <input pInputText id="fullName" formControlName="fullName" class="custom-input" />
+                  <label for="fullName">الاسم الكامل للطالب</label>
+                </p-floatLabel>
+              </div>
+              <div class="form-field">
+                <p-floatLabel>
+                  <input pInputText id="birthDate" formControlName="birthDate" class="custom-input" />
+                  <label for="birthDate">تاريخ الميلاد</label>
+                </p-floatLabel>
+              </div>
+              <div class="form-field">
+                <p-floatLabel>
+                  <p-select
+                    id="gender"
+                    [options]="genders"
+                    formControlName="gender"
+                    optionLabel="label"
+                    optionValue="value"
+                    placeholder="اختر الجنس"
+                    styleClass="custom-select" />
+                  <label for="gender">الجنس</label>
+                </p-floatLabel>
+              </div>
+              <div class="form-field">
+                <p-floatLabel>
+                  <p-select
+                    id="nationality"
+                    [options]="nationalities()"
+                    formControlName="nationality"
+                    optionLabel="label"
+                    optionValue="value"
+                    placeholder="اختر الجنسية"
+                    styleClass="custom-select" />
+                  <label for="nationality">الجنسية</label>
+                </p-floatLabel>
+              </div>
+            </div>
+          </div>
+        </p-step-panel>
+
+        <!-- Step 2 -->
+        <p-step-panel [value]="1">
+          <div class="step-content" [formGroup]="form">
+            <div class="step-title">
+              <i class="pi pi-phone"></i>
+              <span>بيانات الاتصال والتواصل</span>
+            </div>
+            <div class="form-grid">
+              <div class="form-field">
+                <p-floatLabel>
+                  <input pInputText id="idNumber" formControlName="idNumber" class="custom-input" />
+                  <label for="idNumber">رقم الهوية / الإقامة</label>
+                </p-floatLabel>
+              </div>
+              <div class="form-field">
+                <p-floatLabel>
+                  <input pInputText id="parentPhone" formControlName="parentPhone" class="custom-input" />
+                  <label for="parentPhone">رقم هاتف ولي الأمر</label>
+                </p-floatLabel>
+              </div>
+            </div>
+          </div>
+        </p-step-panel>
+
+        <!-- Step 3 -->
+        <p-step-panel [value]="2">
+          <div class="step-content">
+            <div class="step-title">
+              <i class="pi pi-check-circle"></i>
+              <span>تأكيد طلب التسجيل</span>
+            </div>
+            <div class="summary-card">
+              <div class="summary-header">
+                <i class="pi pi-file"></i>
+                <span>ملخص البيانات</span>
+              </div>
+              <div class="summary-grid">
+                <div class="summary-item">
+                  <span class="summary-label">الاسم الكامل</span>
+                  <span class="summary-value">{{ form.get('fullName')?.value || '—' }}</span>
+                </div>
+                <div class="summary-item">
+                  <span class="summary-label">تاريخ الميلاد</span>
+                  <span class="summary-value">{{ form.get('birthDate')?.value || '—' }}</span>
+                </div>
+                <div class="summary-item">
+                  <span class="summary-label">الجنس</span>
+                  <span class="summary-value">{{ getGenderLabel(form.get('gender')?.value) }}</span>
+                </div>
+                <div class="summary-item">
+                  <span class="summary-label">الجنسية</span>
+                  <span class="summary-value">{{ getNationalityLabel(form.get('nationality')?.value) }}</span>
+                </div>
+                <div class="summary-item">
+                  <span class="summary-label">رقم الهوية</span>
+                  <span class="summary-value">{{ form.get('idNumber')?.value || '—' }}</span>
+                </div>
+                <div class="summary-item">
+                  <span class="summary-label">هاتف ولي الأمر</span>
+                  <span class="summary-value">{{ form.get('parentPhone')?.value || '—' }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </p-step-panel>
+      </p-step-panels>
+    </p-stepper>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+      <button
+        class="btn-nav btn-prev"
+        [class.hidden]="activeStep === 0"
+        (click)="onPrev()">
+        <i class="pi pi-chevron-right"></i>
+        <span>السابق</span>
+      </button>
+
+      <button class="btn-nav btn-cancel" [class.hidden]="activeStep !== 0" (click)="onCancel()">
+        <i class="pi pi-times"></i>
+        <span>إلغاء</span>
+      </button>
+
+      <div class="nav-spacer"></div>
+      @if (activeStep < 2) {
+        <button class="btn-nav btn-next" (click)="onNext()">
+          <span>التالي</span>
+          <i class="pi pi-chevron-left"></i>
+        </button>
+      }
+      @if (activeStep === 2) {
+        <button class="btn-nav btn-submit" (click)="onSubmit()" [disabled]="saving()">
+          @if (saving()) {
+            <i class="pi pi-spin pi-spinner"></i>
+          } @else {
+            <i class="pi pi-send"></i>
+          }
+          <span>إرسال طلب التسجيل</span>
+        </button>
+      }
+    </div>
+  </div>
+
+</div>

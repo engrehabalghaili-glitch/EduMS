@@ -1,0 +1,43 @@
+<div class="auth-shell" dir="rtl">
+
+  <aside class="auth-aside">
+    <div class="auth-aside-content">
+      <div class="brand-logo">E</div>
+      <h1 class="brand-title">نظام أتمتة العمليات التعليمية والإدارية</h1>
+      <p class="brand-desc">منصة متكاملة لإدارة المدارس ومكاتب التربية والتعليم، مع دعم أكثر من 200 وظيفة وحالة استخدام، وأمان متقدم للمستخدمين.</p>
+
+      <div class="auth-features">
+        @for (feature of marketingFeatures; track feature.title) {
+          <div class="auth-feature-card">
+            <div class="auth-feature-icon">
+              <i [class]="feature.icon"></i>
+            </div>
+            <div class="auth-feature-text">
+              <div class="auth-feature-title">{{ feature.title }}</div>
+              <div class="auth-feature-desc">{{ feature.desc }}</div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </aside>
+
+  <section class="auth-main">
+    <div class="auth-container-inner">
+
+      <div class="mobile-brand-header">
+        <div class="mobile-logo">E</div>
+        <div class="mobile-title">EduMS Enterprise</div>
+      </div>
+
+      <div class="auth-router-body">
+        <router-outlet></router-outlet>
+      </div>
+
+      <footer class="auth-footer">
+        © 2026 EduMS Enterprise. جميع الحقوق محفوظة.
+      </footer>
+    </div>
+  </section>
+
+</div>

@@ -1,0 +1,117 @@
+@use './styles/variables' as *;
+@use './styles/mixins' as *;
+@use './styles/prime-ng-overrides' as *;
+@use './styles/rtl' as *;
+@use './styles/utilities' as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
+
+@import "primeicons/primeicons.css";
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+
+  background-color: var(--neutral-bg-page);
+  color: var(--neutral-text-primary);
+
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+
+  @include custom-scrollbar;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--neutral-text-primary);
+  font-weight: var(--font-weight-bold);
+  margin-top: 0;
+  margin-bottom: var(--space-2);
+  line-height: var(--line-height-tight);
+}
+
+a {
+  color: var(--primary-base);
+  text-decoration: none;
+  transition: var(--transition-fast);
+
+  &:hover {
+    color: var(--primary-dark);
+  }
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  padding: 1.5rem;
+}
+.bg-pastel-blue { background-color: #e0f2fe !important; }
+.bg-pastel-green { background-color: #dcfce7 !important; }
+.bg-pastel-purple { background-color: #f3e8ff !important; }
+.bg-pastel-red { background-color: #fee2e2 !important; }
+
+:root {
+  --text-color: #374151 !important;
+  --text-color-secondary: #6b7280 !important;
+  --surface-border: rgba(255, 255, 255, 0.4) !important;
+}
+
+body, p, h1, h2, h3, h4, h5, h6, span, div, i {
+  color: var(--text-color);
+}
+
+.p-component, .p-card, .p-dialog, .p-calendar, .p-dropdown {
+  border-color: var(--surface-border) !important;
+}
+
+.app-card {
+  background: var(--neutral-bg-card);
+  border: 1px solid var(--neutral-border);
+  border-radius: var(--border-radius-medium);
+  padding: var(--space-5);
+  @include shadow('xs');
+  transition: var(--transition-base);
+
+  &.interactive {
+    @include hover-focus {
+      @include shadow('md');
+    }
+  }
+}
+
+.page-header {
+  @include flex(row, space-between, center, var(--space-4));
+  margin-bottom: var(--space-6);
+
+  .page-title {
+    h1 {
+      font-size: var(--font-size-3xl);
+      margin-bottom: var(--space-1);
+    }
+    p {
+      color: var(--neutral-text-secondary);
+      font-size: var(--font-size-sm);
+      margin: 0;
+    }
+  }
+
+  @include respond-to('mobile') {
+    @include flex(column, center, flex-start, var(--space-3));
+
+    .p-button {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,132 @@
+<div class="dashboard-inner-container">
+
+  <div class="dashboard-header">
+    <div>
+      <div class="dashboard-title">💼 نظام الحوكمة المالي والإشراف المركزي على الحسابات</div>
+      <div class="dashboard-subtitle">مرحباً أ. خالد بن عبد العزيز • مراقبة التدفقات النقدية، تسوية السندات، وإصدار الميزانيات الختمية</div>
+    </div>
+    <div class="header-actions">
+      <button pButton label="إنشاء سند قبض / صرف جديد" icon="pi pi-wallet" class="p-button-emerald p-button-sm font-cairo" (click)="onFinancialAction('new_voucher', '')"></button>
+      <button pButton label="ميزان المراجعة والقوائم المالي" icon="pi pi-print" class="p-button-outlined p-button-secondary p-button-sm font-cairo" (click)="onFinancialAction('print_balance', '')"></button>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    @for (stat of stats(); track stat.label) {
+      <div class="stat-card" [ngClass]="'card-' + stat.type">
+        <div class="stat-icon">
+          @if (stat.type === 'success') { 💰 }
+          @else if (stat.type === 'info') { 📉 }
+          @else if (stat.type === 'warning') { ⏳ }
+          @else if (stat.type === 'primary') { 📈 }
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">{{ stat.label }}</div>
+          <div class="stat-value">{{ stat.value }}</div>
+          <div class="stat-desc">{{ stat.desc }}</div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="widgets-grid-main">
+
+    <div class="widget-box">
+      <div class="widget-header-title">📥 كشف رسوم الطلاب وفواتير المبيعات الأكاديمية قيد التحصيل</div>
+      <div class="table-container">
+        <table class="enterprise-table">
+          <thead>
+            <tr>
+              <th>رقم الفاتورة</th>
+              <th>اسم الطالب الثلاثي</th>
+              <th>ولي الأمر الضامن</th>
+              <th>المرحلة الدراسية</th>
+              <th>المبلغ الكلي</th>
+              <th>المسدد الحالي</th>
+              <th>الذمة المتبقية</th>
+              <th>حالة السداد العامة</th>
+              <th>إجراءات</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (inv of studentInvoicesList(); track inv.id) {
+              <tr>
+                <td class="font-mono text-emerald-700"><strong>{{ inv.id }}</strong></td>
+                <td><strong>{{ inv.studentName }}</strong></td>
+                <td><span class="father-name-text">👤 {{ inv.fatherName }}</span></td>
+                <td><span class="grade-tag">{{ inv.gradeLevel }}</span></td>
+                <td class="font-mono text-xs font-bold">{{ inv.totalAmount | number }} ر.ي</td>
+                <td class="font-mono text-xs text-emerald-600">{{ inv.paidAmount | number }} ر.ي</td>
+                <td class="font-mono text-xs text-rose-600 font-bold">{{ inv.remainingAmount | number }} ر.ي</td>
+                <td>
+                  <span class="financial-status-badge" [ngClass]="inv.status">
+                    {{ inv.status === 'fully_paid' ? 'مسدد بالكامل' : inv.status === 'partially_paid' ? 'مسدد جزئياً' : 'مستحق بالكامل' }}
+                  </span>
+                </td>
+                <td>
+                  <button pButton label="إصدار إيصال" class="p-button-text p-button-sm p-0 font-cairo text-emerald-600 font-bold" (click)="onFinancialAction('print_invoice', inv.id)"></button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="widget-box">
+      <div class="widget-header-title">📊 منحنى السيولة (الإيرادات الإجمالية والمصروفات الحالية)</div>
+      <div class="chart-wrapper-box" style="height: 250px;">
+        <p-chart type="bar" [data]="cashFlowData" [options]="cashFlowOptions" width="100%" height="100%"></p-chart>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="widgets-grid-secondary">
+
+    <div class="widget-box">
+      <div class="widget-header-title">🛡️ سجل السندات التشغيلية اليومية المباشرة (Audit Trail Ledger)</div>
+      <div class="table-container">
+        <table class="enterprise-table">
+          <thead>
+            <tr>
+              <th>رمز السند</th>
+              <th>نوع السند</th>
+              <th>بيان الحركة التفصيلي</th>
+              <th>قيمة السند الحالية</th>
+              <th>الوقت واليوم</th>
+              <th>الموظف المنشئ للطلب</th>
+              <th>مركز التكلفة / الحساب</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (vch of recentVouchersList(); track vch.id) {
+              <tr>
+                <td class="font-mono text-xs text-slate-500">{{ vch.id }}</td>
+                <td>
+                  <span class="voucher-type-badge" [ngClass]="vch.type">
+                    {{ vch.type === 'receipt' ? '📥 سند قبض' : '📤 سند صرف' }}
+                  </span>
+                </td>
+                <td class="voucher-title-column"><strong>{{ vch.title }}</strong></td>
+                <td class="font-mono text-xs font-bold text-slate-800">{{ vch.amount | number }} ر.ي</td>
+                <td class="font-mono text-xs text-slate-500">⏰ {{ vch.date }}</td>
+                <td><span class="user-badge">{{ vch.createdBy }}</span></td>
+                <td><span class="category-tag-badge">{{ vch.accountCategory }}</span></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="widget-box">
+      <div class="widget-header-title">📈 توزيع وبنود الهيكل المالي للمصروفات</div>
+      <div class="chart-wrapper-box" style="height: 230px;">
+        <p-chart type="doughnut" [data]="expensePieData" [options]="expensePieOptions" width="100%" height="100%"></p-chart>
+      </div>
+    </div>
+
+  </div>
+
+</div>

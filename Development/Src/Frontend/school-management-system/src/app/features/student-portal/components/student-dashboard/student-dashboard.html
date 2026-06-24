@@ -1,0 +1,101 @@
+<div class="dashboard-inner-container">
+
+  <div class="dashboard-header">
+    <div>
+      <div class="dashboard-title">بوابة الطالب الأكاديمية</div>
+      <div class="dashboard-subtitle">مرحباً بك في نظام المتابعة الأكاديمية</div>
+    </div>
+    <div class="header-actions">
+      <button pButton label="الجدول الدراسي الفعلي" icon="pi pi-table" class="p-button-emerald p-button-sm font-cairo"></button>
+      <button pButton label="الإشعارات" icon="pi pi-bell" class="p-button-outlined p-button-secondary p-button-sm font-cairo"></button>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="loading-state"><i class="pi pi-spin pi-spinner"></i><span>جاري تحميل البيانات...</span></div>
+  }
+
+  @if (!loading() && stats().length === 0) {
+    <div class="empty-state"><i class="pi pi-inbox"></i><span>لا توجد بيانات متاحة حالياً</span></div>
+  }
+
+  @if (stats().length > 0) {
+  <div class="stats-grid">
+    @for (stat of stats(); track stat.label) {
+      <div class="stat-card" [ngClass]="'card-' + stat.type">
+        <div class="stat-icon">
+          @if (stat.type === 'primary') { 🎯 }
+          @else if (stat.type === 'success') { ✅ }
+          @else if (stat.type === 'warning') { ⏳ }
+          @else if (stat.type === 'info') { ⏰ }
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">{{ stat.label }}</div>
+          <div class="stat-value">{{ stat.value }}</div>
+          <div class="stat-change">{{ stat.change }}</div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="widgets-grid-main">
+
+    <div class="widget-box">
+      <div class="widget-header-title">الواجبات المنزلية والمهام الأكاديمية المطلوبة</div>
+      @if (homeworksList().length === 0) {
+        <div class="col-empty"><i class="pi pi-check-circle"></i><span>لا توجد واجبات حالياً</span></div>
+      } @else {
+      <div class="table-container">
+        <table class="enterprise-table">
+          <thead>
+            <tr>
+              <th>المادة</th>
+              <th>عنوان الواجب المطلوب</th>
+              <th>آخر موعد للتسليم</th>
+              <th>حالة التسليم</th>
+              <th>الإجراء</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (hw of homeworksList(); track hw.title) {
+              <tr>
+                <td><span class="subject-tag">{{ hw.subject }}</span></td>
+                <td><strong>{{ hw.title }}</strong></td>
+                <td>{{ hw.dueDate }}</td>
+                <td><span class="hw-status-badge" [ngClass]="hw.status">{{ hw.statusText }}</span></td>
+                <td>
+                  @if (hw.status !== 'submitted') {
+                    <button pButton label="رفع الحل" class="p-button-text p-button-sm p-0 font-cairo text-emerald-600 font-bold"></button>
+                  } @else {
+                    <span class="submitted-check">✓ تم</span>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      }
+    </div>
+
+    <div class="widget-box">
+      <div class="widget-header-title">الوصول السريع للمنصات</div>
+      <div class="quick-actions-grid">
+        <a class="quick-action-item"><span class="qa-icon">🎥</span>الحصص المسجلة</a>
+        <a class="quick-action-item"><span class="qa-icon">📝</span>الاختبارات الرقمية</a>
+        <a class="quick-action-item"><span class="qa-icon">📊</span>المكتبة الرقمية</a>
+        <a class="quick-action-item"><span class="qa-icon">💬</span>تواصل مع المعلم</a>
+      </div>
+
+      @if (charts(); as ch) {
+      <div class="widget-header-title secondary">منحنى تصاعد التحصيل الأكاديمي</div>
+      <div class="chart-wrapper-box" style="height: 230px;">
+        <p-chart type="line" [data]="ch.lineData" [options]="ch.lineOptions" width="100%" height="100%"></p-chart>
+      </div>
+      }
+    </div>
+
+  </div>
+  }
+
+</div>

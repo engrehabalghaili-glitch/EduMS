@@ -1,0 +1,126 @@
+<div class="dashboard-inner-container">
+  <div class="dashboard-header">
+    <div>
+      <div class="dashboard-title">قائمة الطلاب</div>
+      <div class="dashboard-subtitle">إدارة بيانات الطلاب المسجلين في المنظومة</div>
+    </div>
+    <button pButton label="+ إضافة طالب" class="p-button-primary p-button-sm" (click)="openNew()"></button>
+  </div>
+
+  <div class="card surface-card shadow-2 border-round-xl p-4">
+    <p-table #dt [value]="students()" [globalFilterFields]="['name','nationalId','className','guardianName','phone']" [loading]="loading()" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,25,50]" dataKey="id" styleClass="p-datatable-sm" currentPageReportTemplate="عرض {first} إلى {last} من إجمالي {totalRecords}" [showCurrentPageReport]="true">
+      <ng-template pTemplate="caption">
+        <div class="table-header">
+          <div class="table-header-start">
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" (input)="onGlobalFilter($event, dt)" placeholder="بحث عن طالب..." class="search-input" />
+            </span>
+          </div>
+          <div class="table-header-end">
+            <button pButton label="تصدير Excel" icon="pi pi-file-excel" class="p-button-success p-button-sm" (click)="exportExcel(dt)"></button>
+            <button pButton label="تصدير PDF" icon="pi pi-file-pdf" class="p-button-danger p-button-sm" (click)="exportPdf()"></button>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="name">الاسم <p-sortIcon field="name" /></th>
+          <th pSortableColumn="nationalId">رقم الهوية <p-sortIcon field="nationalId" /></th>
+          <th pSortableColumn="className">الصف الدراسي <p-sortIcon field="className" /></th>
+          <th pSortableColumn="guardianName">ولي الأمر <p-sortIcon field="guardianName" /></th>
+          <th pSortableColumn="phone">الهاتف <p-sortIcon field="phone" /></th>
+          <th>الإجراءات</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-student>
+        <tr>
+          <td><strong>{{ student.name }}</strong></td>
+          <td class="font-mono">{{ student.nationalId }}</td>
+          <td><span class="badge badge-info">{{ student.className }}</span></td>
+          <td>{{ student.guardianName }}</td>
+          <td dir="ltr" class="text-left">{{ student.phone }}</td>
+          <td>
+            <div class="action-buttons">
+              <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text p-button-sm" (click)="openEdit(student)"></button>
+              <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger p-button-sm" (click)="delete(student.id)"></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="6" class="text-center">لا يوجد طلاب</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <p-dialog [header]="(isEdit() ? 'تعديل بيانات طالب' : 'إضافة طالب جديد')" [(visible)]="dialogVisible" [modal]="true" [breakpoints]="{ '960px': '75vw', '640px': '90vw' }" [style]="{ width: '700px' }" [draggable]="false" [resizable]="false" styleClass="custom-dialog" [maskStyleClass]="'dialog-mask'">
+    <div class="dialog-body">
+      <form [formGroup]="form">
+        <div class="p-fluid formgrid grid">
+          <div class="field col-6">
+            <label for="name">اسم الطالب</label>
+            <input pInputText id="name" formControlName="name" placeholder="أدخل الاسم الكامل" />
+            @if (form.get('name')?.invalid && form.get('name')?.touched) {
+              <small class="p-error">الحقل مطلوب</small>
+            }
+          </div>
+          <div class="field col-6">
+            <label for="nationalId">رقم الهوية</label>
+            <input pInputText id="nationalId" formControlName="nationalId" placeholder="10 أرقام" class="font-mono" />
+            @if (form.get('nationalId')?.invalid && form.get('nationalId')?.touched) {
+              <small class="p-error">10 أرقام مطلوبة</small>
+            }
+          </div>
+          <div class="field col-6">
+            <label for="classId">الصف الدراسي</label>
+            <p-select id="classId" formControlName="classId" [options]="classOptions" optionLabel="label" optionValue="value" placeholder="اختر الصف" styleClass="w-full" appendTo="body" />
+            @if (form.get('classId')?.invalid && form.get('classId')?.touched) {
+              <small class="p-error">اختر الصف الدراسي</small>
+            }
+          </div>
+          <div class="field col-6">
+            <label for="phone">رقم الجوال</label>
+            <input pInputText id="phone" formControlName="phone" placeholder="05xxxxxxxx" class="font-mono" />
+            @if (form.get('phone')?.invalid && form.get('phone')?.touched) {
+              <small class="p-error">رقم جوال صحيح مطلوب</small>
+            }
+          </div>
+          <div class="field col-6">
+            <label for="guardianName">ولي الأمر</label>
+            <input pInputText id="guardianName" formControlName="guardianName" placeholder="اسم ولي الأمر" />
+            @if (form.get('guardianName')?.invalid && form.get('guardianName')?.touched) {
+              <small class="p-error">الحقل مطلوب</small>
+            }
+          </div>
+          <div class="field col-6">
+            <label for="guardianPhone">هاتف ولي الأمر</label>
+            <input pInputText id="guardianPhone" formControlName="guardianPhone" placeholder="05xxxxxxxx" class="font-mono" />
+            @if (form.get('guardianPhone')?.invalid && form.get('guardianPhone')?.touched) {
+              <small class="p-error">رقم جوال صحيح مطلوب</small>
+            }
+          </div>
+          <div class="field col-6">
+            <label for="email">البريد الإلكتروني</label>
+            <input pInputText id="email" formControlName="email" placeholder="email@example.com" />
+            @if (form.get('email')?.invalid && form.get('email')?.touched) {
+              <small class="p-error">بريد إلكتروني صحيح</small>
+            }
+          </div>
+          <div class="field col-6">
+            <label for="address">العنوان</label>
+            <input pInputText id="address" formControlName="address" placeholder="العنوان (اختياري)" />
+          </div>
+        </div>
+      </form>
+    </div>
+    <ng-template pTemplate="footer">
+      <div class="dialog-footer-buttons">
+        <button pButton label="إلغاء" class="p-button-text" (click)="dialogVisible.set(false)"></button>
+        <button pButton [label]="isEdit() ? 'حفظ التعديلات' : 'إضافة'" class="p-button-primary" [disabled]="form.invalid" (click)="save()"></button>
+      </div>
+    </ng-template>
+  </p-dialog>
+</div>

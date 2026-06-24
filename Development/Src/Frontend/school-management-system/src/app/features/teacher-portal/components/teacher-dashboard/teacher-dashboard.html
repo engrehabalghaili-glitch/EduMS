@@ -1,0 +1,136 @@
+<div class="dashboard-inner-container">
+
+  <div class="dashboard-header">
+    <div>
+      <div class="dashboard-title">📇 منصة المعلم الأكاديمية وإدارة الحصص الدراسية</div>
+      <div class="dashboard-subtitle">مرحباً أ. محمد بن راشد • معلم الفيزياء والمشرف التربوي للمرحلة الثانوية</div>
+    </div>
+    <div class="header-actions">
+      <button pButton label="رصد غياب اليوم فوري" icon="pi pi-user-check" class="p-button-purple p-button-sm font-cairo" (click)="onActionTriggered('live_attendance', 'all')"></button>
+      <button pButton label="إضافة واجب / اختبار جديد" icon="pi pi-plus" class="p-button-outlined p-button-secondary p-button-sm font-cairo" (click)="onActionTriggered('add_assignment', '')"></button>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    @for (stat of stats(); track stat.label) {
+      <div class="stat-card" [ngClass]="'card-' + stat.type">
+        <div class="stat-icon">
+          @if (stat.type === 'primary') { 👥 }
+          @else if (stat.type === 'success') { 📈 }
+          @else if (stat.type === 'warning') { ⏳ }
+          @else if (stat.type === 'info') { 📋 }
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">{{ stat.label }}</div>
+          <div class="stat-value">{{ stat.value }}</div>
+          <div class="stat-desc">{{ stat.desc }}</div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="widgets-grid-main">
+
+    <div class="widget-box">
+      <div class="widget-header-title">🏢 فصولك الدراسية وجدول الحصص النشط المربوط بالخطة الدراسية</div>
+      <div class="table-container">
+        <table class="enterprise-table">
+          <thead>
+            <tr>
+              <th>رمز الفصل</th>
+              <th>اسم الصف الدراسي</th>
+              <th>المادة الدراسية المسندة</th>
+              <th>عدد الطلاب المسجلين</th>
+              <th>المعدل الدراسي العام للفصل</th>
+              <th>توقيت الحصة القادمة اليوم</th>
+              <th>التحكم</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (cls of assignedClasses(); track cls.id) {
+              <tr>
+                <td class="font-mono text-purple-700"><strong>{{ cls.id }}</strong></td>
+                <td><strong>{{ cls.name }}</strong></td>
+                <td><span class="subject-badge">{{ cls.subject }}</span></td>
+                <td><span class="count-tag">👤 {{ cls.totalStudents }} طالب</span></td>
+                <td>
+                  <strong class="text-slate-800">{{ cls.averageGrade }}%</strong>
+                  <div class="progress-bar-mini"><div class="fill" [style.width.%]="cls.averageGrade"></div></div>
+                </td>
+                <td><span class="time-badge">⏰ {{ cls.nextLessonTime }}</span></td>
+                <td>
+                  <button pButton label="سجل الدرجات" class="p-button-text p-button-sm p-0 font-cairo text-purple-600 font-bold" (click)="onActionTriggered('view_grades', cls.id)"></button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="widget-box">
+      <div class="widget-header-title">📊 تحليل مهارات ومخرجات مادة الفيزياء</div>
+      <div class="chart-wrapper-box" style="height: 240px;">
+        <p-chart type="radar" [data]="radarData" [options]="radarOptions" width="100%" height="100%"></p-chart>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="widgets-grid-secondary">
+
+    <div class="widget-box">
+      <div class="widget-header-title">📝 واجبات، اختبارات قصيرة ومهام أدائية منشورة للطلاب</div>
+      <div class="table-container">
+        <table class="enterprise-table">
+          <thead>
+            <tr>
+              <th>رمز المهمة</th>
+              <th>عنوان التكليف / الواجب</th>
+              <th>الفصل المستهدف</th>
+              <th>نسبة التسليم الفعلية</th>
+              <th>آخر موعد للتسليم</th>
+              <th>حالة النشاط</th>
+              <th>إجراء</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (asm of assignmentsList(); track asm.id) {
+              <tr>
+                <td class="font-mono text-xs text-slate-500">{{ asm.id }}</td>
+                <td><strong>{{ asm.title }}</strong></td>
+                <td><span class="target-class-badge">{{ asm.targetClass }}</span></td>
+                <td>
+                  <strong class="text-indigo-600">{{ asm.submittedCount }} / {{ asm.totalCount }}</strong>
+                  <span class="text-xs text-slate-400"> ({{ (asm.submittedCount / asm.totalCount * 100) | number:'1.0-0' }}%)</span>
+                </td>
+                <td><span class="font-mono text-xs">📅 {{ asm.dueDate }}</span></td>
+                <td>
+                  <span class="status-badge" [ngClass]="asm.status">
+                    {{ asm.status === 'active' ? 'نشط ويستقبل حلول' : asm.status === 'grading_completed' ? 'تم الرصد والاعتماد' : 'مجدول لاحقاً' }}
+                  </span>
+                </td>
+                <td>
+                  <button pButton [label]="asm.status === 'grading_completed' ? 'تعديل الدرجات' : 'رصد وتصحيح'"
+                          class="p-button-text p-button-sm p-0 font-cairo font-bold"
+                          [ngClass]="asm.status === 'grading_completed' ? 'text-slate-500' : 'text-purple-600'"
+                          (click)="onActionTriggered('grade_assignment', asm.id)">
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="widget-box">
+      <div class="widget-header-title">📈 معدل انضباط حضور ومشاركة الطلاب الحية</div>
+      <div class="chart-wrapper-box" style="height: 250px;">
+        <p-chart type="line" [data]="attendanceLineData" [options]="attendanceLineOptions" width="100%" height="100%"></p-chart>
+      </div>
+    </div>
+
+  </div>
+
+</div>

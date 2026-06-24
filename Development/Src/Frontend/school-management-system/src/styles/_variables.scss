@@ -1,0 +1,217 @@
+// ============================================================
+// نظام التصميم المتكامل (Comprehensive Design System Variables)
+// ============================================================
+
+// ------------------------------------------------------------
+// 1. الخطوط وطباعة النصوص (Typography)
+// ------------------------------------------------------------
+$font-family-primary: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+$font-family-monospace: monospace;
+
+// أحجام الخطوط (Font Sizes - يعتمد على المقياس الشائع 1rem = 16px)
+$font-size-xs:    0.75rem;   // 12px (النصوص المتناهية الصغر)
+$font-size-sm:    0.875rem;  // 14px (النصوص الفرعية، التسميات Labels)
+$font-size-base:  1rem;      // 16px (النص الأساسي للموقع Body)
+$font-size-lg:    1.125rem;  // 18px (العناوين الصغيرة أو النصوص البارزة)
+$font-size-xl:    1.25rem;   // 20px (عناوين الكروت والمكونات)
+$font-size-2xl:   1.5rem;    // 24px (عنوان H3)
+$font-size-3xl:   1.875rem;  // 30px (عنوان H2)
+$font-size-4xl:   2.25rem;   // 36px (عنوان H1 الرئيسي)
+
+// أوزان الخطوط (Font Weights)
+$font-weight-light:   300;
+$font-weight-regular: 400;
+$font-weight-medium:  500;
+$font-weight-bold:    700;
+
+// ارتفاع الأسطر (Line Heights)
+$line-height-none:   1;
+$line-height-tight:  1.25;  // للعناوين الكبيرة منعاً لتداخل الأسطر
+$line-height-base:   1.5;   // للنصوص الطويلة والمقالات ومريح جداً للعين
+$line-height-loose:  1.75;  // للفراغات الإضافية بين الأسطر
+
+// ------------------------------------------------------------
+// 2. ألوان الثيم الأساسية (Theme Colors)
+// ------------------------------------------------------------
+$primary-base:  #1a5fa3;      // الأزرق الأساسي (مثل أزرار الحفظ الرئيسية)
+$primaryColor: #0e1f62;
+$primary-dark:  #0d47a1;      // الأزرق الداكن (للحالات التفاعلية Hover)
+$primary-light: #e3f2fd;      // الأزرق الفاتح جداً (للعناصر المحددة والخلفيات الخفيفة)
+
+$secondary-base:     #10B981;
+$secondary-light:    #34D399;
+$secondary-dark:     #047857;
+$secondary-light-bg: #D1FAE5;
+
+// ------------------------------------------------------------
+// 3. الألوان الوظيفية (Semantic Colors)
+// ------------------------------------------------------------
+$success-color: #2e7d32;      // الأخضر (عمليات النجاح، الحضور، التميز)
+$danger-color:  #c62828;      // الأحمر (الطوارئ، الإنذارات، الحذف، الأخطاء)
+$warning-color: #f57c00;      // الأصفر (التنبيهات، الأعذار، الفوترة المتأخرة)
+$info-color:    #0288d1;      // الأزرق الفاتح (الإحصاءات، التقارير، المعلومات الإضافية)
+
+// ------------------------------------------------------------
+// 4. الألوان المحايدة المتطورة (Advanced Neutral Colors)
+// ------------------------------------------------------------
+$neutral-bg-page:        #f4f6fa; // خلفية الصفحة الرئيسية (رمادية فاتحة مريحة)
+$neutral-bg-card:        #ffffff; // خلفية البطاقات والجداول (أبيض ناصع)
+$neutral-bg-disabled:    #f1f5f9; // خلفية العناصر المعطلة (Disabled Inputs/Buttons)
+$neutral-hover-bg:       #f8fafc; // خلفية التمرير فوق العناصر (Hover Table Rows/Lists)
+
+$neutral-text-primary:   #1e293b; // النصوص الرئيسية والعناوين (داكنة مريحة)
+$neutral-text-secondary: #64748b; // النصوص الفرعية والفقرات الجانبية
+$neutral-text-disabled:  #94a3b8; // للنصوص المعطلة أو التلميحات الباهتة جداً Placeholder
+
+$neutral-border:         #e2e8f0; // لون الحدود الأساسية والفواصل
+$neutral-border-light:   #f1f5f9; // للحدود الداخلية الخفيفة جداً داخل البطاقات
+
+// ------------------------------------------------------------
+// 5. نظام الشفافية (Opacity Tokens)
+// ------------------------------------------------------------
+$opacity-hover:    0.08;
+$opacity-active:   0.12;
+$opacity-disabled: 0.38;
+$opacity-overlay:  0.5;       // لخلفية المودال والـ Overlays الداكنة
+
+// ------------------------------------------------------------
+// 6. نظام الفراغات والتباعد الموحد (Global Spacing Scale)
+// ------------------------------------------------------------
+// يُستخدم هذا النظام للـ Margin و Padding و Gap بدلاً من حصرها بنوع واحد
+$space-1:  0.25rem; // 4px
+$space-2:  0.5rem;  // 8px
+$space-3:  0.75rem; // 12px
+$space-4:  1rem;    // 16px
+$space-5:  1.25rem; // 20px
+$space-6:  1.5rem;  // 24px
+$space-8:  2rem;    // 32px
+$space-10: 2.5rem; // 40px
+$space-12: 3rem;   // 48px
+
+// ------------------------------------------------------------
+// 7. المتغيرات الهيكلية والحواف (Structural & Radii)
+// ------------------------------------------------------------
+$border-radius-small:  6px;   // الحواف المستديرة للمكونات الصغيرة (أزرار، مدخلات)
+$border-radius-medium: 10px;  // الحواف للمكونات المتوسطة (بطاقات، جداول)
+$border-radius-large:  16px;  // للحاويات الكبيرة (مودال، قوائم جانبية)
+$border-radius-xl:     18px;  // للحاويات المربعة والبارزة جداً
+$border-radius-full:   50%;   // دائري كامل (للصور الشخصية Avatar والـ Badges)
+
+// نقاط التوقف للشاشات المتجاوبة (Breakpoints)
+$breakpoint-mobile:  576px;
+$breakpoint-tablet:  768px;
+$breakpoint-desktop: 1024px;
+$breakpoint-wide:    1440px;
+
+// ------------------------------------------------------------
+// 8. نظام الظلال الفاخر (Shadows Scale)
+// ------------------------------------------------------------
+$shadow-xs:   0 1px 2px rgba(15, 23, 42, 0.04);
+$shadow-sm:   0 2px 4px rgba(15, 23, 42, 0.06);
+$shadow-md:   0 4px 12px rgba(15, 23, 42, 0.08);
+$shadow-lg:   0 10px 25px rgba(15, 23, 42, 0.12);
+$shadow-xl:   0 20px 40px rgba(15, 23, 42, 0.15);
+$shadow-gold: 0 4px 18px rgba(212, 175, 55, 0.35);
+$shadow-blue: 0 4px 18px rgba(30, 58, 138, 0.25);
+
+// ------------------------------------------------------------
+// 9. تأثيرات الانتقال والتفاعل (Transitions)
+// ------------------------------------------------------------
+$transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+// ------------------------------------------------------------
+// 10. تخطيط الهيكل الرئيسي (Layout Styles)
+// ------------------------------------------------------------
+$sidebar-width:           280px;
+$sidebar-collapsed-width: 80px;
+$topbar-height:           68px;
+$content-max-width:       1600px;
+
+// طبقات العناصر فوق بعضها (Z-Index Scale)
+$z-sidebar: 40;
+$z-topbar:  50;
+$z-modal:   100;
+$z-toast:   110;
+$z-tooltip: 120;
+// // ============================================================
+// // المتغيرات الأساسية لنظام التصميم (Design System Variables)
+// // ============================================================
+
+// // 1. الخطوط (Typography)
+// $font-family-primary: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+// $font-family-monospace: monospace;
+
+// // 2. الألوان الأساسية للثيم (Theme Colors - درجات الأزرق)
+// $primary-base: #1976d2;       // الأزرق الأساسي (مثل أزرار الحفظ الرئيسية)
+// $primary-dark: #0d47a1;       // الأزرق الداكن (للحالات التفاعلية)
+// $primary-light: #e3f2fd;      // الأزرق الفاتح جداً (للخلفيات المحددة)
+
+// // الألوان الثانوية
+// $secondary-base: #10B981;
+// $secondary-light: #34D399;
+// $secondary-dark: #047857;
+// $secondary-light-bg: #D1FAE5;
+
+// // 3. الألوان الوظيفية (Semantic Colors)
+// $success-color: #2e7d32;      // الأخضر (عمليات النجاح، الحضور، التميز)
+// $danger-color: #c62828;       // الأحمر (الطوارئ، الإنذارات، الحذف، الأخطاء)
+// $warning-color: #f57c00;      // الأصفر (التنبيهات، الأعذار، الفوترة المتأخرة)
+// $info-color: #0288d1;         // الأزرق الفاتح (الإحصاءات، التقارير، المعلومات الإضافية)
+
+// // 4. الألوان المحايدة (Neutral Colors)
+// $neutral-bg-page: #f4f6fa;    // خلفية الصفحة الرئيسية (رمادية فاتحة مريحة)
+// $neutral-bg-card: #ffffff;    // خلفية البطاقات والجداول (أبيض ناصع)
+// $neutral-text-primary: #1e293b; // النصوص الرئيسية (داكنة مريحة)
+// $neutral-text-secondary: #64748b; // النصوص الفرعية (رمادية باهتة)
+// $neutral-border: #e2e8f0;      // لون الحدود والفواصل
+// $neutral-hover-bg: #f8fafc;    // خلفية التمرير فوق العناصر
+// // 5. المتغيرات الهيكلية (Structural)
+// $border-radius-small: 6px;     // الحواف المستديرة للمكونات الصغيرة (أزرار، مدخلات)
+// $border-radius-medium: 10px;   // الحواف للمكونات المتوسطة (بطاقات، جداول)
+// $border-radius-large: 16px;    // للحاويات الكبيرة (مودال، قوائم جانبية)
+// $border-radius-xl: 18px;    // للحاويات المربعة
+// $border-radius-full: 50%;    // دائري
+
+// // نقاط التوقف للشاشات (Breakpoints)
+// $breakpoint-mobile: 576px;
+// $breakpoint-tablet: 768px;
+// $breakpoint-desktop: 1024px;
+// $breakpoint-wide: 1440px;
+
+// //spacing
+// $padding-space-1:4px;
+// $padding-space-2:8px;
+// $padding-space-3:12px;
+// $padding-space-4:16px;
+// $padding-space-6:24px;
+// $padding-space-8:32px;
+// $padding-space-12:48px;
+
+// //shadows
+// $shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+// $shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.06);
+// $shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+// $shadow-lg: 0 10px 25px rgba(15, 23, 42, 0.12);
+// $shadow-xl: 0 20px 40px rgba(15, 23, 42, 0.15);
+// $shadow-gold: 0 4px 18px rgba(212, 175, 55, 0.35);
+// $shadow-blue: 0 4px 18px rgba(30, 58, 138, 0.25);
+
+// /* Transitions */
+// $transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+// $transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+// $transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+// /* Layout */
+// $sidebar-width: 280px;
+// $sidebar-collapsed-width: 80px;
+// $topbar-height: 68px;
+// $content-max-width: 1600px;
+// $z-sidebar: 40;
+// $z-topbar: 50;
+// $z-modal: 100;
+// $z-toast: 110;
+// $z-tooltip: 120;
+
+

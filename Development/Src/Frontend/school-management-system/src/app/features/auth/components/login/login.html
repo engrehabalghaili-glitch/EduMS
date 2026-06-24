@@ -1,0 +1,177 @@
+<p-toast position="top-center"></p-toast>
+
+<div class="login-card-wrap">
+  <h2>مرحباً بعودتك </h2>
+  <p class="lead-text">قم بتسجيل الدخول للوصول إلى نظامك التعليمي والإداري الموحد.</p>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="enterprise-form">
+
+    <div class="form-group">
+      <label class="form-label" for="username">اسم المستخدم أو البريد الإلكتروني <span class="required">*</span></label>
+      <div class="p-input-icon-left w-full input-wrapper">
+        <i class="pi pi-user field-icon"></i>
+        <input
+          id="username"
+          type="text"
+          pInputText
+          formControlName="username"
+          placeholder="مثال: admin@edums.demo"
+          class="w-full form-control-prime"
+          [ngClass]="{'ng-invalid ng-dirty': loginForm.get('username')?.touched && loginForm.get('username')?.invalid}"
+        />
+      </div>
+      @if (loginForm.get('username')?.touched && loginForm.get('username')?.hasError('required')) {
+        <small class="p-error block mt-1 font-cairo">اسم المستخدم مطلوب لإتمام عملية الفحص.</small>
+      }
+      @if (loginForm.get('username')?.touched && loginForm.get('username')?.hasError('email')) {
+        <small class="p-error block mt-1 font-cairo">الرجاء إدخال بريد إلكتروني يتبع الصيغ القياسية الصحيحة.</small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="password">كلمة المرور <span class="required">*</span></label>
+      <div class="p-input-icon-left w-full input-wrapper">
+        <i class="pi pi-lock field-icon"></i>
+        <input
+          id="password"
+          [type]="showPassword() ? 'text' : 'password'"
+          pInputText
+          formControlName="password"
+          placeholder="••••••••"
+          class="w-full form-control-prime"
+          [ngClass]="{'ng-invalid ng-dirty': loginForm.get('password')?.touched && loginForm.get('password')?.invalid}"
+        />
+        <i
+          [class]="showPassword() ? 'pi pi-eye-slash' : 'pi pi-eye'"
+          class="password-toggle-icon"
+          (click)="togglePasswordVisibility()">
+        </i>
+      </div>
+      @if (loginForm.get('password')?.touched && loginForm.get('password')?.hasError('minlength')) {
+        <small class="p-error block mt-1 font-cairo">يجب ألا تقل كلمة المرور عن 6 خانات.</small>
+      }
+    </div>
+
+    <div class="form-actions-row">
+      <div class="checkbox-container">
+        <p-checkbox formControlName="rememberMe" [binary]="true" inputId="rememberMe"></p-checkbox>
+        <label for="rememberMe" class="remember-label">تذكرني</label>
+      </div>
+      <a routerLink="/auth/forgot-password" class="forgot-password-link">نسيت كلمة المرور؟</a>
+    </div>
+
+    <button
+      pButton
+      type="submit"
+      [label]="isLoading() ? 'جاري التحقق الآمن...' : 'تسجيل الدخول'"
+      [icon]="isLoading() ? 'pi pi-spin pi-spinner' : 'pi pi-sign-in'"
+      [disabled]="loginForm.invalid || isLoading()"
+      class="w-full enterprise-submit-btn font-cairo">
+    </button>
+
+    <div class="no-account-row">
+      ليس لديك حساب؟ <a href="javascript:void(0)" class="contact-admin">تواصل مع إدارة تكنولوجيا المعلومات</a>
+    </div>
+
+    <div class="alert-demo-box">
+      <div class="alert-demo-header">
+        <i class="pi pi-info-circle alert-demo-icon"></i>
+        <span>البيانات التجريبية المربوطة بالحراس (Guards):</span>
+      </div>
+      <div class="alert-demo-body">
+        للانتقال الفوري إلى لوحات التحكم دون تعارض مع الحراس، استخدم الحسابات التالية:
+        <ul style="margin: 5px 0 0 0; padding-right: 20px; list-style-type: disc;">
+          <li><b>المدير العام:</b> admin@edums.demo</li>
+          <li><b>الإدارة المالية:</b> finance@edums.demo</li>
+          <li><b>بوابة المعلمين:</b> teacher@edums.demo</li>
+        </ul>
+        <span style="display: block; margin-top: 5px; font-size: 0.85rem; opacity: 0.9;">كلمة المرور الموحدة: <b>demo123</b></span>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<!-- <p-toast position="top-center"></p-toast>
+
+<div class="login-card-wrap">
+  <h2>مرحباً بعودتك </h2>
+  <p class="lead-text">قم بتسجيل الدخول للوصول إلى نظامك التعليمي والإداري.</p>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="enterprise-form">
+
+    <div class="form-group">
+      <label class="form-label" for="username">اسم المستخدم أو البريد الإلكتروني <span class="required">*</span></label>
+      <div class="p-input-icon-left w-full input-wrapper">
+        <i class="pi pi-user field-icon"></i>
+        <input
+          id="username"
+          type="text"
+          pInputText
+          formControlName="username"
+          placeholder="مثال: ahmad@edums.gov.ye"
+          class="w-full form-control-prime"
+          [ngClass]="{'ng-invalid ng-dirty': loginForm.get('username')?.touched && loginForm.get('username')?.invalid}"
+        />
+      </div>
+      @if (loginForm.get('username')?.touched && loginForm.get('username')?.hasError('email')) {
+        <small class="p-error block mt-1 font-cairo">الرجاء إدخال بريد إلكتروني يتبع الصيغ القياسية الصحيحة.</small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="password">كلمة المرور <span class="required">*</span></label>
+      <div class="p-input-icon-left w-full input-wrapper">
+        <i class="pi pi-lock field-icon"></i>
+        <input
+          id="password"
+          [type]="showPassword() ? 'text' : 'password'"
+          pInputText
+          formControlName="password"
+          placeholder="••••••••"
+          class="w-full form-control-prime"
+          [ngClass]="{'ng-invalid ng-dirty': loginForm.get('password')?.touched && loginForm.get('password')?.invalid}"
+        />
+        <i
+          [class]="showPassword() ? 'pi pi-eye-slash' : 'pi pi-eye'"
+          class="password-toggle-icon"
+          (click)="togglePasswordVisibility()">
+        </i>
+      </div>
+    </div>
+
+    <div class="form-actions-row">
+      <div class="checkbox-container">
+        <p-checkbox formControlName="rememberMe" [binary]="true" inputId="rememberMe"></p-checkbox>
+        <label for="rememberMe" class="remember-label">تذكرني</label>
+      </div>
+      <a routerLink="/auth/forgot-password" class="forgot-password-link">نسيت كلمة المرور؟</a>
+    </div>
+
+    <button
+    pButton
+    type="submit"
+    [label]="isLoading() ? 'جاري التحقق الآمن...' : 'تسجيل الدخول'"
+    [icon]="isLoading() ? 'pi pi-spin pi-spinner' : 'pi pi-sign-in'"
+    [disabled]="loginForm.invalid || isLoading()"
+    class="w-full enterprise-submit-btn font-cairo"
+
+    >
+  </button>
+
+    <div class="no-account-row">
+      ليس لديك حساب؟ <a href="javascript:void(0)" class="contact-admin">تواصل مع مدير النظام</a>
+    </div>
+
+    <div class="alert-demo-box">
+      <div class="alert-demo-header">
+        <i class="pi pi-info-circle alert-demo-icon"></i>
+        <span>حسابات تجريبية للعرض:</span>
+      </div>
+      <div class="alert-demo-body">
+        أي اسم مستخدم وكلمة مرور تعملان للعرض التجريبي في هذه المرحلة. يمكنك لاحقاً تبديل الدور والأذونات التشغيلية من القائمة العلوية داخل لوحة التحكم الشاملة.
+      </div>
+    </div>
+
+  </form>
+</div> -->

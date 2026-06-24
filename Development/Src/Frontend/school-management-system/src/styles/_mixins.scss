@@ -1,0 +1,103 @@
+// src/styles/_mixins.scss
+@use './variables' as *;
+@use "sass:map";
+// ============================================================
+// 1. الميكسين الذكي للاستجابة للشاشات (Responsive Layouts)
+// ============================================================
+// جمع الشاشات في Map ليسهل التحكم بها ولتغطية كافة أنواع الأجهزة
+$breakpoints: (
+  'mobile':  576px,
+  'tablet':  768px,
+  'desktop': 1024px,
+  'wide':    1440px
+);
+
+@mixin respond-to($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (max-width: map.get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "عذراً، لم يتم العثور على الشاشة المسمّاة: (#{$breakpoint}) في النظام.";
+  }
+}
+
+// ============================================================
+// 2. ميكسينز التخطيط المرن (Advanced Flexbox Layouts)
+// ============================================================
+// ميكسين مرن يتحكم في الاتجاه، التوزيع، والمحاذاة، والفراغات (Gap) في سطر واحد
+@mixin flex($direction: row, $justify: flex-start, $align: center, $gap: null) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  @if $gap {
+    gap: $gap;
+  }
+}
+
+// ميكسين سريع للتوسيط الكامل (استدعاء للميكسين الأساسي في الأعلى)
+@mixin flex-center {
+  @include flex(row, center, center);
+}
+
+// ============================================================
+// 3. ميكسينز دعم الاتجاهات (RTL / LTR) الاحترافي
+// ============================================================
+// ميكسين ذكي للتحكم بالاتجاه بدقة دون تكرار كود الـ CSS
+@mixin rtl {
+  [dir='rtl'] & {
+    @content;
+  }
+}
+
+// ============================================================
+// 4. ميكسينز الظلال المتوافقة مع نظام التصميم (Dynamic Shadows)
+// ============================================================
+// الآن تقرأ الظلال مباشرة من الـ CSS Variables التي أنشأناها لتقليل حجم الكود وتسهيل الـ Dark Mode
+@mixin shadow($size: 'md') {
+  @if $size == 'xs' { box-shadow: var(--shadow-xs); }
+  @if $size == 'sm' { box-shadow: var(--shadow-sm); }
+  @if $size == 'md' { box-shadow: var(--shadow-md); }
+  @if $size == 'lg' { box-shadow: var(--shadow-lg); }
+  @if $size == 'xl' { box-shadow: var(--shadow-xl); }
+  @if $size == 'gold' { box-shadow: var(--shadow-gold); } // مخصص للوحات التميز والجوائز بالمدرسة
+  @if $size == 'blue' { box-shadow: var(--shadow-blue); } // مخصص للوحات الإحصاءات والتقارير
+}
+
+// ============================================================
+// 5. ميكسينز مساعدة لإراحة العين وتوفير الوقت (Utility Mixins)
+// ============================================================
+
+// ميكسين لقص النصوص الطويلة وعرض نقاط (...) مفيد جداً في أسماء الطلاب أو عناوين الكتب الطويلة بجداول البيانات
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ميكسين لتأثيرات التمرير الاحترافية (Smooth Hover Effect) للأزرار والكروت
+@mixin hover-focus {
+  &:hover, &:focus {
+    @content;
+    outline: none;
+  }
+}
+
+// ميكسين لإنشاء شريط التمرير (Scrollbar) بشكل أنيق يتناسب مع نظام المدرسة بدلاً من شكل المتصفح التقليدي السيء
+@mixin custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: var(--neutral-bg-page);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--neutral-text-disabled);
+    border-radius: var(--border-radius-sm);
+    &:hover {
+      background: var(--neutral-text-secondary);
+    }
+  }
+}
