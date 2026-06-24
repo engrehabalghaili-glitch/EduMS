@@ -1,0 +1,53 @@
+<div class="asset-list-page" dir="rtl">
+  <div class="list-header">
+    <div>
+      <h1>سجل الأصول</h1>
+      <p class="list-subtitle">عرض وإدارة جميع الأصول المسجلة في المنظومة</p>
+    </div>
+    <a routerLink="/assets-management/registration/register" class="add-btn">
+      <span class="pi pi-plus"></span>
+      تسجيل أصل جديد
+    </a>
+  </div>
+
+  <app-card>
+    <div class="toolbar">
+      <div class="toolbar-filters">
+        <app-input-text
+          [ngModel]="store.filter().search"
+          (ngModelChange)="onSearch($event)"
+          placeholder="بحث بالاسم أو الباركود..."
+          inputId="asset-search"
+          styleClass="search-input"
+        />
+        <app-select
+          [options]="categoryOptions"
+          [ngModel]="store.filter().category"
+          (ngModelChange)="onCategoryChange($event)"
+          placeholder="الفئة"
+          styleClass="filter-select"
+        />
+        <app-select
+          [options]="statusOptions"
+          [ngModel]="store.filter().status"
+          (ngModelChange)="onStatusChange($event)"
+          placeholder="الحالة"
+          styleClass="filter-select"
+        />
+      </div>
+      <div class="toolbar-actions">
+        @if (store.selectedIds().length > 0) {
+          <span class="selection-count">{{ store.selectedIds().length }} مُحدد</span>
+          <app-button label="إلغاء التحديد" icon="pi pi-times" styleClass="p-button-text" (click)="store.clearSelection()" />
+        }
+      </div>
+    </div>
+
+    <app-data-table
+      [data]="store.filteredAssets()"
+      [columns]="columns"
+      [config]="tableConfig"
+      [actions]="[]"
+    />
+  </app-card>
+</div>

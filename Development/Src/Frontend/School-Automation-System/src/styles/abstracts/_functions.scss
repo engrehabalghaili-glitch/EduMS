@@ -1,0 +1,60 @@
+@use 'sass:math';
+@use 'sass:color';
+@use 'sass:list';
+@use 'sass:map';
+
+@function rem($px) {
+  @if math.is-unitless($px) {
+    @return math.div($px, 16) * 1rem;
+  }
+  @return math.div($px, 16px) * 1rem;
+}
+
+@function em($px, $base: 16px) {
+  @if math.is-unitless($px) {
+    @return math.div($px, $base) * 1em;
+  }
+  @return math.div($px, $base) * 1em;
+}
+
+@function z-index($key) {
+  $z-indexes: (
+    dropdown: 1000,
+    sticky: 1020,
+    fixed: 1030,
+    drawer: 1040,
+    modal: 1050,
+    popover: 1060,
+    tooltip: 1070,
+    toast: 1080,
+  );
+  @return map.get($z-indexes, $key);
+}
+
+@function contrast-color($bg-color, $light: #ffffff, $dark: #1e293b) {
+  $brightness: (color.red($bg-color) * 299 + color.green($bg-color) * 587 + color.blue($bg-color) * 114) / 1000;
+  @if $brightness > 128 {
+    @return $dark;
+  }
+  @return $light;
+}
+
+@function tint($color, $percentage) {
+  @return color.mix(white, $color, $percentage);
+}
+
+@function shade($color, $percentage) {
+  @return color.mix(black, $color, $percentage);
+}
+
+@function theme-color($key, $shade: 500) {
+  $theme-colors: (
+    primary: var(--primary-#{$shade}),
+    secondary: var(--secondary-#{$shade}),
+    success: var(--success-#{$shade}),
+    warning: var(--warning-#{$shade}),
+    danger: var(--danger-#{$shade}),
+    info: var(--info-#{$shade}),
+  );
+  @return map.get($theme-colors, $key);
+}

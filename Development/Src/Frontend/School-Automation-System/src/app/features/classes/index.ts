@@ -1,0 +1,1 @@
+export { classesRoutes } from './routes';

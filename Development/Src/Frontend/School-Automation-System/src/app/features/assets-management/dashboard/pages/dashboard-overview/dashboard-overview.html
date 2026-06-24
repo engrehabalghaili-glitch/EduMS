@@ -1,0 +1,138 @@
+<div class="overview-page" dir="rtl">
+  <section class="overview-header">
+    <h1>لوحة تحكم الأصول</h1>
+    <p class="overview-subtitle">نظرة شاملة على أصول المدرسة وإدارة الموارد</p>
+  </section>
+
+  <section class="kpi-row">
+    @for (kpi of store.kpiCards(); track kpi.label) {
+      <app-stats-card [config]="kpi" />
+    }
+  </section>
+
+  <section class="section-row two-col">
+    <div class="section-col">
+      <app-card header="توزيع الأصول حسب الفئة">
+        <div class="chart-container">
+          <app-chart type="doughnut" [data]="store.categoryDistribution()" [options]="store.categoryOptions" height="280px" />
+        </div>
+      </app-card>
+    </div>
+    <div class="section-col">
+      <app-card header="أعلى 5 أصول قيمة">
+        <div class="top-assets-list">
+          @for (asset of store.topAssets(); track asset.id) {
+            <div class="top-asset-item" (click)="showAssetDetails(asset)">
+              <span [class]="assetTypeIcon(asset.category)" class="asset-type-icon"></span>
+              <div class="asset-info">
+                <span class="asset-name">{{ asset.name }}</span>
+                <span class="asset-meta">{{ asset.location }} · {{ asset.assignedTo }}</span>
+              </div>
+              <div class="asset-value">{{ asset.purchaseCost | number }} رس</div>
+              <app-asset-status-badge [value]="asset.status" mapType="asset" />
+            </div>
+          }
+        </div>
+      </app-card>
+    </div>
+  </section>
+
+  <section class="section-row two-col">
+    <div class="section-col">
+      <app-card header="الإهلاك والقيمة الدفترية">
+        <div class="chart-container">
+          <app-chart type="bar" [data]="store.depreciationData()" [options]="store.depreciationOptions" height="300px" />
+        </div>
+      </app-card>
+    </div>
+    <div class="section-col">
+      <app-card header="أصول تجاوزت العمر الافتراضي">
+        <div class="expired-list">
+          @for (exp of store.expiredAssets(); track exp.name) {
+            <div class="expired-item">
+              <div class="expired-header">
+                <span class="pi pi-exclamation-triangle expired-icon"></span>
+                <span class="expired-name">{{ exp.name }}</span>
+              </div>
+              <p class="expired-reason">{{ exp.reason }}</p>
+              <div class="expired-footer">
+                <span class="expired-year">سنة الشراء: {{ exp.purchaseYear }}</span>
+                <span class="expired-cost">تكلفة الاستبدال: {{ exp.replacementCost | number }} رس</span>
+              </div>
+            </div>
+          }
+        </div>
+      </app-card>
+    </div>
+  </section>
+
+  <section class="section-row">
+    <app-card header="التكامل مع مكتب التربية">
+      <div class="bureau-content">
+        <div class="bureau-status">
+          @if (store.bureauReport(); as report) {
+            <div class="bureau-stat">
+              <span class="stat-label">آخر مزامنة</span>
+              <span class="stat-value">{{ report.lastSyncDate | date:'yyyy/MM/dd' }}</span>
+            </div>
+            <div class="bureau-stat">
+              <span class="stat-label">الأصول المحلية</span>
+              <span class="stat-value">{{ report.localCount }}</span>
+            </div>
+            <div class="bureau-stat">
+              <span class="stat-label">كشف المكتب</span>
+              <span class="stat-value">{{ report.bureauCount }}</span>
+            </div>
+            <div class="bureau-stat">
+              <span class="stat-label">حالة المطابقة</span>
+              <app-tag [value]="report.status === 'partial-match' ? 'مطابقة جزئية' : 'مطابقة كاملة'" severity="warn" />
+            </div>
+          }
+        </div>
+        <div class="bureau-diffs">
+          @if (store.bureauReport(); as report) {
+            <div class="diff-section">
+              <span class="diff-title extra">أصول زائدة (+{{ report.extraAssets.length }})</span>
+              @for (item of report.extraAssets; track item) {
+                <div class="diff-item">{{ item }}</div>
+              }
+            </div>
+            <app-divider layout="vertical" />
+            <div class="diff-section">
+              <span class="diff-title missing">أصول ناقصة (-{{ report.missingAssets.length }})</span>
+              @for (item of report.missingAssets; track item) {
+                <div class="diff-item">{{ item }}</div>
+              }
+            </div>
+          }
+        </div>
+        <div class="bureau-actions">
+          <app-button label="مقارنة بآخر كشف من المكتب" icon="pi pi-refresh" (click)="compareWithBureau()" />
+          <app-button label="تصدير تقرير الجرد السنوي" icon="pi pi-file-pdf" styleClass="p-button-outlined" (click)="exportReport()" />
+        </div>
+      </div>
+    </app-card>
+  </section>
+
+  <section class="nav-cards-section">
+    <h2 class="nav-cards-title">الانتقال السريع</h2>
+    <div class="nav-cards-row">
+      @for (card of navCards; track card.route) {
+        <a [routerLink]="card.route" class="nav-card" [class]="'nav-card-' + card.color">
+          <span [class]="card.icon" class="nav-card-icon"></span>
+          <div class="nav-card-info">
+            <span class="nav-card-label">{{ card.label }}</span>
+            <span class="nav-card-desc">{{ card.desc }}</span>
+          </div>
+          <span class="pi pi-arrow-left nav-card-arrow"></span>
+        </a>
+      }
+    </div>
+  </section>
+</div>
+
+<app-drawer [(visible)]="drawerVisible" header="تفاصيل الأصل" width="480px">
+  @if (selectedAsset(); as asset) {
+    <app-asset-info-grid [asset]="asset" />
+  }
+</app-drawer>

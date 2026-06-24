@@ -1,0 +1,8 @@
+body {
+  font-family: var(--font-family-sans);
+}
+
+[lang="ar"],
+[dir="rtl"] {
+  font-family: var(--font-family-arabic);
+}

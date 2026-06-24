@@ -1,0 +1,6 @@
+.loading-overlay {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: color-mix(in srgb, var(--white) 80%, transparent);
+  z-index: 1000; border-radius: inherit;
+}

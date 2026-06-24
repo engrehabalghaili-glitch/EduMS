@@ -1,0 +1,36 @@
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+
+  .text-left {
+    text-align: right;
+  }
+
+  .text-right {
+    text-align: left;
+  }
+
+  .flex-row {
+    flex-direction: row-reverse;
+  }
+
+  .flex-row-reverse {
+    flex-direction: row;
+  }
+
+  .justify-start {
+    justify-content: flex-end;
+  }
+
+  .justify-end {
+    justify-content: flex-start;
+  }
+
+  .items-start {
+    align-items: flex-end;
+  }
+
+  .items-end {
+    align-items: flex-start;
+  }
+}

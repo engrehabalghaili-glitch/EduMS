@@ -1,0 +1,15 @@
+:host { display: block; }
+.stats-card { border-radius: var(--border-radius-xl); overflow: hidden; border: none; }
+.p-card-body  { padding: var(--spacing-4); }
+.p-card-content { padding: 0; }
+.stats-content { display: flex; align-items: center; gap: var(--spacing-3); }
+.stats-icon-box {
+  width: 44px; height: 44px; border-radius: var(--border-radius-xl);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.stats-info { display: flex; flex-direction: column; }
+.stats-value { font-size: var(--font-size-4xl); font-weight: 800; line-height: 1.2; }
+.stats-label { font-size: var(--font-size-xs); color: var(--gray-500); white-space: nowrap; }
+.stats-trend { font-size: var(--font-size-xs); font-weight: 600; margin-top: 2px; }
+.stats-trend.up { color: var(--success-500); }
+.stats-trend.down { color: var(--danger-500); }

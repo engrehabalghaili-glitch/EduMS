@@ -1,0 +1,248 @@
+/* PrimeNG 21 Design Token Overrides via CSS Variables */
+:root {
+  --p-border-radius-none: 0;
+  --p-border-radius-xs: 2px;
+  --p-border-radius-sm: 4px;
+  --p-border-radius-md: 6px;
+  --p-border-radius-lg: 8px;
+  --p-border-radius-xl: 12px;
+
+  --p-surface-0: #ffffff;
+  --p-surface-50: #f8fafc;
+  --p-surface-100: #f1f5f9;
+  --p-surface-200: #e2e8f0;
+  --p-surface-300: #cbd5e1;
+  --p-surface-400: #94a3b8;
+  --p-surface-500: #64748b;
+  --p-surface-600: #475569;
+  --p-surface-700: #334155;
+  --p-surface-800: #1e293b;
+  --p-surface-900: #0f172a;
+  --p-surface-950: #020617;
+
+  --p-primary-50: #eff6ff;
+  --p-primary-100: #dbeafe;
+  --p-primary-200: #bfdbfe;
+  --p-primary-300: #93c5fd;
+  --p-primary-400: #60a5fa;
+  --p-primary-500: #1e3a5f;
+  --p-primary-600: #15294a;
+  --p-primary-700: #0f1f3a;
+  --p-primary-800: #0a1528;
+  --p-primary-900: #050c18;
+
+  --p-primary-color: var(--p-primary-500);
+  --p-primary-contrast-color: #ffffff;
+  --p-primary-hover-color: var(--p-primary-600);
+  --p-primary-active-color: var(--p-primary-700);
+
+  --p-highlight-bg: var(--p-primary-50);
+  --p-highlight-focus-bg: var(--p-primary-100);
+  --p-highlight-color: var(--p-primary-700);
+  --p-highlight-focus-color: var(--p-primary-800);
+
+  --p-text-color: #0f172a;
+  --p-text-hover-color: #0f172a;
+  --p-text-muted-color: #64748b;
+  --p-text-hover-muted-color: #475569;
+
+  --p-focus-ring-color: rgba(30, 58, 95, 0.15);
+  --p-focus-ring-width: 3px;
+  --p-focus-ring-style: solid;
+  --p-focus-ring-offset: 1px;
+  --p-focus-ring-shadow: none;
+
+  --p-content-background: #ffffff;
+  --p-content-border-color: #e2e8f0;
+  --p-content-border-radius: 8px;
+
+  --p-mask-background: rgba(0, 0, 0, 0.4);
+  --p-mask-transition-duration: 0.15s;
+
+  --p-navigation-list-item-background-hover: #f1f5f9;
+  --p-navigation-list-item-active-background: #eff6ff;
+  --p-navigation-list-item-active-color: var(--p-primary-700);
+
+  --p-form-field-padding-x: 0.75rem;
+  --p-form-field-padding-y: 0.5rem;
+  --p-form-field-border-radius: 6px;
+  --p-form-field-background: #ffffff;
+  --p-form-field-border-color: #cbd5e1;
+  --p-form-field-hover-border-color: #1e3a5f;
+  --p-form-field-focus-border-color: #1e3a5f;
+  --p-form-field-transition-duration: 0.15s;
+  --p-form-field-font-size: 0.875rem;
+  --p-form-field-color: #0f172a;
+}
+
+/* Button theme tokens */
+:root {
+  --p-button-padding-x: 1rem;
+  --p-button-padding-y: 0.5rem;
+  --p-button-border-radius: 6px;
+  --p-button-font-weight: 500;
+  --p-button-transition-duration: 0.15s;
+
+  --p-button-primary-background: var(--p-primary-500);
+  --p-button-primary-border-color: var(--p-primary-500);
+  --p-button-primary-color: #ffffff;
+  --p-button-primary-hover-background: var(--p-primary-600);
+  --p-button-primary-hover-border-color: var(--p-primary-600);
+  --p-button-primary-active-background: var(--p-primary-700);
+  --p-button-primary-active-border-color: var(--p-primary-700);
+
+  --p-button-outlined-primary-color: var(--p-primary-500);
+  --p-button-outlined-primary-border-color: var(--p-primary-500);
+  --p-button-outlined-primary-hover-background: var(--p-primary-50);
+
+  --p-button-text-primary-hover-background: var(--p-primary-50);
+
+  --p-button-sm-padding-x: 0.75rem;
+  --p-button-sm-padding-y: 0.375rem;
+  --p-button-sm-font-size: 0.75rem;
+
+  --p-button-lg-padding-x: 1.25rem;
+  --p-button-lg-padding-y: 0.625rem;
+  --p-button-lg-font-size: 1rem;
+}
+
+/* Table theme tokens */
+:root {
+  --p-datatable-padding: 0;
+  --p-datatable-header-cell-padding: 0.75rem 1rem;
+  --p-datatable-header-cell-background: #f8fafc;
+  --p-datatable-header-cell-color: #475569;
+  --p-datatable-header-cell-font-weight: 600;
+  --p-datatable-header-cell-font-size: 0.75rem;
+  --p-datatable-body-cell-padding: 0.75rem 1rem;
+  --p-datatable-body-cell-font-size: 0.875rem;
+  --p-datatable-row-hover-background: #f8fafc;
+  --p-datatable-border-color: #e2e8f0;
+  --p-datatable-border-width: 0 0 1px 0;
+}
+
+/* Dialog theme tokens */
+:root {
+  --p-dialog-header-padding: 1rem 1.25rem;
+  --p-dialog-content-padding: 1.25rem;
+  --p-dialog-footer-padding: 0.75rem 1.25rem;
+  --p-dialog-border-radius: 12px;
+  --p-dialog-header-font-size: 1.125rem;
+  --p-dialog-header-font-weight: 600;
+  --p-dialog-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+
+/* Drawer theme tokens */
+:root {
+  --p-drawer-header-padding: 1rem 1.25rem;
+  --p-drawer-content-padding: 1.25rem;
+  --p-drawer-border-radius: 0;
+  --p-drawer-header-font-size: 1.125rem;
+  --p-drawer-header-font-weight: 600;
+}
+
+/* Select (Dropdown) theme tokens */
+:root {
+  --p-select-padding-x: 0.75rem;
+  --p-select-padding-y: 0.5rem;
+  --p-select-border-radius: 6px;
+  --p-select-font-size: 0.875rem;
+  --p-select-background: #ffffff;
+  --p-select-border-color: #cbd5e1;
+  --p-select-hover-border-color: #1e3a5f;
+  --p-select-focus-border-color: #1e3a5f;
+  --p-select-dropdown-background: #ffffff;
+  --p-select-dropdown-border-color: #e2e8f0;
+  --p-select-dropdown-border-radius: 8px;
+  --p-select-option-padding: 0.5rem 0.75rem;
+  --p-select-option-border-radius: 4px;
+  --p-select-option-hover-background: #f1f5f9;
+  --p-select-option-selected-background: #eff6ff;
+  --p-select-option-selected-color: #1e3a5f;
+  --p-select-option-font-size: 0.875rem;
+}
+
+/* InputText theme tokens */
+:root {
+  --p-inputtext-padding-x: 0.75rem;
+  --p-inputtext-padding-y: 0.5rem;
+  --p-inputtext-border-radius: 6px;
+  --p-inputtext-font-size: 0.875rem;
+  --p-inputtext-background: #ffffff;
+  --p-inputtext-border-color: #cbd5e1;
+  --p-inputtext-color: #0f172a;
+  --p-inputtext-hover-border-color: #1e3a5f;
+  --p-inputtext-focus-border-color: #1e3a5f;
+  --p-inputtext-placeholder-color: #94a3b8;
+  --p-inputtext-transition-duration: 0.15s;
+}
+
+/* Menu theme tokens */
+:root {
+  --p-menu-background: #ffffff;
+  --p-menu-border-color: #e2e8f0;
+  --p-menu-border-radius: 8px;
+  --p-menu-item-padding: 0.5rem 0.75rem;
+  --p-menu-item-border-radius: 4px;
+  --p-menu-item-hover-background: #f1f5f9;
+  --p-menu-item-font-size: 0.875rem;
+  --p-menu-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+}
+
+/* Sidebar (PrimeNG PanelMenu, etc.) theme tokens */
+:root {
+  --p-panelmenu-panel-border-color: transparent;
+  --p-panelmenu-item-padding: 0.65rem 0.75rem;
+  --p-panelmenu-item-border-radius: 6px;
+  --p-panelmenu-item-hover-background: #f1f5f9;
+  --p-panelmenu-item-active-background: #eff6ff;
+  --p-panelmenu-item-font-size: 0.875rem;
+}
+
+/* Card theme tokens */
+:root {
+  --p-card-background: #ffffff;
+  --p-card-border-radius: 10px;
+  --p-card-body-padding: 1.25rem;
+  --p-card-caption-padding: 0 0 0.75rem 0;
+  --p-card-title-font-size: 1rem;
+  --p-card-title-font-weight: 600;
+  --p-card-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Tag theme tokens */
+:root {
+  --p-tag-font-size: 0.75rem;
+  --p-tag-font-weight: 600;
+  --p-tag-padding: 0.25rem 0.5rem;
+  --p-tag-border-radius: 4px;
+  --p-tag-success-background: #d1fae5;
+  --p-tag-success-color: #065f46;
+  --p-tag-info-background: #dbeafe;
+  --p-tag-info-color: #1e40af;
+  --p-tag-warn-background: #fef3c7;
+  --p-tag-warn-color: #92400e;
+  --p-tag-danger-background: #fee2e2;
+  --p-tag-danger-color: #991b1b;
+}
+
+/* Badge theme tokens */
+:root {
+  --p-badge-font-size: 0.75rem;
+  --p-badge-font-weight: 700;
+  --p-badge-padding: 0 0.5rem;
+  --p-badge-min-width: 1.5rem;
+  --p-badge-height: 1.5rem;
+  --p-badge-border-radius: 6px;
+  --p-badge-success-background: #10b981;
+  --p-badge-info-background: #3b82f6;
+  --p-badge-warn-background: #f59e0b;
+  --p-badge-danger-background: #ef4444;
+}
+
+/* Timeline theme tokens */
+:root {
+  --p-timeline-event-spacing: 1rem;
+  --p-timeline-connector-color: #e2e8f0;
+  --p-timeline-connector-size: 2px;
+}

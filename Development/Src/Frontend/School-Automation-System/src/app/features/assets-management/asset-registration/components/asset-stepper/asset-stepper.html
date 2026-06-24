@@ -1,0 +1,89 @@
+<div class="stepper-page" dir="rtl">
+  <div class="stepper-header">
+    <h1>تسجيل أصل جديد</h1>
+    <p class="stepper-subtitle">إضافة أصل مع خطوات التوثيق</p>
+  </div>
+
+  <div class="steps-indicator">
+    @for (step of steps; track step.key; let i = $index) {
+      <div class="step-node" [class.active]="step.key === store.activeStep()" [class.completed]="store.currentStepIndex() > i">
+        <div class="step-circle">
+          @if (store.currentStepIndex() > i) {
+            <span class="pi pi-check"></span>
+          } @else {
+            <span [class]="step.icon"></span>
+          }
+        </div>
+        <span class="step-label">{{ step.label }}</span>
+      </div>
+      @if (i < steps.length - 1) {
+        <div class="step-connector" [class.completed]="store.currentStepIndex() > i"></div>
+      }
+    }
+  </div>
+
+  <app-card>
+    @switch (store.activeStep()) {
+      @case ('generalInfo') {
+        <app-step-general-info
+          [data]="store.formData().generalInfo"
+          [errors]="store.validationErrors().generalInfo"
+          (dataChange)="store.updateGeneralInfo($event)"
+          (cancel)="onCancel()"
+          (validate)="store.validateCurrentStep()"
+          (next)="store.nextStep()"
+        />
+      }
+      @case ('locationTagging') {
+        <app-step-location-tagging
+          [data]="store.formData().locationTagging"
+          [errors]="store.validationErrors().locationTagging"
+          (dataChange)="store.updateLocationTagging($event)"
+        />
+      }
+      @case ('warrantyStatus') {
+        <app-step-warranty-status
+          [data]="store.formData().warrantyStatus"
+          [errors]="store.validationErrors().warrantyStatus"
+          (dataChange)="store.updateWarrantyStatus($event)"
+        />
+      }
+      @case ('verification') {
+        <app-step-verification
+          [data]="store.formData()"
+        />
+      }
+    }
+  </app-card>
+
+  @if (store.activeStep() !== 'generalInfo') {
+    <div class="stepper-actions">
+      <app-button
+        label="رجوع"
+        icon="pi pi-chevron-right"
+        styleClass="p-button-outlined"
+        [disabled]="store.isFirstStep()"
+        (click)="store.prevStep()"
+      />
+      <div class="stepper-actions-left">
+        <app-button label="إلغاء" styleClass="p-button-text" (click)="onCancel()" />
+        @if (!store.isLastStep()) {
+          <app-button
+            label="التالي"
+            icon="pi pi-chevron-left"
+            iconPos="right"
+            (click)="store.nextStep()"
+          />
+        } @else {
+          <app-button
+            label="تأكيد وحفظ"
+            icon="pi pi-check"
+            iconPos="right"
+            [loading]="store.submitting()"
+            (click)="onSubmit()"
+          />
+        }
+      </div>
+    </div>
+  }
+</div>

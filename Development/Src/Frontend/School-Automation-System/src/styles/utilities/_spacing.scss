@@ -1,0 +1,57 @@
+$spacing-values: (0, px, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 56, 64);
+
+@each $val in $spacing-values {
+  .m-#{$val} {
+    margin: var(--spacing-#{$val});
+  }
+  .mx-#{$val} {
+    margin-inline: var(--spacing-#{$val});
+  }
+  .my-#{$val} {
+    margin-block: var(--spacing-#{$val});
+  }
+  .ms-#{$val} {
+    margin-inline-start: var(--spacing-#{$val});
+  }
+  .me-#{$val} {
+    margin-inline-end: var(--spacing-#{$val});
+  }
+  .mt-#{$val} {
+    margin-block-start: var(--spacing-#{$val});
+  }
+  .mb-#{$val} {
+    margin-block-end: var(--spacing-#{$val});
+  }
+
+  .p-#{$val} {
+    padding: var(--spacing-#{$val});
+  }
+  .px-#{$val} {
+    padding-inline: var(--spacing-#{$val});
+  }
+  .py-#{$val} {
+    padding-block: var(--spacing-#{$val});
+  }
+  .ps-#{$val} {
+    padding-inline-start: var(--spacing-#{$val});
+  }
+  .pe-#{$val} {
+    padding-inline-end: var(--spacing-#{$val});
+  }
+  .pt-#{$val} {
+    padding-block-start: var(--spacing-#{$val});
+  }
+  .pb-#{$val} {
+    padding-block-end: var(--spacing-#{$val});
+  }
+
+  .gap-#{$val} {
+    gap: var(--spacing-#{$val});
+  }
+}
+
+.m-auto { margin: auto; }
+.mx-auto { margin-inline: auto; }
+.my-auto { margin-block: auto; }
+.ms-auto { margin-inline-start: auto; }
+.me-auto { margin-inline-end: auto; }

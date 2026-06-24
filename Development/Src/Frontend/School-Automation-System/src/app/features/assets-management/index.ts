@@ -1,0 +1,1 @@
+export { assetsManagementRoutes } from './routes';

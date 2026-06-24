@@ -1,0 +1,16 @@
+[lang="ar"],
+[dir="rtl"] {
+  font-family: var(--font-family-arabic);
+
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: var(--font-family-arabic);
+  }
+
+  .font-mono,
+  code,
+  pre,
+  kbd {
+    font-family: var(--font-family-mono);
+  }
+}

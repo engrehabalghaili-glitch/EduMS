@@ -1,0 +1,1 @@
+export { hrRoutes } from './routes';

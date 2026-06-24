@@ -1,0 +1,27 @@
+/* ==============================================
+   Design System — Main Entry Point
+   ============================================== */
+
+// Abstracts (variables, mixins, functions — no CSS output)
+@use 'styles/abstracts';
+
+// Themes (design tokens, light/dark variables, PrimeNG tokens)
+@use 'styles/themes';
+
+// Base (reset, fonts, typography, globals)
+@use 'styles/base';
+
+// Layout (header, sidebar, footer, content)
+@use 'styles/layout';
+
+// Components (buttons, cards, tables, forms)
+@use 'styles/components';
+
+// Utilities (Tailwind-like atomic classes)
+@use 'styles/utilities';
+
+// Vendors (PrimeNG overrides)
+@use 'styles/vendors';
+
+// RTL (Arabic support)
+@use 'styles/rtl';
