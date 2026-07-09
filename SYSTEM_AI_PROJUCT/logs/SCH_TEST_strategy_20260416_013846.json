@@ -1,0 +1,152 @@
+{
+  "school_id": "SCH_TEST",
+  "analysis_timestamp": "2026-04-16T01:38:46.390854",
+  "overall_quality_score": 62.3,
+  "urgency_level": "CRITICAL",
+  "total_issues_identified": 16,
+  "stakeholder_strategies": {
+    "students": {
+      "priority_issues": [
+        "Low STEM performance (45.3%)",
+        "Low student wellbeing score (4.2/10)",
+        "Literacy concerns (58.7%)",
+        "High failure risk (28.4%)"
+      ],
+      "action_plans": [
+        "AI-Assisted Mathematics Bootcamps",
+        "Peer Support Groups & Counseling Sessions",
+        "Personalized Reading Intervention Program",
+        "Early Warning Intervention System"
+      ],
+      "resources": [
+        "Khan Academy Premium Access",
+        "Wolfram Alpha Licenses",
+        "Virtual Science Lab Simulations",
+        "School Psychology Services",
+        "Student Wellness Apps (Headspace for Education)",
+        "Peer Mentorship Program",
+        "Accelerated Reader Program",
+        "Reading Comprehension AI Tools",
+        "Literacy Specialist Support",
+        "Predictive Analytics Dashboard",
+        "Academic Coaching Services",
+        "Parent Engagement Platform"
+      ],
+      "timeline": [
+        "3-6 months",
+        "2-4 months",
+        "4-6 months",
+        "1-3 months"
+      ],
+      "expected_outcomes": [
+        "15-20% improvement in STEM scores",
+        "20% improvement in wellbeing metrics",
+        "10-15% improvement in literacy rates",
+        "25% reduction in failure rates"
+      ]
+    },
+    "teachers": {
+      "priority_issues": [
+        "High teacher burnout index (7.1/10)",
+        "Low LMS engagement (8.3 logins/month)",
+        "Insufficient professional development (15.2 hours/year)"
+      ],
+      "professional_development": [
+        "Digital Literacy Certification Program",
+        "Comprehensive PD Program",
+        "Flipped Classroom Implementation"
+      ],
+      "technology_support": [
+        "Grading AI Assistants",
+        "Lesson Planning Automation",
+        "Administrative Task Automation",
+        "Google for Education Certification",
+        "Microsoft Educator Center Training",
+        "EdTech Integration Workshops",
+        "Online Learning Platforms",
+        "Peer Observation Programs",
+        "Conference Attendance Budget",
+        "Video Creation Tools",
+        "Interactive Whiteboards",
+        "Collaborative Learning Platforms"
+      ],
+      "workload_optimization": [
+        "Automated Grading Tools Deployment"
+      ],
+      "expected_outcomes": [
+        "30% reduction in administrative workload",
+        "50% increase in LMS utilization",
+        "40 hours PD per teacher annually"
+      ]
+    },
+    "administration": {
+      "critical_issues": [
+        "Infrastructure Mismatch: Smart classrooms without adequate internet",
+        "Inadequate internet speed (35.7 Mbps)",
+        "High teacher turnover (24.8%)",
+        "Poor lab equipment quality (4/10)",
+        "Low per-student budget ($2800)"
+      ],
+      "infrastructure_investments": [
+        "ISP Infrastructure Upgrade",
+        "Network Infrastructure Enhancement",
+        "Science Lab Modernization"
+      ],
+      "hr_strategies": [
+        "Retention Bonus Schemes",
+        "Work Environment Audit"
+      ],
+      "resource_allocation": [
+        "Fiber Optic Installation Budget",
+        "Bandwidth Upgrade Investment",
+        "Teacher Retention Budget",
+        "Laboratory Equipment Budget",
+        "Budget Reallocation Review"
+      ],
+      "implementation_timeline": [
+        "6-12 months",
+        "3-6 months",
+        "1-3 months",
+        "6-9 months",
+        "2-4 months"
+      ]
+    },
+    "education_office": {
+      "policy_recommendations": [
+        "Equity-Based Funding Redistribution",
+        "Mandatory IT Investment Standards",
+        "Teacher Qualification Enhancement Program",
+        "National Education Quality Dashboard"
+      ],
+      "regional_analysis": [],
+      "funding_strategies": [
+        "Weighted Student Funding Formula",
+        "Economic Disadvantage Supplements",
+        "Rural Education Incentives",
+        "Technology Infrastructure Grants",
+        "Digital Device Programs",
+        "Teacher Tech Training Budgets"
+      ],
+      "systemic_improvements": [
+        "National Scholarship for Advanced Degrees",
+        "Teacher Exchange Programs",
+        "Research Collaboration Incentives",
+        "Real-time Performance Monitoring",
+        "Predictive Analytics Integration",
+        "Cross-District Best Practices Sharing"
+      ],
+      "implementation_roadmap": [
+        "12-18 months",
+        "6-12 months",
+        "18-24 months",
+        "9-15 months"
+      ]
+    }
+  },
+  "priority_ranking": {
+    "students": 4,
+    "teachers": 3,
+    "administration": 5,
+    "education_office": 4
+  }
+}

@@ -1,0 +1,77 @@
+EDUCATIONAL MODEL FEATURE ANALYSIS REPORT
+==================================================
+
+Model Type: xgboost
+Number of Features: 27
+Training Date: 2026-04-16 10:46:34.683689
+
+FEATURE IMPORTANCE RANKING:
+------------------------------
+ 1. Literacy_Rate                 : 0.7288
+ 2. Term_1_Avg                    : 0.0647
+ 3. Term_2_Avg                    : 0.0496
+ 4. Internet_Speed_Mbps           : 0.0179
+ 5. Teacher_Turnover_Rate         : 0.0162
+ 6. STEM_Subject_Rate             : 0.0158
+ 7. Extracurricular_Participation : 0.0140
+ 8. Budget_Allocation_Scholarships: 0.0128
+ 9. Student_Wellbeing_Score       : 0.0125
+10. Smart_Classroom_Ratio         : 0.0094
+11. Budget_Per_Student            : 0.0091
+12. Professional_Development_Hours_Per_Year: 0.0087
+13. LMS_Login_Frequency           : 0.0074
+14. Teacher_to_Student_Ratio      : 0.0064
+15. Library_Usage_Hours           : 0.0058
+16. Teacher_PhD_Ratio             : 0.0034
+17. Lab_Equipment_Quality_Score   : 0.0030
+18. Teacher_Burnout_Index         : 0.0029
+19. Average_Attendance            : 0.0024
+20. Budget_Efficiency_Score       : 0.0022
+21. Regional_Economic_Index       : 0.0018
+22. Failure_Risk_Index            : 0.0015
+23. Budget_Allocation_IT          : 0.0013
+24. Teacher_Count                 : 0.0009
+25. Student_Count                 : 0.0007
+26. Region                        : 0.0005
+27. School_Type                   : 0.0002
+
+FEATURE CATEGORIES:
+--------------------
+
+Academic:
+  - Term_1_Avg: 0.0647
+  - Term_2_Avg: 0.0496
+  - STEM_Subject_Rate: 0.0158
+  - Literacy_Rate: 0.7288
+  - Failure_Risk_Index: 0.0015
+  Category Total: 0.8604
+
+Engagement:
+  - Average_Attendance: 0.0024
+  - Library_Usage_Hours: 0.0058
+  - Extracurricular_Participation: 0.0140
+  - LMS_Login_Frequency: 0.0074
+  Category Total: 0.0296
+
+Infrastructure:
+  - Internet_Speed_Mbps: 0.0179
+  - Smart_Classroom_Ratio: 0.0094
+  - Lab_Equipment_Quality_Score: 0.0030
+  Category Total: 0.0303
+
+Human Capital:
+  - Teacher_Turnover_Rate: 0.0162
+  - Teacher_PhD_Ratio: 0.0034
+  - Professional_Development_Hours_Per_Year: 0.0087
+  Category Total: 0.0283
+
+Financial:
+  - Budget_Per_Student: 0.0091
+  - Budget_Allocation_IT: 0.0013
+  - Budget_Allocation_Scholarships: 0.0128
+  Category Total: 0.0233
+
+Psychological:
+  - Student_Wellbeing_Score: 0.0125
+  - Teacher_Burnout_Index: 0.0029
+  Category Total: 0.0154

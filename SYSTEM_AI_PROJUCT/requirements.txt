@@ -1,0 +1,16 @@
+pandas
+numpy
+scikit-learn
+xgboost
+fastapi
+uvicorn
+joblib
+python-multipart
+matplotlib
+seaborn
+pydantic
+streamlit
+plotly
+arabic-reshaper
+python-bidi
+openpyxl

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تقرير المراجعة - بوابة توثيق نظام إدارة المدارس</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  /* Enforce Noto Sans Arabic across the entire report */
+  html, body, * { font-family: 'Noto Sans Arabic', 'Tajawal', 'Cairo', sans-serif !important; }
+</style>
+<style>
+  .report-summary {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px; margin-bottom: 24px;
+  }
+  .summary-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 18px;
+  }
+  .summary-card .n { font-size: 28px; font-weight: 800; color: var(--primary); line-height: 1.1; }
+  .summary-card .l { color: var(--text-muted); font-size: 13px; margin-top: 4px; }
+  .summary-card.success .n { color: var(--success); }
+  .summary-card.warning .n { color: var(--warning); }
+  .filters {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px;
+  }
+  .filter-btn {
+    background: var(--bg-card); border: 1px solid var(--border);
+    color: var(--text-soft); padding: 8px 16px; border-radius: var(--radius);
+    cursor: pointer; font-family: inherit; font-size: 13px;
+  }
+  .filter-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .filter-btn:hover { border-color: var(--primary); }
+  .legend {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 18px; margin-bottom: 20px;
+    font-size: 13px; color: var(--text-soft);
+  }
+  .legend h3 { margin: 0 0 10px; color: var(--primary); font-size: 15px; }
+  .legend ul { margin: 0; padding-right: 18px; }
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="currentColor"/><text x="16" y="22" text-anchor="middle" fill="white" font-family="sans-serif" font-size="14" font-weight="bold">SM</text></svg>
+      <div class="logo-text">
+        <span>تقرير المراجعة</span>
+        <small>Review Report</small>
+      </div>
+    </a>
+    <div class="header-spacer"></div>
+    <a href="index.html" class="icon-btn" title="الصفحة الرئيسية">⌂</a>
+    <button id="theme-toggle" class="icon-btn">🌙</button>
+  </div>
+</header>
+
+<div style="max-width:1400px;margin:0 auto;padding:24px">
+  <nav class="breadcrumb">
+    <a href="index.html">الرئيسية</a><span class="sep">›</span>
+    <span class="current">تقرير المراجعة</span>
+  </nav>
+
+  <div class="op-header">
+    <h1>📋 تقرير المراجعة الشامل</h1>
+    <p class="description">يستعرض هذا التقرير حالة كل مخطط تسلسل في النظام، نسبة الثقة في إعادة بنائه، والعناصر التي قد تحتاج لمراجعة بشرية إضافية.</p>
+  </div>
+
+  <div class="legend">
+    <h3>منهجية إعادة بناء المخططات</h3>
+    <ul>
+      <li><strong>تحليل بصري كامل:</strong> تم تحليل عينة موزعة بصرياً على جميع الأقسام الثمانية لاستخراج البنية المعمارية الفعلية للنظام.</li>
+      <li><strong>قوالب ذكية:</strong> تم بناء قوالب Mermaid مخصصة لكل نوع عملية (إنشاء، تعديل، اعتماد، تحويل مالي، ...) تعكس النمط المعماري الموحد للنظام المستخرج من العينة البصرية.</li>
+      <li><strong>تصنيف الثقة:</strong>
+        <span class="badge success">≥85%</span> ثقة عالية (تم تحقق بصري) ·
+        <span class="badge info">70-85%</span> ثقة جيدة (قالب ذكي مبني على النمط المعماري) ·
+        <span class="badge warning">&lt;70%</span> يحتاج مراجعة.
+      </li>
+    </ul>
+  </div>
+
+  <div class="report-summary" id="summary"></div>
+
+  <div class="filters">
+    <button class="filter-btn active" data-f="all">الكل</button>
+    <button class="filter-btn" data-f="verified">المُتحقق منها بصرياً</button>
+    <button class="filter-btn" data-f="templated">القوالب الذكية</button>
+    <button class="filter-btn" data-f="low">ثقة منخفضة</button>
+    <input type="search" id="rep-filter" placeholder="ابحث عن عملية…" style="flex:1;min-width:200px;padding:8px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);font-family:inherit;color:var(--text);font-size:13px">
+  </div>
+
+  <div id="tables"></div>
+
+  <footer>تقرير المراجعة · بوابة توثيق نظام إدارة المدارس</footer>
+</div>
+
+<script>
+const SECTION_META = {
+  section1: { icon:'🏫', name:'إدارة المدرسة والمكتب' },
+  section2: { icon:'🎓', name:'إدارة الطلاب' },
+  section3: { icon:'👥', name:'إدارة الموظفين' },
+  section4: { icon:'📦', name:'إدارة الأصول' },
+  section5: { icon:'💰', name:'الإدارة المالية' },
+  section6: { icon:'🔐', name:'الصلاحيات والأمان' },
+  section7: { icon:'🚨', name:'الطوارئ والسلامة' },
+  section8: { icon:'📊', name:'الإحصاء والتقارير' },
+};
+
+// Theme toggle
+(() => {
+  const t = document.getElementById('theme-toggle');
+  const apply = m => { document.documentElement.dataset.theme = m; t.textContent = m==='dark'?'☀️':'🌙'; localStorage.setItem('theme',m); };
+  apply(localStorage.getItem('theme') || 'light');
+  t.onclick = () => apply(document.documentElement.dataset.theme==='dark'?'light':'dark');
+})();
+
+function esc(s){ return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+let DATA;
+fetch('data/diagrams.json').then(r=>r.json()).then(d=>{ DATA=d; render(); });
+
+let curFilter = 'all', curSearch = '';
+
+function render() {
+  const all = [];
+  let verified=0, templated=0, lowConf=0, totalMsgs=0;
+  for (const sid of Object.keys(SECTION_META)) {
+    const sec = DATA[sid]; if (!sec) continue;
+    for (const op of sec.operations) {
+      all.push({ sid, ...op });
+      if (op.verified) verified++; else templated++;
+      if ((op.confidence||0) < 70) lowConf++;
+      totalMsgs += (op.msg_count||0);
+    }
+  }
+
+  // Summary
+  document.getElementById('summary').innerHTML = `
+    <div class="summary-card"><div class="n">${all.length}</div><div class="l">إجمالي المخططات</div></div>
+    <div class="summary-card success"><div class="n">${verified}</div><div class="l">مُتحقق منها بصرياً</div></div>
+    <div class="summary-card"><div class="n">${templated}</div><div class="l">قوالب ذكية</div></div>
+    <div class="summary-card warning"><div class="n">${lowConf}</div><div class="l">ثقة منخفضة (&lt;70%)</div></div>
+    <div class="summary-card"><div class="n">${totalMsgs}</div><div class="l">إجمالي الرسائل (التفاعلات)</div></div>
+    <div class="summary-card"><div class="n">${Math.round(all.reduce((a,b)=>a+(b.confidence||0),0)/all.length)}%</div><div class="l">متوسط نسبة الثقة</div></div>
+  `;
+
+  // Filtered rows
+  let rows = all;
+  if (curFilter === 'verified') rows = rows.filter(o => o.verified);
+  if (curFilter === 'templated') rows = rows.filter(o => !o.verified);
+  if (curFilter === 'low')       rows = rows.filter(o => (o.confidence||0) < 70);
+  if (curSearch) {
+    const q = curSearch.toLowerCase();
+    rows = rows.filter(o => (o.title||'').toLowerCase().includes(q) || String(o.op_id).includes(q));
+  }
+
+  // Group by section
+  const grouped = {};
+  for (const r of rows) (grouped[r.sid] = grouped[r.sid] || []).push(r);
+
+  const root = document.getElementById('tables');
+  if (!rows.length) {
+    root.innerHTML = '<div class="empty-state"><div class="icon">🔎</div>لا توجد نتائج</div>';
+    return;
+  }
+  root.innerHTML = Object.keys(grouped).map(sid => {
+    const meta = SECTION_META[sid];
+    const ops = grouped[sid];
+    return `
+      <div class="op-section">
+        <h2><span class="icon">${meta.icon}</span> ${meta.name} <small style="color:var(--text-muted);font-weight:500;margin-right:8px">(${ops.length} عملية)</small></h2>
+        <div style="overflow-x:auto">
+          <table class="report-table">
+            <thead>
+              <tr>
+                <th style="width:60px">#</th>
+                <th>اسم العملية</th>
+                <th style="width:90px">المشاركون</th>
+                <th style="width:90px">الرسائل</th>
+                <th style="width:140px">نسبة الثقة</th>
+                <th style="width:100px">الحالة</th>
+                <th>ملاحظات المراجعة</th>
+                <th style="width:80px"></th>
+              </tr>
+            </thead>
+            <tbody>
+              ${ops.map(op => {
+                const c = op.confidence||0;
+                const cls = c >= 85 ? '' : (c >= 70 ? 'warning' : 'danger');
+                const statusBadge = op.verified
+                  ? '<span class="badge success">✓ تحقق بصري</span>'
+                  : '<span class="badge info">قالب ذكي</span>';
+                const issues = (op.issues || []).join(' · ') || '—';
+                return `
+                  <tr>
+                    <td><strong>${op.op_id}</strong></td>
+                    <td>${esc(op.title)}</td>
+                    <td>${(op.participants||[]).length}</td>
+                    <td>${op.msg_count||0}</td>
+                    <td><div class="confidence-bar"><div class="bar ${cls}"><span style="width:${c}%"></span></div><strong>${c}%</strong></div></td>
+                    <td>${statusBadge}</td>
+                    <td style="font-size:12px;color:var(--text-muted)">${esc(issues)}</td>
+                    <td><a href="index.html#/op/${sid}/${op.op_id}">عرض ›</a></td>
+                  </tr>`;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+document.querySelectorAll('.filter-btn').forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll('.filter-btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    curFilter = b.dataset.f; render();
+  };
+});
+document.getElementById('rep-filter').addEventListener('input', e => {
+  curSearch = e.target.value; render();
+});
+</script>
+</body>
+</html>

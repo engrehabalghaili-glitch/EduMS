@@ -1,0 +1,22 @@
+Mock Educational ML Model
+============================
+Model Type: XGBoost (Simulated)
+Training Date: 2025-06-17
+
+Performance Metrics:
+- MSE: 25.5000
+- RMSE: 5.0500
+- MAE: 3.8000
+- R²: 0.8700
+
+Top Features by Importance:
+ 1. Term_1_Avg                    : 0.1500
+ 2. Term_2_Avg                    : 0.1400
+ 3. STEM_Subject_Rate             : 0.1200
+ 4. Average_Attendance            : 0.1100
+ 5. Student_Wellbeing_Score       : 0.1000
+ 6. Budget_Per_Student            : 0.0900
+ 7. Teacher_PhD_Ratio             : 0.0800
+ 8. Internet_Speed_Mbps           : 0.0700
+ 9. Lab_Equipment_Quality_Score   : 0.0600
+10. Teacher_Burnout_Index         : 0.0500

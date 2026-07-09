@@ -1,0 +1,37 @@
+# Build directories
+bin/
+obj/
+dist/
+out/
+build/
+node_modules/
+
+# IDE and Editor files
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.idea/
+
+# Compressed archives and heavy files
+*.zip
+*.rar
+*.7z
+*.tar.gz
+
+# Python environments
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# Local settings and temporary files
+appsettings.Local.json
+*.log
+scratch/
+extracted_docx_texts/
+find_duplicates.ps1
+extract_docx.ps1

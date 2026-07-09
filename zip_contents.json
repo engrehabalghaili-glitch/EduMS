@@ -1,0 +1,486 @@
+﻿[
+    {
+        "FullName":  "ملفات المشروع/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/Edit_ERD_Package_v3_FINAL/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/Edit_ERD_Package_v3_FINAL/ERD_M1_SchoolAdmin.html",
+        "Length":  323656
+    },
+    {
+        "FullName":  "ملفات المشروع/Edit_ERD_Package_v3_FINAL/ERD_M2_Student.html",
+        "Length":  309345
+    },
+    {
+        "FullName":  "ملفات المشروع/Edit_ERD_Package_v3_FINAL/ERD_M3_Employee.html",
+        "Length":  217644
+    },
+    {
+        "FullName":  "ملفات المشروع/Edit_ERD_Package_v3_FINAL/ERD_M4_Assets.html",
+        "Length":  235834
+    },
+    {
+        "FullName":  "ملفات المشروع/Edit_ERD_Package_v3_FINAL/ERD_M5_Finance.html",
+        "Length":  58055
+    },
+    {
+        "FullName":  "ملفات المشروع/Edit_ERD_Package_v3_FINAL/ERD_M6_Statistics.html",
+        "Length":  91982
+    },
+    {
+        "FullName":  "ملفات المشروع/Edit_ERD_Package_v3_FINAL/ERD_M7_Auth.html",
+        "Length":  109170
+    },
+    {
+        "FullName":  "ملفات المشروع/Edit_ERD_Package_v3_FINAL/ERD_M8_Emergency.html",
+        "Length":  77310
+    },
+    {
+        "FullName":  "ملفات المشروع/Edit_ERD_Package_v3_FINAL/EduMS (Educatio.docx",
+        "Length":  31646
+    },
+    {
+        "FullName":  "ملفات المشروع/Edit_ERD_Package_v3_FINAL/erDiagram.docx",
+        "Length":  60994
+    },
+    {
+        "FullName":  "ملفات المشروع/Edit_ERD_Package_v3_FINAL/faild_053212.docx",
+        "Length":  424966
+    },
+    {
+        "FullName":  "ملفات المشروع/Edit_ERD_Package_v3_FINAL/faild_053908.txt",
+        "Length":  698637
+    },
+    {
+        "FullName":  "ملفات المشروع/Edit_ERD_Package_v3_FINAL/index.html",
+        "Length":  9881
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/00_Core/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/00_Core/auth/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/00_Core/auth/forgot-password.html",
+        "Length":  4037
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/00_Core/auth/login.html",
+        "Length":  5841
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/00_Core/auth/reset-password.html",
+        "Length":  6038
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/00_Core/components/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/00_Core/components-library.html",
+        "Length":  22866
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/00_Core/dashboards/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/00_Core/dashboards/dashboards.html",
+        "Length":  44751
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/00_Core/design-system.html",
+        "Length":  14790
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/00_Core/master-shell.html",
+        "Length":  6403
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/README.md",
+        "Length":  9157
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/README.md",
+        "Length":  2533
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/src/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/src/app/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/src/app/core/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/src/app/core/auth/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/src/app/core/auth/auth.guard.ts",
+        "Length":  686
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/src/app/core/auth/auth.service.ts",
+        "Length":  2891
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/src/app/core/auth/role.guard.ts",
+        "Length":  930
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/src/app/core/interceptors/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/src/app/core/interceptors/auth.interceptor.ts",
+        "Length":  880
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/src/app/features/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/src/app/features/auth/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/src/app/features/dashboard/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/src/app/layouts/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/src/app/layouts/master-shell/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/src/app/layouts/master-shell/master-shell.component.html",
+        "Length":  2048
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/src/app/layouts/master-shell/master-shell.component.ts",
+        "Length":  5281
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/src/app/shared/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/src/app/shared/components/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/src/app/shared/directives/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/angular_skeleton/src/app/shared/directives/has-permission.directive.ts",
+        "Length":  1433
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/assets/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/assets/css/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/assets/css/edums-design-system.css",
+        "Length":  37133
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/assets/img/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/assets/js/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/assets/js/edums-core.js",
+        "Length":  17313
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/assets/js/edums-mock-data.js",
+        "Length":  22588
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/docs/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/docs/UX_Documentation.html",
+        "Length":  23258
+    },
+    {
+        "FullName":  "ملفات المشروع/EduMS_UI_System_Batch1/EduMS_UI_System/index.html",
+        "Length":  15186
+    },
+    {
+        "FullName":  "ملفات المشروع/edums.zip",
+        "Length":  351345
+    },
+    {
+        "FullName":  "ملفات المشروع/school_docs_portal_٠١٢٦٥٧/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/school_docs_portal_٠١٢٦٥٧/project_final/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/school_docs_portal_٠١٢٦٥٧/project_final/README.html",
+        "Length":  9576
+    },
+    {
+        "FullName":  "ملفات المشروع/school_docs_portal_٠١٢٦٥٧/project_final/Review_Report.html",
+        "Length":  11027
+    },
+    {
+        "FullName":  "ملفات المشروع/school_docs_portal_٠١٢٦٥٧/project_final/assets/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/school_docs_portal_٠١٢٦٥٧/project_final/assets/css/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/school_docs_portal_٠١٢٦٥٧/project_final/assets/css/style.css",
+        "Length":  17458
+    },
+    {
+        "FullName":  "ملفات المشروع/school_docs_portal_٠١٢٦٥٧/project_final/assets/diagrams/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/school_docs_portal_٠١٢٦٥٧/project_final/assets/js/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/school_docs_portal_٠١٢٦٥٧/project_final/assets/js/app.js",
+        "Length":  20252
+    },
+    {
+        "FullName":  "ملفات المشروع/school_docs_portal_٠١٢٦٥٧/project_final/data/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/school_docs_portal_٠١٢٦٥٧/project_final/data/diagrams.json",
+        "Length":  1022717
+    },
+    {
+        "FullName":  "ملفات المشروع/school_docs_portal_٠١٢٦٥٧/project_final/index.html",
+        "Length":  3488
+    },
+    {
+        "FullName":  "ملفات المشروع/school_docs_portal_٠١٢٦٥٧/project_final/modules/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/school_docs_portal_٠١٢٦٥٧/project_final/verification/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/الارسالية2_080955(0).pdf",
+        "Length":  183117
+    },
+    {
+        "FullName":  "ملفات المشروع/الارسالية2_080955.pdf",
+        "Length":  183117
+    },
+    {
+        "FullName":  "ملفات المشروع/الدراسة التمهيدية_20260203_120604.doc",
+        "Length":  164864
+    },
+    {
+        "FullName":  "ملفات المشروع/السيناريوهات.zip",
+        "Length":  1068265
+    },
+    {
+        "FullName":  "ملفات المشروع/العمليات/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/العمليات/التحليل الكامل كيان الموظفين.docx",
+        "Length":  138194
+    },
+    {
+        "FullName":  "ملفات المشروع/العمليات/التحليل كيان الطلاب.docx",
+        "Length":  218904
+    },
+    {
+        "FullName":  "ملفات المشروع/العمليات/تحليل كامل لعمليات كيان الأصل.doc",
+        "Length":  279552
+    },
+    {
+        "FullName":  "ملفات المشروع/العمليات/تحليل كيان المدرسة_20260201_172531.docx",
+        "Length":  78308
+    },
+    {
+        "FullName":  "ملفات المشروع/العمليات/ملف جمع المطلبات والعمليات والتقارير-1.docx",
+        "Length":  97329
+    },
+    {
+        "FullName":  "ملفات المشروع/العمليات 365/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/العمليات 365/العمليات للقسم الاول قسم المدرسة كامل.docx",
+        "Length":  45303
+    },
+    {
+        "FullName":  "ملفات المشروع/العمليات 365/العمليات للقسم الثالث قسم الموظفين.docx",
+        "Length":  37134
+    },
+    {
+        "FullName":  "ملفات المشروع/العمليات 365/العمليات للقسم الثاني قسم الطلاب.docx",
+        "Length":  57431
+    },
+    {
+        "FullName":  "ملفات المشروع/العمليات 365/العمليات للقسم الرابع قسم الأصول.docx",
+        "Length":  56111
+    },
+    {
+        "FullName":  "ملفات المشروع/العمليات 365/القسم الثامن التقارير والإحصاء.pdf",
+        "Length":  427123
+    },
+    {
+        "FullName":  "ملفات المشروع/العمليات 365/القسم السادس الصلاحيات والأمان.docx",
+        "Length":  23127
+    },
+    {
+        "FullName":  "ملفات المشروع/العمليات 365/عمليات القسم الخامس الادارة المالية.docx",
+        "Length":  33137
+    },
+    {
+        "FullName":  "ملفات المشروع/العمليات 365/عمليات القسم السابع الطوارئ والسلامة.docx",
+        "Length":  15653
+    },
+    {
+        "FullName":  "ملفات المشروع/العمليات 365/عمليات القسم السابع الطوارئ والسلامة.pdf",
+        "Length":  333225
+    },
+    {
+        "FullName":  "ملفات المشروع/تعديل على الثمانية الاقسام الجداول والقيود(Copy 2)/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/تعديل على الثمانية الاقسام الجداول والقيود(Copy 2)/تحليل الجداول للقسم الاول(إدارة المدرسة والمكتب)-1.docx",
+        "Length":  194860
+    },
+    {
+        "FullName":  "ملفات المشروع/تعديل على الثمانية الاقسام الجداول والقيود(Copy 2)/تحليل الجداول للقسم الثامن(ادارة الطوارئ والتميز).docx",
+        "Length":  47472
+    },
+    {
+        "FullName":  "ملفات المشروع/تعديل على الثمانية الاقسام الجداول والقيود(Copy 2)/تحليل الجداول للقسم الخامس (الادارة المالية).docx",
+        "Length":  40502
+    },
+    {
+        "FullName":  "ملفات المشروع/تعديل على الثمانية الاقسام الجداول والقيود(Copy 2)/تحليل الجداول للقسم الرابع (الأصول).docx",
+        "Length":  151702
+    },
+    {
+        "FullName":  "ملفات المشروع/تعديل على الثمانية الاقسام الجداول والقيود(Copy 2)/تحليل الجداول للقسم السابع (نظام الصلاحيات والمستخدمين).docx",
+        "Length":  61417
+    },
+    {
+        "FullName":  "ملفات المشروع/تعديل على الثمانية الاقسام الجداول والقيود(Copy 2)/تحليل الجداول للقسم السادس (إدارةالبيانات والاحصاء).docx",
+        "Length":  58563
+    },
+    {
+        "FullName":  "ملفات المشروع/تعديل على الثمانية الاقسام الجداول والقيود(Copy 2)/تحليل الجداولللقسمالثالث(إدارة الموظفين).docx",
+        "Length":  1712220
+    },
+    {
+        "FullName":  "ملفات المشروع/تعديل على الثمانية الاقسام الجداول والقيود(Copy 2)/نسخة 4تحليل الجداول للقسم الثاني(الطالب).docx",
+        "Length":  1782978
+    },
+    {
+        "FullName":  "ملفات المشروع/خطة البرنامج(0).pdf",
+        "Length":  269216
+    },
+    {
+        "FullName":  "ملفات المشروع/خطة البرنامج.pdf",
+        "Length":  269216
+    },
+    {
+        "FullName":  "ملفات المشروع/خطة مرحلة التصميم(0).docx",
+        "Length":  12075
+    },
+    {
+        "FullName":  "ملفات المشروع/خطة مرحلة التصميم.docx",
+        "Length":  12075
+    },
+    {
+        "FullName":  "ملفات المشروع/مخططات التسلسل/",
+        "Length":  0
+    },
+    {
+        "FullName":  "ملفات المشروع/مخططات التسلسل/Assets Sequence Daigrams (مخططات الأصول).docx",
+        "Length":  23165926
+    },
+    {
+        "FullName":  "ملفات المشروع/مخططات التسلسل/Employees Sequence Diagrams (مخططات الموظفين).docx",
+        "Length":  9521850
+    },
+    {
+        "FullName":  "ملفات المشروع/مخططات التسلسل/Students Sequence Diagrams (مخططات الطلاب).docx",
+        "Length":  26548461
+    },
+    {
+        "FullName":  "ملفات المشروع/مخططات التسلسل/القسم الأول المدرسة والمكتب مخططات التسلسل.docx",
+        "Length":  9964799
+    },
+    {
+        "FullName":  "ملفات المشروع/مخططات التسلسل/القسم الثامن الاحصاء مخططات التسلسل.docx",
+        "Length":  7474317
+    },
+    {
+        "FullName":  "ملفات المشروع/مخططات التسلسل/القسم الخامس الادارة المالية مخططات التسلسل.docx",
+        "Length":  9083948
+    },
+    {
+        "FullName":  "ملفات المشروع/مخططات التسلسل/القسم السابع الطوارئ مخططات التسلسل.docx",
+        "Length":  2554102
+    },
+    {
+        "FullName":  "ملفات المشروع/مخططات التسلسل/القسم السادس السلامة والامان مخططات التسلسل.docx",
+        "Length":  8287048
+    },
+    {
+        "FullName":  "ملفات المشروع/ملف جمع المطلبات والعمليات والتقارير-1_20260203_121945.docx",
+        "Length":  95963
+    },
+    {
+        "FullName":  "ملفات المشروع/ملفات مكتب التربيه.zip",
+        "Length":  8396463
+    }
+]
