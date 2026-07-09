@@ -31,7 +31,9 @@ __pycache__/
 # Local settings and temporary files
 appsettings.Local.json
 *.log
+*.tmp
 scratch/
 extracted_docx_texts/
 find_duplicates.ps1
 extract_docx.ps1
+dotnet-sdk/
