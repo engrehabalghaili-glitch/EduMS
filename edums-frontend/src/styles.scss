@@ -1,0 +1,16 @@
+/* EduMS Global Design Tokens and Base Styling */
+:root {
+  --primary-color: #1a56db;
+  --secondary-color: #046c4e;
+  --bg-color: #f8fafc;
+  --text-color: #0f172a;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  direction: rtl;
+}
