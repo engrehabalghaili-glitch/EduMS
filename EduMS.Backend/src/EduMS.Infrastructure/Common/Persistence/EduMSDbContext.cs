@@ -1,5 +1,7 @@
 using EduMS.Domain.Common;
 using EduMS.Domain.Entities;
+// using EduMS.Domain.Entities.M1_SchoolAdmin;
+using EduMS.Domain.Entities.M2_StudentAffairs;
 using Microsoft.EntityFrameworkCore;
 
 namespace EduMS.Infrastructure.Common.Persistence;
@@ -7,21 +9,23 @@ namespace EduMS.Infrastructure.Common.Persistence;
 public class EduMSDbContext(DbContextOptions<EduMSDbContext> options) : DbContext(options)
 {
     public DbSet<Person> Persons => Set<Person>();
-    public DbSet<SystemUser> SystemUsers => Set<SystemUser>();
-    public DbSet<Employee> Employees => Set<Employee>();
-    public DbSet<Guardian> Guardians => Set<Guardian>();
-    public DbSet<Student> Students => Set<Student>();
-    public DbSet<School> Schools => Set<School>();
-    public DbSet<AcademicLockPeriod> AcademicLockPeriods => Set<AcademicLockPeriod>();
-    public DbSet<Warehouse> Warehouses => Set<Warehouse>();
-    public DbSet<InventoryItem> InventoryItems => Set<InventoryItem>();
-    public DbSet<Account> Accounts => Set<Account>();
-    public DbSet<JournalEntry> JournalEntries => Set<JournalEntry>();
-    public DbSet<JournalEntryLine> JournalEntryLines => Set<JournalEntryLine>();
-    public DbSet<PayrollRun> PayrollRuns => Set<PayrollRun>();
-    public DbSet<PayrollDetail> PayrollDetails => Set<PayrollDetail>();
-    public DbSet<Vendor> Vendors => Set<Vendor>();
-    public DbSet<PaymentVoucher> PaymentVouchers => Set<PaymentVoucher>();
+    // public DbSet<SystemUser> SystemUsers => Set<SystemUser>();
+    // public DbSet<Employee> Employees => Set<Employee>();
+    // public DbSet<Guardian> Guardians => Set<Guardian>();
+    // public DbSet<Student> Students => Set<Student>();
+    // public DbSet<School> Schools => Set<School>();
+    // public DbSet<AcademicLockPeriod> AcademicLockPeriods => Set<AcademicLockPeriod>();
+    // public DbSet<Warehouse> Warehouses => Set<Warehouse>();
+    // public DbSet<InventoryItem> InventoryItems => Set<InventoryItem>();
+    // public DbSet<Account> Accounts => Set<Account>();
+    // public DbSet<JournalEntry> JournalEntries => Set<JournalEntry>();
+    // public DbSet<JournalEntryLine> JournalEntryLines => Set<JournalEntryLine>();
+    // public DbSet<PayrollRun> PayrollRuns => Set<PayrollRun>();
+    // public DbSet<PayrollDetail> PayrollDetails => Set<PayrollDetail>();
+    // public DbSet<Vendor> Vendors => Set<Vendor>();
+    // public DbSet<PaymentVoucher> PaymentVouchers => Set<PaymentVoucher>();
+    
+    public DbSet<Registration> Registrations => Set<Registration>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
