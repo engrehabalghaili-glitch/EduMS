@@ -10,4 +10,7 @@ public class Vendor : BaseAuditableEntity
     public string? ContactEmail { get; set; }
     public string? ContactPhone { get; set; }
     public bool IsActive { get; set; } = true;
+
+    // Navigation Property
+    public virtual ICollection<PaymentVoucher> PaymentVouchers { get; set; } = new List<PaymentVoucher>();
 }

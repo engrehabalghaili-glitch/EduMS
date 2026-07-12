@@ -8,4 +8,7 @@ public class SystemUser : Person
     public bool IsActive { get; set; } = true;
     public long? SchoolId { get; set; } // Reference to School (M1)
     public long? OfficeId { get; set; } // Reference to Office (M1)
+
+    // Cross-Module Navigation Property
+    public virtual School? School { get; set; }
 }

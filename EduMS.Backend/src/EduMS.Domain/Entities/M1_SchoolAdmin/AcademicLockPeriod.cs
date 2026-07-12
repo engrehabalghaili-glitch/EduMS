@@ -15,4 +15,13 @@ public class AcademicLockPeriod : BaseAuditableEntity
     public bool LockGradeRosters { get; set; } = true;
     public bool LockEnrollmentSnapshots { get; set; } = true;
     public bool LockPeriodStatisticalReports { get; set; } = true;
+    public bool LockAttendanceLogs { get; set; } = true;
+    public bool LockBehavioralRecords { get; set; } = true;
+    public bool LockFinancialFeeAssessments { get; set; } = true;
+    public string? UnlockReasonDescription { get; set; }
+    public long? InitiatedByEmployeeId { get; set; }
+
+    // Cross-Module Navigation Properties
+    public virtual School? School { get; set; }
+    public virtual ICollection<StatisticalReportSnapshot> StatisticalReportSnapshots { get; set; } = new List<StatisticalReportSnapshot>();
 }

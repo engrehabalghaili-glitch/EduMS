@@ -11,5 +11,5 @@ public class Warehouse : BaseAuditableEntity
     public bool IsActive { get; set; } = true;
     
     // Navigation Property
-    public ICollection<InventoryItem> InventoryItems { get; set; } = new List<InventoryItem>();
+    public virtual ICollection<InventoryItem> InventoryItems { get; set; } = new List<InventoryItem>();
 }

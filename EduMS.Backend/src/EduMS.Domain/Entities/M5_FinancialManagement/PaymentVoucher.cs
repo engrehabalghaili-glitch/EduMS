@@ -4,6 +4,8 @@ namespace EduMS.Domain.Entities;
 
 public class PaymentVoucher : BaseAuditableEntity
 {
+    public long SchoolId { get; set; }
+    public long? VendorId { get; set; } // Nullable if paying general expense/payroll
     public string VoucherNumber { get; set; } = string.Empty;
     public DateTime VoucherDate { get; set; }
     public decimal TotalAmount { get; set; }
@@ -13,6 +15,8 @@ public class PaymentVoucher : BaseAuditableEntity
     // Links to accounting
     public long? AccountId { get; set; } // Cash/Bank AccountId (FK -> Account)
     
-    // Navigation Property
-    public Account? Account { get; set; }
+    // Cross-Module Navigation Properties
+    public virtual School? School { get; set; }
+    public virtual Vendor? Vendor { get; set; }
+    public virtual Account? Account { get; set; }
 }

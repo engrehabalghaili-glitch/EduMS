@@ -10,6 +10,7 @@ public class InventoryItem : BaseAuditableEntity
     public int Quantity { get; set; }
     public string UnitOfMeasure { get; set; } = string.Empty; // e.g. Box, Piece, Copy
     
-    // Navigation Property
-    public Warehouse? Warehouse { get; set; }
+    // Navigation Properties
+    public virtual Warehouse? Warehouse { get; set; }
+    public virtual ICollection<AssetAllocation> Allocations { get; set; } = new List<AssetAllocation>();
 }

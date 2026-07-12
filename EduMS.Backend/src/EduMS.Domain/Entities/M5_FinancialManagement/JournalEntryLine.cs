@@ -11,6 +11,6 @@ public class JournalEntryLine : BaseEntity
     public string Description { get; set; } = string.Empty;
 
     // Navigation Properties
-    public JournalEntry? JournalEntry { get; set; }
-    public Account? Account { get; set; }
+    public virtual JournalEntry? JournalEntry { get; set; }
+    public virtual Account? Account { get; set; }
 }

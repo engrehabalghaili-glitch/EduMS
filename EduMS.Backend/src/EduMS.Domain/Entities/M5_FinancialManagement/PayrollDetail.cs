@@ -13,6 +13,6 @@ public class PayrollDetail : BaseAuditableEntity
     public int Status { get; set; } // 0=Pending, 1=Paid
 
     // Navigation Properties
-    public PayrollRun? PayrollRun { get; set; }
-    public Employee? Employee { get; set; }
+    public virtual PayrollRun? PayrollRun { get; set; }
+    public virtual Employee? Employee { get; set; }
 }

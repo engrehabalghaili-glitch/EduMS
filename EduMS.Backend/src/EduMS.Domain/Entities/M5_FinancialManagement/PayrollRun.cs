@@ -12,5 +12,5 @@ public class PayrollRun : BaseAuditableEntity
     public int Status { get; set; } // 0=Draft, 1=Approved, 2=Disbursed
     
     // Navigation Property
-    public ICollection<PayrollDetail> PayrollDetails { get; set; } = new List<PayrollDetail>();
+    public virtual ICollection<PayrollDetail> PayrollDetails { get; set; } = new List<PayrollDetail>();
 }

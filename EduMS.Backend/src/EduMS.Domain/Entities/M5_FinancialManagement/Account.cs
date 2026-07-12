@@ -4,6 +4,7 @@ namespace EduMS.Domain.Entities;
 
 public class Account : BaseAuditableEntity
 {
+    public long? SchoolId { get; set; } // Nullable if general chart of accounts or specific campus account
     public string AccountCode { get; set; } = string.Empty;
     public string AccountNameAr { get; set; } = string.Empty;
     public string AccountNameEn { get; set; } = string.Empty;
@@ -13,7 +14,8 @@ public class Account : BaseAuditableEntity
     public decimal CurrentBalance { get; set; }
     public bool IsActive { get; set; } = true;
 
-    // Self-referencing navigation properties
-    public Account? ParentAccount { get; set; }
-    public ICollection<Account> ChildAccounts { get; set; } = new List<Account>();
+    // Cross-Module and Self-Referencing Navigation Properties
+    public virtual School? School { get; set; }
+    public virtual Account? ParentAccount { get; set; }
+    public virtual ICollection<Account> ChildAccounts { get; set; } = new List<Account>();
 }
