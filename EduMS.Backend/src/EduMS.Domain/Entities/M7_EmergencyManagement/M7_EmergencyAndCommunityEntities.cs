@@ -34,6 +34,7 @@ public class EmergencyHosting : BaseAuditableEntity
     public string? Notes { get; set; }
 
     public virtual School? School { get; set; }
+    public virtual SystemUser? ReportedByUser { get; set; }
 }
 
 /// <summary>
@@ -74,6 +75,8 @@ public class EmergencyIncident : BaseAuditableEntity
     public string? Notes { get; set; }
 
     public virtual School? School { get; set; }
+    public virtual SystemUser? ReportedByUser { get; set; }
+    public virtual EmergencyPlan? EmergencyPlan { get; set; }
 }
 
 /// <summary>
@@ -138,6 +141,9 @@ public class TransportationService : BaseAuditableEntity
     public string? Notes { get; set; }
 
     public virtual School? School { get; set; }
+    public virtual SchoolAsset? BusAsset { get; set; }
+    public virtual Employee? DriverEmployee { get; set; }
+    public virtual Employee? SupervisorEmployee { get; set; }
 }
 
 /// <summary>
@@ -249,6 +255,7 @@ public class CommunityPartnership : BaseAuditableEntity
     public string? Notes { get; set; }
 
     public virtual School? School { get; set; }
+    public virtual Employee? ResponsibleEmployee { get; set; }
 }
 
 /// <summary>
@@ -285,6 +292,7 @@ public class SafetySecurityReport : BaseAuditableEntity
     public string? Notes { get; set; }
 
     public virtual School? School { get; set; }
+    public virtual SystemUser? ApprovedByUser { get; set; }
 }
 
 /// <summary>
@@ -385,4 +393,6 @@ public class RemediationPlan : BaseAuditableEntity
     public virtual School? School { get; set; }
     public virtual SchoolDeficit? SchoolDeficit { get; set; }
     public virtual SchoolSurplus? SchoolSurplus { get; set; }
+    public virtual Employee? ExecutionLeadEmployee { get; set; }
+    public virtual SystemUser? ApprovedByUser { get; set; }
 }
