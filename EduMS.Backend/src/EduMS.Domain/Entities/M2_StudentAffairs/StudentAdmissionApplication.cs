@@ -37,4 +37,5 @@ public class StudentAdmissionApplication : BaseAuditableEntity
     // Navigation Properties
     public virtual Guardian? Guardian { get; set; }
     public virtual School? School { get; set; }
+    public virtual Employee? ReviewedByEmployee { get; set; }
 }

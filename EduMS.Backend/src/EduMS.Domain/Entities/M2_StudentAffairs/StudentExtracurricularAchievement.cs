@@ -19,4 +19,5 @@ public class StudentExtracurricularAchievement : BaseAuditableEntity
 
     // Navigation Property
     public virtual Student? Student { get; set; }
+    public virtual Employee? SupervisingCoachEmployee { get; set; }
 }

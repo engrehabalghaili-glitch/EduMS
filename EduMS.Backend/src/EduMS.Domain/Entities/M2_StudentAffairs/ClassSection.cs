@@ -27,4 +27,5 @@ public class ClassSection : BaseAuditableEntity
     public virtual School? School { get; set; }
     public virtual Classroom? Classroom { get; set; }
     public virtual SchoolAcademicYear? AcademicYear { get; set; }
+    public virtual Employee? HomeroomTeacherEmployee { get; set; }
 }

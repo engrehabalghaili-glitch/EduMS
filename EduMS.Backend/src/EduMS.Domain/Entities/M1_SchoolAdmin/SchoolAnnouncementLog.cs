@@ -20,4 +20,5 @@ public class SchoolAnnouncementLog : BaseAuditableEntity
 
     // Navigation Property
     public virtual School? School { get; set; }
+    public virtual Employee? PublishedByEmployee { get; set; }
 }

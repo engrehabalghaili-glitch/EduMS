@@ -19,4 +19,5 @@ public class StudentLibraryBorrowingLog : BaseAuditableEntity
     // Navigation Properties
     public virtual Student? Student { get; set; }
     public virtual SchoolLibraryItem? LibraryItem { get; set; }
+    public virtual Employee? IssuedByLibrarianEmployee { get; set; }
 }

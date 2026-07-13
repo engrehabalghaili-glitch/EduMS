@@ -23,5 +23,6 @@ public class AcademicLockPeriod : BaseAuditableEntity
 
     // Cross-Module Navigation Properties
     public virtual School? School { get; set; }
+    public virtual Employee? InitiatedByEmployee { get; set; }
     public virtual ICollection<StatisticalReportSnapshot> StatisticalReportSnapshots { get; set; } = new List<StatisticalReportSnapshot>();
 }

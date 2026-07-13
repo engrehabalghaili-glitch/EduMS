@@ -26,4 +26,5 @@ public class ExamDistributionTimetable : BaseAuditableEntity
     public virtual Classroom? Classroom { get; set; }
     public virtual SchoolFacility? Facility { get; set; }
     public virtual Employee? ProctorEmployee { get; set; }
+    public virtual Employee? AssistantProctorEmployee { get; set; }
 }

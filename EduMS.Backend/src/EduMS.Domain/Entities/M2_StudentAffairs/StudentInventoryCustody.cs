@@ -38,7 +38,10 @@ public class StudentInventoryCustody : BaseAuditableEntity
     public string? ExemptionReason { get; set; }
     public bool ReplacementRequired { get; set; }
     public string? Notes { get; set; }
+    public long? SchoolAssetId { get; set; }
 
     // Navigation Property
     public virtual Student? Student { get; set; }
+    public virtual Employee? DeliveredByEmployee { get; set; }
+    public virtual SchoolAsset? SchoolAsset { get; set; }
 }

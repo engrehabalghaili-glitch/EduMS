@@ -23,4 +23,6 @@ public class ReferenceCodingLookup : BaseAuditableEntity
 
     // Navigation Property
     public virtual School? School { get; set; }
+    public virtual ReferenceCodingLookup? ParentCode { get; set; }
+    public virtual ICollection<ReferenceCodingLookup> SubCodes { get; set; } = new List<ReferenceCodingLookup>();
 }

@@ -20,4 +20,5 @@ public class StudentExitClearance : BaseAuditableEntity
 
     // Navigation Property
     public virtual Student? Student { get; set; }
+    public virtual Employee? ApprovedByDirectorEmployee { get; set; }
 }

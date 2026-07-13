@@ -17,4 +17,7 @@ public class StudentTransferLog : BaseAuditableEntity
 
     // Navigation Property
     public virtual Student? Student { get; set; }
+    public virtual School? FromSchool { get; set; }
+    public virtual School? ToSchool { get; set; }
+    public virtual Employee? ApprovedByEmployee { get; set; }
 }

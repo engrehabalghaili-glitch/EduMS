@@ -21,4 +21,5 @@ public class DirectorateStatisticalReport : BaseAuditableEntity
 
     // Navigation Property
     public virtual Directorate? Directorate { get; set; }
+    public virtual Employee? CompiledByEmployee { get; set; }
 }

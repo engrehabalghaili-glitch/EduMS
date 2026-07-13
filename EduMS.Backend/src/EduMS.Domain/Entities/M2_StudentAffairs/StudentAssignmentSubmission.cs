@@ -23,4 +23,5 @@ public class StudentAssignmentSubmission : BaseAuditableEntity
     public virtual Student? Student { get; set; }
     public virtual Subject? Subject { get; set; }
     public virtual Classroom? Classroom { get; set; }
+    public virtual Employee? GradedByEmployee { get; set; }
 }

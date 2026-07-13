@@ -22,4 +22,5 @@ public class StudentFinancialAidApplication : BaseAuditableEntity
     // Navigation Properties
     public virtual Student? Student { get; set; }
     public virtual Guardian? Guardian { get; set; }
+    public virtual Employee? ReviewedByCommitteeEmployee { get; set; }
 }

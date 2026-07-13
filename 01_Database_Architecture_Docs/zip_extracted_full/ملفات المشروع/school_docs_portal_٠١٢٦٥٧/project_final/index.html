@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بوابة توثيق نظام إدارة المدارس - Sequence Diagrams</title>
+<meta name="description" content="بوابة توثيق احترافية لنظام إدارة المدارس تحتوي على مخططات التسلسل (Sequence Diagrams) لـ 363 عملية موزعة على 8 وحدات نظام.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231e40af'/%3E%3Ctext x='16' y='22' text-anchor='middle' fill='white' font-family='sans-serif' font-size='18' font-weight='bold'%3ESM%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="app-header">
+  <div class="header-inner">
+    <a href="#/" class="logo">
+      <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="currentColor"/><text x="16" y="22" text-anchor="middle" fill="white" font-family="sans-serif" font-size="14" font-weight="bold">SM</text></svg>
+      <div class="logo-text">
+        <span>نظام إدارة المدارس</span>
+        <small>توثيق Sequence Diagrams</small>
+      </div>
+    </a>
+    <div class="header-spacer"></div>
+    <div class="header-search">
+      <input id="global-search" type="search" placeholder="ابحث في 363 عملية…" autocomplete="off">
+      <div id="global-search-results" class="search-results"></div>
+    </div>
+    <div class="header-actions">
+      <button id="theme-toggle" class="icon-btn" title="تبديل السمة">🌙</button>
+      <a href="Review_Report.html" class="icon-btn" title="تقرير المراجعة">📋</a>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <h3>وحدات النظام</h3>
+    <ul id="modules-nav" class="modules-nav"></ul>
+    <h3 style="margin-top:20px">روابط</h3>
+    <ul class="modules-nav">
+      <li><a class="module-link" href="Review_Report.html"><span>📋 تقرير المراجعة</span></a></li>
+      <li><a class="module-link" href="#/op/section1/1"><span>🚀 البدء من العملية #1</span></a></li>
+    </ul>
+  </aside>
+
+  <main id="app" class="main">
+    <div class="empty-state"><div class="loading"></div><p>جاري تحميل البيانات…</p></div>
+  </main>
+</div>
+
+<footer>
+  بوابة توثيق نظام إدارة المدارس · مخططات التسلسل معاد بناؤها بصيغة Mermaid.js · بنية المعلومات: 8 وحدات · 363 عملية · 363 مخطط
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'default',
+    sequence: { showSequenceNumbers: true, mirrorActors: true, actorMargin: 50, messageAlign: 'center', wrap: true },
+    fontFamily: "'Noto Sans Arabic', 'Tajawal', 'Cairo', sans-serif",
+    securityLevel: 'loose',
+  });
+</script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

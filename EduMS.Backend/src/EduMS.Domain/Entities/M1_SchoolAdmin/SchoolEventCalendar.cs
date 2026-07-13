@@ -19,4 +19,5 @@ public class SchoolEventCalendar : BaseAuditableEntity
 
     // Navigation Property
     public virtual School? School { get; set; }
+    public virtual Employee? OrganizerEmployee { get; set; }
 }
