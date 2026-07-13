@@ -8,7 +8,9 @@ namespace EduMS.Domain.Entities;
 /// </summary>
 public class VacantPosition : BaseAuditableEntity
 {
-    public long SchoolId { get; set; }
+    public long? SchoolId { get; set; }
+    public long? DirectorateId { get; set; }
+    public long? OrganizationalSectorId { get; set; }
     public string PositionCode { get; set; } = string.Empty;
     public string PositionTitleAr { get; set; } = string.Empty;
     public string? PositionTitleEn { get; set; }
@@ -25,6 +27,8 @@ public class VacantPosition : BaseAuditableEntity
     public string? Notes { get; set; }
 
     public virtual School? School { get; set; }
+    public virtual Directorate? Directorate { get; set; }
+    public virtual OrganizationalSector? OrganizationalSector { get; set; }
 }
 
 /// <summary>

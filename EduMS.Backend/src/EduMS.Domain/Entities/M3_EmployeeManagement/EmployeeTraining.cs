@@ -9,7 +9,9 @@ namespace EduMS.Domain.Entities;
 public class EmployeeTraining : BaseAuditableEntity
 {
     public long EmployeeId { get; set; }
-    public long SchoolId { get; set; }
+    public long? SchoolId { get; set; }
+    public long? DirectorateId { get; set; }
+    public long? OrganizationalSectorId { get; set; }
     public string CourseName { get; set; } = string.Empty;
     public string? CourseCode { get; set; }
     public int TrainingType { get; set; } // 1=Internal, 2=External, 3=Online, 4=Conference
@@ -29,4 +31,7 @@ public class EmployeeTraining : BaseAuditableEntity
     public string? Notes { get; set; }
 
     public virtual Employee? Employee { get; set; }
+    public virtual School? School { get; set; }
+    public virtual Directorate? Directorate { get; set; }
+    public virtual OrganizationalSector? OrganizationalSector { get; set; }
 }

@@ -24,4 +24,6 @@ public class Directorate : BaseAuditableEntity
     public virtual ICollection<EducationalSupervisionVisit> SupervisionVisits { get; set; } = new List<EducationalSupervisionVisit>();
     public virtual ICollection<SchoolOperationalBudgetLog> OperationalBudgetLogs { get; set; } = new List<SchoolOperationalBudgetLog>();
     public virtual ICollection<TrainingCourseOffering> TrainingCourseOfferings { get; set; } = new List<TrainingCourseOffering>();
+    public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
+    public virtual ICollection<OrganizationalSector> OrganizationalSectors { get; set; } = new List<OrganizationalSector>();
 }

@@ -8,7 +8,9 @@ namespace EduMS.Domain.Entities;
 /// </summary>
 public class EmployeeCommittee : BaseAuditableEntity
 {
-    public long SchoolId { get; set; }
+    public long? SchoolId { get; set; }
+    public long? DirectorateId { get; set; }
+    public long? OrganizationalSectorId { get; set; }
     public string CommitteeNameAr { get; set; } = string.Empty;
     public string? CommitteeNameEn { get; set; }
     public string CommitteeCode { get; set; } = string.Empty;
@@ -21,6 +23,8 @@ public class EmployeeCommittee : BaseAuditableEntity
     public string? Notes { get; set; }
 
     public virtual School? School { get; set; }
+    public virtual Directorate? Directorate { get; set; }
+    public virtual OrganizationalSector? OrganizationalSector { get; set; }
 }
 
 /// <summary>
@@ -45,7 +49,9 @@ public class CommitteeMember : BaseAuditableEntity
 /// </summary>
 public class EmployeeMeeting : BaseAuditableEntity
 {
-    public long SchoolId { get; set; }
+    public long? SchoolId { get; set; }
+    public long? DirectorateId { get; set; }
+    public long? OrganizationalSectorId { get; set; }
     public long? CommitteeId { get; set; }
     public string MeetingTitleAr { get; set; } = string.Empty;
     public DateTime MeetingDateTime { get; set; }
@@ -60,6 +66,8 @@ public class EmployeeMeeting : BaseAuditableEntity
     public string? Notes { get; set; }
 
     public virtual School? School { get; set; }
+    public virtual Directorate? Directorate { get; set; }
+    public virtual OrganizationalSector? OrganizationalSector { get; set; }
 }
 
 /// <summary>

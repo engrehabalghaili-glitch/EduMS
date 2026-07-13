@@ -9,7 +9,9 @@ namespace EduMS.Domain.Entities;
 public class EmployeeTermination : BaseAuditableEntity
 {
     public long EmployeeId { get; set; }
-    public long SchoolId { get; set; }
+    public long? SchoolId { get; set; }
+    public long? DirectorateId { get; set; }
+    public long? OrganizationalSectorId { get; set; }
     public string TerminationReferenceNumber { get; set; } = string.Empty;
     public DateTime TerminationDate { get; set; }
     public int TerminationType { get; set; } // 1=Resignation, 2=Retirement, 3=Dismissal, 4=EndOfContract, 5=Death
@@ -28,4 +30,7 @@ public class EmployeeTermination : BaseAuditableEntity
     public string? Notes { get; set; }
 
     public virtual Employee? Employee { get; set; }
+    public virtual School? School { get; set; }
+    public virtual Directorate? Directorate { get; set; }
+    public virtual OrganizationalSector? OrganizationalSector { get; set; }
 }

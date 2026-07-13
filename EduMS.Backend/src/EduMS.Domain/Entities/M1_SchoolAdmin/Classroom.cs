@@ -19,6 +19,7 @@ public class Classroom : BaseAuditableEntity
 
     // Intra-Module and Operational Navigation Collections
     public virtual School? School { get; set; }
+    public virtual Employee? HomeroomTeacherEmployee { get; set; }
     public virtual ICollection<ClassSchedule> ClassSchedules { get; set; } = new List<ClassSchedule>();
     public virtual ICollection<ClassroomOperationalRule> OperationalRules { get; set; } = new List<ClassroomOperationalRule>();
     public virtual ICollection<ClassroomResourceAllocation> ResourceAllocations { get; set; } = new List<ClassroomResourceAllocation>();
