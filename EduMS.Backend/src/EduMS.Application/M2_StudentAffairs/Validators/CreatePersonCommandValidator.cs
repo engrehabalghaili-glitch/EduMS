@@ -23,7 +23,7 @@ public class CreatePersonCommandValidator : IValidator<CreatePersonCommand>
             errors.Add(nameof(command.NationalId), new[] { "يجب أن يكون الرقم الوطني بين 9 و 15 رقماً." });
         }
 
-        if (command.Gender is not (1 or 2))
+        if (!System.Enum.IsDefined(typeof(EduMS.Domain.Enums.Gender), command.Gender))
         {
             errors.Add(nameof(command.Gender), new[] { "قيمة الجنس غير صالحة (1 للذكور، 2 للإناث)." });
         }

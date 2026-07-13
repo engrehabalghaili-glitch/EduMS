@@ -6,7 +6,7 @@ public record CreatePersonCommand(
     string FullNameAr,
     string FullNameEn,
     string NationalId,
-    int Gender,
+    EduMS.Domain.Enums.Gender Gender,
     string? ContactNumber,
     string? MedicalInfo
 ) : ICommand<long>;
