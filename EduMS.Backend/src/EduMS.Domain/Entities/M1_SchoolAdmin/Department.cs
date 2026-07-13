@@ -4,7 +4,9 @@ namespace EduMS.Domain.Entities;
 
 public class Department : BaseAuditableEntity
 {
-    public long SchoolId { get; set; }
+    public long? SchoolId { get; set; }
+    public long? DirectorateId { get; set; }
+    public long? OrganizationalSectorId { get; set; }
     public string DepartmentCode { get; set; } = string.Empty;
     public string DepartmentNameAr { get; set; } = string.Empty;
     public string DepartmentNameEn { get; set; } = string.Empty;
@@ -19,4 +21,7 @@ public class Department : BaseAuditableEntity
 
     // Navigation Property
     public virtual School? School { get; set; }
+    public virtual Directorate? Directorate { get; set; }
+    public virtual OrganizationalSector? OrganizationalSector { get; set; }
+    public virtual Employee? HeadOfDepartmentEmployee { get; set; }
 }

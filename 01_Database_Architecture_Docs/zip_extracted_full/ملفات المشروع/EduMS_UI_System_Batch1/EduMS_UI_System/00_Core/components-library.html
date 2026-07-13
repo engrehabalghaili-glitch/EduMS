@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مكتبة المكونات — EduMS Enterprise</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+<link rel="stylesheet" href="../assets/css/edums-design-system.css">
+<style>
+  body { background: #F4F6FA; padding: 24px; }
+  .container { max-width: 1400px; margin: 0 auto; }
+  .component-section { background: #fff; border-radius: 14px; padding: 28px; margin-bottom: 24px; box-shadow: 0 2px 10px rgba(0,0,0,.04); }
+  .component-title { font-size: 22px; color: var(--color-primary-900); border-bottom: 3px solid var(--color-accent-gold); padding-bottom: 10px; margin-bottom: 18px; }
+  .component-subtitle { font-size: 16px; color: var(--color-gray-700); margin: 20px 0 10px; font-weight: 700; }
+  .demo-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 18px; background: var(--color-gray-50); border-radius: 10px; margin: 8px 0; }
+  .nav-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; padding: 14px; background: #fff; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.04); position: sticky; top: 16px; z-index: 50; }
+  .nav-pill { padding: 8px 14px; background: var(--color-gray-100); border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--color-gray-700); text-decoration: none; }
+  .nav-pill:hover { background: var(--color-primary-100); color: var(--color-primary-800); }
+  .header-banner { background: linear-gradient(135deg, #1E3A8A 0%, #172554 100%); color: #fff; padding: 50px 30px; border-radius: 14px; margin-bottom: 24px; position: relative; overflow: hidden; }
+  .header-banner h1 { color: #fff; font-size: 32px; }
+  .header-banner p { color: #BFDBFE; max-width: 600px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header-banner">
+    <h1>🎨 EduMS Components Library</h1>
+    <p>مكتبة المكونات الموحدة لنظام EduMS Enterprise — 13 مكون بأكثر من 50 حالة.</p>
+    <div class="flex gap-2 mt-4">
+      <a href="master-shell.html" class="btn btn-gold"><i class="ph ph-house"></i> اللوحة الرئيسية</a>
+      <a href="design-system.html" class="btn btn-outline" style="border-color:rgba(255,255,255,0.5); color:#fff;"><i class="ph ph-palette"></i> نظام التصميم</a>
+    </div>
+  </div>
+
+  <div class="nav-pills">
+    <a href="#buttons" class="nav-pill">الأزرار</a>
+    <a href="#inputs" class="nav-pill">حقول الإدخال</a>
+    <a href="#cards" class="nav-pill">البطاقات</a>
+    <a href="#badges" class="nav-pill">الشارات</a>
+    <a href="#tables" class="nav-pill">الجداول</a>
+    <a href="#alerts" class="nav-pill">التنبيهات</a>
+    <a href="#modals" class="nav-pill">النوافذ</a>
+    <a href="#toasts" class="nav-pill">Toasts</a>
+    <a href="#tabs" class="nav-pill">التبويبات</a>
+    <a href="#dropdowns" class="nav-pill">القوائم</a>
+    <a href="#loading" class="nav-pill">التحميل</a>
+    <a href="#empty" class="nav-pill">الفراغ</a>
+  </div>
+
+  <!-- BUTTONS -->
+  <section class="component-section" id="buttons">
+    <h2 class="component-title">🔘 1. الأزرار (Buttons)</h2>
+    <h3 class="component-subtitle">الألوان</h3>
+    <div class="demo-row">
+      <button class="btn btn-primary"><i class="ph ph-check"></i> الأساسي</button>
+      <button class="btn btn-gold"><i class="ph ph-star"></i> الذهبي</button>
+      <button class="btn btn-success"><i class="ph ph-thumbs-up"></i> نجاح</button>
+      <button class="btn btn-danger"><i class="ph ph-trash"></i> حذف</button>
+      <button class="btn btn-outline"><i class="ph ph-circle-dashed"></i> محدد</button>
+      <button class="btn btn-ghost"><i class="ph ph-arrow-up"></i> شفاف</button>
+    </div>
+    <h3 class="component-subtitle">الأحجام</h3>
+    <div class="demo-row">
+      <button class="btn btn-primary btn-sm">صغير</button>
+      <button class="btn btn-primary">متوسط</button>
+      <button class="btn btn-primary btn-lg">كبير</button>
+      <button class="btn btn-primary btn-icon"><i class="ph ph-plus"></i></button>
+    </div>
+    <h3 class="component-subtitle">الحالات</h3>
+    <div class="demo-row">
+      <button class="btn btn-primary">عادي</button>
+      <button class="btn btn-primary" disabled>معطل</button>
+      <button class="btn btn-primary is-loading">تحميل</button>
+      <button class="btn btn-primary" onclick="this.classList.toggle('is-loading')">انقر للتحميل</button>
+    </div>
+  </section>
+
+  <!-- INPUTS -->
+  <section class="component-section" id="inputs">
+    <h2 class="component-title">📝 2. حقول الإدخال</h2>
+    <div class="grid grid-cols-2">
+      <div>
+        <div class="form-group">
+          <label class="form-label">حقل نصي عادي</label>
+          <input type="text" class="form-control" placeholder="أدخل النص هنا...">
+          <div class="form-help">ملاحظة مساعدة</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">حقل مع أيقونة <span class="required">*</span></label>
+          <div class="input-group">
+            <input type="email" class="form-control" placeholder="example@edums.gov.ye">
+            <i class="ph ph-envelope input-group-icon"></i>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">حقل صحيح</label>
+          <input type="text" class="form-control is-valid" value="محمد عبدالله">
+          <div class="form-help" style="color: var(--color-success-600);">✓ تم التحقق</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">حقل خاطئ</label>
+          <input type="text" class="form-control is-invalid" value="invalid@">
+          <div class="form-error"><i class="ph ph-warning"></i> صيغة غير صحيحة</div>
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label class="form-label">حقل معطل</label>
+          <input type="text" class="form-control" disabled value="غير قابل للتعديل">
+        </div>
+        <div class="form-group">
+          <label class="form-label">قائمة منسدلة</label>
+          <select class="form-control">
+            <option>اختر...</option>
+            <option>الإدارة المدرسية</option>
+            <option>قسم الطلاب</option>
+            <option>قسم الموظفين</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">منطقة نص</label>
+          <textarea class="form-control" rows="3" placeholder="ملاحظاتك..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">خيارات</label>
+          <div class="flex flex-col gap-2">
+            <label class="form-check"><input type="checkbox" checked> أوافق على الشروط</label>
+            <label class="form-check"><input type="radio" name="r1" checked> ذكر</label>
+            <label class="form-check"><input type="radio" name="r1"> أنثى</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">مفتاح تبديل</label>
+          <div class="flex items-center gap-3">
+            <label class="switch"><input type="checkbox" checked><span class="switch-slider"></span></label>
+            <span class="text-sm">تفعيل الإشعارات</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARDS -->
+  <section class="component-section" id="cards">
+    <h2 class="component-title">🃏 3. البطاقات</h2>
+    <h3 class="component-subtitle">بطاقات الإحصائيات</h3>
+    <div class="grid grid-cols-3 mb-4">
+      <div class="stat-card"><div class="stat-icon">🎓</div><div class="stat-content"><div class="stat-label">الطلاب</div><div class="stat-value">1,247</div><div class="stat-change up">↗ +12</div></div></div>
+      <div class="stat-card stat-gold"><div class="stat-icon">💰</div><div class="stat-content"><div class="stat-label">الإيرادات</div><div class="stat-value">4.2M ر</div><div class="stat-change up">↗ +8.5%</div></div></div>
+      <div class="stat-card stat-success"><div class="stat-icon">✅</div><div class="stat-content"><div class="stat-label">الحضور</div><div class="stat-value">94.2%</div><div class="stat-change up">↗ +1.4%</div></div></div>
+      <div class="stat-card stat-danger"><div class="stat-icon">🚨</div><div class="stat-content"><div class="stat-label">عاجل</div><div class="stat-value">12</div><div class="stat-change down">↘ 4</div></div></div>
+      <div class="stat-card stat-warning"><div class="stat-icon">📊</div><div class="stat-content"><div class="stat-label">معلق</div><div class="stat-value">23</div><div class="stat-change down">↘</div></div></div>
+      <div class="stat-card"><div class="stat-icon">📦</div><div class="stat-content"><div class="stat-label">الأصول</div><div class="stat-value">342</div><div class="stat-change up">↗ +15</div></div></div>
+    </div>
+    <h3 class="component-subtitle">بطاقة عامة</h3>
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">📋 معلومات الطالب</div><div class="card-subtitle">STU-001</div></div>
+        <button class="btn btn-outline btn-sm"><i class="ph ph-pencil"></i> تعديل</button>
+      </div>
+      <div class="card-body"><p>محتوى البطاقة مع رأس وذيل اختياريين. تستخدم على نطاق واسع.</p></div>
+      <div class="card-footer"><button class="btn btn-primary btn-sm">حفظ</button><button class="btn btn-ghost btn-sm">إلغاء</button></div>
+    </div>
+  </section>
+
+  <!-- BADGES -->
+  <section class="component-section" id="badges">
+    <h2 class="component-title">🏷️ 4. الشارات</h2>
+    <div class="demo-row">
+      <span class="badge badge-primary">رئيسي</span>
+      <span class="badge badge-gold">ذهبي</span>
+      <span class="badge badge-success">نجاح</span>
+      <span class="badge badge-danger">خطر</span>
+      <span class="badge badge-warning">تحذير</span>
+      <span class="badge badge-info">معلومات</span>
+      <span class="badge badge-gray">رمادي</span>
+    </div>
+    <div class="demo-row">
+      <span class="badge badge-success badge-dot">نشط</span>
+      <span class="badge badge-warning badge-dot">قيد المراجعة</span>
+      <span class="badge badge-danger badge-dot">معطل</span>
+      <span class="badge badge-gray badge-dot">مؤرشف</span>
+    </div>
+  </section>
+
+  <!-- TABLES -->
+  <section class="component-section" id="tables">
+    <h2 class="component-title">📊 5. جداول البيانات</h2>
+    <div class="table-wrapper mb-4">
+      <div class="table-toolbar">
+        <div class="search-box">
+          <input type="text" class="form-control" placeholder="🔍 ابحث...">
+          <i class="ph ph-magnifying-glass search-icon"></i>
+        </div>
+        <div class="flex gap-2">
+          <button class="btn btn-outline btn-sm"><i class="ph ph-funnel"></i> فلترة</button>
+          <button class="btn btn-outline btn-sm"><i class="ph ph-export"></i> تصدير</button>
+          <button class="btn btn-primary btn-sm"><i class="ph ph-plus"></i> إضافة</button>
+        </div>
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:40px;"><input type="checkbox"></th>
+            <th class="sortable sorted-asc">الكود <span class="sort-icon">↑</span></th>
+            <th class="sortable">الاسم <span class="sort-icon">↕</span></th>
+            <th>الصف</th>
+            <th>الشعبة</th>
+            <th class="sortable">المعدل <span class="sort-icon">↕</span></th>
+            <th>الحالة</th>
+            <th class="text-center">إجراءات</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><input type="checkbox"></td><td class="text-mono">STU-001</td><td>محمد عبدالله</td><td>3 متوسط</td><td>أ</td><td><strong style="color:#10B981;">92.5</strong></td><td><span class="badge badge-success badge-dot">نشط</span></td><td><div class="table-actions"><button class="action-btn"><i class="ph ph-eye"></i></button><button class="action-btn"><i class="ph ph-pencil"></i></button><button class="action-btn danger"><i class="ph ph-trash"></i></button></div></td></tr>
+          <tr><td><input type="checkbox"></td><td class="text-mono">STU-002</td><td>فاطمة أحمد</td><td>3 متوسط</td><td>ب</td><td><strong style="color:#10B981;">95.1</strong></td><td><span class="badge badge-success badge-dot">نشط</span></td><td><div class="table-actions"><button class="action-btn"><i class="ph ph-eye"></i></button><button class="action-btn"><i class="ph ph-pencil"></i></button><button class="action-btn danger"><i class="ph ph-trash"></i></button></div></td></tr>
+          <tr><td><input type="checkbox"></td><td class="text-mono">STU-005</td><td>عبدالرحمن سعيد</td><td>3 متوسط</td><td>أ</td><td><strong style="color:#DC2626;">65.3</strong></td><td><span class="badge badge-warning badge-dot">متعثر</span></td><td><div class="table-actions"><button class="action-btn"><i class="ph ph-eye"></i></button><button class="action-btn"><i class="ph ph-pencil"></i></button><button class="action-btn danger"><i class="ph ph-trash"></i></button></div></td></tr>
+        </tbody>
+      </table>
+      <div class="pagination">
+        <div class="pagination-info">عرض 1-3 من 1,247</div>
+        <div class="pagination-controls">
+          <button class="pagination-btn" disabled>‹</button>
+          <button class="pagination-btn active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span>...</span>
+          <button class="pagination-btn">›</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALERTS -->
+  <section class="component-section" id="alerts">
+    <h2 class="component-title">🔔 6. التنبيهات</h2>
+    <div class="flex flex-col gap-2">
+      <div class="alert alert-success"><i class="ph ph-check-circle alert-icon"></i><div class="alert-body"><div class="alert-title">تم بنجاح!</div><div>تم حفظ البيانات.</div></div><i class="ph ph-x alert-close"></i></div>
+      <div class="alert alert-danger"><i class="ph ph-warning alert-icon"></i><div class="alert-body"><div class="alert-title">خطأ!</div><div>بعض الحقول غير مكتملة.</div></div><i class="ph ph-x alert-close"></i></div>
+      <div class="alert alert-warning"><i class="ph ph-warning-circle alert-icon"></i><div class="alert-body"><div class="alert-title">تنبيه</div><div>تجاوز 10% من الغياب.</div></div></div>
+      <div class="alert alert-info"><i class="ph ph-info alert-icon"></i><div class="alert-body"><div class="alert-title">معلومة:</div><div>تم تحديث النظام.</div></div></div>
+    </div>
+  </section>
+
+  <!-- MODALS -->
+  <section class="component-section" id="modals">
+    <h2 class="component-title">🪟 7. النوافذ المنبثقة</h2>
+    <div class="demo-row">
+      <button class="btn btn-primary" onclick="document.getElementById('m1').classList.add('is-open')">عادية</button>
+      <button class="btn btn-gold" onclick="document.getElementById('m2').classList.add('is-open')">تأكيد</button>
+      <button class="btn btn-danger" onclick="document.getElementById('m3').classList.add('is-open')">حذف</button>
+    </div>
+
+    <div class="modal-backdrop" id="m1"><div class="modal">
+      <div class="modal-header"><div class="modal-title">📋 تفاصيل الطالب</div><button class="modal-close" onclick="this.closest('.modal-backdrop').classList.remove('is-open')"><i class="ph ph-x"></i></button></div>
+      <div class="modal-body"><p><strong>الاسم:</strong> محمد عبدالله السيد</p><p><strong>الرقم:</strong> STU-001</p><p><strong>الصف:</strong> 3 متوسط - أ</p></div>
+      <div class="modal-footer"><button class="btn btn-primary">حفظ</button><button class="btn btn-ghost" onclick="this.closest('.modal-backdrop').classList.remove('is-open')">إغلاق</button></div>
+    </div></div>
+
+    <div class="modal-backdrop" id="m2"><div class="modal modal-sm">
+      <div class="modal-header"><div class="modal-title">⚠️ تأكيد</div><button class="modal-close" onclick="this.closest('.modal-backdrop').classList.remove('is-open')"><i class="ph ph-x"></i></button></div>
+      <div class="modal-body"><p>هل أنت متأكد من اعتماد طلب التسجيل؟</p></div>
+      <div class="modal-footer"><button class="btn btn-success">نعم، اعتماد</button><button class="btn btn-ghost" onclick="this.closest('.modal-backdrop').classList.remove('is-open')">إلغاء</button></div>
+    </div></div>
+
+    <div class="modal-backdrop" id="m3"><div class="modal modal-sm">
+      <div class="modal-header"><div class="modal-title">🗑️ حذف</div><button class="modal-close" onclick="this.closest('.modal-backdrop').classList.remove('is-open')"><i class="ph ph-x"></i></button></div>
+      <div class="modal-body"><p>هل أنت متأكد من الحذف؟ <strong style="color: var(--color-danger-600);">لا يمكن التراجع.</strong></p></div>
+      <div class="modal-footer"><button class="btn btn-danger">حذف</button><button class="btn btn-ghost" onclick="this.closest('.modal-backdrop').classList.remove('is-open')">إلغاء</button></div>
+    </div></div>
+  </section>
+
+  <!-- TOASTS -->
+  <section class="component-section" id="toasts">
+    <h2 class="component-title">🔔 8. Toasts</h2>
+    <div class="demo-row">
+      <button class="btn btn-success" onclick="EduMS.notify({type:'success',title:'تم بنجاح!',msg:'العملية تمت'})">نجاح</button>
+      <button class="btn btn-danger" onclick="EduMS.notify({type:'danger',title:'خطأ!',msg:'حدث خطأ'})">خطأ</button>
+      <button class="btn btn-gold" onclick="EduMS.notify({type:'warning',title:'تحذير',msg:'راجع البيانات'})">تحذير</button>
+      <button class="btn btn-primary" onclick="EduMS.notify({type:'info',title:'معلومة',msg:'تعميم جديد'})">معلومة</button>
+    </div>
+  </section>
+
+  <!-- TABS -->
+  <section class="component-section" id="tabs">
+    <h2 class="component-title">📂 9. التبويبات</h2>
+    <div class="tabs">
+      <div class="tab active" data-tab="t1">معلومات شخصية</div>
+      <div class="tab" data-tab="t2">الأكاديمي</div>
+      <div class="tab" data-tab="t3">الحضور</div>
+      <div class="tab" data-tab="t4">السلوك</div>
+      <div class="tab" data-tab="t5">المالية</div>
+    </div>
+    <div class="tab-content">
+      <div class="tab-pane active" id="t1"><p>📋 المعلومات الشخصية</p></div>
+      <div class="tab-pane" id="t2"><p>📚 السجل الأكاديمي</p></div>
+      <div class="tab-pane" id="t3"><p>📅 الحضور والغياب</p></div>
+      <div class="tab-pane" id="t4"><p>⚖️ السلوك</p></div>
+      <div class="tab-pane" id="t5"><p>💰 المالية</p></div>
+    </div>
+  </section>
+
+  <!-- DROPDOWNS -->
+  <section class="component-section" id="dropdowns">
+    <h2 class="component-title">📋 10. القوائم المنسدلة</h2>
+    <div class="demo-row">
+      <div class="dropdown">
+        <button class="btn btn-outline" onclick="this.parentElement.classList.toggle('is-open')">القائمة <i class="ph ph-caret-down"></i></button>
+        <div class="dropdown-menu">
+          <div class="dropdown-item"><i class="ph ph-eye"></i> عرض</div>
+          <div class="dropdown-item"><i class="ph ph-pencil"></i> تعديل</div>
+          <div class="dropdown-item"><i class="ph ph-export"></i> تصدير</div>
+          <div class="dropdown-divider"></div>
+          <div class="dropdown-item danger"><i class="ph ph-trash"></i> حذف</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOADING -->
+  <section class="component-section" id="loading">
+    <h2 class="component-title">⏳ 11. حالات التحميل</h2>
+    <div class="card">
+      <div class="card-body">
+        <div class="flex gap-3">
+          <div class="skeleton skeleton-avatar"></div>
+          <div style="flex:1;">
+            <div class="skeleton skeleton-title"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text" style="width:80%;"></div>
+          </div>
+        </div>
+        <div class="mt-4 flex gap-2">
+          <div class="skeleton skeleton-button"></div>
+          <div class="skeleton skeleton-button" style="width:80px;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMPTY -->
+  <section class="component-section" id="empty">
+    <h2 class="component-title">📭 12. حالة الفراغ</h2>
+    <div class="card"><div class="card-body">
+      <div class="empty-state">
+        <div class="empty-state-icon"><i class="ph ph-inbox"></i></div>
+        <div class="empty-state-title">لا توجد بيانات</div>
+        <p class="empty-state-desc">لم يتم العثور على نتائج. جرب تعديل البحث.</p>
+        <button class="btn btn-primary"><i class="ph ph-plus"></i> إضافة جديد</button>
+      </div>
+    </div></div>
+  </section>
+</div>
+
+<script src="../assets/js/edums-mock-data.js"></script>
+<script src="../assets/js/edums-core.js"></script>
+<script>
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab).classList.add('active');
+  });
+});
+document.querySelectorAll('.nav-pill').forEach(p => {
+  p.addEventListener('click', e => { e.preventDefault(); document.querySelector(p.getAttribute('href')).scrollIntoView({behavior:'smooth'}); });
+});
+document.querySelectorAll('.modal-backdrop').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('is-open'); });
+});
+</script>
+</body>
+</html>

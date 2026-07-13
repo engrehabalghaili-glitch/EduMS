@@ -18,4 +18,5 @@ public class AcademicBranchConfigLog : BaseAuditableEntity
 
     // Navigation Property
     public virtual School? School { get; set; }
+    public virtual Employee? ModifiedByEmployee { get; set; }
 }

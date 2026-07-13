@@ -13,6 +13,7 @@ public class EducationalSupervisionVisit : BaseAuditableEntity
     public string? Recommendations { get; set; }
     public int Status { get; set; } // 1=Scheduled, 2=Completed, 3=FollowUpRequired
     public long? SupervisorEmployeeId { get; set; }
+    public long? VisitedTeacherEmployeeId { get; set; }
     public long? TargetDepartmentId { get; set; }
     public DateTime? FollowUpRequiredDate { get; set; }
     public string? ActionItemsDetail { get; set; }
@@ -20,4 +21,6 @@ public class EducationalSupervisionVisit : BaseAuditableEntity
     // Navigation Properties
     public virtual Directorate? Directorate { get; set; }
     public virtual School? School { get; set; }
+    public virtual Employee? SupervisorEmployee { get; set; }
+    public virtual Employee? VisitedTeacherEmployee { get; set; }
 }

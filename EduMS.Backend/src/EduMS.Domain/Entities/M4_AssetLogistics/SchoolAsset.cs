@@ -39,6 +39,7 @@ public class SchoolAsset : BaseAuditableEntity
     public string? RfidTag { get; set; }
     public bool HasPhysicalTag { get; set; }
     public DateTime? PhysicalTagDate { get; set; }
+    public string? Currency { get; set; }
     public bool IsActive { get; set; } = true;
     public string? Notes { get; set; }
 
@@ -47,4 +48,16 @@ public class SchoolAsset : BaseAuditableEntity
     public virtual AssetCategory? Category { get; set; }
     public virtual AssetLocationRecord? Location { get; set; }
     public virtual AssetWarrantyContract? WarrantyContract { get; set; }
+
+    // Child Navigation Collections
+    public virtual ICollection<AssetSuspensionRequest> SuspensionRequests { get; set; } = new List<AssetSuspensionRequest>();
+    public virtual ICollection<UsageViolation> UsageViolations { get; set; } = new List<UsageViolation>();
+    public virtual ICollection<AssetAssignment> Assignments { get; set; } = new List<AssetAssignment>();
+    public virtual ICollection<AssetLoan> Loans { get; set; } = new List<AssetLoan>();
+    public virtual ICollection<AssetTransferRequest> TransferRequests { get; set; } = new List<AssetTransferRequest>();
+    public virtual ICollection<AssetInspectionLog> InspectionLogs { get; set; } = new List<AssetInspectionLog>();
+    public virtual ICollection<AssetMovementHistory> MovementHistories { get; set; } = new List<AssetMovementHistory>();
+    public virtual ICollection<AssetMaintenanceTicket> MaintenanceTickets { get; set; } = new List<AssetMaintenanceTicket>();
+    public virtual ICollection<PreventiveMaintenanceSchedule> PreventiveSchedules { get; set; } = new List<PreventiveMaintenanceSchedule>();
+    public virtual ICollection<EmployeeInventoryCustody> EmployeeInventoryCustodies { get; set; } = new List<EmployeeInventoryCustody>();
 }

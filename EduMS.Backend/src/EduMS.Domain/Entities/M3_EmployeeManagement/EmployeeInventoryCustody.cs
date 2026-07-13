@@ -37,4 +37,5 @@ public class EmployeeInventoryCustody : BaseAuditableEntity
     public string? Notes { get; set; }
 
     public virtual Employee? Employee { get; set; }
+    public virtual SchoolAsset? Asset { get; set; }
 }

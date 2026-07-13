@@ -15,9 +15,11 @@ public class EmployeeDocument : BaseAuditableEntity
     public string? DocumentNumber { get; set; }
     public DateTime? IssueDate { get; set; }
     public DateTime? ExpiryDate { get; set; }
+    public string? IssuedBy { get; set; }
     public bool IsExpiryRequired { get; set; }
     public bool ExpiryReminderSent { get; set; }
     public string? FilePath { get; set; }
+    public long? FileSize { get; set; }
     public string? FileType { get; set; }
     public string? ThumbnailPath { get; set; }
     public string? Description { get; set; }

@@ -60,4 +60,5 @@ public class School : BaseAuditableEntity
     public virtual ICollection<JournalEntry> JournalEntries { get; set; } = new List<JournalEntry>();
     public virtual ICollection<PaymentVoucher> PaymentVouchers { get; set; } = new List<PaymentVoucher>();
     public virtual ICollection<StudentEnrollment> StudentEnrollments { get; set; } = new List<StudentEnrollment>();
+    public virtual ICollection<OrganizationalSector> OrganizationalSectors { get; set; } = new List<OrganizationalSector>();
 }

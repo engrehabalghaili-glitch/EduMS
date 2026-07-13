@@ -19,4 +19,5 @@ public class StudentIdentityDocument : BaseAuditableEntity
 
     // Navigation Property
     public virtual Student? Student { get; set; }
+    public virtual Employee? VerifiedByEmployee { get; set; }
 }

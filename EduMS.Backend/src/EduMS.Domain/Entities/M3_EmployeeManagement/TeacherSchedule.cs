@@ -9,7 +9,9 @@ namespace EduMS.Domain.Entities;
 public class TeacherSchedule : BaseAuditableEntity
 {
     public long TeacherEmployeeId { get; set; }
-    public long SchoolId { get; set; }
+    public long? SchoolId { get; set; }
+    public long? DirectorateId { get; set; }
+    public long? OrganizationalSectorId { get; set; }
     public long? SchoolAcademicYearId { get; set; }
     public long? SchoolSemesterId { get; set; }
     public string DayOfWeek { get; set; } = string.Empty; // Saturday=1 ... Wednesday=5
@@ -28,4 +30,7 @@ public class TeacherSchedule : BaseAuditableEntity
     public string? CancellationReason { get; set; }
 
     public virtual Employee? Teacher { get; set; }
+    public virtual School? School { get; set; }
+    public virtual Directorate? Directorate { get; set; }
+    public virtual OrganizationalSector? OrganizationalSector { get; set; }
 }

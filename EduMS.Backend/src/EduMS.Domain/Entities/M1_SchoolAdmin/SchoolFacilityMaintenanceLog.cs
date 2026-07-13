@@ -19,4 +19,5 @@ public class SchoolFacilityMaintenanceLog : BaseAuditableEntity
 
     // Navigation Properties
     public virtual SchoolFacility? Facility { get; set; }
+    public virtual Employee? ResponsibleEmployee { get; set; }
 }

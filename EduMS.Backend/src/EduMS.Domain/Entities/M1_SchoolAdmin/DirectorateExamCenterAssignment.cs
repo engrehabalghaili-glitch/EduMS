@@ -22,4 +22,6 @@ public class DirectorateExamCenterAssignment : BaseAuditableEntity
     // Navigation Properties
     public virtual Directorate? Directorate { get; set; }
     public virtual School? HostedAtSchool { get; set; }
+    public virtual Employee? ChiefSuperintendentEmployee { get; set; }
+    public virtual Employee? ResidentSecurityOfficerEmployee { get; set; }
 }

@@ -18,4 +18,7 @@ public class OfficialCircular : BaseAuditableEntity
     public string? AttachmentFileUrl { get; set; }
     public bool RequiresMandatoryAcknowledgment { get; set; }
     public DateTime? AcknowledgmentDeadline { get; set; }
+
+    // Navigation Property
+    public virtual Employee? IssuerEmployee { get; set; }
 }

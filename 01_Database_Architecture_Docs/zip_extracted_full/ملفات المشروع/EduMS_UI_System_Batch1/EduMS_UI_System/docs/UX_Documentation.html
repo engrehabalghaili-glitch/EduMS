@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>التوثيق التقني — EduMS Enterprise UX/UI</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+<link rel="stylesheet" href="../assets/css/edums-design-system.css">
+<style>
+  body { background: #F4F6FA; padding: 24px; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .doc-section { background: #fff; border-radius: 14px; padding: 32px; margin-bottom: 24px; box-shadow: 0 2px 10px rgba(0,0,0,.04); }
+  .doc-title { font-size: 24px; color: var(--color-primary-900); border-bottom: 3px solid var(--color-accent-gold); padding-bottom: 12px; margin-bottom: 20px; }
+  .doc-section h3 { color: var(--color-primary-800); margin: 24px 0 12px; font-size: 18px; }
+  .doc-section p { line-height: 1.8; color: var(--color-gray-700); margin-bottom: 12px; }
+  .doc-section ul, .doc-section ol { padding-right: 24px; margin: 12px 0; line-height: 2; }
+  pre { background: #0F172A; color: #E2E8F0; padding: 18px; border-radius: 10px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 13px; line-height: 1.6; direction: ltr; text-align: left; margin: 14px 0; }
+  pre .k { color: #C084FC; } pre .s { color: #86EFAC; } pre .c { color: #64748B; font-style: italic; } pre .n { color: #FBBF24; }
+  code { background: #f1f5f9; padding: 2px 8px; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 12px; color: var(--color-primary-900); }
+  .mermaid { background: #fafbfc; border: 2px dashed var(--color-gray-300); border-radius: 12px; padding: 16px; text-align: center; margin: 16px 0; direction: ltr; }
+  .hero-banner { background: linear-gradient(135deg, #1E3A8A, #172554); color: #fff; padding: 50px 36px; border-radius: 18px; margin-bottom: 24px; }
+  .hero-banner h1 { color: #fff; font-size: 32px; margin-bottom: 8px; }
+  .hero-banner p { color: #BFDBFE; }
+  .toc-side { background: #fff; border-radius: 14px; padding: 16px; box-shadow: 0 2px 10px rgba(0,0,0,.04); position: sticky; top: 16px; margin-bottom: 24px; }
+  .toc-side ol { padding-right: 18px; }
+  .toc-side a { color: var(--color-gray-700); text-decoration: none; font-size: 14px; line-height: 2; }
+  .toc-side a:hover { color: var(--color-primary-700); font-weight: 600; }
+  table.spec { width: 100%; border-collapse: collapse; margin: 14px 0; }
+  table.spec th, table.spec td { padding: 10px 12px; border: 1px solid var(--color-gray-200); text-align: right; font-size: 13px; }
+  table.spec th { background: var(--color-primary-50); color: var(--color-primary-900); font-weight: 700; }
+  .principle-card { background: var(--color-primary-50); border-right: 5px solid var(--color-primary-700); padding: 16px 20px; border-radius: 8px; margin: 12px 0; }
+  .principle-card strong { color: var(--color-primary-900); display: block; margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hero-banner">
+    <h1>📚 التوثيق التقني الشامل</h1>
+    <p>EduMS Enterprise — Information Architecture, User Flows, و Angular SPA Strategy</p>
+    <div class="flex gap-2 mt-4">
+      <a href="../index.html" class="btn btn-gold"><i class="ph ph-house"></i> الفهرس</a>
+      <a href="../00_Core/master-shell.html" class="btn btn-outline" style="border-color:rgba(255,255,255,0.5); color:#fff;">اللوحة الرئيسية</a>
+    </div>
+  </div>
+
+  <div class="toc-side">
+    <strong>📑 محتويات التوثيق:</strong>
+    <ol>
+      <li><a href="#ia">جرد وتصنيف المعلومات (Information Architecture)</a></li>
+      <li><a href="#user-flows">خرائط تدفق المستخدم (User Flow Mapping)</a></li>
+      <li><a href="#journeys">رحلات المستخدم (User Journey Maps)</a></li>
+      <li><a href="#spa">معمارية SPA + RBAC</a></li>
+      <li><a href="#angular">Angular Implementation</a></li>
+      <li><a href="#responsive">التصميم المتجاوب</a></li>
+      <li><a href="#api">دمج الـ API مع ASP.NET Core</a></li>
+    </ol>
+  </div>
+
+  <!-- 1. IA -->
+  <section class="doc-section" id="ia">
+    <h2 class="doc-title">1️⃣ جرد وتصنيف المعلومات (Information Architecture)</h2>
+    <p>اعتمدنا <strong>هيكلية هرمية ثلاثية المستويات</strong> لتنظيم 423+ شاشة في النظام:</p>
+
+    <div class="mermaid">
+graph TD
+    A[🏠 EduMS Enterprise] --> B[🏛️ الإدارة المدرسية M1]
+    A --> C[🎓 الطلاب M2]
+    A --> D[👥 الموظفون M3]
+    A --> E[📦 الأصول M4]
+    A --> F[💰 المالية M5]
+    A --> G[📊 الإحصاء M6]
+    A --> H[🔐 الأمن M7]
+    A --> I[🚨 الطوارئ M8]
+    
+    C --> C1[التسجيل والقيد]
+    C --> C2[الأكاديمي]
+    C --> C3[المكتبة]
+    C --> C4[الأنشطة]
+    C --> C5[السلوك]
+    
+    C1 --> C1a[تقديم الطلب]
+    C1 --> C1b[المراجعة]
+    C1 --> C1c[الاعتماد]
+    C1 --> C1d[التسكين]
+    
+    style A fill:#1E3A8A,color:#fff
+    style B fill:#3B82F6,color:#fff
+    style C fill:#10B981,color:#fff
+    style D fill:#8B5CF6,color:#fff
+    style E fill:#F59E0B,color:#fff
+    style F fill:#EF4444,color:#fff
+    style G fill:#06B6D4,color:#fff
+    style H fill:#EC4899,color:#fff
+    style I fill:#F97316,color:#fff
+    </div>
+
+    <h3>🎯 قاعدة الـ 3 نقرات</h3>
+    <div class="principle-card">
+      <strong>المبدأ:</strong>
+      كل وظيفة أساسية يجب أن تكون متاحة بـ <strong>3 نقرات كحد أقصى</strong> من لوحة التحكم.
+      <br><br>
+      <strong>التطبيق:</strong> Sidebar (نقرة 1) → Sub-menu (نقرة 2) → الإجراء (نقرة 3).
+    </div>
+
+    <h3>🗂️ تجميع المعلومات حسب الأدوار</h3>
+    <p>تستخدم وحدة <code>menuItems</code> في <code>edums-mock-data.js</code> خاصية <code>roles</code> لتصفية ما يراه كل مستخدم:</p>
+    <pre><span class="c">// مثال من mock-data.js</span>
+{
+  <span class="n">id</span>: <span class="s">'students-list'</span>,
+  <span class="n">label</span>: <span class="s">'قائمة الطلاب'</span>,
+  <span class="n">icon</span>: <span class="s">'🎓'</span>,
+  <span class="n">route</span>: <span class="s">'#/students/list'</span>,
+  <span class="n">roles</span>: [<span class="s">'principal'</span>, <span class="s">'teacher'</span>, <span class="s">'registrar'</span>, <span class="s">'office_sup'</span>]
+}</pre>
+  </section>
+
+  <!-- 2. USER FLOWS -->
+  <section class="doc-section" id="user-flows">
+    <h2 class="doc-title">2️⃣ خرائط تدفق المستخدم (User Flow Mapping)</h2>
+    
+    <h3>📌 Flow 1: تسجيل طالب جديد (من ولي الأمر حتى الاعتماد)</h3>
+    <div class="mermaid">
+graph LR
+    A([ولي الأمر]) --> B[بوابة التسجيل]
+    B --> C[ملء النموذج]
+    C --> D[رفع الوثائق]
+    D --> E{التحقق التلقائي}
+    E -->|ناقص| C
+    E -->|مكتمل| F[إرسال للمدرسة]
+    F --> G[مراجعة المسجل]
+    G -->|قبول| H[اعتماد المدير]
+    G -->|رفض| I[إشعار ولي الأمر]
+    H --> J[رفع للمكتب]
+    J --> K[اعتماد المكتب]
+    K --> L[إنشاء سجل نشط]
+    L --> M[إصدار رقم القيد]
+    M --> N([نهاية: طالب نشط])
+    
+    style A fill:#FEF3C7,stroke:#92400E
+    style N fill:#D1FAE5,stroke:#059669
+    style E fill:#FEE2E2,stroke:#DC2626
+    style I fill:#FEE2E2,stroke:#DC2626
+    </div>
+
+    <h3>📌 Flow 2: رصد درجات فصل كامل</h3>
+    <div class="mermaid">
+graph TD
+    A([المعلم]) --> B[شاشة الدرجات]
+    B --> C[اختيار الشعبة]
+    C --> D[اختيار المادة]
+    D --> E[شبكة إدخال الدرجات]
+    E --> F[إدخال درجة لكل طالب]
+    F --> G{حفظ كمسودة؟}
+    G -->|نعم| H[حفظ مؤقت]
+    H --> E
+    G -->|لا| I[احتساب آلي]
+    I --> J[مراجعة وتثبيت]
+    J --> K[رفع للاعتماد]
+    K --> L[اعتماد رئيس القسم]
+    L --> M[نشر للأولياء]
+    
+    style A fill:#FEF3C7
+    style M fill:#D1FAE5
+    </div>
+
+    <h3>📌 Flow 3: تسجيل حضور سريع</h3>
+    <div class="mermaid">
+graph LR
+    A([المعلم - الجوال]) --> B[فتح التطبيق]
+    B --> C[تحديد الحصة الحالية]
+    C --> D[عرض كشف الطلاب]
+    D --> E[Swipe للحضور/الغياب]
+    E --> F[تأكيد الإرسال]
+    F --> G[احتساب نسبة الغياب]
+    G --> H{تجاوز 10%?}
+    H -->|نعم| I[إنذار تلقائي لولي الأمر]
+    H -->|لا| J([انتهاء])
+    
+    style A fill:#FEF3C7
+    style I fill:#FEE2E2,stroke:#DC2626
+    style J fill:#D1FAE5
+    </div>
+
+    <h3>📌 Flow 4: دفع الرسوم المدرسية (Online)</h3>
+    <div class="mermaid">
+graph TD
+    A([ولي الأمر]) --> B[شاشة المستحقات]
+    B --> C[عرض الفواتير]
+    C --> D[اختيار فاتورة/فواتير]
+    D --> E[اختيار قناة الدفع]
+    E --> F[بطاقة ائتمان]
+    E --> G[تحويل بنكي]
+    E --> H[محفظة إلكترونية]
+    F --> I[إدخال البيانات]
+    G --> I
+    H --> I
+    I --> J[تحقق 3DS]
+    J --> K{نجاح؟}
+    K -->|نعم| L[إيصال إلكتروني]
+    K -->|لا| M[رسالة خطأ]
+    L --> N[تحديث الرصيد]
+    N --> O([انتهاء])
+    
+    style A fill:#FEF3C7
+    style O fill:#D1FAE5
+    style M fill:#FEE2E2
+    </div>
+
+    <h3>📌 Flow 5: طلب إجازة موظف</h3>
+    <div class="mermaid">
+graph LR
+    A([الموظف]) --> B[طلب إجازة]
+    B --> C[تحديد النوع والفترة]
+    C --> D[إرفاق مستندات]
+    D --> E[إرسال]
+    E --> F[المدير المباشر]
+    F -->|قبول| G[شؤون الموظفين]
+    F -->|رفض| H[إشعار رفض]
+    G -->|اعتماد| I[خصم الرصيد]
+    G -->|رفض| H
+    I --> J[تحديث الجدول]
+    J --> K([إجازة مفعلة])
+    
+    style A fill:#FEF3C7
+    style K fill:#D1FAE5
+    style H fill:#FEE2E2
+    </div>
+
+    <h3>📌 Flow 6: تسجيل أصل جديد + الصيانة</h3>
+    <div class="mermaid">
+graph TD
+    A([أمين الأصول]) --> B[استلام من المورد]
+    B --> C[التحقق من التكرار]
+    C -->|مكرر| D[تنبيه + إلغاء]
+    C -->|جديد| E[إدخال البيانات]
+    E --> F[رقم تتبع مؤقت ASSET-TMP]
+    F --> G[التصنيف والموقع]
+    G --> H[توليد الرقم النهائي]
+    H --> I[طباعة الباركود]
+    I --> J([الأصل نشط])
+    J --> K{تحتاج صيانة؟}
+    K -->|نعم| L[فتح تذكرة]
+    L --> M[تخصيص فني]
+    M --> N[تنفيذ]
+    N --> O[اختبار]
+    O --> P([إعادة للخدمة])
+    
+    style A fill:#FEF3C7
+    style J fill:#D1FAE5
+    style D fill:#FEE2E2
+    style P fill:#D1FAE5
+    </div>
+  </section>
+
+  <!-- 3. JOURNEYS -->
+  <section class="doc-section" id="journeys">
+    <h2 class="doc-title">3️⃣ رحلات المستخدم (User Journey Maps)</h2>
+    
+    <h3>👨‍💼 رحلة مدير المدرسة (يوم نموذجي)</h3>
+    <table class="spec">
+      <tr><th>الوقت</th><th>المهمة</th><th>الواجهة</th><th>الشعور</th><th>تحسينات UX</th></tr>
+      <tr><td>7:00</td><td>تسجيل الدخول وعرض اللوحة</td><td>Master Dashboard</td><td>😊 إيجابي</td><td>عرض فوري للإحصاءات المهمة</td></tr>
+      <tr><td>7:30</td><td>مراجعة تقارير الحضور</td><td>Attendance Reports</td><td>🤔 مركّز</td><td>تنبيهات بصرية للحالات الحرجة</td></tr>
+      <tr><td>9:00</td><td>اعتماد طلب تسجيل جديد</td><td>Applications Queue</td><td>⚡ سريع</td><td>اعتماد بنقرة واحدة + Toast</td></tr>
+      <tr><td>11:00</td><td>تنفيذ تعميم من المكتب</td><td>Circulars</td><td>🎯 منظّم</td><td>Workflow واضح بالخطوات</td></tr>
+      <tr><td>14:00</td><td>اعتماد طلبات إجازات</td><td>Leaves Approval</td><td>✅ مُنجز</td><td>Bulk approval + التذكيرات</td></tr>
+    </table>
+
+    <h3>👨‍👩‍👧 رحلة ولي الأمر</h3>
+    <table class="spec">
+      <tr><th>الخطوة</th><th>الإجراء</th><th>الواجهة المطلوبة</th></tr>
+      <tr><td>1</td><td>تقديم طلب تسجيل ابنه</td><td>نموذج التسجيل العام (5 خطوات)</td></tr>
+      <tr><td>2</td><td>متابعة قبول الطلب</td><td>صفحة "حالة الطلبات"</td></tr>
+      <tr><td>3</td><td>متابعة درجات وحضور أبنائه</td><td>Dashboard مخصص + تنبيهات</td></tr>
+      <tr><td>4</td><td>دفع الرسوم</td><td>بوابة دفع آمنة + إيصال</td></tr>
+      <tr><td>5</td><td>التواصل مع المعلمين</td><td>رسائل + جدولة لقاءات</td></tr>
+    </table>
+  </section>
+
+  <!-- 4. SPA + RBAC -->
+  <section class="doc-section" id="spa">
+    <h2 class="doc-title">4️⃣ معمارية SPA + RBAC</h2>
+    
+    <h3>🏗️ الهيكلية المعمارية</h3>
+    <div class="mermaid">
+graph TB
+    A[تسجيل الدخول] --> B[JWT Token]
+    B --> C{التحقق من الدور}
+    C --> D[Master Shell SPA]
+    D --> E[AuthGuard]
+    D --> F[RoleGuard]
+    D --> G[Dynamic Sidebar]
+    D --> H[Dynamic Dashboard]
+    G --> I[Filter menuItems by role]
+    H --> J[Load Widgets by role]
+    
+    style A fill:#FEF3C7
+    style D fill:#1E3A8A,color:#fff
+    style B fill:#D4AF37,color:#fff
+    </div>
+
+    <h3>🔐 تطبيق Role-Based Access Control</h3>
+    <p>كل دور يحتوي على مجموعة من الـ Permissions. كل قائمة/زر/مكون يتحقق من صلاحياته قبل العرض:</p>
+
+    <pre><span class="c">// Permission Check Logic</span>
+<span class="k">function</span> can(roleOrRoles, currentRole) {
+  <span class="k">if</span> (!roleOrRoles) <span class="k">return</span> <span class="n">true</span>;
+  <span class="k">const</span> arr = Array.isArray(roleOrRoles) ? roleOrRoles : [roleOrRoles];
+  <span class="k">return</span> arr.includes(<span class="s">'*'</span>) || arr.includes(currentRole);
+}
+
+<span class="c">// Usage</span>
+<span class="k">if</span> (EduMS.can([<span class="s">'principal'</span>, <span class="s">'office_sup'</span>])) {
+  <span class="c">// Show this UI element</span>
+}</pre>
+
+    <h3>🔄 تبديل الدور بدون إعادة تحميل</h3>
+    <ol>
+      <li><strong>المستخدم</strong> يختار دوراً جديداً من الـ Dropdown</li>
+      <li><strong>EduMS.setRole()</strong> يُحدّث الـ State</li>
+      <li><strong>updateUser()</strong> يحدّث avatar + name + role</li>
+      <li><strong>renderSidebar()</strong> يُعيد بناء القائمة الجانبية</li>
+      <li><strong>renderDashboard()</strong> يُعيد بناء بطاقات الإحصاء حسب الدور</li>
+      <li><strong>notify()</strong> يعرض Toast تأكيدي</li>
+    </ol>
+  </section>
+
+  <!-- 5. ANGULAR -->
+  <section class="doc-section" id="angular">
+    <h2 class="doc-title">5️⃣ Angular Implementation Strategy</h2>
+    
+    <h3>📁 بنية مجلد Angular المقترحة</h3>
+    <pre>src/app/
+├── core/                  <span class="c">// Singletons (services, guards)</span>
+│   ├── auth/
+│   │   ├── auth.service.ts
+│   │   ├── auth.guard.ts
+│   │   └── role.guard.ts
+│   ├── interceptors/
+│   │   ├── auth.interceptor.ts
+│   │   └── error.interceptor.ts
+│   └── services/
+│       └── permission.service.ts
+├── shared/                <span class="c">// Reusable components</span>
+│   ├── components/
+│   │   ├── button/
+│   │   ├── data-table/
+│   │   ├── modal/
+│   │   └── ...
+│   └── directives/
+│       └── has-permission.directive.ts
+├── layouts/
+│   ├── master-shell/      <span class="c">// Main SPA shell</span>
+│   │   ├── master-shell.component.ts
+│   │   ├── sidebar.component.ts
+│   │   └── topbar.component.ts
+│   └── auth-layout/
+└── features/              <span class="c">// Lazy-loaded modules</span>
+    ├── auth/
+    ├── dashboard/
+    ├── students/
+    ├── employees/
+    └── assets/</pre>
+
+    <h3>🛡️ AuthGuard للحماية</h3>
+    <pre><span class="c">// auth.guard.ts</span>
+<span class="k">@Injectable</span>({ providedIn: <span class="s">'root'</span> })
+<span class="k">export class</span> AuthGuard <span class="k">implements</span> CanActivate {
+  <span class="k">constructor</span>(<span class="k">private</span> auth: AuthService, <span class="k">private</span> router: Router) {}
+  
+  canActivate(): <span class="k">boolean</span> {
+    <span class="k">if</span> (this.auth.isAuthenticated()) <span class="k">return</span> <span class="n">true</span>;
+    this.router.navigate([<span class="s">'/login'</span>]);
+    <span class="k">return</span> <span class="n">false</span>;
+  }
+}
+
+<span class="c">// role.guard.ts</span>
+<span class="k">@Injectable</span>({ providedIn: <span class="s">'root'</span> })
+<span class="k">export class</span> RoleGuard <span class="k">implements</span> CanActivate {
+  <span class="k">constructor</span>(<span class="k">private</span> auth: AuthService) {}
+  
+  canActivate(route: ActivatedRouteSnapshot): <span class="k">boolean</span> {
+    <span class="k">const</span> requiredRoles = route.data[<span class="s">'roles'</span>] <span class="k">as</span> <span class="k">string</span>[];
+    <span class="k">return</span> this.auth.hasAnyRole(requiredRoles);
+  }
+}</pre>
+
+    <h3>🎯 Routing Strategy مع Lazy Loading</h3>
+    <pre><span class="c">// app-routing.module.ts</span>
+<span class="k">const</span> routes: Routes = [
+  { path: <span class="s">'login'</span>, loadComponent: () => <span class="k">import</span>(<span class="s">'./features/auth/login.component'</span>) },
+  {
+    path: <span class="s">''</span>,
+    component: MasterShellComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: <span class="s">'dashboard'</span>, loadComponent: () => <span class="k">import</span>(<span class="s">'./features/dashboard/dashboard.component'</span>) },
+      {
+        path: <span class="s">'students'</span>,
+        loadChildren: () => <span class="k">import</span>(<span class="s">'./features/students/students.module'</span>),
+        canActivate: [RoleGuard],
+        data: { roles: [<span class="s">'principal'</span>, <span class="s">'teacher'</span>, <span class="s">'registrar'</span>] }
+      },
+      <span class="c">// ... باقي الـ Modules</span>
+    ]
+  }
+];</pre>
+
+    <h3>🔒 توجيه HasPermission Directive</h3>
+    <pre><span class="c">// has-permission.directive.ts</span>
+<span class="k">@Directive</span>({ selector: <span class="s">'[hasPermission]'</span> })
+<span class="k">export class</span> HasPermissionDirective {
+  <span class="k">@Input</span>() <span class="k">set</span> hasPermission(roles: <span class="k">string</span>[]) {
+    <span class="k">if</span> (this.auth.hasAnyRole(roles)) {
+      this.view.createEmbeddedView(this.template);
+    } <span class="k">else</span> {
+      this.view.clear();
+    }
+  }
+  <span class="k">constructor</span>(<span class="k">private</span> auth: AuthService, <span class="k">private</span> template: TemplateRef&lt;<span class="k">any</span>&gt;, <span class="k">private</span> view: ViewContainerRef) {}
+}
+
+<span class="c">// Usage in template:</span>
+&lt;button *hasPermission=<span class="s">"['principal', 'office_sup']"</span>&gt;اعتماد الطلب&lt;/button&gt;</pre>
+  </section>
+
+  <!-- 6. RESPONSIVE -->
+  <section class="doc-section" id="responsive">
+    <h2 class="doc-title">6️⃣ التصميم المتجاوب (Responsive Behavior)</h2>
+    <table class="spec">
+      <tr><th>الحجم</th><th>العرض</th><th>السلوك</th></tr>
+      <tr><td>Mobile</td><td>&lt; 640px</td><td>Sidebar مخفي (off-canvas) + Grid يصبح عمود واحد</td></tr>
+      <tr><td>Tablet</td><td>640-1024px</td><td>Sidebar يطوى تلقائياً + Grid 2 أعمدة</td></tr>
+      <tr><td>Desktop</td><td>1024-1440px</td><td>Sidebar مفتوح + Grid 3 أعمدة</td></tr>
+      <tr><td>Large</td><td>&gt; 1440px</td><td>Sidebar مفتوح + Grid 4 أعمدة + محتوى أعرض</td></tr>
+    </table>
+  </section>
+
+  <!-- 7. API -->
+  <section class="doc-section" id="api">
+    <h2 class="doc-title">7️⃣ دمج الـ API مع ASP.NET Core</h2>
+    <h3>🔌 نموذج HTTP Interceptor للـ JWT</h3>
+    <pre><span class="k">@Injectable</span>()
+<span class="k">export class</span> AuthInterceptor <span class="k">implements</span> HttpInterceptor {
+  intercept(req: HttpRequest&lt;<span class="k">any</span>&gt;, next: HttpHandler) {
+    <span class="k">const</span> token = localStorage.getItem(<span class="s">'edums_token'</span>);
+    <span class="k">if</span> (token) {
+      req = req.clone({ setHeaders: { Authorization: <span class="s">`Bearer ${token}`</span> } });
+    }
+    <span class="k">return</span> next.handle(req);
+  }
+}</pre>
+
+    <h3>📡 نموذج خدمة الطلاب</h3>
+    <pre><span class="k">@Injectable</span>({ providedIn: <span class="s">'root'</span> })
+<span class="k">export class</span> StudentsService {
+  <span class="k">private</span> apiUrl = <span class="s">'/api/students'</span>;
+  
+  <span class="k">constructor</span>(<span class="k">private</span> http: HttpClient) {}
+  
+  getAll(filters?: <span class="k">any</span>): Observable&lt;Student[]&gt; {
+    <span class="k">return</span> this.http.get&lt;Student[]&gt;(this.apiUrl, { params: filters });
+  }
+  
+  getById(id: <span class="k">number</span>): Observable&lt;Student&gt; {
+    <span class="k">return</span> this.http.get&lt;Student&gt;(<span class="s">`${this.apiUrl}/${id}`</span>);
+  }
+  
+  create(student: Partial&lt;Student&gt;): Observable&lt;Student&gt; {
+    <span class="k">return</span> this.http.post&lt;Student&gt;(this.apiUrl, student);
+  }
+  
+  approve(id: <span class="k">number</span>): Observable&lt;<span class="k">void</span>&gt; {
+    <span class="k">return</span> this.http.post&lt;<span class="k">void</span>&gt;(<span class="s">`${this.apiUrl}/${id}/approve`</span>, {});
+  }
+}</pre>
+  </section>
+</div>
+
+<script>
+mermaid.initialize({
+  startOnLoad: true,
+  theme: 'default',
+  themeVariables: { fontFamily: 'Cairo, sans-serif' }
+});
+</script>
+</body>
+</html>

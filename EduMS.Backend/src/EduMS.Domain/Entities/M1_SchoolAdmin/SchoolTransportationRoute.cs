@@ -23,4 +23,5 @@ public class SchoolTransportationRoute : BaseAuditableEntity
     // Navigation Properties
     public virtual School? School { get; set; }
     public virtual Employee? DriverEmployee { get; set; }
+    public virtual Employee? BusSupervisorEmployee { get; set; }
 }

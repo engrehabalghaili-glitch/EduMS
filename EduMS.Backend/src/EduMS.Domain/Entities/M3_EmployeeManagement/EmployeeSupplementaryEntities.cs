@@ -9,7 +9,9 @@ namespace EduMS.Domain.Entities;
 public class EmployeeAdditionalTask : BaseAuditableEntity
 {
     public long EmployeeId { get; set; }
-    public long SchoolId { get; set; }
+    public long? SchoolId { get; set; }
+    public long? DirectorateId { get; set; }
+    public long? OrganizationalSectorId { get; set; }
     public string TaskTitleAr { get; set; } = string.Empty;
     public string? TaskDescription { get; set; }
     public int TaskType { get; set; } // 1=Supervision, 2=CommitteeWork, 3=ExtraTeaching, 4=AdminDuty
@@ -22,6 +24,9 @@ public class EmployeeAdditionalTask : BaseAuditableEntity
     public string? Notes { get; set; }
 
     public virtual Employee? Employee { get; set; }
+    public virtual School? School { get; set; }
+    public virtual Directorate? Directorate { get; set; }
+    public virtual OrganizationalSector? OrganizationalSector { get; set; }
 }
 
 /// <summary>
@@ -31,7 +36,9 @@ public class EmployeeMentor : BaseAuditableEntity
 {
     public long MentorEmployeeId { get; set; }
     public long MenteeEmployeeId { get; set; }
-    public long SchoolId { get; set; }
+    public long? SchoolId { get; set; }
+    public long? DirectorateId { get; set; }
+    public long? OrganizationalSectorId { get; set; }
     public long? SchoolAcademicYearId { get; set; }
     public DateTime AssignmentDate { get; set; }
     public DateTime? EndDate { get; set; }
@@ -41,6 +48,9 @@ public class EmployeeMentor : BaseAuditableEntity
 
     public virtual Employee? Mentor { get; set; }
     public virtual Employee? Mentee { get; set; }
+    public virtual School? School { get; set; }
+    public virtual Directorate? Directorate { get; set; }
+    public virtual OrganizationalSector? OrganizationalSector { get; set; }
 }
 
 /// <summary>

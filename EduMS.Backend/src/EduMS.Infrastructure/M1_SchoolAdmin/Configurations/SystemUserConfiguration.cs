@@ -20,9 +20,14 @@ public class SystemUserConfiguration : IEntityTypeConfiguration<SystemUser>
             .HasMaxLength(255)
             .IsRequired();
 
-        builder.Property(u => u.Role)
-            .HasColumnName("ROLE")
-            .HasMaxLength(50);
+        builder.Property(u => u.Username)
+            .HasColumnName("USERNAME")
+            .HasMaxLength(100)
+            .IsRequired();
+
+        builder.Property(u => u.UserType)
+            .HasColumnName("USER_TYPE")
+            .IsRequired();
 
         builder.Property(u => u.IsActive)
             .HasColumnName("IS_ACTIVE")

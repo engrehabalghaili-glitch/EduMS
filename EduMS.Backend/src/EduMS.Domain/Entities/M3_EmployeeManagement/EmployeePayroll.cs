@@ -9,7 +9,9 @@ namespace EduMS.Domain.Entities;
 public class EmployeePayroll : BaseAuditableEntity
 {
     public long EmployeeId { get; set; }
-    public long SchoolId { get; set; }
+    public long? SchoolId { get; set; }
+    public long? DirectorateId { get; set; }
+    public long? OrganizationalSectorId { get; set; }
     public long? SchoolAcademicYearId { get; set; }
     public int PayrollMonth { get; set; }
     public int PayrollYear { get; set; }
@@ -33,4 +35,8 @@ public class EmployeePayroll : BaseAuditableEntity
     public string? Notes { get; set; }
 
     public virtual Employee? Employee { get; set; }
+    public virtual School? School { get; set; }
+    public virtual Directorate? Directorate { get; set; }
+    public virtual OrganizationalSector? OrganizationalSector { get; set; }
+    public virtual EmployeePayrollFinancialContract? FinancialContract { get; set; }
 }

@@ -33,4 +33,5 @@ public class StudentComplaintLog : BaseAuditableEntity
     // Navigation Properties
     public virtual Student? Student { get; set; }
     public virtual Guardian? SubmittedByGuardian { get; set; }
+    public virtual Employee? AssignedToEmployee { get; set; }
 }

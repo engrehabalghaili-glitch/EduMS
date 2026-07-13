@@ -9,7 +9,9 @@ namespace EduMS.Domain.Entities;
 public class EmployeeInternalTransfer : BaseAuditableEntity
 {
     public long EmployeeId { get; set; }
-    public long SchoolId { get; set; }
+    public long? SchoolId { get; set; }
+    public long? DirectorateId { get; set; }
+    public long? OrganizationalSectorId { get; set; }
     public string TransferRequestNumber { get; set; } = string.Empty;
     public DateTime RequestDate { get; set; }
     public long FromDepartmentId { get; set; }
@@ -26,4 +28,7 @@ public class EmployeeInternalTransfer : BaseAuditableEntity
     public string? Notes { get; set; }
 
     public virtual Employee? Employee { get; set; }
+    public virtual School? School { get; set; }
+    public virtual Directorate? Directorate { get; set; }
+    public virtual OrganizationalSector? OrganizationalSector { get; set; }
 }

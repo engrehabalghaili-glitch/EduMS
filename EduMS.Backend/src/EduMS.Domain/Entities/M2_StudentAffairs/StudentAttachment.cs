@@ -18,4 +18,5 @@ public class StudentAttachment : BaseAuditableEntity
 
     // Navigation Property
     public virtual Student? Student { get; set; }
+    public virtual Employee? UploadedByEmployee { get; set; }
 }

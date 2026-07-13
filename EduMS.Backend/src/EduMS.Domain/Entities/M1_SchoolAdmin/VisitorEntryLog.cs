@@ -21,4 +21,5 @@ public class VisitorEntryLog : BaseAuditableEntity
     // Navigation Properties
     public virtual School? School { get; set; }
     public virtual Employee? HostEmployee { get; set; }
+    public virtual Employee? SecurityOfficerEmployee { get; set; }
 }
