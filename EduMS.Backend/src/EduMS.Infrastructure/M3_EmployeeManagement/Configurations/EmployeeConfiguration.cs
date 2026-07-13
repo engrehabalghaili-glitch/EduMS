@@ -10,8 +10,8 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
     {
         builder.ToTable("EMPLOYEE");
 
-        builder.Property(e => e.EmployeeNumber)
-            .HasColumnName("EMPLOYEE_NUMBER")
+        builder.Property(e => e.EmployeeCode)
+            .HasColumnName("EMPLOYEE_CODE")
             .HasMaxLength(30)
             .IsRequired();
 
@@ -20,9 +20,8 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
             .HasMaxLength(100)
             .IsRequired();
 
-        builder.Property(e => e.BaseSalary)
-            .HasColumnName("BASE_SALARY")
-            .HasPrecision(19, 4)
+        builder.Property(e => e.ContractType)
+            .HasColumnName("CONTRACT_TYPE")
             .IsRequired();
 
         builder.Property(e => e.HireDate)
