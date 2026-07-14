@@ -18,6 +18,7 @@ public static class DependencyInjection
             options.UseOracle(connectionString, oracleOptions =>
             {
                 oracleOptions.MigrationsAssembly("EduMS.Infrastructure");
+                oracleOptions.UseOracleSQLCompatibility(OracleSQLCompatibility.DatabaseVersion19);
             });
         });
 

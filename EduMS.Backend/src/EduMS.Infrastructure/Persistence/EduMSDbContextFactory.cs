@@ -20,6 +20,7 @@ public class EduMSDbContextFactory : IDesignTimeDbContextFactory<EduMSDbContext>
             oracleOptions =>
             {
                 oracleOptions.MigrationsAssembly("EduMS.Infrastructure");
+                oracleOptions.UseOracleSQLCompatibility(OracleSQLCompatibility.DatabaseVersion19);
             });
 
         return new EduMSDbContext(optionsBuilder.Options);

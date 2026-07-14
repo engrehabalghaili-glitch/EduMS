@@ -12,7 +12,7 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace EduMS.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(EduMSDbContext))]
-    [Migration("20260714195440_Initial_Unified_EduMS_Schema")]
+    [Migration("20260714210243_Initial_Unified_EduMS_Schema")]
     partial class Initial_Unified_EduMS_Schema
     {
         /// <inheritdoc />
@@ -66,10 +66,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -87,7 +87,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("RequiresSupervisoryApproval")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<long>("SchoolId")
                         .HasColumnType("NUMBER(19)");
@@ -140,11 +140,11 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -152,24 +152,24 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("LAST_SYNCED_AT");
 
                     b.Property<bool>("LockAttendanceLogs")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("LockBehavioralRecords")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("LockEnrollmentSnapshots")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("LOCK_ENROLLMENT_SNAPSHOTS");
 
                     b.Property<bool>("LockFinancialFeeAssessments")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("LockGradeRosters")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("LOCK_GRADE_ROSTERS");
 
                     b.Property<bool>("LockPeriodStatisticalReports")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("LOCK_PERIOD_STATS_REPORTS");
 
                     b.Property<DateTimeOffset?>("ModifiedAt")
@@ -230,7 +230,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<bool>("AutoTriggerNotification")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<int>("ConsecutiveOccurrenceLimit")
                         .HasColumnType("NUMBER(10)");
@@ -251,10 +251,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -328,11 +328,11 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -451,11 +451,11 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("DELETED_BY_USER_ID");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -556,7 +556,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("JobGrade")
                         .HasColumnType("NVARCHAR2(2000)");
@@ -642,7 +642,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -743,10 +743,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsReturned")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -835,13 +835,13 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsSystemCategory")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -918,7 +918,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("ENTRY_TYPE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<long>("JournalEntryId")
@@ -1035,7 +1035,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -1136,13 +1136,13 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsFinePaid")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsOverdue")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<long?>("IssuerUserId")
                         .HasColumnType("NUMBER(19)");
@@ -1214,10 +1214,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -1327,7 +1327,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("DECIMAL(18, 2)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("IssueDescriptionText")
                         .IsRequired()
@@ -1421,7 +1421,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -1492,7 +1492,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("DELETED_BY_USER_ID");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -1612,10 +1612,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsRevoked")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -1722,7 +1722,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -1830,16 +1830,16 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("HasRenewalOption")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsAlertEnabled")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTime?>("LastAlertSentDate")
                         .HasColumnType("TIMESTAMP(7)");
@@ -1933,10 +1933,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsParentNotified")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -2016,15 +2016,15 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("ENTITY_TYPE_KEY");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<bool>("IsSensitive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_SENSITIVE");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -2045,7 +2045,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("NOTES");
 
                     b.Property<bool>("RequiresApprovalToModify")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("REQUIRES_APPROVAL");
 
                     b.Property<string>("SourceModule")
@@ -2110,15 +2110,15 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsConfidential")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_CONFIDENTIAL");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -2151,7 +2151,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("PERMISSION_NAME_EN");
 
                     b.Property<bool>("RequiresSocialWorkerRole")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("REQUIRES_SOCIAL_WORKER_ROLE");
 
                     b.Property<long>("SchoolId")
@@ -2183,23 +2183,23 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("BEHAVIOR_LEVEL");
 
                     b.Property<bool>("CanDecidePenalty")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("CAN_DECIDE_PENALTY");
 
                     b.Property<bool>("CanExecutePenalty")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("CAN_EXECUTE_PENALTY");
 
                     b.Property<bool>("CanInvestigate")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("CAN_INVESTIGATE");
 
                     b.Property<bool>("CanRecord")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("CAN_RECORD");
 
                     b.Property<bool>("CanWaivePenalty")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("CAN_WAIVE_PENALTY");
 
                     b.Property<DateTimeOffset>("CreatedAt")
@@ -2215,7 +2215,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -2231,7 +2231,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("NOTES");
 
                     b.Property<bool>("RequiresCommitteeDecision")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("REQUIRES_COMMITTEE_DECISION");
 
                     b.Property<long>("RoleId")
@@ -2288,18 +2288,18 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("DESCRIPTION_AR");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsSensitive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_SENSITIVE");
 
                     b.Property<bool>("JustificationApprovalRequired")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("JUSTIFICATION_APPROVAL_REQ");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -2318,7 +2318,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("PERMISSION_KEY");
 
                     b.Property<bool>("RequiresJustification")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("REQUIRES_JUSTIFICATION");
 
                     b.Property<long?>("RoleId")
@@ -2400,7 +2400,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -2471,10 +2471,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -2576,13 +2576,13 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsSmartClassroom")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -2650,10 +2650,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -2674,7 +2674,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<bool>("RequiresDailyAttendanceLog")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("RuleCode")
                         .IsRequired()
@@ -2734,7 +2734,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTime?>("LastInspectionDate")
                         .HasColumnType("TIMESTAMP(7)");
@@ -2814,10 +2814,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTime>("JoinDate")
                         .HasColumnType("TIMESTAMP(7)");
@@ -2894,10 +2894,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("IMPACT_RATING");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsRenewable")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_RENEWABLE");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -3055,7 +3055,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("KpiComparedJson")
                         .HasColumnType("NVARCHAR2(2000)");
@@ -3145,10 +3145,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -3222,7 +3222,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<bool>("AlertEnabled")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("AlertRecipientsJson")
                         .HasColumnType("NVARCHAR2(2000)");
@@ -3249,10 +3249,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("KpiCode")
                         .IsRequired()
@@ -3386,10 +3386,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -3455,10 +3455,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsEscalatedToDirector")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<long?>("IssuedByEmployeeId")
                         .HasColumnType("NUMBER(19)");
@@ -3574,10 +3574,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -3632,10 +3632,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -3656,7 +3656,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("RequiresGraduationCertificate")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("StageCode")
                         .IsRequired()
@@ -3718,7 +3718,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -3806,7 +3806,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("ALT_EDU_PLATFORM");
 
                     b.Property<bool>("AlternativeEducationActivated")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("ALT_EDU_ACTIVATED");
 
                     b.Property<string>("AlternativeEducationType")
@@ -3861,7 +3861,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("END_DATE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -3886,7 +3886,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("PARENT_NOTIFICATION_METHOD");
 
                     b.Property<bool>("ParentNotificationSent")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("PARENT_NOTIFICATION_SENT");
 
                     b.Property<int>("SchoolDaysAffected")
@@ -3911,7 +3911,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("RAW(16)");
 
                     b.Property<bool>("WasCompensated")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("WAS_COMPENSATED");
 
                     b.HasKey("Id");
@@ -3966,11 +3966,11 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<bool>("IsOnDutyDuringIncident")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ON_DUTY");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -4087,7 +4087,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("EXPENSE_CATEGORY");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<long>("JournalEntryId")
@@ -4228,7 +4228,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("HOSTING_TYPE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -4343,7 +4343,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -4513,10 +4513,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("INVESTIGATION_REPORT_URL");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsPlanActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_PLAN_ACTIVE");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -4646,7 +4646,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("IMPACT_TYPE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -4674,7 +4674,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("NOTES");
 
                     b.Property<bool>("RequiresMaintenance")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("REQUIRES_MAINTENANCE");
 
                     b.Property<long>("SchoolAssetId")
@@ -4749,11 +4749,11 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("EVACUATION_PROCEDURE_SUMMARY");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -4840,7 +4840,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -4870,7 +4870,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("PARENT_NOTIFICATION_TIME");
 
                     b.Property<bool>("ParentNotified")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("PARENT_NOTIFIED");
 
                     b.Property<int>("SafetyStatus")
@@ -4956,10 +4956,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("HasFinancialCompensation")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -5081,28 +5081,28 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsExcused")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsHoliday")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsOverridden")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsOvertimeApproved")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsSyncedWithPayroll")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsWeekend")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsWorkingDay")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -5111,7 +5111,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<bool>("LocationVerified")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("ModifiedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -5222,7 +5222,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -5309,7 +5309,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("ExpiryReminderSent")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("FilePath")
                         .HasColumnType("NVARCHAR2(2000)");
@@ -5321,22 +5321,22 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsArchived")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsConfidential")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsExpiryRequired")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsRequired")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsVerified")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTime?>("IssueDate")
                         .HasColumnType("TIMESTAMP(7)");
@@ -5432,7 +5432,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -5554,7 +5554,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -5656,7 +5656,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -5770,16 +5770,16 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsDamaged")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsLost")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsReturned")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<long?>("IssuedByEmployeeId")
                         .HasColumnType("NUMBER(19)");
@@ -5827,7 +5827,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("ReplacementRequired")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("ReturnNotes")
                         .HasColumnType("NVARCHAR2(2000)");
@@ -5886,10 +5886,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsEmergency")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -5992,7 +5992,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -6079,10 +6079,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -6195,10 +6195,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("DECIMAL(18,2)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsSynced")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -6329,7 +6329,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -6423,10 +6423,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDisputed")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("KpiScoresJson")
                         .HasColumnType("NVARCHAR2(2000)");
@@ -6520,7 +6520,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("CustodyCleared")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("DecisionDocumentUrl")
                         .HasColumnType("NVARCHAR2(2000)");
@@ -6545,14 +6545,14 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("FinancialCleared")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<decimal>("GratuityAmount")
                         .HasPrecision(18, 2)
                         .HasColumnType("DECIMAL(18,2)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -6666,7 +6666,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -6739,7 +6739,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                     OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<bool>("CertificateIssued")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("CERTIFICATE_ISSUED");
 
                     b.Property<string>("CertificateUrl")
@@ -6783,7 +6783,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("FUNDING_SOURCE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -6902,10 +6902,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsAppealed")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -7017,11 +7017,11 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("EXEMPTION_APPLIED");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<bool>("IsSettled")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_SETTLED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -7156,10 +7156,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsSeatingChartPublished")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -7260,7 +7260,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -7361,10 +7361,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsFinal")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -7485,7 +7485,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("FUNDING_SOURCE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -7601,7 +7601,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -7682,7 +7682,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -7788,7 +7788,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -7842,7 +7842,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("ALLOWED_ACTION");
 
                     b.Property<bool>("ApprovalRequired")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("APPROVAL_REQUIRED");
 
                     b.Property<long?>("ApprovalRoleId")
@@ -7850,7 +7850,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("APPROVAL_ROLE_ID");
 
                     b.Property<bool>("CanDelegate")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("CAN_DELEGATE");
 
                     b.Property<DateTimeOffset>("CreatedAt")
@@ -7866,7 +7866,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -7936,13 +7936,13 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("DECIMAL(18, 2)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsPassingGrade")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -8015,7 +8015,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<string>("ItemCode")
@@ -8114,7 +8114,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("ENTRY_NUMBER");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -8222,7 +8222,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("DELETED_BY_USER_ID");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<long?>("JournalEntryId")
@@ -8349,10 +8349,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsVerified")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<long>("KpiConfigId")
                         .HasColumnType("NUMBER(19)");
@@ -8517,13 +8517,13 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("HasSpecialNeeds")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("IDCardImage")
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -8587,7 +8587,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("SiblingInSchool")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("SiblingNames")
                         .HasColumnType("NVARCHAR2(2000)");
@@ -8598,7 +8598,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("SubmissionDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP(7)")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<int>("SyncStatus")
                         .HasColumnType("NUMBER(10)");
@@ -8618,13 +8618,13 @@ namespace EduMS.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("ParentId", "SchoolId", "AcademicYearId", "RequestedGradeLevelId")
                         .IsUnique()
-                        .HasFilter("[RequestStatus] != 3");
+                        .HasFilter("RequestStatus != 3");
 
-                    b.ToTable("Registrations", "M2", t =>
+                    b.ToTable("Registrations", null, t =>
                         {
-                            t.HasCheckConstraint("CK_Registration_Gender", "Gender IN (1, 2)");
+                            t.HasCheckConstraint("CK_Registration_Gender", "\"Gender\" IN (1, 2)");
 
-                            t.HasCheckConstraint("CK_Registration_Status", "RequestStatus IN (1, 2, 3, 4)");
+                            t.HasCheckConstraint("CK_Registration_Status", "\"RequestStatus\" IN (1, 2, 3, 4)");
                         });
                 });
 
@@ -8658,13 +8658,13 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsAttended")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsExcused")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -8709,7 +8709,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("ALLOWED_ROLES_JSON");
 
                     b.Property<bool>("CanOverrideSchoolDecision")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("CAN_OVERRIDE_SCHOOL_DECISION");
 
                     b.Property<DateTimeOffset>("CreatedAt")
@@ -8725,14 +8725,14 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsReadOnly")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_READ_ONLY");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -8828,10 +8828,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTime>("IssueDate")
                         .HasColumnType("TIMESTAMP(7)");
@@ -8853,7 +8853,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("RequiresMandatoryAcknowledgment")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<int>("SyncStatus")
                         .HasColumnType("NUMBER(10)");
@@ -8916,10 +8916,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -9017,7 +9017,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -9126,7 +9126,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("DESCRIPTION");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -9225,7 +9225,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("EMPLOYEE_ID");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -9313,7 +9313,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<long>("JournalEntryId")
@@ -9424,7 +9424,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("DESCRIPTION");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -9506,11 +9506,11 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("DESCRIPTION");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -9603,14 +9603,14 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("DESCRIPTION_AR");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsSystem")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_SYSTEM");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -9623,7 +9623,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("RequiresApproval")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("REQUIRES_APPROVAL");
 
                     b.Property<string>("RiskLevel")
@@ -9727,10 +9727,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("GENDER");
 
                     b.Property<bool>("IsActivePerson")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -9833,10 +9833,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsReminderActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTime?>("LastServiceDate")
                         .HasColumnType("TIMESTAMP(7)");
@@ -9929,11 +9929,11 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -10028,7 +10028,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -10155,7 +10155,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("EXECUTION_TEAM_JSON");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -10294,10 +10294,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsFinal")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -10376,7 +10376,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("DELETED_BY_USER_ID");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -10478,11 +10478,11 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("DESCRIPTION_AR");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -10576,14 +10576,14 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("INHERITED_FROM_ROLE_ID");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsInherited")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_INHERITED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -10712,7 +10712,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("EXTINGUISHERS_NEXT_INSPECTION");
 
                     b.Property<bool>("HasEvacuationMaps")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("HAS_EVACUATION_MAPS");
 
                     b.Property<int>("IncidentsCount")
@@ -10720,7 +10720,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("INCIDENTS_COUNT");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -10755,7 +10755,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("REPORT_PERIOD");
 
                     b.Property<bool>("SafetyCommitteeFormed")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("SAFETY_COMMITTEE_FORMED");
 
                     b.Property<string>("SafetyCommitteeMembersJson")
@@ -10845,14 +10845,14 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("GOVERNORATE");
 
                     b.Property<bool>("IsAccredited")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -10951,7 +10951,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTime>("IssueDate")
                         .HasColumnType("TIMESTAMP(7)");
@@ -11028,13 +11028,13 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsPinned")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -11154,7 +11154,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("HasPhysicalTag")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTime?>("InsuranceExpiryDate")
                         .HasColumnType("TIMESTAMP(7)");
@@ -11163,13 +11163,13 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsInsured")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -11307,7 +11307,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("IMPACT");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("IssuingBody")
                         .HasMaxLength(250)
@@ -11407,13 +11407,13 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsApprovedByHealthOfficer")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsAvailable")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("ItemCode")
                         .IsRequired()
@@ -11554,7 +11554,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("IMPACT_LEVEL");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -11648,10 +11648,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsPublic")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -11669,7 +11669,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("RequiresAttendanceTracking")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<long>("SchoolId")
                         .HasColumnType("NUMBER(19)");
@@ -11740,10 +11740,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsOperational")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -11829,7 +11829,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("FISCAL_YEAR");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -11959,7 +11959,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("EMPLOYEES_TRANSFER_STATUS");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -12066,7 +12066,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -12138,10 +12138,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -12234,10 +12234,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsLocked")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTime?>("LastSavedAt")
                         .HasColumnType("TIMESTAMP(7)");
@@ -12345,7 +12345,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("DISCOVERY_DATE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -12485,10 +12485,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -12571,7 +12571,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -12668,7 +12668,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -12734,10 +12734,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsVerifiedByOffice")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_VERIFIED_BY_OFFICE");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -12837,10 +12837,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsReadOnly")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -12930,10 +12930,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsReadOnly")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -13021,10 +13021,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsApproved")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -13097,7 +13097,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -13186,14 +13186,14 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsTimeBound")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_TIME_BOUND");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -13227,11 +13227,11 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("PERMISSION_NAME_EN");
 
                     b.Property<bool>("RequiresLockOverride")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("REQUIRES_LOCK_OVERRIDE");
 
                     b.Property<bool>("RequiresSupervisorApproval")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("REQUIRES_SUPERVISOR_APPROVAL");
 
                     b.Property<long>("SchoolId")
@@ -13300,16 +13300,16 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsBlockedFromRegistration")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsEligibleForExam")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsExempt")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<decimal?>("LastPaymentAmount")
                         .HasColumnType("DECIMAL(18, 2)");
@@ -13421,7 +13421,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -13510,10 +13510,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("DECIMAL(18, 2)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsRetakeExam")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -13604,10 +13604,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsGraded")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -13703,10 +13703,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsConfidential")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -13774,14 +13774,14 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsSensitive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_SENSITIVE");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -13815,11 +13815,11 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("PERMISSION_NAME_EN");
 
                     b.Property<bool>("RequiresGuardianConsent")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("REQUIRES_GUARDIAN_CONSENT");
 
                     b.Property<bool>("RequiresPrincipalApproval")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("REQUIRES_PRINCIPAL_APPROVAL");
 
                     b.Property<long>("SchoolId")
@@ -13857,10 +13857,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsAllergyAlertTriggered")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -13955,11 +13955,11 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<bool>("IsReturned")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_RETURNED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -14084,13 +14084,13 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsParentNotifiedOfThreshold")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsWarningThresholdReached")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTime?>("LastAbsenceDate")
                         .HasColumnType("TIMESTAMP(7)");
@@ -14191,7 +14191,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -14274,10 +14274,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<bool>("IsCurrentTerm")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -14354,10 +14354,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsFeaturedInSchoolBoard")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -14436,13 +14436,13 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsRenewable")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -14510,11 +14510,11 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -14557,11 +14557,11 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("PERMISSION_NAME_EN");
 
                     b.Property<bool>("RequiresBoardApproval")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("REQUIRES_BOARD_APPROVAL");
 
                     b.Property<bool>("RequiresDirectorApproval")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("REQUIRES_DIRECTOR_APPROVAL");
 
                     b.Property<long>("SchoolId")
@@ -14605,25 +14605,25 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("HasFinancialResponsibility")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("HasLegalCustody")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsAuthorizedForMedicalDecisions")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsEmergencyContact")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsLivingTogether")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsPrimaryContact")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -14694,10 +14694,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsFitForPhysicalEducation")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -14782,10 +14782,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsVerified")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("IssueCountry")
                         .HasColumnType("NVARCHAR2(2000)");
@@ -14880,19 +14880,19 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsDamaged")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsExemptFromPenalty")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsLost")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsReturned")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("ItemCode")
                         .IsRequired()
@@ -14940,7 +14940,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("ReplacementRequired")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("ReturnNotes")
                         .HasColumnType("NVARCHAR2(2000)");
@@ -15002,10 +15002,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsEpiPenRequired")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTime?>("LastReactionDate")
                         .HasColumnType("TIMESTAMP(7)");
@@ -15086,10 +15086,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsGuardianAttended")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -15185,7 +15185,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("ENTITY_TYPE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -15232,7 +15232,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("RAW(16)");
 
                     b.Property<bool>("WasAllowed")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("WAS_ALLOWED");
 
                     b.HasKey("Id");
@@ -15270,13 +15270,13 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsConfidential")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsParentInvolved")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -15350,10 +15350,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsEnrolledInGiftedProgram")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -15431,7 +15431,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -15540,7 +15540,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("EFFECTIVE_TO");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -15657,7 +15657,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -15734,13 +15734,13 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsCoreSubject")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -15833,13 +15833,13 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsArchived")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsFinal")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -15972,10 +15972,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("IP_ADDRESS");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsSuspicious")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_SUSPICIOUS");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -16046,7 +16046,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("RAW(16)");
 
                     b.Property<bool>("WasAllowed")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("WAS_ALLOWED");
 
                     b.HasKey("Id");
@@ -16095,14 +16095,14 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("DESCRIPTION_AR");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsSensitive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_SENSITIVE");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -16142,7 +16142,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("PERMISSION_TYPE_ID");
 
                     b.Property<bool>("RequiresLogging")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("REQUIRES_LOGGING");
 
                     b.Property<string>("RiskLevel")
@@ -16210,10 +16210,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsPublished")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -16311,22 +16311,22 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("HIERARCHY_LEVEL");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsAssignable")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ASSIGNABLE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsInheritable")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_INHERITABLE");
 
                     b.Property<bool>("IsSystem")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_SYSTEM");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -16421,7 +16421,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("EMAIL");
 
                     b.Property<bool>("EmailVerified")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTime?>("EmailVerifiedAt")
                         .HasColumnType("TIMESTAMP(7)");
@@ -16443,14 +16443,14 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsLocked")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTime?>("LastFailedAttemptDate")
                         .HasColumnType("TIMESTAMP(7)");
@@ -16486,7 +16486,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("MustChangePassword")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("NationalId")
                         .IsRequired()
@@ -16518,7 +16518,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("PhoneVerified")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTime?>("PhoneVerifiedAt")
                         .HasColumnType("TIMESTAMP(7)");
@@ -16555,7 +16555,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<int>("TwoFactorMethod")
                         .HasColumnType("NUMBER(10)");
@@ -16630,16 +16630,16 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsCancelled")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsSubstitute")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -16746,10 +16746,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -16868,11 +16868,11 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("ESTIMATED_DURATION_MIN");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -17026,7 +17026,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("KpiCode")
                         .IsRequired()
@@ -17113,7 +17113,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("DeductionFromSalary")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("DeletedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -17129,7 +17129,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -17252,7 +17252,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("IP_ADDRESS");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -17339,11 +17339,11 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("GRANTED_BY_USER_ID");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -17435,7 +17435,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -17562,7 +17562,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -17684,14 +17684,14 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("END_DATE");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsPrimary")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_PRIMARY");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -17765,7 +17765,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("DELETED_BY_USER_ID");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -17891,11 +17891,11 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("DELETED_BY_USER_ID");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -17964,7 +17964,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NUMBER(19)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
                         .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
@@ -18051,11 +18051,11 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("DELETED_BY_USER_ID");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_DELETED");
 
                     b.Property<DateTimeOffset?>("LastSyncedAt")
@@ -18124,7 +18124,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("CanLogin")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("City")
                         .HasColumnType("NVARCHAR2(2000)");
@@ -18192,14 +18192,14 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("HasSpecialNeeds")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<DateTime>("HireDate")
                         .HasColumnType("TIMESTAMP(7)")
                         .HasColumnName("HIRE_DATE");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("JobGrade")
                         .HasColumnType("NVARCHAR2(2000)");
@@ -18287,7 +18287,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<int>("VerificationStatus")
                         .HasColumnType("NUMBER(10)");
@@ -18328,7 +18328,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("FAMILY_NUMBER");
 
                     b.Property<bool>("IsAuthorizedPickup")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("JobTitle")
                         .HasMaxLength(100)
@@ -18381,7 +18381,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .HasColumnName("GUARDIAN_ID");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN")
+                        .HasColumnType("NUMBER(1)")
                         .HasColumnName("IS_ACTIVE");
 
                     b.Property<string>("PreviousSchoolName")
