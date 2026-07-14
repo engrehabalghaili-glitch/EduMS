@@ -1,3 +1,4 @@
+using System.Threading;
 using EduMS.Domain.Entities;
 using EduMS.Application.Interfaces.Repositories.Common;
 
@@ -7,17 +8,19 @@ public interface ISchoolTransportationRouteRepository : IGenericRepository<Schoo
 {
     // 1. Unique Constraints
     // التحقق من عدم تكرار كود مسار النقل
-    Task<bool> IsRouteCodeUniqueAsync(long schoolId, string routeCode, long? excludeId = null);
+    Task<bool> IsRouteCodeUniqueAsync(long schoolId, string routeCode, long? excludeId = null, CancellationToken cancellationToken = default);
     
     // 2. Capacity Checks
     // جلب المسارات التي لا تزال تحتوي على مقاعد شاغرة
-    Task<IEnumerable<SchoolTransportationRoute>> GetRoutesWithAvailableSeatsAsync(long schoolId);
+    Task<IEnumerable<SchoolTransportationRoute>> GetRoutesWithAvailableSeatsAsync(long schoolId, CancellationToken cancellationToken = default);
     
     // 3. Employee Assignments
     // جلب المسارات المعينة لسائق محدد
-    Task<IEnumerable<SchoolTransportationRoute>> GetRoutesByDriverAsync(long driverEmployeeId);
+    Task<IEnumerable<SchoolTransportationRoute>> GetRoutesByDriverAsync(long driverEmployeeId, CancellationToken cancellationToken = default);
     
     // جلب المسارات المعينة لمشرف حافلة محدد
-    Task<IEnumerable<SchoolTransportationRoute>> GetRoutesBySupervisorAsync(long supervisorEmployeeId);
+    Task<IEnumerable<SchoolTransportationRoute>> GetRoutesBySupervisorAsync(long supervisorEmployeeId, CancellationToken cancellationToken = default);
 }
+
+
 

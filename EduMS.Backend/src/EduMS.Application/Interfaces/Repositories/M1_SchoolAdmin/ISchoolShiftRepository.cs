@@ -1,3 +1,4 @@
+using System.Threading;
 using EduMS.Domain.Entities;
 using EduMS.Application.Interfaces.Repositories.Common;
 
@@ -7,14 +8,16 @@ public interface ISchoolShiftRepository : IGenericRepository<SchoolShift>
 {
     // 1. Unique Constraints
     // التحقق من أن كود الدوام (فترة الصباح/المساء) غير مكرر
-    Task<bool> IsShiftCodeUniqueAsync(long schoolId, string shiftCode, long? excludeId = null);
+    Task<bool> IsShiftCodeUniqueAsync(long schoolId, string shiftCode, long? excludeId = null, CancellationToken cancellationToken = default);
     
     // 2. Status Filters
     // جلب فترات الدوام الفعالة للمدرسة
-    Task<IEnumerable<SchoolShift>> GetActiveShiftsAsync(long schoolId);
+    Task<IEnumerable<SchoolShift>> GetActiveShiftsAsync(long schoolId, CancellationToken cancellationToken = default);
     
     // 3. Time Queries
     // معرفة الدوام بناءً على وقت معين (لمعرفة في أي فترة يقع هذا الوقت)
-    Task<SchoolShift?> GetShiftByTimeAsync(long schoolId, string timeString);
+    Task<SchoolShift?> GetShiftByTimeAsync(long schoolId, string timeString, CancellationToken cancellationToken = default);
 }
+
+
 

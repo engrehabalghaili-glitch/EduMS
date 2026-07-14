@@ -1,3 +1,4 @@
+using System.Threading;
 using EduMS.Domain.Entities;
 using EduMS.Application.Interfaces.Repositories.Common;
 
@@ -7,9 +8,11 @@ public interface ISchoolContactInfoRepository : IGenericRepository<SchoolContact
 {
     // 1. One-to-One Retrieval
     // جلب بيانات التواصل الخاصة بمدرسة معينة (باعتبارها علاقة One-to-One في الغالب)
-    Task<SchoolContactInfo?> GetContactInfoBySchoolIdAsync(long schoolId);
+    Task<SchoolContactInfo?> GetContactInfoBySchoolIdAsync(long schoolId, CancellationToken cancellationToken = default);
     
     // 2. Search
     // البحث عن المدارس التي تقع في مدينة أو حي معين
-    Task<IEnumerable<SchoolContactInfo>> GetSchoolsByLocationAsync(string? city, string? districtName);
+    Task<IEnumerable<SchoolContactInfo>> GetSchoolsByLocationAsync(string? city, string? districtName, CancellationToken cancellationToken = default);
 }
+
+

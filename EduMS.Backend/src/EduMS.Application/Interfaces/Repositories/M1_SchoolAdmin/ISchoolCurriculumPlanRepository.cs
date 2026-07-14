@@ -1,3 +1,4 @@
+using System.Threading;
 using EduMS.Domain.Entities;
 using EduMS.Application.Interfaces.Repositories.Common;
 
@@ -7,17 +8,19 @@ public interface ISchoolCurriculumPlanRepository : IGenericRepository<SchoolCurr
 {
     // 1. Unique Constraints
     // التحقق من عدم تكرار كود الخطة الدراسية
-    Task<bool> IsPlanCodeUniqueAsync(long schoolId, string planCode, long? excludeId = null);
+    Task<bool> IsPlanCodeUniqueAsync(long schoolId, string planCode, long? excludeId = null, CancellationToken cancellationToken = default);
     
     // التحقق من عدم تكرار الخطة لنفس المستوى الدراسي في نفس العام الأكاديمي
-    Task<bool> IsPlanUniqueForGradeAndYearAsync(long schoolId, long gradeCapacityId, long academicYearId, long? excludeId = null);
+    Task<bool> IsPlanUniqueForGradeAndYearAsync(long schoolId, long gradeCapacityId, long academicYearId, long? excludeId = null, CancellationToken cancellationToken = default);
     
     // 2. Status Filters
     // جلب الخطط المعتمدة فقط
-    Task<IEnumerable<SchoolCurriculumPlan>> GetApprovedPlansAsync(long schoolId);
+    Task<IEnumerable<SchoolCurriculumPlan>> GetApprovedPlansAsync(long schoolId, CancellationToken cancellationToken = default);
     
     // 3. Date queries
     // جلب الخطط الدراسية الفعالة بناءً على تاريخ محدد
-    Task<IEnumerable<SchoolCurriculumPlan>> GetEffectivePlansByDateAsync(long schoolId, DateTime date);
+    Task<IEnumerable<SchoolCurriculumPlan>> GetEffectivePlansByDateAsync(long schoolId, DateTime date, CancellationToken cancellationToken = default);
 }
+
+
 

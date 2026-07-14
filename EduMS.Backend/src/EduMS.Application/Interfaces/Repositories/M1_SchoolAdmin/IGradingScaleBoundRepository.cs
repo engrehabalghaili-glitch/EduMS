@@ -1,3 +1,4 @@
+using System.Threading;
 using EduMS.Domain.Entities;
 using EduMS.Application.Interfaces.Repositories.Common;
 
@@ -7,13 +8,15 @@ public interface IGradingScaleBoundRepository : IGenericRepository<GradingScaleB
 {
     // 1. Conflict & Unique Constraints
     // التحقق من أن كود التقييم (مثلاً A+) غير مكرر لنفس المقياس
-    Task<bool> IsLetterCodeUniqueAsync(long schoolId, string scaleName, string letterCode, long? excludeId = null);
+    Task<bool> IsLetterCodeUniqueAsync(long schoolId, string scaleName, string letterCode, long? excludeId = null, CancellationToken cancellationToken = default);
     
     // 2. Logic Methods
     // جلب التقييم المناسب لنسبة مئوية معينة (مثل إعطاء 85% فيرد بـ B)
-    Task<GradingScaleBound?> GetGradeByPercentageAsync(long schoolId, string scaleName, decimal percentage);
+    Task<GradingScaleBound?> GetGradeByPercentageAsync(long schoolId, string scaleName, decimal percentage, CancellationToken cancellationToken = default);
     
     // جلب المقياس كاملاً مرتباً حسب الترتيب (DisplayOrder)
-    Task<IEnumerable<GradingScaleBound>> GetFullScaleOrderedAsync(long schoolId, string scaleName);
+    Task<IEnumerable<GradingScaleBound>> GetFullScaleOrderedAsync(long schoolId, string scaleName, CancellationToken cancellationToken = default);
 }
+
+
 

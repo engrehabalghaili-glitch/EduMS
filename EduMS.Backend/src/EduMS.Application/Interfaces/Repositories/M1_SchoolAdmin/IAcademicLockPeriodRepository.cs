@@ -1,3 +1,4 @@
+using System.Threading;
 using EduMS.Domain.Entities;
 using EduMS.Application.Interfaces.Repositories.Common;
 
@@ -7,13 +8,15 @@ public interface IAcademicLockPeriodRepository : IGenericRepository<AcademicLock
 {
     // 1. Status & Activity Filters
     // جلب فترات الإغلاق الأكاديمي النشطة حالياً للمدرسة
-    Task<IEnumerable<AcademicLockPeriod>> GetActiveLockPeriodsAsync(long schoolId);
+    Task<IEnumerable<AcademicLockPeriod>> GetActiveLockPeriodsAsync(long schoolId, CancellationToken cancellationToken = default);
     
     // 2. Date queries
     // التحقق مما إذا كان هناك فترة إغلاق أكاديمي تغطي تاريخاً معيناً
-    Task<bool> IsDateLockedAsync(long schoolId, DateTime date);
+    Task<bool> IsDateLockedAsync(long schoolId, DateTime date, CancellationToken cancellationToken = default);
     
     // جلب جميع فترات الإغلاق ضمن نطاق زمني
-    Task<IEnumerable<AcademicLockPeriod>> GetLockPeriodsByDateRangeAsync(long schoolId, DateTime startDate, DateTime endDate);
+    Task<IEnumerable<AcademicLockPeriod>> GetLockPeriodsByDateRangeAsync(long schoolId, DateTime startDate, DateTime endDate, CancellationToken cancellationToken = default);
 }
+
+
 

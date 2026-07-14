@@ -1,3 +1,4 @@
+using System.Threading;
 using EduMS.Domain.Entities;
 using EduMS.Application.Interfaces.Repositories.Common;
 
@@ -7,17 +8,19 @@ public interface ISchoolSemesterRepository : IGenericRepository<SchoolSemester>
 {
     // 1. Unique Constraints
     // التحقق من عدم تكرار رقم الفصل الدراسي داخل نفس العام الأكاديمي
-    Task<bool> IsSemesterNumberUniqueAsync(long academicYearId, int semesterNumber, long? excludeId = null);
+    Task<bool> IsSemesterNumberUniqueAsync(long academicYearId, int semesterNumber, long? excludeId = null, CancellationToken cancellationToken = default);
     
     // 2. Status & Current Semester
     // جلب الفصل الدراسي الحالي للعام الأكاديمي
-    Task<SchoolSemester?> GetCurrentSemesterAsync(long academicYearId);
+    Task<SchoolSemester?> GetCurrentSemesterAsync(long academicYearId, CancellationToken cancellationToken = default);
     
     // جلب الفصول الدراسية التابعة لعام أكاديمي محدد
-    Task<IEnumerable<SchoolSemester>> GetSemestersByAcademicYearIdAsync(long academicYearId);
+    Task<IEnumerable<SchoolSemester>> GetSemestersByAcademicYearIdAsync(long academicYearId, CancellationToken cancellationToken = default);
     
     // 3. Date queries
     // جلب الفصل الدراسي الذي يقع فيه تاريخ معين
-    Task<SchoolSemester?> GetSemesterByDateAsync(long academicYearId, DateTime date);
+    Task<SchoolSemester?> GetSemesterByDateAsync(long academicYearId, DateTime date, CancellationToken cancellationToken = default);
 }
+
+
 

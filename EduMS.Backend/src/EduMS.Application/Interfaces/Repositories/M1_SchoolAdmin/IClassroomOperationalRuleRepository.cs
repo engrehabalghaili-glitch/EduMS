@@ -1,3 +1,4 @@
+using System.Threading;
 using EduMS.Domain.Entities;
 using EduMS.Application.Interfaces.Repositories.Common;
 
@@ -7,13 +8,15 @@ public interface IClassroomOperationalRuleRepository : IGenericRepository<Classr
 {
     // 1. Unique Constraints
     // التحقق من أن كود القاعدة التشغيلية غير مكرر داخل نفس الفصل
-    Task<bool> IsRuleCodeUniqueAsync(long classroomId, string ruleCode, long? excludeId = null);
+    Task<bool> IsRuleCodeUniqueAsync(long classroomId, string ruleCode, long? excludeId = null, CancellationToken cancellationToken = default);
     
     // 2. Status Filters
-    Task<IEnumerable<ClassroomOperationalRule>> GetActiveRulesAsync(long classroomId);
+    Task<IEnumerable<ClassroomOperationalRule>> GetActiveRulesAsync(long classroomId, CancellationToken cancellationToken = default);
     
     // 3. Specific Logic
     // جلب القاعدة الفعالة الحالية بناءً على التاريخ
-    Task<ClassroomOperationalRule?> GetEffectiveRuleByDateAsync(long classroomId, DateTime date);
+    Task<ClassroomOperationalRule?> GetEffectiveRuleByDateAsync(long classroomId, DateTime date, CancellationToken cancellationToken = default);
 }
+
+
 
