@@ -30,5 +30,20 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
 
         builder.Property(e => e.SchoolId)
             .HasColumnName("SCHOOL_ID");
+
+        builder.HasOne(e => e.School)
+            .WithMany(s => s.Employees)
+            .HasForeignKey(e => e.SchoolId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(e => e.Directorate)
+            .WithMany()
+            .HasForeignKey(e => e.DirectorateId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(e => e.Department)
+            .WithMany()
+            .HasForeignKey(e => e.DepartmentId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

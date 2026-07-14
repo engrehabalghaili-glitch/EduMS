@@ -10,9 +10,15 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
+        var connectionString = configuration.GetConnectionString("DefaultConnection") 
+                               ?? "User Id=EDUMS_USER;Password=EduMsPass123;Data Source=localhost:1521/orclpdb;";
+
         services.AddDbContext<EduMSDbContext>(options =>
         {
-            options.UseInMemoryDatabase("EduMSDb");
+            options.UseOracle(connectionString, oracleOptions =>
+            {
+                oracleOptions.MigrationsAssembly("EduMS.Infrastructure");
+            });
         });
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
