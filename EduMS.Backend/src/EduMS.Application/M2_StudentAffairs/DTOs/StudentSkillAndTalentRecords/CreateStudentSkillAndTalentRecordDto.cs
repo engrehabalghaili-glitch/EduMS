@@ -6,9 +6,9 @@ public class CreateStudentSkillAndTalentRecordDto
 {
     public long StudentId { get; set; }
     public int TalentCategory { get; set; }
-    public string TalentTitleAr { get; set; } = string.Empty;
+    public string TalentTitleAr { get; set; }
     public int ProficiencyLevel { get; set; }
-    public DateTime DiscoveredDate { get; set; } = DateTime.UtcNow;
+    public DateTime DiscoveredDate { get; set; }
     public long? MentorEmployeeId { get; set; }
     public string? TalentTitleEn { get; set; }
     public string? DevelopmentPlanDescription { get; set; }

@@ -5,10 +5,9 @@ namespace EduMS.Application.M1_SchoolAdmin.DTOs.SchoolAnnouncementLogs;
 public class UpdateSchoolAnnouncementLogDto
 {
     public long Id { get; set; }
-    public long SchoolId { get; set; }
-    public string TitleAr { get; set; } = string.Empty;
-    public string TitleEn { get; set; } = string.Empty;
-    public string AnnouncementContent { get; set; } = string.Empty;
+    public string TitleAr { get; set; }
+    public string TitleEn { get; set; }
+    public string AnnouncementContent { get; set; }
     public DateTime PublishDate { get; set; }
     public DateTime? ExpireDate { get; set; }
     public int TargetAudience { get; set; }
@@ -17,5 +16,4 @@ public class UpdateSchoolAnnouncementLogDto
     public string? AttachmentFileUrl { get; set; }
     public int ViewCount { get; set; }
     public long? PublishedByEmployeeId { get; set; }
-    public bool IsActive { get; set; }
 }

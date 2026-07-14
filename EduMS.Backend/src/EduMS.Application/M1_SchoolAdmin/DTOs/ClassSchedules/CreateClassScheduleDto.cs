@@ -13,7 +13,6 @@ public class CreateClassScheduleDto
     public string? RoomCode { get; set; }
     public string? StartTime { get; set; }
     public string? EndTime { get; set; }
-    public int TermSemesterNumber { get; set; } = 1;
-    public int ScheduleType { get; set; } = 1;
-    public bool IsActive { get; set; } = true;
+    public int TermSemesterNumber { get; set; }
+    public int ScheduleType { get; set; }
 }

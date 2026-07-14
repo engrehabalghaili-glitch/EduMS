@@ -5,9 +5,7 @@ namespace EduMS.Application.M2_StudentAffairs.DTOs.StudentActivityParticipations
 public class UpdateStudentActivityParticipationDto
 {
     public long Id { get; set; }
-    public long StudentId { get; set; }
-    public long SchoolId { get; set; }
-    public string ActivityNameAr { get; set; } = string.Empty;
+    public string ActivityNameAr { get; set; }
     public int ActivityType { get; set; }
     public long? SupervisorEmployeeId { get; set; }
     public DateTime ParticipationDate { get; set; }

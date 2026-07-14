@@ -7,8 +7,8 @@ public class UpdateSchoolSemesterDto
     public long Id { get; set; }
     public long SchoolAcademicYearId { get; set; }
     public int SemesterNumber { get; set; }
-    public string SemesterType { get; set; } = string.Empty;
-    public string SemesterNameAr { get; set; } = string.Empty;
+    public string SemesterType { get; set; }
+    public string SemesterNameAr { get; set; }
     public string? SemesterNameEn { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
@@ -23,8 +23,6 @@ public class UpdateSchoolSemesterDto
     public DateTime? GradingOpenDate { get; set; }
     public DateTime? GradingCloseDate { get; set; }
     public DateTime? ClosureDate { get; set; }
-    public int ApprovalStatus { get; set; }
-    public bool IsActive { get; set; }
     public bool IsCurrent { get; set; }
     public string? Notes { get; set; }
 }

@@ -5,10 +5,9 @@ namespace EduMS.Application.M2_StudentAffairs.DTOs.StudentAssessments;
 public class UpdateStudentAssessmentDto
 {
     public long Id { get; set; }
-    public long StudentId { get; set; }
     public long SubjectId { get; set; }
     public long ClassroomId { get; set; }
-    public string AssessmentTitle { get; set; } = string.Empty;
+    public string AssessmentTitle { get; set; }
     public int AssessmentCategory { get; set; }
     public decimal MaxScore { get; set; }
     public decimal ObtainedScore { get; set; }

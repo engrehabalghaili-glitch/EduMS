@@ -5,9 +5,9 @@ namespace EduMS.Application.M2_StudentAffairs.DTOs.StudentExemplaryRecognitions;
 public class CreateStudentExemplaryRecognitionDto
 {
     public long StudentId { get; set; }
-    public string AcademicYear { get; set; } = string.Empty;
+    public string AcademicYear { get; set; }
     public int SemesterNumber { get; set; }
-    public string RecognitionTitleAr { get; set; } = string.Empty;
+    public string RecognitionTitleAr { get; set; }
     public int Category { get; set; }
     public DateTime AwardDate { get; set; }
     public string? CertificateNumber { get; set; }

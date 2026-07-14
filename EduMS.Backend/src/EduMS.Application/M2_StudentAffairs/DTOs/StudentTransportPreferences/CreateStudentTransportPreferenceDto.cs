@@ -13,8 +13,8 @@ public class CreateStudentTransportPreferenceDto
     public string? PickupGpsLongitude { get; set; }
     public string? PreferredPickupTime { get; set; }
     public string? PreferredDropoffTime { get; set; }
-    public bool UseMorningPickup { get; set; } = true;
-    public bool UseAfternoonDropoff { get; set; } = true;
+    public bool UseMorningPickup { get; set; }
+    public bool UseAfternoonDropoff { get; set; }
     public string? WeeklyDaysJson { get; set; }
     public bool RequiresEscort { get; set; }
     public string? EscortName { get; set; }
@@ -23,7 +23,6 @@ public class CreateStudentTransportPreferenceDto
     public bool RequiresSpecialNeedsTransport { get; set; }
     public string? SpecialNeedsTransportDetails { get; set; }
     public bool IsWheelchairAccessibleBusRequired { get; set; }
-    public int SubscriptionStatus { get; set; } = 1;
     public DateTime? SubscriptionStartDate { get; set; }
     public DateTime? SubscriptionEndDate { get; set; }
     public decimal SubscriptionFeeAmount { get; set; }

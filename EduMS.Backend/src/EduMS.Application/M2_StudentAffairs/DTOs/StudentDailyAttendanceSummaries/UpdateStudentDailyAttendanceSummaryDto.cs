@@ -5,8 +5,7 @@ namespace EduMS.Application.M2_StudentAffairs.DTOs.StudentDailyAttendanceSummari
 public class UpdateStudentDailyAttendanceSummaryDto
 {
     public long Id { get; set; }
-    public long StudentId { get; set; }
-    public string AcademicYear { get; set; } = string.Empty;
+    public string AcademicYear { get; set; }
     public int SemesterNumber { get; set; }
     public int MonthNumber { get; set; }
     public int TotalPresentDays { get; set; }

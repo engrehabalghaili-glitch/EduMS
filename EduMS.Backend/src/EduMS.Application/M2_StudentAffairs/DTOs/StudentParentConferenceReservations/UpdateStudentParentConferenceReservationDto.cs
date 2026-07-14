@@ -5,7 +5,6 @@ namespace EduMS.Application.M2_StudentAffairs.DTOs.StudentParentConferenceReserv
 public class UpdateStudentParentConferenceReservationDto
 {
     public long Id { get; set; }
-    public long StudentId { get; set; }
     public long GuardianId { get; set; }
     public long TeacherEmployeeId { get; set; }
     public long? SchoolEventCalendarId { get; set; }
@@ -13,7 +12,6 @@ public class UpdateStudentParentConferenceReservationDto
     public int MeetingDurationMinutes { get; set; }
     public string? DiscussionTopic { get; set; }
     public string? ConferenceNotes { get; set; }
-    public int Status { get; set; }
     public string? MeetingRoomOrLink { get; set; }
     public int ConferenceType { get; set; }
     public string? FollowUpActionItems { get; set; }

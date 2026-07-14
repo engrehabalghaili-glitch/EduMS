@@ -5,15 +5,13 @@ namespace EduMS.Application.M1_SchoolAdmin.DTOs.OfficialCirculars;
 public class UpdateOfficialCircularDto
 {
     public long Id { get; set; }
-    public string CircularNumber { get; set; } = string.Empty;
+    public string CircularNumber { get; set; }
     public DateTime IssueDate { get; set; }
-    public string TitleAr { get; set; } = string.Empty;
-    public string TitleEn { get; set; } = string.Empty;
+    public string TitleAr { get; set; }
+    public string TitleEn { get; set; }
     public int CircularType { get; set; }
-    public string IssuerName { get; set; } = string.Empty;
+    public string IssuerName { get; set; }
     public int TargetAudience { get; set; }
-    public DateTime EffectiveDate { get; set; }
-    public bool IsActive { get; set; }
     public string? ContentBody { get; set; }
     public long? IssuerEmployeeId { get; set; }
     public string? AttachmentFileUrl { get; set; }

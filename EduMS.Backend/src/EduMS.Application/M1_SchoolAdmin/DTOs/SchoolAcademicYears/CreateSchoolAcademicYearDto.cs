@@ -5,8 +5,8 @@ namespace EduMS.Application.M1_SchoolAdmin.DTOs.SchoolAcademicYears;
 public class CreateSchoolAcademicYearDto
 {
     public long SchoolId { get; set; }
-    public string YearCode { get; set; } = string.Empty;
-    public string YearNameAr { get; set; } = string.Empty;
+    public string YearCode { get; set; }
+    public string YearNameAr { get; set; }
     public string? YearNameEn { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
@@ -17,7 +17,6 @@ public class CreateSchoolAcademicYearDto
     public DateTime? ExamsStartDate { get; set; }
     public DateTime? ExamsEndDate { get; set; }
     public bool IsCurrentYear { get; set; }
-    public int YearStatus { get; set; } = 1;
     public bool IsArchived { get; set; }
     public DateTime? ArchivedDate { get; set; }
     public long? PreviousAcademicYearId { get; set; }

@@ -6,13 +6,12 @@ public class CreateStudentComplaintLogDto
 {
     public long StudentId { get; set; }
     public long? SubmittedByGuardianId { get; set; }
-    public string ComplaintReferenceNumber { get; set; } = string.Empty;
-    public DateTime SubmissionDate { get; set; } = DateTime.UtcNow;
+    public string ComplaintReferenceNumber { get; set; }
+    public DateTime SubmissionDate { get; set; }
     public int ComplaintCategory { get; set; }
-    public string ComplaintTitleAr { get; set; } = string.Empty;
-    public string ComplaintDescriptionText { get; set; } = string.Empty;
+    public string ComplaintTitleAr { get; set; }
+    public string ComplaintDescriptionText { get; set; }
     public string? SupportingDocumentUrl { get; set; }
-    public int ComplaintStatus { get; set; } = 1;
     public long? AssignedToEmployeeId { get; set; }
     public DateTime? AssignedDate { get; set; }
     public DateTime? ExpectedResolutionDate { get; set; }

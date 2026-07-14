@@ -5,11 +5,10 @@ namespace EduMS.Application.M2_StudentAffairs.DTOs.StudentAttachments;
 public class UpdateStudentAttachmentDto
 {
     public long Id { get; set; }
-    public long StudentId { get; set; }
-    public string AttachmentTitleAr { get; set; } = string.Empty;
+    public string AttachmentTitleAr { get; set; }
     public int AttachmentCategory { get; set; }
-    public string FileName { get; set; } = string.Empty;
-    public string FilePathUrl { get; set; } = string.Empty;
+    public string FileName { get; set; }
+    public string FilePathUrl { get; set; }
     public long FileSizeKb { get; set; }
     public DateTime UploadDate { get; set; }
     public string? AttachmentTitleEn { get; set; }

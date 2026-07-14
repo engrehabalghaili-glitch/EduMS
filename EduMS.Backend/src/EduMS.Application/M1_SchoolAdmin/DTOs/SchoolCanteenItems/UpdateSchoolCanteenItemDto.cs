@@ -5,10 +5,9 @@ namespace EduMS.Application.M1_SchoolAdmin.DTOs.SchoolCanteenItems;
 public class UpdateSchoolCanteenItemDto
 {
     public long Id { get; set; }
-    public long SchoolId { get; set; }
     public long? FacilityId { get; set; }
-    public string ItemCode { get; set; } = string.Empty;
-    public string ItemNameAr { get; set; } = string.Empty;
+    public string ItemCode { get; set; }
+    public string ItemNameAr { get; set; }
     public decimal UnitPrice { get; set; }
     public int StockQuantity { get; set; }
     public int NutritionalCategory { get; set; }

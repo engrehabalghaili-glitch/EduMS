@@ -5,9 +5,9 @@ namespace EduMS.Application.M2_StudentAffairs.DTOs.Persons;
 public class UpdatePersonDto
 {
     public long Id { get; set; }
-    public string FullNameAr { get; set; } = string.Empty;
-    public string FullNameEn { get; set; } = string.Empty;
-    public string NationalId { get; set; } = string.Empty;
+    public string FullNameAr { get; set; }
+    public string FullNameEn { get; set; }
+    public string NationalId { get; set; }
     public int Gender { get; set; }
     public string? ContactNumber { get; set; }
     public string? MedicalInfo { get; set; }

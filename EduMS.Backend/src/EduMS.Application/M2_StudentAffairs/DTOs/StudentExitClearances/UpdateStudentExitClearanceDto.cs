@@ -5,8 +5,7 @@ namespace EduMS.Application.M2_StudentAffairs.DTOs.StudentExitClearances;
 public class UpdateStudentExitClearanceDto
 {
     public long Id { get; set; }
-    public long StudentId { get; set; }
-    public string ClearanceReferenceNumber { get; set; } = string.Empty;
+    public string ClearanceReferenceNumber { get; set; }
     public int ClearanceReason { get; set; }
     public DateTime InitiationDate { get; set; }
     public DateTime? CompletionDate { get; set; }
@@ -14,7 +13,5 @@ public class UpdateStudentExitClearanceDto
     public bool IsFinancialClearanceApproved { get; set; }
     public bool IsCanteenClearanceApproved { get; set; }
     public bool IsSportsEquipmentClearanceApproved { get; set; }
-    public int OverallClearanceStatus { get; set; }
-    public long? ApprovedByDirectorEmployeeId { get; set; }
     public string? ClearanceNotes { get; set; }
 }

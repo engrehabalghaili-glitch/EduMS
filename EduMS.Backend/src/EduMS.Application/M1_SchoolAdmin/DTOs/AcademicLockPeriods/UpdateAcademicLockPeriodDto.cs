@@ -6,11 +6,9 @@ public class UpdateAcademicLockPeriodDto
 {
     public long Id { get; set; }
     public long OfficeId { get; set; }
-    public long SchoolId { get; set; }
-    public string PeriodName { get; set; } = string.Empty;
+    public string PeriodName { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
-    public bool IsActive { get; set; }
     public bool LockGradeRosters { get; set; }
     public bool LockEnrollmentSnapshots { get; set; }
     public bool LockPeriodStatisticalReports { get; set; }

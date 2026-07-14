@@ -5,10 +5,8 @@ namespace EduMS.Application.M1_SchoolAdmin.DTOs.TrainingCourseOfferings;
 public class UpdateTrainingCourseOfferingDto
 {
     public long Id { get; set; }
-    public long? DirectorateId { get; set; }
-    public long? SchoolId { get; set; }
-    public string CourseCode { get; set; } = string.Empty;
-    public string CourseTitleAr { get; set; } = string.Empty;
+    public string CourseCode { get; set; }
+    public string CourseTitleAr { get; set; }
     public string? TrainerName { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
@@ -20,5 +18,4 @@ public class UpdateTrainingCourseOfferingDto
     public string? TargetSpecialization { get; set; }
     public int EnrolledParticipantsCount { get; set; }
     public string? CertificateTemplateUrl { get; set; }
-    public bool IsActive { get; set; }
 }

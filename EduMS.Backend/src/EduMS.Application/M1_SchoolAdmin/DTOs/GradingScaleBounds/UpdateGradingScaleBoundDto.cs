@@ -5,9 +5,8 @@ namespace EduMS.Application.M1_SchoolAdmin.DTOs.GradingScaleBounds;
 public class UpdateGradingScaleBoundDto
 {
     public long Id { get; set; }
-    public long SchoolId { get; set; }
-    public string ScaleName { get; set; } = string.Empty;
-    public string LetterCode { get; set; } = string.Empty;
+    public string ScaleName { get; set; }
+    public string LetterCode { get; set; }
     public decimal MinPercentage { get; set; }
     public decimal MaxPercentage { get; set; }
     public decimal GradePointValue { get; set; }
@@ -16,5 +15,4 @@ public class UpdateGradingScaleBoundDto
     public string? ScaleCode { get; set; }
     public bool IsPassingGrade { get; set; }
     public int DisplayOrder { get; set; }
-    public bool IsActive { get; set; }
 }

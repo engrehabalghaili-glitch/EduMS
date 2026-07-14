@@ -5,9 +5,9 @@ namespace EduMS.Application.M1_SchoolAdmin.DTOs.Directorates;
 public class UpdateDirectorateDto
 {
     public long Id { get; set; }
-    public string DirectorateCode { get; set; } = string.Empty;
-    public string DirectorateNameAr { get; set; } = string.Empty;
-    public string DirectorateNameEn { get; set; } = string.Empty;
+    public string DirectorateCode { get; set; }
+    public string DirectorateNameAr { get; set; }
+    public string DirectorateNameEn { get; set; }
     public string? Address { get; set; }
     public string? ContactPhone { get; set; }
     public string? ContactEmail { get; set; }
@@ -18,5 +18,4 @@ public class UpdateDirectorateDto
     public string? SupervisoryScopeDescription { get; set; }
     public decimal AnnualBudgetLimit { get; set; }
     public int EmployeeCount { get; set; }
-    public bool IsActive { get; set; }
 }

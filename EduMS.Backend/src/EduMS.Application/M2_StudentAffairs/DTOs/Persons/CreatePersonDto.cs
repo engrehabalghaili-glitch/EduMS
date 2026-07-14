@@ -4,9 +4,9 @@ namespace EduMS.Application.M2_StudentAffairs.DTOs.Persons;
 
 public class CreatePersonDto
 {
-    public string FullNameAr { get; set; } = string.Empty;
-    public string FullNameEn { get; set; } = string.Empty;
-    public string NationalId { get; set; } = string.Empty;
+    public string FullNameAr { get; set; }
+    public string FullNameEn { get; set; }
+    public string NationalId { get; set; }
     public int Gender { get; set; }
     public string? ContactNumber { get; set; }
     public string? MedicalInfo { get; set; }
@@ -17,5 +17,5 @@ public class CreatePersonDto
     public string? BloodGroup { get; set; }
     public string? ResidentialAddress { get; set; }
     public string? PassportNumber { get; set; }
-    public bool IsActivePerson { get; set; } = true;
+    public bool IsActivePerson { get; set; }
 }

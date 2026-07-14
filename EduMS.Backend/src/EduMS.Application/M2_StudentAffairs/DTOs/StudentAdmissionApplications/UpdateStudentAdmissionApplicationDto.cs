@@ -6,11 +6,9 @@ public class UpdateStudentAdmissionApplicationDto
 {
     public long Id { get; set; }
     public long GuardianId { get; set; }
-    public long SchoolId { get; set; }
     public long? SchoolAcademicYearId { get; set; }
-    public string RequestedGradeLevelCode { get; set; } = string.Empty;
+    public string RequestedGradeLevelCode { get; set; }
     public DateTime SubmissionDate { get; set; }
-    public int RequestStatus { get; set; }
     public string? BirthCertificateAttachmentUrl { get; set; }
     public string? PersonalPhotoAttachmentUrl { get; set; }
     public string? PreviousSchoolName { get; set; }

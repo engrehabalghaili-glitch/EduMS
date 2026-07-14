@@ -5,15 +5,13 @@ namespace EduMS.Application.M2_StudentAffairs.DTOs.StudentFinancialAidApplicatio
 public class UpdateStudentFinancialAidApplicationDto
 {
     public long Id { get; set; }
-    public long StudentId { get; set; }
     public long GuardianId { get; set; }
-    public string ApplicationReferenceNumber { get; set; } = string.Empty;
+    public string ApplicationReferenceNumber { get; set; }
     public DateTime ApplicationDate { get; set; }
     public int AidCategory { get; set; }
     public decimal RequestedAidAmountOrPercentage { get; set; }
     public decimal VerifiedGuardianAnnualIncome { get; set; }
     public int FamilyMembersCount { get; set; }
-    public int ApplicationStatus { get; set; }
     public decimal ApprovedDiscountPercentage { get; set; }
     public long? ReviewedByCommitteeEmployeeId { get; set; }
     public string? IncomeProofAttachmentUrl { get; set; }

@@ -5,7 +5,6 @@ namespace EduMS.Application.M2_StudentAffairs.DTOs.StudentTransportPreferences;
 public class UpdateStudentTransportPreferenceDto
 {
     public long Id { get; set; }
-    public long StudentId { get; set; }
     public long? SchoolAcademicYearId { get; set; }
     public int TransportType { get; set; }
     public long? PreferredBusRouteId { get; set; }
@@ -24,7 +23,6 @@ public class UpdateStudentTransportPreferenceDto
     public bool RequiresSpecialNeedsTransport { get; set; }
     public string? SpecialNeedsTransportDetails { get; set; }
     public bool IsWheelchairAccessibleBusRequired { get; set; }
-    public int SubscriptionStatus { get; set; }
     public DateTime? SubscriptionStartDate { get; set; }
     public DateTime? SubscriptionEndDate { get; set; }
     public decimal SubscriptionFeeAmount { get; set; }

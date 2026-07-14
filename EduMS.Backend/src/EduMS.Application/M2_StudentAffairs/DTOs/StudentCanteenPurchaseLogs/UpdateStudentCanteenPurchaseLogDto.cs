@@ -5,7 +5,6 @@ namespace EduMS.Application.M2_StudentAffairs.DTOs.StudentCanteenPurchaseLogs;
 public class UpdateStudentCanteenPurchaseLogDto
 {
     public long Id { get; set; }
-    public long StudentId { get; set; }
     public long SchoolCanteenItemId { get; set; }
     public DateTime PurchaseDate { get; set; }
     public int QuantityPurchased { get; set; }

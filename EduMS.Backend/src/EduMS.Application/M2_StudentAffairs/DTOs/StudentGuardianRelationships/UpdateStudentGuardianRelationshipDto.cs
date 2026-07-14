@@ -5,7 +5,6 @@ namespace EduMS.Application.M2_StudentAffairs.DTOs.StudentGuardianRelationships;
 public class UpdateStudentGuardianRelationshipDto
 {
     public long Id { get; set; }
-    public long StudentId { get; set; }
     public long GuardianId { get; set; }
     public int RelationshipType { get; set; }
     public bool IsPrimaryContact { get; set; }

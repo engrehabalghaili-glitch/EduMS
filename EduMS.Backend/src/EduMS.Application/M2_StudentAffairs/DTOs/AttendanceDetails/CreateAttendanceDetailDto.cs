@@ -7,10 +7,8 @@ public class CreateAttendanceDetailDto
     public long StudentId { get; set; }
     public long ClassroomId { get; set; }
     public DateTime AttendanceDate { get; set; }
-    public int AttendanceStatus { get; set; }
     public string? AbsenceReason { get; set; }
     public int DurationMinutes { get; set; }
-    public long? RecordedByEmployeeId { get; set; }
     public int PeriodNumber { get; set; }
     public string? CheckInTime { get; set; }
     public string? CheckOutTime { get; set; }

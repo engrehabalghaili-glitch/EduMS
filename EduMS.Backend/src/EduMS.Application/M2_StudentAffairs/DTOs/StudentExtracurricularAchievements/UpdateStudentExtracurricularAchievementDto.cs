@@ -5,11 +5,10 @@ namespace EduMS.Application.M2_StudentAffairs.DTOs.StudentExtracurricularAchieve
 public class UpdateStudentExtracurricularAchievementDto
 {
     public long Id { get; set; }
-    public long StudentId { get; set; }
-    public string CompetitionTitleAr { get; set; } = string.Empty;
+    public string CompetitionTitleAr { get; set; }
     public string? CompetitionTitleEn { get; set; }
     public int CompetitionLevel { get; set; }
-    public string OrganizingInstitutionName { get; set; } = string.Empty;
+    public string OrganizingInstitutionName { get; set; }
     public DateTime AchievementDate { get; set; }
     public int RankOrMedalAchieved { get; set; }
     public string? AwardDescription { get; set; }

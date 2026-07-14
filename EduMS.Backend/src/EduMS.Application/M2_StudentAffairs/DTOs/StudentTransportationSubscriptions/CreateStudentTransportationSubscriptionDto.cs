@@ -10,8 +10,7 @@ public class CreateStudentTransportationSubscriptionDto
     public DateTime? SubscriptionEndDate { get; set; }
     public string? PickupStationAddress { get; set; }
     public string? DropoffStationAddress { get; set; }
-    public int SubscriptionStatus { get; set; }
-    public int SubscriptionType { get; set; } = 1;
+    public int SubscriptionType { get; set; }
     public decimal AgreedMonthlyFee { get; set; }
     public string? PickupTime { get; set; }
     public string? DropoffTime { get; set; }

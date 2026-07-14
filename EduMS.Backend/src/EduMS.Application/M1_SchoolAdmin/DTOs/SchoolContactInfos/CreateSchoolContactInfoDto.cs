@@ -5,12 +5,12 @@ namespace EduMS.Application.M1_SchoolAdmin.DTOs.SchoolContactInfos;
 public class CreateSchoolContactInfoDto
 {
     public long SchoolId { get; set; }
-    public string OfficialPhone { get; set; } = string.Empty;
+    public string OfficialPhone { get; set; }
     public string? Landline { get; set; }
     public string? FaxNumber { get; set; }
-    public string OfficialEmail { get; set; } = string.Empty;
+    public string OfficialEmail { get; set; }
     public string? AlternativeEmail { get; set; }
-    public string FullAddress { get; set; } = string.Empty;
+    public string FullAddress { get; set; }
     public string? StreetName { get; set; }
     public int BuildingNumber { get; set; }
     public string? PostalCode { get; set; }

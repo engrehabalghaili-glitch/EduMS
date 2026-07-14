@@ -12,9 +12,8 @@ public class CreateStudentParentConferenceReservationDto
     public int MeetingDurationMinutes { get; set; }
     public string? DiscussionTopic { get; set; }
     public string? ConferenceNotes { get; set; }
-    public int Status { get; set; }
     public string? MeetingRoomOrLink { get; set; }
-    public int ConferenceType { get; set; } = 1;
+    public int ConferenceType { get; set; }
     public string? FollowUpActionItems { get; set; }
     public bool IsGuardianAttended { get; set; }
 }

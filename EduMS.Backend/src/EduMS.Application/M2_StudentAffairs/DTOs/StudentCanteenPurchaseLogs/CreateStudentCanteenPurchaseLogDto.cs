@@ -6,7 +6,7 @@ public class CreateStudentCanteenPurchaseLogDto
 {
     public long StudentId { get; set; }
     public long SchoolCanteenItemId { get; set; }
-    public DateTime PurchaseDate { get; set; } = DateTime.UtcNow;
+    public DateTime PurchaseDate { get; set; }
     public int QuantityPurchased { get; set; }
     public decimal TotalCost { get; set; }
     public int PaymentMethod { get; set; }

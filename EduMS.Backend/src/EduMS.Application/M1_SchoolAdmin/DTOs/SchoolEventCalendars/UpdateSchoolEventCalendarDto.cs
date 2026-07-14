@@ -5,9 +5,8 @@ namespace EduMS.Application.M1_SchoolAdmin.DTOs.SchoolEventCalendars;
 public class UpdateSchoolEventCalendarDto
 {
     public long Id { get; set; }
-    public long SchoolId { get; set; }
-    public string EventTitleAr { get; set; } = string.Empty;
-    public string EventTitleEn { get; set; } = string.Empty;
+    public string EventTitleAr { get; set; }
+    public string EventTitleEn { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public int EventType { get; set; }

@@ -5,8 +5,7 @@ namespace EduMS.Application.M2_StudentAffairs.DTOs.StudentMedicalAllergyLogs;
 public class UpdateStudentMedicalAllergyLogDto
 {
     public long Id { get; set; }
-    public long StudentId { get; set; }
-    public string AllergyOrConditionName { get; set; } = string.Empty;
+    public string AllergyOrConditionName { get; set; }
     public int SeverityLevel { get; set; }
     public string? ReactionSymptoms { get; set; }
     public string? EmergencyActionProtocol { get; set; }
@@ -15,5 +14,4 @@ public class UpdateStudentMedicalAllergyLogDto
     public bool IsEpiPenRequired { get; set; }
     public string? DoctorContactNumber { get; set; }
     public DateTime? LastReactionDate { get; set; }
-    public int NurseVerificationStatus { get; set; }
 }

@@ -5,8 +5,8 @@ namespace EduMS.Application.M2_StudentAffairs.DTOs.Guardians;
 
 public class UpdateGuardianDto : UpdatePersonDto
 {
-    public string FamilyNumber { get; set; } = string.Empty;
-    public string RelationshipType { get; set; } = string.Empty;
+    public string FamilyNumber { get; set; }
+    public string RelationshipType { get; set; }
     public string? JobTitle { get; set; }
     public string? EmployerName { get; set; }
     public string? WorkPhoneNumber { get; set; }

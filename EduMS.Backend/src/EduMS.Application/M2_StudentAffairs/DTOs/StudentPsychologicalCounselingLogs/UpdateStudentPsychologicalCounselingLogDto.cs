@@ -5,7 +5,6 @@ namespace EduMS.Application.M2_StudentAffairs.DTOs.StudentPsychologicalCounselin
 public class UpdateStudentPsychologicalCounselingLogDto
 {
     public long Id { get; set; }
-    public long StudentId { get; set; }
     public long CounselorEmployeeId { get; set; }
     public DateTime SessionDate { get; set; }
     public int SessionCategory { get; set; }
@@ -16,5 +15,4 @@ public class UpdateStudentPsychologicalCounselingLogDto
     public int ReferralSource { get; set; }
     public int RiskAssessmentLevel { get; set; }
     public bool IsParentInvolved { get; set; }
-    public int CaseStatus { get; set; }
 }
