@@ -1,0 +1,23 @@
+﻿using System;
+
+namespace EduMS.Application.M6_StatisticsReports.DTOs.ReportApprovals;
+
+public class CreateReportApprovalDto
+{
+    public long SystemReportId { get; set; }
+    public long SchoolId { get; set; }
+    public DateTime SubmissionDate { get; set; } = DateTime.UtcNow;
+    public long SubmittedByUserId { get; set; }
+    public int ApprovalStatus { get; set; } = 1;
+    public long? ReviewerId { get; set; }
+    public DateTime? ReviewDate { get; set; }
+    public string? Comments { get; set; }
+    public string? RejectionReason { get; set; }
+    public DateTime? ApprovalDate { get; set; }
+    public long? ApprovedByUserId { get; set; }
+    public string? DigitalSignatureHash { get; set; }
+    public string? CertificateNumber { get; set; }
+    public string? CertificatePath { get; set; }
+    public bool IsFinal { get; set; }
+    public string? Notes { get; set; }
+}
