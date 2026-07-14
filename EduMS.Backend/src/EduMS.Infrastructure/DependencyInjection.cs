@@ -1,5 +1,6 @@
 using EduMS.Domain.Interfaces;
 using EduMS.Infrastructure.Common.Persistence;
+using EduMS.Infrastructure.Persistence.Seeding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +25,7 @@ public static class DependencyInjection
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IEduMSDbInitializer, EduMSDbInitializer>();
 
         return services;
     }

@@ -3,6 +3,7 @@ using System;
 using EduMS.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oracle.EntityFrameworkCore.Metadata;
 
@@ -11,9 +12,11 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace EduMS.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(EduMSDbContext))]
-    partial class EduMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260714213922_Add_SchoolLevel_And_FeeType_Lookup_Tables")]
+    partial class Add_SchoolLevel_And_FeeType_Lookup_Tables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

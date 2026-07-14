@@ -26,6 +26,8 @@ public class EduMSDbContext(DbContextOptions<EduMSDbContext> options) : DbContex
     // public DbSet<PaymentVoucher> PaymentVouchers => Set<PaymentVoucher>();
     
     public DbSet<Registration> Registrations => Set<Registration>();
+    public DbSet<SchoolLevel> SchoolLevels => Set<SchoolLevel>();
+    public DbSet<FeeType> FeeTypes => Set<FeeType>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

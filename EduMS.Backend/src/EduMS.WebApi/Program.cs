@@ -26,6 +26,12 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var dbInitializer = scope.ServiceProvider.GetRequiredService<EduMS.Infrastructure.Persistence.Seeding.IEduMSDbInitializer>();
+    await dbInitializer.SeedAsync();
+}
+
 app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())
