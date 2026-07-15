@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../environments';
-import type { Classroom, CreateClassroomDto, UpdateClassroomDto } from '../../../modules/m1-school-office/data-access/models/classroom';
+import { environment } from '../../../../../environments';
+import type { Classroom, CreateClassroomDto, UpdateClassroomDto } from '../models/classroom';
 
 @Injectable({ providedIn: 'root' })
 export class ClassroomService {

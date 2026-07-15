@@ -1,0 +1,10 @@
+export { SchoolAcademicYearService } from './school-academic-year.service';
+export { SchoolSemesterService } from './school-semester.service';
+export { SchoolShiftService } from './school-shift.service';
+export { SchoolFacilityService } from './school-facility.service';
+export { AcademicBranchConfigLogService } from './academic-branch-config-log.service';
+export { AcademicLockPeriodService } from './academic-lock-period.service';
+export { AcademicWarningPolicyService } from './academic-warning-policy.service';
+export { ClassScheduleService } from './class-schedule.service';
+export { ClassroomService } from './classroom.service';
+export { DepartmentService } from './department.service';
