@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 export { AttendanceDetailService } from './attendance-detail.service';
 export { BehavioralLogService } from './behavioral-log.service';
 export { ClassSectionService } from './class-section.service';
@@ -34,3 +35,39 @@ export { StudentSkillAndTalentRecordService } from './student-skill-and-talent-r
 export { StudentTransferLogService } from './student-transfer-log.service';
 export { StudentTransportPreferenceService } from './student-transport-preference.service';
 export { StudentTransportationSubscriptionService } from './student-transportation-subscription.service';
+=======
+export { StudentService } from './student.service';
+export { GuardianService } from './guardian.service';
+export { EnrollmentService } from './enrollment.service';
+export { AttendanceDetailService } from './attendance-detail.service';
+export { BehavioralLogService } from './behavioral-log.service';
+export { ComplaintLogService } from './complaint-log.service';
+export { DisciplinaryHistoryService } from './disciplinary-history.service';
+export { ExemplaryRecognitionService } from './exemplary-recognition.service';
+export { AssessmentService } from './assessment.service';
+export { AbsenceExcusalService } from './absence-excusal.service';
+export { AssignmentSubmissionService } from './assignment-submission.service';
+export { ExitClearanceService } from './exit-clearance.service';
+export { ExemptionService } from './exemption.service';
+export { ExtracurricularAchievementService } from './extracurricular-achievement.service';
+export { FinancialAidApplicationService } from './financial-aid-application.service';
+export { GuardianRelationshipService } from './guardian-relationship.service';
+export { HealthRecordService } from './health-record.service';
+export { IdentityDocumentService } from './identity-document.service';
+export { InventoryCustodyService } from './inventory-custody.service';
+export { LibraryBorrowingService } from './library-borrowing.service';
+export { MedicalAllergyService } from './medical-allergy.service';
+export { ParentConferenceService } from './parent-conference.service';
+export { PreviousAcademicHistoryService } from './previous-academic-history.service';
+export { PsychologicalCounselingService } from './psychological-counseling.service';
+export { SkillTalentService } from './skill-talent.service';
+export { TransferLogService } from './transfer-log.service';
+export { TransportPreferenceService } from './transport-preference.service';
+export { TransportationSubscriptionService } from './transportation-subscription.service';
+export { AttachmentService } from './attachment.service';
+export { CanteenPurchaseService } from './canteen-purchase.service';
+export { ClassSectionService } from './class-section.service';
+export { AcademicWarningService } from './academic-warning.service';
+export { DailyAttendanceSummaryService } from './daily-attendance-summary.service';
+export { RegistrationService } from './registration.service';
+>>>>>>> a5e4b7bd636905d9ae8eac2a07d1379213c3aaa7

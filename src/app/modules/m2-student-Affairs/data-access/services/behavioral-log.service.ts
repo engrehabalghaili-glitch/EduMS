@@ -7,6 +7,7 @@ import type { BehavioralLog, CreateBehavioralLog, UpdateBehavioralLog } from '..
 @Injectable({ providedIn: 'root' })
 export class BehavioralLogService {
   private readonly http = inject(HttpClient);
+<<<<<<< HEAD
   private readonly apiUrl = environment.apiUrl;
 
   getAll(): Observable<BehavioralLog[]> {
@@ -27,5 +28,31 @@ export class BehavioralLogService {
 
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/behavioral-logs/${id}`);
+=======
+  private readonly baseUrl = `${environment.baseUrl}/behavioralLogs`;
+
+  getAll(): Observable<BehavioralLog[]> {
+    return this.http.get<BehavioralLog[]>(this.baseUrl);
+  }
+
+  getById(id: number): Observable<BehavioralLog> {
+    return this.http.get<BehavioralLog>(`${this.baseUrl}/${id}`);
+  }
+
+  getByStudentId(studentId: number): Observable<BehavioralLog[]> {
+    return this.http.get<BehavioralLog[]>(`${this.baseUrl}?studentId=${studentId}`);
+  }
+
+  create(dto: CreateBehavioralLog): Observable<BehavioralLog> {
+    return this.http.post<BehavioralLog>(this.baseUrl, dto);
+  }
+
+  update(id: number, dto: UpdateBehavioralLog): Observable<BehavioralLog> {
+    return this.http.put<BehavioralLog>(`${this.baseUrl}/${id}`, dto);
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+>>>>>>> a5e4b7bd636905d9ae8eac2a07d1379213c3aaa7
   }
 }
