@@ -45,3 +45,7 @@ export interface Registration {
   approvalDate?: string;
   convertedToStudentId?: number;
 }
+
+export type CreateRegistration = Omit<Registration, 'id' | 'requestStatus' | 'submissionDate' | 'reviewedByUserId' | 'reviewDate' | 'rejectionReason' | 'approvalDate' | 'convertedToStudentId'>;
+
+export type UpdateRegistration = CreateRegistration & { id: number };

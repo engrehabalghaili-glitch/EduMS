@@ -19,6 +19,7 @@ export type GenerationMethod = 'يدوي' | 'تلقائي' | 'مجدول';
 export type EntityType = 'مدرسة' | 'إدارة تعليمية' | 'وزارة' | 'جهة خارجية';
 export type ComplianceReportType = 'امتثال' | 'تقرير سنوي' | 'تقرير نصف سنوي' | 'تقرير دوري';
 export type FinancialReportType = 'تقرير أصول' | 'تقرير مالي شامل' | 'تقرير إيرادات' | 'تقرير مصروفات';
+export type AnalysisStatus = 'قيد التحليل' | 'مكتمل' | 'معلق' | 'مراجع';
 export type Priority = 'منخفض' | 'متوسط' | 'عالي' | 'حرج';
 export type TrendDirection = 'صاعد' | 'هابط' | 'مستقر' | 'متذبذب';
 export type AuditStatus = 'معلق' | 'قيد المراجعة' | 'معتمد' | 'مرفوض';
