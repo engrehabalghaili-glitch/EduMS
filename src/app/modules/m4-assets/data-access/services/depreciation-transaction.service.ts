@@ -7,29 +7,30 @@ import type { DepreciationTransaction, CreateDepreciationTransactionRequest, Upd
 @Injectable({ providedIn: 'root' })
 export class DepreciationTransactionService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/depreciationTransactions`;
+  private readonly apiUrl = `${environment.apiUrl}/depreciationTransactions`;
 
   getAll(): Observable<DepreciationTransaction[]> {
-    return this.http.get<DepreciationTransaction[]>(this.baseUrl);
+    return this.http.get<DepreciationTransaction[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<DepreciationTransaction> {
-    return this.http.get<DepreciationTransaction>(`${this.baseUrl}/${id}`);
+    return this.http.get<DepreciationTransaction>(`${this.apiUrl}/${id}`);
   }
 
   getByAssetId(assetId: number): Observable<DepreciationTransaction[]> {
-    return this.http.get<DepreciationTransaction[]>(`${this.baseUrl}?assetId=${assetId}`);
+    return this.http.get<DepreciationTransaction[]>(`${this.apiUrl}?assetId=${assetId}`);
   }
 
   create(dto: CreateDepreciationTransactionRequest): Observable<DepreciationTransaction> {
-    return this.http.post<DepreciationTransaction>(this.baseUrl, dto);
+    return this.http.post<DepreciationTransaction>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateDepreciationTransactionRequest): Observable<DepreciationTransaction> {
-    return this.http.put<DepreciationTransaction>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<DepreciationTransaction>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

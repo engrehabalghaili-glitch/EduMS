@@ -29,3 +29,4 @@ export class StudentIdentityDocumentService {
     return this.http.delete<void>(`${this.apiUrl}/student-identity-documents/${id}`);
   }
 }
+

@@ -29,3 +29,4 @@ export class StudentGuardianRelationshipService {
     return this.http.delete<void>(`${this.apiUrl}/student-guardian-relationships/${id}`);
   }
 }
+

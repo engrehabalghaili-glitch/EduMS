@@ -29,3 +29,4 @@ export class StudentEnrollmentService {
     return this.http.delete<void>(`${this.apiUrl}/student-enrollments/${id}`);
   }
 }
+

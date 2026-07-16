@@ -7,33 +7,35 @@ import type { SchoolSemester, CreateSchoolSemesterDto, UpdateSchoolSemesterDto }
 @Injectable({ providedIn: 'root' })
 export class SchoolSemesterService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/schoolSemesters`;
+  private readonly apiUrl = `${environment.apiUrl}/schoolSemesters`;
 
   getAll(): Observable<SchoolSemester[]> {
-    return this.http.get<SchoolSemester[]>(this.baseUrl);
+    return this.http.get<SchoolSemester[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<SchoolSemester> {
-    return this.http.get<SchoolSemester>(`${this.baseUrl}/${id}`);
+    return this.http.get<SchoolSemester>(`${this.apiUrl}/${id}`);
   }
 
   getByAcademicYearId(academicYearId: number): Observable<SchoolSemester[]> {
-    return this.http.get<SchoolSemester[]>(`${this.baseUrl}?schoolAcademicYearId=${academicYearId}`);
+    return this.http.get<SchoolSemester[]>(`${this.apiUrl}?schoolAcademicYearId=${academicYearId}`);
   }
 
   getCurrent(): Observable<SchoolSemester[]> {
-    return this.http.get<SchoolSemester[]>(`${this.baseUrl}?isCurrent=true`);
+    return this.http.get<SchoolSemester[]>(`${this.apiUrl}?isCurrent=true`);
   }
 
   create(dto: CreateSchoolSemesterDto): Observable<SchoolSemester> {
-    return this.http.post<SchoolSemester>(this.baseUrl, dto);
+    return this.http.post<SchoolSemester>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateSchoolSemesterDto): Observable<SchoolSemester> {
-    return this.http.put<SchoolSemester>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<SchoolSemester>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

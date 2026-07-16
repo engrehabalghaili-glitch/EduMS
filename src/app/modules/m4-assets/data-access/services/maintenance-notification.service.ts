@@ -7,29 +7,30 @@ import type { MaintenanceNotification, CreateMaintenanceNotificationRequest, Upd
 @Injectable({ providedIn: 'root' })
 export class MaintenanceNotificationService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/maintenanceNotifications`;
+  private readonly apiUrl = `${environment.apiUrl}/maintenanceNotifications`;
 
   getAll(): Observable<MaintenanceNotification[]> {
-    return this.http.get<MaintenanceNotification[]>(this.baseUrl);
+    return this.http.get<MaintenanceNotification[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<MaintenanceNotification> {
-    return this.http.get<MaintenanceNotification>(`${this.baseUrl}/${id}`);
+    return this.http.get<MaintenanceNotification>(`${this.apiUrl}/${id}`);
   }
 
   getByRecipientUserId(recipientUserId: number): Observable<MaintenanceNotification[]> {
-    return this.http.get<MaintenanceNotification[]>(`${this.baseUrl}?recipientUserId=${recipientUserId}`);
+    return this.http.get<MaintenanceNotification[]>(`${this.apiUrl}?recipientUserId=${recipientUserId}`);
   }
 
   create(dto: CreateMaintenanceNotificationRequest): Observable<MaintenanceNotification> {
-    return this.http.post<MaintenanceNotification>(this.baseUrl, dto);
+    return this.http.post<MaintenanceNotification>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateMaintenanceNotificationRequest): Observable<MaintenanceNotification> {
-    return this.http.put<MaintenanceNotification>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<MaintenanceNotification>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

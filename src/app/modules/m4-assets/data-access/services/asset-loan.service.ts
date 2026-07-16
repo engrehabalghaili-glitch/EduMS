@@ -7,29 +7,30 @@ import type { AssetLoan, CreateAssetLoanRequest, UpdateAssetLoanRequest } from '
 @Injectable({ providedIn: 'root' })
 export class AssetLoanService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetLoans`;
+  private readonly apiUrl = `${environment.apiUrl}/assetLoans`;
 
   getAll(): Observable<AssetLoan[]> {
-    return this.http.get<AssetLoan[]>(this.baseUrl);
+    return this.http.get<AssetLoan[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetLoan> {
-    return this.http.get<AssetLoan>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetLoan>(`${this.apiUrl}/${id}`);
   }
 
   getByAssetId(assetId: number): Observable<AssetLoan[]> {
-    return this.http.get<AssetLoan[]>(`${this.baseUrl}?assetId=${assetId}`);
+    return this.http.get<AssetLoan[]>(`${this.apiUrl}?assetId=${assetId}`);
   }
 
   create(dto: CreateAssetLoanRequest): Observable<AssetLoan> {
-    return this.http.post<AssetLoan>(this.baseUrl, dto);
+    return this.http.post<AssetLoan>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetLoanRequest): Observable<AssetLoan> {
-    return this.http.put<AssetLoan>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetLoan>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

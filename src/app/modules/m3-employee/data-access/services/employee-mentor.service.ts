@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../environments';
-import type { EmployeeMentor, CreateEmployeeMentor, UpdateEmployeeMentor } from '../../m3-employee/data-access/models/employee-mentor.types';
+import { environment } from '../../../../../environments';
+import type { EmployeeMentor, CreateEmployeeMentor, UpdateEmployeeMentor } from '../models/employee-mentor.types';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeeMentorService {

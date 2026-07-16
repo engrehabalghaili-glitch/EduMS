@@ -7,29 +7,30 @@ import type { Warehouse, CreateWarehouseRequest, UpdateWarehouseRequest } from '
 @Injectable({ providedIn: 'root' })
 export class WarehouseService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/warehouses`;
+  private readonly apiUrl = `${environment.apiUrl}/warehouses`;
 
   getAll(): Observable<Warehouse[]> {
-    return this.http.get<Warehouse[]>(this.baseUrl);
+    return this.http.get<Warehouse[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<Warehouse> {
-    return this.http.get<Warehouse>(`${this.baseUrl}/${id}`);
+    return this.http.get<Warehouse>(`${this.apiUrl}/${id}`);
   }
 
   getByOwnerId(ownerId: number): Observable<Warehouse[]> {
-    return this.http.get<Warehouse[]>(`${this.baseUrl}?ownerId=${ownerId}`);
+    return this.http.get<Warehouse[]>(`${this.apiUrl}?ownerId=${ownerId}`);
   }
 
   create(dto: CreateWarehouseRequest): Observable<Warehouse> {
-    return this.http.post<Warehouse>(this.baseUrl, dto);
+    return this.http.post<Warehouse>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateWarehouseRequest): Observable<Warehouse> {
-    return this.http.put<Warehouse>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<Warehouse>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

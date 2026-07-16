@@ -7,33 +7,35 @@ import type { AcademicWarningPolicy, CreateAcademicWarningPolicyDto, UpdateAcade
 @Injectable({ providedIn: 'root' })
 export class AcademicWarningPolicyService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/academicWarningPolicies`;
+  private readonly apiUrl = `${environment.apiUrl}/academicWarningPolicies`;
 
   getAll(): Observable<AcademicWarningPolicy[]> {
-    return this.http.get<AcademicWarningPolicy[]>(this.baseUrl);
+    return this.http.get<AcademicWarningPolicy[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AcademicWarningPolicy> {
-    return this.http.get<AcademicWarningPolicy>(`${this.baseUrl}/${id}`);
+    return this.http.get<AcademicWarningPolicy>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<AcademicWarningPolicy[]> {
-    return this.http.get<AcademicWarningPolicy[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<AcademicWarningPolicy[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   getByCategory(category: string): Observable<AcademicWarningPolicy[]> {
-    return this.http.get<AcademicWarningPolicy[]>(`${this.baseUrl}?warningCategory=${category}`);
+    return this.http.get<AcademicWarningPolicy[]>(`${this.apiUrl}?warningCategory=${category}`);
   }
 
   create(dto: CreateAcademicWarningPolicyDto): Observable<AcademicWarningPolicy> {
-    return this.http.post<AcademicWarningPolicy>(this.baseUrl, dto);
+    return this.http.post<AcademicWarningPolicy>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAcademicWarningPolicyDto): Observable<AcademicWarningPolicy> {
-    return this.http.put<AcademicWarningPolicy>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AcademicWarningPolicy>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

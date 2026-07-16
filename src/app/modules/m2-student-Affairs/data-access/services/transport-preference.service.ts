@@ -7,29 +7,30 @@ import type { StudentTransportPreference, CreateStudentTransportPreference, Upda
 @Injectable({ providedIn: 'root' })
 export class TransportPreferenceService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentTransportPreferences`;
+  private readonly apiUrl = `${environment.apiUrl}/studentTransportPreferences`;
 
   getAll(): Observable<StudentTransportPreference[]> {
-    return this.http.get<StudentTransportPreference[]>(this.baseUrl);
+    return this.http.get<StudentTransportPreference[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentTransportPreference> {
-    return this.http.get<StudentTransportPreference>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentTransportPreference>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentTransportPreference[]> {
-    return this.http.get<StudentTransportPreference[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentTransportPreference[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentTransportPreference): Observable<StudentTransportPreference> {
-    return this.http.post<StudentTransportPreference>(this.baseUrl, dto);
+    return this.http.post<StudentTransportPreference>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentTransportPreference): Observable<StudentTransportPreference> {
-    return this.http.put<StudentTransportPreference>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentTransportPreference>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

@@ -29,3 +29,4 @@ export class StudentDailyAttendanceSummaryService {
     return this.http.delete<void>(`${this.apiUrl}/student-daily-attendance-summaries/${id}`);
   }
 }
+

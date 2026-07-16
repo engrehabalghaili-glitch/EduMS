@@ -7,29 +7,30 @@ import type { AssetUsageLog, CreateAssetUsageLogRequest, UpdateAssetUsageLogRequ
 @Injectable({ providedIn: 'root' })
 export class AssetUsageLogService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetUsageLogs`;
+  private readonly apiUrl = `${environment.apiUrl}/assetUsageLogs`;
 
   getAll(): Observable<AssetUsageLog[]> {
-    return this.http.get<AssetUsageLog[]>(this.baseUrl);
+    return this.http.get<AssetUsageLog[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetUsageLog> {
-    return this.http.get<AssetUsageLog>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetUsageLog>(`${this.apiUrl}/${id}`);
   }
 
   getByAssetId(assetId: number): Observable<AssetUsageLog[]> {
-    return this.http.get<AssetUsageLog[]>(`${this.baseUrl}?assetId=${assetId}`);
+    return this.http.get<AssetUsageLog[]>(`${this.apiUrl}?assetId=${assetId}`);
   }
 
   create(dto: CreateAssetUsageLogRequest): Observable<AssetUsageLog> {
-    return this.http.post<AssetUsageLog>(this.baseUrl, dto);
+    return this.http.post<AssetUsageLog>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetUsageLogRequest): Observable<AssetUsageLog> {
-    return this.http.put<AssetUsageLog>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetUsageLog>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

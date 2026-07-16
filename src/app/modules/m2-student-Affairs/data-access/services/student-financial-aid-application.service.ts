@@ -29,3 +29,4 @@ export class StudentFinancialAidApplicationService {
     return this.http.delete<void>(`${this.apiUrl}/student-financial-aid-applications/${id}`);
   }
 }
+

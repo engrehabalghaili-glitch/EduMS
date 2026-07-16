@@ -7,33 +7,35 @@ import type { VisitorEntryLog, CreateVisitorEntryLogDto, UpdateVisitorEntryLogDt
 @Injectable({ providedIn: 'root' })
 export class VisitorEntryLogService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/visitorEntryLogs`;
+  private readonly apiUrl = `${environment.apiUrl}/visitorEntryLogs`;
 
   getAll(): Observable<VisitorEntryLog[]> {
-    return this.http.get<VisitorEntryLog[]>(this.baseUrl);
+    return this.http.get<VisitorEntryLog[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<VisitorEntryLog> {
-    return this.http.get<VisitorEntryLog>(`${this.baseUrl}/${id}`);
+    return this.http.get<VisitorEntryLog>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<VisitorEntryLog[]> {
-    return this.http.get<VisitorEntryLog[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<VisitorEntryLog[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   getActive(): Observable<VisitorEntryLog[]> {
-    return this.http.get<VisitorEntryLog[]>(`${this.baseUrl}?status=نشط`);
+    return this.http.get<VisitorEntryLog[]>(`${this.apiUrl}?status=نشط`);
   }
 
   create(dto: CreateVisitorEntryLogDto): Observable<VisitorEntryLog> {
-    return this.http.post<VisitorEntryLog>(this.baseUrl, dto);
+    return this.http.post<VisitorEntryLog>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateVisitorEntryLogDto): Observable<VisitorEntryLog> {
-    return this.http.put<VisitorEntryLog>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<VisitorEntryLog>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

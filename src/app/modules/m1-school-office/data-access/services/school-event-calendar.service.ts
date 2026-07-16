@@ -7,33 +7,35 @@ import type { SchoolEventCalendar, CreateSchoolEventCalendarDto, UpdateSchoolEve
 @Injectable({ providedIn: 'root' })
 export class SchoolEventCalendarService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/schoolEventCalendars`;
+  private readonly apiUrl = `${environment.apiUrl}/schoolEventCalendars`;
 
   getAll(): Observable<SchoolEventCalendar[]> {
-    return this.http.get<SchoolEventCalendar[]>(this.baseUrl);
+    return this.http.get<SchoolEventCalendar[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<SchoolEventCalendar> {
-    return this.http.get<SchoolEventCalendar>(`${this.baseUrl}/${id}`);
+    return this.http.get<SchoolEventCalendar>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<SchoolEventCalendar[]> {
-    return this.http.get<SchoolEventCalendar[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<SchoolEventCalendar[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   getByEventType(eventType: string): Observable<SchoolEventCalendar[]> {
-    return this.http.get<SchoolEventCalendar[]>(`${this.baseUrl}?eventType=${eventType}`);
+    return this.http.get<SchoolEventCalendar[]>(`${this.apiUrl}?eventType=${eventType}`);
   }
 
   create(dto: CreateSchoolEventCalendarDto): Observable<SchoolEventCalendar> {
-    return this.http.post<SchoolEventCalendar>(this.baseUrl, dto);
+    return this.http.post<SchoolEventCalendar>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateSchoolEventCalendarDto): Observable<SchoolEventCalendar> {
-    return this.http.put<SchoolEventCalendar>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<SchoolEventCalendar>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

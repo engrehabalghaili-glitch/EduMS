@@ -7,29 +7,30 @@ import type { AssetTechnicalSpecification, CreateAssetTechnicalSpecificationRequ
 @Injectable({ providedIn: 'root' })
 export class AssetTechnicalSpecificationService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetTechnicalSpecifications`;
+  private readonly apiUrl = `${environment.apiUrl}/assetTechnicalSpecifications`;
 
   getAll(): Observable<AssetTechnicalSpecification[]> {
-    return this.http.get<AssetTechnicalSpecification[]>(this.baseUrl);
+    return this.http.get<AssetTechnicalSpecification[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetTechnicalSpecification> {
-    return this.http.get<AssetTechnicalSpecification>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetTechnicalSpecification>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<AssetTechnicalSpecification[]> {
-    return this.http.get<AssetTechnicalSpecification[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<AssetTechnicalSpecification[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateAssetTechnicalSpecificationRequest): Observable<AssetTechnicalSpecification> {
-    return this.http.post<AssetTechnicalSpecification>(this.baseUrl, dto);
+    return this.http.post<AssetTechnicalSpecification>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetTechnicalSpecificationRequest): Observable<AssetTechnicalSpecification> {
-    return this.http.put<AssetTechnicalSpecification>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetTechnicalSpecification>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

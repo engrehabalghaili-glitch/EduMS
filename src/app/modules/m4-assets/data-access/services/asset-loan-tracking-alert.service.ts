@@ -7,29 +7,30 @@ import type { AssetLoanTrackingAlert, CreateAssetLoanTrackingAlertRequest, Updat
 @Injectable({ providedIn: 'root' })
 export class AssetLoanTrackingAlertService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetLoanTrackingAlerts`;
+  private readonly apiUrl = `${environment.apiUrl}/assetLoanTrackingAlerts`;
 
   getAll(): Observable<AssetLoanTrackingAlert[]> {
-    return this.http.get<AssetLoanTrackingAlert[]>(this.baseUrl);
+    return this.http.get<AssetLoanTrackingAlert[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetLoanTrackingAlert> {
-    return this.http.get<AssetLoanTrackingAlert>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetLoanTrackingAlert>(`${this.apiUrl}/${id}`);
   }
 
   getByLoanId(loanId: number): Observable<AssetLoanTrackingAlert[]> {
-    return this.http.get<AssetLoanTrackingAlert[]>(`${this.baseUrl}?loanId=${loanId}`);
+    return this.http.get<AssetLoanTrackingAlert[]>(`${this.apiUrl}?loanId=${loanId}`);
   }
 
   create(dto: CreateAssetLoanTrackingAlertRequest): Observable<AssetLoanTrackingAlert> {
-    return this.http.post<AssetLoanTrackingAlert>(this.baseUrl, dto);
+    return this.http.post<AssetLoanTrackingAlert>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetLoanTrackingAlertRequest): Observable<AssetLoanTrackingAlert> {
-    return this.http.put<AssetLoanTrackingAlert>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetLoanTrackingAlert>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

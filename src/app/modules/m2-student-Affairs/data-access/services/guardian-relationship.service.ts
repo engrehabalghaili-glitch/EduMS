@@ -7,29 +7,30 @@ import type { StudentGuardianRelationship, CreateStudentGuardianRelationship, Up
 @Injectable({ providedIn: 'root' })
 export class GuardianRelationshipService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentGuardianRelationships`;
+  private readonly apiUrl = `${environment.apiUrl}/studentGuardianRelationships`;
 
   getAll(): Observable<StudentGuardianRelationship[]> {
-    return this.http.get<StudentGuardianRelationship[]>(this.baseUrl);
+    return this.http.get<StudentGuardianRelationship[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentGuardianRelationship> {
-    return this.http.get<StudentGuardianRelationship>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentGuardianRelationship>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentGuardianRelationship[]> {
-    return this.http.get<StudentGuardianRelationship[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentGuardianRelationship[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentGuardianRelationship): Observable<StudentGuardianRelationship> {
-    return this.http.post<StudentGuardianRelationship>(this.baseUrl, dto);
+    return this.http.post<StudentGuardianRelationship>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentGuardianRelationship): Observable<StudentGuardianRelationship> {
-    return this.http.put<StudentGuardianRelationship>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentGuardianRelationship>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

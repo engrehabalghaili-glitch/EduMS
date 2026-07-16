@@ -7,33 +7,35 @@ import type { SchoolCanteenItem, CreateSchoolCanteenItemDto, UpdateSchoolCanteen
 @Injectable({ providedIn: 'root' })
 export class SchoolCanteenItemService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/schoolCanteenItems`;
+  private readonly apiUrl = `${environment.apiUrl}/schoolCanteenItems`;
 
   getAll(): Observable<SchoolCanteenItem[]> {
-    return this.http.get<SchoolCanteenItem[]>(this.baseUrl);
+    return this.http.get<SchoolCanteenItem[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<SchoolCanteenItem> {
-    return this.http.get<SchoolCanteenItem>(`${this.baseUrl}/${id}`);
+    return this.http.get<SchoolCanteenItem>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<SchoolCanteenItem[]> {
-    return this.http.get<SchoolCanteenItem[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<SchoolCanteenItem[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   getAvailable(): Observable<SchoolCanteenItem[]> {
-    return this.http.get<SchoolCanteenItem[]>(`${this.baseUrl}?isAvailable=true`);
+    return this.http.get<SchoolCanteenItem[]>(`${this.apiUrl}?isAvailable=true`);
   }
 
   create(dto: CreateSchoolCanteenItemDto): Observable<SchoolCanteenItem> {
-    return this.http.post<SchoolCanteenItem>(this.baseUrl, dto);
+    return this.http.post<SchoolCanteenItem>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateSchoolCanteenItemDto): Observable<SchoolCanteenItem> {
-    return this.http.put<SchoolCanteenItem>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<SchoolCanteenItem>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

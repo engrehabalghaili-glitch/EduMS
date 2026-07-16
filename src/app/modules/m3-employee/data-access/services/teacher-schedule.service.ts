@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../environments';
-import type { TeacherSchedule, CreateTeacherSchedule, UpdateTeacherSchedule } from '../../m3-employee/data-access/models/teacher-schedule.types';
+import { environment } from '../../../../../environments';
+import type { TeacherSchedule, CreateTeacherSchedule, UpdateTeacherSchedule } from '../models/teacher-schedule.types';
 
 @Injectable({ providedIn: 'root' })
 export class TeacherScheduleService {

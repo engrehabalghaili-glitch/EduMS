@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../environments';
-import type { EmployeeCommittee, CreateEmployeeCommittee, UpdateEmployeeCommittee } from '../../m3-employee/data-access/models/employee-committee.types';
+import { environment } from '../../../../../environments';
+import type { EmployeeCommittee, CreateEmployeeCommittee, UpdateEmployeeCommittee } from '../models/employee-committee.types';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeeCommitteeService {

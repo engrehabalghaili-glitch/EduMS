@@ -29,3 +29,4 @@ export class StudentSkillAndTalentRecordService {
     return this.http.delete<void>(`${this.apiUrl}/student-skill-and-talent-records/${id}`);
   }
 }
+

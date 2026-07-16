@@ -7,37 +7,39 @@ import type { ExamDistributionTimetable, CreateExamDistributionTimetableDto, Upd
 @Injectable({ providedIn: 'root' })
 export class ExamDistributionTimetableService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/examDistributionTimetables`;
+  private readonly apiUrl = `${environment.apiUrl}/examDistributionTimetables`;
 
   getAll(): Observable<ExamDistributionTimetable[]> {
-    return this.http.get<ExamDistributionTimetable[]>(this.baseUrl);
+    return this.http.get<ExamDistributionTimetable[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<ExamDistributionTimetable> {
-    return this.http.get<ExamDistributionTimetable>(`${this.baseUrl}/${id}`);
+    return this.http.get<ExamDistributionTimetable>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<ExamDistributionTimetable[]> {
-    return this.http.get<ExamDistributionTimetable[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<ExamDistributionTimetable[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   getBySubjectId(subjectId: number): Observable<ExamDistributionTimetable[]> {
-    return this.http.get<ExamDistributionTimetable[]>(`${this.baseUrl}?subjectId=${subjectId}`);
+    return this.http.get<ExamDistributionTimetable[]>(`${this.apiUrl}?subjectId=${subjectId}`);
   }
 
   getByClassroomId(classroomId: number): Observable<ExamDistributionTimetable[]> {
-    return this.http.get<ExamDistributionTimetable[]>(`${this.baseUrl}?classroomId=${classroomId}`);
+    return this.http.get<ExamDistributionTimetable[]>(`${this.apiUrl}?classroomId=${classroomId}`);
   }
 
   create(dto: CreateExamDistributionTimetableDto): Observable<ExamDistributionTimetable> {
-    return this.http.post<ExamDistributionTimetable>(this.baseUrl, dto);
+    return this.http.post<ExamDistributionTimetable>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateExamDistributionTimetableDto): Observable<ExamDistributionTimetable> {
-    return this.http.put<ExamDistributionTimetable>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<ExamDistributionTimetable>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

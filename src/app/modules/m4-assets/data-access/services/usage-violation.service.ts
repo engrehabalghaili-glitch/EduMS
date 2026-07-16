@@ -7,29 +7,30 @@ import type { UsageViolation, CreateUsageViolationRequest, UpdateUsageViolationR
 @Injectable({ providedIn: 'root' })
 export class UsageViolationService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/usageViolations`;
+  private readonly apiUrl = `${environment.apiUrl}/usageViolations`;
 
   getAll(): Observable<UsageViolation[]> {
-    return this.http.get<UsageViolation[]>(this.baseUrl);
+    return this.http.get<UsageViolation[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<UsageViolation> {
-    return this.http.get<UsageViolation>(`${this.baseUrl}/${id}`);
+    return this.http.get<UsageViolation>(`${this.apiUrl}/${id}`);
   }
 
   getByAssetId(assetId: number): Observable<UsageViolation[]> {
-    return this.http.get<UsageViolation[]>(`${this.baseUrl}?assetId=${assetId}`);
+    return this.http.get<UsageViolation[]>(`${this.apiUrl}?assetId=${assetId}`);
   }
 
   create(dto: CreateUsageViolationRequest): Observable<UsageViolation> {
-    return this.http.post<UsageViolation>(this.baseUrl, dto);
+    return this.http.post<UsageViolation>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateUsageViolationRequest): Observable<UsageViolation> {
-    return this.http.put<UsageViolation>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<UsageViolation>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

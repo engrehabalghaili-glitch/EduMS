@@ -7,29 +7,30 @@ import type { StudentDisciplinaryHistory, CreateStudentDisciplinaryHistory, Upda
 @Injectable({ providedIn: 'root' })
 export class DisciplinaryHistoryService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentDisciplinaryHistories`;
+  private readonly apiUrl = `${environment.apiUrl}/studentDisciplinaryHistories`;
 
   getAll(): Observable<StudentDisciplinaryHistory[]> {
-    return this.http.get<StudentDisciplinaryHistory[]>(this.baseUrl);
+    return this.http.get<StudentDisciplinaryHistory[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentDisciplinaryHistory> {
-    return this.http.get<StudentDisciplinaryHistory>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentDisciplinaryHistory>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentDisciplinaryHistory[]> {
-    return this.http.get<StudentDisciplinaryHistory[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentDisciplinaryHistory[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentDisciplinaryHistory): Observable<StudentDisciplinaryHistory> {
-    return this.http.post<StudentDisciplinaryHistory>(this.baseUrl, dto);
+    return this.http.post<StudentDisciplinaryHistory>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentDisciplinaryHistory): Observable<StudentDisciplinaryHistory> {
-    return this.http.put<StudentDisciplinaryHistory>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentDisciplinaryHistory>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

@@ -7,29 +7,30 @@ import type { AssetFeasibilityComparison, CreateAssetFeasibilityComparisonReques
 @Injectable({ providedIn: 'root' })
 export class AssetFeasibilityComparisonService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetFeasibilityComparisons`;
+  private readonly apiUrl = `${environment.apiUrl}/assetFeasibilityComparisons`;
 
   getAll(): Observable<AssetFeasibilityComparison[]> {
-    return this.http.get<AssetFeasibilityComparison[]>(this.baseUrl);
+    return this.http.get<AssetFeasibilityComparison[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetFeasibilityComparison> {
-    return this.http.get<AssetFeasibilityComparison>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetFeasibilityComparison>(`${this.apiUrl}/${id}`);
   }
 
   getByAssetId(assetId: number): Observable<AssetFeasibilityComparison[]> {
-    return this.http.get<AssetFeasibilityComparison[]>(`${this.baseUrl}?assetId=${assetId}`);
+    return this.http.get<AssetFeasibilityComparison[]>(`${this.apiUrl}?assetId=${assetId}`);
   }
 
   create(dto: CreateAssetFeasibilityComparisonRequest): Observable<AssetFeasibilityComparison> {
-    return this.http.post<AssetFeasibilityComparison>(this.baseUrl, dto);
+    return this.http.post<AssetFeasibilityComparison>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetFeasibilityComparisonRequest): Observable<AssetFeasibilityComparison> {
-    return this.http.put<AssetFeasibilityComparison>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetFeasibilityComparison>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

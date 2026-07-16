@@ -7,29 +7,30 @@ import type { StudentMedicalAllergyLog, CreateStudentMedicalAllergyLog, UpdateSt
 @Injectable({ providedIn: 'root' })
 export class MedicalAllergyService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentMedicalAllergyLogs`;
+  private readonly apiUrl = `${environment.apiUrl}/studentMedicalAllergyLogs`;
 
   getAll(): Observable<StudentMedicalAllergyLog[]> {
-    return this.http.get<StudentMedicalAllergyLog[]>(this.baseUrl);
+    return this.http.get<StudentMedicalAllergyLog[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentMedicalAllergyLog> {
-    return this.http.get<StudentMedicalAllergyLog>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentMedicalAllergyLog>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentMedicalAllergyLog[]> {
-    return this.http.get<StudentMedicalAllergyLog[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentMedicalAllergyLog[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentMedicalAllergyLog): Observable<StudentMedicalAllergyLog> {
-    return this.http.post<StudentMedicalAllergyLog>(this.baseUrl, dto);
+    return this.http.post<StudentMedicalAllergyLog>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentMedicalAllergyLog): Observable<StudentMedicalAllergyLog> {
-    return this.http.put<StudentMedicalAllergyLog>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentMedicalAllergyLog>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

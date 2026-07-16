@@ -7,29 +7,30 @@ import type { StudentAttachment, CreateStudentAttachment, UpdateStudentAttachmen
 @Injectable({ providedIn: 'root' })
 export class AttachmentService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentAttachments`;
+  private readonly apiUrl = `${environment.apiUrl}/studentAttachments`;
 
   getAll(): Observable<StudentAttachment[]> {
-    return this.http.get<StudentAttachment[]>(this.baseUrl);
+    return this.http.get<StudentAttachment[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentAttachment> {
-    return this.http.get<StudentAttachment>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentAttachment>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentAttachment[]> {
-    return this.http.get<StudentAttachment[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentAttachment[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentAttachment): Observable<StudentAttachment> {
-    return this.http.post<StudentAttachment>(this.baseUrl, dto);
+    return this.http.post<StudentAttachment>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentAttachment): Observable<StudentAttachment> {
-    return this.http.put<StudentAttachment>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentAttachment>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

@@ -7,29 +7,30 @@ import type { StudentIdentityDocument, CreateStudentIdentityDocument, UpdateStud
 @Injectable({ providedIn: 'root' })
 export class IdentityDocumentService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentIdentityDocuments`;
+  private readonly apiUrl = `${environment.apiUrl}/studentIdentityDocuments`;
 
   getAll(): Observable<StudentIdentityDocument[]> {
-    return this.http.get<StudentIdentityDocument[]>(this.baseUrl);
+    return this.http.get<StudentIdentityDocument[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentIdentityDocument> {
-    return this.http.get<StudentIdentityDocument>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentIdentityDocument>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentIdentityDocument[]> {
-    return this.http.get<StudentIdentityDocument[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentIdentityDocument[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentIdentityDocument): Observable<StudentIdentityDocument> {
-    return this.http.post<StudentIdentityDocument>(this.baseUrl, dto);
+    return this.http.post<StudentIdentityDocument>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentIdentityDocument): Observable<StudentIdentityDocument> {
-    return this.http.put<StudentIdentityDocument>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentIdentityDocument>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

@@ -7,29 +7,30 @@ import type { DetailedAcademicWarningLog, CreateDetailedAcademicWarningLog, Upda
 @Injectable({ providedIn: 'root' })
 export class AcademicWarningService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/detailedAcademicWarningLogs`;
+  private readonly apiUrl = `${environment.apiUrl}/detailedAcademicWarningLogs`;
 
   getAll(): Observable<DetailedAcademicWarningLog[]> {
-    return this.http.get<DetailedAcademicWarningLog[]>(this.baseUrl);
+    return this.http.get<DetailedAcademicWarningLog[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<DetailedAcademicWarningLog> {
-    return this.http.get<DetailedAcademicWarningLog>(`${this.baseUrl}/${id}`);
+    return this.http.get<DetailedAcademicWarningLog>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<DetailedAcademicWarningLog[]> {
-    return this.http.get<DetailedAcademicWarningLog[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<DetailedAcademicWarningLog[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateDetailedAcademicWarningLog): Observable<DetailedAcademicWarningLog> {
-    return this.http.post<DetailedAcademicWarningLog>(this.baseUrl, dto);
+    return this.http.post<DetailedAcademicWarningLog>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateDetailedAcademicWarningLog): Observable<DetailedAcademicWarningLog> {
-    return this.http.put<DetailedAcademicWarningLog>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<DetailedAcademicWarningLog>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

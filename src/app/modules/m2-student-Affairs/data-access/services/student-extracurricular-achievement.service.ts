@@ -29,3 +29,4 @@ export class StudentExtracurricularAchievementService {
     return this.http.delete<void>(`${this.apiUrl}/student-extracurricular-achievements/${id}`);
   }
 }
+

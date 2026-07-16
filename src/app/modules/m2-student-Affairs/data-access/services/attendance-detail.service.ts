@@ -7,7 +7,6 @@ import type { AttendanceDetail, CreateAttendanceDetail, UpdateAttendanceDetail }
 @Injectable({ providedIn: 'root' })
 export class AttendanceDetailService {
   private readonly http = inject(HttpClient);
-<<<<<<< HEAD
   private readonly apiUrl = environment.apiUrl;
 
   getAll(): Observable<AttendanceDetail[]> {
@@ -28,31 +27,6 @@ export class AttendanceDetailService {
 
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/attendance-details/${id}`);
-=======
-  private readonly baseUrl = `${environment.baseUrl}/attendanceDetails`;
-
-  getAll(): Observable<AttendanceDetail[]> {
-    return this.http.get<AttendanceDetail[]>(this.baseUrl);
-  }
-
-  getById(id: number): Observable<AttendanceDetail> {
-    return this.http.get<AttendanceDetail>(`${this.baseUrl}/${id}`);
-  }
-
-  getByStudentId(studentId: number): Observable<AttendanceDetail[]> {
-    return this.http.get<AttendanceDetail[]>(`${this.baseUrl}?studentId=${studentId}`);
-  }
-
-  create(dto: CreateAttendanceDetail): Observable<AttendanceDetail> {
-    return this.http.post<AttendanceDetail>(this.baseUrl, dto);
-  }
-
-  update(id: number, dto: UpdateAttendanceDetail): Observable<AttendanceDetail> {
-    return this.http.put<AttendanceDetail>(`${this.baseUrl}/${id}`, dto);
-  }
-
-  delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
->>>>>>> a5e4b7bd636905d9ae8eac2a07d1379213c3aaa7
   }
 }
+

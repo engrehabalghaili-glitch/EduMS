@@ -7,29 +7,30 @@ import type { AssetBudgetAllocation, CreateAssetBudgetAllocationRequest, UpdateA
 @Injectable({ providedIn: 'root' })
 export class AssetBudgetAllocationService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetBudgetAllocations`;
+  private readonly apiUrl = `${environment.apiUrl}/assetBudgetAllocations`;
 
   getAll(): Observable<AssetBudgetAllocation[]> {
-    return this.http.get<AssetBudgetAllocation[]>(this.baseUrl);
+    return this.http.get<AssetBudgetAllocation[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetBudgetAllocation> {
-    return this.http.get<AssetBudgetAllocation>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetBudgetAllocation>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<AssetBudgetAllocation[]> {
-    return this.http.get<AssetBudgetAllocation[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<AssetBudgetAllocation[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateAssetBudgetAllocationRequest): Observable<AssetBudgetAllocation> {
-    return this.http.post<AssetBudgetAllocation>(this.baseUrl, dto);
+    return this.http.post<AssetBudgetAllocation>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetBudgetAllocationRequest): Observable<AssetBudgetAllocation> {
-    return this.http.put<AssetBudgetAllocation>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetBudgetAllocation>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

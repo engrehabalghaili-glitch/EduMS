@@ -7,33 +7,35 @@ import type { TrainingCourseOffering, CreateTrainingCourseOfferingDto, UpdateTra
 @Injectable({ providedIn: 'root' })
 export class TrainingCourseOfferingService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/trainingCourseOfferings`;
+  private readonly apiUrl = `${environment.apiUrl}/trainingCourseOfferings`;
 
   getAll(): Observable<TrainingCourseOffering[]> {
-    return this.http.get<TrainingCourseOffering[]>(this.baseUrl);
+    return this.http.get<TrainingCourseOffering[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<TrainingCourseOffering> {
-    return this.http.get<TrainingCourseOffering>(`${this.baseUrl}/${id}`);
+    return this.http.get<TrainingCourseOffering>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<TrainingCourseOffering[]> {
-    return this.http.get<TrainingCourseOffering[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<TrainingCourseOffering[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   getByDirectorateId(directorateId: number): Observable<TrainingCourseOffering[]> {
-    return this.http.get<TrainingCourseOffering[]>(`${this.baseUrl}?directorateId=${directorateId}`);
+    return this.http.get<TrainingCourseOffering[]>(`${this.apiUrl}?directorateId=${directorateId}`);
   }
 
   create(dto: CreateTrainingCourseOfferingDto): Observable<TrainingCourseOffering> {
-    return this.http.post<TrainingCourseOffering>(this.baseUrl, dto);
+    return this.http.post<TrainingCourseOffering>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateTrainingCourseOfferingDto): Observable<TrainingCourseOffering> {
-    return this.http.put<TrainingCourseOffering>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<TrainingCourseOffering>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

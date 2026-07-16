@@ -7,29 +7,30 @@ import type { StudentTransportationSubscription, CreateStudentTransportationSubs
 @Injectable({ providedIn: 'root' })
 export class TransportationSubscriptionService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentTransportationSubscriptions`;
+  private readonly apiUrl = `${environment.apiUrl}/studentTransportationSubscriptions`;
 
   getAll(): Observable<StudentTransportationSubscription[]> {
-    return this.http.get<StudentTransportationSubscription[]>(this.baseUrl);
+    return this.http.get<StudentTransportationSubscription[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentTransportationSubscription> {
-    return this.http.get<StudentTransportationSubscription>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentTransportationSubscription>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentTransportationSubscription[]> {
-    return this.http.get<StudentTransportationSubscription[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentTransportationSubscription[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentTransportationSubscription): Observable<StudentTransportationSubscription> {
-    return this.http.post<StudentTransportationSubscription>(this.baseUrl, dto);
+    return this.http.post<StudentTransportationSubscription>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentTransportationSubscription): Observable<StudentTransportationSubscription> {
-    return this.http.put<StudentTransportationSubscription>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentTransportationSubscription>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

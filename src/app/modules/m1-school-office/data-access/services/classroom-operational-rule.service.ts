@@ -7,29 +7,31 @@ import type { ClassroomOperationalRule, CreateClassroomOperationalRuleDto, Updat
 @Injectable({ providedIn: 'root' })
 export class ClassroomOperationalRuleService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/classroomOperationalRules`;
+  private readonly apiUrl = `${environment.apiUrl}/classroomOperationalRules`;
 
   getAll(): Observable<ClassroomOperationalRule[]> {
-    return this.http.get<ClassroomOperationalRule[]>(this.baseUrl);
+    return this.http.get<ClassroomOperationalRule[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<ClassroomOperationalRule> {
-    return this.http.get<ClassroomOperationalRule>(`${this.baseUrl}/${id}`);
+    return this.http.get<ClassroomOperationalRule>(`${this.apiUrl}/${id}`);
   }
 
   getByClassroomId(classroomId: number): Observable<ClassroomOperationalRule[]> {
-    return this.http.get<ClassroomOperationalRule[]>(`${this.baseUrl}?classroomId=${classroomId}`);
+    return this.http.get<ClassroomOperationalRule[]>(`${this.apiUrl}?classroomId=${classroomId}`);
   }
 
   create(dto: CreateClassroomOperationalRuleDto): Observable<ClassroomOperationalRule> {
-    return this.http.post<ClassroomOperationalRule>(this.baseUrl, dto);
+    return this.http.post<ClassroomOperationalRule>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateClassroomOperationalRuleDto): Observable<ClassroomOperationalRule> {
-    return this.http.put<ClassroomOperationalRule>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<ClassroomOperationalRule>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

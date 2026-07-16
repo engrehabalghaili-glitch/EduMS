@@ -7,29 +7,30 @@ import type { AssetRevaluationImpairment, CreateAssetRevaluationImpairmentReques
 @Injectable({ providedIn: 'root' })
 export class AssetRevaluationImpairmentService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetRevaluationImpairments`;
+  private readonly apiUrl = `${environment.apiUrl}/assetRevaluationImpairments`;
 
   getAll(): Observable<AssetRevaluationImpairment[]> {
-    return this.http.get<AssetRevaluationImpairment[]>(this.baseUrl);
+    return this.http.get<AssetRevaluationImpairment[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetRevaluationImpairment> {
-    return this.http.get<AssetRevaluationImpairment>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetRevaluationImpairment>(`${this.apiUrl}/${id}`);
   }
 
   getByAssetId(assetId: number): Observable<AssetRevaluationImpairment[]> {
-    return this.http.get<AssetRevaluationImpairment[]>(`${this.baseUrl}?assetId=${assetId}`);
+    return this.http.get<AssetRevaluationImpairment[]>(`${this.apiUrl}?assetId=${assetId}`);
   }
 
   create(dto: CreateAssetRevaluationImpairmentRequest): Observable<AssetRevaluationImpairment> {
-    return this.http.post<AssetRevaluationImpairment>(this.baseUrl, dto);
+    return this.http.post<AssetRevaluationImpairment>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetRevaluationImpairmentRequest): Observable<AssetRevaluationImpairment> {
-    return this.http.put<AssetRevaluationImpairment>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetRevaluationImpairment>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

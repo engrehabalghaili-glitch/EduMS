@@ -7,29 +7,30 @@ import type { StudentTransferLog, CreateStudentTransferLog, UpdateStudentTransfe
 @Injectable({ providedIn: 'root' })
 export class TransferLogService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentTransferLogs`;
+  private readonly apiUrl = `${environment.apiUrl}/studentTransferLogs`;
 
   getAll(): Observable<StudentTransferLog[]> {
-    return this.http.get<StudentTransferLog[]>(this.baseUrl);
+    return this.http.get<StudentTransferLog[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentTransferLog> {
-    return this.http.get<StudentTransferLog>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentTransferLog>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentTransferLog[]> {
-    return this.http.get<StudentTransferLog[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentTransferLog[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentTransferLog): Observable<StudentTransferLog> {
-    return this.http.post<StudentTransferLog>(this.baseUrl, dto);
+    return this.http.post<StudentTransferLog>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentTransferLog): Observable<StudentTransferLog> {
-    return this.http.put<StudentTransferLog>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentTransferLog>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

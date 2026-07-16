@@ -7,29 +7,30 @@ import type { StudentParentConferenceReservation, CreateStudentParentConferenceR
 @Injectable({ providedIn: 'root' })
 export class ParentConferenceService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentParentConferenceReservations`;
+  private readonly apiUrl = `${environment.apiUrl}/studentParentConferenceReservations`;
 
   getAll(): Observable<StudentParentConferenceReservation[]> {
-    return this.http.get<StudentParentConferenceReservation[]>(this.baseUrl);
+    return this.http.get<StudentParentConferenceReservation[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentParentConferenceReservation> {
-    return this.http.get<StudentParentConferenceReservation>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentParentConferenceReservation>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentParentConferenceReservation[]> {
-    return this.http.get<StudentParentConferenceReservation[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentParentConferenceReservation[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentParentConferenceReservation): Observable<StudentParentConferenceReservation> {
-    return this.http.post<StudentParentConferenceReservation>(this.baseUrl, dto);
+    return this.http.post<StudentParentConferenceReservation>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentParentConferenceReservation): Observable<StudentParentConferenceReservation> {
-    return this.http.put<StudentParentConferenceReservation>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentParentConferenceReservation>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

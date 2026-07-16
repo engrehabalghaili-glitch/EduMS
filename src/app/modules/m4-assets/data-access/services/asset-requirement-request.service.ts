@@ -7,29 +7,30 @@ import type { AssetRequirementRequest, CreateAssetRequirementRequest, UpdateAsse
 @Injectable({ providedIn: 'root' })
 export class AssetRequirementRequestService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetRequirementRequests`;
+  private readonly apiUrl = `${environment.apiUrl}/assetRequirementRequests`;
 
   getAll(): Observable<AssetRequirementRequest[]> {
-    return this.http.get<AssetRequirementRequest[]>(this.baseUrl);
+    return this.http.get<AssetRequirementRequest[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetRequirementRequest> {
-    return this.http.get<AssetRequirementRequest>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetRequirementRequest>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<AssetRequirementRequest[]> {
-    return this.http.get<AssetRequirementRequest[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<AssetRequirementRequest[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateAssetRequirementRequest): Observable<AssetRequirementRequest> {
-    return this.http.post<AssetRequirementRequest>(this.baseUrl, dto);
+    return this.http.post<AssetRequirementRequest>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetRequirementRequest): Observable<AssetRequirementRequest> {
-    return this.http.put<AssetRequirementRequest>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetRequirementRequest>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

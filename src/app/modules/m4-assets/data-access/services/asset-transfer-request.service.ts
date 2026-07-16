@@ -7,29 +7,30 @@ import type { AssetTransferRequest, CreateAssetTransferRequest, UpdateAssetTrans
 @Injectable({ providedIn: 'root' })
 export class AssetTransferRequestService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetTransferRequests`;
+  private readonly apiUrl = `${environment.apiUrl}/assetTransferRequests`;
 
   getAll(): Observable<AssetTransferRequest[]> {
-    return this.http.get<AssetTransferRequest[]>(this.baseUrl);
+    return this.http.get<AssetTransferRequest[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetTransferRequest> {
-    return this.http.get<AssetTransferRequest>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetTransferRequest>(`${this.apiUrl}/${id}`);
   }
 
   getByAssetId(assetId: number): Observable<AssetTransferRequest[]> {
-    return this.http.get<AssetTransferRequest[]>(`${this.baseUrl}?assetId=${assetId}`);
+    return this.http.get<AssetTransferRequest[]>(`${this.apiUrl}?assetId=${assetId}`);
   }
 
   create(dto: CreateAssetTransferRequest): Observable<AssetTransferRequest> {
-    return this.http.post<AssetTransferRequest>(this.baseUrl, dto);
+    return this.http.post<AssetTransferRequest>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetTransferRequest): Observable<AssetTransferRequest> {
-    return this.http.put<AssetTransferRequest>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetTransferRequest>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

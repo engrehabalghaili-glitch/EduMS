@@ -7,33 +7,35 @@ import type { SchoolLibraryItem, CreateSchoolLibraryItemDto, UpdateSchoolLibrary
 @Injectable({ providedIn: 'root' })
 export class SchoolLibraryItemService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/schoolLibraryItems`;
+  private readonly apiUrl = `${environment.apiUrl}/schoolLibraryItems`;
 
   getAll(): Observable<SchoolLibraryItem[]> {
-    return this.http.get<SchoolLibraryItem[]>(this.baseUrl);
+    return this.http.get<SchoolLibraryItem[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<SchoolLibraryItem> {
-    return this.http.get<SchoolLibraryItem>(`${this.baseUrl}/${id}`);
+    return this.http.get<SchoolLibraryItem>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<SchoolLibraryItem[]> {
-    return this.http.get<SchoolLibraryItem[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<SchoolLibraryItem[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   getAvailable(): Observable<SchoolLibraryItem[]> {
-    return this.http.get<SchoolLibraryItem[]>(`${this.baseUrl}?availableCopiesCount=0`);
+    return this.http.get<SchoolLibraryItem[]>(`${this.apiUrl}?availableCopiesCount=0`);
   }
 
   create(dto: CreateSchoolLibraryItemDto): Observable<SchoolLibraryItem> {
-    return this.http.post<SchoolLibraryItem>(this.baseUrl, dto);
+    return this.http.post<SchoolLibraryItem>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateSchoolLibraryItemDto): Observable<SchoolLibraryItem> {
-    return this.http.put<SchoolLibraryItem>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<SchoolLibraryItem>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

@@ -7,29 +7,30 @@ import type { FieldInventoryLog, CreateFieldInventoryLogRequest, UpdateFieldInve
 @Injectable({ providedIn: 'root' })
 export class FieldInventoryLogService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/fieldInventoryLogs`;
+  private readonly apiUrl = `${environment.apiUrl}/fieldInventoryLogs`;
 
   getAll(): Observable<FieldInventoryLog[]> {
-    return this.http.get<FieldInventoryLog[]>(this.baseUrl);
+    return this.http.get<FieldInventoryLog[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<FieldInventoryLog> {
-    return this.http.get<FieldInventoryLog>(`${this.baseUrl}/${id}`);
+    return this.http.get<FieldInventoryLog>(`${this.apiUrl}/${id}`);
   }
 
   getByInventoryPlanId(inventoryPlanId: number): Observable<FieldInventoryLog[]> {
-    return this.http.get<FieldInventoryLog[]>(`${this.baseUrl}?inventoryPlanId=${inventoryPlanId}`);
+    return this.http.get<FieldInventoryLog[]>(`${this.apiUrl}?inventoryPlanId=${inventoryPlanId}`);
   }
 
   create(dto: CreateFieldInventoryLogRequest): Observable<FieldInventoryLog> {
-    return this.http.post<FieldInventoryLog>(this.baseUrl, dto);
+    return this.http.post<FieldInventoryLog>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateFieldInventoryLogRequest): Observable<FieldInventoryLog> {
-    return this.http.put<FieldInventoryLog>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<FieldInventoryLog>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

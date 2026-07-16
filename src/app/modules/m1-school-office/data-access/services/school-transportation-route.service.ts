@@ -7,29 +7,31 @@ import type { SchoolTransportationRoute, CreateSchoolTransportationRouteDto, Upd
 @Injectable({ providedIn: 'root' })
 export class SchoolTransportationRouteService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/schoolTransportationRoutes`;
+  private readonly apiUrl = `${environment.apiUrl}/schoolTransportationRoutes`;
 
   getAll(): Observable<SchoolTransportationRoute[]> {
-    return this.http.get<SchoolTransportationRoute[]>(this.baseUrl);
+    return this.http.get<SchoolTransportationRoute[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<SchoolTransportationRoute> {
-    return this.http.get<SchoolTransportationRoute>(`${this.baseUrl}/${id}`);
+    return this.http.get<SchoolTransportationRoute>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<SchoolTransportationRoute[]> {
-    return this.http.get<SchoolTransportationRoute[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<SchoolTransportationRoute[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateSchoolTransportationRouteDto): Observable<SchoolTransportationRoute> {
-    return this.http.post<SchoolTransportationRoute>(this.baseUrl, dto);
+    return this.http.post<SchoolTransportationRoute>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateSchoolTransportationRouteDto): Observable<SchoolTransportationRoute> {
-    return this.http.put<SchoolTransportationRoute>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<SchoolTransportationRoute>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

@@ -7,37 +7,39 @@ import type { SchoolOperationalBudgetLog, CreateSchoolOperationalBudgetLogDto, U
 @Injectable({ providedIn: 'root' })
 export class SchoolOperationalBudgetLogService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/schoolOperationalBudgetLogs`;
+  private readonly apiUrl = `${environment.apiUrl}/schoolOperationalBudgetLogs`;
 
   getAll(): Observable<SchoolOperationalBudgetLog[]> {
-    return this.http.get<SchoolOperationalBudgetLog[]>(this.baseUrl);
+    return this.http.get<SchoolOperationalBudgetLog[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<SchoolOperationalBudgetLog> {
-    return this.http.get<SchoolOperationalBudgetLog>(`${this.baseUrl}/${id}`);
+    return this.http.get<SchoolOperationalBudgetLog>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<SchoolOperationalBudgetLog[]> {
-    return this.http.get<SchoolOperationalBudgetLog[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<SchoolOperationalBudgetLog[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   getByDirectorateId(directorateId: number): Observable<SchoolOperationalBudgetLog[]> {
-    return this.http.get<SchoolOperationalBudgetLog[]>(`${this.baseUrl}?directorateId=${directorateId}`);
+    return this.http.get<SchoolOperationalBudgetLog[]>(`${this.apiUrl}?directorateId=${directorateId}`);
   }
 
   getByFiscalYear(fiscalYear: string): Observable<SchoolOperationalBudgetLog[]> {
-    return this.http.get<SchoolOperationalBudgetLog[]>(`${this.baseUrl}?fiscalYear=${fiscalYear}`);
+    return this.http.get<SchoolOperationalBudgetLog[]>(`${this.apiUrl}?fiscalYear=${fiscalYear}`);
   }
 
   create(dto: CreateSchoolOperationalBudgetLogDto): Observable<SchoolOperationalBudgetLog> {
-    return this.http.post<SchoolOperationalBudgetLog>(this.baseUrl, dto);
+    return this.http.post<SchoolOperationalBudgetLog>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateSchoolOperationalBudgetLogDto): Observable<SchoolOperationalBudgetLog> {
-    return this.http.put<SchoolOperationalBudgetLog>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<SchoolOperationalBudgetLog>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

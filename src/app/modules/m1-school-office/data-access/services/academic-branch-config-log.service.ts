@@ -7,33 +7,35 @@ import type { AcademicBranchConfigLog, CreateAcademicBranchConfigLogDto, UpdateA
 @Injectable({ providedIn: 'root' })
 export class AcademicBranchConfigLogService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/academicBranchConfigLogs`;
+  private readonly apiUrl = `${environment.apiUrl}/academicBranchConfigLogs`;
 
   getAll(): Observable<AcademicBranchConfigLog[]> {
-    return this.http.get<AcademicBranchConfigLog[]>(this.baseUrl);
+    return this.http.get<AcademicBranchConfigLog[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AcademicBranchConfigLog> {
-    return this.http.get<AcademicBranchConfigLog>(`${this.baseUrl}/${id}`);
+    return this.http.get<AcademicBranchConfigLog>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<AcademicBranchConfigLog[]> {
-    return this.http.get<AcademicBranchConfigLog[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<AcademicBranchConfigLog[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   getByCategory(category: string): Observable<AcademicBranchConfigLog[]> {
-    return this.http.get<AcademicBranchConfigLog[]>(`${this.baseUrl}?configCategory=${category}`);
+    return this.http.get<AcademicBranchConfigLog[]>(`${this.apiUrl}?configCategory=${category}`);
   }
 
   create(dto: CreateAcademicBranchConfigLogDto): Observable<AcademicBranchConfigLog> {
-    return this.http.post<AcademicBranchConfigLog>(this.baseUrl, dto);
+    return this.http.post<AcademicBranchConfigLog>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAcademicBranchConfigLogDto): Observable<AcademicBranchConfigLog> {
-    return this.http.put<AcademicBranchConfigLog>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AcademicBranchConfigLog>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

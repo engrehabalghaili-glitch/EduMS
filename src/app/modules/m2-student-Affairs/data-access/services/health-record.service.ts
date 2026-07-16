@@ -7,29 +7,30 @@ import type { StudentHealthRecord, CreateStudentHealthRecord, UpdateStudentHealt
 @Injectable({ providedIn: 'root' })
 export class HealthRecordService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentHealthRecords`;
+  private readonly apiUrl = `${environment.apiUrl}/studentHealthRecords`;
 
   getAll(): Observable<StudentHealthRecord[]> {
-    return this.http.get<StudentHealthRecord[]>(this.baseUrl);
+    return this.http.get<StudentHealthRecord[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentHealthRecord> {
-    return this.http.get<StudentHealthRecord>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentHealthRecord>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentHealthRecord[]> {
-    return this.http.get<StudentHealthRecord[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentHealthRecord[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentHealthRecord): Observable<StudentHealthRecord> {
-    return this.http.post<StudentHealthRecord>(this.baseUrl, dto);
+    return this.http.post<StudentHealthRecord>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentHealthRecord): Observable<StudentHealthRecord> {
-    return this.http.put<StudentHealthRecord>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentHealthRecord>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

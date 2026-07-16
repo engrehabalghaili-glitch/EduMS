@@ -7,33 +7,35 @@ import type { AcademicLockPeriod, CreateAcademicLockPeriodDto, UpdateAcademicLoc
 @Injectable({ providedIn: 'root' })
 export class AcademicLockPeriodService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/academicLockPeriods`;
+  private readonly apiUrl = `${environment.apiUrl}/academicLockPeriods`;
 
   getAll(): Observable<AcademicLockPeriod[]> {
-    return this.http.get<AcademicLockPeriod[]>(this.baseUrl);
+    return this.http.get<AcademicLockPeriod[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AcademicLockPeriod> {
-    return this.http.get<AcademicLockPeriod>(`${this.baseUrl}/${id}`);
+    return this.http.get<AcademicLockPeriod>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<AcademicLockPeriod[]> {
-    return this.http.get<AcademicLockPeriod[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<AcademicLockPeriod[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   getActive(): Observable<AcademicLockPeriod[]> {
-    return this.http.get<AcademicLockPeriod[]>(`${this.baseUrl}?isActive=true`);
+    return this.http.get<AcademicLockPeriod[]>(`${this.apiUrl}?isActive=true`);
   }
 
   create(dto: CreateAcademicLockPeriodDto): Observable<AcademicLockPeriod> {
-    return this.http.post<AcademicLockPeriod>(this.baseUrl, dto);
+    return this.http.post<AcademicLockPeriod>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAcademicLockPeriodDto): Observable<AcademicLockPeriod> {
-    return this.http.put<AcademicLockPeriod>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AcademicLockPeriod>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

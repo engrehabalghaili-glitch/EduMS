@@ -7,29 +7,30 @@ import type { AssetLocationRecord, CreateAssetLocationRecordRequest, UpdateAsset
 @Injectable({ providedIn: 'root' })
 export class AssetLocationRecordService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetLocationRecords`;
+  private readonly apiUrl = `${environment.apiUrl}/assetLocationRecords`;
 
   getAll(): Observable<AssetLocationRecord[]> {
-    return this.http.get<AssetLocationRecord[]>(this.baseUrl);
+    return this.http.get<AssetLocationRecord[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetLocationRecord> {
-    return this.http.get<AssetLocationRecord>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetLocationRecord>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<AssetLocationRecord[]> {
-    return this.http.get<AssetLocationRecord[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<AssetLocationRecord[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateAssetLocationRecordRequest): Observable<AssetLocationRecord> {
-    return this.http.post<AssetLocationRecord>(this.baseUrl, dto);
+    return this.http.post<AssetLocationRecord>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetLocationRecordRequest): Observable<AssetLocationRecord> {
-    return this.http.put<AssetLocationRecord>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetLocationRecord>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

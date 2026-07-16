@@ -7,33 +7,35 @@ import type { Subject, CreateSubjectDto, UpdateSubjectDto } from '../models/subj
 @Injectable({ providedIn: 'root' })
 export class SubjectService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/subjects`;
+  private readonly apiUrl = `${environment.apiUrl}/subjects`;
 
   getAll(): Observable<Subject[]> {
-    return this.http.get<Subject[]>(this.baseUrl);
+    return this.http.get<Subject[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<Subject> {
-    return this.http.get<Subject>(`${this.baseUrl}/${id}`);
+    return this.http.get<Subject>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<Subject[]> {
-    return this.http.get<Subject[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<Subject[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   getCore(): Observable<Subject[]> {
-    return this.http.get<Subject[]>(`${this.baseUrl}?isCoreSubject=true`);
+    return this.http.get<Subject[]>(`${this.apiUrl}?isCoreSubject=true`);
   }
 
   create(dto: CreateSubjectDto): Observable<Subject> {
-    return this.http.post<Subject>(this.baseUrl, dto);
+    return this.http.post<Subject>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateSubjectDto): Observable<Subject> {
-    return this.http.put<Subject>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<Subject>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

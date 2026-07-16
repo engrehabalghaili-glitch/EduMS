@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../environments';
-import type { EmployeeFinancialTransaction, CreateEmployeeFinancialTransaction, UpdateEmployeeFinancialTransaction } from '../../m3-employee/data-access/models/employee-financial-transaction.types';
+import { environment } from '../../../../../environments';
+import type { EmployeeFinancialTransaction, CreateEmployeeFinancialTransaction, UpdateEmployeeFinancialTransaction } from '../models/employee-financial-transaction.types';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeeFinancialTransactionService {

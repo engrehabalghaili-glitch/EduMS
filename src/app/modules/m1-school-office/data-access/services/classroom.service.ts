@@ -7,29 +7,31 @@ import type { Classroom, CreateClassroomDto, UpdateClassroomDto } from '../model
 @Injectable({ providedIn: 'root' })
 export class ClassroomService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/classrooms`;
+  private readonly apiUrl = `${environment.apiUrl}/classrooms`;
 
   getAll(): Observable<Classroom[]> {
-    return this.http.get<Classroom[]>(this.baseUrl);
+    return this.http.get<Classroom[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<Classroom> {
-    return this.http.get<Classroom>(`${this.baseUrl}/${id}`);
+    return this.http.get<Classroom>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<Classroom[]> {
-    return this.http.get<Classroom[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<Classroom[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateClassroomDto): Observable<Classroom> {
-    return this.http.post<Classroom>(this.baseUrl, dto);
+    return this.http.post<Classroom>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateClassroomDto): Observable<Classroom> {
-    return this.http.put<Classroom>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<Classroom>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

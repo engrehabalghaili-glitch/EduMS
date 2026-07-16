@@ -29,3 +29,4 @@ export class StudentHealthRecordService {
     return this.http.delete<void>(`${this.apiUrl}/student-health-records/${id}`);
   }
 }
+

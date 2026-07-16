@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../environments';
-import type { EmployeeAdditionalTask, CreateEmployeeAdditionalTask, UpdateEmployeeAdditionalTask } from '../../m3-employee/data-access/models/employee-additional-task.types';
+import { environment } from '../../../../../environments';
+import type { EmployeeAdditionalTask, CreateEmployeeAdditionalTask, UpdateEmployeeAdditionalTask } from '../models/employee-additional-task.types';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeeAdditionalTaskService {

@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../environments';
-import type { EmployeePerformanceReview, CreateEmployeePerformanceReview, UpdateEmployeePerformanceReview } from '../../m3-employee/data-access/models/employee-performance-review.types';
+import { environment } from '../../../../../environments';
+import type { EmployeePerformanceReview, CreateEmployeePerformanceReview, UpdateEmployeePerformanceReview } from '../models/employee-performance-review.types';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeePerformanceReviewService {

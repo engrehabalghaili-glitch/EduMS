@@ -7,29 +7,30 @@ import type { StudentSkillAndTalentRecord, CreateStudentSkillAndTalentRecord, Up
 @Injectable({ providedIn: 'root' })
 export class SkillTalentService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentSkillAndTalentRecords`;
+  private readonly apiUrl = `${environment.apiUrl}/studentSkillAndTalentRecords`;
 
   getAll(): Observable<StudentSkillAndTalentRecord[]> {
-    return this.http.get<StudentSkillAndTalentRecord[]>(this.baseUrl);
+    return this.http.get<StudentSkillAndTalentRecord[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentSkillAndTalentRecord> {
-    return this.http.get<StudentSkillAndTalentRecord>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentSkillAndTalentRecord>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentSkillAndTalentRecord[]> {
-    return this.http.get<StudentSkillAndTalentRecord[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentSkillAndTalentRecord[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentSkillAndTalentRecord): Observable<StudentSkillAndTalentRecord> {
-    return this.http.post<StudentSkillAndTalentRecord>(this.baseUrl, dto);
+    return this.http.post<StudentSkillAndTalentRecord>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentSkillAndTalentRecord): Observable<StudentSkillAndTalentRecord> {
-    return this.http.put<StudentSkillAndTalentRecord>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentSkillAndTalentRecord>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

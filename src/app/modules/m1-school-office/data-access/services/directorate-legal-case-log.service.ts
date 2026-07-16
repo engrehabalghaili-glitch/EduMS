@@ -7,29 +7,31 @@ import type { DirectorateLegalCaseLog, CreateDirectorateLegalCaseLogDto, UpdateD
 @Injectable({ providedIn: 'root' })
 export class DirectorateLegalCaseLogService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/directorateLegalCaseLogs`;
+  private readonly apiUrl = `${environment.apiUrl}/directorateLegalCaseLogs`;
 
   getAll(): Observable<DirectorateLegalCaseLog[]> {
-    return this.http.get<DirectorateLegalCaseLog[]>(this.baseUrl);
+    return this.http.get<DirectorateLegalCaseLog[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<DirectorateLegalCaseLog> {
-    return this.http.get<DirectorateLegalCaseLog>(`${this.baseUrl}/${id}`);
+    return this.http.get<DirectorateLegalCaseLog>(`${this.apiUrl}/${id}`);
   }
 
   getByDirectorateId(directorateId: number): Observable<DirectorateLegalCaseLog[]> {
-    return this.http.get<DirectorateLegalCaseLog[]>(`${this.baseUrl}?directorateId=${directorateId}`);
+    return this.http.get<DirectorateLegalCaseLog[]>(`${this.apiUrl}?directorateId=${directorateId}`);
   }
 
   create(dto: CreateDirectorateLegalCaseLogDto): Observable<DirectorateLegalCaseLog> {
-    return this.http.post<DirectorateLegalCaseLog>(this.baseUrl, dto);
+    return this.http.post<DirectorateLegalCaseLog>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateDirectorateLegalCaseLogDto): Observable<DirectorateLegalCaseLog> {
-    return this.http.put<DirectorateLegalCaseLog>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<DirectorateLegalCaseLog>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

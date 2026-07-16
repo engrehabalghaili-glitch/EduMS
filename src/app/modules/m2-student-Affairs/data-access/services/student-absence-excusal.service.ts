@@ -29,3 +29,4 @@ export class StudentAbsenceExcusalService {
     return this.http.delete<void>(`${this.apiUrl}/student-absence-excusals/${id}`);
   }
 }
+

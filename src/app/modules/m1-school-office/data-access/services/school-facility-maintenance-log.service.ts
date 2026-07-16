@@ -7,33 +7,35 @@ import type { SchoolFacilityMaintenanceLog, CreateSchoolFacilityMaintenanceLogDt
 @Injectable({ providedIn: 'root' })
 export class SchoolFacilityMaintenanceLogService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/schoolFacilityMaintenanceLogs`;
+  private readonly apiUrl = `${environment.apiUrl}/schoolFacilityMaintenanceLogs`;
 
   getAll(): Observable<SchoolFacilityMaintenanceLog[]> {
-    return this.http.get<SchoolFacilityMaintenanceLog[]>(this.baseUrl);
+    return this.http.get<SchoolFacilityMaintenanceLog[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<SchoolFacilityMaintenanceLog> {
-    return this.http.get<SchoolFacilityMaintenanceLog>(`${this.baseUrl}/${id}`);
+    return this.http.get<SchoolFacilityMaintenanceLog>(`${this.apiUrl}/${id}`);
   }
 
   getByFacilityId(facilityId: number): Observable<SchoolFacilityMaintenanceLog[]> {
-    return this.http.get<SchoolFacilityMaintenanceLog[]>(`${this.baseUrl}?schoolFacilityId=${facilityId}`);
+    return this.http.get<SchoolFacilityMaintenanceLog[]>(`${this.apiUrl}?schoolFacilityId=${facilityId}`);
   }
 
   getByMaintenanceType(maintenanceType: string): Observable<SchoolFacilityMaintenanceLog[]> {
-    return this.http.get<SchoolFacilityMaintenanceLog[]>(`${this.baseUrl}?maintenanceType=${maintenanceType}`);
+    return this.http.get<SchoolFacilityMaintenanceLog[]>(`${this.apiUrl}?maintenanceType=${maintenanceType}`);
   }
 
   create(dto: CreateSchoolFacilityMaintenanceLogDto): Observable<SchoolFacilityMaintenanceLog> {
-    return this.http.post<SchoolFacilityMaintenanceLog>(this.baseUrl, dto);
+    return this.http.post<SchoolFacilityMaintenanceLog>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateSchoolFacilityMaintenanceLogDto): Observable<SchoolFacilityMaintenanceLog> {
-    return this.http.put<SchoolFacilityMaintenanceLog>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<SchoolFacilityMaintenanceLog>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

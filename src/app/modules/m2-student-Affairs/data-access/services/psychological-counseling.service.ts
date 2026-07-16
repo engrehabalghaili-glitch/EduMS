@@ -7,29 +7,30 @@ import type { StudentPsychologicalCounselingLog, CreateStudentPsychologicalCouns
 @Injectable({ providedIn: 'root' })
 export class PsychologicalCounselingService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentPsychologicalCounselingLogs`;
+  private readonly apiUrl = `${environment.apiUrl}/studentPsychologicalCounselingLogs`;
 
   getAll(): Observable<StudentPsychologicalCounselingLog[]> {
-    return this.http.get<StudentPsychologicalCounselingLog[]>(this.baseUrl);
+    return this.http.get<StudentPsychologicalCounselingLog[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentPsychologicalCounselingLog> {
-    return this.http.get<StudentPsychologicalCounselingLog>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentPsychologicalCounselingLog>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentPsychologicalCounselingLog[]> {
-    return this.http.get<StudentPsychologicalCounselingLog[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentPsychologicalCounselingLog[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentPsychologicalCounselingLog): Observable<StudentPsychologicalCounselingLog> {
-    return this.http.post<StudentPsychologicalCounselingLog>(this.baseUrl, dto);
+    return this.http.post<StudentPsychologicalCounselingLog>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentPsychologicalCounselingLog): Observable<StudentPsychologicalCounselingLog> {
-    return this.http.put<StudentPsychologicalCounselingLog>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentPsychologicalCounselingLog>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

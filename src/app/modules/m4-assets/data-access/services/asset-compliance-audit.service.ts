@@ -7,29 +7,30 @@ import type { AssetComplianceAudit, CreateAssetComplianceAuditRequest, UpdateAss
 @Injectable({ providedIn: 'root' })
 export class AssetComplianceAuditService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetComplianceAudits`;
+  private readonly apiUrl = `${environment.apiUrl}/assetComplianceAudits`;
 
   getAll(): Observable<AssetComplianceAudit[]> {
-    return this.http.get<AssetComplianceAudit[]>(this.baseUrl);
+    return this.http.get<AssetComplianceAudit[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetComplianceAudit> {
-    return this.http.get<AssetComplianceAudit>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetComplianceAudit>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<AssetComplianceAudit[]> {
-    return this.http.get<AssetComplianceAudit[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<AssetComplianceAudit[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateAssetComplianceAuditRequest): Observable<AssetComplianceAudit> {
-    return this.http.post<AssetComplianceAudit>(this.baseUrl, dto);
+    return this.http.post<AssetComplianceAudit>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetComplianceAuditRequest): Observable<AssetComplianceAudit> {
-    return this.http.put<AssetComplianceAudit>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetComplianceAudit>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

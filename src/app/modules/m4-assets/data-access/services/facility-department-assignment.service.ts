@@ -7,29 +7,30 @@ import type { FacilityDepartmentAssignment, CreateFacilityDepartmentAssignmentRe
 @Injectable({ providedIn: 'root' })
 export class FacilityDepartmentAssignmentService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/facilityDepartmentAssignments`;
+  private readonly apiUrl = `${environment.apiUrl}/facilityDepartmentAssignments`;
 
   getAll(): Observable<FacilityDepartmentAssignment[]> {
-    return this.http.get<FacilityDepartmentAssignment[]>(this.baseUrl);
+    return this.http.get<FacilityDepartmentAssignment[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<FacilityDepartmentAssignment> {
-    return this.http.get<FacilityDepartmentAssignment>(`${this.baseUrl}/${id}`);
+    return this.http.get<FacilityDepartmentAssignment>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<FacilityDepartmentAssignment[]> {
-    return this.http.get<FacilityDepartmentAssignment[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<FacilityDepartmentAssignment[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateFacilityDepartmentAssignmentRequest): Observable<FacilityDepartmentAssignment> {
-    return this.http.post<FacilityDepartmentAssignment>(this.baseUrl, dto);
+    return this.http.post<FacilityDepartmentAssignment>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateFacilityDepartmentAssignmentRequest): Observable<FacilityDepartmentAssignment> {
-    return this.http.put<FacilityDepartmentAssignment>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<FacilityDepartmentAssignment>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

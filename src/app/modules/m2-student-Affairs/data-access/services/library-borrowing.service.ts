@@ -7,29 +7,30 @@ import type { StudentLibraryBorrowingLog, CreateStudentLibraryBorrowingLog, Upda
 @Injectable({ providedIn: 'root' })
 export class LibraryBorrowingService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentLibraryBorrowingLogs`;
+  private readonly apiUrl = `${environment.apiUrl}/studentLibraryBorrowingLogs`;
 
   getAll(): Observable<StudentLibraryBorrowingLog[]> {
-    return this.http.get<StudentLibraryBorrowingLog[]>(this.baseUrl);
+    return this.http.get<StudentLibraryBorrowingLog[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentLibraryBorrowingLog> {
-    return this.http.get<StudentLibraryBorrowingLog>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentLibraryBorrowingLog>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentLibraryBorrowingLog[]> {
-    return this.http.get<StudentLibraryBorrowingLog[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentLibraryBorrowingLog[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentLibraryBorrowingLog): Observable<StudentLibraryBorrowingLog> {
-    return this.http.post<StudentLibraryBorrowingLog>(this.baseUrl, dto);
+    return this.http.post<StudentLibraryBorrowingLog>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentLibraryBorrowingLog): Observable<StudentLibraryBorrowingLog> {
-    return this.http.put<StudentLibraryBorrowingLog>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentLibraryBorrowingLog>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

@@ -29,3 +29,4 @@ export class StudentCanteenPurchaseLogService {
     return this.http.delete<void>(`${this.apiUrl}/student-canteen-purchase-logs/${id}`);
   }
 }
+

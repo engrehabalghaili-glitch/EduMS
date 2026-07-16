@@ -7,33 +7,35 @@ import type { Department, CreateDepartmentDto, UpdateDepartmentDto } from '../mo
 @Injectable({ providedIn: 'root' })
 export class DepartmentService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/departments`;
+  private readonly apiUrl = `${environment.apiUrl}/departments`;
 
   getAll(): Observable<Department[]> {
-    return this.http.get<Department[]>(this.baseUrl);
+    return this.http.get<Department[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<Department> {
-    return this.http.get<Department>(`${this.baseUrl}/${id}`);
+    return this.http.get<Department>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<Department[]> {
-    return this.http.get<Department[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<Department[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   getByType(departmentType: string): Observable<Department[]> {
-    return this.http.get<Department[]>(`${this.baseUrl}?departmentType=${departmentType}`);
+    return this.http.get<Department[]>(`${this.apiUrl}?departmentType=${departmentType}`);
   }
 
   create(dto: CreateDepartmentDto): Observable<Department> {
-    return this.http.post<Department>(this.baseUrl, dto);
+    return this.http.post<Department>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateDepartmentDto): Observable<Department> {
-    return this.http.put<Department>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<Department>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

@@ -29,3 +29,4 @@ export class StudentAttachmentService {
     return this.http.delete<void>(`${this.apiUrl}/student-attachments/${id}`);
   }
 }
+

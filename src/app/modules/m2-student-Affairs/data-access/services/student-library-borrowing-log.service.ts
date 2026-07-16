@@ -29,3 +29,4 @@ export class StudentLibraryBorrowingLogService {
     return this.http.delete<void>(`${this.apiUrl}/student-library-borrowing-logs/${id}`);
   }
 }
+

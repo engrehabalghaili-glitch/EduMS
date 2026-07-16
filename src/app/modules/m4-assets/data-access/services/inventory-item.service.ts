@@ -7,29 +7,30 @@ import type { InventoryItem, CreateInventoryItemRequest, UpdateInventoryItemRequ
 @Injectable({ providedIn: 'root' })
 export class InventoryItemService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/inventoryItems`;
+  private readonly apiUrl = `${environment.apiUrl}/inventoryItems`;
 
   getAll(): Observable<InventoryItem[]> {
-    return this.http.get<InventoryItem[]>(this.baseUrl);
+    return this.http.get<InventoryItem[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<InventoryItem> {
-    return this.http.get<InventoryItem>(`${this.baseUrl}/${id}`);
+    return this.http.get<InventoryItem>(`${this.apiUrl}/${id}`);
   }
 
   getByWarehouseId(warehouseId: number): Observable<InventoryItem[]> {
-    return this.http.get<InventoryItem[]>(`${this.baseUrl}?warehouseId=${warehouseId}`);
+    return this.http.get<InventoryItem[]>(`${this.apiUrl}?warehouseId=${warehouseId}`);
   }
 
   create(dto: CreateInventoryItemRequest): Observable<InventoryItem> {
-    return this.http.post<InventoryItem>(this.baseUrl, dto);
+    return this.http.post<InventoryItem>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateInventoryItemRequest): Observable<InventoryItem> {
-    return this.http.put<InventoryItem>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<InventoryItem>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

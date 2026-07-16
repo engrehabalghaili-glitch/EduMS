@@ -29,3 +29,4 @@ export class DetailedAcademicWarningLogService {
     return this.http.delete<void>(`${this.apiUrl}/detailed-academic-warning-logs/${id}`);
   }
 }
+

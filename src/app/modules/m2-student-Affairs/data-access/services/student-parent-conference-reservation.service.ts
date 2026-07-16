@@ -29,3 +29,4 @@ export class StudentParentConferenceReservationService {
     return this.http.delete<void>(`${this.apiUrl}/student-parent-conference-reservations/${id}`);
   }
 }
+

@@ -7,29 +7,30 @@ import type { AssetReceiving, CreateAssetReceivingRequest, UpdateAssetReceivingR
 @Injectable({ providedIn: 'root' })
 export class AssetReceivingService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetReceivings`;
+  private readonly apiUrl = `${environment.apiUrl}/assetReceivings`;
 
   getAll(): Observable<AssetReceiving[]> {
-    return this.http.get<AssetReceiving[]>(this.baseUrl);
+    return this.http.get<AssetReceiving[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetReceiving> {
-    return this.http.get<AssetReceiving>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetReceiving>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<AssetReceiving[]> {
-    return this.http.get<AssetReceiving[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<AssetReceiving[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateAssetReceivingRequest): Observable<AssetReceiving> {
-    return this.http.post<AssetReceiving>(this.baseUrl, dto);
+    return this.http.post<AssetReceiving>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetReceivingRequest): Observable<AssetReceiving> {
-    return this.http.put<AssetReceiving>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetReceiving>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

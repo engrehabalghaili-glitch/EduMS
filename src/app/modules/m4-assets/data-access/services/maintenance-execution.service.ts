@@ -7,29 +7,30 @@ import type { MaintenanceExecution, CreateMaintenanceExecutionRequest, UpdateMai
 @Injectable({ providedIn: 'root' })
 export class MaintenanceExecutionService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/maintenanceExecutions`;
+  private readonly apiUrl = `${environment.apiUrl}/maintenanceExecutions`;
 
   getAll(): Observable<MaintenanceExecution[]> {
-    return this.http.get<MaintenanceExecution[]>(this.baseUrl);
+    return this.http.get<MaintenanceExecution[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<MaintenanceExecution> {
-    return this.http.get<MaintenanceExecution>(`${this.baseUrl}/${id}`);
+    return this.http.get<MaintenanceExecution>(`${this.apiUrl}/${id}`);
   }
 
   getByAssetId(assetId: number): Observable<MaintenanceExecution[]> {
-    return this.http.get<MaintenanceExecution[]>(`${this.baseUrl}?assetId=${assetId}`);
+    return this.http.get<MaintenanceExecution[]>(`${this.apiUrl}?assetId=${assetId}`);
   }
 
   create(dto: CreateMaintenanceExecutionRequest): Observable<MaintenanceExecution> {
-    return this.http.post<MaintenanceExecution>(this.baseUrl, dto);
+    return this.http.post<MaintenanceExecution>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateMaintenanceExecutionRequest): Observable<MaintenanceExecution> {
-    return this.http.put<MaintenanceExecution>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<MaintenanceExecution>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

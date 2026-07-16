@@ -7,29 +7,30 @@ import type { StudentExitClearance, CreateStudentExitClearance, UpdateStudentExi
 @Injectable({ providedIn: 'root' })
 export class ExitClearanceService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentExitClearances`;
+  private readonly apiUrl = `${environment.apiUrl}/studentExitClearances`;
 
   getAll(): Observable<StudentExitClearance[]> {
-    return this.http.get<StudentExitClearance[]>(this.baseUrl);
+    return this.http.get<StudentExitClearance[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentExitClearance> {
-    return this.http.get<StudentExitClearance>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentExitClearance>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentExitClearance[]> {
-    return this.http.get<StudentExitClearance[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentExitClearance[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentExitClearance): Observable<StudentExitClearance> {
-    return this.http.post<StudentExitClearance>(this.baseUrl, dto);
+    return this.http.post<StudentExitClearance>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentExitClearance): Observable<StudentExitClearance> {
-    return this.http.put<StudentExitClearance>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentExitClearance>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

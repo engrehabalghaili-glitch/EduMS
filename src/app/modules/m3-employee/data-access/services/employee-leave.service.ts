@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../environments';
-import type { EmployeeLeave, CreateEmployeeLeave, UpdateEmployeeLeave } from '../../m3-employee/data-access/models/employee-leave.types';
+import { environment } from '../../../../../environments';
+import type { EmployeeLeave, CreateEmployeeLeave, UpdateEmployeeLeave } from '../models/employee-leave.types';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeeLeaveService {

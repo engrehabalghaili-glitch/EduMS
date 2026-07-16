@@ -29,3 +29,4 @@ export class StudentExitClearanceService {
     return this.http.delete<void>(`${this.apiUrl}/student-exit-clearances/${id}`);
   }
 }
+

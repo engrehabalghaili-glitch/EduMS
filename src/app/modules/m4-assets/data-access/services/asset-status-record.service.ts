@@ -7,29 +7,30 @@ import type { AssetStatusRecord, CreateAssetStatusRecordRequest, UpdateAssetStat
 @Injectable({ providedIn: 'root' })
 export class AssetStatusRecordService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetStatusRecords`;
+  private readonly apiUrl = `${environment.apiUrl}/assetStatusRecords`;
 
   getAll(): Observable<AssetStatusRecord[]> {
-    return this.http.get<AssetStatusRecord[]>(this.baseUrl);
+    return this.http.get<AssetStatusRecord[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetStatusRecord> {
-    return this.http.get<AssetStatusRecord>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetStatusRecord>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<AssetStatusRecord[]> {
-    return this.http.get<AssetStatusRecord[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<AssetStatusRecord[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateAssetStatusRecordRequest): Observable<AssetStatusRecord> {
-    return this.http.post<AssetStatusRecord>(this.baseUrl, dto);
+    return this.http.post<AssetStatusRecord>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetStatusRecordRequest): Observable<AssetStatusRecord> {
-    return this.http.put<AssetStatusRecord>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetStatusRecord>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

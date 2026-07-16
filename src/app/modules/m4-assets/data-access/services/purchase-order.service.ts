@@ -7,29 +7,30 @@ import type { PurchaseOrder, CreatePurchaseOrderRequest, UpdatePurchaseOrderRequ
 @Injectable({ providedIn: 'root' })
 export class PurchaseOrderService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/purchaseOrders`;
+  private readonly apiUrl = `${environment.apiUrl}/purchaseOrders`;
 
   getAll(): Observable<PurchaseOrder[]> {
-    return this.http.get<PurchaseOrder[]>(this.baseUrl);
+    return this.http.get<PurchaseOrder[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<PurchaseOrder> {
-    return this.http.get<PurchaseOrder>(`${this.baseUrl}/${id}`);
+    return this.http.get<PurchaseOrder>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<PurchaseOrder[]> {
-    return this.http.get<PurchaseOrder[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<PurchaseOrder[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreatePurchaseOrderRequest): Observable<PurchaseOrder> {
-    return this.http.post<PurchaseOrder>(this.baseUrl, dto);
+    return this.http.post<PurchaseOrder>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdatePurchaseOrderRequest): Observable<PurchaseOrder> {
-    return this.http.put<PurchaseOrder>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<PurchaseOrder>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

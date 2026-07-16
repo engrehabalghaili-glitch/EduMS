@@ -7,29 +7,30 @@ import type { StudentExemption, CreateStudentExemption, UpdateStudentExemption }
 @Injectable({ providedIn: 'root' })
 export class ExemptionService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentExemptions`;
+  private readonly apiUrl = `${environment.apiUrl}/studentExemptions`;
 
   getAll(): Observable<StudentExemption[]> {
-    return this.http.get<StudentExemption[]>(this.baseUrl);
+    return this.http.get<StudentExemption[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentExemption> {
-    return this.http.get<StudentExemption>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentExemption>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentExemption[]> {
-    return this.http.get<StudentExemption[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentExemption[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentExemption): Observable<StudentExemption> {
-    return this.http.post<StudentExemption>(this.baseUrl, dto);
+    return this.http.post<StudentExemption>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentExemption): Observable<StudentExemption> {
-    return this.http.put<StudentExemption>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentExemption>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

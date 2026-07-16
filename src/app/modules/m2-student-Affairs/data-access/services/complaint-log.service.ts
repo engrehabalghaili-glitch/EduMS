@@ -7,29 +7,30 @@ import type { StudentComplaintLog, CreateStudentComplaintLog, UpdateStudentCompl
 @Injectable({ providedIn: 'root' })
 export class ComplaintLogService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentComplaintLogs`;
+  private readonly apiUrl = `${environment.apiUrl}/studentComplaintLogs`;
 
   getAll(): Observable<StudentComplaintLog[]> {
-    return this.http.get<StudentComplaintLog[]>(this.baseUrl);
+    return this.http.get<StudentComplaintLog[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentComplaintLog> {
-    return this.http.get<StudentComplaintLog>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentComplaintLog>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentComplaintLog[]> {
-    return this.http.get<StudentComplaintLog[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentComplaintLog[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentComplaintLog): Observable<StudentComplaintLog> {
-    return this.http.post<StudentComplaintLog>(this.baseUrl, dto);
+    return this.http.post<StudentComplaintLog>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentComplaintLog): Observable<StudentComplaintLog> {
-    return this.http.put<StudentComplaintLog>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentComplaintLog>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

@@ -7,33 +7,35 @@ import type { SchoolAnnouncementLog, CreateSchoolAnnouncementLogDto, UpdateSchoo
 @Injectable({ providedIn: 'root' })
 export class SchoolAnnouncementLogService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/schoolAnnouncementLogs`;
+  private readonly apiUrl = `${environment.apiUrl}/schoolAnnouncementLogs`;
 
   getAll(): Observable<SchoolAnnouncementLog[]> {
-    return this.http.get<SchoolAnnouncementLog[]>(this.baseUrl);
+    return this.http.get<SchoolAnnouncementLog[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<SchoolAnnouncementLog> {
-    return this.http.get<SchoolAnnouncementLog>(`${this.baseUrl}/${id}`);
+    return this.http.get<SchoolAnnouncementLog>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<SchoolAnnouncementLog[]> {
-    return this.http.get<SchoolAnnouncementLog[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<SchoolAnnouncementLog[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   getActive(): Observable<SchoolAnnouncementLog[]> {
-    return this.http.get<SchoolAnnouncementLog[]>(`${this.baseUrl}?isActive=true`);
+    return this.http.get<SchoolAnnouncementLog[]>(`${this.apiUrl}?isActive=true`);
   }
 
   create(dto: CreateSchoolAnnouncementLogDto): Observable<SchoolAnnouncementLog> {
-    return this.http.post<SchoolAnnouncementLog>(this.baseUrl, dto);
+    return this.http.post<SchoolAnnouncementLog>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateSchoolAnnouncementLogDto): Observable<SchoolAnnouncementLog> {
-    return this.http.put<SchoolAnnouncementLog>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<SchoolAnnouncementLog>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

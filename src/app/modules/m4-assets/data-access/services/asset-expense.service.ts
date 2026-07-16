@@ -7,29 +7,30 @@ import type { AssetExpense, CreateAssetExpenseRequest, UpdateAssetExpenseRequest
 @Injectable({ providedIn: 'root' })
 export class AssetExpenseService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetExpenses`;
+  private readonly apiUrl = `${environment.apiUrl}/assetExpenses`;
 
   getAll(): Observable<AssetExpense[]> {
-    return this.http.get<AssetExpense[]>(this.baseUrl);
+    return this.http.get<AssetExpense[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetExpense> {
-    return this.http.get<AssetExpense>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetExpense>(`${this.apiUrl}/${id}`);
   }
 
   getByAssetId(assetId: number): Observable<AssetExpense[]> {
-    return this.http.get<AssetExpense[]>(`${this.baseUrl}?assetId=${assetId}`);
+    return this.http.get<AssetExpense[]>(`${this.apiUrl}?assetId=${assetId}`);
   }
 
   create(dto: CreateAssetExpenseRequest): Observable<AssetExpense> {
-    return this.http.post<AssetExpense>(this.baseUrl, dto);
+    return this.http.post<AssetExpense>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetExpenseRequest): Observable<AssetExpense> {
-    return this.http.put<AssetExpense>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetExpense>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

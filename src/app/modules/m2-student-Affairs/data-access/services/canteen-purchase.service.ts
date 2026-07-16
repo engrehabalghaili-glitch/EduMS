@@ -7,29 +7,30 @@ import type { StudentCanteenPurchaseLog, CreateStudentCanteenPurchaseLog, Update
 @Injectable({ providedIn: 'root' })
 export class CanteenPurchaseService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentCanteenPurchaseLogs`;
+  private readonly apiUrl = `${environment.apiUrl}/studentCanteenPurchaseLogs`;
 
   getAll(): Observable<StudentCanteenPurchaseLog[]> {
-    return this.http.get<StudentCanteenPurchaseLog[]>(this.baseUrl);
+    return this.http.get<StudentCanteenPurchaseLog[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentCanteenPurchaseLog> {
-    return this.http.get<StudentCanteenPurchaseLog>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentCanteenPurchaseLog>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentCanteenPurchaseLog[]> {
-    return this.http.get<StudentCanteenPurchaseLog[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentCanteenPurchaseLog[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentCanteenPurchaseLog): Observable<StudentCanteenPurchaseLog> {
-    return this.http.post<StudentCanteenPurchaseLog>(this.baseUrl, dto);
+    return this.http.post<StudentCanteenPurchaseLog>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentCanteenPurchaseLog): Observable<StudentCanteenPurchaseLog> {
-    return this.http.put<StudentCanteenPurchaseLog>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentCanteenPurchaseLog>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

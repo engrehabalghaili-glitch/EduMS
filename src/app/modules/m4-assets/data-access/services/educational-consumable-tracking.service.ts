@@ -7,29 +7,30 @@ import type { EducationalConsumableTracking, CreateEducationalConsumableTracking
 @Injectable({ providedIn: 'root' })
 export class EducationalConsumableTrackingService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/educationalConsumableTrackings`;
+  private readonly apiUrl = `${environment.apiUrl}/educationalConsumableTrackings`;
 
   getAll(): Observable<EducationalConsumableTracking[]> {
-    return this.http.get<EducationalConsumableTracking[]>(this.baseUrl);
+    return this.http.get<EducationalConsumableTracking[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<EducationalConsumableTracking> {
-    return this.http.get<EducationalConsumableTracking>(`${this.baseUrl}/${id}`);
+    return this.http.get<EducationalConsumableTracking>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<EducationalConsumableTracking[]> {
-    return this.http.get<EducationalConsumableTracking[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<EducationalConsumableTracking[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateEducationalConsumableTrackingRequest): Observable<EducationalConsumableTracking> {
-    return this.http.post<EducationalConsumableTracking>(this.baseUrl, dto);
+    return this.http.post<EducationalConsumableTracking>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateEducationalConsumableTrackingRequest): Observable<EducationalConsumableTracking> {
-    return this.http.put<EducationalConsumableTracking>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<EducationalConsumableTracking>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

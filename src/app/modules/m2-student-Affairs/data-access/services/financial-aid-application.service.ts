@@ -7,29 +7,30 @@ import type { StudentFinancialAidApplication, CreateStudentFinancialAidApplicati
 @Injectable({ providedIn: 'root' })
 export class FinancialAidApplicationService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentFinancialAidApplications`;
+  private readonly apiUrl = `${environment.apiUrl}/studentFinancialAidApplications`;
 
   getAll(): Observable<StudentFinancialAidApplication[]> {
-    return this.http.get<StudentFinancialAidApplication[]>(this.baseUrl);
+    return this.http.get<StudentFinancialAidApplication[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentFinancialAidApplication> {
-    return this.http.get<StudentFinancialAidApplication>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentFinancialAidApplication>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentFinancialAidApplication[]> {
-    return this.http.get<StudentFinancialAidApplication[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentFinancialAidApplication[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentFinancialAidApplication): Observable<StudentFinancialAidApplication> {
-    return this.http.post<StudentFinancialAidApplication>(this.baseUrl, dto);
+    return this.http.post<StudentFinancialAidApplication>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentFinancialAidApplication): Observable<StudentFinancialAidApplication> {
-    return this.http.put<StudentFinancialAidApplication>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentFinancialAidApplication>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

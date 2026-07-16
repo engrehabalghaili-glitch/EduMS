@@ -7,29 +7,30 @@ import type { AssetFinancialAuditArchive, CreateAssetFinancialAuditArchiveReques
 @Injectable({ providedIn: 'root' })
 export class AssetFinancialAuditArchiveService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetFinancialAuditArchives`;
+  private readonly apiUrl = `${environment.apiUrl}/assetFinancialAuditArchives`;
 
   getAll(): Observable<AssetFinancialAuditArchive[]> {
-    return this.http.get<AssetFinancialAuditArchive[]>(this.baseUrl);
+    return this.http.get<AssetFinancialAuditArchive[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetFinancialAuditArchive> {
-    return this.http.get<AssetFinancialAuditArchive>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetFinancialAuditArchive>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<AssetFinancialAuditArchive[]> {
-    return this.http.get<AssetFinancialAuditArchive[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<AssetFinancialAuditArchive[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateAssetFinancialAuditArchiveRequest): Observable<AssetFinancialAuditArchive> {
-    return this.http.post<AssetFinancialAuditArchive>(this.baseUrl, dto);
+    return this.http.post<AssetFinancialAuditArchive>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetFinancialAuditArchiveRequest): Observable<AssetFinancialAuditArchive> {
-    return this.http.put<AssetFinancialAuditArchive>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetFinancialAuditArchive>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

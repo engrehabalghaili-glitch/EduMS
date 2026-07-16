@@ -29,3 +29,4 @@ export class StudentActivityParticipationService {
     return this.http.delete<void>(`${this.apiUrl}/student-activity-participations/${id}`);
   }
 }
+

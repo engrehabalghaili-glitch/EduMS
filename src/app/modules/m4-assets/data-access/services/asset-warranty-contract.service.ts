@@ -7,29 +7,30 @@ import type { AssetWarrantyContract, CreateAssetWarrantyContractRequest, UpdateA
 @Injectable({ providedIn: 'root' })
 export class AssetWarrantyContractService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetWarrantyContracts`;
+  private readonly apiUrl = `${environment.apiUrl}/assetWarrantyContracts`;
 
   getAll(): Observable<AssetWarrantyContract[]> {
-    return this.http.get<AssetWarrantyContract[]>(this.baseUrl);
+    return this.http.get<AssetWarrantyContract[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetWarrantyContract> {
-    return this.http.get<AssetWarrantyContract>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetWarrantyContract>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<AssetWarrantyContract[]> {
-    return this.http.get<AssetWarrantyContract[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<AssetWarrantyContract[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateAssetWarrantyContractRequest): Observable<AssetWarrantyContract> {
-    return this.http.post<AssetWarrantyContract>(this.baseUrl, dto);
+    return this.http.post<AssetWarrantyContract>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetWarrantyContractRequest): Observable<AssetWarrantyContract> {
-    return this.http.put<AssetWarrantyContract>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetWarrantyContract>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

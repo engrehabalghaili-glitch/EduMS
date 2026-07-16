@@ -7,29 +7,31 @@ import type { Directorate, CreateDirectorateDto, UpdateDirectorateDto } from '..
 @Injectable({ providedIn: 'root' })
 export class DirectorateService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/directorates`;
+  private readonly apiUrl = `${environment.apiUrl}/directorates`;
 
   getAll(): Observable<Directorate[]> {
-    return this.http.get<Directorate[]>(this.baseUrl);
+    return this.http.get<Directorate[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<Directorate> {
-    return this.http.get<Directorate>(`${this.baseUrl}/${id}`);
+    return this.http.get<Directorate>(`${this.apiUrl}/${id}`);
   }
 
   getActive(): Observable<Directorate[]> {
-    return this.http.get<Directorate[]>(`${this.baseUrl}?isActive=true`);
+    return this.http.get<Directorate[]>(`${this.apiUrl}?isActive=true`);
   }
 
   create(dto: CreateDirectorateDto): Observable<Directorate> {
-    return this.http.post<Directorate>(this.baseUrl, dto);
+    return this.http.post<Directorate>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateDirectorateDto): Observable<Directorate> {
-    return this.http.put<Directorate>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<Directorate>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

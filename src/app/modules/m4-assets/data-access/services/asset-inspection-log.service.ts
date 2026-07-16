@@ -7,29 +7,30 @@ import type { AssetInspectionLog, CreateAssetInspectionLogRequest, UpdateAssetIn
 @Injectable({ providedIn: 'root' })
 export class AssetInspectionLogService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetInspectionLogs`;
+  private readonly apiUrl = `${environment.apiUrl}/assetInspectionLogs`;
 
   getAll(): Observable<AssetInspectionLog[]> {
-    return this.http.get<AssetInspectionLog[]>(this.baseUrl);
+    return this.http.get<AssetInspectionLog[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetInspectionLog> {
-    return this.http.get<AssetInspectionLog>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetInspectionLog>(`${this.apiUrl}/${id}`);
   }
 
   getByAssetId(assetId: number): Observable<AssetInspectionLog[]> {
-    return this.http.get<AssetInspectionLog[]>(`${this.baseUrl}?assetId=${assetId}`);
+    return this.http.get<AssetInspectionLog[]>(`${this.apiUrl}?assetId=${assetId}`);
   }
 
   create(dto: CreateAssetInspectionLogRequest): Observable<AssetInspectionLog> {
-    return this.http.post<AssetInspectionLog>(this.baseUrl, dto);
+    return this.http.post<AssetInspectionLog>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetInspectionLogRequest): Observable<AssetInspectionLog> {
-    return this.http.put<AssetInspectionLog>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetInspectionLog>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

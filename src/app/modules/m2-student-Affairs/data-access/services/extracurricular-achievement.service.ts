@@ -7,29 +7,30 @@ import type { StudentExtracurricularAchievement, CreateStudentExtracurricularAch
 @Injectable({ providedIn: 'root' })
 export class ExtracurricularAchievementService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentExtracurricularAchievements`;
+  private readonly apiUrl = `${environment.apiUrl}/studentExtracurricularAchievements`;
 
   getAll(): Observable<StudentExtracurricularAchievement[]> {
-    return this.http.get<StudentExtracurricularAchievement[]>(this.baseUrl);
+    return this.http.get<StudentExtracurricularAchievement[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentExtracurricularAchievement> {
-    return this.http.get<StudentExtracurricularAchievement>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentExtracurricularAchievement>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentExtracurricularAchievement[]> {
-    return this.http.get<StudentExtracurricularAchievement[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentExtracurricularAchievement[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentExtracurricularAchievement): Observable<StudentExtracurricularAchievement> {
-    return this.http.post<StudentExtracurricularAchievement>(this.baseUrl, dto);
+    return this.http.post<StudentExtracurricularAchievement>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentExtracurricularAchievement): Observable<StudentExtracurricularAchievement> {
-    return this.http.put<StudentExtracurricularAchievement>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentExtracurricularAchievement>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

@@ -29,3 +29,4 @@ export class StudentMedicalAllergyLogService {
     return this.http.delete<void>(`${this.apiUrl}/student-medical-allergy-logs/${id}`);
   }
 }
+

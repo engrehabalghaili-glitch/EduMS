@@ -29,3 +29,4 @@ export class StudentPsychologicalCounselingLogService {
     return this.http.delete<void>(`${this.apiUrl}/student-psychological-counseling-logs/${id}`);
   }
 }
+

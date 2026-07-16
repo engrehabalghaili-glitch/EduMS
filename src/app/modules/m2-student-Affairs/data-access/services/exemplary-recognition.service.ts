@@ -7,29 +7,30 @@ import type { StudentExemplaryRecognition, CreateStudentExemplaryRecognition, Up
 @Injectable({ providedIn: 'root' })
 export class ExemplaryRecognitionService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentExemplaryRecognitions`;
+  private readonly apiUrl = `${environment.apiUrl}/studentExemplaryRecognitions`;
 
   getAll(): Observable<StudentExemplaryRecognition[]> {
-    return this.http.get<StudentExemplaryRecognition[]>(this.baseUrl);
+    return this.http.get<StudentExemplaryRecognition[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentExemplaryRecognition> {
-    return this.http.get<StudentExemplaryRecognition>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentExemplaryRecognition>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentExemplaryRecognition[]> {
-    return this.http.get<StudentExemplaryRecognition[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentExemplaryRecognition[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentExemplaryRecognition): Observable<StudentExemplaryRecognition> {
-    return this.http.post<StudentExemplaryRecognition>(this.baseUrl, dto);
+    return this.http.post<StudentExemplaryRecognition>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentExemplaryRecognition): Observable<StudentExemplaryRecognition> {
-    return this.http.put<StudentExemplaryRecognition>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentExemplaryRecognition>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

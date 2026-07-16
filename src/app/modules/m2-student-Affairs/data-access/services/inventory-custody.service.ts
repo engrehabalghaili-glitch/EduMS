@@ -7,29 +7,30 @@ import type { StudentInventoryCustody, CreateStudentInventoryCustody, UpdateStud
 @Injectable({ providedIn: 'root' })
 export class InventoryCustodyService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentInventoryCustodies`;
+  private readonly apiUrl = `${environment.apiUrl}/studentInventoryCustodies`;
 
   getAll(): Observable<StudentInventoryCustody[]> {
-    return this.http.get<StudentInventoryCustody[]>(this.baseUrl);
+    return this.http.get<StudentInventoryCustody[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentInventoryCustody> {
-    return this.http.get<StudentInventoryCustody>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentInventoryCustody>(`${this.apiUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentInventoryCustody[]> {
-    return this.http.get<StudentInventoryCustody[]>(`${this.baseUrl}?studentId=${studentId}`);
+    return this.http.get<StudentInventoryCustody[]>(`${this.apiUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentInventoryCustody): Observable<StudentInventoryCustody> {
-    return this.http.post<StudentInventoryCustody>(this.baseUrl, dto);
+    return this.http.post<StudentInventoryCustody>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentInventoryCustody): Observable<StudentInventoryCustody> {
-    return this.http.put<StudentInventoryCustody>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentInventoryCustody>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

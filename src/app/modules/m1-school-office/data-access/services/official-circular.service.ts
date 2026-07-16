@@ -7,33 +7,35 @@ import type { OfficialCircular, CreateOfficialCircularDto, UpdateOfficialCircula
 @Injectable({ providedIn: 'root' })
 export class OfficialCircularService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/officialCirculars`;
+  private readonly apiUrl = `${environment.apiUrl}/officialCirculars`;
 
   getAll(): Observable<OfficialCircular[]> {
-    return this.http.get<OfficialCircular[]>(this.baseUrl);
+    return this.http.get<OfficialCircular[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<OfficialCircular> {
-    return this.http.get<OfficialCircular>(`${this.baseUrl}/${id}`);
+    return this.http.get<OfficialCircular>(`${this.apiUrl}/${id}`);
   }
 
   getByType(circularType: string): Observable<OfficialCircular[]> {
-    return this.http.get<OfficialCircular[]>(`${this.baseUrl}?circularType=${circularType}`);
+    return this.http.get<OfficialCircular[]>(`${this.apiUrl}?circularType=${circularType}`);
   }
 
   getActive(): Observable<OfficialCircular[]> {
-    return this.http.get<OfficialCircular[]>(`${this.baseUrl}?isActive=true`);
+    return this.http.get<OfficialCircular[]>(`${this.apiUrl}?isActive=true`);
   }
 
   create(dto: CreateOfficialCircularDto): Observable<OfficialCircular> {
-    return this.http.post<OfficialCircular>(this.baseUrl, dto);
+    return this.http.post<OfficialCircular>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateOfficialCircularDto): Observable<OfficialCircular> {
-    return this.http.put<OfficialCircular>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<OfficialCircular>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

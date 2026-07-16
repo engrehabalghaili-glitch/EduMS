@@ -7,29 +7,30 @@ import type { PreventiveMaintenanceSchedule, CreatePreventiveMaintenanceSchedule
 @Injectable({ providedIn: 'root' })
 export class PreventiveMaintenanceScheduleService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/preventiveMaintenanceSchedules`;
+  private readonly apiUrl = `${environment.apiUrl}/preventiveMaintenanceSchedules`;
 
   getAll(): Observable<PreventiveMaintenanceSchedule[]> {
-    return this.http.get<PreventiveMaintenanceSchedule[]>(this.baseUrl);
+    return this.http.get<PreventiveMaintenanceSchedule[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<PreventiveMaintenanceSchedule> {
-    return this.http.get<PreventiveMaintenanceSchedule>(`${this.baseUrl}/${id}`);
+    return this.http.get<PreventiveMaintenanceSchedule>(`${this.apiUrl}/${id}`);
   }
 
   getByAssetId(assetId: number): Observable<PreventiveMaintenanceSchedule[]> {
-    return this.http.get<PreventiveMaintenanceSchedule[]>(`${this.baseUrl}?assetId=${assetId}`);
+    return this.http.get<PreventiveMaintenanceSchedule[]>(`${this.apiUrl}?assetId=${assetId}`);
   }
 
   create(dto: CreatePreventiveMaintenanceScheduleRequest): Observable<PreventiveMaintenanceSchedule> {
-    return this.http.post<PreventiveMaintenanceSchedule>(this.baseUrl, dto);
+    return this.http.post<PreventiveMaintenanceSchedule>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdatePreventiveMaintenanceScheduleRequest): Observable<PreventiveMaintenanceSchedule> {
-    return this.http.put<PreventiveMaintenanceSchedule>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<PreventiveMaintenanceSchedule>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

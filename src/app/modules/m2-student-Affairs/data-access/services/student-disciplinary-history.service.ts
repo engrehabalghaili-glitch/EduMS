@@ -29,3 +29,4 @@ export class StudentDisciplinaryHistoryService {
     return this.http.delete<void>(`${this.apiUrl}/student-disciplinary-histories/${id}`);
   }
 }
+

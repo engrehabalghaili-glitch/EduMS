@@ -7,29 +7,30 @@ import type { AssetDocument, CreateAssetDocumentRequest, UpdateAssetDocumentRequ
 @Injectable({ providedIn: 'root' })
 export class AssetDocumentService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetDocuments`;
+  private readonly apiUrl = `${environment.apiUrl}/assetDocuments`;
 
   getAll(): Observable<AssetDocument[]> {
-    return this.http.get<AssetDocument[]>(this.baseUrl);
+    return this.http.get<AssetDocument[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetDocument> {
-    return this.http.get<AssetDocument>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetDocument>(`${this.apiUrl}/${id}`);
   }
 
   getByAssetId(assetId: number): Observable<AssetDocument[]> {
-    return this.http.get<AssetDocument[]>(`${this.baseUrl}?assetId=${assetId}`);
+    return this.http.get<AssetDocument[]>(`${this.apiUrl}?assetId=${assetId}`);
   }
 
   create(dto: CreateAssetDocumentRequest): Observable<AssetDocument> {
-    return this.http.post<AssetDocument>(this.baseUrl, dto);
+    return this.http.post<AssetDocument>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetDocumentRequest): Observable<AssetDocument> {
-    return this.http.put<AssetDocument>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetDocument>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

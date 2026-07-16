@@ -29,3 +29,4 @@ export class StudentExemptionService {
     return this.http.delete<void>(`${this.apiUrl}/student-exemptions/${id}`);
   }
 }
+

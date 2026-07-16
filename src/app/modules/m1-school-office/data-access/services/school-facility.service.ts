@@ -7,33 +7,35 @@ import type { SchoolFacility, CreateSchoolFacilityDto, UpdateSchoolFacilityDto }
 @Injectable({ providedIn: 'root' })
 export class SchoolFacilityService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/facilities`;
+  private readonly apiUrl = `${environment.apiUrl}/facilities`;
 
   getAll(): Observable<SchoolFacility[]> {
-    return this.http.get<SchoolFacility[]>(this.baseUrl);
+    return this.http.get<SchoolFacility[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<SchoolFacility> {
-    return this.http.get<SchoolFacility>(`${this.baseUrl}/${id}`);
+    return this.http.get<SchoolFacility>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<SchoolFacility[]> {
-    return this.http.get<SchoolFacility[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<SchoolFacility[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   getByType(facilityType: string): Observable<SchoolFacility[]> {
-    return this.http.get<SchoolFacility[]>(`${this.baseUrl}?facilityType=${facilityType}`);
+    return this.http.get<SchoolFacility[]>(`${this.apiUrl}?facilityType=${facilityType}`);
   }
 
   create(dto: CreateSchoolFacilityDto): Observable<SchoolFacility> {
-    return this.http.post<SchoolFacility>(this.baseUrl, dto);
+    return this.http.post<SchoolFacility>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateSchoolFacilityDto): Observable<SchoolFacility> {
-    return this.http.put<SchoolFacility>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<SchoolFacility>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

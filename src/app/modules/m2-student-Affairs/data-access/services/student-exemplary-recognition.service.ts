@@ -29,3 +29,4 @@ export class StudentExemplaryRecognitionService {
     return this.http.delete<void>(`${this.apiUrl}/student-exemplary-recognitions/${id}`);
   }
 }
+

@@ -7,29 +7,30 @@ import type { AssetCategory, CreateAssetCategoryRequest, UpdateAssetCategoryRequ
 @Injectable({ providedIn: 'root' })
 export class AssetCategoryService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetCategories`;
+  private readonly apiUrl = `${environment.apiUrl}/assetCategories`;
 
   getAll(): Observable<AssetCategory[]> {
-    return this.http.get<AssetCategory[]>(this.baseUrl);
+    return this.http.get<AssetCategory[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetCategory> {
-    return this.http.get<AssetCategory>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetCategory>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<AssetCategory[]> {
-    return this.http.get<AssetCategory[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<AssetCategory[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateAssetCategoryRequest): Observable<AssetCategory> {
-    return this.http.post<AssetCategory>(this.baseUrl, dto);
+    return this.http.post<AssetCategory>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetCategoryRequest): Observable<AssetCategory> {
-    return this.http.put<AssetCategory>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetCategory>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

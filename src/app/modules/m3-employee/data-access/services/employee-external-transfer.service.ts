@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../environments';
-import type { EmployeeExternalTransfer, CreateEmployeeExternalTransfer, UpdateEmployeeExternalTransfer } from '../../m3-employee/data-access/models/employee-external-transfer.types';
+import { environment } from '../../../../../environments';
+import type { EmployeeExternalTransfer, CreateEmployeeExternalTransfer, UpdateEmployeeExternalTransfer } from '../models/employee-external-transfer.types';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeeExternalTransferService {

@@ -7,29 +7,30 @@ import type { InventoryReconciliation, CreateInventoryReconciliationRequest, Upd
 @Injectable({ providedIn: 'root' })
 export class InventoryReconciliationService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/inventoryReconciliations`;
+  private readonly apiUrl = `${environment.apiUrl}/inventoryReconciliations`;
 
   getAll(): Observable<InventoryReconciliation[]> {
-    return this.http.get<InventoryReconciliation[]>(this.baseUrl);
+    return this.http.get<InventoryReconciliation[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<InventoryReconciliation> {
-    return this.http.get<InventoryReconciliation>(`${this.baseUrl}/${id}`);
+    return this.http.get<InventoryReconciliation>(`${this.apiUrl}/${id}`);
   }
 
   getByInventoryPlanId(inventoryPlanId: number): Observable<InventoryReconciliation[]> {
-    return this.http.get<InventoryReconciliation[]>(`${this.baseUrl}?inventoryPlanId=${inventoryPlanId}`);
+    return this.http.get<InventoryReconciliation[]>(`${this.apiUrl}?inventoryPlanId=${inventoryPlanId}`);
   }
 
   create(dto: CreateInventoryReconciliationRequest): Observable<InventoryReconciliation> {
-    return this.http.post<InventoryReconciliation>(this.baseUrl, dto);
+    return this.http.post<InventoryReconciliation>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateInventoryReconciliationRequest): Observable<InventoryReconciliation> {
-    return this.http.put<InventoryReconciliation>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<InventoryReconciliation>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

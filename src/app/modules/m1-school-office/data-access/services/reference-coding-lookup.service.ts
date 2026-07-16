@@ -7,37 +7,39 @@ import type { ReferenceCodingLookup, CreateReferenceCodingLookupDto, UpdateRefer
 @Injectable({ providedIn: 'root' })
 export class ReferenceCodingLookupService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/referenceCodingLookups`;
+  private readonly apiUrl = `${environment.apiUrl}/referenceCodingLookups`;
 
   getAll(): Observable<ReferenceCodingLookup[]> {
-    return this.http.get<ReferenceCodingLookup[]>(this.baseUrl);
+    return this.http.get<ReferenceCodingLookup[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<ReferenceCodingLookup> {
-    return this.http.get<ReferenceCodingLookup>(`${this.baseUrl}/${id}`);
+    return this.http.get<ReferenceCodingLookup>(`${this.apiUrl}/${id}`);
   }
 
   getByCodeType(codeType: string): Observable<ReferenceCodingLookup[]> {
-    return this.http.get<ReferenceCodingLookup[]>(`${this.baseUrl}?codeType=${codeType}`);
+    return this.http.get<ReferenceCodingLookup[]>(`${this.apiUrl}?codeType=${codeType}`);
   }
 
   getBySchoolId(schoolId: number): Observable<ReferenceCodingLookup[]> {
-    return this.http.get<ReferenceCodingLookup[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<ReferenceCodingLookup[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   getSystemCodes(): Observable<ReferenceCodingLookup[]> {
-    return this.http.get<ReferenceCodingLookup[]>(`${this.baseUrl}?isSystemCode=true`);
+    return this.http.get<ReferenceCodingLookup[]>(`${this.apiUrl}?isSystemCode=true`);
   }
 
   create(dto: CreateReferenceCodingLookupDto): Observable<ReferenceCodingLookup> {
-    return this.http.post<ReferenceCodingLookup>(this.baseUrl, dto);
+    return this.http.post<ReferenceCodingLookup>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateReferenceCodingLookupDto): Observable<ReferenceCodingLookup> {
-    return this.http.put<ReferenceCodingLookup>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<ReferenceCodingLookup>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
+

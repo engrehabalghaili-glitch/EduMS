@@ -29,3 +29,4 @@ export class StudentComplaintLogService {
     return this.http.delete<void>(`${this.apiUrl}/student-complaint-logs/${id}`);
   }
 }
+

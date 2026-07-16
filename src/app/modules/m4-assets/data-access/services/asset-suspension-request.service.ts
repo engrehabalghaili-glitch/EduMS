@@ -7,29 +7,30 @@ import type { AssetSuspensionRequest, CreateAssetSuspensionRequest, UpdateAssetS
 @Injectable({ providedIn: 'root' })
 export class AssetSuspensionRequestService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetSuspensionRequests`;
+  private readonly apiUrl = `${environment.apiUrl}/assetSuspensionRequests`;
 
   getAll(): Observable<AssetSuspensionRequest[]> {
-    return this.http.get<AssetSuspensionRequest[]>(this.baseUrl);
+    return this.http.get<AssetSuspensionRequest[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetSuspensionRequest> {
-    return this.http.get<AssetSuspensionRequest>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetSuspensionRequest>(`${this.apiUrl}/${id}`);
   }
 
   getByAssetId(assetId: number): Observable<AssetSuspensionRequest[]> {
-    return this.http.get<AssetSuspensionRequest[]>(`${this.baseUrl}?assetId=${assetId}`);
+    return this.http.get<AssetSuspensionRequest[]>(`${this.apiUrl}?assetId=${assetId}`);
   }
 
   create(dto: CreateAssetSuspensionRequest): Observable<AssetSuspensionRequest> {
-    return this.http.post<AssetSuspensionRequest>(this.baseUrl, dto);
+    return this.http.post<AssetSuspensionRequest>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetSuspensionRequest): Observable<AssetSuspensionRequest> {
-    return this.http.put<AssetSuspensionRequest>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetSuspensionRequest>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

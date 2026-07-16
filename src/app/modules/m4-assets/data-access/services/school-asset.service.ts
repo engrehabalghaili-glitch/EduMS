@@ -7,29 +7,30 @@ import type { SchoolAsset, CreateSchoolAssetRequest, UpdateSchoolAssetRequest } 
 @Injectable({ providedIn: 'root' })
 export class SchoolAssetService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/schoolAssets`;
+  private readonly apiUrl = `${environment.apiUrl}/schoolAssets`;
 
   getAll(): Observable<SchoolAsset[]> {
-    return this.http.get<SchoolAsset[]>(this.baseUrl);
+    return this.http.get<SchoolAsset[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<SchoolAsset> {
-    return this.http.get<SchoolAsset>(`${this.baseUrl}/${id}`);
+    return this.http.get<SchoolAsset>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<SchoolAsset[]> {
-    return this.http.get<SchoolAsset[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<SchoolAsset[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateSchoolAssetRequest): Observable<SchoolAsset> {
-    return this.http.post<SchoolAsset>(this.baseUrl, dto);
+    return this.http.post<SchoolAsset>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateSchoolAssetRequest): Observable<SchoolAsset> {
-    return this.http.put<SchoolAsset>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<SchoolAsset>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

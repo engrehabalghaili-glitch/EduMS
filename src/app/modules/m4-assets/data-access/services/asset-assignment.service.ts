@@ -7,29 +7,30 @@ import type { AssetAssignment, CreateAssetAssignmentRequest, UpdateAssetAssignme
 @Injectable({ providedIn: 'root' })
 export class AssetAssignmentService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/assetAssignments`;
+  private readonly apiUrl = `${environment.apiUrl}/assetAssignments`;
 
   getAll(): Observable<AssetAssignment[]> {
-    return this.http.get<AssetAssignment[]>(this.baseUrl);
+    return this.http.get<AssetAssignment[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AssetAssignment> {
-    return this.http.get<AssetAssignment>(`${this.baseUrl}/${id}`);
+    return this.http.get<AssetAssignment>(`${this.apiUrl}/${id}`);
   }
 
   getByAssetId(assetId: number): Observable<AssetAssignment[]> {
-    return this.http.get<AssetAssignment[]>(`${this.baseUrl}?assetId=${assetId}`);
+    return this.http.get<AssetAssignment[]>(`${this.apiUrl}?assetId=${assetId}`);
   }
 
   create(dto: CreateAssetAssignmentRequest): Observable<AssetAssignment> {
-    return this.http.post<AssetAssignment>(this.baseUrl, dto);
+    return this.http.post<AssetAssignment>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetAssignmentRequest): Observable<AssetAssignment> {
-    return this.http.put<AssetAssignment>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AssetAssignment>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
