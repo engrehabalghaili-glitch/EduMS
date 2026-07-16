@@ -7,29 +7,30 @@ import type { RemediationPlan, CreateRemediationPlan, UpdateRemediationPlan, Rem
 @Injectable({ providedIn: 'root' })
 export class RemediationPlanService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/remediationPlans`;
+  private readonly apiUrl = `${environment.apiUrl}/remediationPlans`;
 
   getAll(): Observable<RemediationPlanListResponse> {
-    return this.http.get<RemediationPlanListResponse>(this.baseUrl);
+    return this.http.get<RemediationPlanListResponse>(this.apiUrl);
   }
 
   getById(id: number): Observable<RemediationPlanResponse> {
-    return this.http.get<RemediationPlanResponse>(`${this.baseUrl}/${id}`);
+    return this.http.get<RemediationPlanResponse>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<RemediationPlanListResponse> {
-    return this.http.get<RemediationPlanListResponse>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<RemediationPlanListResponse>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateRemediationPlan): Observable<RemediationPlanResponse> {
-    return this.http.post<RemediationPlanResponse>(this.baseUrl, dto);
+    return this.http.post<RemediationPlanResponse>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateRemediationPlan): Observable<RemediationPlanResponse> {
-    return this.http.put<RemediationPlanResponse>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<RemediationPlanResponse>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

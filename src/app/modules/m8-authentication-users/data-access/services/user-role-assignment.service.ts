@@ -7,29 +7,30 @@ import type { UserRoleAssignment, CreateUserRoleAssignment, UpdateUserRoleAssign
 @Injectable({ providedIn: 'root' })
 export class UserRoleAssignmentService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/userRoleAssignments`;
+  private readonly apiUrl = `${environment.apiUrl}/userRoleAssignments`;
 
   getAll(): Observable<UserRoleAssignment[]> {
-    return this.http.get<UserRoleAssignment[]>(this.baseUrl);
+    return this.http.get<UserRoleAssignment[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<UserRoleAssignment> {
-    return this.http.get<UserRoleAssignment>(`${this.baseUrl}/${id}`);
+    return this.http.get<UserRoleAssignment>(`${this.apiUrl}/${id}`);
   }
 
   getByUserId(userId: number): Observable<UserRoleAssignment[]> {
-    return this.http.get<UserRoleAssignment[]>(`${this.baseUrl}?userId=${userId}`);
+    return this.http.get<UserRoleAssignment[]>(`${this.apiUrl}?userId=${userId}`);
   }
 
   create(dto: CreateUserRoleAssignment): Observable<UserRoleAssignment> {
-    return this.http.post<UserRoleAssignment>(this.baseUrl, dto);
+    return this.http.post<UserRoleAssignment>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateUserRoleAssignment): Observable<UserRoleAssignment> {
-    return this.http.put<UserRoleAssignment>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<UserRoleAssignment>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

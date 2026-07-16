@@ -7,29 +7,30 @@ import type { SystemRole, CreateSystemRole, UpdateSystemRole } from '../models/s
 @Injectable({ providedIn: 'root' })
 export class SystemRoleService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/systemRoles`;
+  private readonly apiUrl = `${environment.apiUrl}/systemRoles`;
 
   getAll(): Observable<SystemRole[]> {
-    return this.http.get<SystemRole[]>(this.baseUrl);
+    return this.http.get<SystemRole[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<SystemRole> {
-    return this.http.get<SystemRole>(`${this.baseUrl}/${id}`);
+    return this.http.get<SystemRole>(`${this.apiUrl}/${id}`);
   }
 
   getByRoleType(roleType: string): Observable<SystemRole[]> {
-    return this.http.get<SystemRole[]>(`${this.baseUrl}?roleType=${roleType}`);
+    return this.http.get<SystemRole[]>(`${this.apiUrl}?roleType=${roleType}`);
   }
 
   create(dto: CreateSystemRole): Observable<SystemRole> {
-    return this.http.post<SystemRole>(this.baseUrl, dto);
+    return this.http.post<SystemRole>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateSystemRole): Observable<SystemRole> {
-    return this.http.put<SystemRole>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<SystemRole>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

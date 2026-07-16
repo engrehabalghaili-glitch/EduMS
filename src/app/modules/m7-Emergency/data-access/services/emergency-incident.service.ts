@@ -7,29 +7,30 @@ import type { EmergencyIncident, CreateEmergencyIncident, UpdateEmergencyInciden
 @Injectable({ providedIn: 'root' })
 export class EmergencyIncidentService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/emergencyIncidents`;
+  private readonly apiUrl = `${environment.apiUrl}/emergencyIncidents`;
 
   getAll(): Observable<EmergencyIncidentListResponse> {
-    return this.http.get<EmergencyIncidentListResponse>(this.baseUrl);
+    return this.http.get<EmergencyIncidentListResponse>(this.apiUrl);
   }
 
   getById(id: number): Observable<EmergencyIncidentResponse> {
-    return this.http.get<EmergencyIncidentResponse>(`${this.baseUrl}/${id}`);
+    return this.http.get<EmergencyIncidentResponse>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<EmergencyIncidentListResponse> {
-    return this.http.get<EmergencyIncidentListResponse>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<EmergencyIncidentListResponse>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateEmergencyIncident): Observable<EmergencyIncidentResponse> {
-    return this.http.post<EmergencyIncidentResponse>(this.baseUrl, dto);
+    return this.http.post<EmergencyIncidentResponse>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateEmergencyIncident): Observable<EmergencyIncidentResponse> {
-    return this.http.put<EmergencyIncidentResponse>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<EmergencyIncidentResponse>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

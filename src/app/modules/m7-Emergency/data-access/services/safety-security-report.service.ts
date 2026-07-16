@@ -7,29 +7,30 @@ import type { SafetySecurityReport, CreateSafetySecurityReport, UpdateSafetySecu
 @Injectable({ providedIn: 'root' })
 export class SafetySecurityReportService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/safetySecurityReports`;
+  private readonly apiUrl = `${environment.apiUrl}/safetySecurityReports`;
 
   getAll(): Observable<SafetySecurityReportListResponse> {
-    return this.http.get<SafetySecurityReportListResponse>(this.baseUrl);
+    return this.http.get<SafetySecurityReportListResponse>(this.apiUrl);
   }
 
   getById(id: number): Observable<SafetySecurityReportResponse> {
-    return this.http.get<SafetySecurityReportResponse>(`${this.baseUrl}/${id}`);
+    return this.http.get<SafetySecurityReportResponse>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<SafetySecurityReportListResponse> {
-    return this.http.get<SafetySecurityReportListResponse>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<SafetySecurityReportListResponse>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateSafetySecurityReport): Observable<SafetySecurityReportResponse> {
-    return this.http.post<SafetySecurityReportResponse>(this.baseUrl, dto);
+    return this.http.post<SafetySecurityReportResponse>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateSafetySecurityReport): Observable<SafetySecurityReportResponse> {
-    return this.http.put<SafetySecurityReportResponse>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<SafetySecurityReportResponse>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

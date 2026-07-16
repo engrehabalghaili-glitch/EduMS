@@ -7,29 +7,30 @@ import type { GovernanceRbacRule, CreateGovernanceRbacRule, UpdateGovernanceRbac
 @Injectable({ providedIn: 'root' })
 export class GovernanceRbacRuleService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/governanceRbacRules`;
+  private readonly apiUrl = `${environment.apiUrl}/governanceRbacRules`;
 
   getAll(): Observable<GovernanceRbacRule[]> {
-    return this.http.get<GovernanceRbacRule[]>(this.baseUrl);
+    return this.http.get<GovernanceRbacRule[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<GovernanceRbacRule> {
-    return this.http.get<GovernanceRbacRule>(`${this.baseUrl}/${id}`);
+    return this.http.get<GovernanceRbacRule>(`${this.apiUrl}/${id}`);
   }
 
   getByRoleId(roleId: number): Observable<GovernanceRbacRule[]> {
-    return this.http.get<GovernanceRbacRule[]>(`${this.baseUrl}?roleId=${roleId}`);
+    return this.http.get<GovernanceRbacRule[]>(`${this.apiUrl}?roleId=${roleId}`);
   }
 
   create(dto: CreateGovernanceRbacRule): Observable<GovernanceRbacRule> {
-    return this.http.post<GovernanceRbacRule>(this.baseUrl, dto);
+    return this.http.post<GovernanceRbacRule>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateGovernanceRbacRule): Observable<GovernanceRbacRule> {
-    return this.http.put<GovernanceRbacRule>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<GovernanceRbacRule>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

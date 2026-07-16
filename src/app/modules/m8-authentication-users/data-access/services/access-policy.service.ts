@@ -7,29 +7,30 @@ import type { AccessPolicy, CreateAccessPolicy, UpdateAccessPolicy } from '../mo
 @Injectable({ providedIn: 'root' })
 export class AccessPolicyService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/accessPolicies`;
+  private readonly apiUrl = `${environment.apiUrl}/accessPolicies`;
 
   getAll(): Observable<AccessPolicy[]> {
-    return this.http.get<AccessPolicy[]>(this.baseUrl);
+    return this.http.get<AccessPolicy[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<AccessPolicy> {
-    return this.http.get<AccessPolicy>(`${this.baseUrl}/${id}`);
+    return this.http.get<AccessPolicy>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<AccessPolicy[]> {
-    return this.http.get<AccessPolicy[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<AccessPolicy[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateAccessPolicy): Observable<AccessPolicy> {
-    return this.http.post<AccessPolicy>(this.baseUrl, dto);
+    return this.http.post<AccessPolicy>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateAccessPolicy): Observable<AccessPolicy> {
-    return this.http.put<AccessPolicy>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<AccessPolicy>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

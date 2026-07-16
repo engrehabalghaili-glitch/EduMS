@@ -7,29 +7,30 @@ import type { BehaviorPermissionMatrix, CreateBehaviorPermissionMatrix, UpdateBe
 @Injectable({ providedIn: 'root' })
 export class BehaviorPermissionMatrixService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/behaviorPermissionMatrices`;
+  private readonly apiUrl = `${environment.apiUrl}/behaviorPermissionMatrices`;
 
   getAll(): Observable<BehaviorPermissionMatrix[]> {
-    return this.http.get<BehaviorPermissionMatrix[]>(this.baseUrl);
+    return this.http.get<BehaviorPermissionMatrix[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<BehaviorPermissionMatrix> {
-    return this.http.get<BehaviorPermissionMatrix>(`${this.baseUrl}/${id}`);
+    return this.http.get<BehaviorPermissionMatrix>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<BehaviorPermissionMatrix[]> {
-    return this.http.get<BehaviorPermissionMatrix[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<BehaviorPermissionMatrix[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateBehaviorPermissionMatrix): Observable<BehaviorPermissionMatrix> {
-    return this.http.post<BehaviorPermissionMatrix>(this.baseUrl, dto);
+    return this.http.post<BehaviorPermissionMatrix>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateBehaviorPermissionMatrix): Observable<BehaviorPermissionMatrix> {
-    return this.http.put<BehaviorPermissionMatrix>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<BehaviorPermissionMatrix>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

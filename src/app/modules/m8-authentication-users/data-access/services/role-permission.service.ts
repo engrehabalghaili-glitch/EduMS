@@ -7,29 +7,30 @@ import type { RolePermission, CreateRolePermission, UpdateRolePermission } from 
 @Injectable({ providedIn: 'root' })
 export class RolePermissionService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/rolePermissions`;
+  private readonly apiUrl = `${environment.apiUrl}/rolePermissions`;
 
   getAll(): Observable<RolePermission[]> {
-    return this.http.get<RolePermission[]>(this.baseUrl);
+    return this.http.get<RolePermission[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<RolePermission> {
-    return this.http.get<RolePermission>(`${this.baseUrl}/${id}`);
+    return this.http.get<RolePermission>(`${this.apiUrl}/${id}`);
   }
 
   getByRoleId(roleId: number): Observable<RolePermission[]> {
-    return this.http.get<RolePermission[]>(`${this.baseUrl}?roleId=${roleId}`);
+    return this.http.get<RolePermission[]>(`${this.apiUrl}?roleId=${roleId}`);
   }
 
   create(dto: CreateRolePermission): Observable<RolePermission> {
-    return this.http.post<RolePermission>(this.baseUrl, dto);
+    return this.http.post<RolePermission>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateRolePermission): Observable<RolePermission> {
-    return this.http.put<RolePermission>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<RolePermission>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

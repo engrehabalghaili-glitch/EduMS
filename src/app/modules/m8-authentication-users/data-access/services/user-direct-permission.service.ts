@@ -7,29 +7,30 @@ import type { UserDirectPermission, CreateUserDirectPermission, UpdateUserDirect
 @Injectable({ providedIn: 'root' })
 export class UserDirectPermissionService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/userDirectPermissions`;
+  private readonly apiUrl = `${environment.apiUrl}/userDirectPermissions`;
 
   getAll(): Observable<UserDirectPermission[]> {
-    return this.http.get<UserDirectPermission[]>(this.baseUrl);
+    return this.http.get<UserDirectPermission[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<UserDirectPermission> {
-    return this.http.get<UserDirectPermission>(`${this.baseUrl}/${id}`);
+    return this.http.get<UserDirectPermission>(`${this.apiUrl}/${id}`);
   }
 
   getByUserId(userId: number): Observable<UserDirectPermission[]> {
-    return this.http.get<UserDirectPermission[]>(`${this.baseUrl}?userId=${userId}`);
+    return this.http.get<UserDirectPermission[]>(`${this.apiUrl}?userId=${userId}`);
   }
 
   create(dto: CreateUserDirectPermission): Observable<UserDirectPermission> {
-    return this.http.post<UserDirectPermission>(this.baseUrl, dto);
+    return this.http.post<UserDirectPermission>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateUserDirectPermission): Observable<UserDirectPermission> {
-    return this.http.put<UserDirectPermission>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<UserDirectPermission>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

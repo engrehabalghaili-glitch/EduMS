@@ -7,29 +7,30 @@ import type { StudentBasePermission, CreateStudentBasePermission, UpdateStudentB
 @Injectable({ providedIn: 'root' })
 export class StudentBasePermissionService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentBasePermissions`;
+  private readonly apiUrl = `${environment.apiUrl}/studentBasePermissions`;
 
   getAll(): Observable<StudentBasePermission[]> {
-    return this.http.get<StudentBasePermission[]>(this.baseUrl);
+    return this.http.get<StudentBasePermission[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentBasePermission> {
-    return this.http.get<StudentBasePermission>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentBasePermission>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<StudentBasePermission[]> {
-    return this.http.get<StudentBasePermission[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<StudentBasePermission[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateStudentBasePermission): Observable<StudentBasePermission> {
-    return this.http.post<StudentBasePermission>(this.baseUrl, dto);
+    return this.http.post<StudentBasePermission>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentBasePermission): Observable<StudentBasePermission> {
-    return this.http.put<StudentBasePermission>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentBasePermission>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

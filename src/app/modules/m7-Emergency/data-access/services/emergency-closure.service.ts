@@ -7,29 +7,30 @@ import type { EmergencyClosure, CreateEmergencyClosure, UpdateEmergencyClosure, 
 @Injectable({ providedIn: 'root' })
 export class EmergencyClosureService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/emergencyClosures`;
+  private readonly apiUrl = `${environment.apiUrl}/emergencyClosures`;
 
   getAll(): Observable<EmergencyClosureListResponse> {
-    return this.http.get<EmergencyClosureListResponse>(this.baseUrl);
+    return this.http.get<EmergencyClosureListResponse>(this.apiUrl);
   }
 
   getById(id: number): Observable<EmergencyClosureResponse> {
-    return this.http.get<EmergencyClosureResponse>(`${this.baseUrl}/${id}`);
+    return this.http.get<EmergencyClosureResponse>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<EmergencyClosureListResponse> {
-    return this.http.get<EmergencyClosureListResponse>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<EmergencyClosureListResponse>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateEmergencyClosure): Observable<EmergencyClosureResponse> {
-    return this.http.post<EmergencyClosureResponse>(this.baseUrl, dto);
+    return this.http.post<EmergencyClosureResponse>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateEmergencyClosure): Observable<EmergencyClosureResponse> {
-    return this.http.put<EmergencyClosureResponse>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<EmergencyClosureResponse>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

@@ -7,29 +7,30 @@ import type { OfficePermission, CreateOfficePermission, UpdateOfficePermission }
 @Injectable({ providedIn: 'root' })
 export class OfficePermissionService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/officePermissions`;
+  private readonly apiUrl = `${environment.apiUrl}/officePermissions`;
 
   getAll(): Observable<OfficePermission[]> {
-    return this.http.get<OfficePermission[]>(this.baseUrl);
+    return this.http.get<OfficePermission[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<OfficePermission> {
-    return this.http.get<OfficePermission>(`${this.baseUrl}/${id}`);
+    return this.http.get<OfficePermission>(`${this.apiUrl}/${id}`);
   }
 
   getByOfficeId(officeId: number): Observable<OfficePermission[]> {
-    return this.http.get<OfficePermission[]>(`${this.baseUrl}?officeId=${officeId}`);
+    return this.http.get<OfficePermission[]>(`${this.apiUrl}?officeId=${officeId}`);
   }
 
   create(dto: CreateOfficePermission): Observable<OfficePermission> {
-    return this.http.post<OfficePermission>(this.baseUrl, dto);
+    return this.http.post<OfficePermission>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateOfficePermission): Observable<OfficePermission> {
-    return this.http.put<OfficePermission>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<OfficePermission>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

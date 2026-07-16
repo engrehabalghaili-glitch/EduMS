@@ -7,29 +7,30 @@ import type { CommunityPartnership, CreateCommunityPartnership, UpdateCommunityP
 @Injectable({ providedIn: 'root' })
 export class CommunityPartnershipService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/communityPartnerships`;
+  private readonly apiUrl = `${environment.apiUrl}/communityPartnerships`;
 
   getAll(): Observable<CommunityPartnershipListResponse> {
-    return this.http.get<CommunityPartnershipListResponse>(this.baseUrl);
+    return this.http.get<CommunityPartnershipListResponse>(this.apiUrl);
   }
 
   getById(id: number): Observable<CommunityPartnershipResponse> {
-    return this.http.get<CommunityPartnershipResponse>(`${this.baseUrl}/${id}`);
+    return this.http.get<CommunityPartnershipResponse>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<CommunityPartnershipListResponse> {
-    return this.http.get<CommunityPartnershipListResponse>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<CommunityPartnershipListResponse>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateCommunityPartnership): Observable<CommunityPartnershipResponse> {
-    return this.http.post<CommunityPartnershipResponse>(this.baseUrl, dto);
+    return this.http.post<CommunityPartnershipResponse>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateCommunityPartnership): Observable<CommunityPartnershipResponse> {
-    return this.http.put<CommunityPartnershipResponse>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<CommunityPartnershipResponse>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

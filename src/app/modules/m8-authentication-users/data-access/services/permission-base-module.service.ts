@@ -7,29 +7,30 @@ import type { PermissionBaseModule, CreatePermissionBaseModule, UpdatePermission
 @Injectable({ providedIn: 'root' })
 export class PermissionBaseModuleService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/permissionBaseModules`;
+  private readonly apiUrl = `${environment.apiUrl}/permissionBaseModules`;
 
   getAll(): Observable<PermissionBaseModule[]> {
-    return this.http.get<PermissionBaseModule[]>(this.baseUrl);
+    return this.http.get<PermissionBaseModule[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<PermissionBaseModule> {
-    return this.http.get<PermissionBaseModule>(`${this.baseUrl}/${id}`);
+    return this.http.get<PermissionBaseModule>(`${this.apiUrl}/${id}`);
   }
 
   getByModuleCode(moduleCode: string): Observable<PermissionBaseModule[]> {
-    return this.http.get<PermissionBaseModule[]>(`${this.baseUrl}?moduleCode=${moduleCode}`);
+    return this.http.get<PermissionBaseModule[]>(`${this.apiUrl}?moduleCode=${moduleCode}`);
   }
 
   create(dto: CreatePermissionBaseModule): Observable<PermissionBaseModule> {
-    return this.http.post<PermissionBaseModule>(this.baseUrl, dto);
+    return this.http.post<PermissionBaseModule>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdatePermissionBaseModule): Observable<PermissionBaseModule> {
-    return this.http.put<PermissionBaseModule>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<PermissionBaseModule>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

@@ -7,29 +7,30 @@ import type { SchoolSurplus, CreateSchoolSurplus, UpdateSchoolSurplus, SchoolSur
 @Injectable({ providedIn: 'root' })
 export class SchoolSurplusService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/schoolSurpluses`;
+  private readonly apiUrl = `${environment.apiUrl}/schoolSurpluses`;
 
   getAll(): Observable<SchoolSurplusListResponse> {
-    return this.http.get<SchoolSurplusListResponse>(this.baseUrl);
+    return this.http.get<SchoolSurplusListResponse>(this.apiUrl);
   }
 
   getById(id: number): Observable<SchoolSurplusResponse> {
-    return this.http.get<SchoolSurplusResponse>(`${this.baseUrl}/${id}`);
+    return this.http.get<SchoolSurplusResponse>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<SchoolSurplusListResponse> {
-    return this.http.get<SchoolSurplusListResponse>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<SchoolSurplusListResponse>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateSchoolSurplus): Observable<SchoolSurplusResponse> {
-    return this.http.post<SchoolSurplusResponse>(this.baseUrl, dto);
+    return this.http.post<SchoolSurplusResponse>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateSchoolSurplus): Observable<SchoolSurplusResponse> {
-    return this.http.put<SchoolSurplusResponse>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<SchoolSurplusResponse>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

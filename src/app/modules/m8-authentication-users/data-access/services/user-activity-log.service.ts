@@ -7,29 +7,30 @@ import type { UserActivityLog, CreateUserActivityLog, UpdateUserActivityLog } fr
 @Injectable({ providedIn: 'root' })
 export class UserActivityLogService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/userActivityLogs`;
+  private readonly apiUrl = `${environment.apiUrl}/userActivityLogs`;
 
   getAll(): Observable<UserActivityLog[]> {
-    return this.http.get<UserActivityLog[]>(this.baseUrl);
+    return this.http.get<UserActivityLog[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<UserActivityLog> {
-    return this.http.get<UserActivityLog>(`${this.baseUrl}/${id}`);
+    return this.http.get<UserActivityLog>(`${this.apiUrl}/${id}`);
   }
 
   getByUserId(userId: number): Observable<UserActivityLog[]> {
-    return this.http.get<UserActivityLog[]>(`${this.baseUrl}?userId=${userId}`);
+    return this.http.get<UserActivityLog[]>(`${this.apiUrl}?userId=${userId}`);
   }
 
   create(dto: CreateUserActivityLog): Observable<UserActivityLog> {
-    return this.http.post<UserActivityLog>(this.baseUrl, dto);
+    return this.http.post<UserActivityLog>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateUserActivityLog): Observable<UserActivityLog> {
-    return this.http.put<UserActivityLog>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<UserActivityLog>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

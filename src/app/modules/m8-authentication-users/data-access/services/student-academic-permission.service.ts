@@ -7,29 +7,30 @@ import type { StudentAcademicPermission, CreateStudentAcademicPermission, Update
 @Injectable({ providedIn: 'root' })
 export class StudentAcademicPermissionService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/studentAcademicPermissions`;
+  private readonly apiUrl = `${environment.apiUrl}/studentAcademicPermissions`;
 
   getAll(): Observable<StudentAcademicPermission[]> {
-    return this.http.get<StudentAcademicPermission[]>(this.baseUrl);
+    return this.http.get<StudentAcademicPermission[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<StudentAcademicPermission> {
-    return this.http.get<StudentAcademicPermission>(`${this.baseUrl}/${id}`);
+    return this.http.get<StudentAcademicPermission>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<StudentAcademicPermission[]> {
-    return this.http.get<StudentAcademicPermission[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<StudentAcademicPermission[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateStudentAcademicPermission): Observable<StudentAcademicPermission> {
-    return this.http.post<StudentAcademicPermission>(this.baseUrl, dto);
+    return this.http.post<StudentAcademicPermission>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentAcademicPermission): Observable<StudentAcademicPermission> {
-    return this.http.put<StudentAcademicPermission>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<StudentAcademicPermission>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

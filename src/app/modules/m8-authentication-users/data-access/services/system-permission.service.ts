@@ -7,29 +7,30 @@ import type { SystemPermission, CreateSystemPermission, UpdateSystemPermission }
 @Injectable({ providedIn: 'root' })
 export class SystemPermissionService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/systemPermissions`;
+  private readonly apiUrl = `${environment.apiUrl}/systemPermissions`;
 
   getAll(): Observable<SystemPermission[]> {
-    return this.http.get<SystemPermission[]>(this.baseUrl);
+    return this.http.get<SystemPermission[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<SystemPermission> {
-    return this.http.get<SystemPermission>(`${this.baseUrl}/${id}`);
+    return this.http.get<SystemPermission>(`${this.apiUrl}/${id}`);
   }
 
   getByModule(module: string): Observable<SystemPermission[]> {
-    return this.http.get<SystemPermission[]>(`${this.baseUrl}?module=${module}`);
+    return this.http.get<SystemPermission[]>(`${this.apiUrl}?module=${module}`);
   }
 
   create(dto: CreateSystemPermission): Observable<SystemPermission> {
-    return this.http.post<SystemPermission>(this.baseUrl, dto);
+    return this.http.post<SystemPermission>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateSystemPermission): Observable<SystemPermission> {
-    return this.http.put<SystemPermission>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<SystemPermission>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

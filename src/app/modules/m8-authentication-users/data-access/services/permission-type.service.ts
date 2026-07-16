@@ -7,29 +7,30 @@ import type { PermissionType, CreatePermissionType, UpdatePermissionType } from 
 @Injectable({ providedIn: 'root' })
 export class PermissionTypeService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/permissionTypes`;
+  private readonly apiUrl = `${environment.apiUrl}/permissionTypes`;
 
   getAll(): Observable<PermissionType[]> {
-    return this.http.get<PermissionType[]>(this.baseUrl);
+    return this.http.get<PermissionType[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<PermissionType> {
-    return this.http.get<PermissionType>(`${this.baseUrl}/${id}`);
+    return this.http.get<PermissionType>(`${this.apiUrl}/${id}`);
   }
 
   getByCategory(category: string): Observable<PermissionType[]> {
-    return this.http.get<PermissionType[]>(`${this.baseUrl}?category=${category}`);
+    return this.http.get<PermissionType[]>(`${this.apiUrl}?category=${category}`);
   }
 
   create(dto: CreatePermissionType): Observable<PermissionType> {
-    return this.http.post<PermissionType>(this.baseUrl, dto);
+    return this.http.post<PermissionType>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdatePermissionType): Observable<PermissionType> {
-    return this.http.put<PermissionType>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<PermissionType>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

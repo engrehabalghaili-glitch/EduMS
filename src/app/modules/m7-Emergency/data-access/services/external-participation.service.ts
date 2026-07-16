@@ -7,29 +7,30 @@ import type { ExternalParticipation, CreateExternalParticipation, UpdateExternal
 @Injectable({ providedIn: 'root' })
 export class ExternalParticipationService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/externalParticipations`;
+  private readonly apiUrl = `${environment.apiUrl}/externalParticipations`;
 
   getAll(): Observable<ExternalParticipationListResponse> {
-    return this.http.get<ExternalParticipationListResponse>(this.baseUrl);
+    return this.http.get<ExternalParticipationListResponse>(this.apiUrl);
   }
 
   getById(id: number): Observable<ExternalParticipationResponse> {
-    return this.http.get<ExternalParticipationResponse>(`${this.baseUrl}/${id}`);
+    return this.http.get<ExternalParticipationResponse>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<ExternalParticipationListResponse> {
-    return this.http.get<ExternalParticipationListResponse>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<ExternalParticipationListResponse>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateExternalParticipation): Observable<ExternalParticipationResponse> {
-    return this.http.post<ExternalParticipationResponse>(this.baseUrl, dto);
+    return this.http.post<ExternalParticipationResponse>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateExternalParticipation): Observable<ExternalParticipationResponse> {
-    return this.http.put<ExternalParticipationResponse>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<ExternalParticipationResponse>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

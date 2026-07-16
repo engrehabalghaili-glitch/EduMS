@@ -7,29 +7,30 @@ import type { RoleMatrix, CreateRoleMatrix, UpdateRoleMatrix } from '../models/r
 @Injectable({ providedIn: 'root' })
 export class RoleMatrixService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/roleMatrices`;
+  private readonly apiUrl = `${environment.apiUrl}/roleMatrices`;
 
   getAll(): Observable<RoleMatrix[]> {
-    return this.http.get<RoleMatrix[]>(this.baseUrl);
+    return this.http.get<RoleMatrix[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<RoleMatrix> {
-    return this.http.get<RoleMatrix>(`${this.baseUrl}/${id}`);
+    return this.http.get<RoleMatrix>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<RoleMatrix[]> {
-    return this.http.get<RoleMatrix[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<RoleMatrix[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateRoleMatrix): Observable<RoleMatrix> {
-    return this.http.post<RoleMatrix>(this.baseUrl, dto);
+    return this.http.post<RoleMatrix>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateRoleMatrix): Observable<RoleMatrix> {
-    return this.http.put<RoleMatrix>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<RoleMatrix>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

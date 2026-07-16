@@ -7,25 +7,26 @@ import type { SchoolMerger, CreateSchoolMerger, UpdateSchoolMerger, SchoolMerger
 @Injectable({ providedIn: 'root' })
 export class SchoolMergerService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/schoolMergers`;
+  private readonly apiUrl = `${environment.apiUrl}/schoolMergers`;
 
   getAll(): Observable<SchoolMergerListResponse> {
-    return this.http.get<SchoolMergerListResponse>(this.baseUrl);
+    return this.http.get<SchoolMergerListResponse>(this.apiUrl);
   }
 
   getById(id: number): Observable<SchoolMergerResponse> {
-    return this.http.get<SchoolMergerResponse>(`${this.baseUrl}/${id}`);
+    return this.http.get<SchoolMergerResponse>(`${this.apiUrl}/${id}`);
   }
 
   create(dto: CreateSchoolMerger): Observable<SchoolMergerResponse> {
-    return this.http.post<SchoolMergerResponse>(this.baseUrl, dto);
+    return this.http.post<SchoolMergerResponse>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateSchoolMerger): Observable<SchoolMergerResponse> {
-    return this.http.put<SchoolMergerResponse>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<SchoolMergerResponse>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

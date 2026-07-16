@@ -7,29 +7,30 @@ import type { BehaviorPermission, CreateBehaviorPermission, UpdateBehaviorPermis
 @Injectable({ providedIn: 'root' })
 export class BehaviorPermissionService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/behaviorPermissions`;
+  private readonly apiUrl = `${environment.apiUrl}/behaviorPermissions`;
 
   getAll(): Observable<BehaviorPermission[]> {
-    return this.http.get<BehaviorPermission[]>(this.baseUrl);
+    return this.http.get<BehaviorPermission[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<BehaviorPermission> {
-    return this.http.get<BehaviorPermission>(`${this.baseUrl}/${id}`);
+    return this.http.get<BehaviorPermission>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<BehaviorPermission[]> {
-    return this.http.get<BehaviorPermission[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<BehaviorPermission[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateBehaviorPermission): Observable<BehaviorPermission> {
-    return this.http.post<BehaviorPermission>(this.baseUrl, dto);
+    return this.http.post<BehaviorPermission>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateBehaviorPermission): Observable<BehaviorPermission> {
-    return this.http.put<BehaviorPermission>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<BehaviorPermission>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

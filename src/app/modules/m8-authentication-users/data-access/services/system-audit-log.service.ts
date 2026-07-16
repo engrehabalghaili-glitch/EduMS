@@ -7,29 +7,30 @@ import type { SystemAuditLog, CreateSystemAuditLog, UpdateSystemAuditLog } from 
 @Injectable({ providedIn: 'root' })
 export class SystemAuditLogService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/systemAuditLogs`;
+  private readonly apiUrl = `${environment.apiUrl}/systemAuditLogs`;
 
   getAll(): Observable<SystemAuditLog[]> {
-    return this.http.get<SystemAuditLog[]>(this.baseUrl);
+    return this.http.get<SystemAuditLog[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<SystemAuditLog> {
-    return this.http.get<SystemAuditLog>(`${this.baseUrl}/${id}`);
+    return this.http.get<SystemAuditLog>(`${this.apiUrl}/${id}`);
   }
 
   getByUserId(userId: number): Observable<SystemAuditLog[]> {
-    return this.http.get<SystemAuditLog[]>(`${this.baseUrl}?userId=${userId}`);
+    return this.http.get<SystemAuditLog[]>(`${this.apiUrl}?userId=${userId}`);
   }
 
   create(dto: CreateSystemAuditLog): Observable<SystemAuditLog> {
-    return this.http.post<SystemAuditLog>(this.baseUrl, dto);
+    return this.http.post<SystemAuditLog>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateSystemAuditLog): Observable<SystemAuditLog> {
-    return this.http.put<SystemAuditLog>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<SystemAuditLog>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

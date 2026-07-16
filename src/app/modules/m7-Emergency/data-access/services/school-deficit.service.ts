@@ -7,29 +7,30 @@ import type { SchoolDeficit, CreateSchoolDeficit, UpdateSchoolDeficit, SchoolDef
 @Injectable({ providedIn: 'root' })
 export class SchoolDeficitService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/schoolDeficits`;
+  private readonly apiUrl = `${environment.apiUrl}/schoolDeficits`;
 
   getAll(): Observable<SchoolDeficitListResponse> {
-    return this.http.get<SchoolDeficitListResponse>(this.baseUrl);
+    return this.http.get<SchoolDeficitListResponse>(this.apiUrl);
   }
 
   getById(id: number): Observable<SchoolDeficitResponse> {
-    return this.http.get<SchoolDeficitResponse>(`${this.baseUrl}/${id}`);
+    return this.http.get<SchoolDeficitResponse>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<SchoolDeficitListResponse> {
-    return this.http.get<SchoolDeficitListResponse>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<SchoolDeficitListResponse>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateSchoolDeficit): Observable<SchoolDeficitResponse> {
-    return this.http.post<SchoolDeficitResponse>(this.baseUrl, dto);
+    return this.http.post<SchoolDeficitResponse>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdateSchoolDeficit): Observable<SchoolDeficitResponse> {
-    return this.http.put<SchoolDeficitResponse>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<SchoolDeficitResponse>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

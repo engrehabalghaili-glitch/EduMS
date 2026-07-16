@@ -7,29 +7,30 @@ import type { PrivilegeRule, CreatePrivilegeRule, UpdatePrivilegeRule } from '..
 @Injectable({ providedIn: 'root' })
 export class PrivilegeRuleService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.baseUrl}/privilegeRules`;
+  private readonly apiUrl = `${environment.apiUrl}/privilegeRules`;
 
   getAll(): Observable<PrivilegeRule[]> {
-    return this.http.get<PrivilegeRule[]>(this.baseUrl);
+    return this.http.get<PrivilegeRule[]>(this.apiUrl);
   }
 
   getById(id: number): Observable<PrivilegeRule> {
-    return this.http.get<PrivilegeRule>(`${this.baseUrl}/${id}`);
+    return this.http.get<PrivilegeRule>(`${this.apiUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<PrivilegeRule[]> {
-    return this.http.get<PrivilegeRule[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+    return this.http.get<PrivilegeRule[]>(`${this.apiUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreatePrivilegeRule): Observable<PrivilegeRule> {
-    return this.http.post<PrivilegeRule>(this.baseUrl, dto);
+    return this.http.post<PrivilegeRule>(this.apiUrl, dto);
   }
 
   update(id: number, dto: UpdatePrivilegeRule): Observable<PrivilegeRule> {
-    return this.http.put<PrivilegeRule>(`${this.baseUrl}/${id}`, dto);
+    return this.http.put<PrivilegeRule>(`${this.apiUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+
