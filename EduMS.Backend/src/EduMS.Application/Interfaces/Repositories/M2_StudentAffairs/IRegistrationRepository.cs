@@ -2,6 +2,7 @@ using System.Threading;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using EduMS.Domain.Entities;
+using EduMS.Domain.Entities.M2_StudentAffairs;
 using EduMS.Application.Interfaces.Repositories.Common;
 
 namespace EduMS.Application.Interfaces.Repositories.M2_StudentAffairs;

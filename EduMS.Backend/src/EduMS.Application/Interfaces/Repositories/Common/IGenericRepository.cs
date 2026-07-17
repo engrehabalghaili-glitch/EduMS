@@ -17,7 +17,8 @@ public interface IGenericRepository<T> where T : class
     // 4. جلب مع العلاقات (Eager Loading / Includes) لتجنب تكرار الدوال في الواجهات المخصصة
     Task<IEnumerable<T>> FindWithIncludesAsync(
         Expression<Func<T, bool>> predicate, 
-        params Expression<Func<T, object>>[] includes, CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default,
+        params Expression<Func<T, object>>[] includes);
 
     // 5. التصفح (Pagination) للملفات الكبيرة 
     Task<(IEnumerable<T> Items, int TotalCount)> GetPagedAsync(
