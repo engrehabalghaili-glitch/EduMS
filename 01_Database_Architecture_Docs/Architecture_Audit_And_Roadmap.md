@@ -1,6 +1,6 @@
-# 🏛️ تقرير التدقيق المعماري الشامل ومحاذاة الحدود الهندسية وخارطة الطريق الفنية لإتمام نظام EduMS
+# 🏛️ تقرير التدقيق المعماري الشامل ومحاذاة الحدود الهندسية وخارطة الطريق الفنية المبرمجة لإتمام نظام EduMS
 
-**تاريخ التدقيق والإصدار:** 17 يوليو 2026  
+**تاريخ التدقيق والتحديث الهيكلي:** 18 يوليو 2026  
 **المستودع المستهدف:** الخادم الخلفي الموحد (`EduMS.Backend` - Clean Architecture Solution)  
 **حالة البناء بعد التدقيق:** 🏆 **ناجح بنسبة 100% (0 Error(s) - Zero Build Errors)**  
 
@@ -72,61 +72,99 @@
 
 ---
 
-## 🚀 ثالثاً: خارطة الطريق الفنية المبرمجة والمحددة بالأولويات (`Prioritized Technical Roadmap to Completion`)
+## 🚀 ثالثاً: خارطة الطريق الفنية المبرمجة والمحددة بالأولويات بعد إعادة التسلسل (`Re-Sequenced & Prioritized Technical Roadmap`)
 
-من الآن وحتى الوصول إلى الاكتمال النهائي والإطلاق الشامل للمنظومة، تم وضع خارطة طريق هندسية صارمة مقسمة إلى 4 مراحل تنفيذية ذات أولوية عالية، مع تفصيل فني عميق لكل مرحلة:
+لضمان سلامة التسلسل المنطقي للهندسة البرمجية (`Structural Logical Sequence`)، تم إعادة ترتيب خارطة الطريق وإدراج **المرحلة الخامسة المخصصة لمنطق أعمال التطبيق (CQRS Layer & Enterprise Components)** قبل البدء في واجهات الـ API Controllers. لا يمكن منطقياً وبناءً على العمارة النظيفة إنشاء نقاط النهاية قبل وجود أوامر واستعلامات ومعالجات تطبيقية جاهزة ومختبرة لاستقبال تلك الطلبات.
+
+وفيما يلي المخطط الزمني الهندسي المحدث لخارطة الطريق مقسمة إلى 5 مراحل متكاملة (من المرحلة 5 وحتى المرحلة 9):
 
 ```mermaid
 gantt
-    title خارطة الطريق الهندسية المبرمجة لإتمام الخادم الخلفي EduMS
+    title خارطة الطريق المبرمجة لنظام EduMS (إعادة التسلسل وإدراج المكونات المؤسسية)
     dateFormat  YYYY-MM-DD
     axisFormat %m-%d
-    section المرحلة 5: نقاط النهاية
-    بناء وتطوير واجهات API Controllers للوحدات M2 إلى M8      :active, p5_1, 2026-07-18, 5d
-    توحيد قوالب الاستجابة ومعالجة الاستثناءات المركزية            :p5_2, after p5_1, 2d
-    section المرحلة 6: التدقيق والاعتراض
-    بناء معترض التدقيق التلقائي AuditSaveChangesInterceptor      :p5_3, after p5_2, 3d
-    تفعيل سجل التدقيق الأمني الشامل Audit Trail Logging          :p5_4, after p5_3, 2d
-    section المرحلة 7: الأمان والصلاحيات
-    تكامل التوثيق عبر JWT Bearer وحوكمة السياسات RBAC Policies   :p5_5, after p5_4, 3d
-    section المرحلة 8: التحسين والتوثيق
-    اختبارات التكامل الشاملة وضبط أداء استعلامات Oracle          :p5_6, after p5_5, 3d
+    section المرحلة 5: منطق التطبيق (CQRS)
+    بناء أوامر واستعلامات ومعالجات MediatR للوحدات M2-M8         :active, p5_1, 2026-07-18, 6d
+    تطبيق التحقق عبر FluentValidation والتحويل عبر AutoMapper    :p5_2, after p5_1, 3d
+    section المرحلة 6: واجهات الاتصال
+    تطوير واجهات API Controllers كموزعات نحيفة Thin Dispatchers  :p5_3, after p5_2, 4d
+    section المرحلة 7: المخاوف الشاملة
+    استراتيجية التخزين المؤقت Caching ومعالجة الأخطاء العالمية       :p5_4, after p5_3, 3d
+    بناء معترض الحفظ التدقيقي AuditSaveChangesInterceptor        :p5_5, after p5_4, 2d
+    section المرحلة 8: الأمان والهوية
+    تكامل التوثيق عبر JWT Bearer وحوكمة السياسات RBAC Policies   :p5_6, after p5_5, 3d
+    section المرحلة 9: المهام والأداء
+    المهام المجدولة Hangfire وإدارة الملفات File Storage         :p5_7, after p5_6, 3d
+    تحسين وضبط أداء استعلامات Oracle والاختبارات الشاملة         :p5_8, after p5_7, 3d
 ```
 
-### 🎯 المرحلة الخامسة (Phase-5): بناء وتطوير واجهات الـ API Controllers ونقاط النهاية (`API Endpoints Implementation`)
-* **الأولوية:** 🔴 **قصوى ومباشرة (Immediate Priority)**
-* **الشرح الفني المفصل والدقيق:**
-  1. **تطوير نقاط النهاية للوحدات المتبقية (`M2` إلى `M8`):**  
-     سيتم إنشاء متحكمات واجهات برمجية (`API Controllers`) داخل مجلدات `EduMS.WebApi` المتخصصة لكل قسم (مثل `StudentRegistrationController`, `EmployeeManagementController`, `FinancialInvoiceController`, `EmergencyIncidentController`). ستعتمد هذه المتحكمات على حقن طبقة التطبيق إما عبر نمط **CQRS (`IMediator / ISender`)** أو عبر واجهات خدمات التطبيق (`IApplicationService`) لتمرير أوامر الإضافة والتعديل (`Commands`) واستعلامات الجلب (`Queries`).
-  2. **توحيد قوالب الاستجابة ومعالجة الأخطاء (`Unified API Responses & Global Exception Handling`):**  
-     تغليف جميع الاستجابات الصادرة من نقاط النهاية في قالب موحد `ApiResponse<T>` يحتوي على كائن البيانات (`Data`)، وحالة النجاح (`Success`)، ورسائل الخطأ التفصيلية (`Message / Errors`). سيتم ربط هذا القالب ببرمجية وسيطة لاعتراض الأخطاء العالمية (`Global Exception Handler Middleware`) لترجمة استثناءات المجال (`DomainExceptions`) واستثناءات التحقق (`ValidationExceptions`) إلى رموز حالة HTTP دقيقة (`400 Bad Request`, `404 Not Found`, `409 Conflict`, `500 Internal Server Error`) دون كشف تفاصيل استثناءات النظام الداخلية.
-  3. **التوثيق الآلي عبر Swagger / OpenAPI:**  
-     ضبط توليد وثائق Swagger التفاعلية وتصنيف المتحكمات ومساراتها بوضوح وفق الوحدات التشغيلية لتمكين المطورين من معاينة وفحص نقاط النهاية الحية وتفاصيل الـ DTOs بسهولة.
+---
 
-### 🛡️ المرحلة السادسة (Phase-6): تطبيق معترضات التدقيق وتسجيل الأحداث (`Audit & Logging Interceptors`)
-* **الأولوية:** 🟠 **عالية جداً (High Priority)**
+### 🎯 المرحلة الخامسة (Phase-5): منطق أعمال التطبيق وأنابيب معالجة الـ CQRS والمكونات المؤسسية (`Application Business Logic, CQRS Pipelines & Mapping`)
+* **الأولوية:** 🔴 **قصوى ومباشرة (Immediate Logical Priority - NEXT STEP)**
 * **الشرح الفني المفصل والدقيق:**
-  1. **تطوير معترض الحفظ التلقائي (`AuditSaveChangesInterceptor`):**  
-     بناء معترض مخصص لـ EF Core داخل `EduMS.Infrastructure` يرث من `SaveChangesInterceptor`. يقوم هذا المعترض بفحص جميع الكيانات المتغيرة في الـ `ChangeTracker` التي تطبق واجهة `IAuditableEntity` قبل تنفيذ استعلامات الـ SQL في Oracle، ويقوم تلقائياً بتعبئة وتحديث الحقول المرجعية:  
-     `CreatedBy`, `CreatedDate`, `LastModifiedBy`, `LastModifiedDate`، وتوليد رمز المراجعة والتزامن `VersionToken = Guid.NewGuid().ToString()`.
-  2. **تطبيق سجل التدقيق الأمني الشامل (`Comprehensive Audit Trail Logging`):**  
-     إنشاء آلية اعتراض إضافية تسجل البصمة الكاملة لأي عملية تعديل أو حذف حساسة على الكيانات الرئيسية (مثل التعديلات المالية أو تغيير درجات الطلاب أو تعديل الصلاحيات)، حيث يتم حفظ سجل يضم: المستخدم المنفذ، تاريخ العملية، نوع العملية (`Insert/Update/Delete`)، والقيم السابقة (`OldValues`) والقيم الجديدة (`NewValues`) في جدول مخصص (`SYSTEM_AUDIT_LOG`) لضمان المحاسبة والشفافية التامة.
+  1. **بناء وتنظيم أوامر واستعلامات ومعالجات الـ MediatR (`Commands, Queries, and Handlers`):**  
+     تأسيس هيكلية الـ **CQRS (`Command Query Responsibility Segregation`)** داخل مجلدات `EduMS.Application` لكل وحدة تشغيلية من `M2` وحتى `M8`. كل عملية إضافة، تعديل، أو حذف سيتم تمثيلها بكائن `Command` متصل بمعالج `CommandHandler`، وكل عملية بحث أو جلب سيتم تمثيلها بكائن `Query` متصل بمعالج `QueryHandler`.
+  2. **الفصل الصارم لمسؤوليات الاستعلام والتنفيذ (`Query vs. Repository Boundary Definition`):**  
+     * **قاعدة معمارية إلزامية (`Explicit Query Note`):** إن التنفيذ الفعلي لاستعلامات قواعد البيانات (`LINQ Queries / Raw SQL / EF Core AsNoTracking / Include Expressions`) **يقطن حصرياً داخل طبقة البنية التحتية `EduMS.Infrastructure` داخل المستودعات (`IGenericRepository<T>` و `Repositories`)**.
+     * **دور معالجات التطبيق (`CQRS Handlers in Application Layer`):** تقتصر مسؤولية الـ `QueryHandlers` والـ `CommandHandlers` على **تنسيق وإدارة تدفق العمليات (`Orchestration`)**، واستدعاء واجهات المستودعات، وتطبيق القواعد التشغيلية المجمعة (`Business Validation Rules`)، ثم تحويل الكيانات المستلمة إلى كائنات نقل بيانات (`Entity-to-DTO Mapping`) وإرجاعها للمستدعي.
+  3. **إدراج التحويل الكائني الموحد (`Object Mapping - AutoMapper / Mapster`):**  
+     تكوين وإعداد ملفات تعريف التحويل (`Mapping Profiles`) باستخدام **AutoMapper** أو **Mapster** داخل طبقة التطبيق (`EduMS.Application/Mappings/`) لأتمتة تحويل الكيانات الجداولية الفيزيائية (`Entities`) إلى كائنات الـ `DTOs` المجهزة، وتحويل أوامر الـ `Create/Update Commands` إلى كيانات جديدة، مما يضمن نظافة المعالجات من أكواد النسخ اليدوي الطويلة (`Manual Property-by-Property Assignment`).
+  4. **أنابيب التحقق التلقائي عبر الفلترة الصارمة (`FluentValidation Behavior Pipelines`):**  
+     إنشاء مدققين (`Validators`) باستخدام مكتبة `FluentValidation` لكل `Command` (مثل التحقق من صحة الرقم القومي للطالب، أو سلامة التواريخ المالية، أو عدم تعارض جداول الحصص). يتم حقن هذه المدققات كـ `ValidationBehavior Pipeline` في الـ `MediatR` لرفض الطلبات غير الصالحة تلقائياً قبل وصولها إلى معالجات قاعدة البيانات.
 
-### 🔒 المرحلة السابعة (Phase-7): تأمين الـ API وتفعيل التوثيق والصلاحيات (`Security, JWT & RBAC Middleware`)
-* **الأولوية:** 🟡 **متوسطة إلى عالية (Medium-High Priority)**
-* **الشرح الفني المفصل والدقيق:**
-  1. **تكامل رموز التوثيق (`JWT Bearer Authentication`):**  
-     ضبط خدمات التوثيق في `EduMS.WebApi/Program.cs` لتوليد والتحقق من صحة رموز الـ `JWT Bearer Tokens` المربوطة بجدول المستخدمين `SYSTEM_USER` والأدوار `SYSTEM_ROLE`. سيتم التحقق من التوقيع الرقمي (`Secret Key`) وصلاحية انتهاء الرمز الزمنية.
-  2. **بناء محرك التحكم بالصلاحيات المبني على الأدوار والسياسات (`RBAC Policy-Based Authorization`):**  
-     إنشاء معالج سياسات مخصص (`PermissionsAuthorizationHandler`) يسمح بتزيين نقاط النهاية بسمات صلاحية دقيقة للغاية بدلاً من الاكتفاء بالدور فقط، على سبيل المثال: `[Authorize(Policy = "Permission:users.manage")]` أو `[Authorize(Policy = "Permission:finance.manage")]`. يقوم المعالج بالتحقق الفوري من ربط الدور بالمستخدم (`USER_ROLE_ASSIGNMENT`) ومن ربط الصلاحية بالدور (`ROLE_PERMISSION`) المعتمدين في بذور قاعدة البيانات.
+---
 
-### ⚡ المرحلة الثامنة (Phase-8): تحسين الأداء والاختبارات الشاملة (`Performance Tuning & Comprehensive Validation`)
-* **الأولوية:** 🟢 **مرحلة التتويج والختام (Finalization Priority)**
+### 🌐 المرحلة السادسة (Phase-6): واجهات ومتحكمات الـ API كموزعات نحيفة (`API Controllers & Endpoints - Thin Dispatchers`)
+* **الأولوية:** 🟠 **عالية جداً (High Priority - Follows Phase-5)**
 * **الشرح الفني المفصل والدقيق:**
-  1. **اختبارات التكامل الشاملة (`End-to-End API Integration Testing`):**  
-     إعداد حزم اختبارات آلية ويدوية لمحاكاة دورة حياة العمليات الكاملة على النظام الموحد (مثل إتمام دورة تسجيل طالب، إصدار فاتورة رسوم، تعيين جدول دراسي، ورصد الحضور) مع التأكد من سلامة التخزين والربط المرجعي في Oracle 19c.
-  2. **تحسين وضبط أداء قاعدة بيانات Oracle (`Oracle Query Optimization & Indexing`):**  
-     مراجعة خطط استعلامات الـ SQL الناتجة عن محرك EF Core للتأكد من عدم حدوث مشاكل N+1 في الجلب، وضبط الفهارس (`Database Indexes`) على الأعمدة والأسماء وأكواد المدارس والهويات الوطنية لتحقيق زمن استجابة فوري لا يتعدى ميلي ثوانٍ معدودة في بيئة الإنتاج الفعلي.
+  1. **تطوير متحكمات الـ API لتكون موزعات نحيفة جداً (`Thin Dispatcher Controllers`):**  
+     بما أن منطق الأعمال والتحويل والتحقق قد تم بناءه بالكامل في المرحلة الخامسة، ستكون متحكمات الـ API داخل `EduMS.WebApi` (من `M1` إلى `M8`) **نحيفة للغاية (`Thin Dispatchers`)**. يقتصر دور كل إجراء (`Action Method`) على استقبال طلب الـ HTTP (POST/GET/PUT/DELETE)، وتمريره مباشرة إلى الـ `MediatR` عبر استدعاء:
+     ```csharp
+     var result = await _sender.Send(new CreateRegistrationCommand(dto), cancellationToken);
+     return Ok(ApiResponse<RegistrationDetailsDto>.SuccessResponse(result));
+     ```
+  2. **التوثيق المعياري والربط بنقاط النهاية (`RESTful Paths & OpenAPI Swagger`):**  
+     ضبط مسارات نقاط النهاية بمعايير الـ RESTful الموحدة (مثل `/api/v1/StudentAffairs/Registrations/{id}`)، مع تزيين المتحكمات بسمات التوثيق الدقيقة لـ Swagger (`[ProducesResponseType]`) لتوفير دليل تفاعلي واضح لفرق الواجهة الأمامية.
+
+---
+
+### 🛡️ المرحلة السابعة (Phase-7): المخاوف الشاملة، معترضات التدقيق، والتخزين المؤقت (`Cross-Cutting Concerns, Caching & Interceptors`)
+* **الأولوية:** 🟡 **عالية إلى متوسطة (High-Medium Priority)**
+* **الشرح الفني المفصل والدقيق:**
+  1. **استراتيجية التخزين المؤقت العالي الأداء (`Enterprise Caching Strategy - MemoryCache / Redis`):**  
+     تضمين تقنيات التخزين المؤقت الموزع أو المحلي (`IDistributedCache / IMemoryCache`) داخل أنابيب استعلامات الـ CQRS (`CachingBehavior`) أو مستودعات القراءة من أجل **الجلب الفوري وفائق السرعة للجداول المرجعية والثابتة (`Lookup Tables`)** مثل: المراحل الأكاديمية (`SchoolLevels`)، أنواع الرسوم (`FeeTypes`)، الإدارات، ومصفوفات الأدوار (`Roles & Permissions`). يضمن ذلك تقليل العبء على قاعدة بيانات Oracle 19c بنسبة تفوق 80% في عمليات القراءة المتكررة.
+  2. **معالجة الاستثناءات المركزية وتوظيف قوالب الاستجابة (`Global Exception Handling Middleware`):**  
+     تطوير برمجية وسيطة (`Middleware`) أو معالج استثناءات عالمي (`IExceptionHandler`) داخل `EduMS.WebApi` يلتقط جميع الاستثناءات الصادرة من طبقات التطبيق والنواة (مثل `ValidationException`, `NotFoundException`, `UnauthorizedException`) ويترجمها إلى استجابات HTTP معيارية (`ApiResponse<T>`) محملة برموز الخطأ الواضحة، مع منع تسرب أي تفاصيل تتبعية داخلية (`Stack Trace`) في بيئة الإنتاج.
+  3. **بناء معترض الحفظ التدقيقي المتقدم (`AuditSaveChangesInterceptor & Trail Logging`):**  
+     * تطوير معترض EF Core مخصص `AuditSaveChangesInterceptor` داخل `EduMS.Infrastructure` لاعتراض عمليات الحفظ التلقائي على الكيانات التي تطبق `IAuditableEntity` وتحديث الحقول المرجعية: `CreatedBy`, `CreatedDate`, `LastModifiedBy`, `LastModifiedDate` مع إصدار `VersionToken` جديد.
+     * تفعيل سجل التدقيق الأمني الشامل (`SYSTEM_AUDIT_LOG`) لحفظ بصمة التغييرات التفصيلية (`OldValues vs. NewValues`) للعمليات الحساسة كالدرجات المالية والأكاديمية وحركات الأمان.
+
+---
+
+### 🔒 المرحلة الثامنة (Phase-8): تأمين واجهات الـ API وتفعيل التوثيق والصلاحيات (`Security, Identity, JWT & RBAC Policies`)
+* **الأولوية:** 🔵 **متوسطة (Medium Priority)**
+* **الشرح الفني المفصل والدقيق:**
+  1. **تكامل رموز التوثيق المصادق عليها (`JWT Bearer Authentication`):**  
+     تكوين خدمات الهوية والتوثيق في `Program.cs` لتوليد والتحقق من صحة رموز الـ `JWT Bearer Tokens` المربوطة بجدول المستخدمين `SYSTEM_USER` والأدوار `SYSTEM_ROLE`، مع تشفير المفاتيح السرية وتمرير مطالبات الهوية (`Claims: UserId, Roles, Email`).
+  2. **محرك التحكم بالصلاحيات المبني على الأدوار والسياسات (`RBAC Policy-Based Authorization`):**  
+     تأسيس معالج سياسات مخصص (`PermissionsAuthorizationHandler`) يسمح بتزيين نقاط النهاية أو أوامر الـ CQRS بسمات صلاحية دقيقة للغاية، على سبيل المثال: `[Authorize(Policy = "Permission:finance.invoices.create")]`. يقوم المعالج بالتحقق الفوري والحي من ربط الدور بالمستخدم (`USER_ROLE_ASSIGNMENT`) ومن ربط الصلاحية بالدور (`ROLE_PERMISSION`) المعتمدين والمخزنين في الـ Cache وفي جداول Oracle.
+
+---
+
+### ⚡ المرحلة التاسعة (Phase-9): المهام المجدولة، إدارة الملفات، وتحسين الأداء النهائي (`Background Jobs, File Storage & Performance Tuning`)
+* **الأولوية:** 🟢 **مرحلة التتويج والختام (Finalization & Optimization Priority)**
+* **الشرح الفني المفصل والدقيق:**
+  1. **دمج جدولة المهام الخلفية المؤسسية (`Background Jobs - Hangfire / BackgroundService`):**  
+     تكوين محرك مهام خلفية موثوق (مثل **Hangfire** أو **Microsoft Hosted Services**) لتنفيذ المهام الأكاديمية والمالية المجدولة تلقائياً وبدون تدخل يدوي، مثل:
+     * الاحتساب التلقائي لكشوف المرتبات الشهرية للموظفين (`M5 Payroll Runs`).
+     * إصدار وتوليد فواتير الرسوم الدراسية الدورية للطلاب وتطبيق غرامات أو خصومات السداد المبرمجة (`M5 Student Invoices`).
+     * أرشفة المسودات الإحصائية والتقارير التنظيمية الدورية (`M6 Statistics Archives`).
+     * إرسال تنبيهات فحص السلامة وتجديد خطط الطوارئ المدرسية (`M7 Emergency Reminders`).
+  2. **إدارة التخزين الآمن للمرفقات والملفات (`Enterprise Secure File Management`):**  
+     تأسيس خدمة إدارة الملفات والمرفقات (`IFileStorageService`) داخل `EduMS.Infrastructure` للتعامل الآمن والمشفر مع رفع وحفظ واسترجاع المستندات الحساسة (مثل الوثائق الثبوتية للطلاب في `M2`، الشهادات والعقود الوظيفية في `M3`، ومرفقات تقارير الطوارئ في `M7`). يتم التحكم بمسارات التخزين الفيزيائية أو السحابية مع التحقق الصارم من امتدادات الملفات وأحجامها لمنع الثغرات الأمنية (`File Upload Vulnerabilities`).
+  3. **التحسين والضبط العميق لأداء Oracle 19c (`Oracle SQL Query Optimization & Indexing`):**  
+     مراجعة خطط التنفيذ (`Execution Plans`) لاستعلامات الـ SQL الناتجة عن محرك EF Core للتأكد من عدم حدوث مشاكل `N+1` في الجلب، وضبط الفهارس (`Database Indexes`) على الأعمدة والأسماء وأكواد المدارس والهويات الوطنية لتحقيق أقصى درجات الاستجابة الفورية في بيئة الإنتاج.
 
 ---
 
@@ -136,14 +174,14 @@ gantt
 
 ### 1. التباين الجوهري في تعريف مصطلح "الخدمات" (`The Terminology Difference`)
 
-| جانب المشروع / المستودع | التعريف الفني الدقيق لمصطلح **"الخدمات" (`Services`)** | المسؤول عنه ومكان تواجده | سياسة التعامل في هذا الخادم الخلفي |
+| جانب المشروع / المستودع | التعريف الفني الدقيق لمصطلح **"الخدمات" (`Services` / `Frontend Services`)** | المسؤول عنه ومكان تواجده | سياسة التعامل في هذا الخادم الخلفي |
 | :--- | :--- | :--- | :--- |
 | **فريق الواجهة الأمامية (`Frontend Team & Repo`)** | هي برمجيات ومغلفات اتصال العميل (`Client-Side API Consumers / HTTP Wrappers`) المكتوبة بلغات واجهات الويب (مثل `TypeScript / Axios / Fetch / Angular Services / React API Clients`). وظيفتها استدعاء روابط الإنترنت وتمرير الاستجابات لمكونات الشاشة. | **تم تطويرها وإنجازها مسبقاً بالكامل** من قبل فريق الواجهة الأمامية في مستودعهم المنفصل. | ⛔ **يُمنع منعاً باتاً إنشاء أو محاكاة أو إعادة توليد هذه الخدمات أو مغلفات الـ HTTP في مستودعنا هذا (`EduMS.Backend`).** |
-| **فريق الخادم الخلفي (`Backend Team - Clean Architecture Repo`)** | هي إما فئات معالجة ومنطق أعمال داخلي (`CQRS Commands / Queries / Handlers`) داخل طبقة `EduMS.Application`، أو عقود خدمات بنية تحتية لربط أدوات النظام (`IEduMSDbInitializer` أو `ICurrentUserService`). | **يتم تطويرها وإدارتها حصرياً** داخل طبقات `Application` و `Infrastructure` وفق معايير فصل المسؤوليات. | ✅ يتم التركيز على معالجة البيانات، وتطبيق قواعد العمل التشغيلية (`Business Rules`)، والتعامل الآمن مع قاعدة بيانات Oracle. |
+| **فريق الخادم الخلفي (`Backend Team - Clean Architecture Repo`)** | هي إما فئات معالجة ومنطق أعمال داخلي (`CQRS Commands / Queries / Handlers`) داخل طبقة `EduMS.Application`، أو عقود خدمات بنية تحتية لربط أدوات النظام (`IEduMSDbInitializer` أو `ICurrentUserService` أو `IFileStorageService`). | **يتم تطويرها وإدارتها حصرياً** داخل طبقات `Application` و `Infrastructure` وفق معايير فصل المسؤوليات. | ✅ يتم التركيز على معالجة البيانات، وتطبيق قواعد العمل التشغيلية (`Business Rules`)، والتعامل الآمن مع قاعدة بيانات Oracle. |
 
 ### 2. كيف ستعمل واجهات الـ API Controllers كـ "خطاطيف اتصال" محايدة (`API Controllers as Communication Hooks`)
 
-إن مهمتنا الأساسية والقادمة في **المرحلة الخامسة (`Phase-5`)** تتلخص حصرياً في بناء نقاط النهاية (`RESTful API Controllers & Endpoints`) داخل طبقة `EduMS.WebApi`. وستلعب هذه المتحكمات دور **خطاطيف وبروتوكولات اتصال محايدة ونظيفة (`Clean Communication Hooks`)** تعمل كجسر تواصل بين الواجهة الأمامية ومنطق الأعمال الـ CQRS الخلفي، وذلك بالآلية الهندسية التالية:
+إن مهمتنا في **المرحلة السادسة (`Phase-6`)** تتلخص حصرياً في بناء نقاط النهاية (`RESTful API Controllers & Endpoints`) داخل طبقة `EduMS.WebApi`. وستلعب هذه المتحكمات النحيفة دور **خطاطيف وبروتوكولات اتصال محايدة ونظيفة (`Clean Communication Hooks`)** تعمل كجسر تواصل بين الواجهة الأمامية ومنطق الأعمال الـ CQRS الخلفي (المطور في المرحلة الخامسة)، وذلك بالآلية الهندسية التالية:
 
 ```mermaid
 sequenceDiagram
@@ -151,30 +189,31 @@ sequenceDiagram
     actor Client as عميل النظام (المستعرض/الجوال)
     participant FE_Service as خدمات الواجهة الأمامية الجاهزة<br/>(Frontend HTTP Wrappers - External Repo)
     participant API_Hook as خطاطيف الاتصال في الخادم<br/>(EduMS.WebApi Controllers / Endpoints)
-    participant CQRS as معالجات التطبيق الداخلية<br/>(EduMS.Application CQRS Handlers)
-    participant Oracle as قاعدة بيانات أوراكل<br/>(Oracle 19c ORCLPDB)
+    participant CQRS as معالجات التطبيق الداخلية<br/>(EduMS.Application CQRS Handlers / AutoMapper)
+    participant Oracle as قاعدة بيانات أوراكل<br/>(Oracle 19c ORCLPDB / Infrastructure Repo)
 
     Client->>FE_Service: إرسال إجراء المستخدم (مثال: تسجيل طالب جديد)
     Note over FE_Service: تم إعداد هذه الخدمة ومغلف الاتصال مسبقاً<br/>من قبل فريق الواجهة الأمامية
     FE_Service->>API_Hook: طلب HTTP POST لـ /api/v1/StudentRegistration (مدخلات DTO Json)
     Note over API_Hook: خطاف الاتصال المخصص لاستقبال الطلبات<br/>بأمان وبدون أي محاكاة لعملاء الويب
     API_Hook->>CQRS: تمرير الأمر (CreateStudentCommand) إلى MediatR / Application Layer
-    CQRS->>Oracle: التحقق من القواعد وحفظ البيانات في الجداول الموحدة
+    CQRS->>CQRS: التحقق عبر FluentValidation وتحويل الـ DTO عبر AutoMapper
+    CQRS->>Oracle: استدعاء المستودع (Infrastructure Repository) وحفظ الكيان في الجداول الموحدة
     Oracle-->>CQRS: تأكيد الحفظ ونجاح العملية (Commit)
-    CQRS-->>API_Hook: إرجاع نتيجة العملية عبر كائن الـ DTO
+    CQRS-->>API_Hook: إرجاع نتيجة العملية عبر كائن الـ DTO المحول
     API_Hook-->>FE_Service: استجابة HTTP 200 OK / 201 Created (قالب ApiResponse Json)
     FE_Service-->>Client: تحديث الشاشة وعرض تأكيد النجاح للمستخدم
 ```
 
 #### الضوابط الصارمة لعمل خطاطيف الاتصال (`API Hooks Strict Guidelines`):
 1. **الاستقبال والتوجيه الفوري (`Receive and Dispatch Only`):**  
-   لن تقوم متحكمات `EduMS.WebApi` بتنفيذ أي منطق أعمال معقد أو حسابات مباشرة بداخلها؛ بل تكتفي باستقبال المدخلات في قوالب الـ `DTOs` المجهزة، والتحقق المبدئي من سلامة الطلب (`ModelState / Validation`)، ثم تمرير الأمر فوراً لمعالجات طبقة التطبيق (`CQRS Handlers / Application Services`).
+   لن تقوم متحكمات `EduMS.WebApi` بتنفيذ أي منطق أعمال معقد أو حسابات مباشرة بداخلها؛ بل تكتفي باستقبال المدخلات في قوالب الـ `DTOs` المجهزة، وتمرير الأمر فوراً لمعالجات طبقة التطبيق (`MediatR ISender / CQRS Handlers`).
 2. **الاستجابة المعيارية والمستقرة (`Standardized REST Responses`):**  
-   إعادة النتائج لفريق الواجهة الأمامية في قوالب JSON موحدة ومستقرة تماماً، مما يتيح للخدمات المسبقة الصنع لدى فريق الواجهة الأمامية (`Frontend Services`) استهلاك البيانات وقراءتها مباشرة وبكل سلاسة دون الحاجة لتعديل أكواد العميل.
+   إعادة النتائج لفريق الواجهة الأمامية في قوالب JSON موحدة ومستقرة تماماً (`ApiResponse<T>`)، مما يتيح للخدمات المسبقة الصنع لدى فريق الواجهة الأمامية (`Frontend Services`) استهلاك البيانات وقراءتها مباشرة وبكل سلاسة دون الحاجة لتعديل أكواد العميل.
 3. **تحقيق الفصل التام والصفر تداخل (`Zero Overlap in Team Responsibilities`):**  
    بهذه المنهجية، يظل فريق الخادم الخلفي مركزاً بنسبة 100% على قوة الأداء، وسلامة قاعدة بيانات Oracle 19c، ونزاهة معالجات الـ CQRS، بينما يظل فريق الواجهة الأمامية مستقلاً ومسؤولاً بالكامل عن تجربة المستخدم وإدارة خدمات الاتصال بجانب العميل (`Client-Side State & Services`)، مما يحقق التكامل المثالي والاحترافي للمؤسسة.
 
 ---
 
-### 🌟 الخلاصة والجاهزية للبدء الفوري في المرحلة الخامسة
-لقد أثبت التدقيق المعماري سلامة الخادم الخلفي وخلوه من أي شوائب هيكلية مع نجاح البناء في وضع الإنتاج بـ **صفر أخطاء**. وبناءً على خارطة الطريق المبرمجة وتوضيح الحدود الصارمة مع فريق الواجهة الأمامية، نحن الآن في وضع الهندسة الأمثل للبدء الفوري في **المرحلة الخامسة (`Phase-5`)** وتأسيس خطاطيف الاتصال ومتحكمات الـ API للأقسام والوحدات المتبقية بثقة وكفاءة متناهية! 🚀
+### 🌟 الخلاصة والجاهزية للبدء الفوري في المرحلة الخامسة (منطق أعمال التطبيق - CQRS Layer)
+لقد أثبت التدقيق المعماري سلامة الخادم الخلفي وخلوه من أي شوائب هيكلية مع نجاح البناء في وضع الإنتاج بـ **صفر أخطاء**. وبناءً على خارطة الطريق المبرمجة بعد إعادة التسلسل المنطقي الدقيق، وتوضيح الحدود الصارمة مع فريق الواجهة الأمامية وإدراج كافة المكونات المؤسسية (AutoMapper, Caching, Hangfire, File Storage)، نحن الآن في وضع الهندسة الأمثل للبدء الفوري في **المرحلة الخامسة (`Phase-5`)** وتأسيس أنابيب الـ CQRS وأوامر واستعلامات ومعالجات MediatR للأقسام والوحدات المتبقية بثقة وكفاءة متناهية! 🚀
