@@ -1,36 +1,42 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../environments';
+import { ApiConfigService } from '../../../../core/services/api-config.service';
 import type { StudentGuardianRelationship, CreateStudentGuardianRelationship, UpdateStudentGuardianRelationship } from '../models/guardian-relationship.interface';
 
 @Injectable({ providedIn: 'root' })
 export class GuardianRelationshipService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment.apiUrl}/studentGuardianRelationships`;
+  private readonly apiConfig = inject(ApiConfigService);
+  private readonly baseUrl = this.apiConfig.getEndpoint('M2_StudentAffairs', 'studentGuardianRelationships');
 
   getAll(): Observable<StudentGuardianRelationship[]> {
-    return this.http.get<StudentGuardianRelationship[]>(this.apiUrl);
+    return this.http.get<StudentGuardianRelationship[]>(this.baseUrl);
   }
 
   getById(id: number): Observable<StudentGuardianRelationship> {
-    return this.http.get<StudentGuardianRelationship>(`${this.apiUrl}/${id}`);
+    return this.http.get<StudentGuardianRelationship>(`${this.baseUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentGuardianRelationship[]> {
-    return this.http.get<StudentGuardianRelationship[]>(`${this.apiUrl}?studentId=${studentId}`);
+    return this.http.get<StudentGuardianRelationship[]>(`${this.baseUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentGuardianRelationship): Observable<StudentGuardianRelationship> {
-    return this.http.post<StudentGuardianRelationship>(this.apiUrl, dto);
+    return this.http.post<StudentGuardianRelationship>(this.baseUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentGuardianRelationship): Observable<StudentGuardianRelationship> {
-    return this.http.put<StudentGuardianRelationship>(`${this.apiUrl}/${id}`, dto);
+    return this.http.put<StudentGuardianRelationship>(`${this.baseUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
+
+
+
+
+
 

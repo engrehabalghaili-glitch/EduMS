@@ -1,36 +1,38 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../environments';
+import { ApiConfigService } from '../../../../core/services/api-config.service';
 import type { AssetFeasibilityRiskAnalysis, CreateAssetFeasibilityRiskAnalysisRequest, UpdateAssetFeasibilityRiskAnalysisRequest } from '../models/asset-feasibility-risk-analyses';
 
 @Injectable({ providedIn: 'root' })
 export class AssetFeasibilityRiskAnalysisService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment.apiUrl}/assetFeasibilityRiskAnalyses`;
+  private readonly apiConfig = inject(ApiConfigService);
+  private readonly baseUrl = this.apiConfig.getEndpoint('M4_AssetLogistics', 'assetFeasibilityRiskAnalyses');
 
   getAll(): Observable<AssetFeasibilityRiskAnalysis[]> {
-    return this.http.get<AssetFeasibilityRiskAnalysis[]>(this.apiUrl);
+    return this.http.get<AssetFeasibilityRiskAnalysis[]>(this.baseUrl);
   }
 
   getById(id: number): Observable<AssetFeasibilityRiskAnalysis> {
-    return this.http.get<AssetFeasibilityRiskAnalysis>(`${this.apiUrl}/${id}`);
+    return this.http.get<AssetFeasibilityRiskAnalysis>(`${this.baseUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<AssetFeasibilityRiskAnalysis[]> {
-    return this.http.get<AssetFeasibilityRiskAnalysis[]>(`${this.apiUrl}?schoolId=${schoolId}`);
+    return this.http.get<AssetFeasibilityRiskAnalysis[]>(`${this.baseUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateAssetFeasibilityRiskAnalysisRequest): Observable<AssetFeasibilityRiskAnalysis> {
-    return this.http.post<AssetFeasibilityRiskAnalysis>(this.apiUrl, dto);
+    return this.http.post<AssetFeasibilityRiskAnalysis>(this.baseUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetFeasibilityRiskAnalysisRequest): Observable<AssetFeasibilityRiskAnalysis> {
-    return this.http.put<AssetFeasibilityRiskAnalysis>(`${this.apiUrl}/${id}`, dto);
+    return this.http.put<AssetFeasibilityRiskAnalysis>(`${this.baseUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
+
 

@@ -1,41 +1,45 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../environments';
+import { ApiConfigService } from '../../../../core/services/api-config.service';
 import type { ClassroomResourceAllocation, CreateClassroomResourceAllocationDto, UpdateClassroomResourceAllocationDto } from '../models/classroom-resource-allocation';
 
 @Injectable({ providedIn: 'root' })
 export class ClassroomResourceAllocationService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment.apiUrl}/classroomResourceAllocations`;
+  private readonly apiConfig = inject(ApiConfigService);
+  private readonly baseUrl = this.apiConfig.getEndpoint('M1_SchoolAdmin', 'classroomResourceAllocations');
 
   getAll(): Observable<ClassroomResourceAllocation[]> {
-    return this.http.get<ClassroomResourceAllocation[]>(this.apiUrl);
+    return this.http.get<ClassroomResourceAllocation[]>(this.baseUrl);
   }
 
   getById(id: number): Observable<ClassroomResourceAllocation> {
-    return this.http.get<ClassroomResourceAllocation>(`${this.apiUrl}/${id}`);
+    return this.http.get<ClassroomResourceAllocation>(`${this.baseUrl}/${id}`);
   }
 
   getByClassroomId(classroomId: number): Observable<ClassroomResourceAllocation[]> {
-    return this.http.get<ClassroomResourceAllocation[]>(`${this.apiUrl}?classroomId=${classroomId}`);
+    return this.http.get<ClassroomResourceAllocation[]>(`${this.baseUrl}?classroomId=${classroomId}`);
   }
 
   getByResourceType(resourceType: string): Observable<ClassroomResourceAllocation[]> {
-    return this.http.get<ClassroomResourceAllocation[]>(`${this.apiUrl}?resourceType=${resourceType}`);
+    return this.http.get<ClassroomResourceAllocation[]>(`${this.baseUrl}?resourceType=${resourceType}`);
   }
 
   create(dto: CreateClassroomResourceAllocationDto): Observable<ClassroomResourceAllocation> {
-    return this.http.post<ClassroomResourceAllocation>(this.apiUrl, dto);
+    return this.http.post<ClassroomResourceAllocation>(this.baseUrl, dto);
   }
 
   update(id: number, dto: UpdateClassroomResourceAllocationDto): Observable<ClassroomResourceAllocation> {
-    return this.http.put<ClassroomResourceAllocation>(`${this.apiUrl}/${id}`, dto);
+    return this.http.put<ClassroomResourceAllocation>(`${this.baseUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
+
+
+
 
 

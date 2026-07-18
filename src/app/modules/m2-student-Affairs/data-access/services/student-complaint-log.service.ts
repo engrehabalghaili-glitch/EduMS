@@ -1,32 +1,38 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../environments';
+import { ApiConfigService } from '../../../../core/services/api-config.service';
 import type { StudentComplaintLog, CreateStudentComplaintLog, UpdateStudentComplaintLog } from '../models/complaint-log.interface';
 
 @Injectable({ providedIn: 'root' })
 export class StudentComplaintLogService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = environment.apiUrl;
+  private readonly apiConfig = inject(ApiConfigService);
+  private readonly baseUrl = this.apiConfig.getEndpoint('M2_StudentAffairs', 'student-complaint-logs');
 
   getAll(): Observable<StudentComplaintLog[]> {
-    return this.http.get<StudentComplaintLog[]>(`${this.apiUrl}/student-complaint-logs`);
+    return this.http.get<StudentComplaintLog[]>(`${this.baseUrl}`);
   }
 
   getById(id: number): Observable<StudentComplaintLog> {
-    return this.http.get<StudentComplaintLog>(`${this.apiUrl}/student-complaint-logs/${id}`);
+    return this.http.get<StudentComplaintLog>(`${this.baseUrl}/${id}`);
   }
 
   create(dto: CreateStudentComplaintLog): Observable<StudentComplaintLog> {
-    return this.http.post<StudentComplaintLog>(`${this.apiUrl}/student-complaint-logs`, dto);
+    return this.http.post<StudentComplaintLog>(`${this.baseUrl}`, dto);
   }
 
   update(id: number, dto: UpdateStudentComplaintLog): Observable<StudentComplaintLog> {
-    return this.http.put<StudentComplaintLog>(`${this.apiUrl}/student-complaint-logs/${id}`, dto);
+    return this.http.put<StudentComplaintLog>(`${this.baseUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/student-complaint-logs/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
+
+
+
+
+
 

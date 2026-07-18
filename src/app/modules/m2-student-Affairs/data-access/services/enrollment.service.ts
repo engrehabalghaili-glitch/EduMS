@@ -1,36 +1,42 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../environments';
+import { ApiConfigService } from '../../../../core/services/api-config.service';
 import type { StudentEnrollment, CreateStudentEnrollment, UpdateStudentEnrollment } from '../models/enrollment.interface';
 
 @Injectable({ providedIn: 'root' })
 export class EnrollmentService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment.apiUrl}/studentEnrollments`;
+  private readonly apiConfig = inject(ApiConfigService);
+  private readonly baseUrl = this.apiConfig.getEndpoint('M2_StudentAffairs', 'studentEnrollments');
 
   getAll(): Observable<StudentEnrollment[]> {
-    return this.http.get<StudentEnrollment[]>(this.apiUrl);
+    return this.http.get<StudentEnrollment[]>(this.baseUrl);
   }
 
   getById(id: number): Observable<StudentEnrollment> {
-    return this.http.get<StudentEnrollment>(`${this.apiUrl}/${id}`);
+    return this.http.get<StudentEnrollment>(`${this.baseUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentEnrollment[]> {
-    return this.http.get<StudentEnrollment[]>(`${this.apiUrl}?studentId=${studentId}`);
+    return this.http.get<StudentEnrollment[]>(`${this.baseUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentEnrollment): Observable<StudentEnrollment> {
-    return this.http.post<StudentEnrollment>(this.apiUrl, dto);
+    return this.http.post<StudentEnrollment>(this.baseUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentEnrollment): Observable<StudentEnrollment> {
-    return this.http.put<StudentEnrollment>(`${this.apiUrl}/${id}`, dto);
+    return this.http.put<StudentEnrollment>(`${this.baseUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
+
+
+
+
+
 

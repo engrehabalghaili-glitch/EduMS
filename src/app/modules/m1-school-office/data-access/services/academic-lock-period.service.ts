@@ -1,41 +1,45 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../environments';
+import { ApiConfigService } from '../../../../core/services/api-config.service';
 import type { AcademicLockPeriod, CreateAcademicLockPeriodDto, UpdateAcademicLockPeriodDto } from '../models/academic-lock-period';
 
 @Injectable({ providedIn: 'root' })
 export class AcademicLockPeriodService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment.apiUrl}/academicLockPeriods`;
+  private readonly apiConfig = inject(ApiConfigService);
+  private readonly baseUrl = this.apiConfig.getEndpoint('M1_SchoolAdmin', 'academicLockPeriods');
 
   getAll(): Observable<AcademicLockPeriod[]> {
-    return this.http.get<AcademicLockPeriod[]>(this.apiUrl);
+    return this.http.get<AcademicLockPeriod[]>(this.baseUrl);
   }
 
   getById(id: number): Observable<AcademicLockPeriod> {
-    return this.http.get<AcademicLockPeriod>(`${this.apiUrl}/${id}`);
+    return this.http.get<AcademicLockPeriod>(`${this.baseUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<AcademicLockPeriod[]> {
-    return this.http.get<AcademicLockPeriod[]>(`${this.apiUrl}?schoolId=${schoolId}`);
+    return this.http.get<AcademicLockPeriod[]>(`${this.baseUrl}?schoolId=${schoolId}`);
   }
 
   getActive(): Observable<AcademicLockPeriod[]> {
-    return this.http.get<AcademicLockPeriod[]>(`${this.apiUrl}?isActive=true`);
+    return this.http.get<AcademicLockPeriod[]>(`${this.baseUrl}?isActive=true`);
   }
 
   create(dto: CreateAcademicLockPeriodDto): Observable<AcademicLockPeriod> {
-    return this.http.post<AcademicLockPeriod>(this.apiUrl, dto);
+    return this.http.post<AcademicLockPeriod>(this.baseUrl, dto);
   }
 
   update(id: number, dto: UpdateAcademicLockPeriodDto): Observable<AcademicLockPeriod> {
-    return this.http.put<AcademicLockPeriod>(`${this.apiUrl}/${id}`, dto);
+    return this.http.put<AcademicLockPeriod>(`${this.baseUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
+
+
+
 
 

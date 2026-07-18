@@ -1,36 +1,38 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../environments';
+import { ApiConfigService } from '../../../../core/services/api-config.service';
 import type { AssetFinancialSummaryReport, CreateAssetFinancialSummaryReportRequest, UpdateAssetFinancialSummaryReportRequest } from '../models/asset-financial-summary-reports';
 
 @Injectable({ providedIn: 'root' })
 export class AssetFinancialSummaryReportService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment.apiUrl}/assetFinancialSummaryReports`;
+  private readonly apiConfig = inject(ApiConfigService);
+  private readonly baseUrl = this.apiConfig.getEndpoint('M4_AssetLogistics', 'assetFinancialSummaryReports');
 
   getAll(): Observable<AssetFinancialSummaryReport[]> {
-    return this.http.get<AssetFinancialSummaryReport[]>(this.apiUrl);
+    return this.http.get<AssetFinancialSummaryReport[]>(this.baseUrl);
   }
 
   getById(id: number): Observable<AssetFinancialSummaryReport> {
-    return this.http.get<AssetFinancialSummaryReport>(`${this.apiUrl}/${id}`);
+    return this.http.get<AssetFinancialSummaryReport>(`${this.baseUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<AssetFinancialSummaryReport[]> {
-    return this.http.get<AssetFinancialSummaryReport[]>(`${this.apiUrl}?schoolId=${schoolId}`);
+    return this.http.get<AssetFinancialSummaryReport[]>(`${this.baseUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateAssetFinancialSummaryReportRequest): Observable<AssetFinancialSummaryReport> {
-    return this.http.post<AssetFinancialSummaryReport>(this.apiUrl, dto);
+    return this.http.post<AssetFinancialSummaryReport>(this.baseUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetFinancialSummaryReportRequest): Observable<AssetFinancialSummaryReport> {
-    return this.http.put<AssetFinancialSummaryReport>(`${this.apiUrl}/${id}`, dto);
+    return this.http.put<AssetFinancialSummaryReport>(`${this.baseUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
+
 

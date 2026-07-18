@@ -1,36 +1,42 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../environments';
+import { ApiConfigService } from '../../../../core/services/api-config.service';
 import type { StudentExemplaryRecognition, CreateStudentExemplaryRecognition, UpdateStudentExemplaryRecognition } from '../models/exemplary-recognition.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ExemplaryRecognitionService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment.apiUrl}/studentExemplaryRecognitions`;
+  private readonly apiConfig = inject(ApiConfigService);
+  private readonly baseUrl = this.apiConfig.getEndpoint('M2_StudentAffairs', 'studentExemplaryRecognitions');
 
   getAll(): Observable<StudentExemplaryRecognition[]> {
-    return this.http.get<StudentExemplaryRecognition[]>(this.apiUrl);
+    return this.http.get<StudentExemplaryRecognition[]>(this.baseUrl);
   }
 
   getById(id: number): Observable<StudentExemplaryRecognition> {
-    return this.http.get<StudentExemplaryRecognition>(`${this.apiUrl}/${id}`);
+    return this.http.get<StudentExemplaryRecognition>(`${this.baseUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentExemplaryRecognition[]> {
-    return this.http.get<StudentExemplaryRecognition[]>(`${this.apiUrl}?studentId=${studentId}`);
+    return this.http.get<StudentExemplaryRecognition[]>(`${this.baseUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentExemplaryRecognition): Observable<StudentExemplaryRecognition> {
-    return this.http.post<StudentExemplaryRecognition>(this.apiUrl, dto);
+    return this.http.post<StudentExemplaryRecognition>(this.baseUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentExemplaryRecognition): Observable<StudentExemplaryRecognition> {
-    return this.http.put<StudentExemplaryRecognition>(`${this.apiUrl}/${id}`, dto);
+    return this.http.put<StudentExemplaryRecognition>(`${this.baseUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
+
+
+
+
+
 

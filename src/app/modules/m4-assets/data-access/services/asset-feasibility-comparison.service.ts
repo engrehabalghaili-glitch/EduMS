@@ -1,36 +1,38 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../environments';
+import { ApiConfigService } from '../../../../core/services/api-config.service';
 import type { AssetFeasibilityComparison, CreateAssetFeasibilityComparisonRequest, UpdateAssetFeasibilityComparisonRequest } from '../models/asset-feasibility-comparisons';
 
 @Injectable({ providedIn: 'root' })
 export class AssetFeasibilityComparisonService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment.apiUrl}/assetFeasibilityComparisons`;
+  private readonly apiConfig = inject(ApiConfigService);
+  private readonly baseUrl = this.apiConfig.getEndpoint('M4_AssetLogistics', 'assetFeasibilityComparisons');
 
   getAll(): Observable<AssetFeasibilityComparison[]> {
-    return this.http.get<AssetFeasibilityComparison[]>(this.apiUrl);
+    return this.http.get<AssetFeasibilityComparison[]>(this.baseUrl);
   }
 
   getById(id: number): Observable<AssetFeasibilityComparison> {
-    return this.http.get<AssetFeasibilityComparison>(`${this.apiUrl}/${id}`);
+    return this.http.get<AssetFeasibilityComparison>(`${this.baseUrl}/${id}`);
   }
 
   getByAssetId(assetId: number): Observable<AssetFeasibilityComparison[]> {
-    return this.http.get<AssetFeasibilityComparison[]>(`${this.apiUrl}?assetId=${assetId}`);
+    return this.http.get<AssetFeasibilityComparison[]>(`${this.baseUrl}?assetId=${assetId}`);
   }
 
   create(dto: CreateAssetFeasibilityComparisonRequest): Observable<AssetFeasibilityComparison> {
-    return this.http.post<AssetFeasibilityComparison>(this.apiUrl, dto);
+    return this.http.post<AssetFeasibilityComparison>(this.baseUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetFeasibilityComparisonRequest): Observable<AssetFeasibilityComparison> {
-    return this.http.put<AssetFeasibilityComparison>(`${this.apiUrl}/${id}`, dto);
+    return this.http.put<AssetFeasibilityComparison>(`${this.baseUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
+
 

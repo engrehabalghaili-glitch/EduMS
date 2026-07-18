@@ -1,45 +1,49 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../environments';
+import { ApiConfigService } from '../../../../core/services/api-config.service';
 import type { SchoolCurriculumPlan, CreateSchoolCurriculumPlanDto, UpdateSchoolCurriculumPlanDto } from '../models/school-curriculum-plan';
 
 @Injectable({ providedIn: 'root' })
 export class SchoolCurriculumPlanService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment.apiUrl}/schoolCurriculumPlans`;
+  private readonly apiConfig = inject(ApiConfigService);
+  private readonly baseUrl = this.apiConfig.getEndpoint('M1_SchoolAdmin', 'schoolCurriculumPlans');
 
   getAll(): Observable<SchoolCurriculumPlan[]> {
-    return this.http.get<SchoolCurriculumPlan[]>(this.apiUrl);
+    return this.http.get<SchoolCurriculumPlan[]>(this.baseUrl);
   }
 
   getById(id: number): Observable<SchoolCurriculumPlan> {
-    return this.http.get<SchoolCurriculumPlan>(`${this.apiUrl}/${id}`);
+    return this.http.get<SchoolCurriculumPlan>(`${this.baseUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<SchoolCurriculumPlan[]> {
-    return this.http.get<SchoolCurriculumPlan[]>(`${this.apiUrl}?schoolId=${schoolId}`);
+    return this.http.get<SchoolCurriculumPlan[]>(`${this.baseUrl}?schoolId=${schoolId}`);
   }
 
   getByAcademicYearId(academicYearId: number): Observable<SchoolCurriculumPlan[]> {
-    return this.http.get<SchoolCurriculumPlan[]>(`${this.apiUrl}?schoolAcademicYearId=${academicYearId}`);
+    return this.http.get<SchoolCurriculumPlan[]>(`${this.baseUrl}?schoolAcademicYearId=${academicYearId}`);
   }
 
   getActive(): Observable<SchoolCurriculumPlan[]> {
-    return this.http.get<SchoolCurriculumPlan[]>(`${this.apiUrl}?isActive=true`);
+    return this.http.get<SchoolCurriculumPlan[]>(`${this.baseUrl}?isActive=true`);
   }
 
   create(dto: CreateSchoolCurriculumPlanDto): Observable<SchoolCurriculumPlan> {
-    return this.http.post<SchoolCurriculumPlan>(this.apiUrl, dto);
+    return this.http.post<SchoolCurriculumPlan>(this.baseUrl, dto);
   }
 
   update(id: number, dto: UpdateSchoolCurriculumPlanDto): Observable<SchoolCurriculumPlan> {
-    return this.http.put<SchoolCurriculumPlan>(`${this.apiUrl}/${id}`, dto);
+    return this.http.put<SchoolCurriculumPlan>(`${this.baseUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
+
+
+
 
 

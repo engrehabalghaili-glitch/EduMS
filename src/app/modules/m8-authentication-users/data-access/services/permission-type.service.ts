@@ -1,36 +1,38 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../environments';
+import { ApiConfigService } from '../../../../core/services/api-config.service';
 import type { PermissionType, CreatePermissionType, UpdatePermissionType } from '../models/permission-type.models';
 
 @Injectable({ providedIn: 'root' })
 export class PermissionTypeService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment.apiUrl}/permissionTypes`;
+  private readonly apiConfig = inject(ApiConfigService);
+  private readonly baseUrl = this.apiConfig.getEndpoint('M8_AuthenticationUsers', 'permissionTypes');
 
   getAll(): Observable<PermissionType[]> {
-    return this.http.get<PermissionType[]>(this.apiUrl);
+    return this.http.get<PermissionType[]>(this.baseUrl);
   }
 
   getById(id: number): Observable<PermissionType> {
-    return this.http.get<PermissionType>(`${this.apiUrl}/${id}`);
+    return this.http.get<PermissionType>(`${this.baseUrl}/${id}`);
   }
 
   getByCategory(category: string): Observable<PermissionType[]> {
-    return this.http.get<PermissionType[]>(`${this.apiUrl}?category=${category}`);
+    return this.http.get<PermissionType[]>(`${this.baseUrl}?category=${category}`);
   }
 
   create(dto: CreatePermissionType): Observable<PermissionType> {
-    return this.http.post<PermissionType>(this.apiUrl, dto);
+    return this.http.post<PermissionType>(this.baseUrl, dto);
   }
 
   update(id: number, dto: UpdatePermissionType): Observable<PermissionType> {
-    return this.http.put<PermissionType>(`${this.apiUrl}/${id}`, dto);
+    return this.http.put<PermissionType>(`${this.baseUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
+
 

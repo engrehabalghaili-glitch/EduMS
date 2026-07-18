@@ -1,32 +1,38 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../environments';
+import { ApiConfigService } from '../../../../core/services/api-config.service';
 import type { StudentEnrollment, CreateStudentEnrollment, UpdateStudentEnrollment } from '../models/enrollment.interface';
 
 @Injectable({ providedIn: 'root' })
 export class StudentEnrollmentService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = environment.apiUrl;
+  private readonly apiConfig = inject(ApiConfigService);
+  private readonly baseUrl = this.apiConfig.getEndpoint('M2_StudentAffairs', 'student-enrollments');
 
   getAll(): Observable<StudentEnrollment[]> {
-    return this.http.get<StudentEnrollment[]>(`${this.apiUrl}/student-enrollments`);
+    return this.http.get<StudentEnrollment[]>(`${this.baseUrl}`);
   }
 
   getById(id: number): Observable<StudentEnrollment> {
-    return this.http.get<StudentEnrollment>(`${this.apiUrl}/student-enrollments/${id}`);
+    return this.http.get<StudentEnrollment>(`${this.baseUrl}/${id}`);
   }
 
   create(dto: CreateStudentEnrollment): Observable<StudentEnrollment> {
-    return this.http.post<StudentEnrollment>(`${this.apiUrl}/student-enrollments`, dto);
+    return this.http.post<StudentEnrollment>(`${this.baseUrl}`, dto);
   }
 
   update(id: number, dto: UpdateStudentEnrollment): Observable<StudentEnrollment> {
-    return this.http.put<StudentEnrollment>(`${this.apiUrl}/student-enrollments/${id}`, dto);
+    return this.http.put<StudentEnrollment>(`${this.baseUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/student-enrollments/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
+
+
+
+
+
 

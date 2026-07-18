@@ -1,36 +1,38 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../environments';
+import { ApiConfigService } from '../../../../core/services/api-config.service';
 import type { SchoolSurplus, CreateSchoolSurplus, UpdateSchoolSurplus, SchoolSurplusResponse, SchoolSurplusListResponse } from '../models/school-surplus.types';
 
 @Injectable({ providedIn: 'root' })
 export class SchoolSurplusService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment.apiUrl}/schoolSurpluses`;
+  private readonly apiConfig = inject(ApiConfigService);
+  private readonly baseUrl = this.apiConfig.getEndpoint('M7_EmergencyManagement', 'schoolSurpluses');
 
   getAll(): Observable<SchoolSurplusListResponse> {
-    return this.http.get<SchoolSurplusListResponse>(this.apiUrl);
+    return this.http.get<SchoolSurplusListResponse>(this.baseUrl);
   }
 
   getById(id: number): Observable<SchoolSurplusResponse> {
-    return this.http.get<SchoolSurplusResponse>(`${this.apiUrl}/${id}`);
+    return this.http.get<SchoolSurplusResponse>(`${this.baseUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<SchoolSurplusListResponse> {
-    return this.http.get<SchoolSurplusListResponse>(`${this.apiUrl}?schoolId=${schoolId}`);
+    return this.http.get<SchoolSurplusListResponse>(`${this.baseUrl}?schoolId=${schoolId}`);
   }
 
   create(dto: CreateSchoolSurplus): Observable<SchoolSurplusResponse> {
-    return this.http.post<SchoolSurplusResponse>(this.apiUrl, dto);
+    return this.http.post<SchoolSurplusResponse>(this.baseUrl, dto);
   }
 
   update(id: number, dto: UpdateSchoolSurplus): Observable<SchoolSurplusResponse> {
-    return this.http.put<SchoolSurplusResponse>(`${this.apiUrl}/${id}`, dto);
+    return this.http.put<SchoolSurplusResponse>(`${this.baseUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
+
 

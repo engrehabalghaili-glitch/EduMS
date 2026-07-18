@@ -1,36 +1,42 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../environments';
+import { ApiConfigService } from '../../../../core/services/api-config.service';
 import type { StudentTransferLog, CreateStudentTransferLog, UpdateStudentTransferLog } from '../models/transfer-log.interface';
 
 @Injectable({ providedIn: 'root' })
 export class TransferLogService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment.apiUrl}/studentTransferLogs`;
+  private readonly apiConfig = inject(ApiConfigService);
+  private readonly baseUrl = this.apiConfig.getEndpoint('M2_StudentAffairs', 'studentTransferLogs');
 
   getAll(): Observable<StudentTransferLog[]> {
-    return this.http.get<StudentTransferLog[]>(this.apiUrl);
+    return this.http.get<StudentTransferLog[]>(this.baseUrl);
   }
 
   getById(id: number): Observable<StudentTransferLog> {
-    return this.http.get<StudentTransferLog>(`${this.apiUrl}/${id}`);
+    return this.http.get<StudentTransferLog>(`${this.baseUrl}/${id}`);
   }
 
   getByStudentId(studentId: number): Observable<StudentTransferLog[]> {
-    return this.http.get<StudentTransferLog[]>(`${this.apiUrl}?studentId=${studentId}`);
+    return this.http.get<StudentTransferLog[]>(`${this.baseUrl}?studentId=${studentId}`);
   }
 
   create(dto: CreateStudentTransferLog): Observable<StudentTransferLog> {
-    return this.http.post<StudentTransferLog>(this.apiUrl, dto);
+    return this.http.post<StudentTransferLog>(this.baseUrl, dto);
   }
 
   update(id: number, dto: UpdateStudentTransferLog): Observable<StudentTransferLog> {
-    return this.http.put<StudentTransferLog>(`${this.apiUrl}/${id}`, dto);
+    return this.http.put<StudentTransferLog>(`${this.baseUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
+
+
+
+
+
 

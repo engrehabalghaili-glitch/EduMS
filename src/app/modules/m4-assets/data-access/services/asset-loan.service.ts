@@ -1,36 +1,38 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../environments';
+import { ApiConfigService } from '../../../../core/services/api-config.service';
 import type { AssetLoan, CreateAssetLoanRequest, UpdateAssetLoanRequest } from '../models/asset-loans';
 
 @Injectable({ providedIn: 'root' })
 export class AssetLoanService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment.apiUrl}/assetLoans`;
+  private readonly apiConfig = inject(ApiConfigService);
+  private readonly baseUrl = this.apiConfig.getEndpoint('M4_AssetLogistics', 'assetLoans');
 
   getAll(): Observable<AssetLoan[]> {
-    return this.http.get<AssetLoan[]>(this.apiUrl);
+    return this.http.get<AssetLoan[]>(this.baseUrl);
   }
 
   getById(id: number): Observable<AssetLoan> {
-    return this.http.get<AssetLoan>(`${this.apiUrl}/${id}`);
+    return this.http.get<AssetLoan>(`${this.baseUrl}/${id}`);
   }
 
   getByAssetId(assetId: number): Observable<AssetLoan[]> {
-    return this.http.get<AssetLoan[]>(`${this.apiUrl}?assetId=${assetId}`);
+    return this.http.get<AssetLoan[]>(`${this.baseUrl}?assetId=${assetId}`);
   }
 
   create(dto: CreateAssetLoanRequest): Observable<AssetLoan> {
-    return this.http.post<AssetLoan>(this.apiUrl, dto);
+    return this.http.post<AssetLoan>(this.baseUrl, dto);
   }
 
   update(id: number, dto: UpdateAssetLoanRequest): Observable<AssetLoan> {
-    return this.http.put<AssetLoan>(`${this.apiUrl}/${id}`, dto);
+    return this.http.put<AssetLoan>(`${this.baseUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
+
 

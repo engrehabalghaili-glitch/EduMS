@@ -1,41 +1,45 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../environments';
+import { ApiConfigService } from '../../../../core/services/api-config.service';
 import type { SchoolAcademicYear, CreateSchoolAcademicYearDto, UpdateSchoolAcademicYearDto } from '../models/school-academic-year';
 
 @Injectable({ providedIn: 'root' })
 export class SchoolAcademicYearService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment.apiUrl}/schoolAcademicYears`;
+  private readonly apiConfig = inject(ApiConfigService);
+  private readonly baseUrl = this.apiConfig.getEndpoint('M1_SchoolAdmin', 'schoolAcademicYears');
 
   getAll(): Observable<SchoolAcademicYear[]> {
-    return this.http.get<SchoolAcademicYear[]>(this.apiUrl);
+    return this.http.get<SchoolAcademicYear[]>(this.baseUrl);
   }
 
   getById(id: number): Observable<SchoolAcademicYear> {
-    return this.http.get<SchoolAcademicYear>(`${this.apiUrl}/${id}`);
+    return this.http.get<SchoolAcademicYear>(`${this.baseUrl}/${id}`);
   }
 
   getBySchoolId(schoolId: number): Observable<SchoolAcademicYear[]> {
-    return this.http.get<SchoolAcademicYear[]>(`${this.apiUrl}?schoolId=${schoolId}`);
+    return this.http.get<SchoolAcademicYear[]>(`${this.baseUrl}?schoolId=${schoolId}`);
   }
 
   getCurrentYear(): Observable<SchoolAcademicYear[]> {
-    return this.http.get<SchoolAcademicYear[]>(`${this.apiUrl}?isCurrentYear=true`);
+    return this.http.get<SchoolAcademicYear[]>(`${this.baseUrl}?isCurrentYear=true`);
   }
 
   create(dto: CreateSchoolAcademicYearDto): Observable<SchoolAcademicYear> {
-    return this.http.post<SchoolAcademicYear>(this.apiUrl, dto);
+    return this.http.post<SchoolAcademicYear>(this.baseUrl, dto);
   }
 
   update(id: number, dto: UpdateSchoolAcademicYearDto): Observable<SchoolAcademicYear> {
-    return this.http.put<SchoolAcademicYear>(`${this.apiUrl}/${id}`, dto);
+    return this.http.put<SchoolAcademicYear>(`${this.baseUrl}/${id}`, dto);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
+
+
+
 
 
