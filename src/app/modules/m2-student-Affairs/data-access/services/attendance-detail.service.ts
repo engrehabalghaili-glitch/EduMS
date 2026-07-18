@@ -18,6 +18,10 @@ export class AttendanceDetailService {
     return this.http.get<AttendanceDetail>(`${this.baseUrl}/${id}`);
   }
 
+  getByStudentId(studentId: number): Observable<AttendanceDetail[]> {
+    return this.http.get<AttendanceDetail[]>(`${this.baseUrl}?studentId=${studentId}`);
+  }
+
   create(dto: CreateAttendanceDetail): Observable<AttendanceDetail> {
     return this.http.post<AttendanceDetail>(`${this.baseUrl}`, dto);
   }
@@ -30,9 +34,3 @@ export class AttendanceDetailService {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
-
-
-
-
-
-

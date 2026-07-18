@@ -18,6 +18,10 @@ export class BehavioralLogService {
     return this.http.get<BehavioralLog>(`${this.baseUrl}/${id}`);
   }
 
+  getByStudentId(studentId: number): Observable<BehavioralLog[]> {
+    return this.http.get<BehavioralLog[]>(`${this.baseUrl}?studentId=${studentId}`);
+  }
+
   create(dto: CreateBehavioralLog): Observable<BehavioralLog> {
     return this.http.post<BehavioralLog>(`${this.baseUrl}`, dto);
   }
@@ -30,9 +34,3 @@ export class BehavioralLogService {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
-
-
-
-
-
-

@@ -18,6 +18,10 @@ export class StudentService {
     return this.http.get<Student>(`${this.baseUrl}/${id}`);
   }
 
+  getBySchoolId(schoolId: number): Observable<Student[]> {
+    return this.http.get<Student[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+  }
+
   create(dto: CreateStudent): Observable<Student> {
     return this.http.post<Student>(`${this.baseUrl}`, dto);
   }
@@ -30,10 +34,3 @@ export class StudentService {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
-
-
-
-
-
-
-

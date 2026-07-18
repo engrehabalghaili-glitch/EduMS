@@ -18,6 +18,10 @@ export class GuardianService {
     return this.http.get<Guardian>(`${this.baseUrl}/${id}`);
   }
 
+  getByFamilyNumber(familyNumber: string): Observable<Guardian[]> {
+    return this.http.get<Guardian[]>(`${this.baseUrl}?familyNumber=${familyNumber}`);
+  }
+
   create(dto: CreateGuardian): Observable<Guardian> {
     return this.http.post<Guardian>(`${this.baseUrl}`, dto);
   }
@@ -30,9 +34,3 @@ export class GuardianService {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
-
-
-
-
-
-

@@ -18,6 +18,10 @@ export class ClassSectionService {
     return this.http.get<ClassSection>(`${this.baseUrl}/${id}`);
   }
 
+  getBySchoolId(schoolId: number): Observable<ClassSection[]> {
+    return this.http.get<ClassSection[]>(`${this.baseUrl}?schoolId=${schoolId}`);
+  }
+
   create(dto: CreateClassSection): Observable<ClassSection> {
     return this.http.post<ClassSection>(`${this.baseUrl}`, dto);
   }
@@ -30,9 +34,3 @@ export class ClassSectionService {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
-
-
-
-
-
-
