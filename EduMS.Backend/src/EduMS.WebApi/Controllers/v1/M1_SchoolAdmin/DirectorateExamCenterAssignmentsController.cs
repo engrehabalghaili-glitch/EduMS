@@ -1,0 +1,60 @@
+using EduMS.Application.Common.Responses;
+using EduMS.Application.M1_SchoolAdmin.Commands.DirectorateExamCenterAssignments;
+using EduMS.Application.M1_SchoolAdmin.DTOs.DirectorateExamCenterAssignments;
+using EduMS.Application.M1_SchoolAdmin.Queries.DirectorateExamCenterAssignments;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace EduMS.WebApi.Controllers.v1.M1_SchoolAdmin;
+
+[ApiController]
+[Route("api/v1/[controller]")]
+[Authorize]
+public class DirectorateExamCenterAssignmentsController : ControllerBase
+{
+    private readonly IMediator _mediator;
+
+    public DirectorateExamCenterAssignmentsController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<ApiResponse<IEnumerable<DirectorateExamCenterAssignmentDto>>>> GetAll()
+    {
+        var result = await _mediator.Send(new GetAllDirectorateExamCenterAssignmentsQuery());
+        return Ok(ApiResponse<IEnumerable<DirectorateExamCenterAssignmentDto>>.Success(result));
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<ApiResponse<DirectorateExamCenterAssignmentDto>>> GetById(long id)
+    {
+        var result = await _mediator.Send(new GetDirectorateExamCenterAssignmentByIdQuery { Id = id });
+        return Ok(ApiResponse<DirectorateExamCenterAssignmentDto>.Success(result));
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateDirectorateExamCenterAssignmentDto dto)
+    {
+        var id = await _mediator.Send(new CreateDirectorateExamCenterAssignmentCommand { Dto = dto });
+        return Ok(ApiResponse<long>.Success(id, "Created successfully."));
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateDirectorateExamCenterAssignmentDto dto)
+    {
+        dto.Id = id;
+        var result = await _mediator.Send(new UpdateDirectorateExamCenterAssignmentCommand { Dto = dto });
+        return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
+    {
+        var result = await _mediator.Send(new DeleteDirectorateExamCenterAssignmentCommand { Id = id });
+        return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
+    }
+}
