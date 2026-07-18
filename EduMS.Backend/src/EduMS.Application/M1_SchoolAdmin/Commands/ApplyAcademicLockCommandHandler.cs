@@ -1,11 +1,12 @@
 using EduMS.Application.Common.CQRS;
+using EduMS.Application.Interfaces.Repositories.Common;
 using EduMS.Domain.Entities;
-using EduMS.Domain.Interfaces;
 
 namespace EduMS.Application.Locks.Commands;
 
-public class ApplyAcademicLockCommandHandler(IRepository<AcademicLockPeriod> lockRepository)
+public class ApplyAcademicLockCommandHandler(IGenericRepository<AcademicLockPeriod> lockRepository)
     : ICommandHandler<ApplyAcademicLockCommand, long>
+
 {
     public async Task<long> HandleAsync(ApplyAcademicLockCommand command, CancellationToken cancellationToken)
     {

@@ -92,19 +92,28 @@ public class EduMSDbInitializer(EduMSDbContext context, ILogger<EduMSDbInitializ
 
         // 3. Seed Default SuperAdmin User
         var usersSet = context.Set<SystemUser>();
-        if (!await usersSet.AnyAsync(u => u.Username == "admin", cancellationToken))
+        var adminUser = await usersSet.FirstOrDefaultAsync(u => u.Username == "admin", cancellationToken);
+        if (adminUser == null)
         {
             logger.LogInformation("بذر حساب مدير النظام الافتراضي (Default SuperAdmin User)...");
-            const string rawPassword = "AdminPassword123";
-            const string salt = "EduMS_Salt_2026";
-            var hashedBytes = SHA256.HashData(Encoding.UTF8.GetBytes(rawPassword + salt));
-            var passwordHash = Convert.ToBase64String(hashedBytes);
+            const string rawPassword = "Admin@EduMS2026!";
+            
+            // PBKDF2 Implementation inline
+            var salt = new byte[16];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(salt);
+            }
+            var iterations = 100000;
+            using var pbkdf2 = new Rfc2898DeriveBytes(rawPassword, salt, iterations, HashAlgorithmName.SHA256);
+            var hashBytes = pbkdf2.GetBytes(32);
+            var passwordHash = $"{iterations}:{Convert.ToBase64String(salt)}:{Convert.ToBase64String(hashBytes)}";
 
-            var adminUser = new SystemUser
+            adminUser = new SystemUser
             {
                 Username = "admin",
                 PasswordHash = passwordHash,
-                PasswordSalt = salt,
+                PasswordSalt = Convert.ToBase64String(salt),
                 FullNameAr = "مدير النظام العام",
                 FullNameEn = "System Super Administrator",
                 Email = "admin@edums.edu.sa",
@@ -136,6 +145,21 @@ public class EduMSDbInitializer(EduMSDbContext context, ILogger<EduMSDbInitializ
                 await context.Set<UserRoleAssignment>().AddAsync(assignment, cancellationToken);
                 await context.SaveChangesAsync(cancellationToken);
             }
+        }
+        else
+        {
+            logger.LogInformation("تحديث حساب مدير النظام إلى PBKDF2...");
+            const string rawPassword = "Admin@EduMS2026!";
+            var salt = new byte[16];
+            using (var rng = RandomNumberGenerator.Create()) { rng.GetBytes(salt); }
+            var iterations = 100000;
+            using var pbkdf2 = new Rfc2898DeriveBytes(rawPassword, salt, iterations, HashAlgorithmName.SHA256);
+            var hashBytes = pbkdf2.GetBytes(32);
+            adminUser.PasswordHash = $"{iterations}:{Convert.ToBase64String(salt)}:{Convert.ToBase64String(hashBytes)}";
+            adminUser.PasswordSalt = Convert.ToBase64String(salt);
+            
+            context.Set<SystemUser>().Update(adminUser);
+            await context.SaveChangesAsync(cancellationToken);
         }
     }
 

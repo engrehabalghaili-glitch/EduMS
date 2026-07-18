@@ -1,16 +1,18 @@
 using EduMS.Application.Common.CQRS;
+using EduMS.Application.Interfaces.Repositories.Common;
+using EduMS.Application.Interfaces.Repositories.M1_SchoolAdmin;
 using EduMS.Domain.Entities;
-using EduMS.Domain.Interfaces;
 
 namespace EduMS.Application.Schools.Queries;
 
 public class GetSchoolByCodeQueryHandler(
-    IRepository<School> schoolRepository,
-    IRepository<AcademicLockPeriod> lockRepository
+    ISchoolRepository schoolRepository,
+    IGenericRepository<AcademicLockPeriod> lockRepository
 ) : IQueryHandler<GetSchoolByCodeQuery, SchoolDetailsDto?>
 {
-    private readonly IRepository<School> _schoolRepository = schoolRepository;
-    private readonly IRepository<AcademicLockPeriod> _lockRepository = lockRepository;
+    private readonly ISchoolRepository _schoolRepository = schoolRepository;
+    private readonly IGenericRepository<AcademicLockPeriod> _lockRepository = lockRepository;
+
 
     public async Task<SchoolDetailsDto?> HandleAsync(GetSchoolByCodeQuery request, CancellationToken cancellationToken)
     {

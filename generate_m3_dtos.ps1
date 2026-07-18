@@ -29,7 +29,8 @@ function Generate-Dtos($className, $props, $moduleName, $basePath, $auditProps) 
     $folderName = $className + "s"
     if ($className.EndsWith("y")) {
         $folderName = $className.Substring(0, $className.Length - 1) + "ies"
-    } elseif ($className.EndsWith("s") -or $className.EndsWith("x")) {
+    }
+    elseif ($className.EndsWith("s") -or $className.EndsWith("x")) {
         $folderName = $className + "es"
     }
 

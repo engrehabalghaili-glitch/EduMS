@@ -1,6 +1,6 @@
 using EduMS.Application;
 using EduMS.Infrastructure;
-using EduMS.WebApi.Common.Middleware;
+using EduMS.WebApi.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +24,35 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<EduMS.Application.Interfaces.Security.ICurrentUserService, CurrentUserService>();
+builder.Services.AddScoped<EduMS.Application.Interfaces.Security.IAuthService, AuthService>();
+builder.Services.AddHttpContextAccessor();
+
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+var secretKey = jwtSettings["SecretKey"];
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = jwtSettings["Issuer"],
+        ValidAudience = jwtSettings["Audience"],
+        IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(secretKey ?? ""))
+    };
+});
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -32,7 +61,7 @@ using (var scope = app.Services.CreateScope())
     await dbInitializer.SeedAsync();
 }
 
-app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
+app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())
 {
@@ -46,6 +75,7 @@ else
 }
 
 app.UseCors(FrontendCorsPolicy);
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 

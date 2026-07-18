@@ -1,16 +1,18 @@
 using EduMS.Application.Common.CQRS;
+using EduMS.Application.Interfaces.Repositories.Common;
+using EduMS.Application.Interfaces.Repositories.M1_SchoolAdmin;
 using EduMS.Domain.Entities;
-using EduMS.Domain.Interfaces;
 
 namespace EduMS.Application.Schools.Commands;
 
 public class RegisterSchoolCommandHandler(
-    IRepository<School> schoolRepository,
+    ISchoolRepository schoolRepository,
     IUnitOfWork unitOfWork
 ) : ICommandHandler<RegisterSchoolCommand, long>
 {
-    private readonly IRepository<School> _schoolRepository = schoolRepository;
+    private readonly ISchoolRepository _schoolRepository = schoolRepository;
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
+
 
     public async Task<long> HandleAsync(RegisterSchoolCommand request, CancellationToken cancellationToken)
     {

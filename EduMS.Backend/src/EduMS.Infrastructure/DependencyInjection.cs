@@ -24,8 +24,12 @@ public static class DependencyInjection
         });
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        services.AddScoped(typeof(EduMS.Application.Interfaces.Repositories.Common.IGenericRepository<>), typeof(Repository<>));
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<EduMS.Application.Interfaces.Repositories.Common.IUnitOfWork, UnitOfWork>();
+        services.AddScoped<EduMS.Application.Interfaces.Repositories.M1_SchoolAdmin.ISchoolRepository, EduMS.Infrastructure.M1_SchoolAdmin.SchoolRepository>();
         services.AddScoped<IEduMSDbInitializer, EduMSDbInitializer>();
+
 
         return services;
     }
