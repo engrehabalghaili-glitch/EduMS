@@ -1,6 +1,7 @@
 using EduMS.Application;
 using EduMS.Infrastructure;
 using EduMS.WebApi.Infrastructure;
+using Hangfire;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -94,6 +95,18 @@ else
 app.UseCors(FrontendCorsPolicy);
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseHangfireDashboard("/hangfire", new Hangfire.DashboardOptions
+{
+    // For development, allow local access. In production, add authorization filters here.
+    Authorization = new[] { new Hangfire.Dashboard.LocalRequestsOnlyAuthorizationFilter() }
+});
+
+Hangfire.RecurringJob.AddOrUpdate<EduMS.Application.Interfaces.Infrastructure.ISystemHealthCheckJob>(
+    "system-health-check",
+    job => job.CheckAsync(default),
+    Hangfire.Cron.Minutely);
+
 app.MapControllers();
 
 app.Run();
