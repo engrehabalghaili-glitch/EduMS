@@ -1,7 +1,7 @@
 using EduMS.Domain.Common;
 using EduMS.Domain.Entities;
 // using EduMS.Domain.Entities.M1_SchoolAdmin;
-using EduMS.Domain.Entities.M2_StudentAffairs;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace EduMS.Infrastructure.Common.Persistence;
@@ -25,7 +25,7 @@ public class EduMSDbContext(DbContextOptions<EduMSDbContext> options) : DbContex
     // public DbSet<Vendor> Vendors => Set<Vendor>();
     // public DbSet<PaymentVoucher> PaymentVouchers => Set<PaymentVoucher>();
     
-    public DbSet<Registration> Registrations => Set<Registration>();
+
     public DbSet<SchoolLevel> SchoolLevels => Set<SchoolLevel>();
     public DbSet<FeeType> FeeTypes => Set<FeeType>();
 

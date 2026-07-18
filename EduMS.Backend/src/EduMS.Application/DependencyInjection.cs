@@ -5,9 +5,7 @@ using EduMS.Application.Locks.Commands;
 using EduMS.Application.Locks.Queries;
 using EduMS.Application.Persons.Commands;
 using EduMS.Application.Persons.Validators;
-using EduMS.Application.Registrations.Commands;
-using EduMS.Application.Registrations.Queries;
-using EduMS.Application.Registrations.Validators;
+
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -40,14 +38,10 @@ public static class DependencyInjection
         services.AddScoped<ICommandHandler<ApplyAcademicLockCommand, long>, ApplyAcademicLockCommandHandler>();
         services.AddScoped<IQueryHandler<CheckAcademicLockQuery, bool>, CheckAcademicLockQueryHandler>();
 
-        // Registration Handlers
-        services.AddScoped<ICommandHandler<CreateRegistrationCommand, long>, CreateRegistrationCommandHandler>();
-        services.AddScoped<ICommandHandler<UpdateRegistrationCommand, bool>, UpdateRegistrationCommandHandler>();
-        services.AddScoped<IQueryHandler<GetRegistrationByIdQuery, EduMS.Application.Registrations.DTOs.RegistrationDto?>, GetRegistrationByIdQueryHandler>();
+
 
         services.AddScoped<EduMS.Application.Common.Validation.IValidator<CreatePersonCommand>, CreatePersonCommandValidator>();
-        services.AddScoped<EduMS.Application.Common.Validation.IValidator<CreateRegistrationCommand>, CreateRegistrationCommandValidator>();
-        services.AddScoped<EduMS.Application.Common.Validation.IValidator<UpdateRegistrationCommand>, UpdateRegistrationCommandValidator>();
+
 
         return services;
     }

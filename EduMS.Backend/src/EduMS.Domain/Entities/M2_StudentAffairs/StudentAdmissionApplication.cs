@@ -10,14 +10,34 @@ namespace EduMS.Domain.Entities;
 /// </summary>
 public class StudentAdmissionApplication : BaseAuditableEntity
 {
+    // Applicant's Basic Identity (Raw fields before conversion to Person/Student)
+    public string ApplicantFirstNameAr { get; set; } = string.Empty;
+    public string ApplicantFatherNameAr { get; set; } = string.Empty;
+    public string ApplicantGrandfatherNameAr { get; set; } = string.Empty;
+    public string ApplicantFamilyNameAr { get; set; } = string.Empty;
+
+    public string ApplicantFirstNameEn { get; set; } = string.Empty;
+    public string ApplicantFatherNameEn { get; set; } = string.Empty;
+    public string ApplicantGrandfatherNameEn { get; set; } = string.Empty;
+    public string ApplicantFamilyNameEn { get; set; } = string.Empty;
+
+    public string ApplicantNationalId { get; set; } = string.Empty;
+    public DateTime ApplicantBirthDate { get; set; }
+    public string? ApplicantBirthPlace { get; set; }
+    public string? ApplicantNationality { get; set; }
+    public EduMS.Domain.Enums.Gender ApplicantGender { get; set; }
+    public string? ApplicantAddress { get; set; }
+
+    // Relationships
     public long GuardianId { get; set; }
     public long SchoolId { get; set; }
     public long? SchoolAcademicYearId { get; set; }
     public string RequestedGradeLevelCode { get; set; } = string.Empty;
     public DateTime SubmissionDate { get; set; } = DateTime.UtcNow;
-    public int RequestStatus { get; set; } = 1; // 1=Pending, 2=Accepted, 3=Rejected, 4=Incomplete
+    public EduMS.Domain.Enums.RegistrationStatus RequestStatus { get; set; } = EduMS.Domain.Enums.RegistrationStatus.Pending;
     public string? BirthCertificateAttachmentUrl { get; set; }
     public string? PersonalPhotoAttachmentUrl { get; set; }
+    public string? IDCardImageAttachmentUrl { get; set; }
     public string? PreviousSchoolName { get; set; }
     public string? PreviousSchoolGradeLevel { get; set; }
     public bool HasSpecialNeeds { get; set; }
