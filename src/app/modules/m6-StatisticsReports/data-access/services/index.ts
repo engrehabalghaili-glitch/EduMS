@@ -1,0 +1,16 @@
+export { SystemReportService } from './system-report.service';
+export { SubmittedStatisticsService } from './submitted-statistics.service';
+export { ComparativeReportService } from './comparative-report.service';
+export { DashboardKpiConfigurationService } from './dashboard-kpi-configuration.service';
+export { TrendAnalysisResultService } from './trend-analysis-result.service';
+export { ExceptionalStatisticsReportService } from './exceptional-statistics-report.service';
+export { ExternalComplianceReportService } from './external-compliance-report.service';
+export { GapAnalysisReportService } from './gap-analysis-report.service';
+export { KpiMetricRecordService } from './kpi-metric-record.service';
+export { ReportApprovalService } from './report-approval.service';
+export { SchoolFinancialSummaryReportService } from './school-financial-summary-report.service';
+export { SchoolStatisticsDraftService } from './school-statistics-draft.service';
+export { StatisticalReportSnapshotService } from './statistical-report-snapshot.service';
+export { StatisticsArchiveService } from './statistics-archive.service';
+export { StatisticsReportsArchiveService } from './statistics-reports-archive.service';
+export { StatisticsUpdateHistoryService } from './statistics-update-history.service';

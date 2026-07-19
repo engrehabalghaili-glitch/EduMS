@@ -1,0 +1,35 @@
+<div class="p-6 bg-surface-0 dark:bg-surface-900 rounded-xl shadow-sm border border-surface-200 dark:border-surface-700">
+  <p-table
+    [value]="value()"
+    [columns]="columns()"
+    [loading]="loading()"
+    [paginator]="paginator()"
+    [rows]="rows()"
+    [showCurrentPageReport]="showCurrentPageReport()"
+    [currentPageReportTemplate]="currentPageReportTemplate()"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    styleClass="p-datatable-sm"
+  >
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        @for (col of columns; track col.field) {
+          <th>{{ col.header }}</th>
+        }
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>
+        @for (col of columns; track col.field) {
+          <td>{{ rowData[col.field] }}</td>
+        }
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+        <td [attr.colspan]="columns.length" class="text-center py-8 text-surface-400">
+          No records found
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
