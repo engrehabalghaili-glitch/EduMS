@@ -18,10 +18,6 @@ export class RegistrationService {
     return this.http.get<Registration>(`${this.baseUrl}/${id}`);
   }
 
-  getBySchoolId(schoolId: number): Observable<Registration[]> {
-    return this.http.get<Registration[]>(`${this.baseUrl}?schoolId=${schoolId}`);
-  }
-
   create(dto: CreateRegistration): Observable<Registration> {
     return this.http.post<Registration>(`${this.baseUrl}`, dto);
   }
@@ -34,3 +30,9 @@ export class RegistrationService {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
+
+
+
+
+
+
