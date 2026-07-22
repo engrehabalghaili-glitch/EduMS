@@ -1,39 +1,34 @@
-using EduMS.Application.Common.Validation;
 using EduMS.Application.Schools.Commands;
+using FluentValidation;
 
 namespace EduMS.Application.Schools.Validators;
 
-public class RegisterSchoolCommandValidator : IValidator<RegisterSchoolCommand>
+public class RegisterSchoolCommandValidator : AbstractValidator<RegisterSchoolCommand>, EduMS.Application.Common.Validation.IValidator<RegisterSchoolCommand>
 {
-    public Task ValidateAsync(RegisterSchoolCommand command, CancellationToken cancellationToken)
+    public RegisterSchoolCommandValidator()
     {
-        var errors = new Dictionary<string, string[]>();
+        RuleFor(x => x.SchoolNameAr)
+            .NotEmpty().WithMessage("اسم المدرسة بالعربية حقل مطلوب.")
+            .MaximumLength(200).WithMessage("اسم المدرسة بالعربية لا يجب أن يتجاوز 200 حرف.");
 
-        if (string.IsNullOrWhiteSpace(command.SchoolNameAr))
+        RuleFor(x => x.SchoolCode)
+            .NotEmpty().WithMessage("رمز المدرسة حقل مطلوب.")
+            .MaximumLength(50).WithMessage("رمز المدرسة لا يجب أن يتجاوز 50 حرف.");
+
+        RuleFor(x => x.Directorate)
+            .NotEmpty().WithMessage("اسم الإدارة التعليمية حقل مطلوب.");
+
+        RuleFor(x => x.Governorate)
+            .NotEmpty().WithMessage("اسم المحافظة حقل مطلوب.");
+    }
+
+    public async Task ValidateAsync(RegisterSchoolCommand instance, CancellationToken cancellationToken)
+    {
+        var result = await ((FluentValidation.IValidator<RegisterSchoolCommand>)this).ValidateAsync(instance, cancellationToken);
+        if (!result.IsValid)
         {
-            errors.Add(nameof(command.SchoolNameAr), new[] { "اسم المدرسة بالعربية حقل مطلوب." });
+            throw new EduMS.Application.Common.Validation.ValidationException(result.Errors);
         }
-
-        if (string.IsNullOrWhiteSpace(command.SchoolCode))
-        {
-            errors.Add(nameof(command.SchoolCode), new[] { "رمز المدرسة حقل مطلوب." });
-        }
-
-        if (string.IsNullOrWhiteSpace(command.Directorate))
-        {
-            errors.Add(nameof(command.Directorate), new[] { "اسم الإدارة التعليمية حقل مطلوب." });
-        }
-
-        if (string.IsNullOrWhiteSpace(command.Governorate))
-        {
-            errors.Add(nameof(command.Governorate), new[] { "اسم المحافظة حقل مطلوب." });
-        }
-
-        if (errors.Any())
-        {
-            throw new ValidationException(errors);
-        }
-
-        return Task.CompletedTask;
     }
 }
+

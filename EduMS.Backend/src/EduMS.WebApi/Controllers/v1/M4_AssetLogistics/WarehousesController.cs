@@ -1,0 +1,60 @@
+using EduMS.Application.Common.Responses;
+using EduMS.Application.M4_AssetLogistics.Commands.Warehouses;
+using EduMS.Application.M4_AssetLogistics.DTOs.Warehouses;
+using EduMS.Application.M4_AssetLogistics.Queries.Warehouses;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
+
+[ApiController]
+[Route("api/v1/[controller]")]
+[Authorize]
+public class WarehousesController : ControllerBase
+{
+    private readonly IMediator _mediator;
+
+    public WarehousesController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<ApiResponse<IEnumerable<WarehouseDto>>>> GetAll()
+    {
+        var result = await _mediator.Send(new GetAllWarehousesQuery());
+        return Ok(ApiResponse<IEnumerable<WarehouseDto>>.Success(result));
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<ApiResponse<WarehouseDto>>> GetById(long id)
+    {
+        var result = await _mediator.Send(new GetWarehouseByIdQuery { Id = id });
+        return Ok(ApiResponse<WarehouseDto>.Success(result));
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateWarehouseDto dto)
+    {
+        var id = await _mediator.Send(new CreateWarehouseCommand { Dto = dto });
+        return Ok(ApiResponse<long>.Success(id, "Created successfully."));
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateWarehouseDto dto)
+    {
+        dto.Id = id;
+        var result = await _mediator.Send(new UpdateWarehouseCommand { Dto = dto });
+        return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
+    {
+        var result = await _mediator.Send(new DeleteWarehouseCommand { Id = id });
+        return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
+    }
+}

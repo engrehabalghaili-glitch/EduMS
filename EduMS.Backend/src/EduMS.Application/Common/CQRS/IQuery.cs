@@ -1,3 +1,4 @@
 namespace EduMS.Application.Common.CQRS;
 
-public interface IQuery<out TResponse> { }
+public interface IQuery<out TResponse> : MediatR.IRequest<TResponse> { }
+

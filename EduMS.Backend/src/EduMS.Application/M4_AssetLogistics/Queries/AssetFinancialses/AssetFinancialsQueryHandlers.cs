@@ -1,0 +1,37 @@
+using AutoMapper;
+using EduMS.Application.Interfaces.Repositories.Common;
+using EduMS.Domain.Entities;
+using EduMS.Application.M4_AssetLogistics.DTOs.AssetFinancialses;
+using MediatR;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace EduMS.Application.M4_AssetLogistics.Queries.AssetFinancialses;
+
+public class AssetFinancialsQueryHandlers : 
+    IRequestHandler<GetAssetFinancialsByIdQuery, AssetFinancialsDto>,
+    IRequestHandler<GetAllAssetFinancialsesQuery, IEnumerable<AssetFinancialsDto>>
+{
+    private readonly IGenericRepository<AssetFinancials> _repository;
+    private readonly IMapper _mapper;
+
+    public AssetFinancialsQueryHandlers(IGenericRepository<AssetFinancials> repository, IMapper mapper)
+    {
+        _repository = repository;
+        _mapper = mapper;
+    }
+
+    public async Task<AssetFinancialsDto> Handle(GetAssetFinancialsByIdQuery request, CancellationToken cancellationToken)
+    {
+        var entity = await _repository.GetByIdAsync(request.Id, cancellationToken);
+        if (entity == null) throw new KeyNotFoundException($"AssetFinancials not found.");
+        return _mapper.Map<AssetFinancialsDto>(entity);
+    }
+
+    public async Task<IEnumerable<AssetFinancialsDto>> Handle(GetAllAssetFinancialsesQuery request, CancellationToken cancellationToken)
+    {
+        var entities = await _repository.GetAllAsync(cancellationToken);
+        return _mapper.Map<IEnumerable<AssetFinancialsDto>>(entities);
+    }
+}
