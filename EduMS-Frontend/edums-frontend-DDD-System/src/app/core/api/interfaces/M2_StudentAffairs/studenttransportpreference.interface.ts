@@ -1,0 +1,95 @@
+export interface CreateStudentTransportPreferencePayload {
+    studentId: number;
+    schoolAcademicYearId?: number;
+    transportType: number;
+    preferredBusRouteId?: number;
+    pickupAddress?: string;
+    pickupGpsLatitude?: string;
+    pickupGpsLongitude?: string;
+    preferredPickupTime?: string;
+    preferredDropoffTime?: string;
+    useMorningPickup: boolean;
+    useAfternoonDropoff: boolean;
+    weeklyDaysJson?: string;
+    requiresEscort: boolean;
+    escortName?: string;
+    escortPhone?: string;
+    escortRelationToStudent?: string;
+    requiresSpecialNeedsTransport: boolean;
+    specialNeedsTransportDetails?: string;
+    isWheelchairAccessibleBusRequired: boolean;
+    subscriptionStartDate?: string;
+    subscriptionEndDate?: string;
+    subscriptionFeeAmount: number;
+    isTransportContractSigned: boolean;
+    transportContractFileUrl?: string;
+    authorizedPickupPersonsJson?: string;
+}
+
+export interface StudentTransportPreference {
+    id: number;
+    studentId: number;
+    schoolAcademicYearId?: number;
+    transportType: number;
+    preferredBusRouteId?: number;
+    pickupAddress?: string;
+    pickupGpsLatitude?: string;
+    pickupGpsLongitude?: string;
+    preferredPickupTime?: string;
+    preferredDropoffTime?: string;
+    useMorningPickup: boolean;
+    useAfternoonDropoff: boolean;
+    weeklyDaysJson?: string;
+    requiresEscort: boolean;
+    escortName?: string;
+    escortPhone?: string;
+    escortRelationToStudent?: string;
+    requiresSpecialNeedsTransport: boolean;
+    specialNeedsTransportDetails?: string;
+    isWheelchairAccessibleBusRequired: boolean;
+    subscriptionStatus: number;
+    subscriptionStartDate?: string;
+    subscriptionEndDate?: string;
+    subscriptionFeeAmount: number;
+    isTransportContractSigned: boolean;
+    transportContractFileUrl?: string;
+    authorizedPickupPersonsJson?: string;
+    createdAt: string;
+    createdByUserId: number;
+    modifiedAt?: string;
+    modifiedByUserId?: number;
+    isDeleted: boolean;
+    deletedAt?: string;
+    deletedByUserId?: number;
+    versionToken: string;
+    lastSyncedAt?: string;
+    syncStatus: string;
+}
+
+export interface UpdateStudentTransportPreferencePayload {
+    id?: number;
+    schoolAcademicYearId?: number;
+    transportType?: number;
+    preferredBusRouteId?: number;
+    pickupAddress?: string;
+    pickupGpsLatitude?: string;
+    pickupGpsLongitude?: string;
+    preferredPickupTime?: string;
+    preferredDropoffTime?: string;
+    useMorningPickup?: boolean;
+    useAfternoonDropoff?: boolean;
+    weeklyDaysJson?: string;
+    requiresEscort?: boolean;
+    escortName?: string;
+    escortPhone?: string;
+    escortRelationToStudent?: string;
+    requiresSpecialNeedsTransport?: boolean;
+    specialNeedsTransportDetails?: string;
+    isWheelchairAccessibleBusRequired?: boolean;
+    subscriptionStartDate?: string;
+    subscriptionEndDate?: string;
+    subscriptionFeeAmount?: number;
+    isTransportContractSigned?: boolean;
+    transportContractFileUrl?: string;
+    authorizedPickupPersonsJson?: string;
+}

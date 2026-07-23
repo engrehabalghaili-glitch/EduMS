@@ -1,0 +1,92 @@
+export interface CreateEmergencyHostingPayload {
+    schoolId: number;
+    hostingNumber: string;
+    hostingType: string;
+    hostingDate: string;
+    endDate?: string;
+    expectedEndDate?: string;
+    actualCount: number;
+    maxCapacity: number;
+    utilizationPercentage: number;
+    reason?: string;
+    sourceLocation?: string;
+    supportOrganization?: string;
+    supportOrgContact?: string;
+    facilitiesUsedJson?: string;
+    resourcesProvidedJson?: string;
+    resourcesReceivedJson?: string;
+    expensesJson?: string;
+    totalExpenses: number;
+    hostingStatus: number;
+    closureNotes?: string;
+    lessonsLearned?: string;
+    reportedByUserId?: number;
+    attachmentsJson?: string;
+    notes?: string;
+}
+
+export interface EmergencyHosting {
+    id: number;
+    schoolId: number;
+    hostingNumber: string;
+    hostingType: string;
+    hostingDate: string;
+    endDate?: string;
+    expectedEndDate?: string;
+    actualCount: number;
+    maxCapacity: number;
+    utilizationPercentage: number;
+    reason?: string;
+    sourceLocation?: string;
+    supportOrganization?: string;
+    supportOrgContact?: string;
+    facilitiesUsedJson?: string;
+    resourcesProvidedJson?: string;
+    resourcesReceivedJson?: string;
+    expensesJson?: string;
+    totalExpenses: number;
+    hostingStatus: number;
+    closureNotes?: string;
+    lessonsLearned?: string;
+    reportedByUserId?: number;
+    attachmentsJson?: string;
+    notes?: string;
+    createdAt: string;
+    createdByUserId: number;
+    modifiedAt?: string;
+    modifiedByUserId?: number;
+    isDeleted: boolean;
+    deletedAt?: string;
+    deletedByUserId?: number;
+    versionToken: string;
+    lastSyncedAt?: string;
+    syncStatus: string;
+}
+
+export interface UpdateEmergencyHostingPayload {
+    id?: number;
+    schoolId?: number;
+    hostingNumber?: string;
+    hostingType?: string;
+    hostingDate?: string;
+    endDate?: string;
+    expectedEndDate?: string;
+    actualCount?: number;
+    maxCapacity?: number;
+    utilizationPercentage?: number;
+    reason?: string;
+    sourceLocation?: string;
+    supportOrganization?: string;
+    supportOrgContact?: string;
+    facilitiesUsedJson?: string;
+    resourcesProvidedJson?: string;
+    resourcesReceivedJson?: string;
+    expensesJson?: string;
+    totalExpenses?: number;
+    hostingStatus?: number;
+    closureNotes?: string;
+    lessonsLearned?: string;
+    reportedByUserId?: number;
+    attachmentsJson?: string;
+    notes?: string;
+}

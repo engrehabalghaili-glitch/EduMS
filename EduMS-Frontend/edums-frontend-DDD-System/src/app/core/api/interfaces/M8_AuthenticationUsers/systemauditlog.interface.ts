@@ -1,0 +1,89 @@
+export interface CreateSystemAuditLogPayload {
+    schoolId?: number;
+    userId: number;
+    userRoleAtExecution?: string;
+    actionType: string;
+    entityType: string;
+    entityId?: number;
+    oldValueJson?: string;
+    newValueJson?: string;
+    changeSummary?: string;
+    tableName?: string;
+    fieldName?: string;
+    ipAddress?: string;
+    deviceType?: string;
+    userAgent?: string;
+    sessionId?: string;
+    accessContextJson?: string;
+    severity?: string;
+    riskScore: number;
+    isSuspicious: boolean;
+    wasAllowed: boolean;
+    rejectionReason?: string;
+    notes?: string;
+    actionTimestamp: string;
+}
+
+export interface SystemAuditLog {
+    id: number;
+    schoolId?: number;
+    userId: number;
+    userRoleAtExecution?: string;
+    actionType: string;
+    entityType: string;
+    entityId?: number;
+    oldValueJson?: string;
+    newValueJson?: string;
+    changeSummary?: string;
+    tableName?: string;
+    fieldName?: string;
+    ipAddress?: string;
+    deviceType?: string;
+    userAgent?: string;
+    sessionId?: string;
+    accessContextJson?: string;
+    severity?: string;
+    riskScore: number;
+    isSuspicious: boolean;
+    wasAllowed: boolean;
+    rejectionReason?: string;
+    notes?: string;
+    actionTimestamp: string;
+    createdAt: string;
+    createdByUserId: number;
+    modifiedAt?: string;
+    modifiedByUserId?: number;
+    isDeleted: boolean;
+    deletedAt?: string;
+    deletedByUserId?: number;
+    versionToken: string;
+    lastSyncedAt?: string;
+    syncStatus: string;
+}
+
+export interface UpdateSystemAuditLogPayload {
+    id?: number;
+    schoolId?: number;
+    userId?: number;
+    userRoleAtExecution?: string;
+    actionType?: string;
+    entityType?: string;
+    entityId?: number;
+    oldValueJson?: string;
+    newValueJson?: string;
+    changeSummary?: string;
+    tableName?: string;
+    fieldName?: string;
+    ipAddress?: string;
+    deviceType?: string;
+    userAgent?: string;
+    sessionId?: string;
+    accessContextJson?: string;
+    severity?: string;
+    riskScore?: number;
+    isSuspicious?: boolean;
+    wasAllowed?: boolean;
+    rejectionReason?: string;
+    notes?: string;
+    actionTimestamp?: string;
+}

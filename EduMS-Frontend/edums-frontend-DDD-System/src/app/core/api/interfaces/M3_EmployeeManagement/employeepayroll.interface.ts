@@ -1,0 +1,95 @@
+export interface CreateEmployeePayrollPayload {
+    employeeId: number;
+    schoolId?: number;
+    directorateId?: number;
+    organizationalSectorId?: number;
+    schoolAcademicYearId?: number;
+    payrollMonth: number;
+    payrollYear: number;
+    basicSalary: number;
+    housingAllowance: number;
+    transportAllowance: number;
+    otherAllowances: number;
+    overtimePay: number;
+    grossTotal: number;
+    deductionAbsence: number;
+    deductionInsurance: number;
+    deductionOther: number;
+    netSalary: number;
+    paymentStatus: number;
+    paymentDate?: string;
+    paymentMethod?: string;
+    bankTransactionRef?: string;
+    approvedByUserId?: number;
+    approvalDate?: string;
+    isSynced: boolean;
+    notes?: string;
+}
+
+export interface EmployeePayroll {
+    id: number;
+    employeeId: number;
+    schoolId?: number;
+    directorateId?: number;
+    organizationalSectorId?: number;
+    schoolAcademicYearId?: number;
+    payrollMonth: number;
+    payrollYear: number;
+    basicSalary: number;
+    housingAllowance: number;
+    transportAllowance: number;
+    otherAllowances: number;
+    overtimePay: number;
+    grossTotal: number;
+    deductionAbsence: number;
+    deductionInsurance: number;
+    deductionOther: number;
+    netSalary: number;
+    paymentStatus: number;
+    paymentDate?: string;
+    paymentMethod?: string;
+    bankTransactionRef?: string;
+    approvedByUserId?: number;
+    approvalDate?: string;
+    isSynced: boolean;
+    notes?: string;
+    createdAt: string;
+    createdByUserId: number;
+    modifiedAt?: string;
+    modifiedByUserId?: number;
+    isDeleted: boolean;
+    deletedAt?: string;
+    deletedByUserId?: number;
+    versionToken: string;
+    lastSyncedAt?: string;
+    syncStatus: string;
+}
+
+export interface UpdateEmployeePayrollPayload {
+    id?: number;
+    employeeId?: number;
+    schoolId?: number;
+    directorateId?: number;
+    organizationalSectorId?: number;
+    schoolAcademicYearId?: number;
+    payrollMonth?: number;
+    payrollYear?: number;
+    basicSalary?: number;
+    housingAllowance?: number;
+    transportAllowance?: number;
+    otherAllowances?: number;
+    overtimePay?: number;
+    grossTotal?: number;
+    deductionAbsence?: number;
+    deductionInsurance?: number;
+    deductionOther?: number;
+    netSalary?: number;
+    paymentStatus?: number;
+    paymentDate?: string;
+    paymentMethod?: string;
+    bankTransactionRef?: string;
+    approvedByUserId?: number;
+    approvalDate?: string;
+    isSynced?: boolean;
+    notes?: string;
+}

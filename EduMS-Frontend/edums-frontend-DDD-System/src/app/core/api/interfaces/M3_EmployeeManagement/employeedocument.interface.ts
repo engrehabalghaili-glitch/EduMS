@@ -1,0 +1,95 @@
+export interface CreateEmployeeDocumentPayload {
+    employeeId: number;
+    documentType: string;
+    documentSubType?: string;
+    documentName: string;
+    documentNumber?: string;
+    issueDate?: string;
+    expiryDate?: string;
+    issuedBy?: string;
+    isExpiryRequired: boolean;
+    expiryReminderSent: boolean;
+    filePath?: string;
+    fileSize?: number;
+    fileType?: string;
+    thumbnailPath?: string;
+    description?: string;
+    isRequired: boolean;
+    isVerified: boolean;
+    verifiedByUserId?: number;
+    verificationDate?: string;
+    verificationNotes?: string;
+    rejectionReason?: string;
+    documentStatus: number;
+    isConfidential: boolean;
+    isArchived: boolean;
+    notes?: string;
+}
+
+export interface EmployeeDocument {
+    id: number;
+    employeeId: number;
+    documentType: string;
+    documentSubType?: string;
+    documentName: string;
+    documentNumber?: string;
+    issueDate?: string;
+    expiryDate?: string;
+    issuedBy?: string;
+    isExpiryRequired: boolean;
+    expiryReminderSent: boolean;
+    filePath?: string;
+    fileSize?: number;
+    fileType?: string;
+    thumbnailPath?: string;
+    description?: string;
+    isRequired: boolean;
+    isVerified: boolean;
+    verifiedByUserId?: number;
+    verificationDate?: string;
+    verificationNotes?: string;
+    rejectionReason?: string;
+    documentStatus: number;
+    isConfidential: boolean;
+    isArchived: boolean;
+    notes?: string;
+    createdAt: string;
+    createdByUserId: number;
+    modifiedAt?: string;
+    modifiedByUserId?: number;
+    isDeleted: boolean;
+    deletedAt?: string;
+    deletedByUserId?: number;
+    versionToken: string;
+    lastSyncedAt?: string;
+    syncStatus: string;
+}
+
+export interface UpdateEmployeeDocumentPayload {
+    id?: number;
+    employeeId?: number;
+    documentType?: string;
+    documentSubType?: string;
+    documentName?: string;
+    documentNumber?: string;
+    issueDate?: string;
+    expiryDate?: string;
+    issuedBy?: string;
+    isExpiryRequired?: boolean;
+    expiryReminderSent?: boolean;
+    filePath?: string;
+    fileSize?: number;
+    fileType?: string;
+    thumbnailPath?: string;
+    description?: string;
+    isRequired?: boolean;
+    isVerified?: boolean;
+    verifiedByUserId?: number;
+    verificationDate?: string;
+    verificationNotes?: string;
+    rejectionReason?: string;
+    documentStatus?: number;
+    isConfidential?: boolean;
+    isArchived?: boolean;
+    notes?: string;
+}

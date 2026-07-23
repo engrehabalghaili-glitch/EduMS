@@ -1,0 +1,89 @@
+export interface CreateEmployeePerformanceReviewPayload {
+    employeeId: number;
+    schoolId?: number;
+    directorateId?: number;
+    organizationalSectorId?: number;
+    schoolAcademicYearId?: number;
+    reviewPeriodType: number;
+    reviewPeriodStart: string;
+    reviewPeriodEnd: string;
+    reviewedByEmployeeId: number;
+    reviewDate: string;
+    overallScore: number;
+    performanceLevel?: string;
+    kpiScoresJson?: string;
+    strengthsText?: string;
+    areasForImprovementText?: string;
+    developmentPlanText?: string;
+    employeeResponseText?: string;
+    approvalStatus: number;
+    isDisputed: boolean;
+    disputeReason?: string;
+    disputeDate?: string;
+    finalDecisionText?: string;
+    notes?: string;
+}
+
+export interface EmployeePerformanceReview {
+    id: number;
+    employeeId: number;
+    schoolId?: number;
+    directorateId?: number;
+    organizationalSectorId?: number;
+    schoolAcademicYearId?: number;
+    reviewPeriodType: number;
+    reviewPeriodStart: string;
+    reviewPeriodEnd: string;
+    reviewedByEmployeeId: number;
+    reviewDate: string;
+    overallScore: number;
+    performanceLevel?: string;
+    kpiScoresJson?: string;
+    strengthsText?: string;
+    areasForImprovementText?: string;
+    developmentPlanText?: string;
+    employeeResponseText?: string;
+    approvalStatus: number;
+    isDisputed: boolean;
+    disputeReason?: string;
+    disputeDate?: string;
+    finalDecisionText?: string;
+    notes?: string;
+    createdAt: string;
+    createdByUserId: number;
+    modifiedAt?: string;
+    modifiedByUserId?: number;
+    isDeleted: boolean;
+    deletedAt?: string;
+    deletedByUserId?: number;
+    versionToken: string;
+    lastSyncedAt?: string;
+    syncStatus: string;
+}
+
+export interface UpdateEmployeePerformanceReviewPayload {
+    id?: number;
+    employeeId?: number;
+    schoolId?: number;
+    directorateId?: number;
+    organizationalSectorId?: number;
+    schoolAcademicYearId?: number;
+    reviewPeriodType?: number;
+    reviewPeriodStart?: string;
+    reviewPeriodEnd?: string;
+    reviewedByEmployeeId?: number;
+    reviewDate?: string;
+    overallScore?: number;
+    performanceLevel?: string;
+    kpiScoresJson?: string;
+    strengthsText?: string;
+    areasForImprovementText?: string;
+    developmentPlanText?: string;
+    employeeResponseText?: string;
+    approvalStatus?: number;
+    isDisputed?: boolean;
+    disputeReason?: string;
+    disputeDate?: string;
+    finalDecisionText?: string;
+    notes?: string;
+}

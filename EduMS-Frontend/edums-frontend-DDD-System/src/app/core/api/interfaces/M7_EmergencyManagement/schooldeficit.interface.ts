@@ -1,0 +1,89 @@
+export interface CreateSchoolDeficitPayload {
+    schoolId: number;
+    deficitNumber: string;
+    deficitType: string;
+    deficitCategory?: string;
+    deficitAmount: number;
+    requiredAmount: number;
+    availableAmount: number;
+    deficitDescription?: string;
+    educationalImpact?: string;
+    impactLevel: number;
+    detectionDate: string;
+    detectedByUserId?: number;
+    deficitStatus: number;
+    statusUpdateDate?: string;
+    proposedSolution?: string;
+    estimatedResolutionCost: number;
+    estimatedResolutionDate?: string;
+    actualResolutionDate?: string;
+    resolvedByUserId?: number;
+    resolutionNotes?: string;
+    relatedRemediationPlanId?: number;
+    attachmentsJson?: string;
+    notes?: string;
+}
+
+export interface SchoolDeficit {
+    id: number;
+    schoolId: number;
+    deficitNumber: string;
+    deficitType: string;
+    deficitCategory?: string;
+    deficitAmount: number;
+    requiredAmount: number;
+    availableAmount: number;
+    deficitDescription?: string;
+    educationalImpact?: string;
+    impactLevel: number;
+    detectionDate: string;
+    detectedByUserId?: number;
+    deficitStatus: number;
+    statusUpdateDate?: string;
+    proposedSolution?: string;
+    estimatedResolutionCost: number;
+    estimatedResolutionDate?: string;
+    actualResolutionDate?: string;
+    resolvedByUserId?: number;
+    resolutionNotes?: string;
+    relatedRemediationPlanId?: number;
+    attachmentsJson?: string;
+    notes?: string;
+    createdAt: string;
+    createdByUserId: number;
+    modifiedAt?: string;
+    modifiedByUserId?: number;
+    isDeleted: boolean;
+    deletedAt?: string;
+    deletedByUserId?: number;
+    versionToken: string;
+    lastSyncedAt?: string;
+    syncStatus: string;
+}
+
+export interface UpdateSchoolDeficitPayload {
+    id?: number;
+    schoolId?: number;
+    deficitNumber?: string;
+    deficitType?: string;
+    deficitCategory?: string;
+    deficitAmount?: number;
+    requiredAmount?: number;
+    availableAmount?: number;
+    deficitDescription?: string;
+    educationalImpact?: string;
+    impactLevel?: number;
+    detectionDate?: string;
+    detectedByUserId?: number;
+    deficitStatus?: number;
+    statusUpdateDate?: string;
+    proposedSolution?: string;
+    estimatedResolutionCost?: number;
+    estimatedResolutionDate?: string;
+    actualResolutionDate?: string;
+    resolvedByUserId?: number;
+    resolutionNotes?: string;
+    relatedRemediationPlanId?: number;
+    attachmentsJson?: string;
+    notes?: string;
+}

@@ -1,0 +1,95 @@
+export interface CreateTransportationServicePayload {
+    schoolId: number;
+    routeCode: string;
+    routeName: string;
+    routeDescription?: string;
+    busAssetId?: number;
+    busPlateNumber?: string;
+    busCapacity?: number;
+    busModel?: string;
+    busYear?: string;
+    driverEmployeeId?: number;
+    driverLicenseNumber?: string;
+    driverPhone?: string;
+    supervisorEmployeeId?: number;
+    supervisorPhone?: string;
+    shiftId?: number;
+    tripType: number;
+    startTime?: string;
+    endTime?: string;
+    estimatedDurationMinutes?: string;
+    stopsJson?: string;
+    isActive: boolean;
+    serviceStatus: number;
+    operatorCompany?: string;
+    contractId?: number;
+    notes?: string;
+}
+
+export interface TransportationService {
+    id: number;
+    schoolId: number;
+    routeCode: string;
+    routeName: string;
+    routeDescription?: string;
+    busAssetId?: number;
+    busPlateNumber?: string;
+    busCapacity?: number;
+    busModel?: string;
+    busYear?: string;
+    driverEmployeeId?: number;
+    driverLicenseNumber?: string;
+    driverPhone?: string;
+    supervisorEmployeeId?: number;
+    supervisorPhone?: string;
+    shiftId?: number;
+    tripType: number;
+    startTime?: string;
+    endTime?: string;
+    estimatedDurationMinutes?: string;
+    stopsJson?: string;
+    isActive: boolean;
+    serviceStatus: number;
+    operatorCompany?: string;
+    contractId?: number;
+    notes?: string;
+    createdAt: string;
+    createdByUserId: number;
+    modifiedAt?: string;
+    modifiedByUserId?: number;
+    isDeleted: boolean;
+    deletedAt?: string;
+    deletedByUserId?: number;
+    versionToken: string;
+    lastSyncedAt?: string;
+    syncStatus: string;
+}
+
+export interface UpdateTransportationServicePayload {
+    id?: number;
+    schoolId?: number;
+    routeCode?: string;
+    routeName?: string;
+    routeDescription?: string;
+    busAssetId?: number;
+    busPlateNumber?: string;
+    busCapacity?: number;
+    busModel?: string;
+    busYear?: string;
+    driverEmployeeId?: number;
+    driverLicenseNumber?: string;
+    driverPhone?: string;
+    supervisorEmployeeId?: number;
+    supervisorPhone?: string;
+    shiftId?: number;
+    tripType?: number;
+    startTime?: string;
+    endTime?: string;
+    estimatedDurationMinutes?: string;
+    stopsJson?: string;
+    isActive?: boolean;
+    serviceStatus?: number;
+    operatorCompany?: string;
+    contractId?: number;
+    notes?: string;
+}
