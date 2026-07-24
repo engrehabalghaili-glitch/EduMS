@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   OfficePermission, 
-  CreateOfficePermissionPayload, 
-  UpdateOfficePermissionPayload 
-} from '../../../../core/api/interfaces/M8_AuthenticationUsers/officepermission.interface';
+  CreateOfficePermission, 
+  UpdateOfficePermission 
+} from '@modules/m8-authentication-users/interfaces/office-permission.models';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (OfficePermissions)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class OfficePermissionsService extends BaseApiService<
   OfficePermission, 
-  CreateOfficePermissionPayload, 
-  UpdateOfficePermissionPayload
+  CreateOfficePermission, 
+  UpdateOfficePermission
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

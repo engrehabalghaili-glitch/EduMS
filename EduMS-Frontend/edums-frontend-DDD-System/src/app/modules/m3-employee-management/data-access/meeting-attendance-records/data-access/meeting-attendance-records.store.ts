@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { MeetingAttendanceRecordsService } from './meeting-attendance-records.service';
-import { MeetingAttendanceRecord, CreateMeetingAttendanceRecordPayload, UpdateMeetingAttendanceRecordPayload } from '../../../../core/api/interfaces/M3_EmployeeManagement/meetingattendancerecord.interface';
+import { MeetingAttendanceRecord, CreateMeetingAttendanceRecord, UpdateMeetingAttendanceRecord } from '@modules/m3-employee-management/interfaces/meeting-attendance-record.types';
 
 type MeetingAttendanceRecordsStoreState = {
   items: MeetingAttendanceRecord[];
@@ -45,7 +45,7 @@ export const MeetingAttendanceRecordsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateMeetingAttendanceRecordPayload>(
+    create: rxMethod<CreateMeetingAttendanceRecord>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const MeetingAttendanceRecordsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateMeetingAttendanceRecordPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateMeetingAttendanceRecord}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

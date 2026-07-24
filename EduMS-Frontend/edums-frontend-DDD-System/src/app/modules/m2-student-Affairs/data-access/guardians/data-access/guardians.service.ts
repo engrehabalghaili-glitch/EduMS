@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   Guardian, 
-  CreateGuardianPayload, 
-  UpdateGuardianPayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/guardian.interface';
+  CreateGuardian, 
+  UpdateGuardian 
+} from '@modules/m2-student-Affairs/interfaces/guardian.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (Guardians)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class GuardiansService extends BaseApiService<
   Guardian, 
-  CreateGuardianPayload, 
-  UpdateGuardianPayload
+  CreateGuardian, 
+  UpdateGuardian
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { EmployeeCommitteesService } from './employee-committees.service';
-import { EmployeeCommittee, CreateEmployeeCommitteePayload, UpdateEmployeeCommitteePayload } from '../../../../core/api/interfaces/M3_EmployeeManagement/employeecommittee.interface';
+import { EmployeeCommittee, CreateEmployeeCommittee, UpdateEmployeeCommittee } from '@modules/m3-employee-management/interfaces/employee-committee.types';
 
 type EmployeeCommitteesStoreState = {
   items: EmployeeCommittee[];
@@ -45,7 +45,7 @@ export const EmployeeCommitteesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateEmployeeCommitteePayload>(
+    create: rxMethod<CreateEmployeeCommittee>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const EmployeeCommitteesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateEmployeeCommitteePayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateEmployeeCommittee}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

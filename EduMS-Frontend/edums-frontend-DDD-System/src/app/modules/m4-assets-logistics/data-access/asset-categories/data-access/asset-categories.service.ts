@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AssetCategory, 
-  CreateAssetCategoryPayload, 
-  UpdateAssetCategoryPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/assetcategory.interface';
+  CreateAssetCategoryRequest, 
+  UpdateAssetCategoryRequest 
+} from '@modules/m4-assets-logistics/interfaces/asset-categories';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AssetCategories)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AssetCategoriesService extends BaseApiService<
   AssetCategory, 
-  CreateAssetCategoryPayload, 
-  UpdateAssetCategoryPayload
+  CreateAssetCategoryRequest, 
+  UpdateAssetCategoryRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

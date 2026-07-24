@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   EmployeePayroll, 
-  CreateEmployeePayrollPayload, 
-  UpdateEmployeePayrollPayload 
-} from '../../../../core/api/interfaces/M3_EmployeeManagement/employeepayroll.interface';
+  CreateEmployeePayroll, 
+  UpdateEmployeePayroll 
+} from '@modules/m3-employee-management/interfaces/employee-payroll.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (EmployeePayrolls)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class EmployeePayrollsService extends BaseApiService<
   EmployeePayroll, 
-  CreateEmployeePayrollPayload, 
-  UpdateEmployeePayrollPayload
+  CreateEmployeePayroll, 
+  UpdateEmployeePayroll
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StudentExitClearance, 
-  CreateStudentExitClearancePayload, 
-  UpdateStudentExitClearancePayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/studentexitclearance.interface';
+  CreateStudentExitClearance, 
+  UpdateStudentExitClearance 
+} from '@modules/m2-student-Affairs/interfaces/exit-clearance.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StudentExitClearances)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StudentExitClearancesService extends BaseApiService<
   StudentExitClearance, 
-  CreateStudentExitClearancePayload, 
-  UpdateStudentExitClearancePayload
+  CreateStudentExitClearance, 
+  UpdateStudentExitClearance
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

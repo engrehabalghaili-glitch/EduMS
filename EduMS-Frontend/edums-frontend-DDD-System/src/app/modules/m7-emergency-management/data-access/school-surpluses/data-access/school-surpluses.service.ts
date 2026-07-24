@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   SchoolSurplus, 
-  CreateSchoolSurplusPayload, 
-  UpdateSchoolSurplusPayload 
-} from '../../../../core/api/interfaces/M7_EmergencyManagement/schoolsurpluse.interface';
+  CreateSchoolSurplus, 
+  UpdateSchoolSurplus 
+} from '@modules/m7-emergency-management/interfaces/school-surplus.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (SchoolSurpluses)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class SchoolSurplusesService extends BaseApiService<
   SchoolSurplus, 
-  CreateSchoolSurplusPayload, 
-  UpdateSchoolSurplusPayload
+  CreateSchoolSurplus, 
+  UpdateSchoolSurplus
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

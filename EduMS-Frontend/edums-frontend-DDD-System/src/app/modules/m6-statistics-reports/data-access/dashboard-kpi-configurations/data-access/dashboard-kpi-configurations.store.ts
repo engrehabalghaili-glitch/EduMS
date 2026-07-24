@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { DashboardKpiConfigurationsService } from './dashboard-kpi-configurations.service';
-import { DashboardKpiConfiguration, CreateDashboardKpiConfigurationPayload, UpdateDashboardKpiConfigurationPayload } from '../../../../core/api/interfaces/M6_StatisticsReports/dashboardkpiconfiguration.interface';
+import { DashboardKpiConfiguration, CreateDashboardKpiConfiguration, UpdateDashboardKpiConfiguration } from '@modules/m6-statistics-reports/interfaces/dashboard-kpi-configuration.dto';
 
 type DashboardKpiConfigurationsStoreState = {
   items: DashboardKpiConfiguration[];
@@ -45,7 +45,7 @@ export const DashboardKpiConfigurationsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateDashboardKpiConfigurationPayload>(
+    create: rxMethod<CreateDashboardKpiConfiguration>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const DashboardKpiConfigurationsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateDashboardKpiConfigurationPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateDashboardKpiConfiguration}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

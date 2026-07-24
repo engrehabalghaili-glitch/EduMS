@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   JobApplicant, 
-  CreateJobApplicantPayload, 
-  UpdateJobApplicantPayload 
-} from '../../../../core/api/interfaces/M3_EmployeeManagement/jobapplicant.interface';
+  CreateJobApplicant, 
+  UpdateJobApplicant 
+} from '@modules/m3-employee-management/interfaces/job-applicant.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (JobApplicants)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class JobApplicantsService extends BaseApiService<
   JobApplicant, 
-  CreateJobApplicantPayload, 
-  UpdateJobApplicantPayload
+  CreateJobApplicant, 
+  UpdateJobApplicant
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SchoolFacilityMaintenanceLogsService } from './school-facility-maintenance-logs.service';
-import { SchoolFacilityMaintenanceLog, CreateSchoolFacilityMaintenanceLogPayload, UpdateSchoolFacilityMaintenanceLogPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/schoolfacilitymaintenancelog.interface';
+import { SchoolFacilityMaintenanceLog, CreateSchoolFacilityMaintenanceLogDto, UpdateSchoolFacilityMaintenanceLogDto } from '@modules/m1-school-office/interface/school-facility-maintenance-log';
 
 type SchoolFacilityMaintenanceLogsStoreState = {
   items: SchoolFacilityMaintenanceLog[];
@@ -45,7 +45,7 @@ export const SchoolFacilityMaintenanceLogsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSchoolFacilityMaintenanceLogPayload>(
+    create: rxMethod<CreateSchoolFacilityMaintenanceLogDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SchoolFacilityMaintenanceLogsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSchoolFacilityMaintenanceLogPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSchoolFacilityMaintenanceLogDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

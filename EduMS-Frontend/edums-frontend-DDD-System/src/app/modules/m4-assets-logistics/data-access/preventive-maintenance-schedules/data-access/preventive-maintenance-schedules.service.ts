@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   PreventiveMaintenanceSchedule, 
-  CreatePreventiveMaintenanceSchedulePayload, 
-  UpdatePreventiveMaintenanceSchedulePayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/preventivemaintenanceschedule.interface';
+  CreatePreventiveMaintenanceScheduleRequest, 
+  UpdatePreventiveMaintenanceScheduleRequest 
+} from '@modules/m4-assets-logistics/interfaces/preventive-maintenance-schedules';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (PreventiveMaintenanceSchedules)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class PreventiveMaintenanceSchedulesService extends BaseApiService<
   PreventiveMaintenanceSchedule, 
-  CreatePreventiveMaintenanceSchedulePayload, 
-  UpdatePreventiveMaintenanceSchedulePayload
+  CreatePreventiveMaintenanceScheduleRequest, 
+  UpdatePreventiveMaintenanceScheduleRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

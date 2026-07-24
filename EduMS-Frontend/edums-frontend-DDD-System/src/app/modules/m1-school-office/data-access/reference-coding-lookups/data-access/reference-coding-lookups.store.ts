@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { ReferenceCodingLookupsService } from './reference-coding-lookups.service';
-import { ReferenceCodingLookup, CreateReferenceCodingLookupPayload, UpdateReferenceCodingLookupPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/referencecodinglookup.interface';
+import { ReferenceCodingLookup, CreateReferenceCodingLookupDto, UpdateReferenceCodingLookupDto } from '@modules/m1-school-office/interface/reference-coding-lookup';
 
 type ReferenceCodingLookupsStoreState = {
   items: ReferenceCodingLookup[];
@@ -45,7 +45,7 @@ export const ReferenceCodingLookupsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateReferenceCodingLookupPayload>(
+    create: rxMethod<CreateReferenceCodingLookupDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const ReferenceCodingLookupsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateReferenceCodingLookupPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateReferenceCodingLookupDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   OfficialCircular, 
-  CreateOfficialCircularPayload, 
-  UpdateOfficialCircularPayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/officialcircular.interface';
+  CreateOfficialCircularDto, 
+  UpdateOfficialCircularDto 
+} from '@modules/m1-school-office/interface/official-circular';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (OfficialCirculars)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class OfficialCircularsService extends BaseApiService<
   OfficialCircular, 
-  CreateOfficialCircularPayload, 
-  UpdateOfficialCircularPayload
+  CreateOfficialCircularDto, 
+  UpdateOfficialCircularDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

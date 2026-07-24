@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { ClassroomOperationalRulesService } from './classroom-operational-rules.service';
-import { ClassroomOperationalRule, CreateClassroomOperationalRulePayload, UpdateClassroomOperationalRulePayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/classroomoperationalrule.interface';
+import { ClassroomOperationalRule, CreateClassroomOperationalRuleDto, UpdateClassroomOperationalRuleDto } from '@modules/m1-school-office/interface/classroom-operational-rule';
 
 type ClassroomOperationalRulesStoreState = {
   items: ClassroomOperationalRule[];
@@ -45,7 +45,7 @@ export const ClassroomOperationalRulesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateClassroomOperationalRulePayload>(
+    create: rxMethod<CreateClassroomOperationalRuleDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const ClassroomOperationalRulesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateClassroomOperationalRulePayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateClassroomOperationalRuleDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

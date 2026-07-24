@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SystemUsersService } from './system-users.service';
-import { SystemUser, CreateSystemUserPayload, UpdateSystemUserPayload } from '../../../../core/api/interfaces/M8_AuthenticationUsers/systemuser.interface';
+import { SystemUser, CreateSystemUser, UpdateSystemUser } from '@modules/m8-authentication-users/interfaces/system-user.models';
 
 type SystemUsersStoreState = {
   items: SystemUser[];
@@ -45,7 +45,7 @@ export const SystemUsersStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSystemUserPayload>(
+    create: rxMethod<CreateSystemUser>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SystemUsersStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSystemUserPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSystemUser}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

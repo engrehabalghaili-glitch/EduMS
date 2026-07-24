@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { StudentDailyAttendanceSummariesService } from './student-daily-attendance-summaries.service';
-import { StudentDailyAttendanceSummary, CreateStudentDailyAttendanceSummaryPayload, UpdateStudentDailyAttendanceSummaryPayload } from '../../../../core/api/interfaces/M2_StudentAffairs/studentdailyattendancesummary.interface';
+import { StudentDailyAttendanceSummary, CreateStudentDailyAttendanceSummary, UpdateStudentDailyAttendanceSummary } from '@modules/m2-student-Affairs/interfaces/daily-attendance-summary.interface';
 
 type StudentDailyAttendanceSummariesStoreState = {
   items: StudentDailyAttendanceSummary[];
@@ -45,7 +45,7 @@ export const StudentDailyAttendanceSummariesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateStudentDailyAttendanceSummaryPayload>(
+    create: rxMethod<CreateStudentDailyAttendanceSummary>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const StudentDailyAttendanceSummariesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateStudentDailyAttendanceSummaryPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateStudentDailyAttendanceSummary}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

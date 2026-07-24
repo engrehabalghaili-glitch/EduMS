@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SchoolCanteenItemsService } from './school-canteen-items.service';
-import { SchoolCanteenItem, CreateSchoolCanteenItemPayload, UpdateSchoolCanteenItemPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/schoolcanteenitem.interface';
+import { SchoolCanteenItem, CreateSchoolCanteenItemDto, UpdateSchoolCanteenItemDto } from '@modules/m1-school-office/interface/school-canteen-item';
 
 type SchoolCanteenItemsStoreState = {
   items: SchoolCanteenItem[];
@@ -45,7 +45,7 @@ export const SchoolCanteenItemsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSchoolCanteenItemPayload>(
+    create: rxMethod<CreateSchoolCanteenItemDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SchoolCanteenItemsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSchoolCanteenItemPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSchoolCanteenItemDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

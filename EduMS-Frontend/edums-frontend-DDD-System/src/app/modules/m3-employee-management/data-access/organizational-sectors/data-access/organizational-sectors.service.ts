@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   OrganizationalSector, 
-  CreateOrganizationalSectorPayload, 
-  UpdateOrganizationalSectorPayload 
-} from '../../../../core/api/interfaces/M3_EmployeeManagement/organizationalsector.interface';
+  CreateOrganizationalSector, 
+  UpdateOrganizationalSector 
+} from '@modules/m3-employee-management/interfaces/organizational-sector.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (OrganizationalSectors)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class OrganizationalSectorsService extends BaseApiService<
   OrganizationalSector, 
-  CreateOrganizationalSectorPayload, 
-  UpdateOrganizationalSectorPayload
+  CreateOrganizationalSector, 
+  UpdateOrganizationalSector
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   EmployeeExternalTransfer, 
-  CreateEmployeeExternalTransferPayload, 
-  UpdateEmployeeExternalTransferPayload 
-} from '../../../../core/api/interfaces/M3_EmployeeManagement/employeeexternaltransfer.interface';
+  CreateEmployeeExternalTransfer, 
+  UpdateEmployeeExternalTransfer 
+} from '@modules/m3-employee-management/interfaces/employee-external-transfer.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (EmployeeExternalTransfers)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class EmployeeExternalTransfersService extends BaseApiService<
   EmployeeExternalTransfer, 
-  CreateEmployeeExternalTransferPayload, 
-  UpdateEmployeeExternalTransferPayload
+  CreateEmployeeExternalTransfer, 
+  UpdateEmployeeExternalTransfer
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

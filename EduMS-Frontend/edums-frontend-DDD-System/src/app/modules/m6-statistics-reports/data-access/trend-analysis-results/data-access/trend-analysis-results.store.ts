@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { TrendAnalysisResultsService } from './trend-analysis-results.service';
-import { TrendAnalysisResult, CreateTrendAnalysisResultPayload, UpdateTrendAnalysisResultPayload } from '../../../../core/api/interfaces/M6_StatisticsReports/trendanalysisresult.interface';
+import { TrendAnalysisResult, CreateTrendAnalysisResult, UpdateTrendAnalysisResult } from '@modules/m6-statistics-reports/interfaces/trend-analysis-result.dto';
 
 type TrendAnalysisResultsStoreState = {
   items: TrendAnalysisResult[];
@@ -45,7 +45,7 @@ export const TrendAnalysisResultsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateTrendAnalysisResultPayload>(
+    create: rxMethod<CreateTrendAnalysisResult>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const TrendAnalysisResultsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateTrendAnalysisResultPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateTrendAnalysisResult}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   UsageViolation, 
-  CreateUsageViolationPayload, 
-  UpdateUsageViolationPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/usageviolation.interface';
+  CreateUsageViolationRequest, 
+  UpdateUsageViolationRequest 
+} from '@modules/m4-assets-logistics/interfaces/usage-violations';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (UsageViolations)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class UsageViolationsService extends BaseApiService<
   UsageViolation, 
-  CreateUsageViolationPayload, 
-  UpdateUsageViolationPayload
+  CreateUsageViolationRequest, 
+  UpdateUsageViolationRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { StudentLibraryBorrowingLogsService } from './student-library-borrowing-logs.service';
-import { StudentLibraryBorrowingLog, CreateStudentLibraryBorrowingLogPayload, UpdateStudentLibraryBorrowingLogPayload } from '../../../../core/api/interfaces/M2_StudentAffairs/studentlibraryborrowinglog.interface';
+import { StudentLibraryBorrowingLog, CreateStudentLibraryBorrowingLog, UpdateStudentLibraryBorrowingLog } from '@modules/m2-student-Affairs/interfaces/library-borrowing.interface';
 
 type StudentLibraryBorrowingLogsStoreState = {
   items: StudentLibraryBorrowingLog[];
@@ -45,7 +45,7 @@ export const StudentLibraryBorrowingLogsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateStudentLibraryBorrowingLogPayload>(
+    create: rxMethod<CreateStudentLibraryBorrowingLog>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const StudentLibraryBorrowingLogsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateStudentLibraryBorrowingLogPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateStudentLibraryBorrowingLog}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   PayrollDetail, 
-  CreatePayrollDetailPayload, 
-  UpdatePayrollDetailPayload 
-} from '../../../../core/api/interfaces/M5_FinancialManagement/payrolldetail.interface';
+  CreatePayrollDetailDto, 
+  UpdatePayrollDetailDto 
+} from '@modules/m5-Financial-Management/interfaces/payroll-detail.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (PayrollDetails)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class PayrollDetailsService extends BaseApiService<
   PayrollDetail, 
-  CreatePayrollDetailPayload, 
-  UpdatePayrollDetailPayload
+  CreatePayrollDetailDto, 
+  UpdatePayrollDetailDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

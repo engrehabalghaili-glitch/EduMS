@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SystemAuditLogsService } from './system-audit-logs.service';
-import { SystemAuditLog, CreateSystemAuditLogPayload, UpdateSystemAuditLogPayload } from '../../../../core/api/interfaces/M8_AuthenticationUsers/systemauditlog.interface';
+import { SystemAuditLog, CreateSystemAuditLog, UpdateSystemAuditLog } from '@modules/m8-authentication-users/interfaces/system-audit-log.models';
 
 type SystemAuditLogsStoreState = {
   items: SystemAuditLog[];
@@ -45,7 +45,7 @@ export const SystemAuditLogsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSystemAuditLogPayload>(
+    create: rxMethod<CreateSystemAuditLog>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SystemAuditLogsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSystemAuditLogPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSystemAuditLog}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

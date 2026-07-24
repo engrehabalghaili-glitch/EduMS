@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   MaintenanceSparePart, 
-  CreateMaintenanceSparePartPayload, 
-  UpdateMaintenanceSparePartPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/maintenancesparepart.interface';
+  CreateMaintenanceSparePartRequest, 
+  UpdateMaintenanceSparePartRequest 
+} from '@modules/m4-assets-logistics/interfaces/maintenance-spare-parts';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (MaintenanceSpareParts)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class MaintenanceSparePartsService extends BaseApiService<
   MaintenanceSparePart, 
-  CreateMaintenanceSparePartPayload, 
-  UpdateMaintenanceSparePartPayload
+  CreateMaintenanceSparePartRequest, 
+  UpdateMaintenanceSparePartRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

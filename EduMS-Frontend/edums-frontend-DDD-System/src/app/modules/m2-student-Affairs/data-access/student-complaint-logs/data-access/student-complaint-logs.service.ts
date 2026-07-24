@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StudentComplaintLog, 
-  CreateStudentComplaintLogPayload, 
-  UpdateStudentComplaintLogPayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/studentcomplaintlog.interface';
+  CreateStudentComplaintLog, 
+  UpdateStudentComplaintLog 
+} from '@modules/m2-student-Affairs/interfaces/complaint-log.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StudentComplaintLogs)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StudentComplaintLogsService extends BaseApiService<
   StudentComplaintLog, 
-  CreateStudentComplaintLogPayload, 
-  UpdateStudentComplaintLogPayload
+  CreateStudentComplaintLog, 
+  UpdateStudentComplaintLog
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

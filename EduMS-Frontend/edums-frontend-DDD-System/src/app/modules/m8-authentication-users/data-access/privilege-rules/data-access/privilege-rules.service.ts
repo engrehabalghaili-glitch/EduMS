@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   PrivilegeRule, 
-  CreatePrivilegeRulePayload, 
-  UpdatePrivilegeRulePayload 
-} from '../../../../core/api/interfaces/M8_AuthenticationUsers/privilegerule.interface';
+  CreatePrivilegeRule, 
+  UpdatePrivilegeRule 
+} from '@modules/m8-authentication-users/interfaces/privilege-rule.models';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (PrivilegeRules)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class PrivilegeRulesService extends BaseApiService<
   PrivilegeRule, 
-  CreatePrivilegeRulePayload, 
-  UpdatePrivilegeRulePayload
+  CreatePrivilegeRule, 
+  UpdatePrivilegeRule
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

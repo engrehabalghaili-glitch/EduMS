@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SubmittedStatisticsesService } from './submitted-statisticses.service';
-import { SubmittedStatistics, CreateSubmittedStatisticsPayload, UpdateSubmittedStatisticsPayload } from '../../../../core/api/interfaces/M6_StatisticsReports/submittedstatisticse.interface';
+import { SubmittedStatistics, CreateSubmittedStatistics, UpdateSubmittedStatistics } from '@modules/m6-statistics-reports/interfaces/submitted-statistics.dto';
 
 type SubmittedStatisticsesStoreState = {
   items: SubmittedStatistics[];
@@ -45,7 +45,7 @@ export const SubmittedStatisticsesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSubmittedStatisticsPayload>(
+    create: rxMethod<CreateSubmittedStatistics>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SubmittedStatisticsesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSubmittedStatisticsPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSubmittedStatistics}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

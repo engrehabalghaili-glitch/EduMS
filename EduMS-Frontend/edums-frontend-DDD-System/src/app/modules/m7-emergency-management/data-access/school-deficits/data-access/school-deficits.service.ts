@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   SchoolDeficit, 
-  CreateSchoolDeficitPayload, 
-  UpdateSchoolDeficitPayload 
-} from '../../../../core/api/interfaces/M7_EmergencyManagement/schooldeficit.interface';
+  CreateSchoolDeficit, 
+  UpdateSchoolDeficit 
+} from '@modules/m7-emergency-management/interfaces/school-deficit.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (SchoolDeficits)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class SchoolDeficitsService extends BaseApiService<
   SchoolDeficit, 
-  CreateSchoolDeficitPayload, 
-  UpdateSchoolDeficitPayload
+  CreateSchoolDeficit, 
+  UpdateSchoolDeficit
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

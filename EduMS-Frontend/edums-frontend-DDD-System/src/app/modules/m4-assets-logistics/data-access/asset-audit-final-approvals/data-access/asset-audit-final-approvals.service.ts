@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AssetAuditFinalApproval, 
-  CreateAssetAuditFinalApprovalPayload, 
-  UpdateAssetAuditFinalApprovalPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/assetauditfinalapproval.interface';
+  CreateAssetAuditFinalApprovalRequest, 
+  UpdateAssetAuditFinalApprovalRequest 
+} from '@modules/m4-assets-logistics/interfaces/asset-audit-final-approvals';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AssetAuditFinalApprovals)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AssetAuditFinalApprovalsService extends BaseApiService<
   AssetAuditFinalApproval, 
-  CreateAssetAuditFinalApprovalPayload, 
-  UpdateAssetAuditFinalApprovalPayload
+  CreateAssetAuditFinalApprovalRequest, 
+  UpdateAssetAuditFinalApprovalRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   FieldInventoryLog, 
-  CreateFieldInventoryLogPayload, 
-  UpdateFieldInventoryLogPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/fieldinventorylog.interface';
+  CreateFieldInventoryLogRequest, 
+  UpdateFieldInventoryLogRequest 
+} from '@modules/m4-assets-logistics/interfaces/field-inventory-logs';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (FieldInventoryLogs)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class FieldInventoryLogsService extends BaseApiService<
   FieldInventoryLog, 
-  CreateFieldInventoryLogPayload, 
-  UpdateFieldInventoryLogPayload
+  CreateFieldInventoryLogRequest, 
+  UpdateFieldInventoryLogRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

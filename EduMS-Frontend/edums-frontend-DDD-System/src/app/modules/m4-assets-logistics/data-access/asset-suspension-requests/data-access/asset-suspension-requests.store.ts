@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetSuspensionRequestsService } from './asset-suspension-requests.service';
-import { AssetSuspensionRequest, CreateAssetSuspensionRequestPayload, UpdateAssetSuspensionRequestPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetsuspensionrequest.interface';
+import { AssetSuspensionRequest, CreateAssetSuspensionRequestRequest, UpdateAssetSuspensionRequestRequest } from '@modules/m4-assets-logistics/interfaces/asset-suspension-requests';
 
 type AssetSuspensionRequestsStoreState = {
   items: AssetSuspensionRequest[];
@@ -45,7 +45,7 @@ export const AssetSuspensionRequestsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetSuspensionRequestPayload>(
+    create: rxMethod<CreateAssetSuspensionRequestRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetSuspensionRequestsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetSuspensionRequestPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetSuspensionRequestRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

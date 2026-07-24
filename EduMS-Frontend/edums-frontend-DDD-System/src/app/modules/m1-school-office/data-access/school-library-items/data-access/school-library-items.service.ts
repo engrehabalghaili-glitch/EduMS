@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   SchoolLibraryItem, 
-  CreateSchoolLibraryItemPayload, 
-  UpdateSchoolLibraryItemPayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/schoollibraryitem.interface';
+  CreateSchoolLibraryItemDto, 
+  UpdateSchoolLibraryItemDto 
+} from '@modules/m1-school-office/interface/school-library-item';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (SchoolLibraryItems)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class SchoolLibraryItemsService extends BaseApiService<
   SchoolLibraryItem, 
-  CreateSchoolLibraryItemPayload, 
-  UpdateSchoolLibraryItemPayload
+  CreateSchoolLibraryItemDto, 
+  UpdateSchoolLibraryItemDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

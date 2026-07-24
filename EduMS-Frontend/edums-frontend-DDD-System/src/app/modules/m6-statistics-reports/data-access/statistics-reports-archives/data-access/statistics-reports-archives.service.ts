@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StatisticsReportsArchive, 
-  CreateStatisticsReportsArchivePayload, 
-  UpdateStatisticsReportsArchivePayload 
-} from '../../../../core/api/interfaces/M6_StatisticsReports/statisticsreportsarchive.interface';
+  CreateStatisticsReportsArchive, 
+  UpdateStatisticsReportsArchive 
+} from '@modules/m6-statistics-reports/interfaces/statistics-reports-archive.dto';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StatisticsReportsArchives)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StatisticsReportsArchivesService extends BaseApiService<
   StatisticsReportsArchive, 
-  CreateStatisticsReportsArchivePayload, 
-  UpdateStatisticsReportsArchivePayload
+  CreateStatisticsReportsArchive, 
+  UpdateStatisticsReportsArchive
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   MaintenanceNotification, 
-  CreateMaintenanceNotificationPayload, 
-  UpdateMaintenanceNotificationPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/maintenancenotification.interface';
+  CreateMaintenanceNotificationRequest, 
+  UpdateMaintenanceNotificationRequest 
+} from '@modules/m4-assets-logistics/interfaces/maintenance-notifications';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (MaintenanceNotifications)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class MaintenanceNotificationsService extends BaseApiService<
   MaintenanceNotification, 
-  CreateMaintenanceNotificationPayload, 
-  UpdateMaintenanceNotificationPayload
+  CreateMaintenanceNotificationRequest, 
+  UpdateMaintenanceNotificationRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

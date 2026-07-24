@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { CommunityPartnershipsService } from './community-partnerships.service';
-import { CommunityPartnership, CreateCommunityPartnershipPayload, UpdateCommunityPartnershipPayload } from '../../../../core/api/interfaces/M7_EmergencyManagement/communitypartnership.interface';
+import { CommunityPartnership, CreateCommunityPartnership, UpdateCommunityPartnership } from '@modules/m7-emergency-management/interfaces/community-partnership.types';
 
 type CommunityPartnershipsStoreState = {
   items: CommunityPartnership[];
@@ -45,7 +45,7 @@ export const CommunityPartnershipsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateCommunityPartnershipPayload>(
+    create: rxMethod<CreateCommunityPartnership>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const CommunityPartnershipsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateCommunityPartnershipPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateCommunityPartnership}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

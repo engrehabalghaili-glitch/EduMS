@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { RoleMatrixesService } from './role-matrixes.service';
-import { RoleMatrix, CreateRoleMatrixPayload, UpdateRoleMatrixPayload } from '../../../../core/api/interfaces/M8_AuthenticationUsers/rolematrixe.interface';
+import { RoleMatrix, CreateRoleMatrix, UpdateRoleMatrix } from '@modules/m8-authentication-users/interfaces/role-matrix.models';
 
 type RoleMatrixesStoreState = {
   items: RoleMatrix[];
@@ -45,7 +45,7 @@ export const RoleMatrixesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateRoleMatrixPayload>(
+    create: rxMethod<CreateRoleMatrix>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const RoleMatrixesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateRoleMatrixPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateRoleMatrix}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StudentAssignmentSubmission, 
-  CreateStudentAssignmentSubmissionPayload, 
-  UpdateStudentAssignmentSubmissionPayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/studentassignmentsubmission.interface';
+  CreateStudentAssignmentSubmission, 
+  UpdateStudentAssignmentSubmission 
+} from '@modules/m2-student-Affairs/interfaces/assignment-submission.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StudentAssignmentSubmissions)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StudentAssignmentSubmissionsService extends BaseApiService<
   StudentAssignmentSubmission, 
-  CreateStudentAssignmentSubmissionPayload, 
-  UpdateStudentAssignmentSubmissionPayload
+  CreateStudentAssignmentSubmission, 
+  UpdateStudentAssignmentSubmission
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

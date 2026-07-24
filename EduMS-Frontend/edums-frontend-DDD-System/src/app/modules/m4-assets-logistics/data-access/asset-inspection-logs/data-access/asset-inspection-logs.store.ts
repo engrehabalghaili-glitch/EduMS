@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetInspectionLogsService } from './asset-inspection-logs.service';
-import { AssetInspectionLog, CreateAssetInspectionLogPayload, UpdateAssetInspectionLogPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetinspectionlog.interface';
+import { AssetInspectionLog, CreateAssetInspectionLogRequest, UpdateAssetInspectionLogRequest } from '@modules/m4-assets-logistics/interfaces/asset-inspection-logs';
 
 type AssetInspectionLogsStoreState = {
   items: AssetInspectionLog[];
@@ -45,7 +45,7 @@ export const AssetInspectionLogsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetInspectionLogPayload>(
+    create: rxMethod<CreateAssetInspectionLogRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetInspectionLogsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetInspectionLogPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetInspectionLogRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   EmployeeAttendance, 
-  CreateEmployeeAttendancePayload, 
-  UpdateEmployeeAttendancePayload 
-} from '../../../../core/api/interfaces/M3_EmployeeManagement/employeeattendance.interface';
+  CreateEmployeeAttendance, 
+  UpdateEmployeeAttendance 
+} from '@modules/m3-employee-management/interfaces/employee-attendance.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (EmployeeAttendances)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class EmployeeAttendancesService extends BaseApiService<
   EmployeeAttendance, 
-  CreateEmployeeAttendancePayload, 
-  UpdateEmployeeAttendancePayload
+  CreateEmployeeAttendance, 
+  UpdateEmployeeAttendance
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

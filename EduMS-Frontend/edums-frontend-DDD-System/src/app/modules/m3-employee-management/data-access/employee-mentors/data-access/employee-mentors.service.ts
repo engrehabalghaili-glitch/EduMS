@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   EmployeeMentor, 
-  CreateEmployeeMentorPayload, 
-  UpdateEmployeeMentorPayload 
-} from '../../../../core/api/interfaces/M3_EmployeeManagement/employeementor.interface';
+  CreateEmployeeMentor, 
+  UpdateEmployeeMentor 
+} from '@modules/m3-employee-management/interfaces/employee-mentor.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (EmployeeMentors)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class EmployeeMentorsService extends BaseApiService<
   EmployeeMentor, 
-  CreateEmployeeMentorPayload, 
-  UpdateEmployeeMentorPayload
+  CreateEmployeeMentor, 
+  UpdateEmployeeMentor
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

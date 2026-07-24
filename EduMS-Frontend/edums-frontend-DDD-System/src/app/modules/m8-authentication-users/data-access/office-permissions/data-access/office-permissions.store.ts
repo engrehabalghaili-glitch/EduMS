@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { OfficePermissionsService } from './office-permissions.service';
-import { OfficePermission, CreateOfficePermissionPayload, UpdateOfficePermissionPayload } from '../../../../core/api/interfaces/M8_AuthenticationUsers/officepermission.interface';
+import { OfficePermission, CreateOfficePermission, UpdateOfficePermission } from '@modules/m8-authentication-users/interfaces/office-permission.models';
 
 type OfficePermissionsStoreState = {
   items: OfficePermission[];
@@ -45,7 +45,7 @@ export const OfficePermissionsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateOfficePermissionPayload>(
+    create: rxMethod<CreateOfficePermission>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const OfficePermissionsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateOfficePermissionPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateOfficePermission}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

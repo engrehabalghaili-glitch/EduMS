@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   EmployeeLeave, 
-  CreateEmployeeLeavePayload, 
-  UpdateEmployeeLeavePayload 
-} from '../../../../core/api/interfaces/M3_EmployeeManagement/employeeleave.interface';
+  CreateEmployeeLeave, 
+  UpdateEmployeeLeave 
+} from '@modules/m3-employee-management/interfaces/employee-leave.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (EmployeeLeaves)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class EmployeeLeavesService extends BaseApiService<
   EmployeeLeave, 
-  CreateEmployeeLeavePayload, 
-  UpdateEmployeeLeavePayload
+  CreateEmployeeLeave, 
+  UpdateEmployeeLeave
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

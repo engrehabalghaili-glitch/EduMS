@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   SchoolAsset, 
-  CreateSchoolAssetPayload, 
-  UpdateSchoolAssetPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/schoolasset.interface';
+  CreateSchoolAssetRequest, 
+  UpdateSchoolAssetRequest 
+} from '@modules/m4-assets-logistics/interfaces/school-assets';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (SchoolAssets)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class SchoolAssetsService extends BaseApiService<
   SchoolAsset, 
-  CreateSchoolAssetPayload, 
-  UpdateSchoolAssetPayload
+  CreateSchoolAssetRequest, 
+  UpdateSchoolAssetRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

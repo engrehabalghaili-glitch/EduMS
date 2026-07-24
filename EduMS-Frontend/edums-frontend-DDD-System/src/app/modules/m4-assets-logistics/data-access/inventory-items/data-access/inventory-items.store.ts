@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { InventoryItemsService } from './inventory-items.service';
-import { InventoryItem, CreateInventoryItemPayload, UpdateInventoryItemPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/inventoryitem.interface';
+import { InventoryItem, CreateInventoryItemRequest, UpdateInventoryItemRequest } from '@modules/m4-assets-logistics/interfaces/inventory-items';
 
 type InventoryItemsStoreState = {
   items: InventoryItem[];
@@ -45,7 +45,7 @@ export const InventoryItemsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateInventoryItemPayload>(
+    create: rxMethod<CreateInventoryItemRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const InventoryItemsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateInventoryItemPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateInventoryItemRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

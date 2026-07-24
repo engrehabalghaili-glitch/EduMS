@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   Account, 
-  CreateAccountPayload, 
-  UpdateAccountPayload 
-} from '../../../../core/api/interfaces/M5_FinancialManagement/account.interface';
+  CreateAccountDto, 
+  UpdateAccountDto 
+} from '@modules/m5-Financial-Management/interfaces/account.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (Accounts)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AccountsService extends BaseApiService<
   Account, 
-  CreateAccountPayload, 
-  UpdateAccountPayload
+  CreateAccountDto, 
+  UpdateAccountDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

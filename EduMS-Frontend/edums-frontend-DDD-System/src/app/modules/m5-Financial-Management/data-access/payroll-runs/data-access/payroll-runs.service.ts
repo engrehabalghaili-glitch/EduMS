@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   PayrollRun, 
-  CreatePayrollRunPayload, 
-  UpdatePayrollRunPayload 
-} from '../../../../core/api/interfaces/M5_FinancialManagement/payrollrun.interface';
+  CreatePayrollRunDto, 
+  UpdatePayrollRunDto 
+} from '@modules/m5-Financial-Management/interfaces/payroll-run.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (PayrollRuns)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class PayrollRunsService extends BaseApiService<
   PayrollRun, 
-  CreatePayrollRunPayload, 
-  UpdatePayrollRunPayload
+  CreatePayrollRunDto, 
+  UpdatePayrollRunDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

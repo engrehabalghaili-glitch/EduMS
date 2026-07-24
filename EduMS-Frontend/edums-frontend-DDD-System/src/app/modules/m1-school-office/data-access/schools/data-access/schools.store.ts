@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SchoolsService } from './schools.service';
-import { School, CreateSchoolPayload, UpdateSchoolPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/school.interface';
+import { School, CreateSchoolDto, UpdateSchoolDto } from '@modules/m1-school-office/interface/school';
 
 type SchoolsStoreState = {
   items: School[];
@@ -45,7 +45,7 @@ export const SchoolsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSchoolPayload>(
+    create: rxMethod<CreateSchoolDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SchoolsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSchoolPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSchoolDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

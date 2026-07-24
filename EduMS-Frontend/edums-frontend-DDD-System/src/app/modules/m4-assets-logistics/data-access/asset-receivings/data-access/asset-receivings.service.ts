@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AssetReceiving, 
-  CreateAssetReceivingPayload, 
-  UpdateAssetReceivingPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/assetreceiving.interface';
+  CreateAssetReceivingRequest, 
+  UpdateAssetReceivingRequest 
+} from '@modules/m4-assets-logistics/interfaces/asset-receivings';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AssetReceivings)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AssetReceivingsService extends BaseApiService<
   AssetReceiving, 
-  CreateAssetReceivingPayload, 
-  UpdateAssetReceivingPayload
+  CreateAssetReceivingRequest, 
+  UpdateAssetReceivingRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AssetLoanTrackingAlert, 
-  CreateAssetLoanTrackingAlertPayload, 
-  UpdateAssetLoanTrackingAlertPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/assetloantrackingalert.interface';
+  CreateAssetLoanTrackingAlertRequest, 
+  UpdateAssetLoanTrackingAlertRequest 
+} from '@modules/m4-assets-logistics/interfaces/asset-loan-tracking-alerts';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AssetLoanTrackingAlerts)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AssetLoanTrackingAlertsService extends BaseApiService<
   AssetLoanTrackingAlert, 
-  CreateAssetLoanTrackingAlertPayload, 
-  UpdateAssetLoanTrackingAlertPayload
+  CreateAssetLoanTrackingAlertRequest, 
+  UpdateAssetLoanTrackingAlertRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

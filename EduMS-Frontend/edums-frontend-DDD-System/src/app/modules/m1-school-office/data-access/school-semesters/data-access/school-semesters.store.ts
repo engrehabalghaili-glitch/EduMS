@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SchoolSemestersService } from './school-semesters.service';
-import { SchoolSemester, CreateSchoolSemesterPayload, UpdateSchoolSemesterPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/schoolsemester.interface';
+import { SchoolSemester, CreateSchoolSemesterDto, UpdateSchoolSemesterDto } from '@modules/m1-school-office/interface/school-semester';
 
 type SchoolSemestersStoreState = {
   items: SchoolSemester[];
@@ -45,7 +45,7 @@ export const SchoolSemestersStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSchoolSemesterPayload>(
+    create: rxMethod<CreateSchoolSemesterDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SchoolSemestersStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSchoolSemesterPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSchoolSemesterDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

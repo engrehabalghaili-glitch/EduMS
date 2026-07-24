@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   VacantPosition, 
-  CreateVacantPositionPayload, 
-  UpdateVacantPositionPayload 
-} from '../../../../core/api/interfaces/M3_EmployeeManagement/vacantposition.interface';
+  CreateVacantPosition, 
+  UpdateVacantPosition 
+} from '@modules/m3-employee-management/interfaces/vacant-position.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (VacantPositions)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class VacantPositionsService extends BaseApiService<
   VacantPosition, 
-  CreateVacantPositionPayload, 
-  UpdateVacantPositionPayload
+  CreateVacantPosition, 
+  UpdateVacantPosition
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

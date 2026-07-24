@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { EmployeeExternalTransfersService } from './employee-external-transfers.service';
-import { EmployeeExternalTransfer, CreateEmployeeExternalTransferPayload, UpdateEmployeeExternalTransferPayload } from '../../../../core/api/interfaces/M3_EmployeeManagement/employeeexternaltransfer.interface';
+import { EmployeeExternalTransfer, CreateEmployeeExternalTransfer, UpdateEmployeeExternalTransfer } from '@modules/m3-employee-management/interfaces/employee-external-transfer.types';
 
 type EmployeeExternalTransfersStoreState = {
   items: EmployeeExternalTransfer[];
@@ -45,7 +45,7 @@ export const EmployeeExternalTransfersStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateEmployeeExternalTransferPayload>(
+    create: rxMethod<CreateEmployeeExternalTransfer>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const EmployeeExternalTransfersStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateEmployeeExternalTransferPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateEmployeeExternalTransfer}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

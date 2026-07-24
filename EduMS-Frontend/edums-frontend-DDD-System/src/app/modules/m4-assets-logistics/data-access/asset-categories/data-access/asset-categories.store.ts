@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetCategoriesService } from './asset-categories.service';
-import { AssetCategory, CreateAssetCategoryPayload, UpdateAssetCategoryPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetcategory.interface';
+import { AssetCategory, CreateAssetCategoryRequest, UpdateAssetCategoryRequest } from '@modules/m4-assets-logistics/interfaces/asset-categories';
 
 type AssetCategoriesStoreState = {
   items: AssetCategory[];
@@ -45,7 +45,7 @@ export const AssetCategoriesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetCategoryPayload>(
+    create: rxMethod<CreateAssetCategoryRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetCategoriesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetCategoryPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetCategoryRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

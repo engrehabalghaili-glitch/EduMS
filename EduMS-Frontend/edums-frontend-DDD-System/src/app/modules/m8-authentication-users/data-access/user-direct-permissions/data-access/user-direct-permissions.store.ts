@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { UserDirectPermissionsService } from './user-direct-permissions.service';
-import { UserDirectPermission, CreateUserDirectPermissionPayload, UpdateUserDirectPermissionPayload } from '../../../../core/api/interfaces/M8_AuthenticationUsers/userdirectpermission.interface';
+import { UserDirectPermission, CreateUserDirectPermission, UpdateUserDirectPermission } from '@modules/m8-authentication-users/interfaces/user-direct-permission.models';
 
 type UserDirectPermissionsStoreState = {
   items: UserDirectPermission[];
@@ -45,7 +45,7 @@ export const UserDirectPermissionsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateUserDirectPermissionPayload>(
+    create: rxMethod<CreateUserDirectPermission>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const UserDirectPermissionsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateUserDirectPermissionPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateUserDirectPermission}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

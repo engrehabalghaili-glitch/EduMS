@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AccountsService } from './accounts.service';
-import { Account, CreateAccountPayload, UpdateAccountPayload } from '../../../../core/api/interfaces/M5_FinancialManagement/account.interface';
+import { Account, CreateAccountDto, UpdateAccountDto } from '@modules/m5-Financial-Management/interfaces/account.interface';
 
 type AccountsStoreState = {
   items: Account[];
@@ -45,7 +45,7 @@ export const AccountsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAccountPayload>(
+    create: rxMethod<CreateAccountDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AccountsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAccountPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAccountDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

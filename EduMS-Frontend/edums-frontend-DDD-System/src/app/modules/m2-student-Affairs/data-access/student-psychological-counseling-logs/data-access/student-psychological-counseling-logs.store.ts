@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { StudentPsychologicalCounselingLogsService } from './student-psychological-counseling-logs.service';
-import { StudentPsychologicalCounselingLog, CreateStudentPsychologicalCounselingLogPayload, UpdateStudentPsychologicalCounselingLogPayload } from '../../../../core/api/interfaces/M2_StudentAffairs/studentpsychologicalcounselinglog.interface';
+import { StudentPsychologicalCounselingLog, CreateStudentPsychologicalCounselingLog, UpdateStudentPsychologicalCounselingLog } from '@modules/m2-student-Affairs/interfaces/psychological-counseling.interface';
 
 type StudentPsychologicalCounselingLogsStoreState = {
   items: StudentPsychologicalCounselingLog[];
@@ -45,7 +45,7 @@ export const StudentPsychologicalCounselingLogsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateStudentPsychologicalCounselingLogPayload>(
+    create: rxMethod<CreateStudentPsychologicalCounselingLog>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const StudentPsychologicalCounselingLogsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateStudentPsychologicalCounselingLogPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateStudentPsychologicalCounselingLog}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

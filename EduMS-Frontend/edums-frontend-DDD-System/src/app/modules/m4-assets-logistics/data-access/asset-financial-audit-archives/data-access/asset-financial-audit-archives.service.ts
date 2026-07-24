@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AssetFinancialAuditArchive, 
-  CreateAssetFinancialAuditArchivePayload, 
-  UpdateAssetFinancialAuditArchivePayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/assetfinancialauditarchive.interface';
+  CreateAssetFinancialAuditArchiveRequest, 
+  UpdateAssetFinancialAuditArchiveRequest 
+} from '@modules/m4-assets-logistics/interfaces/asset-financial-audit-archives';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AssetFinancialAuditArchives)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AssetFinancialAuditArchivesService extends BaseApiService<
   AssetFinancialAuditArchive, 
-  CreateAssetFinancialAuditArchivePayload, 
-  UpdateAssetFinancialAuditArchivePayload
+  CreateAssetFinancialAuditArchiveRequest, 
+  UpdateAssetFinancialAuditArchiveRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AcademicBranchConfigLogsService } from './academic-branch-config-logs.service';
-import { AcademicBranchConfigLog, CreateAcademicBranchConfigLogPayload, UpdateAcademicBranchConfigLogPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/academicbranchconfiglog.interface';
+import { AcademicBranchConfigLog, CreateAcademicBranchConfigLogDto, UpdateAcademicBranchConfigLogDto } from '@modules/m1-school-office/interface/academic-branch-config-log';
 
 type AcademicBranchConfigLogsStoreState = {
   items: AcademicBranchConfigLog[];
@@ -45,7 +45,7 @@ export const AcademicBranchConfigLogsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAcademicBranchConfigLogPayload>(
+    create: rxMethod<CreateAcademicBranchConfigLogDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AcademicBranchConfigLogsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAcademicBranchConfigLogPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAcademicBranchConfigLogDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

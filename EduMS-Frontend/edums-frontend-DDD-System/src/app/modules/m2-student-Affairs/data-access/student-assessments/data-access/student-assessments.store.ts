@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { StudentAssessmentsService } from './student-assessments.service';
-import { StudentAssessment, CreateStudentAssessmentPayload, UpdateStudentAssessmentPayload } from '../../../../core/api/interfaces/M2_StudentAffairs/studentassessment.interface';
+import { StudentAssessment, CreateStudentAssessment, UpdateStudentAssessment } from '@modules/m2-student-Affairs/interfaces/assessment.interface';
 
 type StudentAssessmentsStoreState = {
   items: StudentAssessment[];
@@ -45,7 +45,7 @@ export const StudentAssessmentsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateStudentAssessmentPayload>(
+    create: rxMethod<CreateStudentAssessment>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const StudentAssessmentsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateStudentAssessmentPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateStudentAssessment}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

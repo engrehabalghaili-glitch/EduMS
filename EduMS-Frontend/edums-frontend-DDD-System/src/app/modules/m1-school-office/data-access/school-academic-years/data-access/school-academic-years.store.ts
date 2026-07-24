@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SchoolAcademicYearsService } from './school-academic-years.service';
-import { SchoolAcademicYear, CreateSchoolAcademicYearPayload, UpdateSchoolAcademicYearPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/schoolacademicyear.interface';
+import { SchoolAcademicYear, CreateSchoolAcademicYearDto, UpdateSchoolAcademicYearDto } from '@modules/m1-school-office/interface/school-academic-year';
 
 type SchoolAcademicYearsStoreState = {
   items: SchoolAcademicYear[];
@@ -45,7 +45,7 @@ export const SchoolAcademicYearsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSchoolAcademicYearPayload>(
+    create: rxMethod<CreateSchoolAcademicYearDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SchoolAcademicYearsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSchoolAcademicYearPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSchoolAcademicYearDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

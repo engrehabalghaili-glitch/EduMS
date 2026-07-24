@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   KpiMetricRecord, 
-  CreateKpiMetricRecordPayload, 
-  UpdateKpiMetricRecordPayload 
-} from '../../../../core/api/interfaces/M6_StatisticsReports/kpimetricrecord.interface';
+  CreateKpiMetricRecord, 
+  UpdateKpiMetricRecord 
+} from '@modules/m6-statistics-reports/interfaces/kpi-metric-record.dto';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (KpiMetricRecords)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class KpiMetricRecordsService extends BaseApiService<
   KpiMetricRecord, 
-  CreateKpiMetricRecordPayload, 
-  UpdateKpiMetricRecordPayload
+  CreateKpiMetricRecord, 
+  UpdateKpiMetricRecord
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

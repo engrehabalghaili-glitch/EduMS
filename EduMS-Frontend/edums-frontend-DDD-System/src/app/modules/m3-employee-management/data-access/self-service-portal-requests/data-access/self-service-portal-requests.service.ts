@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   SelfServicePortalRequest, 
-  CreateSelfServicePortalRequestPayload, 
-  UpdateSelfServicePortalRequestPayload 
-} from '../../../../core/api/interfaces/M3_EmployeeManagement/selfserviceportalrequest.interface';
+  CreateSelfServicePortalRequest, 
+  UpdateSelfServicePortalRequest 
+} from '@modules/m3-employee-management/interfaces/self-service-portal-request.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (SelfServicePortalRequests)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class SelfServicePortalRequestsService extends BaseApiService<
   SelfServicePortalRequest, 
-  CreateSelfServicePortalRequestPayload, 
-  UpdateSelfServicePortalRequestPayload
+  CreateSelfServicePortalRequest, 
+  UpdateSelfServicePortalRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

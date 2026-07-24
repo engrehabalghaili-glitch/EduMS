@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   EmergencyHosting, 
-  CreateEmergencyHostingPayload, 
-  UpdateEmergencyHostingPayload 
-} from '../../../../core/api/interfaces/M7_EmergencyManagement/emergencyhosting.interface';
+  CreateEmergencyHosting, 
+  UpdateEmergencyHosting 
+} from '@modules/m7-emergency-management/interfaces/emergency-hosting.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (EmergencyHostings)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class EmergencyHostingsService extends BaseApiService<
   EmergencyHosting, 
-  CreateEmergencyHostingPayload, 
-  UpdateEmergencyHostingPayload
+  CreateEmergencyHosting, 
+  UpdateEmergencyHosting
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

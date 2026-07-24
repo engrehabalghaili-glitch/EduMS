@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AssetTechnicalSpecification, 
-  CreateAssetTechnicalSpecificationPayload, 
-  UpdateAssetTechnicalSpecificationPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/assettechnicalspecification.interface';
+  CreateAssetTechnicalSpecificationRequest, 
+  UpdateAssetTechnicalSpecificationRequest 
+} from '@modules/m4-assets-logistics/interfaces/asset-technical-specifications';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AssetTechnicalSpecifications)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AssetTechnicalSpecificationsService extends BaseApiService<
   AssetTechnicalSpecification, 
-  CreateAssetTechnicalSpecificationPayload, 
-  UpdateAssetTechnicalSpecificationPayload
+  CreateAssetTechnicalSpecificationRequest, 
+  UpdateAssetTechnicalSpecificationRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

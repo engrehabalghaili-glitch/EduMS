@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   Vendor, 
-  CreateVendorPayload, 
-  UpdateVendorPayload 
-} from '../../../../core/api/interfaces/M5_FinancialManagement/vendor.interface';
+  CreateVendorDto, 
+  UpdateVendorDto 
+} from '@modules/m5-Financial-Management/interfaces/vendor.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (Vendors)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class VendorsService extends BaseApiService<
   Vendor, 
-  CreateVendorPayload, 
-  UpdateVendorPayload
+  CreateVendorDto, 
+  UpdateVendorDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

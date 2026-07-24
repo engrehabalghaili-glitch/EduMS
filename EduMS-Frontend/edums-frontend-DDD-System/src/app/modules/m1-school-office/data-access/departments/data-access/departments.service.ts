@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   Department, 
-  CreateDepartmentPayload, 
-  UpdateDepartmentPayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/department.interface';
+  CreateDepartmentDto, 
+  UpdateDepartmentDto 
+} from '@modules/m1-school-office/interface/department';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (Departments)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class DepartmentsService extends BaseApiService<
   Department, 
-  CreateDepartmentPayload, 
-  UpdateDepartmentPayload
+  CreateDepartmentDto, 
+  UpdateDepartmentDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

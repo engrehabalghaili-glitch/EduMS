@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SchoolOperationalBudgetLogsService } from './school-operational-budget-logs.service';
-import { SchoolOperationalBudgetLog, CreateSchoolOperationalBudgetLogPayload, UpdateSchoolOperationalBudgetLogPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/schooloperationalbudgetlog.interface';
+import { SchoolOperationalBudgetLog, CreateSchoolOperationalBudgetLogDto, UpdateSchoolOperationalBudgetLogDto } from '@modules/m1-school-office/interface/school-operational-budget-log';
 
 type SchoolOperationalBudgetLogsStoreState = {
   items: SchoolOperationalBudgetLog[];
@@ -45,7 +45,7 @@ export const SchoolOperationalBudgetLogsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSchoolOperationalBudgetLogPayload>(
+    create: rxMethod<CreateSchoolOperationalBudgetLogDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SchoolOperationalBudgetLogsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSchoolOperationalBudgetLogPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSchoolOperationalBudgetLogDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

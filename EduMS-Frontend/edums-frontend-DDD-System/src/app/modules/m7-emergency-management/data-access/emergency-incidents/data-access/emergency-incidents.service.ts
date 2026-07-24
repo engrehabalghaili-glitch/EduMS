@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   EmergencyIncident, 
-  CreateEmergencyIncidentPayload, 
-  UpdateEmergencyIncidentPayload 
-} from '../../../../core/api/interfaces/M7_EmergencyManagement/emergencyincident.interface';
+  CreateEmergencyIncident, 
+  UpdateEmergencyIncident 
+} from '@modules/m7-emergency-management/interfaces/emergency-incident.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (EmergencyIncidents)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class EmergencyIncidentsService extends BaseApiService<
   EmergencyIncident, 
-  CreateEmergencyIncidentPayload, 
-  UpdateEmergencyIncidentPayload
+  CreateEmergencyIncident, 
+  UpdateEmergencyIncident
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

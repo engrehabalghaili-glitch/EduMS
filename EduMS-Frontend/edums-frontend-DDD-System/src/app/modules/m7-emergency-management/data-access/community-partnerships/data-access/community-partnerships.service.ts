@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   CommunityPartnership, 
-  CreateCommunityPartnershipPayload, 
-  UpdateCommunityPartnershipPayload 
-} from '../../../../core/api/interfaces/M7_EmergencyManagement/communitypartnership.interface';
+  CreateCommunityPartnership, 
+  UpdateCommunityPartnership 
+} from '@modules/m7-emergency-management/interfaces/community-partnership.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (CommunityPartnerships)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class CommunityPartnershipsService extends BaseApiService<
   CommunityPartnership, 
-  CreateCommunityPartnershipPayload, 
-  UpdateCommunityPartnershipPayload
+  CreateCommunityPartnership, 
+  UpdateCommunityPartnership
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

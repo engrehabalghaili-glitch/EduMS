@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StudentTransportPreference, 
-  CreateStudentTransportPreferencePayload, 
-  UpdateStudentTransportPreferencePayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/studenttransportpreference.interface';
+  CreateStudentTransportPreference, 
+  UpdateStudentTransportPreference 
+} from '@modules/m2-student-Affairs/interfaces/transport-preference.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StudentTransportPreferences)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StudentTransportPreferencesService extends BaseApiService<
   StudentTransportPreference, 
-  CreateStudentTransportPreferencePayload, 
-  UpdateStudentTransportPreferencePayload
+  CreateStudentTransportPreference, 
+  UpdateStudentTransportPreference
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetAllocationsService } from './asset-allocations.service';
-import { AssetAllocation, CreateAssetAllocationPayload, UpdateAssetAllocationPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetallocation.interface';
+import { AssetAllocation, CreateAssetAllocationRequest, UpdateAssetAllocationRequest } from '@modules/m4-assets-logistics/interfaces/asset-allocations';
 
 type AssetAllocationsStoreState = {
   items: AssetAllocation[];
@@ -45,7 +45,7 @@ export const AssetAllocationsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetAllocationPayload>(
+    create: rxMethod<CreateAssetAllocationRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetAllocationsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetAllocationPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetAllocationRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

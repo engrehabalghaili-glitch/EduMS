@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { StudentExemptionsService } from './student-exemptions.service';
-import { StudentExemption, CreateStudentExemptionPayload, UpdateStudentExemptionPayload } from '../../../../core/api/interfaces/M2_StudentAffairs/studentexemption.interface';
+import { StudentExemption, CreateStudentExemption, UpdateStudentExemption } from '@modules/m2-student-Affairs/interfaces/exemption.interface';
 
 type StudentExemptionsStoreState = {
   items: StudentExemption[];
@@ -45,7 +45,7 @@ export const StudentExemptionsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateStudentExemptionPayload>(
+    create: rxMethod<CreateStudentExemption>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const StudentExemptionsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateStudentExemptionPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateStudentExemption}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

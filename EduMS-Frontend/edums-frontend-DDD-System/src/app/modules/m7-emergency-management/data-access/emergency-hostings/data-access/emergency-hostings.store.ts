@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { EmergencyHostingsService } from './emergency-hostings.service';
-import { EmergencyHosting, CreateEmergencyHostingPayload, UpdateEmergencyHostingPayload } from '../../../../core/api/interfaces/M7_EmergencyManagement/emergencyhosting.interface';
+import { EmergencyHosting, CreateEmergencyHosting, UpdateEmergencyHosting } from '@modules/m7-emergency-management/interfaces/emergency-hosting.types';
 
 type EmergencyHostingsStoreState = {
   items: EmergencyHosting[];
@@ -45,7 +45,7 @@ export const EmergencyHostingsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateEmergencyHostingPayload>(
+    create: rxMethod<CreateEmergencyHosting>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const EmergencyHostingsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateEmergencyHostingPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateEmergencyHosting}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

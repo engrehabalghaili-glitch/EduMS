@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetReceivingsService } from './asset-receivings.service';
-import { AssetReceiving, CreateAssetReceivingPayload, UpdateAssetReceivingPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetreceiving.interface';
+import { AssetReceiving, CreateAssetReceivingRequest, UpdateAssetReceivingRequest } from '@modules/m4-assets-logistics/interfaces/asset-receivings';
 
 type AssetReceivingsStoreState = {
   items: AssetReceiving[];
@@ -45,7 +45,7 @@ export const AssetReceivingsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetReceivingPayload>(
+    create: rxMethod<CreateAssetReceivingRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetReceivingsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetReceivingPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetReceivingRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

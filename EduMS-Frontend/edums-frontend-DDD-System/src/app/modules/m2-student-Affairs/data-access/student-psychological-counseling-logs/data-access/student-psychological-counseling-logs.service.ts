@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StudentPsychologicalCounselingLog, 
-  CreateStudentPsychologicalCounselingLogPayload, 
-  UpdateStudentPsychologicalCounselingLogPayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/studentpsychologicalcounselinglog.interface';
+  CreateStudentPsychologicalCounselingLog, 
+  UpdateStudentPsychologicalCounselingLog 
+} from '@modules/m2-student-Affairs/interfaces/psychological-counseling.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StudentPsychologicalCounselingLogs)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StudentPsychologicalCounselingLogsService extends BaseApiService<
   StudentPsychologicalCounselingLog, 
-  CreateStudentPsychologicalCounselingLogPayload, 
-  UpdateStudentPsychologicalCounselingLogPayload
+  CreateStudentPsychologicalCounselingLog, 
+  UpdateStudentPsychologicalCounselingLog
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

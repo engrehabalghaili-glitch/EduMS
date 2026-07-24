@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetLoansService } from './asset-loans.service';
-import { AssetLoan, CreateAssetLoanPayload, UpdateAssetLoanPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetloan.interface';
+import { AssetLoan, CreateAssetLoanRequest, UpdateAssetLoanRequest } from '@modules/m4-assets-logistics/interfaces/asset-loans';
 
 type AssetLoansStoreState = {
   items: AssetLoan[];
@@ -45,7 +45,7 @@ export const AssetLoansStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetLoanPayload>(
+    create: rxMethod<CreateAssetLoanRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetLoansStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetLoanPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetLoanRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

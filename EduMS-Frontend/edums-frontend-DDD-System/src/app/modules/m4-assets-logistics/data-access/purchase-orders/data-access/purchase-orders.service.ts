@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   PurchaseOrder, 
-  CreatePurchaseOrderPayload, 
-  UpdatePurchaseOrderPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/purchaseorder.interface';
+  CreatePurchaseOrderRequest, 
+  UpdatePurchaseOrderRequest 
+} from '@modules/m4-assets-logistics/interfaces/purchase-orders';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (PurchaseOrders)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class PurchaseOrdersService extends BaseApiService<
   PurchaseOrder, 
-  CreatePurchaseOrderPayload, 
-  UpdatePurchaseOrderPayload
+  CreatePurchaseOrderRequest, 
+  UpdatePurchaseOrderRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

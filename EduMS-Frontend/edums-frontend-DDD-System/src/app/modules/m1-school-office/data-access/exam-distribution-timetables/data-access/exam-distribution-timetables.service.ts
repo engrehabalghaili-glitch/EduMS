@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   ExamDistributionTimetable, 
-  CreateExamDistributionTimetablePayload, 
-  UpdateExamDistributionTimetablePayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/examdistributiontimetable.interface';
+  CreateExamDistributionTimetableDto, 
+  UpdateExamDistributionTimetableDto 
+} from '@modules/m1-school-office/interface/exam-distribution-timetable';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (ExamDistributionTimetables)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class ExamDistributionTimetablesService extends BaseApiService<
   ExamDistributionTimetable, 
-  CreateExamDistributionTimetablePayload, 
-  UpdateExamDistributionTimetablePayload
+  CreateExamDistributionTimetableDto, 
+  UpdateExamDistributionTimetableDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

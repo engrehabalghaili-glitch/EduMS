@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   SchoolCanteenItem, 
-  CreateSchoolCanteenItemPayload, 
-  UpdateSchoolCanteenItemPayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/schoolcanteenitem.interface';
+  CreateSchoolCanteenItemDto, 
+  UpdateSchoolCanteenItemDto 
+} from '@modules/m1-school-office/interface/school-canteen-item';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (SchoolCanteenItems)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class SchoolCanteenItemsService extends BaseApiService<
   SchoolCanteenItem, 
-  CreateSchoolCanteenItemPayload, 
-  UpdateSchoolCanteenItemPayload
+  CreateSchoolCanteenItemDto, 
+  UpdateSchoolCanteenItemDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StudentExemption, 
-  CreateStudentExemptionPayload, 
-  UpdateStudentExemptionPayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/studentexemption.interface';
+  CreateStudentExemption, 
+  UpdateStudentExemption 
+} from '@modules/m2-student-Affairs/interfaces/exemption.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StudentExemptions)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StudentExemptionsService extends BaseApiService<
   StudentExemption, 
-  CreateStudentExemptionPayload, 
-  UpdateStudentExemptionPayload
+  CreateStudentExemption, 
+  UpdateStudentExemption
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

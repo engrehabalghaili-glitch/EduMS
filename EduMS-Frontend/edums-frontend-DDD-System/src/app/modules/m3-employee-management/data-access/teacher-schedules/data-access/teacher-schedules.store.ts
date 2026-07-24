@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { TeacherSchedulesService } from './teacher-schedules.service';
-import { TeacherSchedule, CreateTeacherSchedulePayload, UpdateTeacherSchedulePayload } from '../../../../core/api/interfaces/M3_EmployeeManagement/teacherschedule.interface';
+import { TeacherSchedule, CreateTeacherSchedule, UpdateTeacherSchedule } from '@modules/m3-employee-management/interfaces/teacher-schedule.types';
 
 type TeacherSchedulesStoreState = {
   items: TeacherSchedule[];
@@ -45,7 +45,7 @@ export const TeacherSchedulesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateTeacherSchedulePayload>(
+    create: rxMethod<CreateTeacherSchedule>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const TeacherSchedulesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateTeacherSchedulePayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateTeacherSchedule}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   SchoolShift, 
-  CreateSchoolShiftPayload, 
-  UpdateSchoolShiftPayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/schoolshift.interface';
+  CreateSchoolShiftDto, 
+  UpdateSchoolShiftDto 
+} from '@modules/m1-school-office/interface/school-shift';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (SchoolShifts)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class SchoolShiftsService extends BaseApiService<
   SchoolShift, 
-  CreateSchoolShiftPayload, 
-  UpdateSchoolShiftPayload
+  CreateSchoolShiftDto, 
+  UpdateSchoolShiftDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { DepartmentsService } from './departments.service';
-import { Department, CreateDepartmentPayload, UpdateDepartmentPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/department.interface';
+import { Department, CreateDepartmentDto, UpdateDepartmentDto } from '@modules/m1-school-office/interface/department';
 
 type DepartmentsStoreState = {
   items: Department[];
@@ -45,7 +45,7 @@ export const DepartmentsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateDepartmentPayload>(
+    create: rxMethod<CreateDepartmentDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const DepartmentsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateDepartmentPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateDepartmentDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { MaintenanceExecutionsService } from './maintenance-executions.service';
-import { MaintenanceExecution, CreateMaintenanceExecutionPayload, UpdateMaintenanceExecutionPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/maintenanceexecution.interface';
+import { MaintenanceExecution, CreateMaintenanceExecutionRequest, UpdateMaintenanceExecutionRequest } from '@modules/m4-assets-logistics/interfaces/maintenance-executions';
 
 type MaintenanceExecutionsStoreState = {
   items: MaintenanceExecution[];
@@ -45,7 +45,7 @@ export const MaintenanceExecutionsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateMaintenanceExecutionPayload>(
+    create: rxMethod<CreateMaintenanceExecutionRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const MaintenanceExecutionsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateMaintenanceExecutionPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateMaintenanceExecutionRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

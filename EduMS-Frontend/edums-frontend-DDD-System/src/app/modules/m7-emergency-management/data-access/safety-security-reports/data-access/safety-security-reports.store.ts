@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SafetySecurityReportsService } from './safety-security-reports.service';
-import { SafetySecurityReport, CreateSafetySecurityReportPayload, UpdateSafetySecurityReportPayload } from '../../../../core/api/interfaces/M7_EmergencyManagement/safetysecurityreport.interface';
+import { SafetySecurityReport, CreateSafetySecurityReport, UpdateSafetySecurityReport } from '@modules/m7-emergency-management/interfaces/safety-security-report.types';
 
 type SafetySecurityReportsStoreState = {
   items: SafetySecurityReport[];
@@ -45,7 +45,7 @@ export const SafetySecurityReportsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSafetySecurityReportPayload>(
+    create: rxMethod<CreateSafetySecurityReport>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SafetySecurityReportsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSafetySecurityReportPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSafetySecurityReport}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StudentExtracurricularAchievement, 
-  CreateStudentExtracurricularAchievementPayload, 
-  UpdateStudentExtracurricularAchievementPayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/studentextracurricularachievement.interface';
+  CreateStudentExtracurricularAchievement, 
+  UpdateStudentExtracurricularAchievement 
+} from '@modules/m2-student-Affairs/interfaces/extracurricular-achievement.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StudentExtracurricularAchievements)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StudentExtracurricularAchievementsService extends BaseApiService<
   StudentExtracurricularAchievement, 
-  CreateStudentExtracurricularAchievementPayload, 
-  UpdateStudentExtracurricularAchievementPayload
+  CreateStudentExtracurricularAchievement, 
+  UpdateStudentExtracurricularAchievement
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

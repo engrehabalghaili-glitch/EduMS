@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetExpensesService } from './asset-expenses.service';
-import { AssetExpense, CreateAssetExpensePayload, UpdateAssetExpensePayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetexpense.interface';
+import { AssetExpense, CreateAssetExpenseRequest, UpdateAssetExpenseRequest } from '@modules/m4-assets-logistics/interfaces/asset-expenses';
 
 type AssetExpensesStoreState = {
   items: AssetExpense[];
@@ -45,7 +45,7 @@ export const AssetExpensesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetExpensePayload>(
+    create: rxMethod<CreateAssetExpenseRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetExpensesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetExpensePayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetExpenseRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

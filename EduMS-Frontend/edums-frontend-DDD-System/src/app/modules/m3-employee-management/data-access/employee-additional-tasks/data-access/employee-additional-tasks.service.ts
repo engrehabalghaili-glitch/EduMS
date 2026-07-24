@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   EmployeeAdditionalTask, 
-  CreateEmployeeAdditionalTaskPayload, 
-  UpdateEmployeeAdditionalTaskPayload 
-} from '../../../../core/api/interfaces/M3_EmployeeManagement/employeeadditionaltask.interface';
+  CreateEmployeeAdditionalTask, 
+  UpdateEmployeeAdditionalTask 
+} from '@modules/m3-employee-management/interfaces/employee-additional-task.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (EmployeeAdditionalTasks)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class EmployeeAdditionalTasksService extends BaseApiService<
   EmployeeAdditionalTask, 
-  CreateEmployeeAdditionalTaskPayload, 
-  UpdateEmployeeAdditionalTaskPayload
+  CreateEmployeeAdditionalTask, 
+  UpdateEmployeeAdditionalTask
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SchoolAnnouncementLogsService } from './school-announcement-logs.service';
-import { SchoolAnnouncementLog, CreateSchoolAnnouncementLogPayload, UpdateSchoolAnnouncementLogPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/schoolannouncementlog.interface';
+import { SchoolAnnouncementLog, CreateSchoolAnnouncementLogDto, UpdateSchoolAnnouncementLogDto } from '@modules/m1-school-office/interface/school-announcement-log';
 
 type SchoolAnnouncementLogsStoreState = {
   items: SchoolAnnouncementLog[];
@@ -45,7 +45,7 @@ export const SchoolAnnouncementLogsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSchoolAnnouncementLogPayload>(
+    create: rxMethod<CreateSchoolAnnouncementLogDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SchoolAnnouncementLogsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSchoolAnnouncementLogPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSchoolAnnouncementLogDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

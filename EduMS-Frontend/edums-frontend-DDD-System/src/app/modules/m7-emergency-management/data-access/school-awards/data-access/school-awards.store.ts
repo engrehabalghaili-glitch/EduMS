@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SchoolAwardsService } from './school-awards.service';
-import { SchoolAward, CreateSchoolAwardPayload, UpdateSchoolAwardPayload } from '../../../../core/api/interfaces/M7_EmergencyManagement/schoolaward.interface';
+import { SchoolAward, CreateSchoolAward, UpdateSchoolAward } from '@modules/m7-emergency-management/interfaces/school-award.types';
 
 type SchoolAwardsStoreState = {
   items: SchoolAward[];
@@ -45,7 +45,7 @@ export const SchoolAwardsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSchoolAwardPayload>(
+    create: rxMethod<CreateSchoolAward>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SchoolAwardsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSchoolAwardPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSchoolAward}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

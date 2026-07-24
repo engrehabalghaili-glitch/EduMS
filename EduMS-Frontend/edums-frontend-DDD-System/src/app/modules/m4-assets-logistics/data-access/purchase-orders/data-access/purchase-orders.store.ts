@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { PurchaseOrdersService } from './purchase-orders.service';
-import { PurchaseOrder, CreatePurchaseOrderPayload, UpdatePurchaseOrderPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/purchaseorder.interface';
+import { PurchaseOrder, CreatePurchaseOrderRequest, UpdatePurchaseOrderRequest } from '@modules/m4-assets-logistics/interfaces/purchase-orders';
 
 type PurchaseOrdersStoreState = {
   items: PurchaseOrder[];
@@ -45,7 +45,7 @@ export const PurchaseOrdersStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreatePurchaseOrderPayload>(
+    create: rxMethod<CreatePurchaseOrderRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const PurchaseOrdersStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdatePurchaseOrderPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdatePurchaseOrderRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

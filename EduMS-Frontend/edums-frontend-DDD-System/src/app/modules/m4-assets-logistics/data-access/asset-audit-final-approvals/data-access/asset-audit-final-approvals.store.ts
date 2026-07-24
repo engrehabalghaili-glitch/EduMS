@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetAuditFinalApprovalsService } from './asset-audit-final-approvals.service';
-import { AssetAuditFinalApproval, CreateAssetAuditFinalApprovalPayload, UpdateAssetAuditFinalApprovalPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetauditfinalapproval.interface';
+import { AssetAuditFinalApproval, CreateAssetAuditFinalApprovalRequest, UpdateAssetAuditFinalApprovalRequest } from '@modules/m4-assets-logistics/interfaces/asset-audit-final-approvals';
 
 type AssetAuditFinalApprovalsStoreState = {
   items: AssetAuditFinalApproval[];
@@ -45,7 +45,7 @@ export const AssetAuditFinalApprovalsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetAuditFinalApprovalPayload>(
+    create: rxMethod<CreateAssetAuditFinalApprovalRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetAuditFinalApprovalsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetAuditFinalApprovalPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetAuditFinalApprovalRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

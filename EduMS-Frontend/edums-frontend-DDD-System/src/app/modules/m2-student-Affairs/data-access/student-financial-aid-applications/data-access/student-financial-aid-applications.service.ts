@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StudentFinancialAidApplication, 
-  CreateStudentFinancialAidApplicationPayload, 
-  UpdateStudentFinancialAidApplicationPayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/studentfinancialaidapplication.interface';
+  CreateStudentFinancialAidApplication, 
+  UpdateStudentFinancialAidApplication 
+} from '@modules/m2-student-Affairs/interfaces/financial-aid-application.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StudentFinancialAidApplications)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StudentFinancialAidApplicationsService extends BaseApiService<
   StudentFinancialAidApplication, 
-  CreateStudentFinancialAidApplicationPayload, 
-  UpdateStudentFinancialAidApplicationPayload
+  CreateStudentFinancialAidApplication, 
+  UpdateStudentFinancialAidApplication
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

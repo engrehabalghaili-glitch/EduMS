@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { EducationalSupervisionVisitsService } from './educational-supervision-visits.service';
-import { EducationalSupervisionVisit, CreateEducationalSupervisionVisitPayload, UpdateEducationalSupervisionVisitPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/educationalsupervisionvisit.interface';
+import { EducationalSupervisionVisit, CreateEducationalSupervisionVisitDto, UpdateEducationalSupervisionVisitDto } from '@modules/m1-school-office/interface/educational-supervision-visit';
 
 type EducationalSupervisionVisitsStoreState = {
   items: EducationalSupervisionVisit[];
@@ -45,7 +45,7 @@ export const EducationalSupervisionVisitsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateEducationalSupervisionVisitPayload>(
+    create: rxMethod<CreateEducationalSupervisionVisitDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const EducationalSupervisionVisitsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateEducationalSupervisionVisitPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateEducationalSupervisionVisitDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

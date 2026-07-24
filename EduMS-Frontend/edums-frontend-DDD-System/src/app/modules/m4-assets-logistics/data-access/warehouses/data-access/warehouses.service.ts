@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   Warehouse, 
-  CreateWarehousePayload, 
-  UpdateWarehousePayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/warehouse.interface';
+  CreateWarehouseRequest, 
+  UpdateWarehouseRequest 
+} from '@modules/m4-assets-logistics/interfaces/warehouses';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (Warehouses)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class WarehousesService extends BaseApiService<
   Warehouse, 
-  CreateWarehousePayload, 
-  UpdateWarehousePayload
+  CreateWarehouseRequest, 
+  UpdateWarehouseRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

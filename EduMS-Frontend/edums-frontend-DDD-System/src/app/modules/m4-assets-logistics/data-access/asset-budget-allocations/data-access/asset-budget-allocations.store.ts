@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetBudgetAllocationsService } from './asset-budget-allocations.service';
-import { AssetBudgetAllocation, CreateAssetBudgetAllocationPayload, UpdateAssetBudgetAllocationPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetbudgetallocation.interface';
+import { AssetBudgetAllocation, CreateAssetBudgetAllocationRequest, UpdateAssetBudgetAllocationRequest } from '@modules/m4-assets-logistics/interfaces/asset-budget-allocations';
 
 type AssetBudgetAllocationsStoreState = {
   items: AssetBudgetAllocation[];
@@ -45,7 +45,7 @@ export const AssetBudgetAllocationsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetBudgetAllocationPayload>(
+    create: rxMethod<CreateAssetBudgetAllocationRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetBudgetAllocationsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetBudgetAllocationPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetBudgetAllocationRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

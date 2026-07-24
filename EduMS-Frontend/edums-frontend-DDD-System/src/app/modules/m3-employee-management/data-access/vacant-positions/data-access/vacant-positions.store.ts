@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { VacantPositionsService } from './vacant-positions.service';
-import { VacantPosition, CreateVacantPositionPayload, UpdateVacantPositionPayload } from '../../../../core/api/interfaces/M3_EmployeeManagement/vacantposition.interface';
+import { VacantPosition, CreateVacantPosition, UpdateVacantPosition } from '@modules/m3-employee-management/interfaces/vacant-position.types';
 
 type VacantPositionsStoreState = {
   items: VacantPosition[];
@@ -45,7 +45,7 @@ export const VacantPositionsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateVacantPositionPayload>(
+    create: rxMethod<CreateVacantPosition>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const VacantPositionsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateVacantPositionPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateVacantPosition}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

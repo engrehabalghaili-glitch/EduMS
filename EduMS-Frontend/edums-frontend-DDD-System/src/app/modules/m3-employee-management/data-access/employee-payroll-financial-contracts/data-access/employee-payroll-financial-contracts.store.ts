@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { EmployeePayrollFinancialContractsService } from './employee-payroll-financial-contracts.service';
-import { EmployeePayrollFinancialContract, CreateEmployeePayrollFinancialContractPayload, UpdateEmployeePayrollFinancialContractPayload } from '../../../../core/api/interfaces/M3_EmployeeManagement/employeepayrollfinancialcontract.interface';
+import { EmployeePayrollFinancialContract, CreateEmployeePayrollFinancialContract, UpdateEmployeePayrollFinancialContract } from '@modules/m3-employee-management/interfaces/employee-payroll-financial-contract.types';
 
 type EmployeePayrollFinancialContractsStoreState = {
   items: EmployeePayrollFinancialContract[];
@@ -45,7 +45,7 @@ export const EmployeePayrollFinancialContractsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateEmployeePayrollFinancialContractPayload>(
+    create: rxMethod<CreateEmployeePayrollFinancialContract>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const EmployeePayrollFinancialContractsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateEmployeePayrollFinancialContractPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateEmployeePayrollFinancialContract}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

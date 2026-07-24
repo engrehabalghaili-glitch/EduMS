@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AssetMaintenanceTicket, 
-  CreateAssetMaintenanceTicketPayload, 
-  UpdateAssetMaintenanceTicketPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/assetmaintenanceticket.interface';
+  CreateAssetMaintenanceTicketRequest, 
+  UpdateAssetMaintenanceTicketRequest 
+} from '@modules/m4-assets-logistics/interfaces/asset-maintenance-tickets';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AssetMaintenanceTickets)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AssetMaintenanceTicketsService extends BaseApiService<
   AssetMaintenanceTicket, 
-  CreateAssetMaintenanceTicketPayload, 
-  UpdateAssetMaintenanceTicketPayload
+  CreateAssetMaintenanceTicketRequest, 
+  UpdateAssetMaintenanceTicketRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StudentParentConferenceReservation, 
-  CreateStudentParentConferenceReservationPayload, 
-  UpdateStudentParentConferenceReservationPayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/studentparentconferencereservation.interface';
+  CreateStudentParentConferenceReservation, 
+  UpdateStudentParentConferenceReservation 
+} from '@modules/m2-student-Affairs/interfaces/parent-conference.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StudentParentConferenceReservations)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StudentParentConferenceReservationsService extends BaseApiService<
   StudentParentConferenceReservation, 
-  CreateStudentParentConferenceReservationPayload, 
-  UpdateStudentParentConferenceReservationPayload
+  CreateStudentParentConferenceReservation, 
+  UpdateStudentParentConferenceReservation
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AccessPoliciesService } from './access-policies.service';
-import { AccessPolicy, CreateAccessPolicyPayload, UpdateAccessPolicyPayload } from '../../../../core/api/interfaces/M8_AuthenticationUsers/accesspolicy.interface';
+import { AccessPolicy, CreateAccessPolicy, UpdateAccessPolicy } from '@modules/m8-authentication-users/interfaces/access-policy.models';
 
 type AccessPoliciesStoreState = {
   items: AccessPolicy[];
@@ -45,7 +45,7 @@ export const AccessPoliciesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAccessPolicyPayload>(
+    create: rxMethod<CreateAccessPolicy>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AccessPoliciesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAccessPolicyPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAccessPolicy}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

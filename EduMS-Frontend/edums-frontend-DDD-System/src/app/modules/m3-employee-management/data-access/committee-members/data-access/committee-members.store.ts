@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { CommitteeMembersService } from './committee-members.service';
-import { CommitteeMember, CreateCommitteeMemberPayload, UpdateCommitteeMemberPayload } from '../../../../core/api/interfaces/M3_EmployeeManagement/committeemember.interface';
+import { CommitteeMember, CreateCommitteeMember, UpdateCommitteeMember } from '@modules/m3-employee-management/interfaces/committee-member.types';
 
 type CommitteeMembersStoreState = {
   items: CommitteeMember[];
@@ -45,7 +45,7 @@ export const CommitteeMembersStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateCommitteeMemberPayload>(
+    create: rxMethod<CreateCommitteeMember>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const CommitteeMembersStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateCommitteeMemberPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateCommitteeMember}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

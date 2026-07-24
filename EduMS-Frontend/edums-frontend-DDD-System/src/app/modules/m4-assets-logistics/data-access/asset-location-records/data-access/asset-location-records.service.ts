@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AssetLocationRecord, 
-  CreateAssetLocationRecordPayload, 
-  UpdateAssetLocationRecordPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/assetlocationrecord.interface';
+  CreateAssetLocationRecordRequest, 
+  UpdateAssetLocationRecordRequest 
+} from '@modules/m4-assets-logistics/interfaces/asset-location-records';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AssetLocationRecords)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AssetLocationRecordsService extends BaseApiService<
   AssetLocationRecord, 
-  CreateAssetLocationRecordPayload, 
-  UpdateAssetLocationRecordPayload
+  CreateAssetLocationRecordRequest, 
+  UpdateAssetLocationRecordRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

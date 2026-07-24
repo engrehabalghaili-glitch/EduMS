@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SchoolDeficitsService } from './school-deficits.service';
-import { SchoolDeficit, CreateSchoolDeficitPayload, UpdateSchoolDeficitPayload } from '../../../../core/api/interfaces/M7_EmergencyManagement/schooldeficit.interface';
+import { SchoolDeficit, CreateSchoolDeficit, UpdateSchoolDeficit } from '@modules/m7-emergency-management/interfaces/school-deficit.types';
 
 type SchoolDeficitsStoreState = {
   items: SchoolDeficit[];
@@ -45,7 +45,7 @@ export const SchoolDeficitsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSchoolDeficitPayload>(
+    create: rxMethod<CreateSchoolDeficit>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SchoolDeficitsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSchoolDeficitPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSchoolDeficit}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

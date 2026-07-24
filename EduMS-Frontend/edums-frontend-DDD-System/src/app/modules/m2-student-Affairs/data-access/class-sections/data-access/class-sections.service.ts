@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   ClassSection, 
-  CreateClassSectionPayload, 
-  UpdateClassSectionPayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/classsection.interface';
+  CreateClassSection, 
+  UpdateClassSection 
+} from '@modules/m2-student-Affairs/interfaces/class-section.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (ClassSections)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class ClassSectionsService extends BaseApiService<
   ClassSection, 
-  CreateClassSectionPayload, 
-  UpdateClassSectionPayload
+  CreateClassSection, 
+  UpdateClassSection
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

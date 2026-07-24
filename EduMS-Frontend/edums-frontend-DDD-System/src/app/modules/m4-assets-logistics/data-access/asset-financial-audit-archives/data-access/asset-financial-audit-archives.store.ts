@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetFinancialAuditArchivesService } from './asset-financial-audit-archives.service';
-import { AssetFinancialAuditArchive, CreateAssetFinancialAuditArchivePayload, UpdateAssetFinancialAuditArchivePayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetfinancialauditarchive.interface';
+import { AssetFinancialAuditArchive, CreateAssetFinancialAuditArchiveRequest, UpdateAssetFinancialAuditArchiveRequest } from '@modules/m4-assets-logistics/interfaces/asset-financial-audit-archives';
 
 type AssetFinancialAuditArchivesStoreState = {
   items: AssetFinancialAuditArchive[];
@@ -45,7 +45,7 @@ export const AssetFinancialAuditArchivesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetFinancialAuditArchivePayload>(
+    create: rxMethod<CreateAssetFinancialAuditArchiveRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetFinancialAuditArchivesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetFinancialAuditArchivePayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetFinancialAuditArchiveRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

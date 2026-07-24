@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { WarehousesService } from './warehouses.service';
-import { Warehouse, CreateWarehousePayload, UpdateWarehousePayload } from '../../../../core/api/interfaces/M4_AssetLogistics/warehouse.interface';
+import { Warehouse, CreateWarehouseRequest, UpdateWarehouseRequest } from '@modules/m4-assets-logistics/interfaces/warehouses';
 
 type WarehousesStoreState = {
   items: Warehouse[];
@@ -45,7 +45,7 @@ export const WarehousesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateWarehousePayload>(
+    create: rxMethod<CreateWarehouseRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const WarehousesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateWarehousePayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateWarehouseRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   School, 
-  CreateSchoolPayload, 
-  UpdateSchoolPayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/school.interface';
+  CreateSchoolDto, 
+  UpdateSchoolDto 
+} from '@modules/m1-school-office/interface/school';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (Schools)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class SchoolsService extends BaseApiService<
   School, 
-  CreateSchoolPayload, 
-  UpdateSchoolPayload
+  CreateSchoolDto, 
+  UpdateSchoolDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

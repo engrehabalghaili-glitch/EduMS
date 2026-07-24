@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { GradingScaleBoundsService } from './grading-scale-bounds.service';
-import { GradingScaleBound, CreateGradingScaleBoundPayload, UpdateGradingScaleBoundPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/gradingscalebound.interface';
+import { GradingScaleBound, CreateGradingScaleBoundDto, UpdateGradingScaleBoundDto } from '@modules/m1-school-office/interface/grading-scale-bound';
 
 type GradingScaleBoundsStoreState = {
   items: GradingScaleBound[];
@@ -45,7 +45,7 @@ export const GradingScaleBoundsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateGradingScaleBoundPayload>(
+    create: rxMethod<CreateGradingScaleBoundDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const GradingScaleBoundsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateGradingScaleBoundPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateGradingScaleBoundDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

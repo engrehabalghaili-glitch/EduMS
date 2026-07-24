@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { EmployeeAdditionalTasksService } from './employee-additional-tasks.service';
-import { EmployeeAdditionalTask, CreateEmployeeAdditionalTaskPayload, UpdateEmployeeAdditionalTaskPayload } from '../../../../core/api/interfaces/M3_EmployeeManagement/employeeadditionaltask.interface';
+import { EmployeeAdditionalTask, CreateEmployeeAdditionalTask, UpdateEmployeeAdditionalTask } from '@modules/m3-employee-management/interfaces/employee-additional-task.types';
 
 type EmployeeAdditionalTasksStoreState = {
   items: EmployeeAdditionalTask[];
@@ -45,7 +45,7 @@ export const EmployeeAdditionalTasksStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateEmployeeAdditionalTaskPayload>(
+    create: rxMethod<CreateEmployeeAdditionalTask>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const EmployeeAdditionalTasksStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateEmployeeAdditionalTaskPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateEmployeeAdditionalTask}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

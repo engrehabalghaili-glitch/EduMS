@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StudentSkillAndTalentRecord, 
-  CreateStudentSkillAndTalentRecordPayload, 
-  UpdateStudentSkillAndTalentRecordPayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/studentskillandtalentrecord.interface';
+  CreateStudentSkillAndTalentRecord, 
+  UpdateStudentSkillAndTalentRecord 
+} from '@modules/m2-student-Affairs/interfaces/skill-talent.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StudentSkillAndTalentRecords)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StudentSkillAndTalentRecordsService extends BaseApiService<
   StudentSkillAndTalentRecord, 
-  CreateStudentSkillAndTalentRecordPayload, 
-  UpdateStudentSkillAndTalentRecordPayload
+  CreateStudentSkillAndTalentRecord, 
+  UpdateStudentSkillAndTalentRecord
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

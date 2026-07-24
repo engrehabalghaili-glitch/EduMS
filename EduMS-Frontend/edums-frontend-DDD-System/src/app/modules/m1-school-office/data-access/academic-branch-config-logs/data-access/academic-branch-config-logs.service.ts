@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AcademicBranchConfigLog, 
-  CreateAcademicBranchConfigLogPayload, 
-  UpdateAcademicBranchConfigLogPayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/academicbranchconfiglog.interface';
+  CreateAcademicBranchConfigLogDto, 
+  UpdateAcademicBranchConfigLogDto 
+} from '@modules/m1-school-office/interface/academic-branch-config-log';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AcademicBranchConfigLogs)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AcademicBranchConfigLogsService extends BaseApiService<
   AcademicBranchConfigLog, 
-  CreateAcademicBranchConfigLogPayload, 
-  UpdateAcademicBranchConfigLogPayload
+  CreateAcademicBranchConfigLogDto, 
+  UpdateAcademicBranchConfigLogDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

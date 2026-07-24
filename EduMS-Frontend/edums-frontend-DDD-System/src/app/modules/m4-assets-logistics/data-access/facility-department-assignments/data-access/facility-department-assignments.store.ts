@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { FacilityDepartmentAssignmentsService } from './facility-department-assignments.service';
-import { FacilityDepartmentAssignment, CreateFacilityDepartmentAssignmentPayload, UpdateFacilityDepartmentAssignmentPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/facilitydepartmentassignment.interface';
+import { FacilityDepartmentAssignment, CreateFacilityDepartmentAssignmentRequest, UpdateFacilityDepartmentAssignmentRequest } from '@modules/m4-assets-logistics/interfaces/facility-department-assignments';
 
 type FacilityDepartmentAssignmentsStoreState = {
   items: FacilityDepartmentAssignment[];
@@ -45,7 +45,7 @@ export const FacilityDepartmentAssignmentsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateFacilityDepartmentAssignmentPayload>(
+    create: rxMethod<CreateFacilityDepartmentAssignmentRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const FacilityDepartmentAssignmentsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateFacilityDepartmentAssignmentPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateFacilityDepartmentAssignmentRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

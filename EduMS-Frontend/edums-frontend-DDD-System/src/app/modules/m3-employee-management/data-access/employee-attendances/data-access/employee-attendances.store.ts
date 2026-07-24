@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { EmployeeAttendancesService } from './employee-attendances.service';
-import { EmployeeAttendance, CreateEmployeeAttendancePayload, UpdateEmployeeAttendancePayload } from '../../../../core/api/interfaces/M3_EmployeeManagement/employeeattendance.interface';
+import { EmployeeAttendance, CreateEmployeeAttendance, UpdateEmployeeAttendance } from '@modules/m3-employee-management/interfaces/employee-attendance.types';
 
 type EmployeeAttendancesStoreState = {
   items: EmployeeAttendance[];
@@ -45,7 +45,7 @@ export const EmployeeAttendancesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateEmployeeAttendancePayload>(
+    create: rxMethod<CreateEmployeeAttendance>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const EmployeeAttendancesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateEmployeeAttendancePayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateEmployeeAttendance}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

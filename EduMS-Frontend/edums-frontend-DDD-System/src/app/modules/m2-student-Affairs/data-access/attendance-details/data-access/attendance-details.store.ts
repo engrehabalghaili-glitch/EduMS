@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AttendanceDetailsService } from './attendance-details.service';
-import { AttendanceDetail, CreateAttendanceDetailPayload, UpdateAttendanceDetailPayload } from '../../../../core/api/interfaces/M2_StudentAffairs/attendancedetail.interface';
+import { AttendanceDetail, CreateAttendanceDetail, UpdateAttendanceDetail } from '@modules/m2-student-Affairs/interfaces/attendance.interface';
 
 type AttendanceDetailsStoreState = {
   items: AttendanceDetail[];
@@ -45,7 +45,7 @@ export const AttendanceDetailsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAttendanceDetailPayload>(
+    create: rxMethod<CreateAttendanceDetail>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AttendanceDetailsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAttendanceDetailPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAttendanceDetail}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

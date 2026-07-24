@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { OrganizationalSectorsService } from './organizational-sectors.service';
-import { OrganizationalSector, CreateOrganizationalSectorPayload, UpdateOrganizationalSectorPayload } from '../../../../core/api/interfaces/M3_EmployeeManagement/organizationalsector.interface';
+import { OrganizationalSector, CreateOrganizationalSector, UpdateOrganizationalSector } from '@modules/m3-employee-management/interfaces/organizational-sector.types';
 
 type OrganizationalSectorsStoreState = {
   items: OrganizationalSector[];
@@ -45,7 +45,7 @@ export const OrganizationalSectorsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateOrganizationalSectorPayload>(
+    create: rxMethod<CreateOrganizationalSector>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const OrganizationalSectorsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateOrganizationalSectorPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateOrganizationalSector}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

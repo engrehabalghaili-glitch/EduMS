@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { StudentFinancialAidApplicationsService } from './student-financial-aid-applications.service';
-import { StudentFinancialAidApplication, CreateStudentFinancialAidApplicationPayload, UpdateStudentFinancialAidApplicationPayload } from '../../../../core/api/interfaces/M2_StudentAffairs/studentfinancialaidapplication.interface';
+import { StudentFinancialAidApplication, CreateStudentFinancialAidApplication, UpdateStudentFinancialAidApplication } from '@modules/m2-student-Affairs/interfaces/financial-aid-application.interface';
 
 type StudentFinancialAidApplicationsStoreState = {
   items: StudentFinancialAidApplication[];
@@ -45,7 +45,7 @@ export const StudentFinancialAidApplicationsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateStudentFinancialAidApplicationPayload>(
+    create: rxMethod<CreateStudentFinancialAidApplication>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const StudentFinancialAidApplicationsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateStudentFinancialAidApplicationPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateStudentFinancialAidApplication}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

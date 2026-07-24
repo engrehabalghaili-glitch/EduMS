@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetTransferRequestsService } from './asset-transfer-requests.service';
-import { AssetTransferRequest, CreateAssetTransferRequestPayload, UpdateAssetTransferRequestPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assettransferrequest.interface';
+import { AssetTransferRequest, CreateAssetTransferRequestRequest, UpdateAssetTransferRequestRequest } from '@modules/m4-assets-logistics/interfaces/asset-transfer-requests';
 
 type AssetTransferRequestsStoreState = {
   items: AssetTransferRequest[];
@@ -45,7 +45,7 @@ export const AssetTransferRequestsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetTransferRequestPayload>(
+    create: rxMethod<CreateAssetTransferRequestRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetTransferRequestsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetTransferRequestPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetTransferRequestRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SchoolAssetsService } from './school-assets.service';
-import { SchoolAsset, CreateSchoolAssetPayload, UpdateSchoolAssetPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/schoolasset.interface';
+import { SchoolAsset, CreateSchoolAssetRequest, UpdateSchoolAssetRequest } from '@modules/m4-assets-logistics/interfaces/school-assets';
 
 type SchoolAssetsStoreState = {
   items: SchoolAsset[];
@@ -45,7 +45,7 @@ export const SchoolAssetsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSchoolAssetPayload>(
+    create: rxMethod<CreateSchoolAssetRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SchoolAssetsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSchoolAssetPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSchoolAssetRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

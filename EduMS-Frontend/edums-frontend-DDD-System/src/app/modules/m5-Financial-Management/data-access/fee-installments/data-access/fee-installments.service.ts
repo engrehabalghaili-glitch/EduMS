@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   FeeInstallment, 
-  CreateFeeInstallmentPayload, 
-  UpdateFeeInstallmentPayload 
-} from '../../../../core/api/interfaces/M5_FinancialManagement/feeinstallment.interface';
+  CreateFeeInstallmentDto, 
+  UpdateFeeInstallmentDto 
+} from '@modules/m5-Financial-Management/interfaces/fee-installment.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (FeeInstallments)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class FeeInstallmentsService extends BaseApiService<
   FeeInstallment, 
-  CreateFeeInstallmentPayload, 
-  UpdateFeeInstallmentPayload
+  CreateFeeInstallmentDto, 
+  UpdateFeeInstallmentDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

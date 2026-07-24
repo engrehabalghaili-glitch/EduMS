@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { JobApplicantsService } from './job-applicants.service';
-import { JobApplicant, CreateJobApplicantPayload, UpdateJobApplicantPayload } from '../../../../core/api/interfaces/M3_EmployeeManagement/jobapplicant.interface';
+import { JobApplicant, CreateJobApplicant, UpdateJobApplicant } from '@modules/m3-employee-management/interfaces/job-applicant.types';
 
 type JobApplicantsStoreState = {
   items: JobApplicant[];
@@ -45,7 +45,7 @@ export const JobApplicantsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateJobApplicantPayload>(
+    create: rxMethod<CreateJobApplicant>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const JobApplicantsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateJobApplicantPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateJobApplicant}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

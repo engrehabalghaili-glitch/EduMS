@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StudentInventoryCustody, 
-  CreateStudentInventoryCustodyPayload, 
-  UpdateStudentInventoryCustodyPayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/studentinventorycustody.interface';
+  CreateStudentInventoryCustody, 
+  UpdateStudentInventoryCustody 
+} from '@modules/m2-student-Affairs/interfaces/inventory-custody.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StudentInventoryCustodies)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StudentInventoryCustodiesService extends BaseApiService<
   StudentInventoryCustody, 
-  CreateStudentInventoryCustodyPayload, 
-  UpdateStudentInventoryCustodyPayload
+  CreateStudentInventoryCustody, 
+  UpdateStudentInventoryCustody
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

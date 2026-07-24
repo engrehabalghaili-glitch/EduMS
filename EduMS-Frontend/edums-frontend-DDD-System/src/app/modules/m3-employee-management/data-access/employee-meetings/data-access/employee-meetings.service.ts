@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   EmployeeMeeting, 
-  CreateEmployeeMeetingPayload, 
-  UpdateEmployeeMeetingPayload 
-} from '../../../../core/api/interfaces/M3_EmployeeManagement/employeemeeting.interface';
+  CreateEmployeeMeeting, 
+  UpdateEmployeeMeeting 
+} from '@modules/m3-employee-management/interfaces/employee-meeting.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (EmployeeMeetings)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class EmployeeMeetingsService extends BaseApiService<
   EmployeeMeeting, 
-  CreateEmployeeMeetingPayload, 
-  UpdateEmployeeMeetingPayload
+  CreateEmployeeMeeting, 
+  UpdateEmployeeMeeting
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetDocumentsService } from './asset-documents.service';
-import { AssetDocument, CreateAssetDocumentPayload, UpdateAssetDocumentPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetdocument.interface';
+import { AssetDocument, CreateAssetDocumentRequest, UpdateAssetDocumentRequest } from '@modules/m4-assets-logistics/interfaces/asset-documents';
 
 type AssetDocumentsStoreState = {
   items: AssetDocument[];
@@ -45,7 +45,7 @@ export const AssetDocumentsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetDocumentPayload>(
+    create: rxMethod<CreateAssetDocumentRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetDocumentsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetDocumentPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetDocumentRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

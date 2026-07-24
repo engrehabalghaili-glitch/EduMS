@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SchoolEventCalendarsService } from './school-event-calendars.service';
-import { SchoolEventCalendar, CreateSchoolEventCalendarPayload, UpdateSchoolEventCalendarPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/schooleventcalendar.interface';
+import { SchoolEventCalendar, CreateSchoolEventCalendarDto, UpdateSchoolEventCalendarDto } from '@modules/m1-school-office/interface/school-event-calendar';
 
 type SchoolEventCalendarsStoreState = {
   items: SchoolEventCalendar[];
@@ -45,7 +45,7 @@ export const SchoolEventCalendarsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSchoolEventCalendarPayload>(
+    create: rxMethod<CreateSchoolEventCalendarDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SchoolEventCalendarsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSchoolEventCalendarPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSchoolEventCalendarDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

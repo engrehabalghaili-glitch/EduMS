@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { StudentParentConferenceReservationsService } from './student-parent-conference-reservations.service';
-import { StudentParentConferenceReservation, CreateStudentParentConferenceReservationPayload, UpdateStudentParentConferenceReservationPayload } from '../../../../core/api/interfaces/M2_StudentAffairs/studentparentconferencereservation.interface';
+import { StudentParentConferenceReservation, CreateStudentParentConferenceReservation, UpdateStudentParentConferenceReservation } from '@modules/m2-student-Affairs/interfaces/parent-conference.interface';
 
 type StudentParentConferenceReservationsStoreState = {
   items: StudentParentConferenceReservation[];
@@ -45,7 +45,7 @@ export const StudentParentConferenceReservationsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateStudentParentConferenceReservationPayload>(
+    create: rxMethod<CreateStudentParentConferenceReservation>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const StudentParentConferenceReservationsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateStudentParentConferenceReservationPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateStudentParentConferenceReservation}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

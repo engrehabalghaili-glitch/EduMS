@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { GapAnalysisReportsService } from './gap-analysis-reports.service';
-import { GapAnalysisReport, CreateGapAnalysisReportPayload, UpdateGapAnalysisReportPayload } from '../../../../core/api/interfaces/M6_StatisticsReports/gapanalysisreport.interface';
+import { GapAnalysisReport, CreateGapAnalysisReport, UpdateGapAnalysisReport } from '@modules/m6-statistics-reports/interfaces/gap-analysis-report.dto';
 
 type GapAnalysisReportsStoreState = {
   items: GapAnalysisReport[];
@@ -45,7 +45,7 @@ export const GapAnalysisReportsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateGapAnalysisReportPayload>(
+    create: rxMethod<CreateGapAnalysisReport>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const GapAnalysisReportsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateGapAnalysisReportPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateGapAnalysisReport}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

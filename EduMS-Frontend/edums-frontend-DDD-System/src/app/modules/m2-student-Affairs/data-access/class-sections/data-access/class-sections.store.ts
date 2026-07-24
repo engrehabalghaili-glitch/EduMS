@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { ClassSectionsService } from './class-sections.service';
-import { ClassSection, CreateClassSectionPayload, UpdateClassSectionPayload } from '../../../../core/api/interfaces/M2_StudentAffairs/classsection.interface';
+import { ClassSection, CreateClassSection, UpdateClassSection } from '@modules/m2-student-Affairs/interfaces/class-section.interface';
 
 type ClassSectionsStoreState = {
   items: ClassSection[];
@@ -45,7 +45,7 @@ export const ClassSectionsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateClassSectionPayload>(
+    create: rxMethod<CreateClassSection>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const ClassSectionsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateClassSectionPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateClassSection}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

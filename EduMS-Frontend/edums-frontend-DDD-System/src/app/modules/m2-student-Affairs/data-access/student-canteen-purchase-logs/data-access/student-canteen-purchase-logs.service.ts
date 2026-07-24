@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StudentCanteenPurchaseLog, 
-  CreateStudentCanteenPurchaseLogPayload, 
-  UpdateStudentCanteenPurchaseLogPayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/studentcanteenpurchaselog.interface';
+  CreateStudentCanteenPurchaseLog, 
+  UpdateStudentCanteenPurchaseLog 
+} from '@modules/m2-student-Affairs/interfaces/canteen-purchase.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StudentCanteenPurchaseLogs)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StudentCanteenPurchaseLogsService extends BaseApiService<
   StudentCanteenPurchaseLog, 
-  CreateStudentCanteenPurchaseLogPayload, 
-  UpdateStudentCanteenPurchaseLogPayload
+  CreateStudentCanteenPurchaseLog, 
+  UpdateStudentCanteenPurchaseLog
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

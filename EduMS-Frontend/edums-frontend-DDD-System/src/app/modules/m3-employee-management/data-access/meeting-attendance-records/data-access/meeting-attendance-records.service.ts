@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   MeetingAttendanceRecord, 
-  CreateMeetingAttendanceRecordPayload, 
-  UpdateMeetingAttendanceRecordPayload 
-} from '../../../../core/api/interfaces/M3_EmployeeManagement/meetingattendancerecord.interface';
+  CreateMeetingAttendanceRecord, 
+  UpdateMeetingAttendanceRecord 
+} from '@modules/m3-employee-management/interfaces/meeting-attendance-record.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (MeetingAttendanceRecords)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class MeetingAttendanceRecordsService extends BaseApiService<
   MeetingAttendanceRecord, 
-  CreateMeetingAttendanceRecordPayload, 
-  UpdateMeetingAttendanceRecordPayload
+  CreateMeetingAttendanceRecord, 
+  UpdateMeetingAttendanceRecord
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

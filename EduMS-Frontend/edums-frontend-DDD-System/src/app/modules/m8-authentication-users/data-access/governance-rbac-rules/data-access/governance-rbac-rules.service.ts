@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   GovernanceRbacRule, 
-  CreateGovernanceRbacRulePayload, 
-  UpdateGovernanceRbacRulePayload 
-} from '../../../../core/api/interfaces/M8_AuthenticationUsers/governancerbacrule.interface';
+  CreateGovernanceRbacRule, 
+  UpdateGovernanceRbacRule 
+} from '@modules/m8-authentication-users/interfaces/governance-rbac-rule.models';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (GovernanceRbacRules)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class GovernanceRbacRulesService extends BaseApiService<
   GovernanceRbacRule, 
-  CreateGovernanceRbacRulePayload, 
-  UpdateGovernanceRbacRulePayload
+  CreateGovernanceRbacRule, 
+  UpdateGovernanceRbacRule
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

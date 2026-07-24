@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetRequirementRequestsService } from './asset-requirement-requests.service';
-import { AssetRequirementRequest, CreateAssetRequirementRequestPayload, UpdateAssetRequirementRequestPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetrequirementrequest.interface';
+import { AssetRequirementRequest, CreateAssetRequirementRequestRequest, UpdateAssetRequirementRequestRequest } from '@modules/m4-assets-logistics/interfaces/asset-requirement-requests';
 
 type AssetRequirementRequestsStoreState = {
   items: AssetRequirementRequest[];
@@ -45,7 +45,7 @@ export const AssetRequirementRequestsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetRequirementRequestPayload>(
+    create: rxMethod<CreateAssetRequirementRequestRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetRequirementRequestsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetRequirementRequestPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetRequirementRequestRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

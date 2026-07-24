@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { StudentPreviousAcademicHistoriesService } from './student-previous-academic-histories.service';
-import { StudentPreviousAcademicHistory, CreateStudentPreviousAcademicHistoryPayload, UpdateStudentPreviousAcademicHistoryPayload } from '../../../../core/api/interfaces/M2_StudentAffairs/studentpreviousacademichistory.interface';
+import { StudentPreviousAcademicHistory, CreateStudentPreviousAcademicHistory, UpdateStudentPreviousAcademicHistory } from '@modules/m2-student-Affairs/interfaces/previous-academic-history.interface';
 
 type StudentPreviousAcademicHistoriesStoreState = {
   items: StudentPreviousAcademicHistory[];
@@ -45,7 +45,7 @@ export const StudentPreviousAcademicHistoriesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateStudentPreviousAcademicHistoryPayload>(
+    create: rxMethod<CreateStudentPreviousAcademicHistory>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const StudentPreviousAcademicHistoriesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateStudentPreviousAcademicHistoryPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateStudentPreviousAcademicHistory}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

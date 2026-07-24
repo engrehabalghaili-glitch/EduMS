@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { OfficialCircularsService } from './official-circulars.service';
-import { OfficialCircular, CreateOfficialCircularPayload, UpdateOfficialCircularPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/officialcircular.interface';
+import { OfficialCircular, CreateOfficialCircularDto, UpdateOfficialCircularDto } from '@modules/m1-school-office/interface/official-circular';
 
 type OfficialCircularsStoreState = {
   items: OfficialCircular[];
@@ -45,7 +45,7 @@ export const OfficialCircularsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateOfficialCircularPayload>(
+    create: rxMethod<CreateOfficialCircularDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const OfficialCircularsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateOfficialCircularPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateOfficialCircularDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

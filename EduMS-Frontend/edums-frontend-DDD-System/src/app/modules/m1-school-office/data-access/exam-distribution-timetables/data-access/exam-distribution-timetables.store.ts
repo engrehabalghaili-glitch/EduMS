@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { ExamDistributionTimetablesService } from './exam-distribution-timetables.service';
-import { ExamDistributionTimetable, CreateExamDistributionTimetablePayload, UpdateExamDistributionTimetablePayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/examdistributiontimetable.interface';
+import { ExamDistributionTimetable, CreateExamDistributionTimetableDto, UpdateExamDistributionTimetableDto } from '@modules/m1-school-office/interface/exam-distribution-timetable';
 
 type ExamDistributionTimetablesStoreState = {
   items: ExamDistributionTimetable[];
@@ -45,7 +45,7 @@ export const ExamDistributionTimetablesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateExamDistributionTimetablePayload>(
+    create: rxMethod<CreateExamDistributionTimetableDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const ExamDistributionTimetablesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateExamDistributionTimetablePayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateExamDistributionTimetableDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

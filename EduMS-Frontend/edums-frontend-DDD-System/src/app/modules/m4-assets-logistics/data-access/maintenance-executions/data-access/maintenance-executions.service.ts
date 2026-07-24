@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   MaintenanceExecution, 
-  CreateMaintenanceExecutionPayload, 
-  UpdateMaintenanceExecutionPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/maintenanceexecution.interface';
+  CreateMaintenanceExecutionRequest, 
+  UpdateMaintenanceExecutionRequest 
+} from '@modules/m4-assets-logistics/interfaces/maintenance-executions';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (MaintenanceExecutions)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class MaintenanceExecutionsService extends BaseApiService<
   MaintenanceExecution, 
-  CreateMaintenanceExecutionPayload, 
-  UpdateMaintenanceExecutionPayload
+  CreateMaintenanceExecutionRequest, 
+  UpdateMaintenanceExecutionRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

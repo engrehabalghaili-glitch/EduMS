@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { StudentAbsenceExcusalsService } from './student-absence-excusals.service';
-import { StudentAbsenceExcusal, CreateStudentAbsenceExcusalPayload, UpdateStudentAbsenceExcusalPayload } from '../../../../core/api/interfaces/M2_StudentAffairs/studentabsenceexcusal.interface';
+import { StudentAbsenceExcusal, CreateStudentAbsenceExcusal, UpdateStudentAbsenceExcusal } from '@modules/m2-student-Affairs/interfaces/absence-excusal.interface';
 
 type StudentAbsenceExcusalsStoreState = {
   items: StudentAbsenceExcusal[];
@@ -45,7 +45,7 @@ export const StudentAbsenceExcusalsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateStudentAbsenceExcusalPayload>(
+    create: rxMethod<CreateStudentAbsenceExcusal>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const StudentAbsenceExcusalsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateStudentAbsenceExcusalPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateStudentAbsenceExcusal}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

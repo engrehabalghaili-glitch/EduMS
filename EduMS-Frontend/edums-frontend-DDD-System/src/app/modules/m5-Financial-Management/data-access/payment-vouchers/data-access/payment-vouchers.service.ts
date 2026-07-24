@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   PaymentVoucher, 
-  CreatePaymentVoucherPayload, 
-  UpdatePaymentVoucherPayload 
-} from '../../../../core/api/interfaces/M5_FinancialManagement/paymentvoucher.interface';
+  CreatePaymentVoucherDto, 
+  UpdatePaymentVoucherDto 
+} from '@modules/m5-Financial-Management/interfaces/payment-voucher.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (PaymentVouchers)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class PaymentVouchersService extends BaseApiService<
   PaymentVoucher, 
-  CreatePaymentVoucherPayload, 
-  UpdatePaymentVoucherPayload
+  CreatePaymentVoucherDto, 
+  UpdatePaymentVoucherDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

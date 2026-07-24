@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   EducationalConsumableTracking, 
-  CreateEducationalConsumableTrackingPayload, 
-  UpdateEducationalConsumableTrackingPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/educationalconsumabletracking.interface';
+  CreateEducationalConsumableTrackingRequest, 
+  UpdateEducationalConsumableTrackingRequest 
+} from '@modules/m4-assets-logistics/interfaces/educational-consumable-trackings';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (EducationalConsumableTrackings)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class EducationalConsumableTrackingsService extends BaseApiService<
   EducationalConsumableTracking, 
-  CreateEducationalConsumableTrackingPayload, 
-  UpdateEducationalConsumableTrackingPayload
+  CreateEducationalConsumableTrackingRequest, 
+  UpdateEducationalConsumableTrackingRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   Subject, 
-  CreateSubjectPayload, 
-  UpdateSubjectPayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/subject.interface';
+  CreateSubjectDto, 
+  UpdateSubjectDto 
+} from '@modules/m1-school-office/interface/subject';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (Subjects)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class SubjectsService extends BaseApiService<
   Subject, 
-  CreateSubjectPayload, 
-  UpdateSubjectPayload
+  CreateSubjectDto, 
+  UpdateSubjectDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

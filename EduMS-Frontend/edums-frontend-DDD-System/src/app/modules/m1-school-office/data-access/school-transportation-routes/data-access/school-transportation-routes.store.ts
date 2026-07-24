@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SchoolTransportationRoutesService } from './school-transportation-routes.service';
-import { SchoolTransportationRoute, CreateSchoolTransportationRoutePayload, UpdateSchoolTransportationRoutePayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/schooltransportationroute.interface';
+import { SchoolTransportationRoute, CreateSchoolTransportationRouteDto, UpdateSchoolTransportationRouteDto } from '@modules/m1-school-office/interface/school-transportation-route';
 
 type SchoolTransportationRoutesStoreState = {
   items: SchoolTransportationRoute[];
@@ -45,7 +45,7 @@ export const SchoolTransportationRoutesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSchoolTransportationRoutePayload>(
+    create: rxMethod<CreateSchoolTransportationRouteDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SchoolTransportationRoutesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSchoolTransportationRoutePayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSchoolTransportationRouteDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

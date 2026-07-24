@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   UserRoleAssignment, 
-  CreateUserRoleAssignmentPayload, 
-  UpdateUserRoleAssignmentPayload 
-} from '../../../../core/api/interfaces/M8_AuthenticationUsers/userroleassignment.interface';
+  CreateUserRoleAssignment, 
+  UpdateUserRoleAssignment 
+} from '@modules/m8-authentication-users/interfaces/user-role-assignment.models';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (UserRoleAssignments)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class UserRoleAssignmentsService extends BaseApiService<
   UserRoleAssignment, 
-  CreateUserRoleAssignmentPayload, 
-  UpdateUserRoleAssignmentPayload
+  CreateUserRoleAssignment, 
+  UpdateUserRoleAssignment
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

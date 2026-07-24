@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { CurriculumTextbookDistributionsService } from './curriculum-textbook-distributions.service';
-import { CurriculumTextbookDistribution, CreateCurriculumTextbookDistributionPayload, UpdateCurriculumTextbookDistributionPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/curriculumtextbookdistribution.interface';
+import { CurriculumTextbookDistribution, CreateCurriculumTextbookDistributionDto, UpdateCurriculumTextbookDistributionDto } from '@modules/m1-school-office/interface/curriculum-textbook-distribution';
 
 type CurriculumTextbookDistributionsStoreState = {
   items: CurriculumTextbookDistribution[];
@@ -45,7 +45,7 @@ export const CurriculumTextbookDistributionsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateCurriculumTextbookDistributionPayload>(
+    create: rxMethod<CreateCurriculumTextbookDistributionDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const CurriculumTextbookDistributionsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateCurriculumTextbookDistributionPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateCurriculumTextbookDistributionDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

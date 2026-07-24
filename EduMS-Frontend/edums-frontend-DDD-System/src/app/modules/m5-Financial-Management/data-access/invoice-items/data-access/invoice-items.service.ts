@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   InvoiceItem, 
-  CreateInvoiceItemPayload, 
-  UpdateInvoiceItemPayload 
-} from '../../../../core/api/interfaces/M5_FinancialManagement/invoiceitem.interface';
+  CreateInvoiceItemDto, 
+  UpdateInvoiceItemDto 
+} from '@modules/m5-Financial-Management/interfaces/invoice-item.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (InvoiceItems)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class InvoiceItemsService extends BaseApiService<
   InvoiceItem, 
-  CreateInvoiceItemPayload, 
-  UpdateInvoiceItemPayload
+  CreateInvoiceItemDto, 
+  UpdateInvoiceItemDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

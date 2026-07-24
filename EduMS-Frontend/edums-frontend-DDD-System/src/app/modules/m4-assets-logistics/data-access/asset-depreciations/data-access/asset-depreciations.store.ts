@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetDepreciationsService } from './asset-depreciations.service';
-import { AssetDepreciation, CreateAssetDepreciationPayload, UpdateAssetDepreciationPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetdepreciation.interface';
+import { AssetDepreciation, CreateAssetDepreciationRequest, UpdateAssetDepreciationRequest } from '@modules/m4-assets-logistics/interfaces/asset-depreciations';
 
 type AssetDepreciationsStoreState = {
   items: AssetDepreciation[];
@@ -45,7 +45,7 @@ export const AssetDepreciationsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetDepreciationPayload>(
+    create: rxMethod<CreateAssetDepreciationRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetDepreciationsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetDepreciationPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetDepreciationRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

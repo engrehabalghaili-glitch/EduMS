@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   EmployeePayrollFinancialContract, 
-  CreateEmployeePayrollFinancialContractPayload, 
-  UpdateEmployeePayrollFinancialContractPayload 
-} from '../../../../core/api/interfaces/M3_EmployeeManagement/employeepayrollfinancialcontract.interface';
+  CreateEmployeePayrollFinancialContract, 
+  UpdateEmployeePayrollFinancialContract 
+} from '@modules/m3-employee-management/interfaces/employee-payroll-financial-contract.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (EmployeePayrollFinancialContracts)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class EmployeePayrollFinancialContractsService extends BaseApiService<
   EmployeePayrollFinancialContract, 
-  CreateEmployeePayrollFinancialContractPayload, 
-  UpdateEmployeePayrollFinancialContractPayload
+  CreateEmployeePayrollFinancialContract, 
+  UpdateEmployeePayrollFinancialContract
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

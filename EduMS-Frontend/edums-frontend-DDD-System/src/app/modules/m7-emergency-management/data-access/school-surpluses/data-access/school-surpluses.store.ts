@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SchoolSurplusesService } from './school-surpluses.service';
-import { SchoolSurplus, CreateSchoolSurplusPayload, UpdateSchoolSurplusPayload } from '../../../../core/api/interfaces/M7_EmergencyManagement/schoolsurpluse.interface';
+import { SchoolSurplus, CreateSchoolSurplus, UpdateSchoolSurplus } from '@modules/m7-emergency-management/interfaces/school-surplus.types';
 
 type SchoolSurplusesStoreState = {
   items: SchoolSurplus[];
@@ -45,7 +45,7 @@ export const SchoolSurplusesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSchoolSurplusPayload>(
+    create: rxMethod<CreateSchoolSurplus>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SchoolSurplusesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSchoolSurplusPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSchoolSurplus}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

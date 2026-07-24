@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   UserActivityLog, 
-  CreateUserActivityLogPayload, 
-  UpdateUserActivityLogPayload 
-} from '../../../../core/api/interfaces/M8_AuthenticationUsers/useractivitylog.interface';
+  CreateUserActivityLog, 
+  UpdateUserActivityLog 
+} from '@modules/m8-authentication-users/interfaces/user-activity-log.models';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (UserActivityLogs)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class UserActivityLogsService extends BaseApiService<
   UserActivityLog, 
-  CreateUserActivityLogPayload, 
-  UpdateUserActivityLogPayload
+  CreateUserActivityLog, 
+  UpdateUserActivityLog
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

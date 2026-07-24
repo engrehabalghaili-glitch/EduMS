@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { DetailedAcademicWarningLogsService } from './detailed-academic-warning-logs.service';
-import { DetailedAcademicWarningLog, CreateDetailedAcademicWarningLogPayload, UpdateDetailedAcademicWarningLogPayload } from '../../../../core/api/interfaces/M2_StudentAffairs/detailedacademicwarninglog.interface';
+import { DetailedAcademicWarningLog, CreateDetailedAcademicWarningLog, UpdateDetailedAcademicWarningLog } from '@modules/m2-student-Affairs/interfaces/academic-warning.interface';
 
 type DetailedAcademicWarningLogsStoreState = {
   items: DetailedAcademicWarningLog[];
@@ -45,7 +45,7 @@ export const DetailedAcademicWarningLogsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateDetailedAcademicWarningLogPayload>(
+    create: rxMethod<CreateDetailedAcademicWarningLog>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const DetailedAcademicWarningLogsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateDetailedAcademicWarningLogPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateDetailedAcademicWarningLog}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

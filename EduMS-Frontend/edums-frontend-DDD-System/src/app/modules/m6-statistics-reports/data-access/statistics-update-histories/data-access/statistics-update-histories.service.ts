@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StatisticsUpdateHistory, 
-  CreateStatisticsUpdateHistoryPayload, 
-  UpdateStatisticsUpdateHistoryPayload 
-} from '../../../../core/api/interfaces/M6_StatisticsReports/statisticsupdatehistory.interface';
+  CreateStatisticsUpdateHistory, 
+  UpdateStatisticsUpdateHistory 
+} from '@modules/m6-statistics-reports/interfaces/statistics-update-history.dto';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StatisticsUpdateHistories)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StatisticsUpdateHistoriesService extends BaseApiService<
   StatisticsUpdateHistory, 
-  CreateStatisticsUpdateHistoryPayload, 
-  UpdateStatisticsUpdateHistoryPayload
+  CreateStatisticsUpdateHistory, 
+  UpdateStatisticsUpdateHistory
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

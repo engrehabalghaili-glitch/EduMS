@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AssetMovementHistory, 
-  CreateAssetMovementHistoryPayload, 
-  UpdateAssetMovementHistoryPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/assetmovementhistory.interface';
+  CreateAssetMovementHistoryRequest, 
+  UpdateAssetMovementHistoryRequest 
+} from '@modules/m4-assets-logistics/interfaces/asset-movement-histories';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AssetMovementHistories)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AssetMovementHistoriesService extends BaseApiService<
   AssetMovementHistory, 
-  CreateAssetMovementHistoryPayload, 
-  UpdateAssetMovementHistoryPayload
+  CreateAssetMovementHistoryRequest, 
+  UpdateAssetMovementHistoryRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

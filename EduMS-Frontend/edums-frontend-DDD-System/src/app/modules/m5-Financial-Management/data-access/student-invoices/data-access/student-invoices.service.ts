@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StudentInvoice, 
-  CreateStudentInvoicePayload, 
-  UpdateStudentInvoicePayload 
-} from '../../../../core/api/interfaces/M5_FinancialManagement/studentinvoice.interface';
+  CreateStudentInvoiceDto, 
+  UpdateStudentInvoiceDto 
+} from '@modules/m5-Financial-Management/interfaces/student-invoice.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StudentInvoices)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StudentInvoicesService extends BaseApiService<
   StudentInvoice, 
-  CreateStudentInvoicePayload, 
-  UpdateStudentInvoicePayload
+  CreateStudentInvoiceDto, 
+  UpdateStudentInvoiceDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   SafetySecurityReport, 
-  CreateSafetySecurityReportPayload, 
-  UpdateSafetySecurityReportPayload 
-} from '../../../../core/api/interfaces/M7_EmergencyManagement/safetysecurityreport.interface';
+  CreateSafetySecurityReport, 
+  UpdateSafetySecurityReport 
+} from '@modules/m7-emergency-management/interfaces/safety-security-report.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (SafetySecurityReports)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class SafetySecurityReportsService extends BaseApiService<
   SafetySecurityReport, 
-  CreateSafetySecurityReportPayload, 
-  UpdateSafetySecurityReportPayload
+  CreateSafetySecurityReport, 
+  UpdateSafetySecurityReport
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

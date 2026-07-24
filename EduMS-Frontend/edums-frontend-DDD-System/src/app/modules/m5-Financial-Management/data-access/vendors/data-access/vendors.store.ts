@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { VendorsService } from './vendors.service';
-import { Vendor, CreateVendorPayload, UpdateVendorPayload } from '../../../../core/api/interfaces/M5_FinancialManagement/vendor.interface';
+import { Vendor, CreateVendorDto, UpdateVendorDto } from '@modules/m5-Financial-Management/interfaces/vendor.interface';
 
 type VendorsStoreState = {
   items: Vendor[];
@@ -45,7 +45,7 @@ export const VendorsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateVendorPayload>(
+    create: rxMethod<CreateVendorDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const VendorsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateVendorPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateVendorDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

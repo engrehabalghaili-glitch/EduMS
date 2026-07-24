@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   CommitteeMember, 
-  CreateCommitteeMemberPayload, 
-  UpdateCommitteeMemberPayload 
-} from '../../../../core/api/interfaces/M3_EmployeeManagement/committeemember.interface';
+  CreateCommitteeMember, 
+  UpdateCommitteeMember 
+} from '@modules/m3-employee-management/interfaces/committee-member.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (CommitteeMembers)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class CommitteeMembersService extends BaseApiService<
   CommitteeMember, 
-  CreateCommitteeMemberPayload, 
-  UpdateCommitteeMemberPayload
+  CreateCommitteeMember, 
+  UpdateCommitteeMember
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

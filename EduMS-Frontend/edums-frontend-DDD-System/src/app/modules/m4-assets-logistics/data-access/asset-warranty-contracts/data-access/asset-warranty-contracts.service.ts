@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AssetWarrantyContract, 
-  CreateAssetWarrantyContractPayload, 
-  UpdateAssetWarrantyContractPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/assetwarrantycontract.interface';
+  CreateAssetWarrantyContractRequest, 
+  UpdateAssetWarrantyContractRequest 
+} from '@modules/m4-assets-logistics/interfaces/asset-warranty-contracts';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AssetWarrantyContracts)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AssetWarrantyContractsService extends BaseApiService<
   AssetWarrantyContract, 
-  CreateAssetWarrantyContractPayload, 
-  UpdateAssetWarrantyContractPayload
+  CreateAssetWarrantyContractRequest, 
+  UpdateAssetWarrantyContractRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

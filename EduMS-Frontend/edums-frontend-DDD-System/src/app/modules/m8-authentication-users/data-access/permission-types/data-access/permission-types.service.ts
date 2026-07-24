@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   PermissionType, 
-  CreatePermissionTypePayload, 
-  UpdatePermissionTypePayload 
-} from '../../../../core/api/interfaces/M8_AuthenticationUsers/permissiontype.interface';
+  CreatePermissionType, 
+  UpdatePermissionType 
+} from '@modules/m8-authentication-users/interfaces/permission-type.models';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (PermissionTypes)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class PermissionTypesService extends BaseApiService<
   PermissionType, 
-  CreatePermissionTypePayload, 
-  UpdatePermissionTypePayload
+  CreatePermissionType, 
+  UpdatePermissionType
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

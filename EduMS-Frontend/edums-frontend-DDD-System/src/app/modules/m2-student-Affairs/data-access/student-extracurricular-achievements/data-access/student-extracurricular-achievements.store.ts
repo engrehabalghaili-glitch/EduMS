@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { StudentExtracurricularAchievementsService } from './student-extracurricular-achievements.service';
-import { StudentExtracurricularAchievement, CreateStudentExtracurricularAchievementPayload, UpdateStudentExtracurricularAchievementPayload } from '../../../../core/api/interfaces/M2_StudentAffairs/studentextracurricularachievement.interface';
+import { StudentExtracurricularAchievement, CreateStudentExtracurricularAchievement, UpdateStudentExtracurricularAchievement } from '@modules/m2-student-Affairs/interfaces/extracurricular-achievement.interface';
 
 type StudentExtracurricularAchievementsStoreState = {
   items: StudentExtracurricularAchievement[];
@@ -45,7 +45,7 @@ export const StudentExtracurricularAchievementsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateStudentExtracurricularAchievementPayload>(
+    create: rxMethod<CreateStudentExtracurricularAchievement>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const StudentExtracurricularAchievementsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateStudentExtracurricularAchievementPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateStudentExtracurricularAchievement}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   DepreciationTransaction, 
-  CreateDepreciationTransactionPayload, 
-  UpdateDepreciationTransactionPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/depreciationtransaction.interface';
+  CreateDepreciationTransactionRequest, 
+  UpdateDepreciationTransactionRequest 
+} from '@modules/m4-assets-logistics/interfaces/depreciation-transactions';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (DepreciationTransactions)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class DepreciationTransactionsService extends BaseApiService<
   DepreciationTransaction, 
-  CreateDepreciationTransactionPayload, 
-  UpdateDepreciationTransactionPayload
+  CreateDepreciationTransactionRequest, 
+  UpdateDepreciationTransactionRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

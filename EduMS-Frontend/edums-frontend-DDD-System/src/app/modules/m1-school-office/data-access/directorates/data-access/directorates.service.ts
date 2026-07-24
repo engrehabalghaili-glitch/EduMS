@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   Directorate, 
-  CreateDirectoratePayload, 
-  UpdateDirectoratePayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/directorate.interface';
+  CreateDirectorateDto, 
+  UpdateDirectorateDto 
+} from '@modules/m1-school-office/interface/directorate';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (Directorates)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class DirectoratesService extends BaseApiService<
   Directorate, 
-  CreateDirectoratePayload, 
-  UpdateDirectoratePayload
+  CreateDirectorateDto, 
+  UpdateDirectorateDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

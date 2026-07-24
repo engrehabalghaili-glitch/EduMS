@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AssetDocument, 
-  CreateAssetDocumentPayload, 
-  UpdateAssetDocumentPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/assetdocument.interface';
+  CreateAssetDocumentRequest, 
+  UpdateAssetDocumentRequest 
+} from '@modules/m4-assets-logistics/interfaces/asset-documents';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AssetDocuments)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AssetDocumentsService extends BaseApiService<
   AssetDocument, 
-  CreateAssetDocumentPayload, 
-  UpdateAssetDocumentPayload
+  CreateAssetDocumentRequest, 
+  UpdateAssetDocumentRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

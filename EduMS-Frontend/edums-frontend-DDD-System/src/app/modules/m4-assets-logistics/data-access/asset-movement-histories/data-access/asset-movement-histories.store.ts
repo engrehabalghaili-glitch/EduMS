@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetMovementHistoriesService } from './asset-movement-histories.service';
-import { AssetMovementHistory, CreateAssetMovementHistoryPayload, UpdateAssetMovementHistoryPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetmovementhistory.interface';
+import { AssetMovementHistory, CreateAssetMovementHistoryRequest, UpdateAssetMovementHistoryRequest } from '@modules/m4-assets-logistics/interfaces/asset-movement-histories';
 
 type AssetMovementHistoriesStoreState = {
   items: AssetMovementHistory[];
@@ -45,7 +45,7 @@ export const AssetMovementHistoriesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetMovementHistoryPayload>(
+    create: rxMethod<CreateAssetMovementHistoryRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetMovementHistoriesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetMovementHistoryPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetMovementHistoryRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

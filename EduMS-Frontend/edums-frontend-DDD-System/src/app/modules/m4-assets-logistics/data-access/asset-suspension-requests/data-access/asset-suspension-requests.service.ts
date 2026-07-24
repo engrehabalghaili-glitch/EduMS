@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AssetSuspensionRequest, 
-  CreateAssetSuspensionRequestPayload, 
-  UpdateAssetSuspensionRequestPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/assetsuspensionrequest.interface';
+  CreateAssetSuspensionRequestRequest, 
+  UpdateAssetSuspensionRequestRequest 
+} from '@modules/m4-assets-logistics/interfaces/asset-suspension-requests';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AssetSuspensionRequests)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AssetSuspensionRequestsService extends BaseApiService<
   AssetSuspensionRequest, 
-  CreateAssetSuspensionRequestPayload, 
-  UpdateAssetSuspensionRequestPayload
+  CreateAssetSuspensionRequestRequest, 
+  UpdateAssetSuspensionRequestRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

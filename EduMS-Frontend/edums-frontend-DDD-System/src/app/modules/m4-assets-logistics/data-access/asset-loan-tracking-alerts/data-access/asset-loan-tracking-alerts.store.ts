@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetLoanTrackingAlertsService } from './asset-loan-tracking-alerts.service';
-import { AssetLoanTrackingAlert, CreateAssetLoanTrackingAlertPayload, UpdateAssetLoanTrackingAlertPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetloantrackingalert.interface';
+import { AssetLoanTrackingAlert, CreateAssetLoanTrackingAlertRequest, UpdateAssetLoanTrackingAlertRequest } from '@modules/m4-assets-logistics/interfaces/asset-loan-tracking-alerts';
 
 type AssetLoanTrackingAlertsStoreState = {
   items: AssetLoanTrackingAlert[];
@@ -45,7 +45,7 @@ export const AssetLoanTrackingAlertsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetLoanTrackingAlertPayload>(
+    create: rxMethod<CreateAssetLoanTrackingAlertRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetLoanTrackingAlertsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetLoanTrackingAlertPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetLoanTrackingAlertRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { EmployeePerformanceReviewsService } from './employee-performance-reviews.service';
-import { EmployeePerformanceReview, CreateEmployeePerformanceReviewPayload, UpdateEmployeePerformanceReviewPayload } from '../../../../core/api/interfaces/M3_EmployeeManagement/employeeperformancereview.interface';
+import { EmployeePerformanceReview, CreateEmployeePerformanceReview, UpdateEmployeePerformanceReview } from '@modules/m3-employee-management/interfaces/employee-performance-review.types';
 
 type EmployeePerformanceReviewsStoreState = {
   items: EmployeePerformanceReview[];
@@ -45,7 +45,7 @@ export const EmployeePerformanceReviewsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateEmployeePerformanceReviewPayload>(
+    create: rxMethod<CreateEmployeePerformanceReview>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const EmployeePerformanceReviewsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateEmployeePerformanceReviewPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateEmployeePerformanceReview}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

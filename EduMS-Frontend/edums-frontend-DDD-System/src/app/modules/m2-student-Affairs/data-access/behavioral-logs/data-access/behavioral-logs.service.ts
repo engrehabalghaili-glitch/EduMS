@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   BehavioralLog, 
-  CreateBehavioralLogPayload, 
-  UpdateBehavioralLogPayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/behaviorallog.interface';
+  CreateBehavioralLog, 
+  UpdateBehavioralLog 
+} from '@modules/m2-student-Affairs/interfaces/behavioral-log.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (BehavioralLogs)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class BehavioralLogsService extends BaseApiService<
   BehavioralLog, 
-  CreateBehavioralLogPayload, 
-  UpdateBehavioralLogPayload
+  CreateBehavioralLog, 
+  UpdateBehavioralLog
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

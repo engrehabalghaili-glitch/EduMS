@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { JournalEntryLinesService } from './journal-entry-lines.service';
-import { JournalEntryLine, CreateJournalEntryLinePayload, UpdateJournalEntryLinePayload } from '../../../../core/api/interfaces/M5_FinancialManagement/journalentryline.interface';
+import { JournalEntryLine, CreateJournalEntryLineDto, UpdateJournalEntryLineDto } from '@modules/m5-Financial-Management/interfaces/journal-entry-line.interface';
 
 type JournalEntryLinesStoreState = {
   items: JournalEntryLine[];
@@ -45,7 +45,7 @@ export const JournalEntryLinesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateJournalEntryLinePayload>(
+    create: rxMethod<CreateJournalEntryLineDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const JournalEntryLinesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateJournalEntryLinePayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateJournalEntryLineDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

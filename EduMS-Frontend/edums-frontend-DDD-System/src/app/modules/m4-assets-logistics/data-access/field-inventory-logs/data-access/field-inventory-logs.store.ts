@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { FieldInventoryLogsService } from './field-inventory-logs.service';
-import { FieldInventoryLog, CreateFieldInventoryLogPayload, UpdateFieldInventoryLogPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/fieldinventorylog.interface';
+import { FieldInventoryLog, CreateFieldInventoryLogRequest, UpdateFieldInventoryLogRequest } from '@modules/m4-assets-logistics/interfaces/field-inventory-logs';
 
 type FieldInventoryLogsStoreState = {
   items: FieldInventoryLog[];
@@ -45,7 +45,7 @@ export const FieldInventoryLogsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateFieldInventoryLogPayload>(
+    create: rxMethod<CreateFieldInventoryLogRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const FieldInventoryLogsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateFieldInventoryLogPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateFieldInventoryLogRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

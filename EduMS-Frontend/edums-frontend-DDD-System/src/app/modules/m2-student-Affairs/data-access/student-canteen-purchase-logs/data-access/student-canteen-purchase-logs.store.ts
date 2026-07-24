@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { StudentCanteenPurchaseLogsService } from './student-canteen-purchase-logs.service';
-import { StudentCanteenPurchaseLog, CreateStudentCanteenPurchaseLogPayload, UpdateStudentCanteenPurchaseLogPayload } from '../../../../core/api/interfaces/M2_StudentAffairs/studentcanteenpurchaselog.interface';
+import { StudentCanteenPurchaseLog, CreateStudentCanteenPurchaseLog, UpdateStudentCanteenPurchaseLog } from '@modules/m2-student-Affairs/interfaces/canteen-purchase.interface';
 
 type StudentCanteenPurchaseLogsStoreState = {
   items: StudentCanteenPurchaseLog[];
@@ -45,7 +45,7 @@ export const StudentCanteenPurchaseLogsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateStudentCanteenPurchaseLogPayload>(
+    create: rxMethod<CreateStudentCanteenPurchaseLog>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const StudentCanteenPurchaseLogsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateStudentCanteenPurchaseLogPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateStudentCanteenPurchaseLog}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

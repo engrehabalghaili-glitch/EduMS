@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { InventoryReconciliationsService } from './inventory-reconciliations.service';
-import { InventoryReconciliation, CreateInventoryReconciliationPayload, UpdateInventoryReconciliationPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/inventoryreconciliation.interface';
+import { InventoryReconciliation, CreateInventoryReconciliationRequest, UpdateInventoryReconciliationRequest } from '@modules/m4-assets-logistics/interfaces/inventory-reconciliations';
 
 type InventoryReconciliationsStoreState = {
   items: InventoryReconciliation[];
@@ -45,7 +45,7 @@ export const InventoryReconciliationsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateInventoryReconciliationPayload>(
+    create: rxMethod<CreateInventoryReconciliationRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const InventoryReconciliationsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateInventoryReconciliationPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateInventoryReconciliationRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { PayrollRunsService } from './payroll-runs.service';
-import { PayrollRun, CreatePayrollRunPayload, UpdatePayrollRunPayload } from '../../../../core/api/interfaces/M5_FinancialManagement/payrollrun.interface';
+import { PayrollRun, CreatePayrollRunDto, UpdatePayrollRunDto } from '@modules/m5-Financial-Management/interfaces/payroll-run.interface';
 
 type PayrollRunsStoreState = {
   items: PayrollRun[];
@@ -45,7 +45,7 @@ export const PayrollRunsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreatePayrollRunPayload>(
+    create: rxMethod<CreatePayrollRunDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const PayrollRunsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdatePayrollRunPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdatePayrollRunDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

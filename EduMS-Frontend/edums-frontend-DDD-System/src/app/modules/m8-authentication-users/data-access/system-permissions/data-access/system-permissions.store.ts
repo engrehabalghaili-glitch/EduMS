@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SystemPermissionsService } from './system-permissions.service';
-import { SystemPermission, CreateSystemPermissionPayload, UpdateSystemPermissionPayload } from '../../../../core/api/interfaces/M8_AuthenticationUsers/systempermission.interface';
+import { SystemPermission, CreateSystemPermission, UpdateSystemPermission } from '@modules/m8-authentication-users/interfaces/system-permission.models';
 
 type SystemPermissionsStoreState = {
   items: SystemPermission[];
@@ -45,7 +45,7 @@ export const SystemPermissionsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSystemPermissionPayload>(
+    create: rxMethod<CreateSystemPermission>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SystemPermissionsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSystemPermissionPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSystemPermission}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

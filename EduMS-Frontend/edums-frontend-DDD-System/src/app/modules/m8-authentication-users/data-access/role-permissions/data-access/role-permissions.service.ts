@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   RolePermission, 
-  CreateRolePermissionPayload, 
-  UpdateRolePermissionPayload 
-} from '../../../../core/api/interfaces/M8_AuthenticationUsers/rolepermission.interface';
+  CreateRolePermission, 
+  UpdateRolePermission 
+} from '@modules/m8-authentication-users/interfaces/role-permission.models';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (RolePermissions)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class RolePermissionsService extends BaseApiService<
   RolePermission, 
-  CreateRolePermissionPayload, 
-  UpdateRolePermissionPayload
+  CreateRolePermission, 
+  UpdateRolePermission
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StaffCustodySummary, 
-  CreateStaffCustodySummaryPayload, 
-  UpdateStaffCustodySummaryPayload 
-} from '../../../../core/api/interfaces/M3_EmployeeManagement/staffcustodysummary.interface';
+  CreateStaffCustodySummary, 
+  UpdateStaffCustodySummary 
+} from '@modules/m3-employee-management/interfaces/staff-custody-summary.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StaffCustodySummaries)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StaffCustodySummariesService extends BaseApiService<
   StaffCustodySummary, 
-  CreateStaffCustodySummaryPayload, 
-  UpdateStaffCustodySummaryPayload
+  CreateStaffCustodySummary, 
+  UpdateStaffCustodySummary
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

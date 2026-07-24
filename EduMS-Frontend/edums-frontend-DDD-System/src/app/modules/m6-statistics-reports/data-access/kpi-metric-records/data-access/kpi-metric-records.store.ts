@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { KpiMetricRecordsService } from './kpi-metric-records.service';
-import { KpiMetricRecord, CreateKpiMetricRecordPayload, UpdateKpiMetricRecordPayload } from '../../../../core/api/interfaces/M6_StatisticsReports/kpimetricrecord.interface';
+import { KpiMetricRecord, CreateKpiMetricRecord, UpdateKpiMetricRecord } from '@modules/m6-statistics-reports/interfaces/kpi-metric-record.dto';
 
 type KpiMetricRecordsStoreState = {
   items: KpiMetricRecord[];
@@ -45,7 +45,7 @@ export const KpiMetricRecordsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateKpiMetricRecordPayload>(
+    create: rxMethod<CreateKpiMetricRecord>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const KpiMetricRecordsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateKpiMetricRecordPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateKpiMetricRecord}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   ExternalParticipation, 
-  CreateExternalParticipationPayload, 
-  UpdateExternalParticipationPayload 
-} from '../../../../core/api/interfaces/M7_EmergencyManagement/externalparticipation.interface';
+  CreateExternalParticipation, 
+  UpdateExternalParticipation 
+} from '@modules/m7-emergency-management/interfaces/external-participation.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (ExternalParticipations)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class ExternalParticipationsService extends BaseApiService<
   ExternalParticipation, 
-  CreateExternalParticipationPayload, 
-  UpdateExternalParticipationPayload
+  CreateExternalParticipation, 
+  UpdateExternalParticipation
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

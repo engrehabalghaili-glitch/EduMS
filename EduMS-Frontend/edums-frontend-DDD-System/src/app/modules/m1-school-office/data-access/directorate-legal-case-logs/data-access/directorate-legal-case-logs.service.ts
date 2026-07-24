@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   DirectorateLegalCaseLog, 
-  CreateDirectorateLegalCaseLogPayload, 
-  UpdateDirectorateLegalCaseLogPayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/directoratelegalcaselog.interface';
+  CreateDirectorateLegalCaseLogDto, 
+  UpdateDirectorateLegalCaseLogDto 
+} from '@modules/m1-school-office/interface/directorate-legal-case-log';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (DirectorateLegalCaseLogs)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class DirectorateLegalCaseLogsService extends BaseApiService<
   DirectorateLegalCaseLog, 
-  CreateDirectorateLegalCaseLogPayload, 
-  UpdateDirectorateLegalCaseLogPayload
+  CreateDirectorateLegalCaseLogDto, 
+  UpdateDirectorateLegalCaseLogDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AppointmentDecisionsService } from './appointment-decisions.service';
-import { AppointmentDecision, CreateAppointmentDecisionPayload, UpdateAppointmentDecisionPayload } from '../../../../core/api/interfaces/M3_EmployeeManagement/appointmentdecision.interface';
+import { AppointmentDecision, CreateAppointmentDecision, UpdateAppointmentDecision } from '@modules/m3-employee-management/interfaces/appointment-decision.types';
 
 type AppointmentDecisionsStoreState = {
   items: AppointmentDecision[];
@@ -45,7 +45,7 @@ export const AppointmentDecisionsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAppointmentDecisionPayload>(
+    create: rxMethod<CreateAppointmentDecision>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AppointmentDecisionsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAppointmentDecisionPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAppointmentDecision}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

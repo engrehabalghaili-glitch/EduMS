@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StudentAbsenceExcusal, 
-  CreateStudentAbsenceExcusalPayload, 
-  UpdateStudentAbsenceExcusalPayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/studentabsenceexcusal.interface';
+  CreateStudentAbsenceExcusal, 
+  UpdateStudentAbsenceExcusal 
+} from '@modules/m2-student-Affairs/interfaces/absence-excusal.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StudentAbsenceExcusals)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StudentAbsenceExcusalsService extends BaseApiService<
   StudentAbsenceExcusal, 
-  CreateStudentAbsenceExcusalPayload, 
-  UpdateStudentAbsenceExcusalPayload
+  CreateStudentAbsenceExcusal, 
+  UpdateStudentAbsenceExcusal
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

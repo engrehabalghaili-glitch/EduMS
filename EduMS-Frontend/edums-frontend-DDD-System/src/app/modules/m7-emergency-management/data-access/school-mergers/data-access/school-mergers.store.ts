@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SchoolMergersService } from './school-mergers.service';
-import { SchoolMerger, CreateSchoolMergerPayload, UpdateSchoolMergerPayload } from '../../../../core/api/interfaces/M7_EmergencyManagement/schoolmerger.interface';
+import { SchoolMerger, CreateSchoolMerger, UpdateSchoolMerger } from '@modules/m7-emergency-management/interfaces/school-merger.types';
 
 type SchoolMergersStoreState = {
   items: SchoolMerger[];
@@ -45,7 +45,7 @@ export const SchoolMergersStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSchoolMergerPayload>(
+    create: rxMethod<CreateSchoolMerger>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SchoolMergersStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSchoolMergerPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSchoolMerger}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

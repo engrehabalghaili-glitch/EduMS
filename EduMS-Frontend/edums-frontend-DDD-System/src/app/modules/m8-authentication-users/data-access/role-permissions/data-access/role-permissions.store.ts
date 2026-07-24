@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { RolePermissionsService } from './role-permissions.service';
-import { RolePermission, CreateRolePermissionPayload, UpdateRolePermissionPayload } from '../../../../core/api/interfaces/M8_AuthenticationUsers/rolepermission.interface';
+import { RolePermission, CreateRolePermission, UpdateRolePermission } from '@modules/m8-authentication-users/interfaces/role-permission.models';
 
 type RolePermissionsStoreState = {
   items: RolePermission[];
@@ -45,7 +45,7 @@ export const RolePermissionsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateRolePermissionPayload>(
+    create: rxMethod<CreateRolePermission>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const RolePermissionsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateRolePermissionPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateRolePermission}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   GapAnalysisReport, 
-  CreateGapAnalysisReportPayload, 
-  UpdateGapAnalysisReportPayload 
-} from '../../../../core/api/interfaces/M6_StatisticsReports/gapanalysisreport.interface';
+  CreateGapAnalysisReport, 
+  UpdateGapAnalysisReport 
+} from '@modules/m6-statistics-reports/interfaces/gap-analysis-report.dto';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (GapAnalysisReports)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class GapAnalysisReportsService extends BaseApiService<
   GapAnalysisReport, 
-  CreateGapAnalysisReportPayload, 
-  UpdateGapAnalysisReportPayload
+  CreateGapAnalysisReport, 
+  UpdateGapAnalysisReport
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

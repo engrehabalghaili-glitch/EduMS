@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SchoolStatisticsDraftsService } from './school-statistics-drafts.service';
-import { SchoolStatisticsDraft, CreateSchoolStatisticsDraftPayload, UpdateSchoolStatisticsDraftPayload } from '../../../../core/api/interfaces/M6_StatisticsReports/schoolstatisticsdraft.interface';
+import { SchoolStatisticsDraft, CreateSchoolStatisticsDraft, UpdateSchoolStatisticsDraft } from '@modules/m6-statistics-reports/interfaces/school-statistics-draft.dto';
 
 type SchoolStatisticsDraftsStoreState = {
   items: SchoolStatisticsDraft[];
@@ -45,7 +45,7 @@ export const SchoolStatisticsDraftsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSchoolStatisticsDraftPayload>(
+    create: rxMethod<CreateSchoolStatisticsDraft>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SchoolStatisticsDraftsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSchoolStatisticsDraftPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSchoolStatisticsDraft}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

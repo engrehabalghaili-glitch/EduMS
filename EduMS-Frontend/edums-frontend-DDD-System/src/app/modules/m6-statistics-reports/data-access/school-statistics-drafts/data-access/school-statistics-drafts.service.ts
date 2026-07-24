@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   SchoolStatisticsDraft, 
-  CreateSchoolStatisticsDraftPayload, 
-  UpdateSchoolStatisticsDraftPayload 
-} from '../../../../core/api/interfaces/M6_StatisticsReports/schoolstatisticsdraft.interface';
+  CreateSchoolStatisticsDraft, 
+  UpdateSchoolStatisticsDraft 
+} from '@modules/m6-statistics-reports/interfaces/school-statistics-draft.dto';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (SchoolStatisticsDrafts)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class SchoolStatisticsDraftsService extends BaseApiService<
   SchoolStatisticsDraft, 
-  CreateSchoolStatisticsDraftPayload, 
-  UpdateSchoolStatisticsDraftPayload
+  CreateSchoolStatisticsDraft, 
+  UpdateSchoolStatisticsDraft
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

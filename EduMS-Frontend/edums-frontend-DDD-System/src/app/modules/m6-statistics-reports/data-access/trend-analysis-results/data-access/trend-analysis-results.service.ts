@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   TrendAnalysisResult, 
-  CreateTrendAnalysisResultPayload, 
-  UpdateTrendAnalysisResultPayload 
-} from '../../../../core/api/interfaces/M6_StatisticsReports/trendanalysisresult.interface';
+  CreateTrendAnalysisResult, 
+  UpdateTrendAnalysisResult 
+} from '@modules/m6-statistics-reports/interfaces/trend-analysis-result.dto';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (TrendAnalysisResults)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class TrendAnalysisResultsService extends BaseApiService<
   TrendAnalysisResult, 
-  CreateTrendAnalysisResultPayload, 
-  UpdateTrendAnalysisResultPayload
+  CreateTrendAnalysisResult, 
+  UpdateTrendAnalysisResult
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

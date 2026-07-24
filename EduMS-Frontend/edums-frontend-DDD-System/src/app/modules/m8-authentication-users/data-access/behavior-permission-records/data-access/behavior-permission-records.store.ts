@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { BehaviorPermissionRecordsService } from './behavior-permission-records.service';
-import { BehaviorPermissionRecord, CreateBehaviorPermissionRecordPayload, UpdateBehaviorPermissionRecordPayload } from '../../../../core/api/interfaces/M8_AuthenticationUsers/behaviorpermissionrecord.interface';
+import { BehaviorPermissionRecord, CreateBehaviorPermissionRecord, UpdateBehaviorPermissionRecord } from '@modules/m8-authentication-users/interfaces/behavior-permission-record.models';
 
 type BehaviorPermissionRecordsStoreState = {
   items: BehaviorPermissionRecord[];
@@ -45,7 +45,7 @@ export const BehaviorPermissionRecordsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateBehaviorPermissionRecordPayload>(
+    create: rxMethod<CreateBehaviorPermissionRecord>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const BehaviorPermissionRecordsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateBehaviorPermissionRecordPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateBehaviorPermissionRecord}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

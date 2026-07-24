@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { UserRoleAssignmentsService } from './user-role-assignments.service';
-import { UserRoleAssignment, CreateUserRoleAssignmentPayload, UpdateUserRoleAssignmentPayload } from '../../../../core/api/interfaces/M8_AuthenticationUsers/userroleassignment.interface';
+import { UserRoleAssignment, CreateUserRoleAssignment, UpdateUserRoleAssignment } from '@modules/m8-authentication-users/interfaces/user-role-assignment.models';
 
 type UserRoleAssignmentsStoreState = {
   items: UserRoleAssignment[];
@@ -45,7 +45,7 @@ export const UserRoleAssignmentsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateUserRoleAssignmentPayload>(
+    create: rxMethod<CreateUserRoleAssignment>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const UserRoleAssignmentsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateUserRoleAssignmentPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateUserRoleAssignment}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

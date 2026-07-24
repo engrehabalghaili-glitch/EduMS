@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { ExternalParticipationsService } from './external-participations.service';
-import { ExternalParticipation, CreateExternalParticipationPayload, UpdateExternalParticipationPayload } from '../../../../core/api/interfaces/M7_EmergencyManagement/externalparticipation.interface';
+import { ExternalParticipation, CreateExternalParticipation, UpdateExternalParticipation } from '@modules/m7-emergency-management/interfaces/external-participation.types';
 
 type ExternalParticipationsStoreState = {
   items: ExternalParticipation[];
@@ -45,7 +45,7 @@ export const ExternalParticipationsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateExternalParticipationPayload>(
+    create: rxMethod<CreateExternalParticipation>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const ExternalParticipationsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateExternalParticipationPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateExternalParticipation}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

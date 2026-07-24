@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   GradingScaleBound, 
-  CreateGradingScaleBoundPayload, 
-  UpdateGradingScaleBoundPayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/gradingscalebound.interface';
+  CreateGradingScaleBoundDto, 
+  UpdateGradingScaleBoundDto 
+} from '@modules/m1-school-office/interface/grading-scale-bound';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (GradingScaleBounds)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class GradingScaleBoundsService extends BaseApiService<
   GradingScaleBound, 
-  CreateGradingScaleBoundPayload, 
-  UpdateGradingScaleBoundPayload
+  CreateGradingScaleBoundDto, 
+  UpdateGradingScaleBoundDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

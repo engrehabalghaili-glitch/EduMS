@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { EmployeeLeavesService } from './employee-leaves.service';
-import { EmployeeLeave, CreateEmployeeLeavePayload, UpdateEmployeeLeavePayload } from '../../../../core/api/interfaces/M3_EmployeeManagement/employeeleave.interface';
+import { EmployeeLeave, CreateEmployeeLeave, UpdateEmployeeLeave } from '@modules/m3-employee-management/interfaces/employee-leave.types';
 
 type EmployeeLeavesStoreState = {
   items: EmployeeLeave[];
@@ -45,7 +45,7 @@ export const EmployeeLeavesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateEmployeeLeavePayload>(
+    create: rxMethod<CreateEmployeeLeave>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const EmployeeLeavesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateEmployeeLeavePayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateEmployeeLeave}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

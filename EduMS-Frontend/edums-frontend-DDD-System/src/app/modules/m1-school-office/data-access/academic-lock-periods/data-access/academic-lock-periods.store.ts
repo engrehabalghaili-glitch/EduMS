@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AcademicLockPeriodsService } from './academic-lock-periods.service';
-import { AcademicLockPeriod, CreateAcademicLockPeriodPayload, UpdateAcademicLockPeriodPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/academiclockperiod.interface';
+import { AcademicLockPeriod, CreateAcademicLockPeriodDto, UpdateAcademicLockPeriodDto } from '@modules/m1-school-office/interface/academic-lock-period';
 
 type AcademicLockPeriodsStoreState = {
   items: AcademicLockPeriod[];
@@ -45,7 +45,7 @@ export const AcademicLockPeriodsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAcademicLockPeriodPayload>(
+    create: rxMethod<CreateAcademicLockPeriodDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AcademicLockPeriodsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAcademicLockPeriodPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAcademicLockPeriodDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

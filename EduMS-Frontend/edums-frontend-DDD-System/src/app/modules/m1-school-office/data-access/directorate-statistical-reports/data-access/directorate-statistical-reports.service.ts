@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   DirectorateStatisticalReport, 
-  CreateDirectorateStatisticalReportPayload, 
-  UpdateDirectorateStatisticalReportPayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/directoratestatisticalreport.interface';
+  CreateDirectorateStatisticalReportDto, 
+  UpdateDirectorateStatisticalReportDto 
+} from '@modules/m1-school-office/interface/directorate-statistical-report';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (DirectorateStatisticalReports)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class DirectorateStatisticalReportsService extends BaseApiService<
   DirectorateStatisticalReport, 
-  CreateDirectorateStatisticalReportPayload, 
-  UpdateDirectorateStatisticalReportPayload
+  CreateDirectorateStatisticalReportDto, 
+  UpdateDirectorateStatisticalReportDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

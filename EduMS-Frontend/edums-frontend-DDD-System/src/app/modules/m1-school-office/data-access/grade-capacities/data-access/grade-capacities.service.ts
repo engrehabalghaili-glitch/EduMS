@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   GradeCapacity, 
-  CreateGradeCapacityPayload, 
-  UpdateGradeCapacityPayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/gradecapacity.interface';
+  CreateGradeCapacityDto, 
+  UpdateGradeCapacityDto 
+} from '@modules/m1-school-office/interface/grade-capacity';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (GradeCapacities)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class GradeCapacitiesService extends BaseApiService<
   GradeCapacity, 
-  CreateGradeCapacityPayload, 
-  UpdateGradeCapacityPayload
+  CreateGradeCapacityDto, 
+  UpdateGradeCapacityDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

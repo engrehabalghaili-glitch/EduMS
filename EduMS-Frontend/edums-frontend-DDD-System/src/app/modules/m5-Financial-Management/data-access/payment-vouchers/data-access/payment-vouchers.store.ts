@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { PaymentVouchersService } from './payment-vouchers.service';
-import { PaymentVoucher, CreatePaymentVoucherPayload, UpdatePaymentVoucherPayload } from '../../../../core/api/interfaces/M5_FinancialManagement/paymentvoucher.interface';
+import { PaymentVoucher, CreatePaymentVoucherDto, UpdatePaymentVoucherDto } from '@modules/m5-Financial-Management/interfaces/payment-voucher.interface';
 
 type PaymentVouchersStoreState = {
   items: PaymentVoucher[];
@@ -45,7 +45,7 @@ export const PaymentVouchersStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreatePaymentVoucherPayload>(
+    create: rxMethod<CreatePaymentVoucherDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const PaymentVouchersStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdatePaymentVoucherPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdatePaymentVoucherDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

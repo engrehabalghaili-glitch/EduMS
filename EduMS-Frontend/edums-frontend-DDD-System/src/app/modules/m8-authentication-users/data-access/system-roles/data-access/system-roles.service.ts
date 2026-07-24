@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   SystemRole, 
-  CreateSystemRolePayload, 
-  UpdateSystemRolePayload 
-} from '../../../../core/api/interfaces/M8_AuthenticationUsers/systemrole.interface';
+  CreateSystemRole, 
+  UpdateSystemRole 
+} from '@modules/m8-authentication-users/interfaces/system-role.models';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (SystemRoles)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class SystemRolesService extends BaseApiService<
   SystemRole, 
-  CreateSystemRolePayload, 
-  UpdateSystemRolePayload
+  CreateSystemRole, 
+  UpdateSystemRole
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   InventoryReconciliation, 
-  CreateInventoryReconciliationPayload, 
-  UpdateInventoryReconciliationPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/inventoryreconciliation.interface';
+  CreateInventoryReconciliationRequest, 
+  UpdateInventoryReconciliationRequest 
+} from '@modules/m4-assets-logistics/interfaces/inventory-reconciliations';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (InventoryReconciliations)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class InventoryReconciliationsService extends BaseApiService<
   InventoryReconciliation, 
-  CreateInventoryReconciliationPayload, 
-  UpdateInventoryReconciliationPayload
+  CreateInventoryReconciliationRequest, 
+  UpdateInventoryReconciliationRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

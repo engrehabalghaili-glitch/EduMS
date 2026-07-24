@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { StudentSkillAndTalentRecordsService } from './student-skill-and-talent-records.service';
-import { StudentSkillAndTalentRecord, CreateStudentSkillAndTalentRecordPayload, UpdateStudentSkillAndTalentRecordPayload } from '../../../../core/api/interfaces/M2_StudentAffairs/studentskillandtalentrecord.interface';
+import { StudentSkillAndTalentRecord, CreateStudentSkillAndTalentRecord, UpdateStudentSkillAndTalentRecord } from '@modules/m2-student-Affairs/interfaces/skill-talent.interface';
 
 type StudentSkillAndTalentRecordsStoreState = {
   items: StudentSkillAndTalentRecord[];
@@ -45,7 +45,7 @@ export const StudentSkillAndTalentRecordsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateStudentSkillAndTalentRecordPayload>(
+    create: rxMethod<CreateStudentSkillAndTalentRecord>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const StudentSkillAndTalentRecordsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateStudentSkillAndTalentRecordPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateStudentSkillAndTalentRecord}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

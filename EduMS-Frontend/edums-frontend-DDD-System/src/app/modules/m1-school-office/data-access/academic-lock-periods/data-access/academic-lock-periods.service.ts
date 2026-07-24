@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AcademicLockPeriod, 
-  CreateAcademicLockPeriodPayload, 
-  UpdateAcademicLockPeriodPayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/academiclockperiod.interface';
+  CreateAcademicLockPeriodDto, 
+  UpdateAcademicLockPeriodDto 
+} from '@modules/m1-school-office/interface/academic-lock-period';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AcademicLockPeriods)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AcademicLockPeriodsService extends BaseApiService<
   AcademicLockPeriod, 
-  CreateAcademicLockPeriodPayload, 
-  UpdateAcademicLockPeriodPayload
+  CreateAcademicLockPeriodDto, 
+  UpdateAcademicLockPeriodDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

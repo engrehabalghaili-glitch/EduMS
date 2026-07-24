@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SchoolLibraryItemsService } from './school-library-items.service';
-import { SchoolLibraryItem, CreateSchoolLibraryItemPayload, UpdateSchoolLibraryItemPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/schoollibraryitem.interface';
+import { SchoolLibraryItem, CreateSchoolLibraryItemDto, UpdateSchoolLibraryItemDto } from '@modules/m1-school-office/interface/school-library-item';
 
 type SchoolLibraryItemsStoreState = {
   items: SchoolLibraryItem[];
@@ -45,7 +45,7 @@ export const SchoolLibraryItemsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSchoolLibraryItemPayload>(
+    create: rxMethod<CreateSchoolLibraryItemDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SchoolLibraryItemsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSchoolLibraryItemPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSchoolLibraryItemDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

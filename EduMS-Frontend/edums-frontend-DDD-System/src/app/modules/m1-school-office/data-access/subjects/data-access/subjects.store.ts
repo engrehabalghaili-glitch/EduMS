@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SubjectsService } from './subjects.service';
-import { Subject, CreateSubjectPayload, UpdateSubjectPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/subject.interface';
+import { Subject, CreateSubjectDto, UpdateSubjectDto } from '@modules/m1-school-office/interface/subject';
 
 type SubjectsStoreState = {
   items: Subject[];
@@ -45,7 +45,7 @@ export const SubjectsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSubjectPayload>(
+    create: rxMethod<CreateSubjectDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SubjectsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSubjectPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSubjectDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   BehaviorPermission, 
-  CreateBehaviorPermissionPayload, 
-  UpdateBehaviorPermissionPayload 
-} from '../../../../core/api/interfaces/M8_AuthenticationUsers/behaviorpermission.interface';
+  CreateBehaviorPermission, 
+  UpdateBehaviorPermission 
+} from '@modules/m8-authentication-users/interfaces/behavior-permission.models';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (BehaviorPermissions)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class BehaviorPermissionsService extends BaseApiService<
   BehaviorPermission, 
-  CreateBehaviorPermissionPayload, 
-  UpdateBehaviorPermissionPayload
+  CreateBehaviorPermission, 
+  UpdateBehaviorPermission
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

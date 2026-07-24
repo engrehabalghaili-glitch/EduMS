@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { GradeCapacitiesService } from './grade-capacities.service';
-import { GradeCapacity, CreateGradeCapacityPayload, UpdateGradeCapacityPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/gradecapacity.interface';
+import { GradeCapacity, CreateGradeCapacityDto, UpdateGradeCapacityDto } from '@modules/m1-school-office/interface/grade-capacity';
 
 type GradeCapacitiesStoreState = {
   items: GradeCapacity[];
@@ -45,7 +45,7 @@ export const GradeCapacitiesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateGradeCapacityPayload>(
+    create: rxMethod<CreateGradeCapacityDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const GradeCapacitiesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateGradeCapacityPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateGradeCapacityDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

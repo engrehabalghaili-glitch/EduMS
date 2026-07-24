@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { PersonsService } from './persons.service';
-import { Person, CreatePersonPayload, UpdatePersonPayload } from '../../../../core/api/interfaces/M2_StudentAffairs/person.interface';
+import { Person, CreatePerson, UpdatePerson } from '@modules/m2-student-Affairs/interfaces/person.interface';
 
 type PersonsStoreState = {
   items: Person[];
@@ -45,7 +45,7 @@ export const PersonsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreatePersonPayload>(
+    create: rxMethod<CreatePerson>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const PersonsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdatePersonPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdatePerson}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

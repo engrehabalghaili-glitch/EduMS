@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetFinancialSummaryReportsService } from './asset-financial-summary-reports.service';
-import { AssetFinancialSummaryReport, CreateAssetFinancialSummaryReportPayload, UpdateAssetFinancialSummaryReportPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetfinancialsummaryreport.interface';
+import { AssetFinancialSummaryReport, CreateAssetFinancialSummaryReportRequest, UpdateAssetFinancialSummaryReportRequest } from '@modules/m4-assets-logistics/interfaces/asset-financial-summary-reports';
 
 type AssetFinancialSummaryReportsStoreState = {
   items: AssetFinancialSummaryReport[];
@@ -45,7 +45,7 @@ export const AssetFinancialSummaryReportsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetFinancialSummaryReportPayload>(
+    create: rxMethod<CreateAssetFinancialSummaryReportRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetFinancialSummaryReportsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetFinancialSummaryReportPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetFinancialSummaryReportRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

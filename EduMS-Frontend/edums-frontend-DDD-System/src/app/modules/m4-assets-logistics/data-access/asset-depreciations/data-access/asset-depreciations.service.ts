@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AssetDepreciation, 
-  CreateAssetDepreciationPayload, 
-  UpdateAssetDepreciationPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/assetdepreciation.interface';
+  CreateAssetDepreciationRequest, 
+  UpdateAssetDepreciationRequest 
+} from '@modules/m4-assets-logistics/interfaces/asset-depreciations';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AssetDepreciations)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AssetDepreciationsService extends BaseApiService<
   AssetDepreciation, 
-  CreateAssetDepreciationPayload, 
-  UpdateAssetDepreciationPayload
+  CreateAssetDepreciationRequest, 
+  UpdateAssetDepreciationRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

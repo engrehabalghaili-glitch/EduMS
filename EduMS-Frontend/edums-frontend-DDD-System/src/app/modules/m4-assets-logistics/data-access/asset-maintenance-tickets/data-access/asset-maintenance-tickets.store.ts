@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetMaintenanceTicketsService } from './asset-maintenance-tickets.service';
-import { AssetMaintenanceTicket, CreateAssetMaintenanceTicketPayload, UpdateAssetMaintenanceTicketPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetmaintenanceticket.interface';
+import { AssetMaintenanceTicket, CreateAssetMaintenanceTicketRequest, UpdateAssetMaintenanceTicketRequest } from '@modules/m4-assets-logistics/interfaces/asset-maintenance-tickets';
 
 type AssetMaintenanceTicketsStoreState = {
   items: AssetMaintenanceTicket[];
@@ -45,7 +45,7 @@ export const AssetMaintenanceTicketsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetMaintenanceTicketPayload>(
+    create: rxMethod<CreateAssetMaintenanceTicketRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetMaintenanceTicketsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetMaintenanceTicketPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetMaintenanceTicketRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

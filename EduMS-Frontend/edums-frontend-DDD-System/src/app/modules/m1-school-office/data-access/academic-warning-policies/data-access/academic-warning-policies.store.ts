@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AcademicWarningPoliciesService } from './academic-warning-policies.service';
-import { AcademicWarningPolicy, CreateAcademicWarningPolicyPayload, UpdateAcademicWarningPolicyPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/academicwarningpolicy.interface';
+import { AcademicWarningPolicy, CreateAcademicWarningPolicyDto, UpdateAcademicWarningPolicyDto } from '@modules/m1-school-office/interface/academic-warning-policy';
 
 type AcademicWarningPoliciesStoreState = {
   items: AcademicWarningPolicy[];
@@ -45,7 +45,7 @@ export const AcademicWarningPoliciesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAcademicWarningPolicyPayload>(
+    create: rxMethod<CreateAcademicWarningPolicyDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AcademicWarningPoliciesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAcademicWarningPolicyPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAcademicWarningPolicyDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

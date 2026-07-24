@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { StatisticsUpdateHistoriesService } from './statistics-update-histories.service';
-import { StatisticsUpdateHistory, CreateStatisticsUpdateHistoryPayload, UpdateStatisticsUpdateHistoryPayload } from '../../../../core/api/interfaces/M6_StatisticsReports/statisticsupdatehistory.interface';
+import { StatisticsUpdateHistory, CreateStatisticsUpdateHistory, UpdateStatisticsUpdateHistory } from '@modules/m6-statistics-reports/interfaces/statistics-update-history.dto';
 
 type StatisticsUpdateHistoriesStoreState = {
   items: StatisticsUpdateHistory[];
@@ -45,7 +45,7 @@ export const StatisticsUpdateHistoriesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateStatisticsUpdateHistoryPayload>(
+    create: rxMethod<CreateStatisticsUpdateHistory>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const StatisticsUpdateHistoriesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateStatisticsUpdateHistoryPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateStatisticsUpdateHistory}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

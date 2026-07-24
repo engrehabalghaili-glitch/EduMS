@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AssetFeasibilityComparison, 
-  CreateAssetFeasibilityComparisonPayload, 
-  UpdateAssetFeasibilityComparisonPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/assetfeasibilitycomparison.interface';
+  CreateAssetFeasibilityComparisonRequest, 
+  UpdateAssetFeasibilityComparisonRequest 
+} from '@modules/m4-assets-logistics/interfaces/asset-feasibility-comparisons';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AssetFeasibilityComparisons)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AssetFeasibilityComparisonsService extends BaseApiService<
   AssetFeasibilityComparison, 
-  CreateAssetFeasibilityComparisonPayload, 
-  UpdateAssetFeasibilityComparisonPayload
+  CreateAssetFeasibilityComparisonRequest, 
+  UpdateAssetFeasibilityComparisonRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

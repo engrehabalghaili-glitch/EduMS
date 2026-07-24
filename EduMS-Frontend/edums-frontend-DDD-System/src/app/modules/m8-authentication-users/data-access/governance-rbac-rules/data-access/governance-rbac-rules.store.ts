@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { GovernanceRbacRulesService } from './governance-rbac-rules.service';
-import { GovernanceRbacRule, CreateGovernanceRbacRulePayload, UpdateGovernanceRbacRulePayload } from '../../../../core/api/interfaces/M8_AuthenticationUsers/governancerbacrule.interface';
+import { GovernanceRbacRule, CreateGovernanceRbacRule, UpdateGovernanceRbacRule } from '@modules/m8-authentication-users/interfaces/governance-rbac-rule.models';
 
 type GovernanceRbacRulesStoreState = {
   items: GovernanceRbacRule[];
@@ -45,7 +45,7 @@ export const GovernanceRbacRulesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateGovernanceRbacRulePayload>(
+    create: rxMethod<CreateGovernanceRbacRule>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const GovernanceRbacRulesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateGovernanceRbacRulePayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateGovernanceRbacRule}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

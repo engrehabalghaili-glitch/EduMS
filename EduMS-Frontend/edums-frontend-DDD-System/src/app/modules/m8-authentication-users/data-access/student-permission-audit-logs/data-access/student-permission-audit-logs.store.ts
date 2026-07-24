@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { StudentPermissionAuditLogsService } from './student-permission-audit-logs.service';
-import { StudentPermissionAuditLog, CreateStudentPermissionAuditLogPayload, UpdateStudentPermissionAuditLogPayload } from '../../../../core/api/interfaces/M8_AuthenticationUsers/studentpermissionauditlog.interface';
+import { StudentPermissionAuditLog, CreateStudentPermissionAuditLog, UpdateStudentPermissionAuditLog } from '@modules/m8-authentication-users/interfaces/student-permission-audit-log.models';
 
 type StudentPermissionAuditLogsStoreState = {
   items: StudentPermissionAuditLog[];
@@ -45,7 +45,7 @@ export const StudentPermissionAuditLogsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateStudentPermissionAuditLogPayload>(
+    create: rxMethod<CreateStudentPermissionAuditLog>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const StudentPermissionAuditLogsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateStudentPermissionAuditLogPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateStudentPermissionAuditLog}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   CurriculumTextbookDistribution, 
-  CreateCurriculumTextbookDistributionPayload, 
-  UpdateCurriculumTextbookDistributionPayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/curriculumtextbookdistribution.interface';
+  CreateCurriculumTextbookDistributionDto, 
+  UpdateCurriculumTextbookDistributionDto 
+} from '@modules/m1-school-office/interface/curriculum-textbook-distribution';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (CurriculumTextbookDistributions)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class CurriculumTextbookDistributionsService extends BaseApiService<
   CurriculumTextbookDistribution, 
-  CreateCurriculumTextbookDistributionPayload, 
-  UpdateCurriculumTextbookDistributionPayload
+  CreateCurriculumTextbookDistributionDto, 
+  UpdateCurriculumTextbookDistributionDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

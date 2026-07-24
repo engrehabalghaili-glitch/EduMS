@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StudentExemplaryRecognition, 
-  CreateStudentExemplaryRecognitionPayload, 
-  UpdateStudentExemplaryRecognitionPayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/studentexemplaryrecognition.interface';
+  CreateStudentExemplaryRecognition, 
+  UpdateStudentExemplaryRecognition 
+} from '@modules/m2-student-Affairs/interfaces/exemplary-recognition.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StudentExemplaryRecognitions)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StudentExemplaryRecognitionsService extends BaseApiService<
   StudentExemplaryRecognition, 
-  CreateStudentExemplaryRecognitionPayload, 
-  UpdateStudentExemplaryRecognitionPayload
+  CreateStudentExemplaryRecognition, 
+  UpdateStudentExemplaryRecognition
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

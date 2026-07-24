@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StudentGuardianRelationship, 
-  CreateStudentGuardianRelationshipPayload, 
-  UpdateStudentGuardianRelationshipPayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/studentguardianrelationship.interface';
+  CreateStudentGuardianRelationship, 
+  UpdateStudentGuardianRelationship 
+} from '@modules/m2-student-Affairs/interfaces/guardian-relationship.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StudentGuardianRelationships)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StudentGuardianRelationshipsService extends BaseApiService<
   StudentGuardianRelationship, 
-  CreateStudentGuardianRelationshipPayload, 
-  UpdateStudentGuardianRelationshipPayload
+  CreateStudentGuardianRelationship, 
+  UpdateStudentGuardianRelationship
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

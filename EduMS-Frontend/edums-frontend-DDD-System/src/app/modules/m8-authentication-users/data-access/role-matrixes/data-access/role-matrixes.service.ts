@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   RoleMatrix, 
-  CreateRoleMatrixPayload, 
-  UpdateRoleMatrixPayload 
-} from '../../../../core/api/interfaces/M8_AuthenticationUsers/rolematrixe.interface';
+  CreateRoleMatrix, 
+  UpdateRoleMatrix 
+} from '@modules/m8-authentication-users/interfaces/role-matrix.models';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (RoleMatrixes)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class RoleMatrixesService extends BaseApiService<
   RoleMatrix, 
-  CreateRoleMatrixPayload, 
-  UpdateRoleMatrixPayload
+  CreateRoleMatrix, 
+  UpdateRoleMatrix
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

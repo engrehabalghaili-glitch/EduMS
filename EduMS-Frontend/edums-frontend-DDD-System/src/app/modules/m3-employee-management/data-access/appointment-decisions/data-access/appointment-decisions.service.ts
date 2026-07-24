@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AppointmentDecision, 
-  CreateAppointmentDecisionPayload, 
-  UpdateAppointmentDecisionPayload 
-} from '../../../../core/api/interfaces/M3_EmployeeManagement/appointmentdecision.interface';
+  CreateAppointmentDecision, 
+  UpdateAppointmentDecision 
+} from '@modules/m3-employee-management/interfaces/appointment-decision.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AppointmentDecisions)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AppointmentDecisionsService extends BaseApiService<
   AppointmentDecision, 
-  CreateAppointmentDecisionPayload, 
-  UpdateAppointmentDecisionPayload
+  CreateAppointmentDecision, 
+  UpdateAppointmentDecision
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

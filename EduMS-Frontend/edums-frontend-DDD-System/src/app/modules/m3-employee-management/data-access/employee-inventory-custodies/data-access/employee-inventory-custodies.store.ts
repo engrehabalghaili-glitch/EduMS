@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { EmployeeInventoryCustodiesService } from './employee-inventory-custodies.service';
-import { EmployeeInventoryCustody, CreateEmployeeInventoryCustodyPayload, UpdateEmployeeInventoryCustodyPayload } from '../../../../core/api/interfaces/M3_EmployeeManagement/employeeinventorycustody.interface';
+import { EmployeeInventoryCustody, CreateEmployeeInventoryCustody, UpdateEmployeeInventoryCustody } from '@modules/m3-employee-management/interfaces/employee-inventory-custody.types';
 
 type EmployeeInventoryCustodiesStoreState = {
   items: EmployeeInventoryCustody[];
@@ -45,7 +45,7 @@ export const EmployeeInventoryCustodiesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateEmployeeInventoryCustodyPayload>(
+    create: rxMethod<CreateEmployeeInventoryCustody>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const EmployeeInventoryCustodiesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateEmployeeInventoryCustodyPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateEmployeeInventoryCustody}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

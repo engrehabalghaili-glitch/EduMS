@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   EmployeePerformanceReview, 
-  CreateEmployeePerformanceReviewPayload, 
-  UpdateEmployeePerformanceReviewPayload 
-} from '../../../../core/api/interfaces/M3_EmployeeManagement/employeeperformancereview.interface';
+  CreateEmployeePerformanceReview, 
+  UpdateEmployeePerformanceReview 
+} from '@modules/m3-employee-management/interfaces/employee-performance-review.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (EmployeePerformanceReviews)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class EmployeePerformanceReviewsService extends BaseApiService<
   EmployeePerformanceReview, 
-  CreateEmployeePerformanceReviewPayload, 
-  UpdateEmployeePerformanceReviewPayload
+  CreateEmployeePerformanceReview, 
+  UpdateEmployeePerformanceReview
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

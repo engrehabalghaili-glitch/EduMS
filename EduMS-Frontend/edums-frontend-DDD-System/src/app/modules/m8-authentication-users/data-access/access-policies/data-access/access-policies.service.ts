@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AccessPolicy, 
-  CreateAccessPolicyPayload, 
-  UpdateAccessPolicyPayload 
-} from '../../../../core/api/interfaces/M8_AuthenticationUsers/accesspolicy.interface';
+  CreateAccessPolicy, 
+  UpdateAccessPolicy 
+} from '@modules/m8-authentication-users/interfaces/access-policy.models';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AccessPolicies)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AccessPoliciesService extends BaseApiService<
   AccessPolicy, 
-  CreateAccessPolicyPayload, 
-  UpdateAccessPolicyPayload
+  CreateAccessPolicy, 
+  UpdateAccessPolicy
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

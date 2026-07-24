@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   SchoolAward, 
-  CreateSchoolAwardPayload, 
-  UpdateSchoolAwardPayload 
-} from '../../../../core/api/interfaces/M7_EmergencyManagement/schoolaward.interface';
+  CreateSchoolAward, 
+  UpdateSchoolAward 
+} from '@modules/m7-emergency-management/interfaces/school-award.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (SchoolAwards)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class SchoolAwardsService extends BaseApiService<
   SchoolAward, 
-  CreateSchoolAwardPayload, 
-  UpdateSchoolAwardPayload
+  CreateSchoolAward, 
+  UpdateSchoolAward
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

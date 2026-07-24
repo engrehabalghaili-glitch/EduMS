@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   FacilityDepartmentAssignment, 
-  CreateFacilityDepartmentAssignmentPayload, 
-  UpdateFacilityDepartmentAssignmentPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/facilitydepartmentassignment.interface';
+  CreateFacilityDepartmentAssignmentRequest, 
+  UpdateFacilityDepartmentAssignmentRequest 
+} from '@modules/m4-assets-logistics/interfaces/facility-department-assignments';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (FacilityDepartmentAssignments)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class FacilityDepartmentAssignmentsService extends BaseApiService<
   FacilityDepartmentAssignment, 
-  CreateFacilityDepartmentAssignmentPayload, 
-  UpdateFacilityDepartmentAssignmentPayload
+  CreateFacilityDepartmentAssignmentRequest, 
+  UpdateFacilityDepartmentAssignmentRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

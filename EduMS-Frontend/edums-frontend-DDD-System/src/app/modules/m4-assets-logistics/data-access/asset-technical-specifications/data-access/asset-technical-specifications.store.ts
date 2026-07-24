@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetTechnicalSpecificationsService } from './asset-technical-specifications.service';
-import { AssetTechnicalSpecification, CreateAssetTechnicalSpecificationPayload, UpdateAssetTechnicalSpecificationPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assettechnicalspecification.interface';
+import { AssetTechnicalSpecification, CreateAssetTechnicalSpecificationRequest, UpdateAssetTechnicalSpecificationRequest } from '@modules/m4-assets-logistics/interfaces/asset-technical-specifications';
 
 type AssetTechnicalSpecificationsStoreState = {
   items: AssetTechnicalSpecification[];
@@ -45,7 +45,7 @@ export const AssetTechnicalSpecificationsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetTechnicalSpecificationPayload>(
+    create: rxMethod<CreateAssetTechnicalSpecificationRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetTechnicalSpecificationsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetTechnicalSpecificationPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetTechnicalSpecificationRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

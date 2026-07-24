@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AssetAllocation, 
-  CreateAssetAllocationPayload, 
-  UpdateAssetAllocationPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/assetallocation.interface';
+  CreateAssetAllocationRequest, 
+  UpdateAssetAllocationRequest 
+} from '@modules/m4-assets-logistics/interfaces/asset-allocations';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AssetAllocations)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AssetAllocationsService extends BaseApiService<
   AssetAllocation, 
-  CreateAssetAllocationPayload, 
-  UpdateAssetAllocationPayload
+  CreateAssetAllocationRequest, 
+  UpdateAssetAllocationRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

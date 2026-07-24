@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   SystemAuditLog, 
-  CreateSystemAuditLogPayload, 
-  UpdateSystemAuditLogPayload 
-} from '../../../../core/api/interfaces/M8_AuthenticationUsers/systemauditlog.interface';
+  CreateSystemAuditLog, 
+  UpdateSystemAuditLog 
+} from '@modules/m8-authentication-users/interfaces/system-audit-log.models';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (SystemAuditLogs)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class SystemAuditLogsService extends BaseApiService<
   SystemAuditLog, 
-  CreateSystemAuditLogPayload, 
-  UpdateSystemAuditLogPayload
+  CreateSystemAuditLog, 
+  UpdateSystemAuditLog
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

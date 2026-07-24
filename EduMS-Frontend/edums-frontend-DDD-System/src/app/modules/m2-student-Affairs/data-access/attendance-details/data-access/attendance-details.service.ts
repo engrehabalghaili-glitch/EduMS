@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AttendanceDetail, 
-  CreateAttendanceDetailPayload, 
-  UpdateAttendanceDetailPayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/attendancedetail.interface';
+  CreateAttendanceDetail, 
+  UpdateAttendanceDetail 
+} from '@modules/m2-student-Affairs/interfaces/attendance.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AttendanceDetails)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AttendanceDetailsService extends BaseApiService<
   AttendanceDetail, 
-  CreateAttendanceDetailPayload, 
-  UpdateAttendanceDetailPayload
+  CreateAttendanceDetail, 
+  UpdateAttendanceDetail
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

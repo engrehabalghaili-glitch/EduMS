@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   VisitorEntryLog, 
-  CreateVisitorEntryLogPayload, 
-  UpdateVisitorEntryLogPayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/visitorentrylog.interface';
+  CreateVisitorEntryLogDto, 
+  UpdateVisitorEntryLogDto 
+} from '@modules/m1-school-office/interface/visitor-entry-log';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (VisitorEntryLogs)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class VisitorEntryLogsService extends BaseApiService<
   VisitorEntryLog, 
-  CreateVisitorEntryLogPayload, 
-  UpdateVisitorEntryLogPayload
+  CreateVisitorEntryLogDto, 
+  UpdateVisitorEntryLogDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { EducationalConsumableTrackingsService } from './educational-consumable-trackings.service';
-import { EducationalConsumableTracking, CreateEducationalConsumableTrackingPayload, UpdateEducationalConsumableTrackingPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/educationalconsumabletracking.interface';
+import { EducationalConsumableTracking, CreateEducationalConsumableTrackingRequest, UpdateEducationalConsumableTrackingRequest } from '@modules/m4-assets-logistics/interfaces/educational-consumable-trackings';
 
 type EducationalConsumableTrackingsStoreState = {
   items: EducationalConsumableTracking[];
@@ -45,7 +45,7 @@ export const EducationalConsumableTrackingsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateEducationalConsumableTrackingPayload>(
+    create: rxMethod<CreateEducationalConsumableTrackingRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const EducationalConsumableTrackingsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateEducationalConsumableTrackingPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateEducationalConsumableTrackingRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

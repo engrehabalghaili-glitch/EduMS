@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AssetRequirementRequest, 
-  CreateAssetRequirementRequestPayload, 
-  UpdateAssetRequirementRequestPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/assetrequirementrequest.interface';
+  CreateAssetRequirementRequestRequest, 
+  UpdateAssetRequirementRequestRequest 
+} from '@modules/m4-assets-logistics/interfaces/asset-requirement-requests';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AssetRequirementRequests)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AssetRequirementRequestsService extends BaseApiService<
   AssetRequirementRequest, 
-  CreateAssetRequirementRequestPayload, 
-  UpdateAssetRequirementRequestPayload
+  CreateAssetRequirementRequestRequest, 
+  UpdateAssetRequirementRequestRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

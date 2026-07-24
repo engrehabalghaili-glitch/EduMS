@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AssetFeasibilityRiskAnalysis, 
-  CreateAssetFeasibilityRiskAnalysisPayload, 
-  UpdateAssetFeasibilityRiskAnalysisPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/assetfeasibilityriskanalysise.interface';
+  CreateAssetFeasibilityRiskAnalysisRequest, 
+  UpdateAssetFeasibilityRiskAnalysisRequest 
+} from '@modules/m4-assets-logistics/interfaces/asset-feasibility-risk-analyses';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AssetFeasibilityRiskAnalysises)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AssetFeasibilityRiskAnalysisesService extends BaseApiService<
   AssetFeasibilityRiskAnalysis, 
-  CreateAssetFeasibilityRiskAnalysisPayload, 
-  UpdateAssetFeasibilityRiskAnalysisPayload
+  CreateAssetFeasibilityRiskAnalysisRequest, 
+  UpdateAssetFeasibilityRiskAnalysisRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

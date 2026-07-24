@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { StudentMedicalAllergyLogsService } from './student-medical-allergy-logs.service';
-import { StudentMedicalAllergyLog, CreateStudentMedicalAllergyLogPayload, UpdateStudentMedicalAllergyLogPayload } from '../../../../core/api/interfaces/M2_StudentAffairs/studentmedicalallergylog.interface';
+import { StudentMedicalAllergyLog, CreateStudentMedicalAllergyLog, UpdateStudentMedicalAllergyLog } from '@modules/m2-student-Affairs/interfaces/medical-allergy.interface';
 
 type StudentMedicalAllergyLogsStoreState = {
   items: StudentMedicalAllergyLog[];
@@ -45,7 +45,7 @@ export const StudentMedicalAllergyLogsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateStudentMedicalAllergyLogPayload>(
+    create: rxMethod<CreateStudentMedicalAllergyLog>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const StudentMedicalAllergyLogsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateStudentMedicalAllergyLogPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateStudentMedicalAllergyLog}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { DirectorateExamCenterAssignmentsService } from './directorate-exam-center-assignments.service';
-import { DirectorateExamCenterAssignment, CreateDirectorateExamCenterAssignmentPayload, UpdateDirectorateExamCenterAssignmentPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/directorateexamcenterassignment.interface';
+import { DirectorateExamCenterAssignment, CreateDirectorateExamCenterAssignmentDto, UpdateDirectorateExamCenterAssignmentDto } from '@modules/m1-school-office/interface/directorate-exam-center-assignment';
 
 type DirectorateExamCenterAssignmentsStoreState = {
   items: DirectorateExamCenterAssignment[];
@@ -45,7 +45,7 @@ export const DirectorateExamCenterAssignmentsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateDirectorateExamCenterAssignmentPayload>(
+    create: rxMethod<CreateDirectorateExamCenterAssignmentDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const DirectorateExamCenterAssignmentsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateDirectorateExamCenterAssignmentPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateDirectorateExamCenterAssignmentDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

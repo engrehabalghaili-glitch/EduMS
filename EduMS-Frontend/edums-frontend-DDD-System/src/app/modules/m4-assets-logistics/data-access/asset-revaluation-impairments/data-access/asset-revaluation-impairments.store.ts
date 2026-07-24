@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetRevaluationImpairmentsService } from './asset-revaluation-impairments.service';
-import { AssetRevaluationImpairment, CreateAssetRevaluationImpairmentPayload, UpdateAssetRevaluationImpairmentPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetrevaluationimpairment.interface';
+import { AssetRevaluationImpairment, CreateAssetRevaluationImpairmentRequest, UpdateAssetRevaluationImpairmentRequest } from '@modules/m4-assets-logistics/interfaces/asset-revaluation-impairments';
 
 type AssetRevaluationImpairmentsStoreState = {
   items: AssetRevaluationImpairment[];
@@ -45,7 +45,7 @@ export const AssetRevaluationImpairmentsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetRevaluationImpairmentPayload>(
+    create: rxMethod<CreateAssetRevaluationImpairmentRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetRevaluationImpairmentsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetRevaluationImpairmentPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetRevaluationImpairmentRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

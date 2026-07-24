@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   UserDirectPermission, 
-  CreateUserDirectPermissionPayload, 
-  UpdateUserDirectPermissionPayload 
-} from '../../../../core/api/interfaces/M8_AuthenticationUsers/userdirectpermission.interface';
+  CreateUserDirectPermission, 
+  UpdateUserDirectPermission 
+} from '@modules/m8-authentication-users/interfaces/user-direct-permission.models';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (UserDirectPermissions)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class UserDirectPermissionsService extends BaseApiService<
   UserDirectPermission, 
-  CreateUserDirectPermissionPayload, 
-  UpdateUserDirectPermissionPayload
+  CreateUserDirectPermission, 
+  UpdateUserDirectPermission
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StudentLibraryBorrowingLog, 
-  CreateStudentLibraryBorrowingLogPayload, 
-  UpdateStudentLibraryBorrowingLogPayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/studentlibraryborrowinglog.interface';
+  CreateStudentLibraryBorrowingLog, 
+  UpdateStudentLibraryBorrowingLog 
+} from '@modules/m2-student-Affairs/interfaces/library-borrowing.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StudentLibraryBorrowingLogs)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StudentLibraryBorrowingLogsService extends BaseApiService<
   StudentLibraryBorrowingLog, 
-  CreateStudentLibraryBorrowingLogPayload, 
-  UpdateStudentLibraryBorrowingLogPayload
+  CreateStudentLibraryBorrowingLog, 
+  UpdateStudentLibraryBorrowingLog
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

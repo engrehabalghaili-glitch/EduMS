@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { PreventiveMaintenanceSchedulesService } from './preventive-maintenance-schedules.service';
-import { PreventiveMaintenanceSchedule, CreatePreventiveMaintenanceSchedulePayload, UpdatePreventiveMaintenanceSchedulePayload } from '../../../../core/api/interfaces/M4_AssetLogistics/preventivemaintenanceschedule.interface';
+import { PreventiveMaintenanceSchedule, CreatePreventiveMaintenanceScheduleRequest, UpdatePreventiveMaintenanceScheduleRequest } from '@modules/m4-assets-logistics/interfaces/preventive-maintenance-schedules';
 
 type PreventiveMaintenanceSchedulesStoreState = {
   items: PreventiveMaintenanceSchedule[];
@@ -45,7 +45,7 @@ export const PreventiveMaintenanceSchedulesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreatePreventiveMaintenanceSchedulePayload>(
+    create: rxMethod<CreatePreventiveMaintenanceScheduleRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const PreventiveMaintenanceSchedulesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdatePreventiveMaintenanceSchedulePayload}>(
+    update: rxMethod<{id: number | string, payload: UpdatePreventiveMaintenanceScheduleRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   ReferenceCodingLookup, 
-  CreateReferenceCodingLookupPayload, 
-  UpdateReferenceCodingLookupPayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/referencecodinglookup.interface';
+  CreateReferenceCodingLookupDto, 
+  UpdateReferenceCodingLookupDto 
+} from '@modules/m1-school-office/interface/reference-coding-lookup';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (ReferenceCodingLookups)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class ReferenceCodingLookupsService extends BaseApiService<
   ReferenceCodingLookup, 
-  CreateReferenceCodingLookupPayload, 
-  UpdateReferenceCodingLookupPayload
+  CreateReferenceCodingLookupDto, 
+  UpdateReferenceCodingLookupDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

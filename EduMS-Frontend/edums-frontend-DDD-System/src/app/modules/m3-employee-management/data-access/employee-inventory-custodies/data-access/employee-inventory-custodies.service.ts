@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   EmployeeInventoryCustody, 
-  CreateEmployeeInventoryCustodyPayload, 
-  UpdateEmployeeInventoryCustodyPayload 
-} from '../../../../core/api/interfaces/M3_EmployeeManagement/employeeinventorycustody.interface';
+  CreateEmployeeInventoryCustody, 
+  UpdateEmployeeInventoryCustody 
+} from '@modules/m3-employee-management/interfaces/employee-inventory-custody.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (EmployeeInventoryCustodies)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class EmployeeInventoryCustodiesService extends BaseApiService<
   EmployeeInventoryCustody, 
-  CreateEmployeeInventoryCustodyPayload, 
-  UpdateEmployeeInventoryCustodyPayload
+  CreateEmployeeInventoryCustody, 
+  UpdateEmployeeInventoryCustody
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

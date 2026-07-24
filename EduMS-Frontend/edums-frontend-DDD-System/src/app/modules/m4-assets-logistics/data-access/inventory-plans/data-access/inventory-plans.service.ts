@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   InventoryPlan, 
-  CreateInventoryPlanPayload, 
-  UpdateInventoryPlanPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/inventoryplan.interface';
+  CreateInventoryPlanRequest, 
+  UpdateInventoryPlanRequest 
+} from '@modules/m4-assets-logistics/interfaces/inventory-plans';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (InventoryPlans)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class InventoryPlansService extends BaseApiService<
   InventoryPlan, 
-  CreateInventoryPlanPayload, 
-  UpdateInventoryPlanPayload
+  CreateInventoryPlanRequest, 
+  UpdateInventoryPlanRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

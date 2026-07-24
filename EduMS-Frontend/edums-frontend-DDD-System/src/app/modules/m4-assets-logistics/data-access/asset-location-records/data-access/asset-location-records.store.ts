@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetLocationRecordsService } from './asset-location-records.service';
-import { AssetLocationRecord, CreateAssetLocationRecordPayload, UpdateAssetLocationRecordPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetlocationrecord.interface';
+import { AssetLocationRecord, CreateAssetLocationRecordRequest, UpdateAssetLocationRecordRequest } from '@modules/m4-assets-logistics/interfaces/asset-location-records';
 
 type AssetLocationRecordsStoreState = {
   items: AssetLocationRecord[];
@@ -45,7 +45,7 @@ export const AssetLocationRecordsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetLocationRecordPayload>(
+    create: rxMethod<CreateAssetLocationRecordRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetLocationRecordsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetLocationRecordPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetLocationRecordRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   SystemUser, 
-  CreateSystemUserPayload, 
-  UpdateSystemUserPayload 
-} from '../../../../core/api/interfaces/M8_AuthenticationUsers/systemuser.interface';
+  CreateSystemUser, 
+  UpdateSystemUser 
+} from '@modules/m8-authentication-users/interfaces/system-user.models';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (SystemUsers)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class SystemUsersService extends BaseApiService<
   SystemUser, 
-  CreateSystemUserPayload, 
-  UpdateSystemUserPayload
+  CreateSystemUser, 
+  UpdateSystemUser
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

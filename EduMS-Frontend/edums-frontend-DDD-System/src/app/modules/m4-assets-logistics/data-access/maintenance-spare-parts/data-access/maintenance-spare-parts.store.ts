@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { MaintenanceSparePartsService } from './maintenance-spare-parts.service';
-import { MaintenanceSparePart, CreateMaintenanceSparePartPayload, UpdateMaintenanceSparePartPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/maintenancesparepart.interface';
+import { MaintenanceSparePart, CreateMaintenanceSparePartRequest, UpdateMaintenanceSparePartRequest } from '@modules/m4-assets-logistics/interfaces/maintenance-spare-parts';
 
 type MaintenanceSparePartsStoreState = {
   items: MaintenanceSparePart[];
@@ -45,7 +45,7 @@ export const MaintenanceSparePartsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateMaintenanceSparePartPayload>(
+    create: rxMethod<CreateMaintenanceSparePartRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const MaintenanceSparePartsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateMaintenanceSparePartPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateMaintenanceSparePartRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

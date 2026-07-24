@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   DirectorateExamCenterAssignment, 
-  CreateDirectorateExamCenterAssignmentPayload, 
-  UpdateDirectorateExamCenterAssignmentPayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/directorateexamcenterassignment.interface';
+  CreateDirectorateExamCenterAssignmentDto, 
+  UpdateDirectorateExamCenterAssignmentDto 
+} from '@modules/m1-school-office/interface/directorate-exam-center-assignment';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (DirectorateExamCenterAssignments)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class DirectorateExamCenterAssignmentsService extends BaseApiService<
   DirectorateExamCenterAssignment, 
-  CreateDirectorateExamCenterAssignmentPayload, 
-  UpdateDirectorateExamCenterAssignmentPayload
+  CreateDirectorateExamCenterAssignmentDto, 
+  UpdateDirectorateExamCenterAssignmentDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

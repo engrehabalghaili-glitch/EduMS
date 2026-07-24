@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   RemediationPlan, 
-  CreateRemediationPlanPayload, 
-  UpdateRemediationPlanPayload 
-} from '../../../../core/api/interfaces/M7_EmergencyManagement/remediationplan.interface';
+  CreateRemediationPlan, 
+  UpdateRemediationPlan 
+} from '@modules/m7-emergency-management/interfaces/remediation-plan.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (RemediationPlans)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class RemediationPlansService extends BaseApiService<
   RemediationPlan, 
-  CreateRemediationPlanPayload, 
-  UpdateRemediationPlanPayload
+  CreateRemediationPlan, 
+  UpdateRemediationPlan
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

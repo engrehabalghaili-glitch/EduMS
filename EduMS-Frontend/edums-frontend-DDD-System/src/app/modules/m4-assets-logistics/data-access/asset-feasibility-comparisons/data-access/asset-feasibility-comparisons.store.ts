@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetFeasibilityComparisonsService } from './asset-feasibility-comparisons.service';
-import { AssetFeasibilityComparison, CreateAssetFeasibilityComparisonPayload, UpdateAssetFeasibilityComparisonPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetfeasibilitycomparison.interface';
+import { AssetFeasibilityComparison, CreateAssetFeasibilityComparisonRequest, UpdateAssetFeasibilityComparisonRequest } from '@modules/m4-assets-logistics/interfaces/asset-feasibility-comparisons';
 
 type AssetFeasibilityComparisonsStoreState = {
   items: AssetFeasibilityComparison[];
@@ -45,7 +45,7 @@ export const AssetFeasibilityComparisonsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetFeasibilityComparisonPayload>(
+    create: rxMethod<CreateAssetFeasibilityComparisonRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetFeasibilityComparisonsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetFeasibilityComparisonPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetFeasibilityComparisonRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

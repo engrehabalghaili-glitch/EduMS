@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { EmployeeInternalTransfersService } from './employee-internal-transfers.service';
-import { EmployeeInternalTransfer, CreateEmployeeInternalTransferPayload, UpdateEmployeeInternalTransferPayload } from '../../../../core/api/interfaces/M3_EmployeeManagement/employeeinternaltransfer.interface';
+import { EmployeeInternalTransfer, CreateEmployeeInternalTransfer, UpdateEmployeeInternalTransfer } from '@modules/m3-employee-management/interfaces/employee-internal-transfer.types';
 
 type EmployeeInternalTransfersStoreState = {
   items: EmployeeInternalTransfer[];
@@ -45,7 +45,7 @@ export const EmployeeInternalTransfersStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateEmployeeInternalTransferPayload>(
+    create: rxMethod<CreateEmployeeInternalTransfer>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const EmployeeInternalTransfersStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateEmployeeInternalTransferPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateEmployeeInternalTransfer}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

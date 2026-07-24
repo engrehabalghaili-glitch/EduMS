@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { FeeStructuresService } from './fee-structures.service';
-import { FeeStructure, CreateFeeStructurePayload, UpdateFeeStructurePayload } from '../../../../core/api/interfaces/M5_FinancialManagement/feestructure.interface';
+import { FeeStructure, CreateFeeStructureDto, UpdateFeeStructureDto } from '@modules/m5-Financial-Management/interfaces/fee-structure.interface';
 
 type FeeStructuresStoreState = {
   items: FeeStructure[];
@@ -45,7 +45,7 @@ export const FeeStructuresStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateFeeStructurePayload>(
+    create: rxMethod<CreateFeeStructureDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const FeeStructuresStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateFeeStructurePayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateFeeStructureDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

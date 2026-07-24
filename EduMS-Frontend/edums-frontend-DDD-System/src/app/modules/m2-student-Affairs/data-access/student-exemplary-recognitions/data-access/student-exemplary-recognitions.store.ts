@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { StudentExemplaryRecognitionsService } from './student-exemplary-recognitions.service';
-import { StudentExemplaryRecognition, CreateStudentExemplaryRecognitionPayload, UpdateStudentExemplaryRecognitionPayload } from '../../../../core/api/interfaces/M2_StudentAffairs/studentexemplaryrecognition.interface';
+import { StudentExemplaryRecognition, CreateStudentExemplaryRecognition, UpdateStudentExemplaryRecognition } from '@modules/m2-student-Affairs/interfaces/exemplary-recognition.interface';
 
 type StudentExemplaryRecognitionsStoreState = {
   items: StudentExemplaryRecognition[];
@@ -45,7 +45,7 @@ export const StudentExemplaryRecognitionsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateStudentExemplaryRecognitionPayload>(
+    create: rxMethod<CreateStudentExemplaryRecognition>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const StudentExemplaryRecognitionsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateStudentExemplaryRecognitionPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateStudentExemplaryRecognition}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

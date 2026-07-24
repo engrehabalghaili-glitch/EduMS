@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   DashboardKpiConfiguration, 
-  CreateDashboardKpiConfigurationPayload, 
-  UpdateDashboardKpiConfigurationPayload 
-} from '../../../../core/api/interfaces/M6_StatisticsReports/dashboardkpiconfiguration.interface';
+  CreateDashboardKpiConfiguration, 
+  UpdateDashboardKpiConfiguration 
+} from '@modules/m6-statistics-reports/interfaces/dashboard-kpi-configuration.dto';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (DashboardKpiConfigurations)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class DashboardKpiConfigurationsService extends BaseApiService<
   DashboardKpiConfiguration, 
-  CreateDashboardKpiConfigurationPayload, 
-  UpdateDashboardKpiConfigurationPayload
+  CreateDashboardKpiConfiguration, 
+  UpdateDashboardKpiConfiguration
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   SchoolMerger, 
-  CreateSchoolMergerPayload, 
-  UpdateSchoolMergerPayload 
-} from '../../../../core/api/interfaces/M7_EmergencyManagement/schoolmerger.interface';
+  CreateSchoolMerger, 
+  UpdateSchoolMerger 
+} from '@modules/m7-emergency-management/interfaces/school-merger.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (SchoolMergers)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class SchoolMergersService extends BaseApiService<
   SchoolMerger, 
-  CreateSchoolMergerPayload, 
-  UpdateSchoolMergerPayload
+  CreateSchoolMerger, 
+  UpdateSchoolMerger
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

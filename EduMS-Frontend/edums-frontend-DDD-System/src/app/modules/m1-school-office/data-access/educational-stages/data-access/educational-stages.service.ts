@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   EducationalStage, 
-  CreateEducationalStagePayload, 
-  UpdateEducationalStagePayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/educationalstage.interface';
+  CreateEducationalStageDto, 
+  UpdateEducationalStageDto 
+} from '@modules/m1-school-office/interface/educational-stage';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (EducationalStages)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class EducationalStagesService extends BaseApiService<
   EducationalStage, 
-  CreateEducationalStagePayload, 
-  UpdateEducationalStagePayload
+  CreateEducationalStageDto, 
+  UpdateEducationalStageDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

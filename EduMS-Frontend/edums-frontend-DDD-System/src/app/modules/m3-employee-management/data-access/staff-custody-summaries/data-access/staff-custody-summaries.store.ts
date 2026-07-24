@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { StaffCustodySummariesService } from './staff-custody-summaries.service';
-import { StaffCustodySummary, CreateStaffCustodySummaryPayload, UpdateStaffCustodySummaryPayload } from '../../../../core/api/interfaces/M3_EmployeeManagement/staffcustodysummary.interface';
+import { StaffCustodySummary, CreateStaffCustodySummary, UpdateStaffCustodySummary } from '@modules/m3-employee-management/interfaces/staff-custody-summary.types';
 
 type StaffCustodySummariesStoreState = {
   items: StaffCustodySummary[];
@@ -45,7 +45,7 @@ export const StaffCustodySummariesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateStaffCustodySummaryPayload>(
+    create: rxMethod<CreateStaffCustodySummary>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const StaffCustodySummariesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateStaffCustodySummaryPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateStaffCustodySummary}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { BehavioralLogsService } from './behavioral-logs.service';
-import { BehavioralLog, CreateBehavioralLogPayload, UpdateBehavioralLogPayload } from '../../../../core/api/interfaces/M2_StudentAffairs/behaviorallog.interface';
+import { BehavioralLog, CreateBehavioralLog, UpdateBehavioralLog } from '@modules/m2-student-Affairs/interfaces/behavioral-log.interface';
 
 type BehavioralLogsStoreState = {
   items: BehavioralLog[];
@@ -45,7 +45,7 @@ export const BehavioralLogsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateBehavioralLogPayload>(
+    create: rxMethod<CreateBehavioralLog>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const BehavioralLogsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateBehavioralLogPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateBehavioralLog}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

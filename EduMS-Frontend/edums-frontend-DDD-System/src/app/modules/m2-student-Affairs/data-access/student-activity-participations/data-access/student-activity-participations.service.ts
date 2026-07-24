@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StudentActivityParticipation, 
-  CreateStudentActivityParticipationPayload, 
-  UpdateStudentActivityParticipationPayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/studentactivityparticipation.interface';
+  CreateStudentActivityParticipation, 
+  UpdateStudentActivityParticipation 
+} from '@modules/m2-student-Affairs/interfaces/activity-participation.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StudentActivityParticipations)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StudentActivityParticipationsService extends BaseApiService<
   StudentActivityParticipation, 
-  CreateStudentActivityParticipationPayload, 
-  UpdateStudentActivityParticipationPayload
+  CreateStudentActivityParticipation, 
+  UpdateStudentActivityParticipation
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

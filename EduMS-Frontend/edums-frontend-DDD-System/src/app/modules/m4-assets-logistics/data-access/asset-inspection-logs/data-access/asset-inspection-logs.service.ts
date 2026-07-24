@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AssetInspectionLog, 
-  CreateAssetInspectionLogPayload, 
-  UpdateAssetInspectionLogPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/assetinspectionlog.interface';
+  CreateAssetInspectionLogRequest, 
+  UpdateAssetInspectionLogRequest 
+} from '@modules/m4-assets-logistics/interfaces/asset-inspection-logs';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AssetInspectionLogs)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AssetInspectionLogsService extends BaseApiService<
   AssetInspectionLog, 
-  CreateAssetInspectionLogPayload, 
-  UpdateAssetInspectionLogPayload
+  CreateAssetInspectionLogRequest, 
+  UpdateAssetInspectionLogRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

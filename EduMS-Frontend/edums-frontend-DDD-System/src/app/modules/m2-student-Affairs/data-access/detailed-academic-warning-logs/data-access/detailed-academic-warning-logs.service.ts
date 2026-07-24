@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   DetailedAcademicWarningLog, 
-  CreateDetailedAcademicWarningLogPayload, 
-  UpdateDetailedAcademicWarningLogPayload 
-} from '../../../../core/api/interfaces/M2_StudentAffairs/detailedacademicwarninglog.interface';
+  CreateDetailedAcademicWarningLog, 
+  UpdateDetailedAcademicWarningLog 
+} from '@modules/m2-student-Affairs/interfaces/academic-warning.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (DetailedAcademicWarningLogs)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class DetailedAcademicWarningLogsService extends BaseApiService<
   DetailedAcademicWarningLog, 
-  CreateDetailedAcademicWarningLogPayload, 
-  UpdateDetailedAcademicWarningLogPayload
+  CreateDetailedAcademicWarningLog, 
+  UpdateDetailedAcademicWarningLog
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

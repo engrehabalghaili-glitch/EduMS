@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { StatisticsArchivesService } from './statistics-archives.service';
-import { StatisticsArchive, CreateStatisticsArchivePayload, UpdateStatisticsArchivePayload } from '../../../../core/api/interfaces/M6_StatisticsReports/statisticsarchive.interface';
+import { StatisticsArchive, CreateStatisticsArchive, UpdateStatisticsArchive } from '@modules/m6-statistics-reports/interfaces/statistics-archive.dto';
 
 type StatisticsArchivesStoreState = {
   items: StatisticsArchive[];
@@ -45,7 +45,7 @@ export const StatisticsArchivesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateStatisticsArchivePayload>(
+    create: rxMethod<CreateStatisticsArchive>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const StatisticsArchivesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateStatisticsArchivePayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateStatisticsArchive}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

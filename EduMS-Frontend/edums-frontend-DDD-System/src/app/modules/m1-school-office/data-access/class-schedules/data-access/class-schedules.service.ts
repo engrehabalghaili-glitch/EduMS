@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   ClassSchedule, 
-  CreateClassSchedulePayload, 
-  UpdateClassSchedulePayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/classschedule.interface';
+  CreateClassScheduleDto, 
+  UpdateClassScheduleDto 
+} from '@modules/m1-school-office/interface/class-schedule';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (ClassSchedules)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class ClassSchedulesService extends BaseApiService<
   ClassSchedule, 
-  CreateClassSchedulePayload, 
-  UpdateClassSchedulePayload
+  CreateClassScheduleDto, 
+  UpdateClassScheduleDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

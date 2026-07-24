@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { UsageViolationsService } from './usage-violations.service';
-import { UsageViolation, CreateUsageViolationPayload, UpdateUsageViolationPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/usageviolation.interface';
+import { UsageViolation, CreateUsageViolationRequest, UpdateUsageViolationRequest } from '@modules/m4-assets-logistics/interfaces/usage-violations';
 
 type UsageViolationsStoreState = {
   items: UsageViolation[];
@@ -45,7 +45,7 @@ export const UsageViolationsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateUsageViolationPayload>(
+    create: rxMethod<CreateUsageViolationRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const UsageViolationsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateUsageViolationPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateUsageViolationRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

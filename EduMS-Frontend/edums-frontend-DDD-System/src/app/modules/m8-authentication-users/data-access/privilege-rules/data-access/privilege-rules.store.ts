@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { PrivilegeRulesService } from './privilege-rules.service';
-import { PrivilegeRule, CreatePrivilegeRulePayload, UpdatePrivilegeRulePayload } from '../../../../core/api/interfaces/M8_AuthenticationUsers/privilegerule.interface';
+import { PrivilegeRule, CreatePrivilegeRule, UpdatePrivilegeRule } from '@modules/m8-authentication-users/interfaces/privilege-rule.models';
 
 type PrivilegeRulesStoreState = {
   items: PrivilegeRule[];
@@ -45,7 +45,7 @@ export const PrivilegeRulesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreatePrivilegeRulePayload>(
+    create: rxMethod<CreatePrivilegeRule>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const PrivilegeRulesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdatePrivilegeRulePayload}>(
+    update: rxMethod<{id: number | string, payload: UpdatePrivilegeRule}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

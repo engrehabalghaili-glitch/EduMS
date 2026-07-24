@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   JournalEntryLine, 
-  CreateJournalEntryLinePayload, 
-  UpdateJournalEntryLinePayload 
-} from '../../../../core/api/interfaces/M5_FinancialManagement/journalentryline.interface';
+  CreateJournalEntryLineDto, 
+  UpdateJournalEntryLineDto 
+} from '@modules/m5-Financial-Management/interfaces/journal-entry-line.interface';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (JournalEntryLines)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class JournalEntryLinesService extends BaseApiService<
   JournalEntryLine, 
-  CreateJournalEntryLinePayload, 
-  UpdateJournalEntryLinePayload
+  CreateJournalEntryLineDto, 
+  UpdateJournalEntryLineDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

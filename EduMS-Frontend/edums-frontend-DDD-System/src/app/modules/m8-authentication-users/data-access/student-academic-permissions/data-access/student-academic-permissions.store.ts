@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { StudentAcademicPermissionsService } from './student-academic-permissions.service';
-import { StudentAcademicPermission, CreateStudentAcademicPermissionPayload, UpdateStudentAcademicPermissionPayload } from '../../../../core/api/interfaces/M8_AuthenticationUsers/studentacademicpermission.interface';
+import { StudentAcademicPermission, CreateStudentAcademicPermission, UpdateStudentAcademicPermission } from '@modules/m8-authentication-users/interfaces/student-academic-permission.models';
 
 type StudentAcademicPermissionsStoreState = {
   items: StudentAcademicPermission[];
@@ -45,7 +45,7 @@ export const StudentAcademicPermissionsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateStudentAcademicPermissionPayload>(
+    create: rxMethod<CreateStudentAcademicPermission>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const StudentAcademicPermissionsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateStudentAcademicPermissionPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateStudentAcademicPermission}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { DirectorateStatisticalReportsService } from './directorate-statistical-reports.service';
-import { DirectorateStatisticalReport, CreateDirectorateStatisticalReportPayload, UpdateDirectorateStatisticalReportPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/directoratestatisticalreport.interface';
+import { DirectorateStatisticalReport, CreateDirectorateStatisticalReportDto, UpdateDirectorateStatisticalReportDto } from '@modules/m1-school-office/interface/directorate-statistical-report';
 
 type DirectorateStatisticalReportsStoreState = {
   items: DirectorateStatisticalReport[];
@@ -45,7 +45,7 @@ export const DirectorateStatisticalReportsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateDirectorateStatisticalReportPayload>(
+    create: rxMethod<CreateDirectorateStatisticalReportDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const DirectorateStatisticalReportsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateDirectorateStatisticalReportPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateDirectorateStatisticalReportDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

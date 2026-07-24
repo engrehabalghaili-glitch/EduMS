@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetFeasibilityRiskAnalysisesService } from './asset-feasibility-risk-analysises.service';
-import { AssetFeasibilityRiskAnalysis, CreateAssetFeasibilityRiskAnalysisPayload, UpdateAssetFeasibilityRiskAnalysisPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetfeasibilityriskanalysise.interface';
+import { AssetFeasibilityRiskAnalysis, CreateAssetFeasibilityRiskAnalysisRequest, UpdateAssetFeasibilityRiskAnalysisRequest } from '@modules/m4-assets-logistics/interfaces/asset-feasibility-risk-analyses';
 
 type AssetFeasibilityRiskAnalysisesStoreState = {
   items: AssetFeasibilityRiskAnalysis[];
@@ -45,7 +45,7 @@ export const AssetFeasibilityRiskAnalysisesStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetFeasibilityRiskAnalysisPayload>(
+    create: rxMethod<CreateAssetFeasibilityRiskAnalysisRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetFeasibilityRiskAnalysisesStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetFeasibilityRiskAnalysisPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetFeasibilityRiskAnalysisRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

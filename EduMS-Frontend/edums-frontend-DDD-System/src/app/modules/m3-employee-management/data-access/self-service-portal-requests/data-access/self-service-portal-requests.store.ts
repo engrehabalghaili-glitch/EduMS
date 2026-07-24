@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { SelfServicePortalRequestsService } from './self-service-portal-requests.service';
-import { SelfServicePortalRequest, CreateSelfServicePortalRequestPayload, UpdateSelfServicePortalRequestPayload } from '../../../../core/api/interfaces/M3_EmployeeManagement/selfserviceportalrequest.interface';
+import { SelfServicePortalRequest, CreateSelfServicePortalRequestRequest, UpdateSelfServicePortalRequestRequest } from '@modules/m3-employee-management/interfaces/self-service-portal-request.types';
 
 type SelfServicePortalRequestsStoreState = {
   items: SelfServicePortalRequest[];
@@ -45,7 +45,7 @@ export const SelfServicePortalRequestsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateSelfServicePortalRequestPayload>(
+    create: rxMethod<CreateSelfServicePortalRequestRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const SelfServicePortalRequestsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateSelfServicePortalRequestPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateSelfServicePortalRequestRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

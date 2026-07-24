@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   AssetComplianceAudit, 
-  CreateAssetComplianceAuditPayload, 
-  UpdateAssetComplianceAuditPayload 
-} from '../../../../core/api/interfaces/M4_AssetLogistics/assetcomplianceaudit.interface';
+  CreateAssetComplianceAuditRequest, 
+  UpdateAssetComplianceAuditRequest 
+} from '@modules/m4-assets-logistics/interfaces/asset-compliance-audits';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (AssetComplianceAudits)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class AssetComplianceAuditsService extends BaseApiService<
   AssetComplianceAudit, 
-  CreateAssetComplianceAuditPayload, 
-  UpdateAssetComplianceAuditPayload
+  CreateAssetComplianceAuditRequest, 
+  UpdateAssetComplianceAuditRequest
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

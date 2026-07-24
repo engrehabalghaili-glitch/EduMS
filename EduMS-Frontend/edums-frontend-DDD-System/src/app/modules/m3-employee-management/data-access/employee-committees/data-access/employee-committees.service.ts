@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   EmployeeCommittee, 
-  CreateEmployeeCommitteePayload, 
-  UpdateEmployeeCommitteePayload 
-} from '../../../../core/api/interfaces/M3_EmployeeManagement/employeecommittee.interface';
+  CreateEmployeeCommittee, 
+  UpdateEmployeeCommittee 
+} from '@modules/m3-employee-management/interfaces/employee-committee.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (EmployeeCommittees)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class EmployeeCommitteesService extends BaseApiService<
   EmployeeCommittee, 
-  CreateEmployeeCommitteePayload, 
-  UpdateEmployeeCommitteePayload
+  CreateEmployeeCommittee, 
+  UpdateEmployeeCommittee
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

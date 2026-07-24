@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   StudentBasePermission, 
-  CreateStudentBasePermissionPayload, 
-  UpdateStudentBasePermissionPayload 
-} from '../../../../core/api/interfaces/M8_AuthenticationUsers/studentbasepermission.interface';
+  CreateStudentBasePermission, 
+  UpdateStudentBasePermission 
+} from '@modules/m8-authentication-users/interfaces/student-base-permission.models';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (StudentBasePermissions)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class StudentBasePermissionsService extends BaseApiService<
   StudentBasePermission, 
-  CreateStudentBasePermissionPayload, 
-  UpdateStudentBasePermissionPayload
+  CreateStudentBasePermission, 
+  UpdateStudentBasePermission
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

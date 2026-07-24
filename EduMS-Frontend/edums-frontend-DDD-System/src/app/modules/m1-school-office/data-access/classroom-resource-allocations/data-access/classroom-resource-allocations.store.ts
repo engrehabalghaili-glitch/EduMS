@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { ClassroomResourceAllocationsService } from './classroom-resource-allocations.service';
-import { ClassroomResourceAllocation, CreateClassroomResourceAllocationPayload, UpdateClassroomResourceAllocationPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/classroomresourceallocation.interface';
+import { ClassroomResourceAllocation, CreateClassroomResourceAllocationDto, UpdateClassroomResourceAllocationDto } from '@modules/m1-school-office/interface/classroom-resource-allocation';
 
 type ClassroomResourceAllocationsStoreState = {
   items: ClassroomResourceAllocation[];
@@ -45,7 +45,7 @@ export const ClassroomResourceAllocationsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateClassroomResourceAllocationPayload>(
+    create: rxMethod<CreateClassroomResourceAllocationDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const ClassroomResourceAllocationsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateClassroomResourceAllocationPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateClassroomResourceAllocationDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

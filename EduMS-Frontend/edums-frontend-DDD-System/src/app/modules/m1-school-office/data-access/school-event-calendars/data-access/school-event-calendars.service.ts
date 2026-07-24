@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   SchoolEventCalendar, 
-  CreateSchoolEventCalendarPayload, 
-  UpdateSchoolEventCalendarPayload 
-} from '../../../../core/api/interfaces/M1_SchoolAdmin/schooleventcalendar.interface';
+  CreateSchoolEventCalendarDto, 
+  UpdateSchoolEventCalendarDto 
+} from '@modules/m1-school-office/interface/school-event-calendar';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (SchoolEventCalendars)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class SchoolEventCalendarsService extends BaseApiService<
   SchoolEventCalendar, 
-  CreateSchoolEventCalendarPayload, 
-  UpdateSchoolEventCalendarPayload
+  CreateSchoolEventCalendarDto, 
+  UpdateSchoolEventCalendarDto
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   TransportationService, 
-  CreateTransportationServicePayload, 
-  UpdateTransportationServicePayload 
-} from '../../../../core/api/interfaces/M7_EmergencyManagement/transportationservice.interface';
+  CreateTransportationService, 
+  UpdateTransportationService 
+} from '@modules/m7-emergency-management/interfaces/transportation-service.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (TransportationServices)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class TransportationServicesService extends BaseApiService<
   TransportationService, 
-  CreateTransportationServicePayload, 
-  UpdateTransportationServicePayload
+  CreateTransportationService, 
+  UpdateTransportationService
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

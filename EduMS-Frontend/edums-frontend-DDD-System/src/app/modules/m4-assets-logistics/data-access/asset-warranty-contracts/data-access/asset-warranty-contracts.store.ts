@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { AssetWarrantyContractsService } from './asset-warranty-contracts.service';
-import { AssetWarrantyContract, CreateAssetWarrantyContractPayload, UpdateAssetWarrantyContractPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/assetwarrantycontract.interface';
+import { AssetWarrantyContract, CreateAssetWarrantyContractRequest, UpdateAssetWarrantyContractRequest } from '@modules/m4-assets-logistics/interfaces/asset-warranty-contracts';
 
 type AssetWarrantyContractsStoreState = {
   items: AssetWarrantyContract[];
@@ -45,7 +45,7 @@ export const AssetWarrantyContractsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateAssetWarrantyContractPayload>(
+    create: rxMethod<CreateAssetWarrantyContractRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const AssetWarrantyContractsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateAssetWarrantyContractPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateAssetWarrantyContractRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

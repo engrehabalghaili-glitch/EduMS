@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { MaintenanceNotificationsService } from './maintenance-notifications.service';
-import { MaintenanceNotification, CreateMaintenanceNotificationPayload, UpdateMaintenanceNotificationPayload } from '../../../../core/api/interfaces/M4_AssetLogistics/maintenancenotification.interface';
+import { MaintenanceNotification, CreateMaintenanceNotificationRequest, UpdateMaintenanceNotificationRequest } from '@modules/m4-assets-logistics/interfaces/maintenance-notifications';
 
 type MaintenanceNotificationsStoreState = {
   items: MaintenanceNotification[];
@@ -45,7 +45,7 @@ export const MaintenanceNotificationsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateMaintenanceNotificationPayload>(
+    create: rxMethod<CreateMaintenanceNotificationRequest>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const MaintenanceNotificationsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateMaintenanceNotificationPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateMaintenanceNotificationRequest}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(

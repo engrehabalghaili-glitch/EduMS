@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   EmployeeDocument, 
-  CreateEmployeeDocumentPayload, 
-  UpdateEmployeeDocumentPayload 
-} from '../../../../core/api/interfaces/M3_EmployeeManagement/employeedocument.interface';
+  CreateEmployeeDocument, 
+  UpdateEmployeeDocument 
+} from '@modules/m3-employee-management/interfaces/employee-document.types';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (EmployeeDocuments)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class EmployeeDocumentsService extends BaseApiService<
   EmployeeDocument, 
-  CreateEmployeeDocumentPayload, 
-  UpdateEmployeeDocumentPayload
+  CreateEmployeeDocument, 
+  UpdateEmployeeDocument
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

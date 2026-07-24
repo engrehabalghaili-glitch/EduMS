@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BaseApiService } from '../../../../core/api/services/base-api.service';
+import { BaseApiService } from '@base-api';
 import { 
   PermissionBaseModule, 
-  CreatePermissionBaseModulePayload, 
-  UpdatePermissionBaseModulePayload 
-} from '../../../../core/api/interfaces/M8_AuthenticationUsers/permissionbasemodule.interface';
+  CreatePermissionBaseModule, 
+  UpdatePermissionBaseModule 
+} from '@modules/m8-authentication-users/interfaces/permission-base-module.models';
 
 /**
  * خدمة (Service) متخصصة لإدارة عمليات (PermissionBaseModules)
@@ -16,8 +16,8 @@ import {
 @Injectable({ providedIn: 'root' })
 export class PermissionBaseModulesService extends BaseApiService<
   PermissionBaseModule, 
-  CreatePermissionBaseModulePayload, 
-  UpdatePermissionBaseModulePayload
+  CreatePermissionBaseModule, 
+  UpdatePermissionBaseModule
 > {
   /**
    * الرابط الأساسي للـ API المستخرج من الـ Controller في الباك إند

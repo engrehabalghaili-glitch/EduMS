@@ -3,7 +3,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { DirectorateLegalCaseLogsService } from './directorate-legal-case-logs.service';
-import { DirectorateLegalCaseLog, CreateDirectorateLegalCaseLogPayload, UpdateDirectorateLegalCaseLogPayload } from '../../../../core/api/interfaces/M1_SchoolAdmin/directoratelegalcaselog.interface';
+import { DirectorateLegalCaseLog, CreateDirectorateLegalCaseLogDto, UpdateDirectorateLegalCaseLogDto } from '@modules/m1-school-office/interface/directorate-legal-case-log';
 
 type DirectorateLegalCaseLogsStoreState = {
   items: DirectorateLegalCaseLog[];
@@ -45,7 +45,7 @@ export const DirectorateLegalCaseLogsStore = signalStore(
         ))
       )
     ),
-    create: rxMethod<CreateDirectorateLegalCaseLogPayload>(
+    create: rxMethod<CreateDirectorateLegalCaseLogDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap((payload) => service.create(payload).pipe(
@@ -61,7 +61,7 @@ export const DirectorateLegalCaseLogsStore = signalStore(
         ))
       )
     ),
-    update: rxMethod<{id: number | string, payload: UpdateDirectorateLegalCaseLogPayload}>(
+    update: rxMethod<{id: number | string, payload: UpdateDirectorateLegalCaseLogDto}>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({id, payload}) => service.update(id, payload).pipe(
