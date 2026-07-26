@@ -1,0 +1,21 @@
+<div class="tabs-bar" role="tablist">
+  @for (tab of tabs(); track tab.key) {
+    <button
+      class="tab-btn"
+      [class.active]="currentTab() === tab.key"
+      [class.tab-disabled]="!!tab.disabled"
+      [disabled]="!!tab.disabled"
+      [attr.aria-selected]="currentTab() === tab.key"
+      (click)="selectTab(tab.key)"
+      type="button"
+    >
+      @if (tab.icon) {
+        <i [class]="'tab-icon ' + tab.icon"></i>
+      }
+      <span class="tab-label">{{ tab.label }}</span>
+      @if (tab.badge != null) {
+        <span class="tab-badge" [class]="'badge-' + (tab.badgeColor ?? 'primary')">{{ tab.badge }}</span>
+      }
+    </button>
+  }
+</div>

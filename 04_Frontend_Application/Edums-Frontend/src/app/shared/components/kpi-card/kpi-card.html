@@ -1,0 +1,46 @@
+<div
+  class="kpi-card"
+  [ngClass]="['kpi-' + severity(), clickable() ? 'kpi-clickable' : '']"
+  (click)="clickable() ? onClick.emit() : null"
+>
+  @if (loading()) {
+    <div class="kpi-skeleton">
+      <p-skeleton width="2.5rem" height="2.5rem" borderRadius="0.625rem" />
+      <div class="kpi-skel-body">
+        <p-skeleton width="5rem" height="0.625rem" />
+        <p-skeleton width="4rem" height="1.25rem" />
+      </div>
+    </div>
+  } @else {
+    @if (icon()) {
+      <div class="kpi-icon-wrap" [style.background]="iconBgColor() || currentColors().iconBg">
+        <i [class]="'kpi-icon pi ' + icon()"></i>
+      </div>
+    }
+    <div class="kpi-body">
+      <span class="kpi-label">{{ title() }}</span>
+      <div class="kpi-metric-row">
+        <span class="kpi-value">{{ displayValue() }}</span>
+        @if (trend()) {
+          <span class="kpi-trend" [ngClass]="trendClass()">
+            <i [class]="trendIcon()"></i>
+            @if (trendValue()) {
+              <span class="trend-num">{{ trendValue() }}%</span>
+            }
+          </span>
+        }
+      </div>
+      @if (subtitle()) {
+        <span class="kpi-subtitle">{{ subtitle() }}</span>
+      }
+      @if (progressValue() > 0) {
+        <p-progressBar
+          [value]="progressValue()"
+          [color]="progressColor() || currentColors().progress"
+          [showValue]="false"
+          styleClass="kpi-progress"
+        />
+      }
+    </div>
+  }
+</div>

@@ -1,0 +1,11 @@
+<p-tag
+  [value]="status()"
+  [severity]="severityMap[severity()]"
+  [icon]="icon() || undefined"
+  [rounded]="rounded()"
+  [ngClass]="[
+    'stat-tag',
+    size() === 'small' ? 'stat-tag-sm' : size() === 'large' ? 'stat-tag-lg' : '',
+    pulsing() ? 'stat-pulsing' : ''
+  ]"
+/>

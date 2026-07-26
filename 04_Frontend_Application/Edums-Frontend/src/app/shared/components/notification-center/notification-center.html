@@ -1,0 +1,84 @@
+<div class="nc-root">
+  <button
+    pButton
+    type="button"
+    class="p-button-sm p-button-text nc-trigger"
+    (click)="popover.toggle($event)"
+    [pTooltip]="'الإشعارات'"
+    tooltipPosition="bottom"
+  >
+    <i class="pi pi-bell"></i>
+    @if (unreadCount() > 0) {
+      <p-badge [value]="unreadCount()" severity="danger" class="nc-badge"></p-badge>
+    }
+  </button>
+
+  <p-popover #popover [dismissable]="true" [style]="{ width: '22rem' }">
+    <ng-template pTemplate="content">
+      <div class="nc-panel">
+        <div class="nc-header">
+          <span class="nc-header-title">الإشعارات</span>
+          <button
+            pButton
+            type="button"
+            class="p-button-sm p-button-text"
+            (click)="markAllRead()"
+          >تحديد الكل مقروء</button>
+        </div>
+
+        @if (loading()) {
+          <div class="nc-loading">
+            @for (_ of [0,1,2,3]; track _) {
+              <div class="nc-skel-item">
+                <p-skeleton width="2rem" height="2rem" borderRadius="50%" />
+                <div class="nc-skel-lines">
+                  <p-skeleton width="80%" height="0.625rem" borderRadius="0.25rem" />
+                  <p-skeleton width="60%" height="0.5rem" borderRadius="0.25rem" />
+                </div>
+              </div>
+            }
+          </div>
+        } @else if (notifications().length === 0) {
+          <div class="nc-empty">
+            <i class="pi pi-inbox nc-empty-icon"></i>
+            <span>لا توجد إشعارات</span>
+          </div>
+        } @else {
+          <p-scrollPanel [style]="{ maxHeight: maxHeight() }" class="nc-scroll">
+            @for (notif of notifications(); track notif.id) {
+              <div
+                class="nc-item"
+                [ngClass]="{ 'nc-unread': !notif.read }"
+                (click)="notificationClick(notif)"
+              >
+                @if (notif.avatar) {
+                  <img [src]="notif.avatar" alt="" class="nc-avatar" />
+                } @else {
+                  <span class="nc-type-icon" [style.background]="typeColor(notif.type)">
+                    <i [class]="typeIcon(notif.type)"></i>
+                  </span>
+                }
+                <div class="nc-content">
+                  <div class="nc-title-row">
+                    <span class="nc-title">{{ notif.title }}</span>
+                    <span class="nc-time">{{ timeAgo(notif.time) }}</span>
+                  </div>
+                  <p class="nc-msg">{{ notif.message }}</p>
+                </div>
+              </div>
+            }
+          </p-scrollPanel>
+        }
+
+        <div class="nc-footer">
+          <button
+            pButton
+            type="button"
+            class="p-button-sm p-button-text p-button-block"
+            (click)="viewAll()"
+          >عرض الكل</button>
+        </div>
+      </div>
+    </ng-template>
+  </p-popover>
+</div>

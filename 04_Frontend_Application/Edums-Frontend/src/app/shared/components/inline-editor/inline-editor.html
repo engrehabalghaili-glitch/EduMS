@@ -1,0 +1,83 @@
+@if (editing()) {
+  <div class="ie-editing" [ngClass]="'ie-size-' + size()">
+    @if (label()) {
+      <label class="ie-label">{{ label() }}</label>
+    }
+
+    @switch (type()) {
+      @case ('text') {
+        <input
+          pInputText
+          type="text"
+          [ngModel]="editValue()"
+          (ngModelChange)="editValue.set($event)"
+          [placeholder]="placeholder()"
+          [maxlength]="maxlengthOrNull()"
+          (keydown)="onKeydown($event)"
+          autofocus
+          class="ie-input"
+        />
+      }
+      @case ('number') {
+        <p-inputNumber
+          [ngModel]="editValue()"
+          (ngModelChange)="editValue.set($event)"
+          [placeholder]="placeholder()"
+          [maxlength]="maxlengthOrNull()"
+          (keydown)="onKeydown($event)"
+          inputStyleClass="ie-input"
+        />
+      }
+      @case ('textarea') {
+        <textarea
+          pInputText
+          [ngModel]="editValue()"
+          (ngModelChange)="editValue.set($event)"
+          [placeholder]="placeholder()"
+          [maxlength]="maxlengthOrNull()"
+          (keydown)="onKeydown($event)"
+          rows="3"
+          autofocus
+          class="ie-input ie-textarea"
+        ></textarea>
+      }
+      @case ('dropdown') {
+        <p-select
+          [ngModel]="editValue()"
+          (ngModelChange)="editValue.set($event)"
+          [options]="options()"
+          [optionLabel]="optionLabel()"
+          [optionValue]="optionValue()"
+          [placeholder]="placeholder()"
+          styleClass="ie-input"
+        />
+      }
+    }
+
+    <div class="ie-actions">
+      <button
+        pButton
+        type="button"
+        icon="pi pi-check"
+        class="p-button-sm p-button-rounded p-button-text p-button-success"
+        (click)="onSave()"
+      ></button>
+      <button
+        pButton
+        type="button"
+        icon="pi pi-times"
+        class="p-button-sm p-button-rounded p-button-text p-button-danger"
+        (click)="onCancel()"
+      ></button>
+    </div>
+  </div>
+} @else {
+  <div class="ie-display" (click)="startEditing()" [ngClass]="styleClass()">
+    @if (value() !== null && value() !== undefined && value() !== '') {
+      <span class="ie-value">{{ value() }}</span>
+    } @else {
+      <span class="ie-placeholder">{{ placeholder() }}</span>
+    }
+    <i class="pi pi-fw pi-pencil ie-pencil"></i>
+  </div>
+}

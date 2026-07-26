@@ -1,0 +1,57 @@
+using EduMS.Application.Common.Responses;
+using EduMS.Application.M2_StudentAffairs.Commands.Students;
+using EduMS.Application.M2_StudentAffairs.DTOs.Students;
+using EduMS.Application.M2_StudentAffairs.Queries.Students;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace EduMS.WebApi.Controllers.v1.M2_StudentAffairs;
+
+[ApiController]
+[Route("api/v1/[controller]")]
+[Authorize]
+public class StudentsController(MediatR.ISender sender) : ControllerBase
+{
+
+    [HttpGet]
+    public async Task<ActionResult<ApiResponse<IEnumerable<StudentDto>>>> GetAll()
+    {
+        var result = await sender.Send(new GetAllStudentsQuery());
+        return Ok(ApiResponse<IEnumerable<StudentDto>>.Success(result));
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<ApiResponse<StudentDto>>> GetById(long id)
+    {
+        var result = await sender.Send(new GetStudentByIdQuery { Id = id });
+        return Ok(ApiResponse<StudentDto>.Success(result));
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateStudentDto dto)
+    {
+        var id = await sender.Send(new CreateStudentCommand { Dto = dto });
+        return Ok(ApiResponse<long>.Success(id, "Created successfully."));
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateStudentDto dto)
+    {
+        dto.Id = id;
+        var result = await sender.Send(new UpdateStudentCommand { Dto = dto });
+        return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
+    {
+        var result = await sender.Send(new DeleteStudentCommand { Id = id });
+        return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
+    }
+}
+
+
+

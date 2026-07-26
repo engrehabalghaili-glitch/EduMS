@@ -1,0 +1,65 @@
+<p-toolbar [styleClass]="'ph-toolbar' + (sticky() ? ' ph-sticky' : '')">
+  <ng-template pTemplate="start">
+    <div class="ph-start">
+      @if (backButton()) {
+        <button
+          pButton
+          type="button"
+          icon="pi pi-arrow-right"
+          class="p-button-sm p-button-text p-button-rounded ph-back-btn"
+          pTooltip="رجوع"
+          tooltipPosition="bottom"
+          [disabled]="loading()"
+          (click)="handleBack()"
+        ></button>
+      }
+      @if (icon()) {
+        <i [class]="'ph-page-icon pi ' + icon()"></i>
+      }
+      <div class="ph-text">
+        <h1 class="ph-title">{{ title() }}</h1>
+        @if (subtitle()) {
+          <p class="ph-subtitle">{{ subtitle() }}</p>
+        }
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="end">
+    <div class="ph-actions">
+      @if (actionsSlot()) {
+        <ng-container [ngTemplateOutlet]="actionsSlot()!" />
+      }
+      @for (action of actions(); track trackAction($index, action)) {
+        @if (action.items && action.items.length > 0) {
+          <p-splitButton
+            [label]="action.label"
+            [icon]="action.icon || ''"
+            [severity]="mapSeverity(action.severity)"
+            [disabled]="loading() || action.disabled"
+            [model]="convertToMenuItems(action.items)"
+            (onClick)="action.command()"
+            size="small"
+          />
+        } @else {
+          <button
+            pButton
+            type="button"
+            [label]="action.label"
+            [icon]="action.icon || ''"
+            [severity]="mapSeverity(action.severity)"
+            [disabled]="loading() || action.disabled"
+            size="small"
+            (click)="action.command()"
+          ></button>
+        }
+      }
+    </div>
+  </ng-template>
+</p-toolbar>
+
+@if (breadcrumbItems().length) {
+  <div class="ph-breadcrumb-row">
+    <p-breadcrumb [model]="breadcrumbItems()" />
+  </div>
+}

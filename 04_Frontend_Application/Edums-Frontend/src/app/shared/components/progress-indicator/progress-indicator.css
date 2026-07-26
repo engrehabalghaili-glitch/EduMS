@@ -1,0 +1,57 @@
+:host {
+  display: block;
+}
+
+.pi-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.pi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pi-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #52525b;
+}
+
+.pi-value {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #27272a;
+}
+
+.pi-value-inline {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #27272a;
+  text-align: center;
+}
+
+.pi-fill {
+  height: 100%;
+  border-radius: 0.25rem;
+  transition: width 0.35s ease;
+}
+
+.pi-size-small .pi-fill {
+  border-radius: 0.125rem;
+}
+
+.pi-size-large .pi-fill {
+  border-radius: 0.375rem;
+}
+
+:host ::ng-deep .p-progressbar {
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+:host ::ng-deep .p-progressbar .p-progressbar-value {
+  display: none;
+}

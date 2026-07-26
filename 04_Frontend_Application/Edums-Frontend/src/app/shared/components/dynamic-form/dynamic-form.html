@@ -1,0 +1,158 @@
+<form [formGroup]="formGroup()" (ngSubmit)="submit()" class="df-form">
+  <div class="df-grid" [style.grid-template-columns]="gridColumns()">
+    @for (field of formConfig(); track field.name) {
+      @if (isVisible(field)) {
+        <div class="df-field" [style.grid-column]="'span ' + fieldCols(field)">
+          <label [for]="fieldId(field)" class="df-label">{{ field.label }}</label>
+
+          @switch (field.type) {
+            @case ('text') {
+              <input
+                [id]="fieldId(field)"
+                pInputText
+                type="text"
+                [formControlName]="field.name"
+                [placeholder]="field.placeholder ?? ''"
+                [readonly]="isDisabled(field)"
+                class="df-w-full"
+              />
+            }
+            @case ('textarea') {
+              <textarea
+                [id]="fieldId(field)"
+                pInputText
+                [formControlName]="field.name"
+                [placeholder]="field.placeholder ?? ''"
+                [readonly]="isDisabled(field)"
+                [rows]="field.rows ?? 3"
+                class="df-w-full"
+              ></textarea>
+            }
+            @case ('number') {
+              <p-inputNumber
+                [inputId]="fieldId(field)"
+                [formControlName]="field.name"
+                [placeholder]="field.placeholder ?? ''"
+                [readonly]="isDisabled(field)"
+                [min]="field.min"
+                [max]="field.max"
+                [step]="field.step"
+                inputStyleClass="df-w-full"
+              />
+            }
+            @case ('dropdown') {
+              <p-select
+                [inputId]="fieldId(field)"
+                [formControlName]="field.name"
+                [options]="field.options ?? []"
+                [optionLabel]="'label'"
+                [optionValue]="'value'"
+                [placeholder]="field.placeholder ?? ''"
+                [disabled]="isDisabled(field)"
+                styleClass="df-w-full"
+              />
+            }
+            @case ('multiSelect') {
+              <p-multiSelect
+                [inputId]="fieldId(field)"
+                [formControlName]="field.name"
+                [options]="field.options ?? []"
+                optionLabel="label"
+                [placeholder]="field.placeholder ?? ''"
+                [disabled]="isDisabled(field)"
+                styleClass="df-w-full"
+              />
+            }
+            @case ('date') {
+              <p-datepicker
+                [inputId]="fieldId(field)"
+                [formControlName]="field.name"
+                [placeholder]="field.placeholder ?? ''"
+                [disabled]="isDisabled(field)"
+                styleClass="df-w-full"
+                [showIcon]="true"
+                [iconDisplay]="'input'"
+              />
+            }
+            @case ('checkbox') {
+              <div class="df-checkbox-wrap">
+                <p-checkbox
+                  [inputId]="fieldId(field)"
+                  [formControlName]="field.name"
+                  [binary]="true"
+                  [disabled]="isDisabled(field)"
+                />
+                <label [for]="fieldId(field)" class="df-checkbox-label">{{ field.label }}</label>
+              </div>
+            }
+            @case ('radio') {
+              <div class="df-radio-group">
+                @for (opt of field.options ?? []; track opt.value) {
+                  <div class="df-radio-item">
+                    <p-radioButton
+                      [inputId]="fieldId(field) + '-' + opt.value"
+                      [value]="opt.value"
+                      [formControlName]="field.name"
+                      [disabled]="isDisabled(field)"
+                    />
+                    <label [for]="fieldId(field) + '-' + opt.value" class="df-radio-label">{{ opt.label }}</label>
+                  </div>
+                }
+              </div>
+            }
+            @case ('switch') {
+              <p-toggleswitch
+                [inputId]="fieldId(field)"
+                [formControlName]="field.name"
+                [disabled]="isDisabled(field)"
+              />
+            }
+            @case ('editor') {
+              <p-editor
+                [formControlName]="field.name"
+                [readonly]="isDisabled(field)"
+                styleClass="df-editor"
+              />
+            }
+            @case ('mask') {
+              <p-inputMask
+                [inputId]="fieldId(field)"
+                [formControlName]="field.name"
+                [mask]="field.mask ?? ''"
+                [placeholder]="field.placeholder ?? ''"
+                [disabled]="isDisabled(field)"
+                styleClass="df-w-full"
+              />
+            }
+          }
+
+          @if (field.hint) {
+            <small class="df-hint">{{ field.hint }}</small>
+          }
+
+          @if (getFieldErrors(field).length > 0) {
+            <div class="df-errors">
+              @for (err of getFieldErrors(field); track err) {
+                <small class="df-error">{{ err }}</small>
+              }
+            </div>
+          }
+        </div>
+      }
+    }
+  </div>
+
+  <div class="df-actions">
+    @if (showCancel()) {
+      <button pButton type="button" [label]="cancelLabel()" class="p-button-sm p-button-text" (click)="cancel()"></button>
+    }
+    <button
+      pButton
+      type="submit"
+      [label]="submitLabel()"
+      [loading]="loading()"
+      [disabled]="formGroup().invalid || loading()"
+      class="p-button-sm"
+    ></button>
+  </div>
+</form>

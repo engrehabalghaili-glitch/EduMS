@@ -1,0 +1,55 @@
+<div class="input-group" [ngClass]="{ 'has-error': errorMessage() }">
+  @if (label()) {
+    <label class="input-label">{{ label() }}</label>
+  }
+
+  <p-iconfield [iconPosition]="iconPosition()" class="w-full">
+    @if (prefixIcon()) {
+      <p-inputIcon styleClass="pi {{ prefixIcon() }}" />
+    }
+
+    @if (type() === 'number') {
+      <p-inputNumber
+        [ngModel]="value()"
+        (ngModelChange)="onValueChange($event)"
+        [placeholder]="placeholder()"
+        [disabled]="disabled()"
+        [variant]="variant()"
+        [fluid]="true"
+        [mode]="inputMode()"
+        [currency]="currency()"
+        [minFractionDigits]="minFractionDigits()"
+        [maxFractionDigits]="maxFractionDigits()"
+        [min]="min()"
+        [max]="max()"
+        [showClear]="true"
+        (onBlur)="onBlur()"
+      />
+    } @else {
+      <input
+        pInputText
+        [ngModel]="value()"
+        (ngModelChange)="onValueChange($event)"
+        [placeholder]="placeholder()"
+        [disabled]="disabled()"
+        [variant]="variant()"
+        [fluid]="true"
+        [type]="type()"
+        [class.p-invalid]="!!errorMessage()"
+        (blur)="onBlur()"
+      />
+    }
+
+    @if (suffixIcon()) {
+      <p-inputIcon styleClass="pi {{ suffixIcon() }}" />
+    }
+  </p-iconfield>
+
+  @if (hint() && !errorMessage()) {
+    <span class="hint-msg">{{ hint() }}</span>
+  }
+
+  @if (errorMessage(); as msg) {
+    <span class="error-msg">{{ msg }}</span>
+  }
+</div>

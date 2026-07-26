@@ -1,0 +1,18 @@
+<div class="empty-wrap">
+  <i [class]="icon()"></i>
+  <h3 class="empty-title">{{ title() }}</h3>
+  @if (description()) {
+    <p class="empty-desc">{{ description() }}</p>
+  }
+  @if (showAction() && actionLabel()) {
+    <div class="empty-action">
+      <button
+        pButton
+        type="button"
+        [label]="actionLabel()"
+        [icon]="actionIcon()"
+        (click)="actionClick()"
+      ></button>
+    </div>
+  }
+</div>
