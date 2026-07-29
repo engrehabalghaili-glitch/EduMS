@@ -1,6 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+export interface ApiResponse<T> {
+  succeeded: boolean;
+  message: string;
+  data: T;
+  errors?: string[];
+}
 
 /**
  * كلاس الخدمة الأساسي (Base API Service)
@@ -27,7 +35,9 @@ export abstract class BaseApiService<T, TCreate = T, TUpdate = T> {
    * @returns Observable يحتوي على مصفوفة من النوع الأساسي T
    */
   getAll(): Observable<T[]> {
-    return this.http.get<T[]>(this.baseUrl);
+    return this.http.get<ApiResponse<T[]>>(this.baseUrl).pipe(
+      map(res => res.data)
+    );
   }
 
   /**
@@ -36,7 +46,9 @@ export abstract class BaseApiService<T, TCreate = T, TUpdate = T> {
    * @returns Observable يحتوي على السجل المطلوب من النوع T
    */
   getById(id: number | string): Observable<T> {
-    return this.http.get<T>(`${this.baseUrl}/${id}`);
+    return this.http.get<ApiResponse<T>>(`${this.baseUrl}/${id}`).pipe(
+      map(res => res.data)
+    );
   }
 
   /**
@@ -45,7 +57,9 @@ export abstract class BaseApiService<T, TCreate = T, TUpdate = T> {
    * @returns Observable يحتوي على السجل بعد إنشائه في الخادم
    */
   create(payload: TCreate): Observable<T> {
-    return this.http.post<T>(this.baseUrl, payload);
+    return this.http.post<ApiResponse<T>>(this.baseUrl, payload).pipe(
+      map(res => res.data)
+    );
   }
 
   /**
@@ -54,7 +68,9 @@ export abstract class BaseApiService<T, TCreate = T, TUpdate = T> {
    * @param payload البيانات المرسلة للتعديل
    */
   update(id: number | string, payload: TUpdate): Observable<void> {
-    return this.http.put<void>(`${this.baseUrl}/${id}`, payload);
+    return this.http.put<ApiResponse<any>>(`${this.baseUrl}/${id}`, payload).pipe(
+      map(() => undefined)
+    );
   }
 
   /**
@@ -62,6 +78,8 @@ export abstract class BaseApiService<T, TCreate = T, TUpdate = T> {
    * @param id المعرف الفريد للسجل المراد حذفه
    */
   delete(id: number | string): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<ApiResponse<any>>(`${this.baseUrl}/${id}`).pipe(
+      map(() => undefined)
+    );
   }
 }
