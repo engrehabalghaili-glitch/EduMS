@@ -779,7 +779,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("AssetId");
 
-                    b.ToTable("AssetAssignment");
+                    b.ToTable("AssetAssignments");
                 });
 
             modelBuilder.Entity("EduMS.Domain.Entities.AssetCategory", b =>
@@ -2847,6 +2847,69 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("CommitteeMember");
+                });
+
+            modelBuilder.Entity("EduMS.Domain.Entities.CommunicationTemplate", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(19)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("BodyTemplate")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<long>("CreatedByUserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<DateTimeOffset?>("DeletedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<long?>("DeletedByUserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<DateTimeOffset?>("LastSyncedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<DateTimeOffset?>("ModifiedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<long?>("ModifiedByUserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<string>("SubjectTemplate")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int>("SyncStatus")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<string>("TemplateCode")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("TemplateName")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<Guid>("VersionToken")
+                        .HasColumnType("RAW(16)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CommunicationTemplates");
                 });
 
             modelBuilder.Entity("EduMS.Domain.Entities.CommunityPartnership", b =>
@@ -7636,6 +7699,189 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                     b.ToTable("FeeInvoice");
                 });
 
+            modelBuilder.Entity("EduMS.Domain.Entities.FeePayment", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(19)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("AllocatedInvoicesJson")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("AllocatedItemsJson")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("DECIMAL(18, 2)");
+
+                    b.Property<decimal>("AmountPaid")
+                        .HasColumnType("DECIMAL(18, 2)");
+
+                    b.Property<string>("BankName")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("BankTransactionId")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("BankTransactionRef")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("CheckBank")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<DateTime?>("CheckDate")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<string>("CheckNumber")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("ChequeNumber")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<long?>("CollectedByUserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<DateTime?>("ConfirmationDate")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<long?>("ConfirmedByUserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<decimal>("ConvertedAmount")
+                        .HasColumnType("DECIMAL(18, 2)");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<long>("CreatedByUserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<string>("CreditCardLast4")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("CreditCardType")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("Currency")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<DateTimeOffset?>("DeletedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<long?>("DeletedByUserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<decimal>("ExchangeRate")
+                        .HasColumnType("DECIMAL(18, 2)");
+
+                    b.Property<long?>("InstallmentId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<long?>("InvoiceId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<bool>("IsConfirmed")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<bool>("IsReversed")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<DateTimeOffset?>("LastSyncedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<DateTimeOffset?>("ModifiedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<long?>("ModifiedByUserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("PayerEmail")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("PayerName")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("PayerType")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<int>("PaymentMethod")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<string>("PaymentNumber")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int>("PaymentStatus")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<DateTime?>("PaymentTime")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<string>("PaymentType")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("ReceiptDocumentUrl")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<DateTime?>("ReceiptEmailSentAt")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<string>("ReceiptNumber")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<bool>("ReceiptPrinted")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<bool>("ReceiptSentToEmail")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<DateTime?>("ReversalDate")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<string>("ReversalReason")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<long?>("SchoolAcademicYearId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<long>("SchoolId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<long>("StudentAccountId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<long>("StudentId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<int>("SyncStatus")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<Guid>("VersionToken")
+                        .HasColumnType("RAW(16)");
+
+                    b.Property<string>("WalletType")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentAccountId");
+
+                    b.ToTable("FeePayments");
+                });
+
             modelBuilder.Entity("EduMS.Domain.Entities.FeeStructure", b =>
                 {
                     b.Property<long>("Id")
@@ -8579,215 +8825,6 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                     b.ToTable("KPI_METRIC_RECORD", (string)null);
                 });
 
-            modelBuilder.Entity("EduMS.Domain.Entities.M2_StudentAffairs.Registration", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(19)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("AcademicYearId")
-                        .HasColumnType("NUMBER(19)");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<DateTime?>("ApprovalDate")
-                        .HasColumnType("TIMESTAMP(7)");
-
-                    b.Property<string>("BirthCertificate")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("TIMESTAMP(7)");
-
-                    b.Property<string>("BirthPlace")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<long?>("ConvertedToStudentId")
-                        .HasColumnType("NUMBER(19)");
-
-                    b.Property<string>("CountryOfBirth")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
-
-                    b.Property<long>("CreatedByUserId")
-                        .HasColumnType("NUMBER(19)");
-
-                    b.Property<DateTimeOffset?>("DeletedAt")
-                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
-
-                    b.Property<long?>("DeletedByUserId")
-                        .HasColumnType("NUMBER(19)");
-
-                    b.Property<string>("EmergencyContactName")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("EmergencyContactPhone")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("EmergencyContactRelation")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("FamilyNameAr")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("NVARCHAR2(50)");
-
-                    b.Property<string>("FamilyNameEn")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("FatherNameAr")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("NVARCHAR2(50)");
-
-                    b.Property<string>("FatherNameEn")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("FirstNameAr")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("NVARCHAR2(50)");
-
-                    b.Property<string>("FirstNameEn")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("GrandfatherNameAr")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("GrandfatherNameEn")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<bool>("HasSpecialNeeds")
-                        .HasColumnType("NUMBER(1)");
-
-                    b.Property<string>("IDCardImage")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("NUMBER(1)");
-
-                    b.Property<DateTimeOffset?>("LastSyncedAt")
-                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
-
-                    b.Property<string>("MedicalNotes")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<DateTimeOffset?>("ModifiedAt")
-                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
-
-                    b.Property<long?>("ModifiedByUserId")
-                        .HasColumnType("NUMBER(19)");
-
-                    b.Property<string>("MotherName")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("MotherNationality")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("MotherPhone")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("Nationality")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<long>("ParentId")
-                        .HasColumnType("NUMBER(19)");
-
-                    b.Property<string>("PersonalPhoto")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("PreviousGrade")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("PreviousSchool")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("ReferralSource")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("RejectionReason")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int>("RequestStatus")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<long>("RequestedGradeLevelId")
-                        .HasColumnType("NUMBER(19)");
-
-                    b.Property<DateTime?>("ReviewDate")
-                        .HasColumnType("TIMESTAMP(7)");
-
-                    b.Property<long?>("ReviewedByUserId")
-                        .HasColumnType("NUMBER(19)");
-
-                    b.Property<long>("SchoolId")
-                        .HasColumnType("NUMBER(19)");
-
-                    b.Property<bool>("SiblingInSchool")
-                        .HasColumnType("NUMBER(1)");
-
-                    b.Property<string>("SiblingNames")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("SpecialNeedsDetails")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<DateTime>("SubmissionDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                    b.Property<int>("SyncStatus")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<Guid>("VersionToken")
-                        .HasColumnType("RAW(16)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ConvertedToStudentId");
-
-                    b.HasIndex("ParentId");
-
-                    b.HasIndex("ReviewedByUserId");
-
-                    b.HasIndex("SchoolId");
-
-                    b.HasIndex("ParentId", "SchoolId", "AcademicYearId", "RequestedGradeLevelId")
-                        .IsUnique()
-                        .HasFilter("RequestStatus != 3");
-
-                    b.ToTable("Registrations", null, t =>
-                        {
-                            t.HasCheckConstraint("CK_Registration_Gender", "\"Gender\" IN (1, 2)");
-
-                            t.HasCheckConstraint("CK_Registration_Status", "\"RequestStatus\" IN (1, 2, 3, 4)");
-                        });
-                });
-
             modelBuilder.Entity("EduMS.Domain.Entities.MeetingAttendanceRecord", b =>
                 {
                     b.Property<long>("Id")
@@ -8854,6 +8891,72 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                     b.HasIndex("MeetingId");
 
                     b.ToTable("MeetingAttendanceRecord");
+                });
+
+            modelBuilder.Entity("EduMS.Domain.Entities.MessageQueue", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(19)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<long>("CreatedByUserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<DateTimeOffset?>("DeletedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<long?>("DeletedByUserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<DateTimeOffset?>("LastSyncedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<string>("MessageType")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<DateTimeOffset?>("ModifiedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<long?>("ModifiedByUserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<string>("RecipientAddress")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int>("RetryCount")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int>("SyncStatus")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<Guid>("VersionToken")
+                        .HasColumnType("RAW(16)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MessageQueues");
                 });
 
             modelBuilder.Entity("EduMS.Domain.Entities.OfficePermission", b =>
@@ -11077,6 +11180,107 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                     b.ToTable("SCHOOL", (string)null);
                 });
 
+            modelBuilder.Entity("EduMS.Domain.Entities.SchoolAcademicYear", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(19)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime?>("AddDropEndDate")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<DateTime?>("AddDropStartDate")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<DateTime?>("ArchivedDate")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<long>("CreatedByUserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<DateTimeOffset?>("DeletedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<long?>("DeletedByUserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<DateTime?>("ExamsEndDate")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<DateTime?>("ExamsStartDate")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<bool>("IsCurrentYear")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<DateTimeOffset?>("LastSyncedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<DateTimeOffset?>("ModifiedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<long?>("ModifiedByUserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<long?>("PreviousAcademicYearId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<DateTime>("RegistrationEndDate")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<DateTime>("RegistrationStartDate")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<long>("SchoolId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<int>("SyncStatus")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<Guid>("VersionToken")
+                        .HasColumnType("RAW(16)");
+
+                    b.Property<string>("YearCode")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("YearNameAr")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("YearNameEn")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int>("YearStatus")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SchoolId");
+
+                    b.ToTable("SchoolAcademicYears");
+                });
+
             modelBuilder.Entity("EduMS.Domain.Entities.SchoolAccreditationLog", b =>
                 {
                     b.Property<long>("Id")
@@ -11400,7 +11604,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("WarrantyContractId");
 
-                    b.ToTable("SchoolAsset");
+                    b.ToTable("SchoolAssets");
                 });
 
             modelBuilder.Entity("EduMS.Domain.Entities.SchoolAward", b =>
@@ -13654,7 +13858,7 @@ namespace EduMS.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("StudentAccount");
+                    b.ToTable("StudentAccounts");
                 });
 
             modelBuilder.Entity("EduMS.Domain.Entities.StudentActivityParticipation", b =>
@@ -15244,6 +15448,170 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                     b.ToTable("StudentInventoryCustody");
                 });
 
+            modelBuilder.Entity("EduMS.Domain.Entities.StudentInvoice", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(19)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<decimal>("BalanceDue")
+                        .HasColumnType("DECIMAL(18, 2)");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<long>("CreatedByUserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<int?>("CurrentInstallment")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<DateTimeOffset?>("DeletedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<long?>("DeletedByUserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<decimal>("DiscountAmount")
+                        .HasColumnType("DECIMAL(18, 2)");
+
+                    b.Property<int?>("DiscountReason")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<DateTime?>("DueDate")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<int?>("InstallmentCount")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<bool>("InstallmentPlan")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<string>("InvoiceCategory")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<DateTime>("InvoiceDate")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<string>("InvoiceNumber")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int>("InvoiceStatus")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<string>("InvoiceType")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<bool>("IsLate")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<DateTime?>("IssueDate")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<DateTimeOffset?>("LastSyncedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<int?>("LateDays")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<decimal?>("LateFeeAmount")
+                        .HasColumnType("DECIMAL(18, 2)");
+
+                    b.Property<decimal?>("LateFeePercentage")
+                        .HasColumnType("DECIMAL(18, 2)");
+
+                    b.Property<DateTimeOffset?>("ModifiedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<long?>("ModifiedByUserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<decimal>("NetAmount")
+                        .HasColumnType("DECIMAL(18, 2)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<decimal>("PaidAmount")
+                        .HasColumnType("DECIMAL(18, 2)");
+
+                    b.Property<DateTime?>("ParentApprovalDate")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<bool>("ParentApprovalRequired")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<int>("ParentApprovalStatus")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<DateTime?>("ParentNotifiedAt")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<string>("PaymentMethod")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int>("PaymentStatus")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<decimal>("RemainingAmount")
+                        .HasColumnType("DECIMAL(18, 2)");
+
+                    b.Property<long?>("SchoolAcademicYearId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<long>("SchoolId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<long?>("SchoolSemesterId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<bool>("SentToParent")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<long>("StudentAccountId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<long>("StudentId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<decimal>("SubtotalAmount")
+                        .HasColumnType("DECIMAL(18, 2)");
+
+                    b.Property<int>("SyncStatus")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<decimal>("TaxAmount")
+                        .HasColumnType("DECIMAL(18, 2)");
+
+                    b.Property<decimal>("TaxRate")
+                        .HasColumnType("DECIMAL(18, 2)");
+
+                    b.Property<string>("TaxRegistrationNumber")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("DECIMAL(18, 2)");
+
+                    b.Property<Guid>("VersionToken")
+                        .HasColumnType("RAW(16)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentAccountId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentInvoices");
+                });
+
             modelBuilder.Entity("EduMS.Domain.Entities.StudentMedicalAllergyLog", b =>
                 {
                     b.Property<long>("Id")
@@ -16329,6 +16697,69 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                     b.ToTable("SYSTEM_AUDIT_LOG", (string)null);
                 });
 
+            modelBuilder.Entity("EduMS.Domain.Entities.SystemNotification", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(19)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("ActionUrl")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<long>("CreatedByUserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<DateTimeOffset?>("DeletedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<long?>("DeletedByUserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<DateTimeOffset?>("LastSyncedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<DateTimeOffset?>("ModifiedAt")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<long?>("ModifiedByUserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<DateTime>("NotificationDate")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<int>("SyncStatus")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("NUMBER(19)");
+
+                    b.Property<Guid>("VersionToken")
+                        .HasColumnType("RAW(16)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SystemNotifications");
+                });
+
             modelBuilder.Entity("EduMS.Domain.Entities.SystemPermission", b =>
                 {
                     b.Property<long>("Id")
@@ -16804,6 +17235,12 @@ namespace EduMS.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("ProfilePictureUrl")
                         .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<DateTime?>("RefreshTokenExpiryTime")
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<long?>("SchoolId")
                         .HasColumnType("NUMBER(19)")
@@ -17997,6 +18434,9 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                     b.Property<int>("SyncStatus")
                         .HasColumnType("NUMBER(10)");
 
+                    b.Property<long?>("SystemUserId")
+                        .HasColumnType("NUMBER(19)");
+
                     b.Property<long>("UserId")
                         .HasColumnType("NUMBER(19)");
 
@@ -18006,6 +18446,8 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
+
+                    b.HasIndex("SystemUserId");
 
                     b.HasIndex("UserId", "RoleId");
 
@@ -20246,6 +20688,17 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                     b.Navigation("Student");
                 });
 
+            modelBuilder.Entity("EduMS.Domain.Entities.FeePayment", b =>
+                {
+                    b.HasOne("EduMS.Domain.Entities.StudentAccount", "StudentAccount")
+                        .WithMany()
+                        .HasForeignKey("StudentAccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("StudentAccount");
+                });
+
             modelBuilder.Entity("EduMS.Domain.Entities.FeeStructure", b =>
                 {
                     b.HasOne("EduMS.Domain.Entities.School", "School")
@@ -20404,37 +20857,6 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("KpiConfig");
-                });
-
-            modelBuilder.Entity("EduMS.Domain.Entities.M2_StudentAffairs.Registration", b =>
-                {
-                    b.HasOne("EduMS.Domain.Entities.Student", "ConvertedToStudent")
-                        .WithMany()
-                        .HasForeignKey("ConvertedToStudentId");
-
-                    b.HasOne("EduMS.Domain.Entities.Guardian", "Parent")
-                        .WithMany()
-                        .HasForeignKey("ParentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EduMS.Domain.Entities.SystemUser", "ReviewedByUser")
-                        .WithMany()
-                        .HasForeignKey("ReviewedByUserId");
-
-                    b.HasOne("EduMS.Domain.Entities.School", "School")
-                        .WithMany()
-                        .HasForeignKey("SchoolId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ConvertedToStudent");
-
-                    b.Navigation("Parent");
-
-                    b.Navigation("ReviewedByUser");
-
-                    b.Navigation("School");
                 });
 
             modelBuilder.Entity("EduMS.Domain.Entities.MeetingAttendanceRecord", b =>
@@ -20797,6 +21219,17 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                     b.Navigation("DirectorateEntity");
 
                     b.Navigation("EducationalStage");
+                });
+
+            modelBuilder.Entity("EduMS.Domain.Entities.SchoolAcademicYear", b =>
+                {
+                    b.HasOne("EduMS.Domain.Entities.School", "School")
+                        .WithMany()
+                        .HasForeignKey("SchoolId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("School");
                 });
 
             modelBuilder.Entity("EduMS.Domain.Entities.SchoolAccreditationLog", b =>
@@ -21490,6 +21923,25 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                     b.Navigation("Student");
                 });
 
+            modelBuilder.Entity("EduMS.Domain.Entities.StudentInvoice", b =>
+                {
+                    b.HasOne("EduMS.Domain.Entities.StudentAccount", "StudentAccount")
+                        .WithMany()
+                        .HasForeignKey("StudentAccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EduMS.Domain.Entities.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+
+                    b.Navigation("StudentAccount");
+                });
+
             modelBuilder.Entity("EduMS.Domain.Entities.StudentMedicalAllergyLog", b =>
                 {
                     b.HasOne("EduMS.Domain.Entities.Student", "Student")
@@ -22007,6 +22459,10 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("EduMS.Domain.Entities.SystemUser", null)
+                        .WithMany("UserRoleAssignments")
+                        .HasForeignKey("SystemUserId");
+
                     b.HasOne("EduMS.Domain.Entities.SystemUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -22356,6 +22812,11 @@ namespace EduMS.Infrastructure.Persistence.Migrations
                     b.Navigation("StudentAssessments");
 
                     b.Navigation("TextbookDistributions");
+                });
+
+            modelBuilder.Entity("EduMS.Domain.Entities.SystemUser", b =>
+                {
+                    b.Navigation("UserRoleAssignments");
                 });
 
             modelBuilder.Entity("EduMS.Domain.Entities.Vendor", b =>

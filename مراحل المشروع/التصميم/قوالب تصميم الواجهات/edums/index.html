@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS Enterprise - لوحة التحكم الرئيسية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="index.html" class="nav-item">
+                        <span style="display: flex; align-items: center;">
+                            <span class="icon">📊</span>
+                            <span>لوحة التحكم</span>
+                        </span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">الوحدات الرئيسية</div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🏫</span>
+                                <span>إدارة المدرسة (M1)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="modules/m1-school-office/index.html">لوحة تحكم المدرسة</a></li>
+                            <li><a href="modules/m1-school-office/school-profile.html">ملف المدرسة</a></li>
+                            <li><a href="modules/m1-school-office/classes.html">الصفوف والفصول</a></li>
+                            <li><a href="modules/m1-school-office/timetable.html">الجدول الدراسي</a></li>
+                            <li><a href="modules/m1-school-office/academic-year.html">العام الدراسي</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🎓</span>
+                                <span>شؤون الطلاب (M2)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="modules/m2-student-affairs/index.html">لوحة تحكم الطلاب</a></li>
+                            <li><a href="modules/m2-student-affairs/students.html">قاعدة الطلاب</a></li>
+                            <li><a href="modules/m2-student-affairs/registration-requests.html">طلبات القيد</a></li>
+                            <li><a href="modules/m2-student-affairs/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🏫</span>
+                                <span>إدارة الموظفين (M3)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="modules/m3-employee-management/index.html">لوحة تحكم الموظفين</a></li>
+                            <li><a href="modules/m3-employee-management/employees.html">قائمة الموظفين</a></li>
+                            <li><a href="modules/m3-employee-management/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📦</span>
+                                <span>إدارة الأصول (M4)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="modules/m4-assets-logistics/index.html">لوحة تحكم الأصول</a></li>
+                            <li><a href="modules/m4-assets-logistics/inventory.html">المخزون</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">💰</span>
+                                <span>المالية (M5)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="modules/m5-finance/index.html">لوحة المالية</a></li>
+                            <li><a href="modules/m5-finance/invoices.html">الفواتير</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📈</span>
+                                <span>الإحصاء (M6)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="modules/m6-statistics-reports/index.html">لوحة الإحصاء</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🚨</span>
+                                <span>الطوارئ (M7)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="modules/m7-emergency-management/index.html">لوحة الطوارئ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🔐</span>
+                                <span>الأمن والمستخدمين (M8)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="modules/m8-authentication-users/index.html">المستخدمين</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>لوحة التحكم الرئيسية</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">
+                            🔔
+                            <span class="badge">5</span>
+                        </button>
+                        <button class="header-btn">💬</button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير المدرسة</h4>
+                            <p>الإدارة</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h1 class="page-title">مرحباً بك 👋</h1>
+                    <div class="page-breadcrumb">
+                        <a href="#">الرئيسية</a>
+                        <span>/</span>
+                        <span>لوحة التحكم</span>
+                    </div>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon primary">👨‍🎓</div>
+                        <div class="stat-info">
+                            <h3>1,248</h3>
+                            <p>الطلاب المسجلين</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon success">👨‍🏫</div>
+                        <div class="stat-info">
+                            <h3>156</h3>
+                            <p>الموظفين</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon warning">🏫</div>
+                        <div class="stat-info">
+                            <h3>48</h3>
+                            <p>الصفوف الدراسية</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon danger">💰</div>
+                        <div class="stat-info">
+                            <h3>245,600</h3>
+                            <p>الإيرادات الشهرية</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions & Modules -->
+                <div class="grid-2">
+                    <!-- Quick Actions -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">إجراءات سريعة</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="quick-actions">
+                                <a href="modules/m2-student-affairs/registration-requests.html" class="quick-action">
+                                    <div class="icon">➕</div>
+                                    <h4>تسجيل طالب جديد</h4>
+                                    <p>إضافة طالب جديد للمدرسة</p>
+                                </a>
+                                <a href="modules/m3-employee-management/recruitment.html" class="quick-action">
+                                    <div class="icon">👤</div>
+                                    <h4>تسجيل موظف</h4>
+                                    <p>إضافة موظف جديد</p>
+                                </a>
+                                <a href="modules/m5-finance/invoices.html" class="quick-action">
+                                    <div class="icon">📄</div>
+                                    <h4>إنشاء فاتورة</h4>
+                                    <p>إصدار فاتورة رسوم</p>
+                                </a>
+                                <a href="modules/m6-statistics-reports/dashboard.html" class="quick-action">
+                                    <div class="icon">📊</div>
+                                    <h4>تقارير</h4>
+                                    <p>عرض التقارير المتاحة</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Activity -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">النشاط الأخير</h3>
+                            <a href="#" class="btn btn-outline btn-sm">عرض الكل</a>
+                        </div>
+                        <div class="card-body">
+                            <ul class="activity-list">
+                                <li class="activity-item">
+                                    <div class="activity-icon" style="background: #dcfce7; color: #166534;">👨‍🎓</div>
+                                    <div class="activity-content">
+                                        <h4>تسجيل طالب جديد</h4>
+                                        <p>تم تسجيل أحمد محمد في الصف العاشر</p>
+                                        <div class="activity-time">منذ 5 دقائق</div>
+                                    </div>
+                                </li>
+                                <li class="activity-item">
+                                    <div class="activity-icon" style="background: #dbeafe; color: #1e40af;">💰</div>
+                                    <div class="activity-content">
+                                        <h4>تم استلام دفعة</h4>
+                                        <p>تم استلام مبلغ 2,500 ريال من ولي أمر</p>
+                                        <div class="activity-time">منذ 20 دقيقة</div>
+                                    </div>
+                                </li>
+                                <li class="activity-item">
+                                    <div class="activity-icon" style="background: #fef3c7; color: #92400e;">📦</div>
+                                    <div class="activity-content">
+                                        <h4>إضافة أصل جديد</h4>
+                                        <p>تم إضافة جهاز عرض جديد للمخزن</p>
+                                        <div class="activity-time">منذ ساعة</div>
+                                    </div>
+                                </li>
+                                <li class="activity-item">
+                                    <div class="activity-icon" style="background: #ede9fe; color: #6b21a8;">👨‍🏫</div>
+                                    <div class="activity-content">
+                                        <h4>تحديث بيانات موظف</h4>
+                                        <p>تم تحديث بيانات أستاذ خالد</p>
+                                        <div class="activity-time">منذ ساعتين</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Detailed Navigation Grid -->
+                <div class="card" style="margin-top: 32px;">
+                    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3 class="card-title">🚀 خارطة الوصول السريع لكافة واجهات النظام (400+ شاشة)</h3>
+                        <div class="search-box">
+                            <input type="text" id="navSearch" placeholder="ابحث عن شاشة أو عملية..." style="padding: 8px 15px; border-radius: 20px; border: 1px solid #ddd; width: 250px;">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="detailed-nav-grid" id="navGrid">
+                            <!-- School Admin -->
+                            <div class="nav-group" data-category="school">
+                                <h4><a href="modules/m1-school-office/index.html" style="color: inherit; text-decoration: none;">🏫 إدارة المدرسة</a></h4>
+                                <ul>
+                                    <li><a href="modules/m1-school-office/index.html">لوحة تحكم المدرسة</a></li>
+                                    <li><a href="modules/m1-school-office/school-profile.html">ملف المدرسة</a></li>
+                                    <li><a href="modules/m1-school-office/vision-mission.html">الرؤية والرسالة</a></li>
+                                    <li><a href="modules/m1-school-office/leadership.html">القيادة المدرسية</a></li>
+                                    <li><a href="modules/m1-school-office/org-chart.html">الهيكل التنظيمي</a></li>
+                                    <li><a href="modules/m1-school-office/committees.html">اللجان وفرق العمل</a></li>
+                                    <li><a href="modules/m1-school-office/meeting-minutes.html">محاضر الاجتماعات</a></li>
+                                    <li><a href="modules/m1-school-office/academic-year.html">العام الأكاديمي</a></li>
+                                    <li><a href="modules/m1-school-office/semesters.html">الفصول الدراسية</a></li>
+                                    <li><a href="modules/m1-school-office/levels.html">المراحل الدراسية</a></li>
+                                    <li><a href="modules/m1-school-office/academic-tracks.html">المسارات الأكاديمية</a></li>
+                                    <li><a href="modules/m1-school-office/classes.html">الصفوف الدراسية</a></li>
+                                    <li><a href="modules/m1-school-office/classrooms.html">القاعات والمرافق</a></li>
+                                    <li><a href="modules/m1-school-office/timetable.html">الجدول الدراسي</a></li>
+                                    <li><a href="modules/m1-school-office/subjects.html">المواد الدراسية</a></li>
+                                    <li><a href="modules/m1-school-office/curriculum.html">المناهج والكتب</a></li>
+                                    <li><a href="modules/m1-school-office/shifts.html">الفترات الدراسية</a></li>
+                                    <li><a href="modules/m1-school-office/circulars.html">التعاميم والمراسلات</a></li>
+                                    <li><a href="modules/m1-school-office/internal-policies.html">اللوائح والسياسات</a></li>
+                                    <li><a href="modules/m1-school-office/strategic-plans.html">التخطيط الاستراتيجي</a></li>
+                                    <li><a href="modules/m1-school-office/inspection.html">الإشراف والاعتماد</a></li>
+                                    <li><a href="modules/m1-school-office/quality-standards.html">الجودة والتميز</a></li>
+                                    <li><a href="modules/m1-school-office/offices.html">المكاتب الإدارية</a></li>
+                                    <li><a href="modules/m1-school-office/events-calendar.html">أجندة الفعاليات</a></li>
+                                    <li><a href="modules/m1-school-office/reference-codes.html">الأكواد المرجعية</a></li>
+                                    <li><a href="modules/m1-school-office/audit-log.html">سجل التدقيق</a></li>
+                                    <li><a href="modules/m1-school-office/reports.html">التقارير السنوية</a></li>
+                                </ul>
+                            </div>
+
+                            
+                            <!-- Generated Interfaces M1 -->
+                            <div class="nav-group" data-category="school-generated">
+                                <h4 style="color: #2563eb;"><a href="modules/m1-school-office/generated_interfaces/index.html" style="color: inherit; text-decoration: none;">✨ إدارة المدرسة (المطابقة 100%)</a></h4>
+                                <ul>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/academic-branch-config-log.html">سجل تكوين الفروع الأكاديمية</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/academic-lock-period.html">فترة الإغلاق الأكاديمي</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/academic-warning-policy.html">سياسة الإنذار الأكاديمي</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/class-schedule.html">الجدول الدراسي</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/classroom-operational-rule.html">القاعدة التشغيلية للقاعة</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/classroom-resource-allocation.html">تخصيص موارد القاعة</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/classrooms.html">القاعة الدراسية</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/curriculum-textbook-distribution.html">توزيع المقررات والكتب</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/department.html">القسم الإداري/الأكاديمي</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/directorate-exam-center-assignment.html">تخصيص مركز الاختبارات</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/directorate-legal-case-log.html">سجل القضايا القانونية للمديرية</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/directorate-statistical-report.html">التقرير الإحصائي للمديرية</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/directorate.html">المديرية / مكتب التربية</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/educational-stage.html">المرحلة التعليمية</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/educational-supervision-visit.html">زيارة الإشراف التربوي</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/exam-distribution-timetable.html">جدول توزيع الاختبارات</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/grade-capacity.html">السعة الاستيعابية للصف</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/grading-scale-bound.html">حدود مقياس الدرجات</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/official-circular.html">التعاميم الرسمية</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/reference-coding-lookup.html">الترميز المرجعي</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/school-academic-year.html">العام الدراسي للمدرسة</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/school-accreditation-log.html">سجل الاعتماد المدرسي</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/school-announcement-log.html">سجل الإعلانات</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/school-audit-log.html">سجل التدقيق والمراجعة</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/school-canteen-item.html">أصناف المقصف المدرسي</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/school-contact-info.html">بيانات الاتصال بالمدرسة</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/school-curriculum-plan.html">خطة المنهج المدرسي</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/school-event-calendar.html">تقويم الفعاليات</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/school-facility-maintenance-log.html">سجل صيانة المرافق</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/school-facility.html">المرافق المدرسية</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/school-level.html">مستوى المدرسة</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/school-library-item.html">محتويات المكتبة المدرسية</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/school-operational-budget-log.html">سجل الميزانية التشغيلية</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/school-semester.html">الفصل الدراسي</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/school-shift.html">الفترة الدراسية (الدوام)</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/school-transportation-route.html">مسارات النقل المدرسي</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/school.html">بيانات المدرسة</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/subjects.html">Subject</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/training-course-offering.html">الدورات التدريبية المقدمة</a></li>
+                                    <li><a href="modules/m1-school-office/generated_interfaces/visitor-entry-log.html">سجل دخول الزوار</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Student Lifecycle -->
+                            <div class="nav-group" data-category="student">
+                                <h4><a href="modules/m2-student-affairs/index.html" style="color: inherit; text-decoration: none;">👨‍🎓 دورة حياة الطالب</a></h4>
+                                <ul>
+                                    <li><a href="modules/m2-student-affairs/index.html">لوحة تحكم الطلاب</a></li>
+                                    <li><a href="modules/m2-student-affairs/students.html">قائمة الطلاب</a></li>
+                                    <li><a href="modules/m2-student-affairs/applications.html">طلبات القبول</a></li>
+                                    <li><a href="modules/m2-student-affairs/enrollment.html">توزيع الفصول</a></li>
+                                    <li><a href="modules/m2-student-affairs/registration-requests.html">طلبات القيد</a></li>
+                                    <li><a href="modules/m2-student-affairs/attendance.html">الحضور والغياب</a></li>
+                                    <li><a href="modules/m2-student-affairs/grades.html">الدرجات والتقييم</a></li>
+                                    <li><a href="modules/m2-student-affairs/behavior.html">السلوك والانضباط</a></li>
+                                    <li><a href="modules/m2-student-affairs/health.html">السجل الصحي</a></li>
+                                    <li><a href="modules/m2-student-affairs/guardians.html">أولياء الأمور</a></li>
+                                    <li><a href="modules/m2-student-affairs/transfers.html">التحويلات</a></li>
+                                    <li><a href="modules/m2-student-affairs/transport.html">النقل المدرسي</a></li>
+                                    <li><a href="modules/m2-student-affairs/activities.html">الأنشطة الطلابية</a></li>
+                                    <li><a href="modules/m2-student-affairs/documents.html">ملفات الطلاب</a></li>
+                                    <li><a href="modules/m2-student-affairs/edit-student.html">تعديل بيانات طالب</a></li>
+                                    <li><a href="modules/m2-student-affairs/edit-health.html">تحديث البيانات الصحية</a></li>
+                                    <li><a href="modules/m2-student-affairs/edit-family.html">تحديث البيانات الأسرية</a></li>
+                                    <li><a href="modules/m2-student-affairs/graduation.html">التخرج والأرشفة</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Employee Management -->
+                            <div class="nav-group" data-category="employee">
+                                <h4><a href="modules/m3-employee-management/index.html" style="color: inherit; text-decoration: none;">👨‍🏫 إدارة الموظفين</a></h4>
+                                <ul>
+                                    <li><a href="modules/m3-employee-management/index.html">لوحة تحكم الموظفين</a></li>
+                                    <li><a href="modules/m3-employee-management/employees.html">قائمة الموظفين</a></li>
+                                    <li><a href="modules/m3-employee-management/recruitment.html">التوظيف</a></li>
+                                    <li><a href="modules/m3-employee-management/contracts.html">العقود</a></li>
+                                    <li><a href="modules/m3-employee-management/attendance.html">الحضور والغياب</a></li>
+                                    <li><a href="modules/m3-employee-management/tasks.html">المهام والتكليفات</a></li>
+                                    <li><a href="modules/m3-employee-management/salary.html">الرواتب والأجور</a></li>
+                                    <li><a href="modules/m3-employee-management/leave.html">الإجازات</a></li>
+                                    <li><a href="modules/m3-employee-management/evaluation.html">تقييم الأداء</a></li>
+                                    <li><a href="modules/m3-employee-management/training.html">التدريب والتطوير</a></li>
+                                    <li><a href="modules/m3-employee-management/discipline.html">الانضباط والجزاءات</a></li>
+                                    <li><a href="modules/m3-employee-management/departments.html">الأقسام الإدارية</a></li>
+                                    <li><a href="modules/m3-employee-management/edit-employee.html">تعديل بيانات موظف</a></li>
+                                    <li><a href="modules/m3-employee-management/termination.html">إنهاء الخدمة</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Finance Management -->
+                            <div class="nav-group" data-category="finance">
+                                <h4><a href="modules/m5-finance/index.html" style="color: inherit; text-decoration: none;">💰 الإدارة المالية</a></h4>
+                                <ul>
+                                    <li><a href="modules/m5-finance/index.html">لوحة تحكم المالية</a></li>
+                                    <li><a href="modules/m5-finance/accounts.html">الحسابات والقيود</a></li>
+                                    <li><a href="modules/m5-finance/budget.html">الميزانية التقديرية</a></li>
+                                    <li><a href="modules/m5-finance/fees.html">الرسوم الدراسية</a></li>
+                                    <li><a href="modules/m5-finance/invoices.html">الفواتير</a></li>
+                                    <li><a href="modules/m5-finance/payments.html">التحصيل والمدفوعات</a></li>
+                                    <li><a href="modules/m5-finance/expenses.html">المصروفات</a></li>
+                                    <li><a href="modules/m5-finance/salaries.html">كشوف الرواتب</a></li>
+                                    <li><a href="modules/m5-finance/treasury.html">الخزينة والصندوق</a></li>
+                                    <li><a href="modules/m5-finance/audit.html">التدقيق المالي</a></li>
+                                    <li><a href="modules/m5-finance/reports.html">التقارير المالية</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Assets Management -->
+                            <div class="nav-group" data-category="assets">
+                                <h4><a href="modules/m4-assets-logistics/index.html" style="color: inherit; text-decoration: none;">📦 الأصول والمرافق</a></h4>
+                                <ul>
+                                    <li><a href="modules/m4-assets-logistics/index.html">لوحة تحكم الأصول</a></li>
+                                    <li><a href="modules/m4-assets-logistics/inventory.html">المخزون السلعي</a></li>
+                                    <li><a href="modules/m4-assets-logistics/procurement.html">المشتريات</a></li>
+                                    <li><a href="modules/m4-assets-logistics/maintenance.html">عمليات الصيانة</a></li>
+                                    <li><a href="modules/m4-assets-logistics/maintenance-schedules.html">جداول الصيانة</a></li>
+                                    <li><a href="modules/m4-assets-logistics/assignment.html">عهد الأصول</a></li>
+                                    <li><a href="modules/m4-assets-logistics/audits.html">جرد الأصول</a></li>
+                                    <li><a href="modules/m4-assets-logistics/inventory-plans.html">خطط الجرد</a></li>
+                                    <li><a href="modules/m4-assets-logistics/locations.html">مواقع الأصول</a></li>
+                                    <li><a href="modules/m4-assets-logistics/rooms.html">القاعات والغرف</a></li>
+                                    <li><a href="modules/m4-assets-logistics/suppliers.html">الموردين</a></li>
+                                    <li><a href="modules/m4-assets-logistics/tags.html">الترميز (Tags)</a></li>
+                                    <li><a href="modules/m4-assets-logistics/transfers.html">نقل الأصول</a></li>
+                                    <li><a href="modules/m4-assets-logistics/disposal.html">التخلص من الأصول</a></li>
+                                    <li><a href="modules/m4-assets-logistics/depreciation.html">الإهلاك المالي</a></li>
+                                    <li><a href="modules/m4-assets-logistics/valuations.html">تقييم الأصول</a></li>
+                                    <li><a href="modules/m4-assets-logistics/warranty.html">الضمانات</a></li>
+                                    <li><a href="modules/m4-assets-logistics/insurance.html">التأمين</a></li>
+                                    <li><a href="modules/m4-assets-logistics/service-contracts.html">عقود الخدمة</a></li>
+                                    <li><a href="modules/m4-assets-logistics/financials.html">البيانات المالية</a></li>
+                                    <li><a href="modules/m4-assets-logistics/documents.html">وثائق الأصول</a></li>
+                                    <li><a href="modules/m4-assets-logistics/types.html">أنواع الأصول</a></li>
+                                    <li><a href="modules/m4-assets-logistics/classification.html">تصنيف الأصول</a></li>
+                                    <li><a href="modules/m4-assets-logistics/conditions.html">حالة الأصول</a></li>
+                                    <li><a href="modules/m4-assets-logistics/compliance.html">الامتثال والمعايير</a></li>
+                                    <li><a href="modules/m4-assets-logistics/calibration.html">المعايرة</a></li>
+                                    <li><a href="modules/m4-assets-logistics/parts-inventory.html">قطع الغيار</a></li>
+                                    <li><a href="modules/m4-assets-logistics/reservations.html">حجز الأصول</a></li>
+                                    <li><a href="modules/m4-assets-logistics/requirements.html">الاحتياجات</a></li>
+                                    <li><a href="modules/m4-assets-logistics/retirement.html">تقاعد الأصول</a></li>
+                                    <li><a href="modules/m4-assets-logistics/reports.html">تقارير الأصول</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Security & Auth -->
+                            <div class="nav-group" data-category="auth">
+                                <h4><a href="modules/m8-authentication-users/index.html" style="color: inherit; text-decoration: none;">🔐 الأمن والصلاحيات</a></h4>
+                                <ul>
+                                    <li><a href="modules/m8-authentication-users/index.html">لوحة تحكم الأمن</a></li>
+                                    <li><a href="modules/m8-authentication-users/users.html">إدارة المستخدمين</a></li>
+                                    <li><a href="modules/m8-authentication-users/roles.html">الأدوار والوظائف</a></li>
+                                    <li><a href="modules/m8-authentication-users/permissions.html">الأذونات</a></li>
+                                    <li><a href="modules/m8-authentication-users/access-policies.html">سياسات الوصول</a></li>
+                                    <li><a href="modules/m8-authentication-users/security.html">إعدادات الأمان</a></li>
+                                    <li><a href="modules/m8-authentication-users/audit.html">سجلات النشاط</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Emergency & Excellence -->
+                            <div class="nav-group" data-category="emergency">
+                                <h4><a href="modules/m7-emergency-management/index.html" style="color: inherit; text-decoration: none;">🚨 الطوارئ والتميز</a></h4>
+                                <ul>
+                                    <li><a href="modules/m7-emergency-management/index.html">لوحة تحكم الطوارئ</a></li>
+                                    <li><a href="modules/m7-emergency-management/procedures.html">إجراءات الطوارئ</a></li>
+                                    <li><a href="modules/m7-emergency-management/alerts.html">نظام التنبيهات</a></li>
+                                    <li><a href="modules/m7-emergency-management/drills.html">تدريبات الإخلاء</a></li>
+                                    <li><a href="modules/m7-emergency-management/recovery.html">خطط التعافي</a></li>
+                                    <li><a href="modules/m7-emergency-management/report.html">بلاغات الطوارئ</a></li>
+                                    <li><a href="modules/m7-emergency-management/contact.html">أرقام الطوارئ</a></li>
+                                    <li><a href="modules/m7-emergency-management/excellence.html">معايير التميز</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Stats & Reports -->
+                            <div class="nav-group" data-category="statistics">
+                                <h4><a href="modules/m6-statistics-reports/index.html" style="color: inherit; text-decoration: none;">📈 الإحصاء والتقارير</a></h4>
+                                <ul>
+                                    <li><a href="modules/m6-statistics-reports/index.html">لوحة تحكم الإحصاء</a></li>
+                                    <li><a href="modules/m6-statistics-reports/dashboard.html">لوحة الإحصاءات</a></li>
+                                    <li><a href="modules/m6-statistics-reports/analytics.html">التحليلات البيانية</a></li>
+                                    <li><a href="modules/m6-statistics-reports/students-report.html">تقارير الطلاب</a></li>
+                                    <li><a href="modules/m6-statistics-reports/employees-report.html">تقارير الموظفين</a></li>
+                                    <li><a href="modules/m6-statistics-reports/finance-report.html">تقارير مالية</a></li>
+                                    <li><a href="modules/m6-statistics-reports/attendance-report.html">تقرير الحضور</a></li>
+                                    <li><a href="modules/m6-statistics-reports/custom-reports.html">منشئ التقارير</a></li>
+                                    <li><a href="modules/m6-statistics-reports/integration.html">التكامل الوطني</a></li>
+                                    <li><a href="modules/m6-statistics-reports/export.html">تصدير البيانات</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Settings & Help -->
+                            <div class="nav-group" data-category="settings">
+                                <h4><a href="modules/help/index.html" style="color: inherit; text-decoration: none;">⚙️ الإعدادات والمساعدة</a></h4>
+                                <ul>
+                                    <li><a href="modules/settings/index.html">لوحة الإعدادات</a></li>
+                                    <li><a href="modules/settings/general.html">إعدادات عامة</a></li>
+                                    <li><a href="modules/settings/academic.html">إعدادات أكاديمية</a></li>
+                                    <li><a href="modules/settings/finance.html">إعدادات مالية</a></li>
+                                    <li><a href="modules/settings/notifications.html">التنبيهات</a></li>
+                                    <li><a href="modules/settings/backup.html">النسخ الاحتياطي</a></li>
+                                    <li><a href="modules/settings/logs.html">سجلات النظام</a></li>
+                                    <li><a href="modules/help/guides.html">أدلة الاستخدام</a></li>
+                                    <li><a href="modules/help/faq.html">الأسئلة الشائعة</a></li>
+                                    <li><a href="modules/help/support.html">الدعم الفني</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modules Overview -->
+                <div class="card" style="margin-top: 32px;">
+                    <div class="card-header">
+                        <h3 class="card-title">وحدات النظام</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="modules-grid">
+                            <a href="modules/m1-school-office/index.html" class="module-card school">
+                                <div class="module-icon">🏫</div>
+                                <h3>إدارة المدرسة والبيئة التنظيمية</h3>
+                                <p>إدارة بيانات المدرسة، الصفوف، الفصول، الجداول الدراسية، والسنة الدراسية</p>
+                                <div class="module-meta">
+                                    <span>📊 47 جدول</span>
+                                    <span>🔑 1505 حقل</span>
+                                </div>
+                            </a>
+                            
+                            <a href="modules/m2-student-affairs/index.html" class="module-card student">
+                                <div class="module-icon">👨‍🎓</div>
+                                <h3>إدارة الطلاب والشؤون الأكاديمية</h3>
+                                <p>إدارة تسجيل الطلاب، الحضور، الدرجات، السلوك، والشهادات</p>
+                                <div class="module-meta">
+                                    <span>📊 37 جدول</span>
+                                    <span>🔑 1706 حقل</span>
+                                </div>
+                            </a>
+                            
+                            <a href="modules/m3-employee-management/index.html" class="module-card employee">
+                                <div class="module-icon">👨‍🏫</div>
+                                <h3>إدارة الموظفين والكادر التعليمي</h3>
+                                <p>إدارة بيانات الموظفين، الرواتب، الإجازات، العقود، والتقييمات</p>
+                                <div class="module-meta">
+                                    <span>📊 24 جدول</span>
+                                    <span>🔑 1176 حقل</span>
+                                </div>
+                            </a>
+                            
+                            <a href="modules/m4-assets-logistics/index.html" class="module-card assets">
+                                <div class="module-icon">📦</div>
+                                <h3>إدارة الأصول والمرافق</h3>
+                                <p>إدارة الأصول، الصيانة، المخزون، المرافق، والمعدات المدرسية</p>
+                                <div class="module-meta">
+                                    <span>📊 41 جدول</span>
+                                    <span>🔑 984 حقل</span>
+                                </div>
+                            </a>
+                            
+                            <a href="modules/m5-finance/index.html" class="module-card finance">
+                                <div class="module-icon">💰</div>
+                                <h3>الإدارة المالية</h3>
+                                <p>إدارة الرسوم، الفواتير، المدفوعات، المصروفات، والتقارير المالية</p>
+                                <div class="module-meta">
+                                    <span>📊 8 جدول</span>
+                                    <span>🔑 231 حقل</span>
+                                </div>
+                            </a>
+                            
+                            <a href="modules/m6-statistics-reports/index.html" class="module-card stats">
+                                <div class="module-icon">📈</div>
+                                <h3>إدارة البيانات والإحصاء</h3>
+                                <p>لوحات التحليل، التقارير الإحصائية، التحليلات التنبؤية، ومؤشرات الأداء</p>
+                                <div class="module-meta">
+                                    <span>📊 15 جدول</span>
+                                    <span>🔑 397 حقل</span>
+                                </div>
+                            </a>
+                            
+                            <a href="modules/m8-authentication-users/index.html" class="module-card auth">
+                                <div class="module-icon">🔐</div>
+                                <h3>الأمن والصلاحيات والمستخدمين</h3>
+                                <p>إدارة المستخدمين، الصلاحيات، الأدوار، سجلات النشاط، والأمان</p>
+                                <div class="module-meta">
+                                    <span>📊 21 جدول</span>
+                                    <span>🔑 442 حقل</span>
+                                </div>
+                            </a>
+                            
+                            <a href="modules/m7-emergency-management/index.html" class="module-card emergency">
+                                <div class="module-icon">🚨</div>
+                                <h3>إدارة الطوارئ والتميز</h3>
+                                <p>إدارة الحالات الطارئة، خطط الطوارئ، التدريبات، والاستضافة الطارئة</p>
+                                <div class="module-meta">
+                                    <span>📊 12 جدول</span>
+                                    <span>🔑 354 حقل</span>
+                                </div>
+                            </a>
+
+                            <a href="modules/help/index.html" class="module-card help">
+                                <div class="module-icon">❓</div>
+                                <h3>المساعدة والدعم الفني</h3>
+                                <p>أدلة الاستخدام، الأسئلة الشائعة، ومركز المساعدة والدعم المباشر</p>
+                                <div class="module-meta">
+                                    <span>📖 10 أدلة</span>
+                                    <span>🛠️ دعم 24/7</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Charts Section -->
+                <div class="grid-2" style="margin-top: 32px;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">توزيع الطلاب حسب المراحل</h3>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="studentsChart" height="250"></canvas>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">الإيرادات الشهرية</h3>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="financeChart" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        function toggleDropdown(element) {
+            const dropdown = element.parentElement;
+            dropdown.classList.toggle('active');
+        }
+
+        // Initialize Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Search Functionality for Nav Grid
+            const navSearch = document.getElementById('navSearch');
+            const navGroups = document.querySelectorAll('.nav-group');
+            
+            navSearch.addEventListener('input', function(e) {
+                const term = e.target.value.toLowerCase().trim();
+                
+                navGroups.forEach(group => {
+                    const links = group.querySelectorAll('ul li');
+                    let groupVisible = false;
+                    
+                    links.forEach(li => {
+                        const a = li.querySelector('a');
+                        const text = a.textContent.toLowerCase();
+                        
+                        if (text.includes(term)) {
+                            li.classList.remove('hidden');
+                            a.classList.add('highlight');
+                            groupVisible = true;
+                        } else {
+                            li.classList.add('hidden');
+                            a.classList.remove('highlight');
+                        }
+                    });
+                    
+                    if (groupVisible || term === '') {
+                        group.classList.remove('hidden');
+                    } else {
+                        group.classList.add('hidden');
+                    }
+                    
+                    if (term === '') {
+                        links.forEach(li => li.querySelector('a').classList.remove('highlight'));
+                    }
+                });
+            });
+
+            // Students Chart
+            const studentsCtx = document.getElementById('studentsChart').getContext('2d');
+            new Chart(studentsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['رياض الأطفال', 'ابتدائي', 'متوسط', 'ثانوي'],
+                    datasets: [{
+                        data: [180, 450, 320, 298],
+                        backgroundColor: [
+                            '#3b82f6',
+                            '#10b981',
+                            '#f59e0b',
+                            '#ef4444'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+            
+            // Finance Chart
+            const financeCtx = document.getElementById('financeChart').getContext('2d');
+            new Chart(financeCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['محرم', 'صفر', 'ربيع الأول', 'ربيع الثاني', 'جماد الأول', 'جماد الثاني'],
+                    datasets: [{
+                        label: 'الإيرادات',
+                        data: [180000, 210000, 195000, 220000, 245600, 230000],
+                        backgroundColor: '#3b82f6'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

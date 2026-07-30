@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - إدارة البيانات والإحصاء</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span style="display: flex; align-items: center;">
+                            <span class="icon">📊</span>
+                            <span>لوحة التحكم</span>
+                        </span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">الوحدات الرئيسية</div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🏫</span>
+                                <span>إدارة المدرسة (M1)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m1-school-office/index.html">لوحة تحكم المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/school-profile.html">ملف المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/classes.html">الصفوف والفصول</a></li>
+                            <li><a href="../../modules/m1-school-office/timetable.html">الجدول الدراسي</a></li>
+                            <li><a href="../../modules/m1-school-office/academic-year.html">العام الدراسي</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🎓</span>
+                                <span>شؤون الطلاب (M2)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m2-student-affairs/index.html">لوحة تحكم الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/students.html">قاعدة الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/registration-requests.html">طلبات القيد</a></li>
+                            <li><a href="../../modules/m2-student-affairs/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🏫</span>
+                                <span>إدارة الموظفين (M3)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m3-employee-management/index.html">لوحة تحكم الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/employees.html">قائمة الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📦</span>
+                                <span>إدارة الأصول (M4)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m4-assets-logistics/index.html">لوحة تحكم الأصول</a></li>
+                            <li><a href="../../modules/m4-assets-logistics/inventory.html">المخزون</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">💰</span>
+                                <span>المالية (M5)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m5-finance/index.html">لوحة المالية</a></li>
+                            <li><a href="../../modules/m5-finance/invoices.html">الفواتير</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📈</span>
+                                <span>الإحصاء (M6)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m6-statistics-reports/index.html">لوحة الإحصاء</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🚨</span>
+                                <span>الطوارئ (M7)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m7-emergency-management/index.html">لوحة الطوارئ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🔐</span>
+                                <span>الأمن والمستخدمين (M8)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m8-authentication-users/index.html">المستخدمين</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة البيانات والإحصاء</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">🔔</button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير المدرسة</h4>
+                            <p>الإدارة</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h1 class="page-title">📈 إدارة البيانات والإحصاء</h1>
+                    <div class="page-breadcrumb">
+                        <a href="../../index.html">الرئيسية</a>
+                        <span>/</span>
+                        <span>الإحصاء والتقارير</span>
+                    </div>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon primary">📊</div>
+                        <div class="stat-info">
+                            <h3>56</h3>
+                            <p>تقرير متاح</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon success">📈</div>
+                        <div class="stat-info">
+                            <h3>24</h3>
+                            <p>لوحة تحليل</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon warning">📉</div>
+                        <div class="stat-info">
+                            <h3>12</h3>
+                            <p>نموذج مقارنة</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon danger">📥</div>
+                        <div class="stat-info">
+                            <h3>8</h3>
+                            <p>تنسيق تصدير</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header">
+                        <h3 class="card-title">إجراءات سريعة</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="quick-actions">
+                            <a href="dashboard.html" class="quick-action">
+                                <div class="icon">📊</div>
+                                <h4>لوحات تحليلية</h4>
+                                <p>لوحات مخصصة</p>
+                            </a>
+                            <a href="students-report.html" class="quick-action">
+                                <div class="icon">👨‍🎓</div>
+                                <h4>تقارير الطلاب</h4>
+                                <p>تقارير شاملة</p>
+                            </a>
+                            <a href="analytics.html" class="quick-action">
+                                <div class="icon">📉</div>
+                                <h4>تحليلات</h4>
+                                <p>تحليلات عالية المستوى</p>
+                            </a>
+                            <a href="export.html" class="quick-action">
+                                <div class="icon">📥</div>
+                                <h4>تصدير</h4>
+                                <p>تصدير تقارير</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Grid -->
+                <div class="grid-2">
+                    <!-- Key Metrics -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">مؤشرات الأداء الرئيسية</h3>
+                            <button class="btn btn-outline btn-sm">📊 عرض الكل</button>
+                        </div>
+                        <div class="card-body">
+                            <div style="display: grid; gap: 16px;">
+                                <div style="display: flex; justify-content: space-between; padding: 12px; background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-radius: 8px;">
+                                    <div>
+                                        <div style="font-weight: 600; color: #1e40af;">نسبة النجاح</div>
+                                        <div style="color: #1e40af; font-size: 0.9em;">العام الدراسي 2023/2024</div>
+                                    </div>
+                                    <div style="font-size: 1.8em; font-weight: 800; color: #1e40af;">94.2%</div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 12px; background: linear-gradient(135deg, #dcfce7, #bbf7d0); border-radius: 8px;">
+                                    <div>
+                                        <div style="font-weight: 600; color: #166534;">نسبة الحضور</div>
+                                        <div style="color: #166534; font-size: 0.9em;">متوسط الحضور</div>
+                                    </div>
+                                    <div style="font-size: 1.8em; font-weight: 800; color: #166534;">91.8%</div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 12px; background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 8px;">
+                                    <div>
+                                        <div style="font-weight: 600; color: #92400e;">التحصيل المالي</div>
+                                        <div style="color: #92400e; font-size: 0.9em;">نسبة التحصيل</div>
+                                    </div>
+                                    <div style="font-size: 1.8em; font-weight: 800; color: #92400e;">88.5%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Reports -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">آخر التقارير</h3>
+                            <button class="btn btn-outline btn-sm">📅 عرض الكل</button>
+                        </div>
+                        <div class="card-body">
+                            <div style="display: grid; gap: 12px;">
+                                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #f8fafc; border-radius: 8px;">
+                                    <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #3b82f6, #1e40af); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.2em;">📊</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 600;">تقرير أداء الطلاب</div>
+                                        <div style="color: #6b7280; font-size: 0.9em;">الفصل الثاني - 2024</div>
+                                    </div>
+                                    <button class="action-btn view">👁️</button>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #f8fafc; border-radius: 8px;">
+                                    <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #10b981, #059669); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.2em;">💰</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 600;">تقرير مالي شهري</div>
+                                        <div style="color: #6b7280; font-size: 0.9em;">مايو - 2024</div>
+                                    </div>
+                                    <button class="action-btn view">👁️</button>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #f8fafc; border-radius: 8px;">
+                                    <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b, #d97706); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.2em;">👥</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 600;">تقرير الحضور والانصراف</div>
+                                        <div style="color: #6b7280; font-size: 0.9em;">أسبوع 18</div>
+                                    </div>
+                                    <button class="action-btn view">👁️</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Analytics Charts -->
+                <div class="card" style="margin-top: 24px;">
+                    <div class="card-header">
+                        <h3 class="card-title">تحليلات الأداء</h3>
+                    </div>
+                    <div class="card-body">
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;">
+                            <div>
+                                <h4 style="color: #1e3a8a; margin-bottom: 16px;">توزيع الدرجات</h4>
+                                <canvas id="gradeDistribution" height="250"></canvas>
+                            </div>
+                            <div>
+                                <h4 style="color: #1e3a8a; margin-bottom: 16px;">الترقية بين الفصول</h4>
+                                <canvas id="termComparison" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Initialize Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Grade Distribution
+            const ctx = document.getElementById('gradeDistribution').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['ممتاز', 'جيد جدًا', 'جيد', 'مقبول', 'ضعيف'],
+                    datasets: [{
+                        data: [25, 35, 25, 10, 5],
+                        backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#6b7280', '#ef4444']
+                    }]
+                }
+            });
+            
+            // Term Comparison
+            const ctx2 = document.getElementById('termComparison').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['الفصل الأول', 'الفصل الثاني'],
+                    datasets: [{
+                        label: 'متوسط الدرجات',
+                        data: [82.5, 86.2],
+                        backgroundColor: ['#3b82f6', '#10b981']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

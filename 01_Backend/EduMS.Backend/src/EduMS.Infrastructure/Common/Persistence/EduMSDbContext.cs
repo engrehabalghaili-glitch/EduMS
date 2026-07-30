@@ -56,7 +56,7 @@ public class EduMSDbContext(DbContextOptions<EduMSDbContext> options, EduMS.Appl
                 base.OnModelCreating(modelBuilder);
 
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
-        {
+        {  
             var schoolIdProperty = entityType.FindProperty("SchoolId");
             if (schoolIdProperty != null && schoolIdProperty.ClrType == typeof(long?))
             {

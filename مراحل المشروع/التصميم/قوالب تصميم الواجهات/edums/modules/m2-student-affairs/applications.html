@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - إدارة طلبات القبول والتسجيل</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span style="display: flex; align-items: center;">
+                            <span class="icon">📊</span>
+                            <span>لوحة التحكم</span>
+                        </span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">الوحدات الرئيسية</div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🏫</span>
+                                <span>إدارة المدرسة (M1)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m1-school-office/index.html">لوحة تحكم المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/school-profile.html">ملف المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/classes.html">الصفوف والفصول</a></li>
+                            <li><a href="../../modules/m1-school-office/timetable.html">الجدول الدراسي</a></li>
+                            <li><a href="../../modules/m1-school-office/academic-year.html">العام الدراسي</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🎓</span>
+                                <span>شؤون الطلاب (M2)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m2-student-affairs/index.html">لوحة تحكم الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/students.html">قاعدة الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/registration-requests.html">طلبات القيد</a></li>
+                            <li><a href="../../modules/m2-student-affairs/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🏫</span>
+                                <span>إدارة الموظفين (M3)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m3-employee-management/index.html">لوحة تحكم الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/employees.html">قائمة الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📦</span>
+                                <span>إدارة الأصول (M4)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m4-assets-logistics/index.html">لوحة تحكم الأصول</a></li>
+                            <li><a href="../../modules/m4-assets-logistics/inventory.html">المخزون</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">💰</span>
+                                <span>المالية (M5)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m5-finance/index.html">لوحة المالية</a></li>
+                            <li><a href="../../modules/m5-finance/invoices.html">الفواتير</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📈</span>
+                                <span>الإحصاء (M6)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m6-statistics-reports/index.html">لوحة الإحصاء</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🚨</span>
+                                <span>الطوارئ (M7)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m7-emergency-management/index.html">لوحة الطوارئ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🔐</span>
+                                <span>الأمن والمستخدمين (M8)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m8-authentication-users/index.html">المستخدمين</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة الطلاب - القبول والتسجيل</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">🔔<span class="badge">5</span></button>
+                        <button class="header-btn">💬</button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير القبول</h4>
+                            <p>قسم التسجيل</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <h1 class="page-title">📝 طلبات القبول والتسجيل</h1>
+                            <div class="page-breadcrumb">
+                                <a href="../../index.html">الرئيسية</a>
+                                <span>/</span>
+                                <a href="index.html">إدارة الطلاب</a>
+                                <span>/</span>
+                                <span>القبول</span>
+                            </div>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-primary" onclick="openModal('newApplicationModal')">
+                                <span>➕</span>
+                                <span>تسجيل طلب جديد</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lifecycle Filter -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-body" style="padding: 15px;">
+                        <div class="lifecycle-steps">
+                            <div class="step active">الكل (120)</div>
+                            <div class="step">قيد المراجعة (45)</div>
+                            <div class="step">بانتظار الوثائق (12)</div>
+                            <div class="step">مقبول مبدئياً (28)</div>
+                            <div class="step">إحالة للمكتب (15)</div>
+                            <div class="step">مكتمل (20)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Applications Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">قائمة طلبات الالتحاق (1446 هـ)</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>رقم الطلب</th>
+                                        <th>تاريخ التقديم</th>
+                                        <th>اسم الطالب</th>
+                                        <th>الصف المستهدف</th>
+                                        <th>نوع الطلب</th>
+                                        <th>الحالة</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>APP-1446-001</strong></td>
+                                        <td>25 مايو 2026</td>
+                                        <td>يوسف إبراهيم أحمد</td>
+                                        <td>الأول الابتدائي</td>
+                                        <td>جديد</td>
+                                        <td><span class="badge-status warning">قيد المراجعة</span></td>
+                                        <td>
+                                            <div class="action-btns">
+                                                <button class="btn-icon" title="معاينة">👁️</button>
+                                                <button class="btn-icon" title="قبول مبدئي" style="color: var(--success);">✅</button>
+                                                <button class="btn-icon" title="رفض" style="color: var(--danger);">❌</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>APP-1446-002</strong></td>
+                                        <td>24 مايو 2026</td>
+                                        <td>سارة محمد القحطاني</td>
+                                        <td>الرابع الابتدائي</td>
+                                        <td>تحويل خارجي</td>
+                                        <td><span class="badge-status info">بانتظار الوثائق</span></td>
+                                        <td>
+                                            <div class="action-btns">
+                                                <button class="btn-icon">👁️</button>
+                                                <button class="btn-icon">📩</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>APP-1446-005</strong></td>
+                                        <td>20 مايو 2026</td>
+                                        <td>علي حسن الشهري</td>
+                                        <td>السابع (أول متوسط)</td>
+                                        <td>جديد</td>
+                                        <td><span class="badge-status success">مقبول نهائياً</span></td>
+                                        <td>
+                                            <div class="action-btns">
+                                                <button class="btn-icon">👁️</button>
+                                                <button class="btn-icon">🏫</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="newApplicationModal" class="modal">
+        <div class="modal-content" style="width: 850px;">
+            <div class="modal-header">
+                <h3>نموذج طلب التحاق جديد</h3>
+                <span class="close-modal" onclick="closeModal('newApplicationModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-section-title">بيانات الطالب</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">الاسم الكامل (عربي)</label>
+                            <input type="text" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">رقم الهوية / الإقامة</label>
+                            <input type="text" class="form-input">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">تاريخ الميلاد</label>
+                            <input type="date" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">الجنسية</label>
+                            <select class="form-select">
+                                <option>سعودي</option>
+                                <option>مقيم</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-section-title" style="margin-top: 20px;">البيانات الأكاديمية</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">المرحلة الدراسية</label>
+                            <select class="form-select">
+                                <option>الابتدائية</option>
+                                <option>المتوسطة</option>
+                                <option>الثانوية</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">الصف</label>
+                            <select class="form-select">
+                                <option>الأول</option>
+                                <option>الثاني</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-section-title" style="margin-top: 20px;">الوثائق المرفقة</div>
+                    <div class="documents-upload-grid">
+                        <div class="upload-item">
+                            <label>صورة الهوية</label>
+                            <input type="file">
+                        </div>
+                        <div class="upload-item">
+                            <label>شهادة الميلاد</label>
+                            <input type="file">
+                        </div>
+                        <div class="upload-item">
+                            <label>آخر شهادة دراسية</label>
+                            <input type="file">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('newApplicationModal')">إلغاء</button>
+                <button class="btn btn-primary">حفظ وإرسال للمراجعة</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .lifecycle-steps { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 5px; }
+        .step { padding: 8px 16px; background: #f1f5f9; border-radius: 20px; font-size: 0.85em; font-weight: 600; color: #64748b; cursor: pointer; white-space: nowrap; }
+        .step.active { background: var(--primary); color: white; }
+        
+        .form-section-title { font-weight: 800; color: var(--primary); border-bottom: 2px solid #eff6ff; padding-bottom: 8px; margin-bottom: 15px; font-size: 0.95em; }
+        .documents-upload-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; background: #f8fafc; padding: 15px; border-radius: 8px; }
+        .upload-item label { display: block; font-size: 0.8em; font-weight: 600; margin-bottom: 5px; }
+
+        .badge-status.warning { background: #fef3c7; color: #92400e; }
+        .badge-status.info { background: #dbeafe; color: #1e40af; }
+        .badge-status.success { background: #dcfce7; color: #166534; }
+
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+        .modal-content { background-color: white; margin: 5% auto; width: 600px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); overflow: hidden; animation: modalSlideDown 0.3s ease-out; }
+        .modal-header { padding: 20px 24px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; }
+        .modal-header h3 { color: #1e3a8a; }
+        .close-modal { font-size: 24px; font-weight: bold; cursor: pointer; color: #6b7280; }
+        .modal-body { padding: 24px; max-height: 70vh; overflow-y: auto; }
+        .modal-footer { padding: 16px 24px; border-top: 1px solid #e5e7eb; display: flex; justify-content: flex-end; gap: 12px; background: #f8fafc; }
+    </style>
+
+    <script>
+        function openModal(id) { document.getElementById(id).style.display = "block"; }
+        function closeModal(id) { document.getElementById(id).style.display = "none"; }
+    </script>
+</body>
+</html>
