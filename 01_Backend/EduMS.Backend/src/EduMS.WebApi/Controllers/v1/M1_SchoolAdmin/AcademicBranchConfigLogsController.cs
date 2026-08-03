@@ -6,6 +6,8 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using System.Threading.Tasks;
 
 namespace EduMS.WebApi.Controllers.v1.M1_SchoolAdmin;
@@ -16,6 +18,8 @@ namespace EduMS.WebApi.Controllers.v1.M1_SchoolAdmin;
 public class AcademicBranchConfigLogsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.AcademicBranchConfigLogs.View)]
+
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<AcademicBranchConfigLogDto>>>> GetAll()
     {
@@ -23,6 +27,7 @@ public class AcademicBranchConfigLogsController(MediatR.ISender sender) : Contro
         return Ok(ApiResponse<IEnumerable<AcademicBranchConfigLogDto>>.Success(result));
     }
 
+        [HasPermission(Permissions.AcademicBranchConfigLogs.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<AcademicBranchConfigLogDto>>> GetById(long id)
     {
@@ -30,6 +35,7 @@ public class AcademicBranchConfigLogsController(MediatR.ISender sender) : Contro
         return Ok(ApiResponse<AcademicBranchConfigLogDto>.Success(result));
     }
 
+    [HasPermission(Permissions.AcademicBranchConfigLogs.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateAcademicBranchConfigLogDto dto)
     {
@@ -37,6 +43,7 @@ public class AcademicBranchConfigLogsController(MediatR.ISender sender) : Contro
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.AcademicBranchConfigLogs.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateAcademicBranchConfigLogDto dto)
     {
@@ -45,6 +52,7 @@ public class AcademicBranchConfigLogsController(MediatR.ISender sender) : Contro
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.AcademicBranchConfigLogs.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +60,10 @@ public class AcademicBranchConfigLogsController(MediatR.ISender sender) : Contro
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
+
+
+
 
 
 

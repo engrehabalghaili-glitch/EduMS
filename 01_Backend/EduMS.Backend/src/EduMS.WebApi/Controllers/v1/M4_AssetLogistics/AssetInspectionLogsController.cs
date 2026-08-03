@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.AssetInspectionLogs;
 using EduMS.Application.M4_AssetLogistics.DTOs.AssetInspectionLogs;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class AssetInspectionLogsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.AssetInspectionLogs.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<AssetInspectionLogDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class AssetInspectionLogsController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<IEnumerable<AssetInspectionLogDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetInspectionLogs.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<AssetInspectionLogDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class AssetInspectionLogsController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<AssetInspectionLogDto>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetInspectionLogs.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateAssetInspectionLogDto dto)
     {
@@ -37,6 +42,7 @@ public class AssetInspectionLogsController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.AssetInspectionLogs.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateAssetInspectionLogDto dto)
     {
@@ -45,6 +51,7 @@ public class AssetInspectionLogsController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.AssetInspectionLogs.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class AssetInspectionLogsController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

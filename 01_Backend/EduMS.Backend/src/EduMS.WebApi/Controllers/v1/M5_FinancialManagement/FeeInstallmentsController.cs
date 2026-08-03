@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M5_FinancialManagement.Commands.FeeInstallments;
 using EduMS.Application.M5_FinancialManagement.DTOs.FeeInstallments;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M5_FinancialManagement;
 public class FeeInstallmentsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.FeeInstallments.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<FeeInstallmentDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class FeeInstallmentsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<FeeInstallmentDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.FeeInstallments.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<FeeInstallmentDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class FeeInstallmentsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<FeeInstallmentDto>.Success(result));
     }
 
+    [HasPermission(Permissions.FeeInstallments.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateFeeInstallmentDto dto)
     {
@@ -37,6 +42,7 @@ public class FeeInstallmentsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.FeeInstallments.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateFeeInstallmentDto dto)
     {
@@ -45,6 +51,7 @@ public class FeeInstallmentsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.FeeInstallments.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class FeeInstallmentsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

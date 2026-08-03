@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M8_AuthenticationUsers.Commands.StudentPermissionAuditLogs;
 using EduMS.Application.M8_AuthenticationUsers.DTOs.StudentPermissionAuditLogs;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M8_AuthenticationUsers;
 public class StudentPermissionAuditLogsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.StudentPermissionAuditLogs.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<StudentPermissionAuditLogDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class StudentPermissionAuditLogsController(MediatR.ISender sender) : Cont
         return Ok(ApiResponse<IEnumerable<StudentPermissionAuditLogDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentPermissionAuditLogs.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<StudentPermissionAuditLogDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class StudentPermissionAuditLogsController(MediatR.ISender sender) : Cont
         return Ok(ApiResponse<StudentPermissionAuditLogDto>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentPermissionAuditLogs.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateStudentPermissionAuditLogDto dto)
     {
@@ -37,6 +42,7 @@ public class StudentPermissionAuditLogsController(MediatR.ISender sender) : Cont
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.StudentPermissionAuditLogs.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateStudentPermissionAuditLogDto dto)
     {
@@ -45,6 +51,7 @@ public class StudentPermissionAuditLogsController(MediatR.ISender sender) : Cont
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.StudentPermissionAuditLogs.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class StudentPermissionAuditLogsController(MediatR.ISender sender) : Cont
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

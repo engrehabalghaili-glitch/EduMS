@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M8_AuthenticationUsers.Commands.AccessPolicies;
 using EduMS.Application.M8_AuthenticationUsers.DTOs.AccessPolicies;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M8_AuthenticationUsers;
 public class AccessPoliciesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.AccessPolicies.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<AccessPolicyDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class AccessPoliciesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<AccessPolicyDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.AccessPolicies.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<AccessPolicyDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class AccessPoliciesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<AccessPolicyDto>.Success(result));
     }
 
+    [HasPermission(Permissions.AccessPolicies.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateAccessPolicyDto dto)
     {
@@ -37,6 +42,7 @@ public class AccessPoliciesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.AccessPolicies.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateAccessPolicyDto dto)
     {
@@ -45,6 +51,7 @@ public class AccessPoliciesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.AccessPolicies.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class AccessPoliciesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using System.Threading;
 using System.Threading.Tasks;
 using EduMS.Application.Common.Responses;
@@ -18,6 +20,8 @@ public class SchoolsController(ISender sender) : ControllerBase
 {
     private readonly ISender _sender = sender;
 
+    [HasPermission(Permissions.Schools.View)]
+
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<SchoolDto>>>> GetSchools(
         [FromQuery] bool onlyActive = true, 
@@ -29,6 +33,7 @@ public class SchoolsController(ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<SchoolDto>>.Success(result, "Schools retrieved successfully."));
     }
 
+    [HasPermission(Permissions.Schools.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> CreateSchool(
         [FromBody] CreateSchoolDto schoolDto, 
@@ -40,3 +45,7 @@ public class SchoolsController(ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(schoolId, "School created successfully."));
     }
 }
+
+
+
+

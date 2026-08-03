@@ -6,6 +6,8 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using System.Threading.Tasks;
 
 namespace EduMS.WebApi.Controllers.v1.M1_SchoolAdmin;
@@ -16,6 +18,8 @@ namespace EduMS.WebApi.Controllers.v1.M1_SchoolAdmin;
 public class SchoolLibraryItemsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.SchoolLibraryItems.View)]
+
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<SchoolLibraryItemDto>>>> GetAll()
     {
@@ -23,6 +27,7 @@ public class SchoolLibraryItemsController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<IEnumerable<SchoolLibraryItemDto>>.Success(result));
     }
 
+        [HasPermission(Permissions.SchoolLibraryItems.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<SchoolLibraryItemDto>>> GetById(long id)
     {
@@ -30,6 +35,7 @@ public class SchoolLibraryItemsController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<SchoolLibraryItemDto>.Success(result));
     }
 
+    [HasPermission(Permissions.SchoolLibraryItems.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateSchoolLibraryItemDto dto)
     {
@@ -37,6 +43,7 @@ public class SchoolLibraryItemsController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.SchoolLibraryItems.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateSchoolLibraryItemDto dto)
     {
@@ -45,6 +52,7 @@ public class SchoolLibraryItemsController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.SchoolLibraryItems.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +60,10 @@ public class SchoolLibraryItemsController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
+
+
+
 
 
 

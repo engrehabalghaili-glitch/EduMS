@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M6_StatisticsReports.Commands.TrendAnalysisResults;
 using EduMS.Application.M6_StatisticsReports.DTOs.TrendAnalysisResults;
@@ -44,4 +46,5 @@ public class TrendAnalysisResultsController(MediatR.ISender sender) : Controller
         return Ok(ApiResponse<bool>.Success(result, "Approved successfully."));
     }
 }
+
 

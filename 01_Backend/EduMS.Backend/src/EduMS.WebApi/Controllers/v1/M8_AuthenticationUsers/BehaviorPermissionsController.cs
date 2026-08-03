@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M8_AuthenticationUsers.Commands.BehaviorPermissions;
 using EduMS.Application.M8_AuthenticationUsers.DTOs.BehaviorPermissions;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M8_AuthenticationUsers;
 public class BehaviorPermissionsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.BehaviorPermissions.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<BehaviorPermissionDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class BehaviorPermissionsController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<IEnumerable<BehaviorPermissionDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.BehaviorPermissions.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<BehaviorPermissionDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class BehaviorPermissionsController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<BehaviorPermissionDto>.Success(result));
     }
 
+    [HasPermission(Permissions.BehaviorPermissions.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateBehaviorPermissionDto dto)
     {
@@ -37,6 +42,7 @@ public class BehaviorPermissionsController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.BehaviorPermissions.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateBehaviorPermissionDto dto)
     {
@@ -45,6 +51,7 @@ public class BehaviorPermissionsController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.BehaviorPermissions.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class BehaviorPermissionsController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

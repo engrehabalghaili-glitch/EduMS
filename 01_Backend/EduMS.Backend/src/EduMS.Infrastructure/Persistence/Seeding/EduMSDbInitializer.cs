@@ -56,32 +56,63 @@ public class EduMSDbInitializer(EduMSDbContext context, ILogger<EduMSDbInitializ
             await context.SaveChangesAsync(cancellationToken);
         }
 
-        // 2. Seed Permissions
+        // 2. Dynamic Seed Permissions using Reflection
         var permissionsSet = context.Set<SystemPermission>();
-        if (!await permissionsSet.AnyAsync(cancellationToken))
+        
+        logger.LogInformation("بذر/تحديث قائمة الصلاحيات في النظام برمجياً عبر Reflection...");
+        var allPermissions = new List<string>();
+        var nestedTypes = typeof(EduMS.Domain.Constants.Permissions).GetNestedTypes(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+        foreach (var type in nestedTypes)
         {
-            logger.LogInformation("بذر قائمة الصلاحيات القياسية في النظام (Module 8 - Permissions)...");
-            var permissions = new List<SystemPermission>
+            var fields = type.GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.FlattenHierarchy);
+            foreach (var field in fields)
             {
-                new() { PermissionKey = "users.view", Module = "Security", SubModule = "Users", ActionType = "view", NameAr = "عرض حسابات المستخدمين", NameEn = "View Users", IsActive = true, RequiresLogging = true },
-                new() { PermissionKey = "users.manage", Module = "Security", SubModule = "Users", ActionType = "manage", NameAr = "إدارة وإنشاء وتعديل المستخدمين", NameEn = "Manage Users", IsActive = true, RequiresLogging = true, IsSensitive = true },
-                new() { PermissionKey = "roles.manage", Module = "Security", SubModule = "Roles", ActionType = "manage", NameAr = "إدارة الأدوار والصلاحيات وتعيينها", NameEn = "Manage Roles & Permissions", IsActive = true, RequiresLogging = true, IsSensitive = true },
-                new() { PermissionKey = "school.manage", Module = "SchoolAdmin", SubModule = "Settings", ActionType = "manage", NameAr = "إدارة الإعدادات والبيانات الأساسية للمدرسة", NameEn = "Manage School Configuration", IsActive = true, RequiresLogging = true },
-                new() { PermissionKey = "students.view", Module = "StudentAffairs", SubModule = "Students", ActionType = "view", NameAr = "عرض ملفات الطلاب والبيانات الشخصية", NameEn = "View Students", IsActive = true, RequiresLogging = true },
-                new() { PermissionKey = "students.manage", Module = "StudentAffairs", SubModule = "Students", ActionType = "manage", NameAr = "إدارة شؤون الطلاب والقبول والتسجيل والتحويل", NameEn = "Manage Students & Enrollment", IsActive = true, RequiresLogging = true },
-                new() { PermissionKey = "finance.manage", Module = "Finance", SubModule = "Invoices", ActionType = "manage", NameAr = "إدارة الرسوم الدراسية والفواتير وسندات القبض والصرف", NameEn = "Manage Financials & Invoices", IsActive = true, RequiresLogging = true, IsSensitive = true },
-                new() { PermissionKey = "academic.manage", Module = "Academic", SubModule = "Classes", ActionType = "manage", NameAr = "إدارة الجداول والصفوف ورصد الدرجات والغياب", NameEn = "Manage Academic & Classes", IsActive = true, RequiresLogging = true },
-                new() { PermissionKey = "portal.access", Module = "Portal", SubModule = "General", ActionType = "view", NameAr = "الوصول إلى البوابات الإلكترونية والخدمات الذاتية", NameEn = "Access Portal", IsActive = true, RequiresLogging = false }
-            };
+                if (field.IsLiteral && !field.IsInitOnly && field.FieldType == typeof(string))
+                {
+                    var value = field.GetRawConstantValue()?.ToString();
+                    if (!string.IsNullOrEmpty(value))
+                    {
+                        allPermissions.Add(value);
+                    }
+                }
+            }
+        }
 
-            await permissionsSet.AddRangeAsync(permissions, cancellationToken);
+        var existingPermissions = await permissionsSet.Select(p => p.PermissionKey).ToListAsync(cancellationToken);
+        var missingPermissions = allPermissions.Except(existingPermissions).ToList();
+
+        if (missingPermissions.Any())
+        {
+            var newPermissions = missingPermissions.Select(p => new SystemPermission
+            {
+                PermissionKey = p,
+                Module = p.Split('.').Length > 1 ? p.Split('.')[1] : "System",
+                ActionType = p.Split('.').LastOrDefault()?.ToLower() ?? "view",
+                NameAr = p,
+                NameEn = p,
+                IsActive = true,
+                RequiresLogging = true
+            }).ToList();
+
+            await permissionsSet.AddRangeAsync(newPermissions, cancellationToken);
             await context.SaveChangesAsync(cancellationToken);
+        }
 
-            // Grant all permissions to SUPER_ADMIN
-            var superAdminRole = await rolesSet.FirstOrDefaultAsync(r => r.RoleCode == "SUPER_ADMIN", cancellationToken);
-            if (superAdminRole != null)
+        // Grant ALL permissions to SUPER_ADMIN
+        var superAdminRole = await rolesSet.FirstOrDefaultAsync(r => r.RoleCode == "SUPER_ADMIN", cancellationToken);
+        if (superAdminRole != null)
+        {
+            var allDbPermissions = await permissionsSet.ToListAsync(cancellationToken);
+            var existingRolePermissions = await context.Set<RolePermission>()
+                .Where(rp => rp.RoleId == superAdminRole.Id)
+                .Select(rp => rp.PermissionId)
+                .ToListAsync(cancellationToken);
+
+            var missingRolePermissions = allDbPermissions.Where(p => !existingRolePermissions.Contains(p.Id)).ToList();
+
+            if (missingRolePermissions.Any())
             {
-                var rolePermissions = permissions.Select(p => new RolePermission
+                var rolePermissions = missingRolePermissions.Select(p => new RolePermission
                 {
                     RoleId = superAdminRole.Id,
                     PermissionId = p.Id,
@@ -139,13 +170,13 @@ public class EduMSDbInitializer(EduMSDbContext context, ILogger<EduMSDbInitializ
             await usersSet.AddAsync(adminUser, cancellationToken);
             await context.SaveChangesAsync(cancellationToken);
 
-            var superAdminRole = await rolesSet.FirstOrDefaultAsync(r => r.RoleCode == "SUPER_ADMIN", cancellationToken);
-            if (superAdminRole != null)
+            var superAdminRoleForUser = await rolesSet.FirstOrDefaultAsync(r => r.RoleCode == "SUPER_ADMIN", cancellationToken);
+            if (superAdminRoleForUser != null)
             {
                 var assignment = new UserRoleAssignment
                 {
                     UserId = adminUser.Id,
-                    RoleId = superAdminRole.Id,
+                    RoleId = superAdminRoleForUser.Id,
                     IsPrimary = true,
                     IsActive = true,
                     AssignedAt = DateTime.UtcNow
@@ -339,3 +370,4 @@ public class EduMSDbInitializer(EduMSDbContext context, ILogger<EduMSDbInitializ
         }
     }
 }
+

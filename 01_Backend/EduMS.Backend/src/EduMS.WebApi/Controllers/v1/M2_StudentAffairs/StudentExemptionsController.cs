@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M2_StudentAffairs.Commands.StudentExemptions;
 using EduMS.Application.M2_StudentAffairs.DTOs.StudentExemptions;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M2_StudentAffairs;
 public class StudentExemptionsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.StudentExemptions.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<StudentExemptionDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class StudentExemptionsController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<IEnumerable<StudentExemptionDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentExemptions.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<StudentExemptionDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class StudentExemptionsController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<StudentExemptionDto>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentExemptions.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateStudentExemptionDto dto)
     {
@@ -37,6 +42,7 @@ public class StudentExemptionsController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.StudentExemptions.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateStudentExemptionDto dto)
     {
@@ -45,6 +51,7 @@ public class StudentExemptionsController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.StudentExemptions.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class StudentExemptionsController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

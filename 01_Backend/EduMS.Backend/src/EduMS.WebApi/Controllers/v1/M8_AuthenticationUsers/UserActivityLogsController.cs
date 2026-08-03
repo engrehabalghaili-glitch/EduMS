@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M8_AuthenticationUsers.Commands.UserActivityLogs;
 using EduMS.Application.M8_AuthenticationUsers.DTOs.UserActivityLogs;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M8_AuthenticationUsers;
 public class UserActivityLogsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.UserActivityLogs.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<UserActivityLogDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class UserActivityLogsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<UserActivityLogDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.UserActivityLogs.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<UserActivityLogDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class UserActivityLogsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<UserActivityLogDto>.Success(result));
     }
 
+    [HasPermission(Permissions.UserActivityLogs.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateUserActivityLogDto dto)
     {
@@ -37,6 +42,7 @@ public class UserActivityLogsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.UserActivityLogs.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateUserActivityLogDto dto)
     {
@@ -45,6 +51,7 @@ public class UserActivityLogsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.UserActivityLogs.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class UserActivityLogsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

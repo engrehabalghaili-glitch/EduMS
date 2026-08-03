@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>النمط العام لاستعلامات القراءة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../00_Engine/academic-style.css">
+<style>:root{--accent:#059669}</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="crumb"><a href="../index.html">🏠 فهرس المكتبة</a> <span>/</span> <a href="../04_Sequence/index.html">D. مخططات التتابع</a> <span>/</span> <span>SEQ-QRY-PATTERN</span></div>
+
+  <div class="dg-head">
+    <h1>📖 النمط العام لاستعلامات القراءة</h1>
+    <div class="sub">GET بواسطة معرّف: النمط الذي يغطي 414 معالج استعلام</div>
+    <div class="meta">
+      <span class="chip mono">SEQ-QRY-PATTERN</span>
+      <span class="chip">Pattern-Level</span>
+      <span class="chip">CQRS Query</span><span class="chip">IGenericRepository</span><span class="chip">IMediator</span>
+    </div>
+  </div>
+
+  <div class="truth">
+    <b>✔ مُشتقّ من الكود الفعلي (Reverse-Engineered)</b> —
+    المصدر: <code>EduMS.Application/*/Queries/</code>
+    
+  </div>
+
+  <div class="stat-row"><div class="stat"><div class="k">معالجات استعلام</div><div class="v">414</div></div><div class="stat"><div class="k">المشاركون</div><div class="v">6</div></div><div class="stat"><div class="k">الرسائل</div><div class="v">13</div></div></div>
+
+  <div class="toolbar">
+    <button class="btn" onclick="Z.in()">🔍+</button>
+    <button class="btn" onclick="Z.out()">🔍−</button>
+    <span class="zoomval" id="zv">100%</span>
+    <button class="btn ghost" onclick="Z.reset()">↺ 100%</button>
+    <button class="btn ghost" onclick="Z.fit()">⤢ ملء العرض</button>
+    <span class="sep"></span>
+    <button class="btn gold" onclick="DG.saveSVG('#svgHost svg','SEQ-QRY-PATTERN')">💾 Save as SVG</button>
+    <button class="btn gold" onclick="DG.savePNG('#svgHost svg','SEQ-QRY-PATTERN',3)">🖼 Save as PNG</button>
+    <span class="sep"></span>
+    <button class="btn ghost" onclick="window.print()">🖨 طباعة</button>
+  </div>
+
+  <div class="canvas-card grid-bg" id="canvas"><div id="svgHost"></div></div>
+
+  <div class="legend">
+    <div class="item">▭ مشارك (Participant) + خط حياة (Lifeline)</div>
+    <div class="item"><span class="swatch" style="background:#bfdbfe;border-color:#1d4ed8"></span> شريط تنشيط (Activation)</div>
+    <div class="item">⟶ استدعاء متزامن &nbsp; ⤎ عودة (Return)</div>
+  </div>
+  <div class="note info"><h4>لماذا نمط عام؟</h4><ul><li>من أصل <b>414</b> معالج استعلام في النظام، الغالبية العظمى تتبع هذا النمط الموحّد.</li><li>المشاركون: <b>Actor → Controller → IMediator → QueryHandler → IGenericRepository → DbContext</b>.</li><li>الاختلاف الوحيد بين معالج وآخر هو <b>اسم الكيان (XxxEntity)</b> و<b>الـ DTO المُرجَع</b>.</li><li>للاستعلامات الأكثر تعقيداً (تصفية، صفحات، اتحاد جداول) راجع صفحات SEQ الخاصة.</li></ul></div>
+  
+
+  <div class="foot">EduMS Enterprise • Phase D Reverse-Engineering • مولَّد من <span class="mono">https://github.com/engrehabalghaili-glitch/EduMS.git</span></div>
+</div>
+
+<script src="../00_Engine/diagram-engine.js"></script>
+<script src="../00_Engine/renderers.js"></script>
+<script>
+const SPEC = {"title": "Generic Query Pattern — GetByIdQueryHandler", "subtitle": "النمط العام لجميع استعلامات القراءة الفردية • يمثل ~414 معالج Query في الكود", "participants": [{"id": "A", "name": "المستخدم", "sub": "GET /api/...", "kind": "actor", "color": "#0f172a"}, {"id": "C", "name": "XxxController", "sub": "ApiControllerBase", "kind": "ui", "color": "#7c3aed"}, {"id": "M", "name": "IMediator", "sub": "MediatR", "kind": "component", "color": "#1e3a8a"}, {"id": "H", "name": "GetXxxByIdQueryHandler", "sub": "ApplicationLayer", "kind": "component", "color": "#059669"}, {"id": "R", "name": "IGenericRepository<Xxx>", "sub": "Repository", "kind": "component", "color": "#0891b2"}, {"id": "DB", "name": "EduMSDbContext", "sub": "Oracle DB", "kind": "db", "color": "#b45309"}], "messages": [{"from": "A", "to": "C", "label": "GET /api/v1/xxx/{id}"}, {"from": "C", "to": "C", "label": "Authorize [JWT + Role]"}, {"from": "C", "to": "M", "label": "Send(new GetXxxByIdQuery(id))"}, {"from": "M", "to": "H", "label": "HandleAsync(query, ct)"}, {"from": "H", "to": "R", "label": "_repository.GetByIdAsync(id, ct)"}, {"from": "R", "to": "DB", "label": "SELECT * FROM XXX WHERE ID = :id"}, {"from": "DB", "to": "R", "label": "entity row", "kind": "return"}, {"from": "R", "to": "H", "label": "Xxx entity", "kind": "return"}, {"from": "H", "to": "H", "label": "if (entity == null) throw KeyNotFoundException", "kind": "error"}, {"from": "H", "to": "H", "label": "_mapper.Map<XxxDto>(entity)"}, {"from": "H", "to": "M", "label": "XxxDto", "kind": "return"}, {"from": "M", "to": "C", "label": "response", "kind": "return"}, {"from": "C", "to": "A", "label": "200 OK + JSON", "kind": "return"}], "activations": [{"of": "H", "from": 4, "to": 10}], "laneW": 220, "step": 44};
+DG.renderers.sequence('#svgHost', SPEC);
+const Z = DG.attachZoom('#canvas', '#svgHost svg', '#zv');
+Z.fit();
+</script>
+</body>
+</html>

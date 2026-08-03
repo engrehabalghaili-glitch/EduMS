@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M8_AuthenticationUsers.Commands.SystemAuditLogs;
 using EduMS.Application.M8_AuthenticationUsers.DTOs.SystemAuditLogs;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M8_AuthenticationUsers;
 public class SystemAuditLogsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.SystemAuditLogs.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<SystemAuditLogDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class SystemAuditLogsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<SystemAuditLogDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.SystemAuditLogs.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<SystemAuditLogDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class SystemAuditLogsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<SystemAuditLogDto>.Success(result));
     }
 
+    [HasPermission(Permissions.SystemAuditLogs.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateSystemAuditLogDto dto)
     {
@@ -37,6 +42,7 @@ public class SystemAuditLogsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.SystemAuditLogs.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateSystemAuditLogDto dto)
     {
@@ -45,6 +51,7 @@ public class SystemAuditLogsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.SystemAuditLogs.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class SystemAuditLogsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

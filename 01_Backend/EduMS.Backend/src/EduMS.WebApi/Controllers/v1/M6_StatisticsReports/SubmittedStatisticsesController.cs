@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M6_StatisticsReports.Commands.SubmittedStatisticses;
 using EduMS.Application.M6_StatisticsReports.DTOs.SubmittedStatisticses;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M6_StatisticsReports;
 public class SubmittedStatisticsesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.SubmittedStatisticses.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<SubmittedStatisticsDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class SubmittedStatisticsesController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<IEnumerable<SubmittedStatisticsDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.SubmittedStatisticses.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<SubmittedStatisticsDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class SubmittedStatisticsesController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<SubmittedStatisticsDto>.Success(result));
     }
 
+    [HasPermission(Permissions.SubmittedStatisticses.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateSubmittedStatisticsDto dto)
     {
@@ -37,6 +42,7 @@ public class SubmittedStatisticsesController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 }
+
 
 
 

@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.EducationalConsumableTrackings;
 using EduMS.Application.M4_AssetLogistics.DTOs.EducationalConsumableTrackings;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class EducationalConsumableTrackingsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.EducationalConsumableTrackings.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<EducationalConsumableTrackingDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class EducationalConsumableTrackingsController(MediatR.ISender sender) : 
         return Ok(ApiResponse<IEnumerable<EducationalConsumableTrackingDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.EducationalConsumableTrackings.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<EducationalConsumableTrackingDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class EducationalConsumableTrackingsController(MediatR.ISender sender) : 
         return Ok(ApiResponse<EducationalConsumableTrackingDto>.Success(result));
     }
 
+    [HasPermission(Permissions.EducationalConsumableTrackings.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateEducationalConsumableTrackingDto dto)
     {
@@ -37,6 +42,7 @@ public class EducationalConsumableTrackingsController(MediatR.ISender sender) : 
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.EducationalConsumableTrackings.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateEducationalConsumableTrackingDto dto)
     {
@@ -45,6 +51,7 @@ public class EducationalConsumableTrackingsController(MediatR.ISender sender) : 
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.EducationalConsumableTrackings.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class EducationalConsumableTrackingsController(MediatR.ISender sender) : 
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

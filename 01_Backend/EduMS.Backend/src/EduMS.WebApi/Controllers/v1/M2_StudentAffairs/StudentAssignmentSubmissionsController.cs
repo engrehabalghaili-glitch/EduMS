@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M2_StudentAffairs.Commands.StudentAssignmentSubmissions;
 using EduMS.Application.M2_StudentAffairs.DTOs.StudentAssignmentSubmissions;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M2_StudentAffairs;
 public class StudentAssignmentSubmissionsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.StudentAssignmentSubmissions.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<StudentAssignmentSubmissionDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class StudentAssignmentSubmissionsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<IEnumerable<StudentAssignmentSubmissionDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentAssignmentSubmissions.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<StudentAssignmentSubmissionDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class StudentAssignmentSubmissionsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<StudentAssignmentSubmissionDto>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentAssignmentSubmissions.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateStudentAssignmentSubmissionDto dto)
     {
@@ -37,6 +42,7 @@ public class StudentAssignmentSubmissionsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.StudentAssignmentSubmissions.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateStudentAssignmentSubmissionDto dto)
     {
@@ -45,6 +51,7 @@ public class StudentAssignmentSubmissionsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.StudentAssignmentSubmissions.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class StudentAssignmentSubmissionsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

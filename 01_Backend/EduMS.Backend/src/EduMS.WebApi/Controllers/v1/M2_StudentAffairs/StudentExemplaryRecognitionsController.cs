@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M2_StudentAffairs.Commands.StudentExemplaryRecognitions;
 using EduMS.Application.M2_StudentAffairs.DTOs.StudentExemplaryRecognitions;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M2_StudentAffairs;
 public class StudentExemplaryRecognitionsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.StudentExemplaryRecognitions.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<StudentExemplaryRecognitionDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class StudentExemplaryRecognitionsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<IEnumerable<StudentExemplaryRecognitionDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentExemplaryRecognitions.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<StudentExemplaryRecognitionDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class StudentExemplaryRecognitionsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<StudentExemplaryRecognitionDto>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentExemplaryRecognitions.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateStudentExemplaryRecognitionDto dto)
     {
@@ -37,6 +42,7 @@ public class StudentExemplaryRecognitionsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.StudentExemplaryRecognitions.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateStudentExemplaryRecognitionDto dto)
     {
@@ -45,6 +51,7 @@ public class StudentExemplaryRecognitionsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.StudentExemplaryRecognitions.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class StudentExemplaryRecognitionsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

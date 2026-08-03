@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M8_AuthenticationUsers.Commands.RolePermissions;
 using EduMS.Application.M8_AuthenticationUsers.DTOs.RolePermissions;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M8_AuthenticationUsers;
 public class RolePermissionsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.RolePermissions.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<RolePermissionDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class RolePermissionsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<RolePermissionDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.RolePermissions.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<RolePermissionDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class RolePermissionsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<RolePermissionDto>.Success(result));
     }
 
+    [HasPermission(Permissions.RolePermissions.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateRolePermissionDto dto)
     {
@@ -37,6 +42,7 @@ public class RolePermissionsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.RolePermissions.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateRolePermissionDto dto)
     {
@@ -45,6 +51,7 @@ public class RolePermissionsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.RolePermissions.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class RolePermissionsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

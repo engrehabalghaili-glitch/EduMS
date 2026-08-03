@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M8_AuthenticationUsers.Commands.BehaviorPermissionMatrixes;
 using EduMS.Application.M8_AuthenticationUsers.DTOs.BehaviorPermissionMatrixes;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M8_AuthenticationUsers;
 public class BehaviorPermissionMatrixesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.BehaviorPermissionMatrixes.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<BehaviorPermissionMatrixDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class BehaviorPermissionMatrixesController(MediatR.ISender sender) : Cont
         return Ok(ApiResponse<IEnumerable<BehaviorPermissionMatrixDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.BehaviorPermissionMatrixes.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<BehaviorPermissionMatrixDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class BehaviorPermissionMatrixesController(MediatR.ISender sender) : Cont
         return Ok(ApiResponse<BehaviorPermissionMatrixDto>.Success(result));
     }
 
+    [HasPermission(Permissions.BehaviorPermissionMatrixes.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateBehaviorPermissionMatrixDto dto)
     {
@@ -37,6 +42,7 @@ public class BehaviorPermissionMatrixesController(MediatR.ISender sender) : Cont
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.BehaviorPermissionMatrixes.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateBehaviorPermissionMatrixDto dto)
     {
@@ -45,6 +51,7 @@ public class BehaviorPermissionMatrixesController(MediatR.ISender sender) : Cont
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.BehaviorPermissionMatrixes.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class BehaviorPermissionMatrixesController(MediatR.ISender sender) : Cont
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

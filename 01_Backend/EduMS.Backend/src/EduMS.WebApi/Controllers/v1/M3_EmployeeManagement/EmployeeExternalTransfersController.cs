@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M3_EmployeeManagement.Commands.EmployeeExternalTransfers;
 using EduMS.Application.M3_EmployeeManagement.DTOs.EmployeeExternalTransfers;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M3_EmployeeManagement;
 public class EmployeeExternalTransfersController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.EmployeeExternalTransfers.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<EmployeeExternalTransferDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class EmployeeExternalTransfersController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<IEnumerable<EmployeeExternalTransferDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.EmployeeExternalTransfers.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<EmployeeExternalTransferDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class EmployeeExternalTransfersController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<EmployeeExternalTransferDto>.Success(result));
     }
 
+    [HasPermission(Permissions.EmployeeExternalTransfers.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateEmployeeExternalTransferDto dto)
     {
@@ -37,6 +42,7 @@ public class EmployeeExternalTransfersController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.EmployeeExternalTransfers.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateEmployeeExternalTransferDto dto)
     {
@@ -45,6 +51,7 @@ public class EmployeeExternalTransfersController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.EmployeeExternalTransfers.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class EmployeeExternalTransfersController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M2_StudentAffairs.Commands.StudentSkillAndTalentRecords;
 using EduMS.Application.M2_StudentAffairs.DTOs.StudentSkillAndTalentRecords;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M2_StudentAffairs;
 public class StudentSkillAndTalentRecordsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.StudentSkillAndTalentRecords.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<StudentSkillAndTalentRecordDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class StudentSkillAndTalentRecordsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<IEnumerable<StudentSkillAndTalentRecordDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentSkillAndTalentRecords.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<StudentSkillAndTalentRecordDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class StudentSkillAndTalentRecordsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<StudentSkillAndTalentRecordDto>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentSkillAndTalentRecords.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateStudentSkillAndTalentRecordDto dto)
     {
@@ -37,6 +42,7 @@ public class StudentSkillAndTalentRecordsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.StudentSkillAndTalentRecords.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateStudentSkillAndTalentRecordDto dto)
     {
@@ -45,6 +51,7 @@ public class StudentSkillAndTalentRecordsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.StudentSkillAndTalentRecords.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class StudentSkillAndTalentRecordsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

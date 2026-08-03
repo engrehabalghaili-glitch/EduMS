@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.AssetBudgetAllocations;
 using EduMS.Application.M4_AssetLogistics.DTOs.AssetBudgetAllocations;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class AssetBudgetAllocationsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.AssetBudgetAllocations.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<AssetBudgetAllocationDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class AssetBudgetAllocationsController(MediatR.ISender sender) : Controll
         return Ok(ApiResponse<IEnumerable<AssetBudgetAllocationDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetBudgetAllocations.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<AssetBudgetAllocationDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class AssetBudgetAllocationsController(MediatR.ISender sender) : Controll
         return Ok(ApiResponse<AssetBudgetAllocationDto>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetBudgetAllocations.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateAssetBudgetAllocationDto dto)
     {
@@ -37,6 +42,7 @@ public class AssetBudgetAllocationsController(MediatR.ISender sender) : Controll
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.AssetBudgetAllocations.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateAssetBudgetAllocationDto dto)
     {
@@ -45,6 +51,7 @@ public class AssetBudgetAllocationsController(MediatR.ISender sender) : Controll
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.AssetBudgetAllocations.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class AssetBudgetAllocationsController(MediatR.ISender sender) : Controll
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

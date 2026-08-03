@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M3_EmployeeManagement.Commands.EmployeeFinancialTransactions;
 using EduMS.Application.M3_EmployeeManagement.DTOs.EmployeeFinancialTransactions;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M3_EmployeeManagement;
 public class EmployeeFinancialTransactionsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.EmployeeFinancialTransactions.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<EmployeeFinancialTransactionDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class EmployeeFinancialTransactionsController(MediatR.ISender sender) : C
         return Ok(ApiResponse<IEnumerable<EmployeeFinancialTransactionDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.EmployeeFinancialTransactions.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<EmployeeFinancialTransactionDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class EmployeeFinancialTransactionsController(MediatR.ISender sender) : C
         return Ok(ApiResponse<EmployeeFinancialTransactionDto>.Success(result));
     }
 
+    [HasPermission(Permissions.EmployeeFinancialTransactions.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateEmployeeFinancialTransactionDto dto)
     {
@@ -37,6 +42,7 @@ public class EmployeeFinancialTransactionsController(MediatR.ISender sender) : C
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.EmployeeFinancialTransactions.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateEmployeeFinancialTransactionDto dto)
     {
@@ -45,6 +51,7 @@ public class EmployeeFinancialTransactionsController(MediatR.ISender sender) : C
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.EmployeeFinancialTransactions.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class EmployeeFinancialTransactionsController(MediatR.ISender sender) : C
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

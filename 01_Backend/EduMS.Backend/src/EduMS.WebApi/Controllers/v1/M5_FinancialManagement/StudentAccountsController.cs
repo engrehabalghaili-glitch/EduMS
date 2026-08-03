@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M5_FinancialManagement.Commands.StudentAccounts;
 using EduMS.Application.M5_FinancialManagement.DTOs.StudentAccounts;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M5_FinancialManagement;
 public class StudentAccountsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.StudentAccounts.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<StudentAccountDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class StudentAccountsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<StudentAccountDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentAccounts.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<StudentAccountDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class StudentAccountsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<StudentAccountDto>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentAccounts.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateStudentAccountDto dto)
     {
@@ -37,6 +42,7 @@ public class StudentAccountsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.StudentAccounts.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateStudentAccountDto dto)
     {
@@ -45,6 +51,7 @@ public class StudentAccountsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.StudentAccounts.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class StudentAccountsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

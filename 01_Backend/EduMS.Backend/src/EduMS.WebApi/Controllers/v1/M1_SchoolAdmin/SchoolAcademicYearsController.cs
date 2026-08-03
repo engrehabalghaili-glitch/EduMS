@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M1_SchoolAdmin.Commands.SchoolAcademicYears;
 using EduMS.Application.M1_SchoolAdmin.DTOs.SchoolAcademicYears;
@@ -14,6 +16,8 @@ namespace EduMS.WebApi.Controllers.v1.M1_SchoolAdmin;
 public class SchoolAcademicYearsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.SchoolAcademicYears.View)]
+
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -21,6 +25,7 @@ public class SchoolAcademicYearsController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<IEnumerable<SchoolAcademicYearDto>>.Success(result));
     }
 
+        [HasPermission(Permissions.SchoolAcademicYears.View)]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(long id)
     {
@@ -28,6 +33,7 @@ public class SchoolAcademicYearsController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<SchoolAcademicYearDto>.Success(result));
     }
 
+    [HasPermission(Permissions.SchoolAcademicYears.Create)]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateSchoolAcademicYearDto dto)
     {
@@ -35,6 +41,7 @@ public class SchoolAcademicYearsController(MediatR.ISender sender) : ControllerB
         return CreatedAtAction(nameof(GetById), new { id }, ApiResponse<long>.Success(id, "Created successfully"));
     }
 
+    [HasPermission(Permissions.SchoolAcademicYears.Update)]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(long id, [FromBody] UpdateSchoolAcademicYearDto dto)
     {
@@ -43,6 +50,7 @@ public class SchoolAcademicYearsController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<bool>.Success(true, "Updated successfully"));
     }
 
+    [HasPermission(Permissions.SchoolAcademicYears.Delete)]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(long id)
     {
@@ -50,6 +58,11 @@ public class SchoolAcademicYearsController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<bool>.Success(true, "Deleted successfully"));
     }
 }
+
+
+
+
+
 
 
 

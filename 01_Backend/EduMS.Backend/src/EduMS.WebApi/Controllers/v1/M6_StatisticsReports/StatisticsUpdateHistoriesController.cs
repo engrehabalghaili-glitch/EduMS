@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M6_StatisticsReports.Commands.StatisticsUpdateHistories;
 using EduMS.Application.M6_StatisticsReports.DTOs.StatisticsUpdateHistories;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M6_StatisticsReports;
 public class StatisticsUpdateHistoriesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.StatisticsUpdateHistories.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<StatisticsUpdateHistoryDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class StatisticsUpdateHistoriesController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<IEnumerable<StatisticsUpdateHistoryDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.StatisticsUpdateHistories.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<StatisticsUpdateHistoryDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class StatisticsUpdateHistoriesController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<StatisticsUpdateHistoryDto>.Success(result));
     }
 
+    [HasPermission(Permissions.StatisticsUpdateHistories.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateStatisticsUpdateHistoryDto dto)
     {
@@ -37,6 +42,7 @@ public class StatisticsUpdateHistoriesController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 }
+
 
 
 

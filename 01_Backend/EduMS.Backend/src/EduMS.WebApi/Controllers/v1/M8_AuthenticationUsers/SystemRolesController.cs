@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using EduMS.Infrastructure.Security.Authorization;
+using EduMS.Domain.Constants;
 
 namespace EduMS.WebApi.Controllers.v1.M8_AuthenticationUsers;
 
@@ -17,6 +19,7 @@ public class SystemRolesController(MediatR.ISender sender) : ControllerBase
 {
 
     [HttpGet]
+    [HasPermission(Permissions.SystemRoles.View)]
     public async Task<ActionResult<ApiResponse<IEnumerable<SystemRoleDto>>>> GetAll()
     {
         var result = await sender.Send(new GetAllSystemRolesQuery());
@@ -24,6 +27,7 @@ public class SystemRolesController(MediatR.ISender sender) : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [HasPermission(Permissions.SystemRoles.View)]
     public async Task<ActionResult<ApiResponse<SystemRoleDto>>> GetById(long id)
     {
         var result = await sender.Send(new GetSystemRoleByIdQuery { Id = id });
@@ -31,6 +35,7 @@ public class SystemRolesController(MediatR.ISender sender) : ControllerBase
     }
 
     [HttpPost]
+    [HasPermission(Permissions.SystemRoles.Create)]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateSystemRoleDto dto)
     {
         var id = await sender.Send(new CreateSystemRoleCommand { Dto = dto });
@@ -38,6 +43,7 @@ public class SystemRolesController(MediatR.ISender sender) : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [HasPermission(Permissions.SystemRoles.Update)]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateSystemRoleDto dto)
     {
         dto.Id = id;
@@ -46,6 +52,7 @@ public class SystemRolesController(MediatR.ISender sender) : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [HasPermission(Permissions.SystemRoles.Delete)]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
         var result = await sender.Send(new DeleteSystemRoleCommand { Id = id });

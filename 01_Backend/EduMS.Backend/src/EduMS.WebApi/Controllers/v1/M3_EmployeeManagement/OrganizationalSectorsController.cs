@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M3_EmployeeManagement.Commands.OrganizationalSectors;
 using EduMS.Application.M3_EmployeeManagement.DTOs.OrganizationalSectors;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M3_EmployeeManagement;
 public class OrganizationalSectorsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.OrganizationalSectors.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<OrganizationalSectorDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class OrganizationalSectorsController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<IEnumerable<OrganizationalSectorDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.OrganizationalSectors.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<OrganizationalSectorDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class OrganizationalSectorsController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<OrganizationalSectorDto>.Success(result));
     }
 
+    [HasPermission(Permissions.OrganizationalSectors.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateOrganizationalSectorDto dto)
     {
@@ -37,6 +42,7 @@ public class OrganizationalSectorsController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.OrganizationalSectors.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateOrganizationalSectorDto dto)
     {
@@ -45,6 +51,7 @@ public class OrganizationalSectorsController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.OrganizationalSectors.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class OrganizationalSectorsController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

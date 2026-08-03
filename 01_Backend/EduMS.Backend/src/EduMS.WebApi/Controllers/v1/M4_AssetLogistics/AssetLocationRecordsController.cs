@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.AssetLocationRecords;
 using EduMS.Application.M4_AssetLogistics.DTOs.AssetLocationRecords;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class AssetLocationRecordsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.AssetLocationRecords.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<AssetLocationRecordDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class AssetLocationRecordsController(MediatR.ISender sender) : Controller
         return Ok(ApiResponse<IEnumerable<AssetLocationRecordDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetLocationRecords.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<AssetLocationRecordDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class AssetLocationRecordsController(MediatR.ISender sender) : Controller
         return Ok(ApiResponse<AssetLocationRecordDto>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetLocationRecords.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateAssetLocationRecordDto dto)
     {
@@ -37,6 +42,7 @@ public class AssetLocationRecordsController(MediatR.ISender sender) : Controller
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.AssetLocationRecords.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateAssetLocationRecordDto dto)
     {
@@ -45,6 +51,7 @@ public class AssetLocationRecordsController(MediatR.ISender sender) : Controller
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.AssetLocationRecords.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class AssetLocationRecordsController(MediatR.ISender sender) : Controller
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

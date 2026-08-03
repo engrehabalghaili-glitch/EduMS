@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.AssetTransferRequests;
 using EduMS.Application.M4_AssetLogistics.DTOs.AssetTransferRequests;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class AssetTransferRequestsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.AssetTransferRequests.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<AssetTransferRequestDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class AssetTransferRequestsController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<IEnumerable<AssetTransferRequestDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetTransferRequests.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<AssetTransferRequestDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class AssetTransferRequestsController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<AssetTransferRequestDto>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetTransferRequests.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateAssetTransferRequestDto dto)
     {
@@ -37,6 +42,7 @@ public class AssetTransferRequestsController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.AssetTransferRequests.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateAssetTransferRequestDto dto)
     {
@@ -45,6 +51,7 @@ public class AssetTransferRequestsController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.AssetTransferRequests.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class AssetTransferRequestsController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

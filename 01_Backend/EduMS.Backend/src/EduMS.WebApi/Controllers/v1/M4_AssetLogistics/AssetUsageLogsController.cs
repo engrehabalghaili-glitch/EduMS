@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.AssetUsageLogs;
 using EduMS.Application.M4_AssetLogistics.DTOs.AssetUsageLogs;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class AssetUsageLogsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.AssetUsageLogs.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<AssetUsageLogDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class AssetUsageLogsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<AssetUsageLogDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetUsageLogs.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<AssetUsageLogDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class AssetUsageLogsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<AssetUsageLogDto>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetUsageLogs.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateAssetUsageLogDto dto)
     {
@@ -37,6 +42,7 @@ public class AssetUsageLogsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.AssetUsageLogs.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateAssetUsageLogDto dto)
     {
@@ -45,6 +51,7 @@ public class AssetUsageLogsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.AssetUsageLogs.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class AssetUsageLogsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

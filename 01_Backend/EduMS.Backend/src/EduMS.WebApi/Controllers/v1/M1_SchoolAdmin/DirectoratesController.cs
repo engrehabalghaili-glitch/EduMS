@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M1_SchoolAdmin.Commands.Directorates;
 using EduMS.Application.M1_SchoolAdmin.DTOs.Directorates;
@@ -14,6 +16,8 @@ namespace EduMS.WebApi.Controllers.v1.M1_SchoolAdmin;
 public class DirectoratesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.Directorates.View)]
+
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -21,6 +25,7 @@ public class DirectoratesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<DirectorateDto>>.Success(result));
     }
 
+        [HasPermission(Permissions.Directorates.View)]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(long id)
     {
@@ -28,6 +33,7 @@ public class DirectoratesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<DirectorateDto>.Success(result));
     }
 
+    [HasPermission(Permissions.Directorates.Create)]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateDirectorateDto dto)
     {
@@ -35,6 +41,7 @@ public class DirectoratesController(MediatR.ISender sender) : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id }, ApiResponse<long>.Success(id, "Created successfully"));
     }
 
+    [HasPermission(Permissions.Directorates.Update)]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(long id, [FromBody] UpdateDirectorateDto dto)
     {
@@ -43,6 +50,7 @@ public class DirectoratesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(true, "Updated successfully"));
     }
 
+    [HasPermission(Permissions.Directorates.Delete)]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(long id)
     {
@@ -50,6 +58,11 @@ public class DirectoratesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(true, "Deleted successfully"));
     }
 }
+
+
+
+
+
 
 
 

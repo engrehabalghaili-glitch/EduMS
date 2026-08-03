@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.Warehouses;
 using EduMS.Application.M4_AssetLogistics.DTOs.Warehouses;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class WarehousesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.Warehouses.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<WarehouseDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class WarehousesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<WarehouseDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.Warehouses.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<WarehouseDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class WarehousesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<WarehouseDto>.Success(result));
     }
 
+    [HasPermission(Permissions.Warehouses.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateWarehouseDto dto)
     {
@@ -37,6 +42,7 @@ public class WarehousesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.Warehouses.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateWarehouseDto dto)
     {
@@ -45,6 +51,7 @@ public class WarehousesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.Warehouses.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class WarehousesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

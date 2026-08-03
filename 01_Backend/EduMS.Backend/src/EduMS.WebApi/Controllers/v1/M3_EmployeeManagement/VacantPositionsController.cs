@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M3_EmployeeManagement.Commands.VacantPositions;
 using EduMS.Application.M3_EmployeeManagement.DTOs.VacantPositions;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M3_EmployeeManagement;
 public class VacantPositionsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.VacantPositions.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<VacantPositionDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class VacantPositionsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<VacantPositionDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.VacantPositions.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<VacantPositionDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class VacantPositionsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<VacantPositionDto>.Success(result));
     }
 
+    [HasPermission(Permissions.VacantPositions.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateVacantPositionDto dto)
     {
@@ -37,6 +42,7 @@ public class VacantPositionsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.VacantPositions.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateVacantPositionDto dto)
     {
@@ -45,6 +51,7 @@ public class VacantPositionsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.VacantPositions.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class VacantPositionsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

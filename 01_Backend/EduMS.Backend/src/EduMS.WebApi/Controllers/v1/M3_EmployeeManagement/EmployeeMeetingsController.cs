@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M3_EmployeeManagement.Commands.EmployeeMeetings;
 using EduMS.Application.M3_EmployeeManagement.DTOs.EmployeeMeetings;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M3_EmployeeManagement;
 public class EmployeeMeetingsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.EmployeeMeetings.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<EmployeeMeetingDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class EmployeeMeetingsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<EmployeeMeetingDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.EmployeeMeetings.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<EmployeeMeetingDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class EmployeeMeetingsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<EmployeeMeetingDto>.Success(result));
     }
 
+    [HasPermission(Permissions.EmployeeMeetings.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateEmployeeMeetingDto dto)
     {
@@ -37,6 +42,7 @@ public class EmployeeMeetingsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.EmployeeMeetings.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateEmployeeMeetingDto dto)
     {
@@ -45,6 +51,7 @@ public class EmployeeMeetingsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.EmployeeMeetings.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class EmployeeMeetingsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

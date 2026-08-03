@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M1_SchoolAdmin.Commands.Departments;
 using EduMS.Application.M1_SchoolAdmin.DTOs.Departments;
@@ -14,6 +16,8 @@ namespace EduMS.WebApi.Controllers.v1.M1_SchoolAdmin;
 public class DepartmentsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.Departments.View)]
+
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -21,6 +25,7 @@ public class DepartmentsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<DepartmentDto>>.Success(result));
     }
 
+        [HasPermission(Permissions.Departments.View)]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(long id)
     {
@@ -28,6 +33,7 @@ public class DepartmentsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<DepartmentDto>.Success(result));
     }
 
+    [HasPermission(Permissions.Departments.Create)]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateDepartmentDto dto)
     {
@@ -35,6 +41,7 @@ public class DepartmentsController(MediatR.ISender sender) : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id }, ApiResponse<long>.Success(id, "Created successfully"));
     }
 
+    [HasPermission(Permissions.Departments.Update)]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(long id, [FromBody] UpdateDepartmentDto dto)
     {
@@ -43,6 +50,7 @@ public class DepartmentsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(true, "Updated successfully"));
     }
 
+    [HasPermission(Permissions.Departments.Delete)]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(long id)
     {
@@ -50,6 +58,11 @@ public class DepartmentsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(true, "Deleted successfully"));
     }
 }
+
+
+
+
+
 
 
 

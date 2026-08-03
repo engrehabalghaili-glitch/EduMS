@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M2_StudentAffairs.Commands.StudentInventoryCustodies;
 using EduMS.Application.M2_StudentAffairs.DTOs.StudentInventoryCustodies;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M2_StudentAffairs;
 public class StudentInventoryCustodiesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.StudentInventoryCustodies.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<StudentInventoryCustodyDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class StudentInventoryCustodiesController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<IEnumerable<StudentInventoryCustodyDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentInventoryCustodies.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<StudentInventoryCustodyDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class StudentInventoryCustodiesController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<StudentInventoryCustodyDto>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentInventoryCustodies.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateStudentInventoryCustodyDto dto)
     {
@@ -37,6 +42,7 @@ public class StudentInventoryCustodiesController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.StudentInventoryCustodies.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateStudentInventoryCustodyDto dto)
     {
@@ -45,6 +51,7 @@ public class StudentInventoryCustodiesController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.StudentInventoryCustodies.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class StudentInventoryCustodiesController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

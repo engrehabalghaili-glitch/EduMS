@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.AssetRevaluationImpairments;
 using EduMS.Application.M4_AssetLogistics.DTOs.AssetRevaluationImpairments;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class AssetRevaluationImpairmentsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.AssetRevaluationImpairments.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<AssetRevaluationImpairmentDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class AssetRevaluationImpairmentsController(MediatR.ISender sender) : Con
         return Ok(ApiResponse<IEnumerable<AssetRevaluationImpairmentDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetRevaluationImpairments.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<AssetRevaluationImpairmentDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class AssetRevaluationImpairmentsController(MediatR.ISender sender) : Con
         return Ok(ApiResponse<AssetRevaluationImpairmentDto>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetRevaluationImpairments.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateAssetRevaluationImpairmentDto dto)
     {
@@ -37,6 +42,7 @@ public class AssetRevaluationImpairmentsController(MediatR.ISender sender) : Con
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.AssetRevaluationImpairments.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateAssetRevaluationImpairmentDto dto)
     {
@@ -45,6 +51,7 @@ public class AssetRevaluationImpairmentsController(MediatR.ISender sender) : Con
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.AssetRevaluationImpairments.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class AssetRevaluationImpairmentsController(MediatR.ISender sender) : Con
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

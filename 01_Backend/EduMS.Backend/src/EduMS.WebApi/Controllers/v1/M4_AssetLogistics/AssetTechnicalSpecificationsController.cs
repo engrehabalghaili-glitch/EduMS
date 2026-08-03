@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.AssetTechnicalSpecifications;
 using EduMS.Application.M4_AssetLogistics.DTOs.AssetTechnicalSpecifications;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class AssetTechnicalSpecificationsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.AssetTechnicalSpecifications.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<AssetTechnicalSpecificationDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class AssetTechnicalSpecificationsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<IEnumerable<AssetTechnicalSpecificationDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetTechnicalSpecifications.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<AssetTechnicalSpecificationDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class AssetTechnicalSpecificationsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<AssetTechnicalSpecificationDto>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetTechnicalSpecifications.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateAssetTechnicalSpecificationDto dto)
     {
@@ -37,6 +42,7 @@ public class AssetTechnicalSpecificationsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.AssetTechnicalSpecifications.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateAssetTechnicalSpecificationDto dto)
     {
@@ -45,6 +51,7 @@ public class AssetTechnicalSpecificationsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.AssetTechnicalSpecifications.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class AssetTechnicalSpecificationsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

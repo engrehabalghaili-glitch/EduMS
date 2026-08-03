@@ -6,6 +6,8 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using System.Threading.Tasks;
 
 namespace EduMS.WebApi.Controllers.v1.M1_SchoolAdmin;
@@ -16,6 +18,8 @@ namespace EduMS.WebApi.Controllers.v1.M1_SchoolAdmin;
 public class AcademicWarningPoliciesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.AcademicWarningPolicies.View)]
+
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<AcademicWarningPolicyDto>>>> GetAll()
     {
@@ -23,6 +27,7 @@ public class AcademicWarningPoliciesController(MediatR.ISender sender) : Control
         return Ok(ApiResponse<IEnumerable<AcademicWarningPolicyDto>>.Success(result));
     }
 
+        [HasPermission(Permissions.AcademicWarningPolicies.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<AcademicWarningPolicyDto>>> GetById(long id)
     {
@@ -30,6 +35,7 @@ public class AcademicWarningPoliciesController(MediatR.ISender sender) : Control
         return Ok(ApiResponse<AcademicWarningPolicyDto>.Success(result));
     }
 
+    [HasPermission(Permissions.AcademicWarningPolicies.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateAcademicWarningPolicyDto dto)
     {
@@ -37,6 +43,7 @@ public class AcademicWarningPoliciesController(MediatR.ISender sender) : Control
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.AcademicWarningPolicies.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateAcademicWarningPolicyDto dto)
     {
@@ -45,6 +52,7 @@ public class AcademicWarningPoliciesController(MediatR.ISender sender) : Control
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.AcademicWarningPolicies.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +60,10 @@ public class AcademicWarningPoliciesController(MediatR.ISender sender) : Control
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
+
+
+
 
 
 

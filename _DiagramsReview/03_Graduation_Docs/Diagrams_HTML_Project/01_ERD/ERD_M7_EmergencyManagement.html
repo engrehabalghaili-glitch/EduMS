@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ERD — إدارة الطوارئ والسلامة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../00_Engine/academic-style.css">
+<style>:root{--accent:#BE185D}</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="crumb"><a href="../index.html">🏠 فهرس المكتبة</a> <span>/</span> <a href="../01_ERD/index.html">A. مخططات ERD</a> <span>/</span> <span>ERD-M7</span></div>
+
+  <div class="dg-head">
+    <h1>🚨 ERD — إدارة الطوارئ والسلامة</h1>
+    <div class="sub">Emergency Management • مخطط علاقات الكيانات بترميز Chen • مُشتق من كود C#</div>
+    <div class="meta">
+      <span class="chip mono">ERD-M7</span>
+      <span class="chip">Module-Level</span>
+      <span class="chip">13 كيان</span><span class="chip">3 علاقة داخلية</span><span class="chip">426 عمود</span>
+    </div>
+  </div>
+
+  <div class="truth">
+    <b>✔ مُشتقّ من الكود الفعلي (Reverse-Engineered)</b> —
+    المصدر: <code>EduMS.Infrastructure/Persistence/Migrations/EduMSDbContextModelSnapshot.cs</code>
+    — الوحدة <code>M7_EmergencyManagement</code> من مجلد <code>EduMS.Domain/Entities/M7_EmergencyManagement/</code>
+  </div>
+
+  <div class="stat-row"><div class="stat"><div class="k">الكيانات</div><div class="v">13</div></div><div class="stat"><div class="k">الأعمدة</div><div class="v">426</div></div><div class="stat"><div class="k">العلاقات الداخلية</div><div class="v">3</div></div><div class="stat"><div class="k">كيانات بلا PK</div><div class="v">0</div></div></div>
+
+  <div class="toolbar">
+    <button class="btn" onclick="Z.in()">🔍+</button>
+    <button class="btn" onclick="Z.out()">🔍−</button>
+    <span class="zoomval" id="zv">100%</span>
+    <button class="btn ghost" onclick="Z.reset()">↺ 100%</button>
+    <button class="btn ghost" onclick="Z.fit()">⤢ ملء العرض</button>
+    <span class="sep"></span>
+    <button class="btn gold" onclick="DG.saveSVG('#svgHost svg','ERD-M7')">💾 Save as SVG</button>
+    <button class="btn gold" onclick="DG.savePNG('#svgHost svg','ERD-M7',3)">🖼 Save as PNG</button>
+    <span class="sep"></span>
+    <button class="btn ghost" onclick="window.print()">🖨 طباعة</button>
+  </div>
+
+  <div class="canvas-card grid-bg" id="canvas"><div id="svgHost"></div></div>
+
+  <div class="legend">
+    <div class="item"><span class="swatch ent"></span> كيان (Entity) — مستطيل</div>
+    <div class="item"><span class="swatch attr"></span> خاصية (Attribute) — بيضاوي</div>
+    <div class="item"><span class="swatch rel"></span> علاقة (Relationship) — معيّن</div>
+    <div class="item"><b style="color:#1d4ed8;text-decoration:underline">PK</b> مفتاح رئيسي (تحته خط)</div>
+    <div class="item"><b style="color:#b45309">FK</b> مفتاح خارجي</div>
+    <div class="item"><b style="color:#b45309">1 : M</b> نسبة التعدّد (Cardinality)</div>
+  </div>
+  <div class="note info"><h4>ملاحظات هندسية (مستخرجة من الكود)</h4><ul><li>جميع الكيانات مُستخرجة من <code>modelBuilder.Entity(...)</code> في ملف الـ snapshot الفعلي.</li><li>أسماء الجداول الفيزيائية من <code>b.ToTable(...)</code> — قاعدة البيانات Oracle.</li><li>المفاتيح الرئيسية من <code>b.HasKey(...)</code> والمفاتيح الخارجية من <code>.HasForeignKey(...)</code>.</li><li>نسبة التعدّد مشتقة من <code>.WithMany()</code> ⇒ 1:M ومن <code>.WithOne()</code> ⇒ 1:1.</li><li>الخصائص المعروضة مُنتقاة (PK ثم FK ثم أهم الأعمدة) لضمان قابلية القراءة؛ الجدول أدناه يذكر العدد الكامل.</li></ul></div>
+  <div class='sec-title' style='font-size:17px'>الجداول الفعلية في هذه الوحدة<span class='cnt'>13</span></div><table class='dg'><thead><tr><th>الكيان (C# Entity)</th><th>الجدول الفيزيائي</th><th>PK</th><th>عدد الأعمدة</th><th>FKs</th></tr></thead><tbody><tr><td class='mono'>CommunityPartnership</td><td class='mono'>COMMUNITY_PARTNERSHIP</td><td class='mono'>Id</td><td>32</td><td>2</td></tr><tr><td class='mono'>EmergencyClosure</td><td class='mono'>EMERGENCY_CLOSURE</td><td class='mono'>Id</td><td>32</td><td>1</td></tr><tr><td class='mono'>EmergencyHosting</td><td class='mono'>EMERGENCY_HOSTING</td><td class='mono'>Id</td><td>35</td><td>2</td></tr><tr><td class='mono'>EmergencyIncident</td><td class='mono'>EMERGENCY_INCIDENT</td><td class='mono'>Id</td><td>43</td><td>4</td></tr><tr><td class='mono'>EmergencyPlan</td><td class='mono'>EMERGENCY_PLAN</td><td class='mono'>Id</td><td>19</td><td>2</td></tr><tr><td class='mono'>ExternalParticipation</td><td class='mono'>EXTERNAL_PARTICIPATION</td><td class='mono'>Id</td><td>31</td><td>1</td></tr><tr><td class='mono'>RemediationPlan</td><td class='mono'>REMEDIATION_PLAN</td><td class='mono'>Id</td><td>37</td><td>5</td></tr><tr><td class='mono'>SafetySecurityReport</td><td class='mono'>SAFETY_SECURITY_REPORT</td><td class='mono'>Id</td><td>38</td><td>2</td></tr><tr><td class='mono'>SchoolAward</td><td class='mono'>SCHOOL_AWARD</td><td class='mono'>Id</td><td>30</td><td>1</td></tr><tr><td class='mono'>SchoolDeficit</td><td class='mono'>SCHOOL_DEFICIT</td><td class='mono'>Id</td><td>34</td><td>1</td></tr><tr><td class='mono'>SchoolMerger</td><td class='mono'>SCHOOL_MERGER</td><td class='mono'>Id</td><td>26</td><td>1</td></tr><tr><td class='mono'>SchoolSurplus</td><td class='mono'>SCHOOL_SURPLUS</td><td class='mono'>Id</td><td>33</td><td>1</td></tr><tr><td class='mono'>TransportationService</td><td class='mono'>TRANSPORTATION_SERVICE</td><td class='mono'>Id</td><td>36</td><td>4</td></tr></tbody></table>
+
+  <div class="foot">EduMS Enterprise • Phase D Reverse-Engineering • مولَّد من <span class="mono">https://github.com/engrehabalghaili-glitch/EduMS.git</span></div>
+</div>
+
+<script src="../00_Engine/diagram-engine.js"></script>
+<script src="../00_Engine/renderers.js"></script>
+<script>
+const SPEC = {"title":"ERD \u2014 Emergency Management (M7_EmergencyManagement)","subtitle":"\u0625\u062F\u0627\u0631\u0629 \u0627\u0644\u0637\u0648\u0627\u0631\u0626 \u0648\u0627\u0644\u0633\u0644\u0627\u0645\u0629 \u2022 13 \u0643\u064A\u0627\u0646 \u2022 3 \u0639\u0644\u0627\u0642\u0629 \u2022 Chen Notation","layout":"ring","ringRx":806,"ringRy":520,"attrRx":150,"attrRy":108,"cellW":640,"cellH":480,"cols":3,"maxAttrs":11,"entities":[{"name":"CommunicationTemplate","ar":"","table":"COMMUNICATIONTEMPLATE","weak":false,"attributes":[{"name":"Id","type":"BIGINT","pk":true,"fk":false},{"name":"TemplateCode","type":"VARCHAR(200)","pk":false,"fk":false},{"name":"TemplateName","type":"VARCHAR(200)","pk":false,"fk":false},{"name":"SubjectTemplate","type":"VARCHAR(200)","pk":false,"fk":false},{"name":"BodyTemplate","type":"VARCHAR(200)","pk":false,"fk":false},{"name":"Type","type":"VARCHAR(200)","pk":false,"fk":false}]},{"name":"MessageQueue","ar":"","table":"MESSAGEQUEUE","weak":false,"attributes":[{"name":"Id","type":"BIGINT","pk":true,"fk":false},{"name":"MessageType","type":"VARCHAR(200)","pk":false,"fk":false},{"name":"RecipientAddress","type":"VARCHAR(200)","pk":false,"fk":false},{"name":"Subject","type":"VARCHAR(200)","pk":false,"fk":false},{"name":"Body","type":"VARCHAR(200)","pk":false,"fk":false},{"name":"Status","type":"VARCHAR(200)","pk":false,"fk":false},{"name":"RetryCount","type":"BIGINT","pk":false,"fk":false}]},{"name":"SystemNotification","ar":"","table":"SYSTEMNOTIFICATION","weak":false,"attributes":[{"name":"Id","type":"BIGINT","pk":true,"fk":false},{"name":"UserId","type":"BIGINT","pk":false,"fk":true},{"name":"Title","type":"VARCHAR(200)","pk":false,"fk":false},{"name":"Message","type":"VARCHAR(200)","pk":false,"fk":false},{"name":"IsRead","type":"BOOL","pk":false,"fk":false},{"name":"ActionUrl","type":"VARCHAR(200)","pk":false,"fk":false},{"name":"NotificationDate","type":"TIMESTAMP","pk":false,"fk":false}]}],"relations":[]};
+DG.renderers.chenERD('#svgHost', SPEC);
+const Z = DG.attachZoom('#canvas', '#svgHost svg', '#zv');
+Z.fit();
+</script>
+</body>
+</html>

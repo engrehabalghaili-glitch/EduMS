@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M8_AuthenticationUsers.Commands.RoleMatrixes;
 using EduMS.Application.M8_AuthenticationUsers.DTOs.RoleMatrixes;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M8_AuthenticationUsers;
 public class RoleMatrixesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.RoleMatrixes.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<RoleMatrixDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class RoleMatrixesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<RoleMatrixDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.RoleMatrixes.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<RoleMatrixDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class RoleMatrixesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<RoleMatrixDto>.Success(result));
     }
 
+    [HasPermission(Permissions.RoleMatrixes.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateRoleMatrixDto dto)
     {
@@ -37,6 +42,7 @@ public class RoleMatrixesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.RoleMatrixes.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateRoleMatrixDto dto)
     {
@@ -45,6 +51,7 @@ public class RoleMatrixesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.RoleMatrixes.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class RoleMatrixesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

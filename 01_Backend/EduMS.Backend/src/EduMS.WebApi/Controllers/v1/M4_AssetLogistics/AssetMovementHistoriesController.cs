@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.AssetMovementHistories;
 using EduMS.Application.M4_AssetLogistics.DTOs.AssetMovementHistories;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class AssetMovementHistoriesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.AssetMovementHistories.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<AssetMovementHistoryDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class AssetMovementHistoriesController(MediatR.ISender sender) : Controll
         return Ok(ApiResponse<IEnumerable<AssetMovementHistoryDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetMovementHistories.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<AssetMovementHistoryDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class AssetMovementHistoriesController(MediatR.ISender sender) : Controll
         return Ok(ApiResponse<AssetMovementHistoryDto>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetMovementHistories.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateAssetMovementHistoryDto dto)
     {
@@ -37,6 +42,7 @@ public class AssetMovementHistoriesController(MediatR.ISender sender) : Controll
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.AssetMovementHistories.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateAssetMovementHistoryDto dto)
     {
@@ -45,6 +51,7 @@ public class AssetMovementHistoriesController(MediatR.ISender sender) : Controll
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.AssetMovementHistories.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class AssetMovementHistoriesController(MediatR.ISender sender) : Controll
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

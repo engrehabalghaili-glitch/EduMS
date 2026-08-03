@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.AssetFinancialSummaryReports;
 using EduMS.Application.M4_AssetLogistics.DTOs.AssetFinancialSummaryReports;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class AssetFinancialSummaryReportsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.AssetFinancialSummaryReports.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<AssetFinancialSummaryReportDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class AssetFinancialSummaryReportsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<IEnumerable<AssetFinancialSummaryReportDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetFinancialSummaryReports.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<AssetFinancialSummaryReportDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class AssetFinancialSummaryReportsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<AssetFinancialSummaryReportDto>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetFinancialSummaryReports.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateAssetFinancialSummaryReportDto dto)
     {
@@ -37,6 +42,7 @@ public class AssetFinancialSummaryReportsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.AssetFinancialSummaryReports.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateAssetFinancialSummaryReportDto dto)
     {
@@ -45,6 +51,7 @@ public class AssetFinancialSummaryReportsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.AssetFinancialSummaryReports.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class AssetFinancialSummaryReportsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M6_StatisticsReports.Commands.ExternalComplianceReports;
 using EduMS.Application.M6_StatisticsReports.DTOs.ExternalComplianceReports;
@@ -44,4 +46,5 @@ public class ExternalComplianceReportsController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<bool>.Success(result, "Approved successfully."));
     }
 }
+
 

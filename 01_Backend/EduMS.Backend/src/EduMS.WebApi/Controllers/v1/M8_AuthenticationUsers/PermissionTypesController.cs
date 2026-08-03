@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M8_AuthenticationUsers.Commands.PermissionTypes;
 using EduMS.Application.M8_AuthenticationUsers.DTOs.PermissionTypes;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M8_AuthenticationUsers;
 public class PermissionTypesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.PermissionTypes.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<PermissionTypeDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class PermissionTypesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<PermissionTypeDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.PermissionTypes.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<PermissionTypeDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class PermissionTypesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<PermissionTypeDto>.Success(result));
     }
 
+    [HasPermission(Permissions.PermissionTypes.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreatePermissionTypeDto dto)
     {
@@ -37,6 +42,7 @@ public class PermissionTypesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.PermissionTypes.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdatePermissionTypeDto dto)
     {
@@ -45,6 +51,7 @@ public class PermissionTypesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.PermissionTypes.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class PermissionTypesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

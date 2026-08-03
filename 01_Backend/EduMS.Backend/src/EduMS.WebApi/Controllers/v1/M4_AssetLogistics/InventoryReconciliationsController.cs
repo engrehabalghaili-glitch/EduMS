@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.InventoryReconciliations;
 using EduMS.Application.M4_AssetLogistics.DTOs.InventoryReconciliations;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class InventoryReconciliationsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.InventoryReconciliations.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<InventoryReconciliationDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class InventoryReconciliationsController(MediatR.ISender sender) : Contro
         return Ok(ApiResponse<IEnumerable<InventoryReconciliationDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.InventoryReconciliations.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<InventoryReconciliationDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class InventoryReconciliationsController(MediatR.ISender sender) : Contro
         return Ok(ApiResponse<InventoryReconciliationDto>.Success(result));
     }
 
+    [HasPermission(Permissions.InventoryReconciliations.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateInventoryReconciliationDto dto)
     {
@@ -37,6 +42,7 @@ public class InventoryReconciliationsController(MediatR.ISender sender) : Contro
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.InventoryReconciliations.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateInventoryReconciliationDto dto)
     {
@@ -45,6 +51,7 @@ public class InventoryReconciliationsController(MediatR.ISender sender) : Contro
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.InventoryReconciliations.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class InventoryReconciliationsController(MediatR.ISender sender) : Contro
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.AssetComplianceAudits;
 using EduMS.Application.M4_AssetLogistics.DTOs.AssetComplianceAudits;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class AssetComplianceAuditsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.AssetComplianceAudits.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<AssetComplianceAuditDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class AssetComplianceAuditsController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<IEnumerable<AssetComplianceAuditDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetComplianceAudits.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<AssetComplianceAuditDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class AssetComplianceAuditsController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<AssetComplianceAuditDto>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetComplianceAudits.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateAssetComplianceAuditDto dto)
     {
@@ -37,6 +42,7 @@ public class AssetComplianceAuditsController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.AssetComplianceAudits.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateAssetComplianceAuditDto dto)
     {
@@ -45,6 +51,7 @@ public class AssetComplianceAuditsController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.AssetComplianceAudits.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class AssetComplianceAuditsController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

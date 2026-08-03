@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M8_AuthenticationUsers.Commands.GovernanceRbacRules;
 using EduMS.Application.M8_AuthenticationUsers.DTOs.GovernanceRbacRules;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M8_AuthenticationUsers;
 public class GovernanceRbacRulesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.GovernanceRbacRules.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<GovernanceRbacRuleDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class GovernanceRbacRulesController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<IEnumerable<GovernanceRbacRuleDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.GovernanceRbacRules.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<GovernanceRbacRuleDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class GovernanceRbacRulesController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<GovernanceRbacRuleDto>.Success(result));
     }
 
+    [HasPermission(Permissions.GovernanceRbacRules.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateGovernanceRbacRuleDto dto)
     {
@@ -37,6 +42,7 @@ public class GovernanceRbacRulesController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.GovernanceRbacRules.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateGovernanceRbacRuleDto dto)
     {
@@ -45,6 +51,7 @@ public class GovernanceRbacRulesController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.GovernanceRbacRules.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class GovernanceRbacRulesController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

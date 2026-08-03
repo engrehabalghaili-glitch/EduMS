@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M2_StudentAffairs.Commands.StudentDailyAttendanceSummaries;
 using EduMS.Application.M2_StudentAffairs.DTOs.StudentDailyAttendanceSummaries;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M2_StudentAffairs;
 public class StudentDailyAttendanceSummariesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.StudentDailyAttendanceSummaries.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<StudentDailyAttendanceSummaryDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class StudentDailyAttendanceSummariesController(MediatR.ISender sender) :
         return Ok(ApiResponse<IEnumerable<StudentDailyAttendanceSummaryDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentDailyAttendanceSummaries.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<StudentDailyAttendanceSummaryDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class StudentDailyAttendanceSummariesController(MediatR.ISender sender) :
         return Ok(ApiResponse<StudentDailyAttendanceSummaryDto>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentDailyAttendanceSummaries.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateStudentDailyAttendanceSummaryDto dto)
     {
@@ -37,6 +42,7 @@ public class StudentDailyAttendanceSummariesController(MediatR.ISender sender) :
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.StudentDailyAttendanceSummaries.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateStudentDailyAttendanceSummaryDto dto)
     {
@@ -45,6 +51,7 @@ public class StudentDailyAttendanceSummariesController(MediatR.ISender sender) :
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.StudentDailyAttendanceSummaries.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class StudentDailyAttendanceSummariesController(MediatR.ISender sender) :
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

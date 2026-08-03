@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.AssetDocuments;
 using EduMS.Application.M4_AssetLogistics.DTOs.AssetDocuments;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class AssetDocumentsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.AssetDocuments.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<AssetDocumentDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class AssetDocumentsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<AssetDocumentDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetDocuments.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<AssetDocumentDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class AssetDocumentsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<AssetDocumentDto>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetDocuments.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateAssetDocumentDto dto)
     {
@@ -37,6 +42,7 @@ public class AssetDocumentsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.AssetDocuments.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateAssetDocumentDto dto)
     {
@@ -45,6 +51,7 @@ public class AssetDocumentsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.AssetDocuments.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class AssetDocumentsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

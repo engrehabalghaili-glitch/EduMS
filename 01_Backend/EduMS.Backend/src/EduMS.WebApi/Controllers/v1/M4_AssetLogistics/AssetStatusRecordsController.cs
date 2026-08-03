@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.AssetStatusRecords;
 using EduMS.Application.M4_AssetLogistics.DTOs.AssetStatusRecords;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class AssetStatusRecordsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.AssetStatusRecords.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<AssetStatusRecordDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class AssetStatusRecordsController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<IEnumerable<AssetStatusRecordDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetStatusRecords.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<AssetStatusRecordDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class AssetStatusRecordsController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<AssetStatusRecordDto>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetStatusRecords.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateAssetStatusRecordDto dto)
     {
@@ -37,6 +42,7 @@ public class AssetStatusRecordsController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.AssetStatusRecords.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateAssetStatusRecordDto dto)
     {
@@ -45,6 +51,7 @@ public class AssetStatusRecordsController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.AssetStatusRecords.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class AssetStatusRecordsController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

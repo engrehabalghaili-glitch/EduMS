@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M3_EmployeeManagement.Commands.EmployeeAttendances;
 using EduMS.Application.M3_EmployeeManagement.DTOs.EmployeeAttendances;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M3_EmployeeManagement;
 public class EmployeeAttendancesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.EmployeeAttendances.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<EmployeeAttendanceDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class EmployeeAttendancesController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<IEnumerable<EmployeeAttendanceDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.EmployeeAttendances.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<EmployeeAttendanceDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class EmployeeAttendancesController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<EmployeeAttendanceDto>.Success(result));
     }
 
+    [HasPermission(Permissions.EmployeeAttendances.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateEmployeeAttendanceDto dto)
     {
@@ -37,6 +42,7 @@ public class EmployeeAttendancesController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.EmployeeAttendances.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateEmployeeAttendanceDto dto)
     {
@@ -45,6 +51,7 @@ public class EmployeeAttendancesController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.EmployeeAttendances.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class EmployeeAttendancesController(MediatR.ISender sender) : ControllerB
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

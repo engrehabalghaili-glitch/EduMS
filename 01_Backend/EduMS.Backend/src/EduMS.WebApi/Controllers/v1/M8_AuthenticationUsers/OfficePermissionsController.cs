@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M8_AuthenticationUsers.Commands.OfficePermissions;
 using EduMS.Application.M8_AuthenticationUsers.DTOs.OfficePermissions;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M8_AuthenticationUsers;
 public class OfficePermissionsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.OfficePermissions.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<OfficePermissionDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class OfficePermissionsController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<IEnumerable<OfficePermissionDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.OfficePermissions.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<OfficePermissionDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class OfficePermissionsController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<OfficePermissionDto>.Success(result));
     }
 
+    [HasPermission(Permissions.OfficePermissions.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateOfficePermissionDto dto)
     {
@@ -37,6 +42,7 @@ public class OfficePermissionsController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.OfficePermissions.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateOfficePermissionDto dto)
     {
@@ -45,6 +51,7 @@ public class OfficePermissionsController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.OfficePermissions.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class OfficePermissionsController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

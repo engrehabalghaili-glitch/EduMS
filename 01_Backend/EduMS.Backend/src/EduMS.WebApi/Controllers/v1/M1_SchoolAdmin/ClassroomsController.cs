@@ -6,6 +6,8 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using System.Threading.Tasks;
 
 namespace EduMS.WebApi.Controllers.v1.M1_SchoolAdmin;
@@ -16,6 +18,8 @@ namespace EduMS.WebApi.Controllers.v1.M1_SchoolAdmin;
 public class ClassroomsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.Classrooms.View)]
+
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<ClassroomDto>>>> GetAll()
     {
@@ -23,6 +27,7 @@ public class ClassroomsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<ClassroomDto>>.Success(result));
     }
 
+        [HasPermission(Permissions.Classrooms.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<ClassroomDto>>> GetById(long id)
     {
@@ -30,6 +35,7 @@ public class ClassroomsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<ClassroomDto>.Success(result));
     }
 
+    [HasPermission(Permissions.Classrooms.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateClassroomDto dto)
     {
@@ -37,6 +43,7 @@ public class ClassroomsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.Classrooms.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateClassroomDto dto)
     {
@@ -45,6 +52,7 @@ public class ClassroomsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.Classrooms.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +60,10 @@ public class ClassroomsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
+
+
+
 
 
 

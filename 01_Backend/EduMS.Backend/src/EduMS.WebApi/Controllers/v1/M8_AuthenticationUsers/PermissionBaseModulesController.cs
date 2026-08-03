@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M8_AuthenticationUsers.Commands.PermissionBaseModules;
 using EduMS.Application.M8_AuthenticationUsers.DTOs.PermissionBaseModules;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M8_AuthenticationUsers;
 public class PermissionBaseModulesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.PermissionBaseModules.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<PermissionBaseModuleDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class PermissionBaseModulesController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<IEnumerable<PermissionBaseModuleDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.PermissionBaseModules.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<PermissionBaseModuleDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class PermissionBaseModulesController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<PermissionBaseModuleDto>.Success(result));
     }
 
+    [HasPermission(Permissions.PermissionBaseModules.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreatePermissionBaseModuleDto dto)
     {
@@ -37,6 +42,7 @@ public class PermissionBaseModulesController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.PermissionBaseModules.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdatePermissionBaseModuleDto dto)
     {
@@ -45,6 +51,7 @@ public class PermissionBaseModulesController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.PermissionBaseModules.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class PermissionBaseModulesController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

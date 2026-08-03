@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M2_StudentAffairs.Commands.StudentAbsenceExcusals;
 using EduMS.Application.M2_StudentAffairs.DTOs.StudentAbsenceExcusals;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M2_StudentAffairs;
 public class StudentAbsenceExcusalsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.StudentAbsenceExcusals.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<StudentAbsenceExcusalDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class StudentAbsenceExcusalsController(MediatR.ISender sender) : Controll
         return Ok(ApiResponse<IEnumerable<StudentAbsenceExcusalDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentAbsenceExcusals.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<StudentAbsenceExcusalDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class StudentAbsenceExcusalsController(MediatR.ISender sender) : Controll
         return Ok(ApiResponse<StudentAbsenceExcusalDto>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentAbsenceExcusals.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateStudentAbsenceExcusalDto dto)
     {
@@ -37,6 +42,7 @@ public class StudentAbsenceExcusalsController(MediatR.ISender sender) : Controll
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.StudentAbsenceExcusals.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateStudentAbsenceExcusalDto dto)
     {
@@ -45,6 +51,7 @@ public class StudentAbsenceExcusalsController(MediatR.ISender sender) : Controll
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.StudentAbsenceExcusals.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class StudentAbsenceExcusalsController(MediatR.ISender sender) : Controll
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M6_StatisticsReports.Commands.StatisticalReportSnapshots;
 using EduMS.Application.M6_StatisticsReports.DTOs.StatisticalReportSnapshots;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M6_StatisticsReports;
 public class StatisticalReportSnapshotsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.StatisticalReportSnapshots.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<StatisticalReportSnapshotDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class StatisticalReportSnapshotsController(MediatR.ISender sender) : Cont
         return Ok(ApiResponse<IEnumerable<StatisticalReportSnapshotDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.StatisticalReportSnapshots.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<StatisticalReportSnapshotDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class StatisticalReportSnapshotsController(MediatR.ISender sender) : Cont
         return Ok(ApiResponse<StatisticalReportSnapshotDto>.Success(result));
     }
 
+    [HasPermission(Permissions.StatisticalReportSnapshots.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateStatisticalReportSnapshotDto dto)
     {
@@ -37,6 +42,7 @@ public class StatisticalReportSnapshotsController(MediatR.ISender sender) : Cont
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 }
+
 
 
 

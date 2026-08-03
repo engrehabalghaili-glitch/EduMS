@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M6_StatisticsReports.Commands.ReportApprovals;
 using EduMS.Application.M6_StatisticsReports.DTOs.ReportApprovals;
@@ -44,4 +46,5 @@ public class ReportApprovalsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Approved successfully."));
     }
 }
+
 

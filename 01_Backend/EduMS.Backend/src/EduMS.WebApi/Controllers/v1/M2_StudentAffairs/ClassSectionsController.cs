@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M2_StudentAffairs.Commands.ClassSections;
 using EduMS.Application.M2_StudentAffairs.DTOs.ClassSections;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M2_StudentAffairs;
 public class ClassSectionsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.ClassSections.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<ClassSectionDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class ClassSectionsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<ClassSectionDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.ClassSections.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<ClassSectionDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class ClassSectionsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<ClassSectionDto>.Success(result));
     }
 
+    [HasPermission(Permissions.ClassSections.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateClassSectionDto dto)
     {
@@ -37,6 +42,7 @@ public class ClassSectionsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.ClassSections.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateClassSectionDto dto)
     {
@@ -45,6 +51,7 @@ public class ClassSectionsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.ClassSections.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class ClassSectionsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

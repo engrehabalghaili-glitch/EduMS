@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.AssetAllocations;
 using EduMS.Application.M4_AssetLogistics.DTOs.AssetAllocations;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class AssetAllocationsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.AssetAllocations.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<AssetAllocationDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class AssetAllocationsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<AssetAllocationDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetAllocations.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<AssetAllocationDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class AssetAllocationsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<AssetAllocationDto>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetAllocations.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateAssetAllocationDto dto)
     {
@@ -37,6 +42,7 @@ public class AssetAllocationsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.AssetAllocations.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateAssetAllocationDto dto)
     {
@@ -45,6 +51,7 @@ public class AssetAllocationsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.AssetAllocations.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class AssetAllocationsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

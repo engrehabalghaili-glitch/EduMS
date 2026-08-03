@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M5_FinancialManagement.Commands.FeeInvoices;
 using EduMS.Application.M5_FinancialManagement.DTOs.FeeInvoices;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M5_FinancialManagement;
 public class FeeInvoicesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.FeeInvoices.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<FeeInvoiceDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class FeeInvoicesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<FeeInvoiceDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.FeeInvoices.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<FeeInvoiceDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class FeeInvoicesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<FeeInvoiceDto>.Success(result));
     }
 
+    [HasPermission(Permissions.FeeInvoices.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateFeeInvoiceDto dto)
     {
@@ -37,6 +42,7 @@ public class FeeInvoicesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.FeeInvoices.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateFeeInvoiceDto dto)
     {
@@ -45,6 +51,7 @@ public class FeeInvoicesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.FeeInvoices.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class FeeInvoicesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

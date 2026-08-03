@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M2_StudentAffairs.Commands.StudentParentConferenceReservations;
 using EduMS.Application.M2_StudentAffairs.DTOs.StudentParentConferenceReservations;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M2_StudentAffairs;
 public class StudentParentConferenceReservationsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.StudentParentConferenceReservations.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<StudentParentConferenceReservationDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class StudentParentConferenceReservationsController(MediatR.ISender sende
         return Ok(ApiResponse<IEnumerable<StudentParentConferenceReservationDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentParentConferenceReservations.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<StudentParentConferenceReservationDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class StudentParentConferenceReservationsController(MediatR.ISender sende
         return Ok(ApiResponse<StudentParentConferenceReservationDto>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentParentConferenceReservations.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateStudentParentConferenceReservationDto dto)
     {
@@ -37,6 +42,7 @@ public class StudentParentConferenceReservationsController(MediatR.ISender sende
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.StudentParentConferenceReservations.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateStudentParentConferenceReservationDto dto)
     {
@@ -45,6 +51,7 @@ public class StudentParentConferenceReservationsController(MediatR.ISender sende
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.StudentParentConferenceReservations.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class StudentParentConferenceReservationsController(MediatR.ISender sende
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

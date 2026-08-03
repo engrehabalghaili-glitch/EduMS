@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M3_EmployeeManagement.Commands.EmployeeTerminations;
 using EduMS.Application.M3_EmployeeManagement.DTOs.EmployeeTerminations;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M3_EmployeeManagement;
 public class EmployeeTerminationsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.EmployeeTerminations.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<EmployeeTerminationDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class EmployeeTerminationsController(MediatR.ISender sender) : Controller
         return Ok(ApiResponse<IEnumerable<EmployeeTerminationDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.EmployeeTerminations.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<EmployeeTerminationDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class EmployeeTerminationsController(MediatR.ISender sender) : Controller
         return Ok(ApiResponse<EmployeeTerminationDto>.Success(result));
     }
 
+    [HasPermission(Permissions.EmployeeTerminations.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateEmployeeTerminationDto dto)
     {
@@ -37,6 +42,7 @@ public class EmployeeTerminationsController(MediatR.ISender sender) : Controller
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.EmployeeTerminations.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateEmployeeTerminationDto dto)
     {
@@ -45,6 +51,7 @@ public class EmployeeTerminationsController(MediatR.ISender sender) : Controller
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.EmployeeTerminations.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class EmployeeTerminationsController(MediatR.ISender sender) : Controller
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

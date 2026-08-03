@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.FieldInventoryLogs;
 using EduMS.Application.M4_AssetLogistics.DTOs.FieldInventoryLogs;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class FieldInventoryLogsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.FieldInventoryLogs.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<FieldInventoryLogDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class FieldInventoryLogsController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<IEnumerable<FieldInventoryLogDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.FieldInventoryLogs.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<FieldInventoryLogDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class FieldInventoryLogsController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<FieldInventoryLogDto>.Success(result));
     }
 
+    [HasPermission(Permissions.FieldInventoryLogs.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateFieldInventoryLogDto dto)
     {
@@ -37,6 +42,7 @@ public class FieldInventoryLogsController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.FieldInventoryLogs.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateFieldInventoryLogDto dto)
     {
@@ -45,6 +51,7 @@ public class FieldInventoryLogsController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.FieldInventoryLogs.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class FieldInventoryLogsController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

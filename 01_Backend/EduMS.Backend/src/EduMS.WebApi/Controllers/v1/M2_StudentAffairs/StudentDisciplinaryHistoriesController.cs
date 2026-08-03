@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M2_StudentAffairs.Commands.StudentDisciplinaryHistories;
 using EduMS.Application.M2_StudentAffairs.DTOs.StudentDisciplinaryHistories;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M2_StudentAffairs;
 public class StudentDisciplinaryHistoriesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.StudentDisciplinaryHistories.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<StudentDisciplinaryHistoryDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class StudentDisciplinaryHistoriesController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<IEnumerable<StudentDisciplinaryHistoryDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentDisciplinaryHistories.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<StudentDisciplinaryHistoryDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class StudentDisciplinaryHistoriesController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<StudentDisciplinaryHistoryDto>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentDisciplinaryHistories.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateStudentDisciplinaryHistoryDto dto)
     {
@@ -37,6 +42,7 @@ public class StudentDisciplinaryHistoriesController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.StudentDisciplinaryHistories.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateStudentDisciplinaryHistoryDto dto)
     {
@@ -45,6 +51,7 @@ public class StudentDisciplinaryHistoriesController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.StudentDisciplinaryHistories.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class StudentDisciplinaryHistoriesController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

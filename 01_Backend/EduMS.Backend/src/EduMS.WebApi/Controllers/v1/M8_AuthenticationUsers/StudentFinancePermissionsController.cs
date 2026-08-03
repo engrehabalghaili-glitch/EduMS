@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M8_AuthenticationUsers.Commands.StudentFinancePermissions;
 using EduMS.Application.M8_AuthenticationUsers.DTOs.StudentFinancePermissions;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M8_AuthenticationUsers;
 public class StudentFinancePermissionsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.StudentFinancePermissions.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<StudentFinancePermissionDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class StudentFinancePermissionsController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<IEnumerable<StudentFinancePermissionDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentFinancePermissions.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<StudentFinancePermissionDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class StudentFinancePermissionsController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<StudentFinancePermissionDto>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentFinancePermissions.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateStudentFinancePermissionDto dto)
     {
@@ -37,6 +42,7 @@ public class StudentFinancePermissionsController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.StudentFinancePermissions.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateStudentFinancePermissionDto dto)
     {
@@ -45,6 +51,7 @@ public class StudentFinancePermissionsController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.StudentFinancePermissions.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class StudentFinancePermissionsController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

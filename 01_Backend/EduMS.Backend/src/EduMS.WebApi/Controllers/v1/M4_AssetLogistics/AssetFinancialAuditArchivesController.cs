@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.AssetFinancialAuditArchives;
 using EduMS.Application.M4_AssetLogistics.DTOs.AssetFinancialAuditArchives;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class AssetFinancialAuditArchivesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.AssetFinancialAuditArchives.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<AssetFinancialAuditArchiveDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class AssetFinancialAuditArchivesController(MediatR.ISender sender) : Con
         return Ok(ApiResponse<IEnumerable<AssetFinancialAuditArchiveDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetFinancialAuditArchives.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<AssetFinancialAuditArchiveDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class AssetFinancialAuditArchivesController(MediatR.ISender sender) : Con
         return Ok(ApiResponse<AssetFinancialAuditArchiveDto>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetFinancialAuditArchives.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateAssetFinancialAuditArchiveDto dto)
     {
@@ -37,6 +42,7 @@ public class AssetFinancialAuditArchivesController(MediatR.ISender sender) : Con
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.AssetFinancialAuditArchives.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateAssetFinancialAuditArchiveDto dto)
     {
@@ -45,6 +51,7 @@ public class AssetFinancialAuditArchivesController(MediatR.ISender sender) : Con
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.AssetFinancialAuditArchives.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class AssetFinancialAuditArchivesController(MediatR.ISender sender) : Con
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

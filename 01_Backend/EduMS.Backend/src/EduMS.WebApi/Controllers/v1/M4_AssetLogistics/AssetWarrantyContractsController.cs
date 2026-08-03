@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.AssetWarrantyContracts;
 using EduMS.Application.M4_AssetLogistics.DTOs.AssetWarrantyContracts;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class AssetWarrantyContractsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.AssetWarrantyContracts.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<AssetWarrantyContractDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class AssetWarrantyContractsController(MediatR.ISender sender) : Controll
         return Ok(ApiResponse<IEnumerable<AssetWarrantyContractDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetWarrantyContracts.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<AssetWarrantyContractDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class AssetWarrantyContractsController(MediatR.ISender sender) : Controll
         return Ok(ApiResponse<AssetWarrantyContractDto>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetWarrantyContracts.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateAssetWarrantyContractDto dto)
     {
@@ -37,6 +42,7 @@ public class AssetWarrantyContractsController(MediatR.ISender sender) : Controll
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.AssetWarrantyContracts.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateAssetWarrantyContractDto dto)
     {
@@ -45,6 +51,7 @@ public class AssetWarrantyContractsController(MediatR.ISender sender) : Controll
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.AssetWarrantyContracts.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class AssetWarrantyContractsController(MediatR.ISender sender) : Controll
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

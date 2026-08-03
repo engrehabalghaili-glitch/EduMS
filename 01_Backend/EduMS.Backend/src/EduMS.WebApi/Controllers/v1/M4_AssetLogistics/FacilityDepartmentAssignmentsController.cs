@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.FacilityDepartmentAssignments;
 using EduMS.Application.M4_AssetLogistics.DTOs.FacilityDepartmentAssignments;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class FacilityDepartmentAssignmentsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.FacilityDepartmentAssignments.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<FacilityDepartmentAssignmentDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class FacilityDepartmentAssignmentsController(MediatR.ISender sender) : C
         return Ok(ApiResponse<IEnumerable<FacilityDepartmentAssignmentDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.FacilityDepartmentAssignments.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<FacilityDepartmentAssignmentDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class FacilityDepartmentAssignmentsController(MediatR.ISender sender) : C
         return Ok(ApiResponse<FacilityDepartmentAssignmentDto>.Success(result));
     }
 
+    [HasPermission(Permissions.FacilityDepartmentAssignments.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateFacilityDepartmentAssignmentDto dto)
     {
@@ -37,6 +42,7 @@ public class FacilityDepartmentAssignmentsController(MediatR.ISender sender) : C
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.FacilityDepartmentAssignments.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateFacilityDepartmentAssignmentDto dto)
     {
@@ -45,6 +51,7 @@ public class FacilityDepartmentAssignmentsController(MediatR.ISender sender) : C
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.FacilityDepartmentAssignments.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class FacilityDepartmentAssignmentsController(MediatR.ISender sender) : C
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

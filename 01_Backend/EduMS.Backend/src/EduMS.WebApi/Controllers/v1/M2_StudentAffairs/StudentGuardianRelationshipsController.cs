@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M2_StudentAffairs.Commands.StudentGuardianRelationships;
 using EduMS.Application.M2_StudentAffairs.DTOs.StudentGuardianRelationships;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M2_StudentAffairs;
 public class StudentGuardianRelationshipsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.StudentGuardianRelationships.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<StudentGuardianRelationshipDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class StudentGuardianRelationshipsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<IEnumerable<StudentGuardianRelationshipDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentGuardianRelationships.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<StudentGuardianRelationshipDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class StudentGuardianRelationshipsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<StudentGuardianRelationshipDto>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentGuardianRelationships.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateStudentGuardianRelationshipDto dto)
     {
@@ -37,6 +42,7 @@ public class StudentGuardianRelationshipsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.StudentGuardianRelationships.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateStudentGuardianRelationshipDto dto)
     {
@@ -45,6 +51,7 @@ public class StudentGuardianRelationshipsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.StudentGuardianRelationships.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class StudentGuardianRelationshipsController(MediatR.ISender sender) : Co
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

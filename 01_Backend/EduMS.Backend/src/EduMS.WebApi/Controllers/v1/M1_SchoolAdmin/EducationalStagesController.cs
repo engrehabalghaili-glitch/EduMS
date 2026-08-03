@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M1_SchoolAdmin.Commands.EducationalStages;
 using EduMS.Application.M1_SchoolAdmin.DTOs.EducationalStages;
@@ -14,6 +16,8 @@ namespace EduMS.WebApi.Controllers.v1.M1_SchoolAdmin;
 public class EducationalStagesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.EducationalStages.View)]
+
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -21,6 +25,7 @@ public class EducationalStagesController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<IEnumerable<EducationalStageDto>>.Success(result));
     }
 
+        [HasPermission(Permissions.EducationalStages.View)]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(long id)
     {
@@ -28,6 +33,7 @@ public class EducationalStagesController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<EducationalStageDto>.Success(result));
     }
 
+    [HasPermission(Permissions.EducationalStages.Create)]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateEducationalStageDto dto)
     {
@@ -35,6 +41,7 @@ public class EducationalStagesController(MediatR.ISender sender) : ControllerBas
         return CreatedAtAction(nameof(GetById), new { id }, ApiResponse<long>.Success(id, "Created successfully"));
     }
 
+    [HasPermission(Permissions.EducationalStages.Update)]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(long id, [FromBody] UpdateEducationalStageDto dto)
     {
@@ -43,6 +50,7 @@ public class EducationalStagesController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<bool>.Success(true, "Updated successfully"));
     }
 
+    [HasPermission(Permissions.EducationalStages.Delete)]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(long id)
     {
@@ -50,6 +58,11 @@ public class EducationalStagesController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<bool>.Success(true, "Deleted successfully"));
     }
 }
+
+
+
+
+
 
 
 

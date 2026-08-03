@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.DepreciationTransactions;
 using EduMS.Application.M4_AssetLogistics.DTOs.DepreciationTransactions;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class DepreciationTransactionsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.DepreciationTransactions.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<DepreciationTransactionDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class DepreciationTransactionsController(MediatR.ISender sender) : Contro
         return Ok(ApiResponse<IEnumerable<DepreciationTransactionDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.DepreciationTransactions.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<DepreciationTransactionDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class DepreciationTransactionsController(MediatR.ISender sender) : Contro
         return Ok(ApiResponse<DepreciationTransactionDto>.Success(result));
     }
 
+    [HasPermission(Permissions.DepreciationTransactions.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateDepreciationTransactionDto dto)
     {
@@ -37,6 +42,7 @@ public class DepreciationTransactionsController(MediatR.ISender sender) : Contro
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.DepreciationTransactions.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateDepreciationTransactionDto dto)
     {
@@ -45,6 +51,7 @@ public class DepreciationTransactionsController(MediatR.ISender sender) : Contro
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.DepreciationTransactions.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class DepreciationTransactionsController(MediatR.ISender sender) : Contro
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

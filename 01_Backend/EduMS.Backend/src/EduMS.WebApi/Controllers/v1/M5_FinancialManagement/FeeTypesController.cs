@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M5_FinancialManagement.Commands.FeeTypes;
 using EduMS.Application.M5_FinancialManagement.DTOs.FeeTypes;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M5_FinancialManagement;
 public class FeeTypesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.FeeTypes.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<FeeTypeDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class FeeTypesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<FeeTypeDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.FeeTypes.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<FeeTypeDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class FeeTypesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<FeeTypeDto>.Success(result));
     }
 
+    [HasPermission(Permissions.FeeTypes.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateFeeTypeDto dto)
     {
@@ -37,6 +42,7 @@ public class FeeTypesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.FeeTypes.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateFeeTypeDto dto)
     {
@@ -45,6 +51,7 @@ public class FeeTypesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.FeeTypes.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class FeeTypesController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

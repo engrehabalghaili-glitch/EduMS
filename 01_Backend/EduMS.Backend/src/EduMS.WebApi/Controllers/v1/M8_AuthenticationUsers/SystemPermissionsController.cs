@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using EduMS.Infrastructure.Security.Authorization;
+using EduMS.Domain.Constants;
 
 namespace EduMS.WebApi.Controllers.v1.M8_AuthenticationUsers;
 
@@ -17,6 +19,7 @@ public class SystemPermissionsController(MediatR.ISender sender) : ControllerBas
 {
 
     [HttpGet]
+    [HasPermission(Permissions.SystemPermissions.View)]
     public async Task<ActionResult<ApiResponse<IEnumerable<SystemPermissionDto>>>> GetAll()
     {
         var result = await sender.Send(new GetAllSystemPermissionsQuery());
@@ -24,6 +27,7 @@ public class SystemPermissionsController(MediatR.ISender sender) : ControllerBas
     }
 
     [HttpGet("{id}")]
+    [HasPermission(Permissions.SystemPermissions.View)]
     public async Task<ActionResult<ApiResponse<SystemPermissionDto>>> GetById(long id)
     {
         var result = await sender.Send(new GetSystemPermissionByIdQuery { Id = id });
@@ -31,6 +35,7 @@ public class SystemPermissionsController(MediatR.ISender sender) : ControllerBas
     }
 
     [HttpPost]
+    [HasPermission(Permissions.SystemPermissions.Create)]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateSystemPermissionDto dto)
     {
         var id = await sender.Send(new CreateSystemPermissionCommand { Dto = dto });
@@ -38,6 +43,7 @@ public class SystemPermissionsController(MediatR.ISender sender) : ControllerBas
     }
 
     [HttpPut("{id}")]
+    [HasPermission(Permissions.SystemPermissions.Update)]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateSystemPermissionDto dto)
     {
         dto.Id = id;
@@ -46,6 +52,7 @@ public class SystemPermissionsController(MediatR.ISender sender) : ControllerBas
     }
 
     [HttpDelete("{id}")]
+    [HasPermission(Permissions.SystemPermissions.Delete)]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
         var result = await sender.Send(new DeleteSystemPermissionCommand { Id = id });

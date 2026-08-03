@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M2_StudentAffairs.Commands.StudentMedicalAllergyLogs;
 using EduMS.Application.M2_StudentAffairs.DTOs.StudentMedicalAllergyLogs;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M2_StudentAffairs;
 public class StudentMedicalAllergyLogsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.StudentMedicalAllergyLogs.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<StudentMedicalAllergyLogDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class StudentMedicalAllergyLogsController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<IEnumerable<StudentMedicalAllergyLogDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentMedicalAllergyLogs.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<StudentMedicalAllergyLogDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class StudentMedicalAllergyLogsController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<StudentMedicalAllergyLogDto>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentMedicalAllergyLogs.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateStudentMedicalAllergyLogDto dto)
     {
@@ -37,6 +42,7 @@ public class StudentMedicalAllergyLogsController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.StudentMedicalAllergyLogs.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateStudentMedicalAllergyLogDto dto)
     {
@@ -45,6 +51,7 @@ public class StudentMedicalAllergyLogsController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.StudentMedicalAllergyLogs.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class StudentMedicalAllergyLogsController(MediatR.ISender sender) : Contr
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

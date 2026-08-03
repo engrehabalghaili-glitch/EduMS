@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.AssetDepreciations;
 using EduMS.Application.M4_AssetLogistics.DTOs.AssetDepreciations;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class AssetDepreciationsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.AssetDepreciations.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<AssetDepreciationDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class AssetDepreciationsController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<IEnumerable<AssetDepreciationDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetDepreciations.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<AssetDepreciationDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class AssetDepreciationsController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<AssetDepreciationDto>.Success(result));
     }
 
+    [HasPermission(Permissions.AssetDepreciations.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateAssetDepreciationDto dto)
     {
@@ -37,6 +42,7 @@ public class AssetDepreciationsController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.AssetDepreciations.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateAssetDepreciationDto dto)
     {
@@ -45,6 +51,7 @@ public class AssetDepreciationsController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.AssetDepreciations.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class AssetDepreciationsController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

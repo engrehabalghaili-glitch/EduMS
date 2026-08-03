@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M3_EmployeeManagement.Commands.EmployeeDocuments;
 using EduMS.Application.M3_EmployeeManagement.DTOs.EmployeeDocuments;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M3_EmployeeManagement;
 public class EmployeeDocumentsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.EmployeeDocuments.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<EmployeeDocumentDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class EmployeeDocumentsController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<IEnumerable<EmployeeDocumentDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.EmployeeDocuments.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<EmployeeDocumentDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class EmployeeDocumentsController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<EmployeeDocumentDto>.Success(result));
     }
 
+    [HasPermission(Permissions.EmployeeDocuments.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateEmployeeDocumentDto dto)
     {
@@ -37,6 +42,7 @@ public class EmployeeDocumentsController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.EmployeeDocuments.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateEmployeeDocumentDto dto)
     {
@@ -45,6 +51,7 @@ public class EmployeeDocumentsController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.EmployeeDocuments.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class EmployeeDocumentsController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

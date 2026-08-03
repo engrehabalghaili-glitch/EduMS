@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M5_FinancialManagement.Commands.JournalEntryLines;
 using EduMS.Application.M5_FinancialManagement.DTOs.JournalEntryLines;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M5_FinancialManagement;
 public class JournalEntryLinesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.JournalEntryLines.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<JournalEntryLineDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class JournalEntryLinesController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<IEnumerable<JournalEntryLineDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.JournalEntryLines.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<JournalEntryLineDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class JournalEntryLinesController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<JournalEntryLineDto>.Success(result));
     }
 
+    [HasPermission(Permissions.JournalEntryLines.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateJournalEntryLineDto dto)
     {
@@ -37,6 +42,7 @@ public class JournalEntryLinesController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.JournalEntryLines.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateJournalEntryLineDto dto)
     {
@@ -45,6 +51,7 @@ public class JournalEntryLinesController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.JournalEntryLines.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class JournalEntryLinesController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

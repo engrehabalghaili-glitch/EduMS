@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M5_FinancialManagement.Commands.FeeStructures;
 using EduMS.Application.M5_FinancialManagement.DTOs.FeeStructures;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M5_FinancialManagement;
 public class FeeStructuresController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.FeeStructures.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<FeeStructureDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class FeeStructuresController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<FeeStructureDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.FeeStructures.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<FeeStructureDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class FeeStructuresController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<FeeStructureDto>.Success(result));
     }
 
+    [HasPermission(Permissions.FeeStructures.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateFeeStructureDto dto)
     {
@@ -37,6 +42,7 @@ public class FeeStructuresController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.FeeStructures.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateFeeStructureDto dto)
     {
@@ -45,6 +51,7 @@ public class FeeStructuresController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.FeeStructures.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class FeeStructuresController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

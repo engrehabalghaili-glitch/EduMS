@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M3_EmployeeManagement.Commands.EmployeeInventoryCustodies;
 using EduMS.Application.M3_EmployeeManagement.DTOs.EmployeeInventoryCustodies;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M3_EmployeeManagement;
 public class EmployeeInventoryCustodiesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.EmployeeInventoryCustodies.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<EmployeeInventoryCustodyDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class EmployeeInventoryCustodiesController(MediatR.ISender sender) : Cont
         return Ok(ApiResponse<IEnumerable<EmployeeInventoryCustodyDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.EmployeeInventoryCustodies.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<EmployeeInventoryCustodyDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class EmployeeInventoryCustodiesController(MediatR.ISender sender) : Cont
         return Ok(ApiResponse<EmployeeInventoryCustodyDto>.Success(result));
     }
 
+    [HasPermission(Permissions.EmployeeInventoryCustodies.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateEmployeeInventoryCustodyDto dto)
     {
@@ -37,6 +42,7 @@ public class EmployeeInventoryCustodiesController(MediatR.ISender sender) : Cont
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.EmployeeInventoryCustodies.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateEmployeeInventoryCustodyDto dto)
     {
@@ -45,6 +51,7 @@ public class EmployeeInventoryCustodiesController(MediatR.ISender sender) : Cont
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.EmployeeInventoryCustodies.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class EmployeeInventoryCustodiesController(MediatR.ISender sender) : Cont
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

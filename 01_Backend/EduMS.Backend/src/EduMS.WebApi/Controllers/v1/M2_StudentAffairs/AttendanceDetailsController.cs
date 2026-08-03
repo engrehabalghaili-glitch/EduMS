@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M2_StudentAffairs.Commands.AttendanceDetails;
 using EduMS.Application.M2_StudentAffairs.DTOs.AttendanceDetails;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M2_StudentAffairs;
 public class AttendanceDetailsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.AttendanceDetails.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<AttendanceDetailDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class AttendanceDetailsController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<IEnumerable<AttendanceDetailDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.AttendanceDetails.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<AttendanceDetailDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class AttendanceDetailsController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<AttendanceDetailDto>.Success(result));
     }
 
+    [HasPermission(Permissions.AttendanceDetails.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateAttendanceDetailDto dto)
     {
@@ -37,6 +42,7 @@ public class AttendanceDetailsController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.AttendanceDetails.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateAttendanceDetailDto dto)
     {
@@ -45,6 +51,7 @@ public class AttendanceDetailsController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.AttendanceDetails.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class AttendanceDetailsController(MediatR.ISender sender) : ControllerBas
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

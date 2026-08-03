@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DFD Level 1 — شؤون الطلاب والأكاديميات</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../00_Engine/academic-style.css">
+<style>:root{--accent:#0891B2}</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="crumb"><a href="../index.html">🏠 فهرس المكتبة</a> <span>/</span> <a href="../02_DFD/index.html">B. مخططات تدفق البيانات</a> <span>/</span> <span>DFD-L1-M2</span></div>
+
+  <div class="dg-head">
+    <h1>🎓 DFD Level 1 — شؤون الطلاب والأكاديميات</h1>
+    <div class="sub">Student Affairs • تفكيك تدفّق البيانات داخل الوحدة • مشتق من المتحكمات والمعالجات</div>
+    <div class="meta">
+      <span class="chip mono">DFD-L1-M2</span>
+      <span class="chip">Module-Level</span>
+      <span class="chip">36 controller</span><span class="chip">183 handler</span><span class="chip">27 جدول</span>
+    </div>
+  </div>
+
+  <div class="truth">
+    <b>✔ مُشتقّ من الكود الفعلي (Reverse-Engineered)</b> —
+    المصدر: <code>Controllers/v1/M2_StudentAffairs/ + Application/M2_StudentAffairs/</code>
+    
+  </div>
+
+  <div class="stat-row"><div class="stat"><div class="k">المتحكمات</div><div class="v">36</div></div><div class="stat"><div class="k">نقاط النهاية</div><div class="v">180</div></div><div class="stat"><div class="k">الأوامر</div><div class="v">110</div></div><div class="stat"><div class="k">الاستعلامات</div><div class="v">73</div></div><div class="stat"><div class="k">الجداول</div><div class="v">27</div></div></div>
+
+  <div class="toolbar">
+    <button class="btn" onclick="Z.in()">🔍+</button>
+    <button class="btn" onclick="Z.out()">🔍−</button>
+    <span class="zoomval" id="zv">100%</span>
+    <button class="btn ghost" onclick="Z.reset()">↺ 100%</button>
+    <button class="btn ghost" onclick="Z.fit()">⤢ ملء العرض</button>
+    <span class="sep"></span>
+    <button class="btn gold" onclick="DG.saveSVG('#svgHost svg','DFD-L1-M2')">💾 Save as SVG</button>
+    <button class="btn gold" onclick="DG.savePNG('#svgHost svg','DFD-L1-M2',3)">🖼 Save as PNG</button>
+    <span class="sep"></span>
+    <button class="btn ghost" onclick="window.print()">🖨 طباعة</button>
+  </div>
+
+  <div class="canvas-card grid-bg" id="canvas"><div id="svgHost"></div></div>
+
+  <div class="legend">
+    <div class="item"><span class="swatch proc"></span> عملية (Process) — مستطيل أكاديمي برأس أزرق داكن</div>
+    <div class="item"><span class="swatch ext"></span> كيان خارجي (External Entity)</div>
+    <div class="item"><span class="swatch store"></span> مخزن بيانات (Data Store)</div>
+    <div class="item">⟶ تدفّق بيانات — الأسهم المتقابلة مُزاحة لتجنّب التداخل</div>
+  </div>
+  <div class="note info"><h4>كيف اشتُقّ هذا المخطط</h4><ul><li>العمليات الفرعية = أكبر 8 متحكم من أصل <b>36</b> في <code>Controllers/v1/M2_StudentAffairs/</code>.</li><li>مخازن البيانات = أكثر جداول الوحدة ارتباطاً (حسب درجة المفاتيح الخارجية).</li><li>التدفّقات نحو MediatR مأخوذة من <b>183</b> handler فعلي (110 أوامر / 73 استعلامات).</li><li>أسماء العمليات على المخازن هي أسماء الدوال الحقيقية في الـ Repositories.</li></ul></div>
+  <div class='sec-title' style='font-size:17px'>العمليات الفرعية ← المتحكمات الفعلية<span class='cnt'>36 إجمالي</span></div><table class='dg'><thead><tr><th>#</th><th>Controller</th><th>Route</th><th>Endpoints</th></tr></thead><tbody><tr><td class='mono'>P2.1</td><td class='mono'>AttendanceDetailsController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P2.2</td><td class='mono'>BehavioralLogsController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P2.3</td><td class='mono'>ClassSectionsController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P2.4</td><td class='mono'>DetailedAcademicWarningLogsController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P2.5</td><td class='mono'>GuardiansController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P2.6</td><td class='mono'>PersonsController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P2.7</td><td class='mono'>StudentAbsenceExcusalsController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P2.8</td><td class='mono'>StudentActivityParticipationsController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr></tbody></table>
+
+  <div class="foot">EduMS Enterprise • Phase D Reverse-Engineering • مولَّد من <span class="mono">https://github.com/engrehabalghaili-glitch/EduMS.git</span></div>
+</div>
+
+<script src="../00_Engine/diagram-engine.js"></script>
+<script src="../00_Engine/renderers.js"></script>
+<script>
+const SPEC = {"title": "DFD Level 1 — Student Affairs (M2_StudentAffairs)", "subtitle": "8 عملية فرعية • 6 مخزن • 183 handler فعلي", "width": 1620, "height": 1080, "procW": 214, "procH": 100, "extW": 180, "extH": 66, "storeW": 190, "storeH": 54, "processes": [{"id": "P2.1", "name": "Attendance Details", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#0891B2"}, {"id": "P2.2", "name": "Behavioral Logs", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#0891B2"}, {"id": "P2.3", "name": "Class Sections", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#0891B2"}, {"id": "P2.4", "name": "Detailed Academic Warning Logs", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#0891B2"}, {"id": "P2.5", "name": "Guardians", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#0891B2"}, {"id": "P2.6", "name": "Persons", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#0891B2"}, {"id": "P2.7", "name": "Student Absence Excusals", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#0891B2"}, {"id": "P2.8", "name": "Student Activity Participations", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#0891B2"}], "externals": [{"id": "EA", "name": "المستخدم المخوّل", "sub": "via JWT + RBAC"}, {"id": "EB", "name": "طبقة MediatR", "sub": "110 Cmd / 73 Qry"}, {"id": "EC", "name": "وحدات أخرى", "sub": "Cross-module FKs"}], "stores": [{"id": "D2.1", "name": "Student", "sub": "STUDENT"}, {"id": "D2.2", "name": "Guardian", "sub": "GUARDIAN"}, {"id": "D2.3", "name": "StudentTransferLog", "sub": "STUDENT_TRANSFER_LOG"}, {"id": "D2.4", "name": "StudentEnrollment", "sub": "StudentEnrollment"}, {"id": "D2.5", "name": "StudentInventoryCustody", "sub": "StudentInventoryCustody"}, {"id": "D2.6", "name": "StudentAssessment", "sub": "StudentAssessment"}], "flows": [{"from": "EA", "to": "P2.1", "label": "HTTP request"}, {"from": "P2.1", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P2.1", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "P2.1", "to": "D2.1", "label": "AddAsync / UpdateAsync", "color": "#b45309", "mono": true}, {"from": "D2.1", "to": "P2.1", "label": "GetByIdAsync", "color": "#0891b2", "mono": true}, {"from": "EA", "to": "P2.2", "label": "HTTP request"}, {"from": "P2.2", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P2.2", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "P2.2", "to": "D2.2", "label": "AddAsync / UpdateAsync", "color": "#b45309", "mono": true}, {"from": "D2.2", "to": "P2.2", "label": "GetByIdAsync", "color": "#0891b2", "mono": true}, {"from": "EA", "to": "P2.3", "label": "HTTP request"}, {"from": "P2.3", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P2.3", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "P2.3", "to": "D2.3", "label": "AddAsync / UpdateAsync", "color": "#b45309", "mono": true}, {"from": "D2.3", "to": "P2.3", "label": "GetByIdAsync", "color": "#0891b2", "mono": true}, {"from": "EA", "to": "P2.4", "label": "HTTP request"}, {"from": "P2.4", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P2.4", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "P2.4", "to": "D2.4", "label": "AddAsync / UpdateAsync", "color": "#b45309", "mono": true}, {"from": "D2.4", "to": "P2.4", "label": "GetByIdAsync", "color": "#0891b2", "mono": true}, {"from": "EA", "to": "P2.5", "label": "HTTP request"}, {"from": "P2.5", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P2.5", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "P2.5", "to": "D2.5", "label": "AddAsync / UpdateAsync", "color": "#b45309", "mono": true}, {"from": "D2.5", "to": "P2.5", "label": "GetByIdAsync", "color": "#0891b2", "mono": true}, {"from": "EA", "to": "P2.6", "label": "HTTP request"}, {"from": "P2.6", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P2.6", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "P2.6", "to": "D2.6", "label": "AddAsync / UpdateAsync", "color": "#b45309", "mono": true}, {"from": "D2.6", "to": "P2.6", "label": "GetByIdAsync", "color": "#0891b2", "mono": true}, {"from": "EA", "to": "P2.7", "label": "HTTP request"}, {"from": "P2.7", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P2.7", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "EA", "to": "P2.8", "label": "HTTP request"}, {"from": "P2.8", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P2.8", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "EC", "to": "D2.1", "label": "FK refs", "color": "#6b7280"}]};
+DG.renderers.dfd('#svgHost', SPEC);
+const Z = DG.attachZoom('#canvas', '#svgHost svg', '#zv');
+Z.fit();
+</script>
+</body>
+</html>

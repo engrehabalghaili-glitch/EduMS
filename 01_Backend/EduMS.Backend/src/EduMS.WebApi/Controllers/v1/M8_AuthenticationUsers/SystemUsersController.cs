@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using EduMS.Infrastructure.Security.Authorization;
+using EduMS.Domain.Constants;
 
 namespace EduMS.WebApi.Controllers.v1.M8_AuthenticationUsers;
 
@@ -17,6 +19,7 @@ public class SystemUsersController(MediatR.ISender sender) : ControllerBase
 {
 
     [HttpGet]
+    [HasPermission(Permissions.SystemUsers.View)]
     public async Task<ActionResult<ApiResponse<IEnumerable<SystemUserDto>>>> GetAll()
     {
         var result = await sender.Send(new GetAllSystemUsersQuery());
@@ -24,6 +27,7 @@ public class SystemUsersController(MediatR.ISender sender) : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [HasPermission(Permissions.SystemUsers.View)]
     public async Task<ActionResult<ApiResponse<SystemUserDto>>> GetById(long id)
     {
         var result = await sender.Send(new GetSystemUserByIdQuery { Id = id });
@@ -31,6 +35,7 @@ public class SystemUsersController(MediatR.ISender sender) : ControllerBase
     }
 
     [HttpPost]
+    [HasPermission(Permissions.SystemUsers.Create)]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateSystemUserDto dto)
     {
         var id = await sender.Send(new CreateSystemUserCommand { Dto = dto });
@@ -38,6 +43,7 @@ public class SystemUsersController(MediatR.ISender sender) : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [HasPermission(Permissions.SystemUsers.Update)]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateSystemUserDto dto)
     {
         dto.Id = id;
@@ -46,6 +52,7 @@ public class SystemUsersController(MediatR.ISender sender) : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [HasPermission(Permissions.SystemUsers.Delete)]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
         var result = await sender.Send(new DeleteSystemUserCommand { Id = id });

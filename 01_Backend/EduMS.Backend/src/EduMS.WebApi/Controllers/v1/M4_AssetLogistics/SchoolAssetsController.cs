@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.SchoolAssets;
 using EduMS.Application.M4_AssetLogistics.DTOs.SchoolAssets;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class SchoolAssetsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.SchoolAssets.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<SchoolAssetDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class SchoolAssetsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<SchoolAssetDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.SchoolAssets.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<SchoolAssetDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class SchoolAssetsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<SchoolAssetDto>.Success(result));
     }
 
+    [HasPermission(Permissions.SchoolAssets.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateSchoolAssetDto dto)
     {
@@ -37,6 +42,7 @@ public class SchoolAssetsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.SchoolAssets.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateSchoolAssetDto dto)
     {
@@ -45,6 +51,7 @@ public class SchoolAssetsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.SchoolAssets.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class SchoolAssetsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

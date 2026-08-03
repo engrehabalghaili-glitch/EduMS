@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M2_StudentAffairs.Commands.Students;
 using EduMS.Application.M2_StudentAffairs.DTOs.Students;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M2_StudentAffairs;
 public class StudentsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.Students.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<StudentDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class StudentsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<StudentDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.Students.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<StudentDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class StudentsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<StudentDto>.Success(result));
     }
 
+    [HasPermission(Permissions.Students.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateStudentDto dto)
     {
@@ -37,6 +42,7 @@ public class StudentsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.Students.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateStudentDto dto)
     {
@@ -45,6 +51,7 @@ public class StudentsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.Students.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class StudentsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

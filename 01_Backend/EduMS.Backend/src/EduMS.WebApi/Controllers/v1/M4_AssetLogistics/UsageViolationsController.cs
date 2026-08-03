@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.UsageViolations;
 using EduMS.Application.M4_AssetLogistics.DTOs.UsageViolations;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class UsageViolationsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.UsageViolations.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<UsageViolationDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class UsageViolationsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<UsageViolationDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.UsageViolations.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<UsageViolationDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class UsageViolationsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<UsageViolationDto>.Success(result));
     }
 
+    [HasPermission(Permissions.UsageViolations.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateUsageViolationDto dto)
     {
@@ -37,6 +42,7 @@ public class UsageViolationsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.UsageViolations.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateUsageViolationDto dto)
     {
@@ -45,6 +51,7 @@ public class UsageViolationsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.UsageViolations.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class UsageViolationsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

@@ -46,6 +46,9 @@ public static class DependencyInjection
         services.AddScoped<EduMS.Application.Interfaces.Security.ICurrentUserService, EduMS.Infrastructure.Security.CurrentUserService>();
         services.AddScoped<EduMS.Application.Interfaces.CrossModule.IAcademicIntegrityChecker, EduMS.Infrastructure.CrossModule.AcademicIntegrityChecker>();
 
+        // Custom RBAC Authorization Engine
+        services.AddSingleton<Microsoft.AspNetCore.Authorization.IAuthorizationPolicyProvider, EduMS.Infrastructure.Security.Authorization.PermissionAuthorizationPolicyProvider>();
+        services.AddScoped<Microsoft.AspNetCore.Authorization.IAuthorizationHandler, EduMS.Infrastructure.Security.Authorization.PermissionAuthorizationHandler>();
         // Hangfire Background Jobs
         services.AddHangfire(config => config
             .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)

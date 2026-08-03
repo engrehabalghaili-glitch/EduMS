@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using EduMS.Infrastructure.Security.Authorization;
+using EduMS.Domain.Constants;
 
 namespace EduMS.WebApi.Controllers.v1.M8_AuthenticationUsers;
 
@@ -17,6 +19,7 @@ public class UserRoleAssignmentsController(MediatR.ISender sender) : ControllerB
 {
 
     [HttpGet]
+    [HasPermission(Permissions.UserRoleAssignments.View)]
     public async Task<ActionResult<ApiResponse<IEnumerable<UserRoleAssignmentDto>>>> GetAll()
     {
         var result = await sender.Send(new GetAllUserRoleAssignmentsQuery());
@@ -24,6 +27,7 @@ public class UserRoleAssignmentsController(MediatR.ISender sender) : ControllerB
     }
 
     [HttpGet("{id}")]
+    [HasPermission(Permissions.UserRoleAssignments.View)]
     public async Task<ActionResult<ApiResponse<UserRoleAssignmentDto>>> GetById(long id)
     {
         var result = await sender.Send(new GetUserRoleAssignmentByIdQuery { Id = id });
@@ -31,6 +35,7 @@ public class UserRoleAssignmentsController(MediatR.ISender sender) : ControllerB
     }
 
     [HttpPost]
+    [HasPermission(Permissions.UserRoleAssignments.Assign)]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateUserRoleAssignmentDto dto)
     {
         var id = await sender.Send(new CreateUserRoleAssignmentCommand { Dto = dto });
@@ -38,6 +43,7 @@ public class UserRoleAssignmentsController(MediatR.ISender sender) : ControllerB
     }
 
     [HttpPut("{id}")]
+    [HasPermission(Permissions.UserRoleAssignments.Assign)]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateUserRoleAssignmentDto dto)
     {
         dto.Id = id;
@@ -46,6 +52,7 @@ public class UserRoleAssignmentsController(MediatR.ISender sender) : ControllerB
     }
 
     [HttpDelete("{id}")]
+    [HasPermission(Permissions.UserRoleAssignments.Revoke)]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
         var result = await sender.Send(new DeleteUserRoleAssignmentCommand { Id = id });

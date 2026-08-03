@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M3_EmployeeManagement.Commands.EmployeePayrolls;
 using EduMS.Application.M3_EmployeeManagement.DTOs.EmployeePayrolls;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M3_EmployeeManagement;
 public class EmployeePayrollsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.EmployeePayrolls.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<EmployeePayrollDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class EmployeePayrollsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<EmployeePayrollDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.EmployeePayrolls.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<EmployeePayrollDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class EmployeePayrollsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<EmployeePayrollDto>.Success(result));
     }
 
+    [HasPermission(Permissions.EmployeePayrolls.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateEmployeePayrollDto dto)
     {
@@ -37,6 +42,7 @@ public class EmployeePayrollsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.EmployeePayrolls.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateEmployeePayrollDto dto)
     {
@@ -45,6 +51,7 @@ public class EmployeePayrollsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.EmployeePayrolls.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class EmployeePayrollsController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

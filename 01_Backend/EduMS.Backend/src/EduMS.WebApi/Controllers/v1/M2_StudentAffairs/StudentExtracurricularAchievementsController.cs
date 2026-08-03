@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M2_StudentAffairs.Commands.StudentExtracurricularAchievements;
 using EduMS.Application.M2_StudentAffairs.DTOs.StudentExtracurricularAchievements;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M2_StudentAffairs;
 public class StudentExtracurricularAchievementsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.StudentExtracurricularAchievements.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<StudentExtracurricularAchievementDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class StudentExtracurricularAchievementsController(MediatR.ISender sender
         return Ok(ApiResponse<IEnumerable<StudentExtracurricularAchievementDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentExtracurricularAchievements.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<StudentExtracurricularAchievementDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class StudentExtracurricularAchievementsController(MediatR.ISender sender
         return Ok(ApiResponse<StudentExtracurricularAchievementDto>.Success(result));
     }
 
+    [HasPermission(Permissions.StudentExtracurricularAchievements.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateStudentExtracurricularAchievementDto dto)
     {
@@ -37,6 +42,7 @@ public class StudentExtracurricularAchievementsController(MediatR.ISender sender
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.StudentExtracurricularAchievements.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateStudentExtracurricularAchievementDto dto)
     {
@@ -45,6 +51,7 @@ public class StudentExtracurricularAchievementsController(MediatR.ISender sender
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.StudentExtracurricularAchievements.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class StudentExtracurricularAchievementsController(MediatR.ISender sender
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

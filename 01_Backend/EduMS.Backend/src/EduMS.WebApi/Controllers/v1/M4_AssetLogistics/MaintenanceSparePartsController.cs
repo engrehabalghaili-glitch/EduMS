@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.MaintenanceSpareParts;
 using EduMS.Application.M4_AssetLogistics.DTOs.MaintenanceSpareParts;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class MaintenanceSparePartsController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.MaintenanceSpareParts.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<MaintenanceSparePartDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class MaintenanceSparePartsController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<IEnumerable<MaintenanceSparePartDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.MaintenanceSpareParts.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<MaintenanceSparePartDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class MaintenanceSparePartsController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<MaintenanceSparePartDto>.Success(result));
     }
 
+    [HasPermission(Permissions.MaintenanceSpareParts.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateMaintenanceSparePartDto dto)
     {
@@ -37,6 +42,7 @@ public class MaintenanceSparePartsController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.MaintenanceSpareParts.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateMaintenanceSparePartDto dto)
     {
@@ -45,6 +51,7 @@ public class MaintenanceSparePartsController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.MaintenanceSpareParts.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class MaintenanceSparePartsController(MediatR.ISender sender) : Controlle
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

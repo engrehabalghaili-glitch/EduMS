@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M4_AssetLogistics.Commands.InventoryPlans;
 using EduMS.Application.M4_AssetLogistics.DTOs.InventoryPlans;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M4_AssetLogistics;
 public class InventoryPlansController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.InventoryPlans.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<InventoryPlanDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class InventoryPlansController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<IEnumerable<InventoryPlanDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.InventoryPlans.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<InventoryPlanDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class InventoryPlansController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<InventoryPlanDto>.Success(result));
     }
 
+    [HasPermission(Permissions.InventoryPlans.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateInventoryPlanDto dto)
     {
@@ -37,6 +42,7 @@ public class InventoryPlansController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 
+    [HasPermission(Permissions.InventoryPlans.Update)]
     [HttpPut("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Update(long id, [FromBody] UpdateInventoryPlanDto dto)
     {
@@ -45,6 +51,7 @@ public class InventoryPlansController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Updated successfully."));
     }
 
+    [HasPermission(Permissions.InventoryPlans.Delete)]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(long id)
     {
@@ -52,6 +59,7 @@ public class InventoryPlansController(MediatR.ISender sender) : ControllerBase
         return Ok(ApiResponse<bool>.Success(result, "Deleted successfully."));
     }
 }
+
 
 
 

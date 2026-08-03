@@ -1,3 +1,5 @@
+using EduMS.Domain.Constants;
+using EduMS.Infrastructure.Security.Authorization;
 using EduMS.Application.Common.Responses;
 using EduMS.Application.M6_StatisticsReports.Commands.StatisticsArchives;
 using EduMS.Application.M6_StatisticsReports.DTOs.StatisticsArchives;
@@ -16,6 +18,7 @@ namespace EduMS.WebApi.Controllers.v1.M6_StatisticsReports;
 public class StatisticsArchivesController(MediatR.ISender sender) : ControllerBase
 {
 
+    [HasPermission(Permissions.StatisticsArchives.View)]
     [HttpGet]
     public async Task<ActionResult<ApiResponse<IEnumerable<StatisticsArchiveDto>>>> GetAll()
     {
@@ -23,6 +26,7 @@ public class StatisticsArchivesController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<IEnumerable<StatisticsArchiveDto>>.Success(result));
     }
 
+    [HasPermission(Permissions.StatisticsArchives.View)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<StatisticsArchiveDto>>> GetById(long id)
     {
@@ -30,6 +34,7 @@ public class StatisticsArchivesController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<StatisticsArchiveDto>.Success(result));
     }
 
+    [HasPermission(Permissions.StatisticsArchives.Create)]
     [HttpPost]
     public async Task<ActionResult<ApiResponse<long>>> Create([FromBody] CreateStatisticsArchiveDto dto)
     {
@@ -37,6 +42,7 @@ public class StatisticsArchivesController(MediatR.ISender sender) : ControllerBa
         return Ok(ApiResponse<long>.Success(id, "Created successfully."));
     }
 }
+
 
 
 
