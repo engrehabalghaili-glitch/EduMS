@@ -1,0 +1,94 @@
+import { inject } from '@angular/core';
+import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
+import { rxMethod } from '@ngrx/signals/rxjs-interop';
+import { pipe, switchMap, tap } from 'rxjs';
+import { DirectoratesService } from './directorates.service';
+import { Directorate, CreateDirectorateDto, UpdateDirectorateDto } from '@modules/m1-school-office/interface/directorate';
+
+type DirectoratesStoreState = {
+  items: Directorate[];
+  selectedItem: Directorate | null;
+  isLoading: boolean;
+  error: string | null;
+};
+
+const initialState: DirectoratesStoreState = {
+  items: [],
+  selectedItem: null,
+  isLoading: false,
+  error: null,
+};
+
+export const DirectoratesStore = signalStore(
+  { providedIn: 'root' },
+  withState(initialState),
+  withMethods((store, service = inject(DirectoratesService)) => ({
+    loadAll: rxMethod<void>(
+      pipe(
+        tap(() => patchState(store, { isLoading: true, error: null })),
+        switchMap(() => service.getAll().pipe(
+          tap({
+            next: (response) => patchState(store, { items: response || [], isLoading: false }),
+            error: (err) => patchState(store, { error: err.message || 'Error loading data', isLoading: false })
+          })
+        ))
+      )
+    ),
+    loadById: rxMethod<number | string>(
+      pipe(
+        tap(() => patchState(store, { isLoading: true, error: null })),
+        switchMap((id) => service.getById(id).pipe(
+          tap({
+            next: (response) => patchState(store, { selectedItem: response, isLoading: false }),
+            error: (err) => patchState(store, { error: err.message || 'Error loading data', isLoading: false })
+          })
+        ))
+      )
+    ),
+    create: rxMethod<CreateDirectorateDto>(
+      pipe(
+        tap(() => patchState(store, { isLoading: true, error: null })),
+        switchMap((payload) => service.create(payload).pipe(
+          tap({
+            next: (response) => {
+              if (response) {
+                patchState(store, { items: [...store.items(), response as Directorate] });
+              }
+              patchState(store, { isLoading: false });
+            },
+            error: (err) => patchState(store, { error: err.message || 'Error creating item', isLoading: false })
+          })
+        ))
+      )
+    ),
+    update: rxMethod<{id: number | string, payload: UpdateDirectorateDto}>(
+      pipe(
+        tap(() => patchState(store, { isLoading: true, error: null })),
+        switchMap(({id, payload}) => service.update(id, payload).pipe(
+          tap({
+            next: () => {
+              const updatedItems = store.items().map(item => (item as any).id === id ? { ...item, ...payload } : item);
+              patchState(store, { items: updatedItems as Directorate[] });
+              patchState(store, { isLoading: false });
+            },
+            error: (err) => patchState(store, { error: err.message || 'Error updating item', isLoading: false })
+          })
+        ))
+      )
+    ),
+    delete: rxMethod<number | string>(
+      pipe(
+        tap(() => patchState(store, { isLoading: true, error: null })),
+        switchMap((id) => service.delete(id).pipe(
+          tap({
+            next: () => {
+              const updatedItems = store.items().filter(item => (item as any).id !== id);
+              patchState(store, { items: updatedItems as Directorate[], isLoading: false });
+            },
+            error: (err) => patchState(store, { error: err.message || 'Error deleting item', isLoading: false })
+          })
+        ))
+      )
+    )
+  }))
+);

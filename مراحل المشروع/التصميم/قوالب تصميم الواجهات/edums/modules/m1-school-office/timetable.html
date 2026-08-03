@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - الجداول الدراسية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span style="display: flex; align-items: center;">
+                            <span class="icon">📊</span>
+                            <span>لوحة التحكم</span>
+                        </span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">الوحدات الرئيسية</div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🏫</span>
+                                <span>إدارة المدرسة (M1)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m1-school-office/index.html">لوحة تحكم المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/school-profile.html">ملف المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/classes.html">الصفوف والفصول</a></li>
+                            <li><a href="../../modules/m1-school-office/timetable.html">الجدول الدراسي</a></li>
+                            <li><a href="../../modules/m1-school-office/academic-year.html">العام الدراسي</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🎓</span>
+                                <span>شؤون الطلاب (M2)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m2-student-affairs/index.html">لوحة تحكم الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/students.html">قاعدة الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/registration-requests.html">طلبات القيد</a></li>
+                            <li><a href="../../modules/m2-student-affairs/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🏫</span>
+                                <span>إدارة الموظفين (M3)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m3-employee-management/index.html">لوحة تحكم الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/employees.html">قائمة الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📦</span>
+                                <span>إدارة الأصول (M4)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m4-assets-logistics/index.html">لوحة تحكم الأصول</a></li>
+                            <li><a href="../../modules/m4-assets-logistics/inventory.html">المخزون</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">💰</span>
+                                <span>المالية (M5)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m5-finance/index.html">لوحة المالية</a></li>
+                            <li><a href="../../modules/m5-finance/invoices.html">الفواتير</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📈</span>
+                                <span>الإحصاء (M6)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m6-statistics-reports/index.html">لوحة الإحصاء</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🚨</span>
+                                <span>الطوارئ (M7)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m7-emergency-management/index.html">لوحة الطوارئ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🔐</span>
+                                <span>الأمن والمستخدمين (M8)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m8-authentication-users/index.html">المستخدمين</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left"><h2>إدارة المدرسة والبيئة التنظيمية</h2></div>
+                <div class="header-right">
+                    <div class="header-actions"><button class="header-btn">🔔<span class="badge">5</span></button></div>
+                    <div class="user-profile"><div class="user-avatar">م</div><div class="user-info"><h4>مدير المدرسة</h4><p>الإدارة</p></div></div>
+                </div>
+            </header>
+            <div class="content-area">
+                <div class="page-header">
+                    <h1 class="page-title">📋 الجداول الدراسية</h1>
+                    <div class="page-breadcrumb"><a href="../../index.html">الرئيسية</a><span>/</span><a href="index.html">إدارة المدرسة</a><span>/</span><span>الجداول الدراسية</span></div>
+                </div>
+                <div class="filters">
+                    <div class="filter-group"><label>المرحلة</label><select class="form-input"><option>الابتدائية</option><option>المتوسطة</option><option>الثانوية</option></select></div>
+                    <div class="filter-group"><label>الصف</label><select class="form-input"><option>الأول</option><option>الثاني</option><option>الثالث</option></select></div>
+                    <div class="filter-group"><label>الشعبة</label><select class="form-input"><option>أ</option><option>ب</option><option>ج</option></select></div>
+                </div>
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header">
+                        <h3 class="card-title">جدول الصف الرابع (أ) - الفترة الصباحية</h3>
+                        <button class="btn btn-primary" onclick="openModal('addLessonModal')">➕ إضافة حصة</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr><th>الحصة</th><th>الوقت</th><th>الأحد</th><th>الإثنين</th><th>الثلاثاء</th><th>الأربعاء</th><th>الخميس</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>الحصة 1</td><td>07:30 - 08:15</td><td><div class="card" style="margin: 5px; padding: 8px; background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-radius: 6px;"><strong>الرياضيات</strong><br>أحمد محمد</div></td><td><div class="card" style="margin: 5px; padding: 8px; background: linear-gradient(135deg, #dcfce7, #bbf7d0); border-radius: 6px;"><strong>اللغة العربية</strong><br>فاطمة علي</div></td><td><div class="card" style="margin: 5px; padding: 8px; background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 6px;"><strong>العلوم</strong><br>سارة خالد</div></td><td><div class="card" style="margin: 5px; padding: 8px; background: linear-gradient(135deg, #fce7f3, #fbcfe8); border-radius: 6px;"><strong>اللغة الإنجليزية</strong><br>محمد يوسف</div></td><td><div class="card" style="margin: 5px; padding: 8px; background: linear-gradient(135deg, #e0e7ff, #c7d2fe); border-radius: 6px;"><strong>التربية الإسلامية</strong><br>عبدالله سعيد</div></td></tr>
+                                    <tr><td>الحصة 2</td><td>08:15 - 09:00</td><td><div class="card" style="margin: 5px; padding: 8px; background: linear-gradient(135deg, #dcfce7, #bbf7d0); border-radius: 6px;"><strong>اللغة العربية</strong><br>فاطمة علي</div></td><td><div class="card" style="margin: 5px; padding: 8px; background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-radius: 6px;"><strong>الرياضيات</strong><br>أحمد محمد</div></td><td><div class="card" style="margin: 5px; padding: 8px; background: linear-gradient(135deg, #fce7f3, #fbcfe8); border-radius: 6px;"><strong>اللغة الإنجليزية</strong><br>محمد يوسف</div></td><td><div class="card" style="margin: 5px; padding: 8px; background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 6px;"><strong>العلوم</strong><br>سارة خالد</div></td><td><div class="card" style="margin: 5px; padding: 8px; background: linear-gradient(135deg, #e0e7ff, #c7d2fe); border-radius: 6px;"><strong>التربية الإسلامية</strong><br>عبدالله سعيد</div></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="modal-overlay" id="addLessonModal"><div class="modal"><div class="modal-header"><h3>إضافة حصة جديدة</h3><button class="close-btn" onclick="closeModal('addLessonModal')">&times;</button></div><div class="modal-body"><form class="form-group"><label>المادة الدراسية</label><select class="form-input"><option>الرياضيات</option><option>اللغة العربية</option><option>العلوم</option><option>اللغة الإنجليزية</option></select><label>المعلم</label><select class="form-input"><option>أحمد محمد</option><option>فاطمة علي</option><option>سارة خالد</option></select><label>اليوم</label><select class="form-input"><option>الأحد</option><option>الإثنين</option><option>الثلاثاء</option></select><label>الحصة</label><select class="form-input"><option>الحصة 1</option><option>الحصة 2</option></select></form></div><div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('addLessonModal')">إلغاء</button><button class="btn btn-primary">حفظ</button></div></div></div>
+    <script>function openModal(id){document.getElementById(id).classList.add('active');}function closeModal(id){document.getElementById(id).classList.remove('active');}</script>
+</body>
+</html>

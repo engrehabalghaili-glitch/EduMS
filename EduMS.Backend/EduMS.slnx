@@ -1,8 +1,0 @@
-<Solution>
-  <Folder Name="/src/">
-    <Project Path="src/EduMS.Application/EduMS.Application.csproj" />
-    <Project Path="src/EduMS.Domain/EduMS.Domain.csproj" />
-    <Project Path="src/EduMS.Infrastructure/EduMS.Infrastructure.csproj" />
-    <Project Path="src/EduMS.WebApi/EduMS.WebApi.csproj" />
-  </Folder>
-</Solution>

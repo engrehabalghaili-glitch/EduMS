@@ -1,0 +1,60 @@
+<header class="header-bar">
+  <!-- Right side (RTL): Breadcrumbs -->
+  <div class="header-section header-right">
+    <nav class="breadcrumbs">
+      @for (crumb of breadcrumbs(); track crumb.route; let last = $last) {
+        @if (!last) {
+          <a [routerLink]="crumb.route" class="crumb-link">{{ crumb.label }}</a>
+          <span class="crumb-sep">/</span>
+        } @else {
+          <span class="crumb-current">{{ crumb.label }}</span>
+        }
+      }
+    </nav>
+  </div>
+
+  <!-- Center: Search -->
+  <div class="header-section header-center">
+    @if (showSearch()) {
+      <div class="search-field">
+        <svg class="search-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input
+          type="text"
+          class="search-input"
+          placeholder="بحث..."
+          [value]="searchQuery()"
+          (input)="onSearchInput($event)"
+          (blur)="showSearch.set(false)"
+          autofocus
+        />
+      </div>
+    } @else {
+      <button class="search-btn" (click)="toggleSearch()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
+    }
+  </div>
+
+  <!-- Left side (RTL): Profile + Logout -->
+  <div class="header-section header-left">
+    <div class="profile-row">
+      <div class="avatar-sm">{{ userInitial() }}</div>
+      <div class="profile-text">
+        <span class="profile-name">{{ userName() }}</span>
+        <span class="profile-role">{{ userRole() }}</span>
+      </div>
+    </div>
+    <div class="divider-v"></div>
+    <button class="logout-btn" (click)="logout()" title="تسجيل الخروج">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+        <polyline points="16 17 21 12 16 7"/>
+        <line x1="21" y1="12" x2="9" y2="12"/>
+      </svg>
+    </button>
+  </div>
+</header>

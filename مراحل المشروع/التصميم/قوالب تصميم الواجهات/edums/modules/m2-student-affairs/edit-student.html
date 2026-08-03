@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - تعديل بيانات طالب</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span style="display: flex; align-items: center;">
+                            <span class="icon">📊</span>
+                            <span>لوحة التحكم</span>
+                        </span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">الوحدات الرئيسية</div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🏫</span>
+                                <span>إدارة المدرسة (M1)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m1-school-office/index.html">لوحة تحكم المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/school-profile.html">ملف المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/classes.html">الصفوف والفصول</a></li>
+                            <li><a href="../../modules/m1-school-office/timetable.html">الجدول الدراسي</a></li>
+                            <li><a href="../../modules/m1-school-office/academic-year.html">العام الدراسي</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🎓</span>
+                                <span>شؤون الطلاب (M2)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m2-student-affairs/index.html">لوحة تحكم الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/students.html">قاعدة الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/registration-requests.html">طلبات القيد</a></li>
+                            <li><a href="../../modules/m2-student-affairs/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🏫</span>
+                                <span>إدارة الموظفين (M3)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m3-employee-management/index.html">لوحة تحكم الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/employees.html">قائمة الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📦</span>
+                                <span>إدارة الأصول (M4)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m4-assets-logistics/index.html">لوحة تحكم الأصول</a></li>
+                            <li><a href="../../modules/m4-assets-logistics/inventory.html">المخزون</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">💰</span>
+                                <span>المالية (M5)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m5-finance/index.html">لوحة المالية</a></li>
+                            <li><a href="../../modules/m5-finance/invoices.html">الفواتير</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📈</span>
+                                <span>الإحصاء (M6)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m6-statistics-reports/index.html">لوحة الإحصاء</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🚨</span>
+                                <span>الطوارئ (M7)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m7-emergency-management/index.html">لوحة الطوارئ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🔐</span>
+                                <span>الأمن والمستخدمين (M8)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m8-authentication-users/index.html">المستخدمين</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة الطلاب - تعديل الملف الشخصي</h2>
+                </div>
+                <div class="header-right">
+                    <div class="user-profile">
+                        <div class="user-avatar">أ</div>
+                        <div class="user-info">
+                            <h4>أحمد فهد الحربي</h4>
+                            <p>طالب - الأول الثانوي</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h1 class="page-title">⚙️ تعديل بيانات الطالب: أحمد فهد الحربي</h1>
+                </div>
+                
+                <!-- Edit Form with Tabs -->
+                <div class="card">
+                    <div class="card-header" style="padding: 0;">
+                        <div class="tabs">
+                            <button class="tab-btn active" onclick="switchTab(event, 'personal')">البيانات الشخصية</button>
+                            <button class="tab-btn" onclick="switchTab(event, 'academic')">البيانات الأكاديمية</button>
+                            <button class="tab-btn" onclick="switchTab(event, 'guardians')">أولياء الأمور</button>
+                            <button class="tab-btn" onclick="switchTab(event, 'health')">السجل الصحي</button>
+                            <button class="tab-btn" onclick="switchTab(event, 'documents')">المرفقات</button>
+                        </div>
+                    </div>
+                    <div class="card-body" style="padding: 30px;">
+                        <!-- Tab: Personal -->
+                        <div id="personal" class="tab-content active">
+                            <form>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">الاسم الكامل (عربي)</label>
+                                        <input type="text" class="form-input" value="أحمد فهد الحربي">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">الاسم الكامل (English)</label>
+                                        <input type="text" class="form-input" value="Ahmed Fahad Al-Harbi">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">رقم الهوية / الإقامة</label>
+                                        <input type="text" class="form-input" value="1023456789">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">تاريخ الميلاد</label>
+                                        <input type="date" class="form-input" value="2008-05-15">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">الجنسية</label>
+                                        <select class="form-select">
+                                            <option selected>سعودي</option>
+                                            <option>مقيم</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">الجنس</label>
+                                        <select class="form-select">
+                                            <option selected>ذكر</option>
+                                            <option>أنثى</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">العنوان الوطني / السكن</label>
+                                    <textarea class="form-textarea">الرياض - حي النرجس - شارع 15</textarea>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Tab: Academic -->
+                        <div id="academic" class="tab-content">
+                            <form>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">الرقم الأكاديمي</label>
+                                        <input type="text" class="form-input" value="20240001" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">تاريخ الالتحاق</label>
+                                        <input type="date" class="form-input" value="2024-08-20">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">المرحلة الدراسية</label>
+                                        <select class="form-select">
+                                            <option>الابتدائية</option>
+                                            <option>المتوسطة</option>
+                                            <option selected>الثانوية</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">الصف الدراسي</label>
+                                        <select class="form-select">
+                                            <option selected>الأول الثانوي</option>
+                                            <option>الثاني الثانوي</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">الشعبة</label>
+                                        <select class="form-select">
+                                            <option selected>شعبة (أ)</option>
+                                            <option>شعبة (ب)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">حالة القيد الحالية</label>
+                                    <select class="form-select">
+                                        <option selected>نشط (Active)</option>
+                                        <option>مجمد (Frozen)</option>
+                                        <option>منسحب (Withdrawn)</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Other tabs placeholders -->
+                        <div id="guardians" class="tab-content">
+                            <h4>أولياء الأمور المرتبطين</h4>
+                            <div class="table-responsive" style="margin-top: 15px;">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr><th>ولي الأمر</th><th>العلاقة</th><th>أساسي</th><th>الإجراء</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>فهد الحربي</td><td>أب</td><td>✅ نعم</td><td><button class="btn btn-outline btn-sm">حذف الربط</button></td></tr>
+                                        <tr><td>منيرة العلي</td><td>أم</td><td>❌ لا</td><td><button class="btn btn-outline btn-sm">حذف الربط</button></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button class="btn btn-primary btn-sm" style="margin-top: 15px;">🔗 إضافة ولي أمر آخر</button>
+                        </div>
+                    </div>
+                    <div class="card-footer" style="padding: 20px 30px; border-top: 1px solid #e5e7eb; display: flex; justify-content: flex-end; gap: 10px;">
+                        <button class="btn btn-outline">إلغاء التغييرات</button>
+                        <button class="btn btn-primary">حفظ كافة التعديلات</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <style>
+        .tabs { display: flex; border-bottom: 1px solid #e5e7eb; background: #f8fafc; }
+        .tab-btn { padding: 15px 25px; border: none; background: none; font-weight: 700; color: #64748b; cursor: pointer; transition: all 0.2s; border-bottom: 3px solid transparent; }
+        .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); background: white; }
+        .tab-btn:hover { background: #eff6ff; }
+        
+        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content.active { display: block; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+
+    <script>
+        function toggleDropdown(element) {
+            const dropdown = element.parentElement;
+            dropdown.classList.toggle('active');
+        }
+
+        function switchTab(evt, tabId) {
+            var contents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+            var buttons = document.getElementsByClassName("tab-btn");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("active");
+            }
+            document.getElementById(tabId).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>

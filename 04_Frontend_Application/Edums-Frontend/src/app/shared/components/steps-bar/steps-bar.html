@@ -1,0 +1,9 @@
+<div class="steps-wrap">
+  <p-steps
+    [model]="steps()"
+    [activeIndex]="activeIndex()"
+    [readonly]="readonly()"
+    [styleClass]="styleClass()"
+    (activeIndexChange)="onStepClick($event)"
+  />
+</div>

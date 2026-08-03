@@ -1,0 +1,19 @@
+:host {
+  display: block;
+}
+
+.chart-title {
+  margin: 0 0 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #27272a;
+  text-align: center;
+}
+
+.chart-container {
+  position: relative;
+}
+
+.chart-container ::ng-deep canvas {
+  max-height: 20rem;
+}

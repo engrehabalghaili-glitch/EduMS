@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+.multiselect-wrap ::ng-deep .p-multiselect {
+  width: 100%;
+  min-height: 2.25rem;
+}
+
+.multiselect-wrap ::ng-deep .p-multiselect .p-multiselect-label {
+  font-size: 0.8125rem;
+  color: #27272a;
+}
+
+.multiselect-wrap ::ng-deep .p-multiselect .p-multiselect-placeholder {
+  color: #a1a1aa;
+}
+
+.multiselect-wrap ::ng-deep .p-multiselect.p-invalid {
+  border-color: #e53e3e;
+}

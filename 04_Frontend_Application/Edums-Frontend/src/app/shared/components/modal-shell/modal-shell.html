@@ -1,0 +1,30 @@
+<p-dialog
+  [visible]="visible()"
+  (visibleChange)="visible.set($event)"
+  [style]="{ width: width() }"
+  [modal]="modal()"
+  [closable]="closable()"
+  [showHeader]="showHeader()"
+  [draggable]="draggable()"
+  [resizable]="resizable()"
+  [blockScroll]="blockScroll()"
+  [dismissableMask]="dismissableMask()"
+  [closeOnEscape]="closeOnEscape()"
+  [breakpoints]="breakpoints()"
+  [position]="position()"
+  [styleClass]="styleClass()"
+  [rtl]="true"
+>
+  <ng-template pTemplate="header">
+    <ng-content select="[header]"></ng-content>
+    @if (header()) {
+      <span>{{ header() }}</span>
+    }
+  </ng-template>
+
+  <ng-content />
+
+  <ng-template pTemplate="footer">
+    <ng-content select="[footer]"></ng-content>
+  </ng-template>
+</p-dialog>

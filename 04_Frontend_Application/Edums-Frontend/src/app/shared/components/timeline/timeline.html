@@ -1,0 +1,52 @@
+<p-timeline
+  [value]="events()"
+  [align]="alignment()"
+  [layout]="layout()"
+  [styleClass]="styleClass()"
+>
+  <ng-template pTemplate="content" let-event>
+    <div class="timeline-item" (click)="eventClick(event)">
+      <h4 class="timeline-title">{{ event.title }}</h4>
+      @if (event.description) {
+        <p class="timeline-desc">{{ event.description }}</p>
+      }
+      @if (event.actor) {
+        <span class="timeline-actor">
+          <i class="pi pi-fw pi-user"></i>
+          {{ event.actor }}
+        </span>
+      }
+      @if (event.metadata && event.metadata.length > 0) {
+        <div class="timeline-meta">
+          @for (meta of event.metadata; track meta.label) {
+            <span class="meta-item">
+              @if (meta.icon) {
+                <i [class]="meta.icon"></i>
+              }
+              <span class="meta-label">{{ meta.label }}:</span>
+              <span class="meta-value">{{ meta.value }}</span>
+            </span>
+          }
+        </div>
+      }
+      @if (event.date) {
+        <span class="timeline-date">
+          <i class="pi pi-fw pi-calendar"></i>
+          {{ event.date }}
+        </span>
+      }
+    </div>
+  </ng-template>
+
+  @if (showIcons()) {
+    <ng-template pTemplate="marker" let-event>
+      <span
+        class="timeline-marker"
+        [style.background]="getEventColor(event)"
+        [style.color]="'#ffffff'"
+      >
+        <i [class]="getEventIcon(event)"></i>
+      </span>
+    </ng-template>
+  }
+</p-timeline>

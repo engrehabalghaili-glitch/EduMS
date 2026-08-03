@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - سياسات الوصول المتقدمة (ABAC)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span style="display: flex; align-items: center;">
+                            <span class="icon">📊</span>
+                            <span>لوحة التحكم</span>
+                        </span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">الوحدات الرئيسية</div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🏫</span>
+                                <span>إدارة المدرسة (M1)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m1-school-office/index.html">لوحة تحكم المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/school-profile.html">ملف المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/classes.html">الصفوف والفصول</a></li>
+                            <li><a href="../../modules/m1-school-office/timetable.html">الجدول الدراسي</a></li>
+                            <li><a href="../../modules/m1-school-office/academic-year.html">العام الدراسي</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🎓</span>
+                                <span>شؤون الطلاب (M2)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m2-student-affairs/index.html">لوحة تحكم الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/students.html">قاعدة الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/registration-requests.html">طلبات القيد</a></li>
+                            <li><a href="../../modules/m2-student-affairs/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🏫</span>
+                                <span>إدارة الموظفين (M3)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m3-employee-management/index.html">لوحة تحكم الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/employees.html">قائمة الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📦</span>
+                                <span>إدارة الأصول (M4)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m4-assets-logistics/index.html">لوحة تحكم الأصول</a></li>
+                            <li><a href="../../modules/m4-assets-logistics/inventory.html">المخزون</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">💰</span>
+                                <span>المالية (M5)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m5-finance/index.html">لوحة المالية</a></li>
+                            <li><a href="../../modules/m5-finance/invoices.html">الفواتير</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📈</span>
+                                <span>الإحصاء (M6)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m6-statistics-reports/index.html">لوحة الإحصاء</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🚨</span>
+                                <span>الطوارئ (M7)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m7-emergency-management/index.html">لوحة الطوارئ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🔐</span>
+                                <span>الأمن والمستخدمين (M8)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m8-authentication-users/index.html">المستخدمين</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>نظام الصلاحيات - سياسات الوصول المتقدمة</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">
+                            🔔
+                            <span class="badge">0</span>
+                        </button>
+                        <button class="header-btn">💬</button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير النظام</h4>
+                            <p>الأمن</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <h1 class="page-title">🛡️ سياسات الوصول المتقدمة (ABAC)</h1>
+                            <div class="page-breadcrumb">
+                                <a href="../../index.html">الرئيسية</a>
+                                <span>/</span>
+                                <a href="index.html">الصلاحيات</a>
+                                <span>/</span>
+                                <span>سياسات الوصول</span>
+                            </div>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-primary" onclick="openModal('newPolicyModal')">
+                                <span>➕</span>
+                                <span>إضافة سياسة جديدة</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Intro Card -->
+                <div class="card" style="margin-bottom: 32px; background: #f8fafc;">
+                    <div class="card-body">
+                        <p style="color: #475569; font-size: 0.95em;">
+                            تسمح لك سياسات الوصول المبنية على الخصائص (ABAC) بتحديد شروط دقيقة للوصول إلى الموارد، مثل تقييد الدخول من عناوين IP معينة، أو في أوقات محددة، أو لمجموعات معينة بناءً على خصائصها الوظيفية.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Policies List -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">قائمة سياسات الوصول النشطة</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>اسم السياسة</th>
+                                        <th>النوع</th>
+                                        <th>الشرط (Rule)</th>
+                                        <th>المورد (Resource)</th>
+                                        <th>الإجراء</th>
+                                        <th>الحالة</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>تقييد وقت العمل</strong></td>
+                                        <td>Time-based</td>
+                                        <td>بين 7:00 ص و 4:00 م</td>
+                                        <td>المالية، الموارد البشرية</td>
+                                        <td><span class="badge-status danger">منع الوصول</span></td>
+                                        <td><span class="badge-status success">نشط</span></td>
+                                        <td>
+                                            <div class="action-btns">
+                                                <button class="btn-icon">👁️</button>
+                                                <button class="btn-icon">📝</button>
+                                                <button class="btn-icon">🗑️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>الوصول من الشبكة الداخلية</strong></td>
+                                        <td>IP-based</td>
+                                        <td>192.168.1.0/24</td>
+                                        <td>لوحة تحكم النظام</td>
+                                        <td><span class="badge-status success">السماح فقط</span></td>
+                                        <td><span class="badge-status success">نشط</span></td>
+                                        <td>
+                                            <div class="action-btns">
+                                                <button class="btn-icon">👁️</button>
+                                                <button class="btn-icon">📝</button>
+                                                <button class="btn-icon">🗑️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div id="newPolicyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>إنشاء سياسة وصول جديدة</h3>
+                <span class="close-modal" onclick="closeModal('newPolicyModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">اسم السياسة</label>
+                        <input type="text" class="form-input" placeholder="مثلاً: منع الدخول خارج الدوام">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">نوع الشرط</label>
+                        <select class="form-select">
+                            <option>وقتي (Time-based)</option>
+                            <option>مكاني (IP-based / Location)</option>
+                            <option>وظيفي (Attribute-based)</option>
+                            <option>جهازي (Device-based)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">تفاصيل القاعدة (Rule Definition)</label>
+                        <div style="background: #f1f5f9; padding: 15px; border-radius: 8px;">
+                            <p style="font-size: 0.8em; margin-bottom: 10px; color: #64748b;">إذا كان [الوقت] [ليس بين] [07:00] و [16:00]</p>
+                            <div style="display: flex; gap: 10px;">
+                                <select class="form-select" style="flex: 1;"><option>ليس بين</option></select>
+                                <input type="time" class="form-input" style="flex: 1;">
+                                <input type="time" class="form-input" style="flex: 1;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">الموارد المتأثرة</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <label><input type="checkbox"> النظام المالي</label>
+                            <label><input type="checkbox"> سجلات الطلاب</label>
+                            <label><input type="checkbox"> إدارة الموظفين</label>
+                            <label><input type="checkbox"> إعدادات النظام</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">الإجراء (Effect)</label>
+                        <select class="form-select">
+                            <option>السماح (Allow)</option>
+                            <option>المنع (Deny)</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('newPolicyModal')">إلغاء</button>
+                <button class="btn btn-primary">حفظ السياسة</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .badge-status.success { background: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 20px; font-size: 0.8em; font-weight: 700; }
+        .badge-status.danger { background: #fee2e2; color: #991b1b; padding: 4px 10px; border-radius: 20px; font-size: 0.8em; font-weight: 700; }
+        .action-btns { display: flex; gap: 5px; }
+        .btn-icon { width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e5e7eb; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+        .modal-content { background-color: white; margin: 5% auto; width: 600px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); overflow: hidden; animation: modalSlideDown 0.3s ease-out; }
+        .modal-header { padding: 20px 24px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; }
+        .modal-header h3 { color: #1e3a8a; }
+        .close-modal { font-size: 24px; font-weight: bold; cursor: pointer; color: #6b7280; }
+        .modal-body { padding: 24px; max-height: 70vh; overflow-y: auto; }
+        .modal-footer { padding: 16px 24px; border-top: 1px solid #e5e7eb; display: flex; justify-content: flex-end; gap: 12px; background: #f8fafc; }
+    </style>
+
+    <script>
+        function openModal(id) { document.getElementById(id).style.display = "block"; }
+        function closeModal(id) { document.getElementById(id).style.display = "none"; }
+    </script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<div class="tree-table-wrap">
+  <p-treeTable
+    #tt
+    [value]="value()"
+    [columns]="columns()"
+    [loading]="loading()"
+    [lazy]="lazy()"
+    [paginator]="paginator()"
+    [rows]="rows()"
+    [first]="first()"
+    [totalRecords]="totalRecords()"
+    [showCurrentPageReport]="showCurrentPageReport()"
+    [currentPageReportTemplate]="currentPageReportTemplate()"
+    [rowsPerPageOptions]="rowsPerPageOptions()"
+    [sortField]="sortField()"
+    [sortOrder]="sortOrder()"
+    [selectionMode]="selectionMode()"
+    [dataKey]="dataKey()"
+    [selection]="selection()"
+    [globalFilterFields]="globalFilterFields()"
+    [styleClass]="styleClass()"
+    [tableStyle]="tableStyle()"
+    [showGridlines]="showGridlines()"
+    (selectionChange)="onSelectionChange($event)"
+    (onLazyLoad)="onLazyLoad($event)"
+    (onNodeExpand)="onNodeExpand($event)"
+    (onNodeCollapse)="onNodeCollapse($event)"
+    (onNodeSelect)="onNodeSelect($event)"
+    (onNodeUnselect)="onNodeUnselect($event)"
+  >
+    <ng-template pTemplate="caption">
+      <div class="tt-toolbar">
+        <div class="tt-toolbar-left">
+          @if (globalFilterFields().length) {
+            <div class="tree-search">
+              <i class="pi pi-search search-ico"></i>
+              <input
+                #filterInput
+                type="text"
+                class="search-input"
+                placeholder="بحث..."
+                (input)="tt.filterGlobal(filterInput.value, 'contains')"
+              />
+            </div>
+          }
+        </div>
+        <div class="tt-toolbar-right">
+          @if (actionTemplate()) {
+            <ng-content select="[actions]" />
+          }
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        @if (selectionMode() === 'checkbox') {
+          <th style="width:3rem">
+            <p-treeTableHeaderCheckbox />
+          </th>
+        }
+        @for (col of columns; track col.field) {
+          <th
+            [ttSortableColumn]="col.sortable ? col.field : ''"
+            [style]="{ width: col.width || 'auto' }"
+          >
+            <div class="th-content">
+              <span>{{ col.header }}</span>
+            </div>
+          </th>
+        }
+        @if (actionTemplate()) {
+          <th class="actions-th"><span class="sr-only">إجراءات</span></th>
+        }
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [ttRow]="rowData" (click)="triggerAction(rowData)">
+        @if (selectionMode() === 'checkbox') {
+          <td>
+            <p-treeTableCheckbox [value]="rowData" />
+          </td>
+        }
+        @for (col of columns; track col.field) {
+          <td>
+            <div class="tt-cell" [class.tt-cell-expander]="col.expander">
+              @if (col.expander) {
+                <p-treeTableToggler [rowNode]="rowData" />
+              }
+              @if (bodyTemplate()) {
+                <ng-container
+                  [ngTemplateOutlet]="bodyTemplate()!"
+                  [ngTemplateOutletContext]="{ $implicit: rowData }"
+                />
+              } @else {
+                @if (rowData.data) {
+                  <span class="tt-cell-text">{{ rowData.data[col.field] }}</span>
+                } @else {
+                  <span class="tt-cell-text">{{ rowData[col.field] }}</span>
+                }
+              }
+            </div>
+          </td>
+        }
+        @if (actionTemplate()) {
+          <td class="actions-cell">
+            <ng-container
+              [ngTemplateOutlet]="actionTemplate()!"
+              [ngTemplateOutletContext]="{ $implicit: rowData }"
+            />
+          </td>
+        }
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="loadingbody" let-columns="columns">
+      @for (row of skeletonRows; track row) {
+        <tr>
+          @if (selectionMode() === 'checkbox') {
+            <td><p-skeleton width="1.25rem" height="1.25rem" /></td>
+          }
+          @for (col of columns; track col.field) {
+            <td><p-skeleton width="100%" height="1.25rem" /></td>
+          }
+          @if (actionTemplate()) {
+            <td><p-skeleton width="2rem" height="1.25rem" /></td>
+          }
+        </tr>
+      }
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage" let-columns="columns">
+      <tr>
+        <td
+          [attr.colspan]="columns.length + (selectionMode() === 'checkbox' ? 1 : 0) + (actionTemplate() ? 1 : 0)"
+          class="empty-cell"
+        >
+          <div class="empty-msg">
+            <i class="pi pi-sitemap empty-icon"></i>
+            <span>{{ emptyMessage() }}</span>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-treeTable>
+</div>

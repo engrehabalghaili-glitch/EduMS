@@ -1,0 +1,83 @@
+:host {
+  display: inline-block;
+}
+
+.ie-display {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.ie-display:hover {
+  border-color: #d4d4d8;
+  background: #f4f4f5;
+}
+
+.ie-value {
+  font-size: 0.8125rem;
+  color: #18181b;
+}
+
+.ie-placeholder {
+  font-size: 0.8125rem;
+  color: #a1a1aa;
+  font-style: italic;
+}
+
+.ie-pencil {
+  font-size: 0.625rem;
+  color: #a1a1aa;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.ie-display:hover .ie-pencil {
+  opacity: 1;
+}
+
+.ie-editing {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.ie-size-small .ie-input {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.ie-size-normal .ie-input {
+  font-size: 0.8125rem;
+  padding: 0.375rem 0.625rem;
+}
+
+.ie-size-large .ie-input {
+  font-size: 0.9375rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.ie-textarea {
+  resize: vertical;
+  min-height: 4rem;
+}
+
+.ie-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #52525b;
+}
+
+.ie-actions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.ie-actions .p-button {
+  width: 1.5rem;
+  height: 1.5rem;
+}

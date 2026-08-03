@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DFD Level 1 — إدارة الطوارئ والسلامة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../00_Engine/academic-style.css">
+<style>:root{--accent:#BE185D}</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="crumb"><a href="../index.html">🏠 فهرس المكتبة</a> <span>/</span> <a href="../02_DFD/index.html">B. مخططات تدفق البيانات</a> <span>/</span> <span>DFD-L1-M7</span></div>
+
+  <div class="dg-head">
+    <h1>🚨 DFD Level 1 — إدارة الطوارئ والسلامة</h1>
+    <div class="sub">Emergency Management • تفكيك تدفّق البيانات داخل الوحدة • مشتق من المتحكمات والمعالجات</div>
+    <div class="meta">
+      <span class="chip mono">DFD-L1-M7</span>
+      <span class="chip">Module-Level</span>
+      <span class="chip">13 controller</span><span class="chip">65 handler</span><span class="chip">13 جدول</span>
+    </div>
+  </div>
+
+  <div class="truth">
+    <b>✔ مُشتقّ من الكود الفعلي (Reverse-Engineered)</b> —
+    المصدر: <code>Controllers/v1/M7_EmergencyManagement/ + Application/M7_EmergencyManagement/</code>
+    
+  </div>
+
+  <div class="stat-row"><div class="stat"><div class="k">المتحكمات</div><div class="v">13</div></div><div class="stat"><div class="k">نقاط النهاية</div><div class="v">65</div></div><div class="stat"><div class="k">الأوامر</div><div class="v">39</div></div><div class="stat"><div class="k">الاستعلامات</div><div class="v">26</div></div><div class="stat"><div class="k">الجداول</div><div class="v">13</div></div></div>
+
+  <div class="toolbar">
+    <button class="btn" onclick="Z.in()">🔍+</button>
+    <button class="btn" onclick="Z.out()">🔍−</button>
+    <span class="zoomval" id="zv">100%</span>
+    <button class="btn ghost" onclick="Z.reset()">↺ 100%</button>
+    <button class="btn ghost" onclick="Z.fit()">⤢ ملء العرض</button>
+    <span class="sep"></span>
+    <button class="btn gold" onclick="DG.saveSVG('#svgHost svg','DFD-L1-M7')">💾 Save as SVG</button>
+    <button class="btn gold" onclick="DG.savePNG('#svgHost svg','DFD-L1-M7',3)">🖼 Save as PNG</button>
+    <span class="sep"></span>
+    <button class="btn ghost" onclick="window.print()">🖨 طباعة</button>
+  </div>
+
+  <div class="canvas-card grid-bg" id="canvas"><div id="svgHost"></div></div>
+
+  <div class="legend">
+    <div class="item"><span class="swatch proc"></span> عملية (Process) — مستطيل أكاديمي برأس أزرق داكن</div>
+    <div class="item"><span class="swatch ext"></span> كيان خارجي (External Entity)</div>
+    <div class="item"><span class="swatch store"></span> مخزن بيانات (Data Store)</div>
+    <div class="item">⟶ تدفّق بيانات — الأسهم المتقابلة مُزاحة لتجنّب التداخل</div>
+  </div>
+  <div class="note info"><h4>كيف اشتُقّ هذا المخطط</h4><ul><li>العمليات الفرعية = أكبر 8 متحكم من أصل <b>13</b> في <code>Controllers/v1/M7_EmergencyManagement/</code>.</li><li>مخازن البيانات = أكثر جداول الوحدة ارتباطاً (حسب درجة المفاتيح الخارجية).</li><li>التدفّقات نحو MediatR مأخوذة من <b>65</b> handler فعلي (39 أوامر / 26 استعلامات).</li><li>أسماء العمليات على المخازن هي أسماء الدوال الحقيقية في الـ Repositories.</li></ul></div>
+  <div class='sec-title' style='font-size:17px'>العمليات الفرعية ← المتحكمات الفعلية<span class='cnt'>13 إجمالي</span></div><table class='dg'><thead><tr><th>#</th><th>Controller</th><th>Route</th><th>Endpoints</th></tr></thead><tbody><tr><td class='mono'>P7.1</td><td class='mono'>CommunityPartnershipsController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P7.2</td><td class='mono'>EmergencyClosuresController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P7.3</td><td class='mono'>EmergencyHostingsController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P7.4</td><td class='mono'>EmergencyIncidentsController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P7.5</td><td class='mono'>EmergencyPlansController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P7.6</td><td class='mono'>ExternalParticipationsController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P7.7</td><td class='mono'>RemediationPlansController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P7.8</td><td class='mono'>SafetySecurityReportsController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr></tbody></table>
+
+  <div class="foot">EduMS Enterprise • Phase D Reverse-Engineering • مولَّد من <span class="mono">https://github.com/engrehabalghaili-glitch/EduMS.git</span></div>
+</div>
+
+<script src="../00_Engine/diagram-engine.js"></script>
+<script src="../00_Engine/renderers.js"></script>
+<script>
+const SPEC = {"title": "DFD Level 1 — Emergency Management (M7_EmergencyManagement)", "subtitle": "8 عملية فرعية • 6 مخزن • 65 handler فعلي", "width": 1620, "height": 1080, "procW": 214, "procH": 100, "extW": 180, "extH": 66, "storeW": 190, "storeH": 54, "processes": [{"id": "P7.1", "name": "Community Partnerships", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#BE185D"}, {"id": "P7.2", "name": "Emergency Closures", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#BE185D"}, {"id": "P7.3", "name": "Emergency Hostings", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#BE185D"}, {"id": "P7.4", "name": "Emergency Incidents", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#BE185D"}, {"id": "P7.5", "name": "Emergency Plans", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#BE185D"}, {"id": "P7.6", "name": "External Participations", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#BE185D"}, {"id": "P7.7", "name": "Remediation Plans", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#BE185D"}, {"id": "P7.8", "name": "Safety Security Reports", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#BE185D"}], "externals": [{"id": "EA", "name": "المستخدم المخوّل", "sub": "via JWT + RBAC"}, {"id": "EB", "name": "طبقة MediatR", "sub": "39 Cmd / 26 Qry"}, {"id": "EC", "name": "وحدات أخرى", "sub": "Cross-module FKs"}], "stores": [{"id": "D7.1", "name": "EmergencyIncident", "sub": "EMERGENCY_INCIDENT"}, {"id": "D7.2", "name": "EmergencyHosting", "sub": "EMERGENCY_HOSTING"}, {"id": "D7.3", "name": "TransportationService", "sub": "TRANSPORTATION_SERVICE"}, {"id": "D7.4", "name": "RemediationPlan", "sub": "REMEDIATION_PLAN"}, {"id": "D7.5", "name": "EmergencyClosure", "sub": "EMERGENCY_CLOSURE"}, {"id": "D7.6", "name": "EmergencyPlan", "sub": "EMERGENCY_PLAN"}], "flows": [{"from": "EA", "to": "P7.1", "label": "HTTP request"}, {"from": "P7.1", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P7.1", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "P7.1", "to": "D7.1", "label": "AddAsync / UpdateAsync", "color": "#b45309", "mono": true}, {"from": "D7.1", "to": "P7.1", "label": "GetByIdAsync", "color": "#0891b2", "mono": true}, {"from": "EA", "to": "P7.2", "label": "HTTP request"}, {"from": "P7.2", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P7.2", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "P7.2", "to": "D7.2", "label": "AddAsync / UpdateAsync", "color": "#b45309", "mono": true}, {"from": "D7.2", "to": "P7.2", "label": "GetByIdAsync", "color": "#0891b2", "mono": true}, {"from": "EA", "to": "P7.3", "label": "HTTP request"}, {"from": "P7.3", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P7.3", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "P7.3", "to": "D7.3", "label": "AddAsync / UpdateAsync", "color": "#b45309", "mono": true}, {"from": "D7.3", "to": "P7.3", "label": "GetByIdAsync", "color": "#0891b2", "mono": true}, {"from": "EA", "to": "P7.4", "label": "HTTP request"}, {"from": "P7.4", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P7.4", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "P7.4", "to": "D7.4", "label": "AddAsync / UpdateAsync", "color": "#b45309", "mono": true}, {"from": "D7.4", "to": "P7.4", "label": "GetByIdAsync", "color": "#0891b2", "mono": true}, {"from": "EA", "to": "P7.5", "label": "HTTP request"}, {"from": "P7.5", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P7.5", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "P7.5", "to": "D7.5", "label": "AddAsync / UpdateAsync", "color": "#b45309", "mono": true}, {"from": "D7.5", "to": "P7.5", "label": "GetByIdAsync", "color": "#0891b2", "mono": true}, {"from": "EA", "to": "P7.6", "label": "HTTP request"}, {"from": "P7.6", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P7.6", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "P7.6", "to": "D7.6", "label": "AddAsync / UpdateAsync", "color": "#b45309", "mono": true}, {"from": "D7.6", "to": "P7.6", "label": "GetByIdAsync", "color": "#0891b2", "mono": true}, {"from": "EA", "to": "P7.7", "label": "HTTP request"}, {"from": "P7.7", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P7.7", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "EA", "to": "P7.8", "label": "HTTP request"}, {"from": "P7.8", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P7.8", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "EC", "to": "D7.1", "label": "FK refs", "color": "#6b7280"}]};
+DG.renderers.dfd('#svgHost', SPEC);
+const Z = DG.attachZoom('#canvas', '#svgHost svg', '#zv');
+Z.fit();
+</script>
+</body>
+</html>

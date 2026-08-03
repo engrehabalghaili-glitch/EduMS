@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - حجز الأصول</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span style="display: flex; align-items: center;">
+                            <span class="icon">📊</span>
+                            <span>لوحة التحكم</span>
+                        </span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">الوحدات الرئيسية</div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🏫</span>
+                                <span>إدارة المدرسة (M1)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m1-school-office/index.html">لوحة تحكم المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/school-profile.html">ملف المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/classes.html">الصفوف والفصول</a></li>
+                            <li><a href="../../modules/m1-school-office/timetable.html">الجدول الدراسي</a></li>
+                            <li><a href="../../modules/m1-school-office/academic-year.html">العام الدراسي</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🎓</span>
+                                <span>شؤون الطلاب (M2)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m2-student-affairs/index.html">لوحة تحكم الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/students.html">قاعدة الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/registration-requests.html">طلبات القيد</a></li>
+                            <li><a href="../../modules/m2-student-affairs/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🏫</span>
+                                <span>إدارة الموظفين (M3)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m3-employee-management/index.html">لوحة تحكم الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/employees.html">قائمة الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📦</span>
+                                <span>إدارة الأصول (M4)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m4-assets-logistics/index.html">لوحة تحكم الأصول</a></li>
+                            <li><a href="../../modules/m4-assets-logistics/inventory.html">المخزون</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">💰</span>
+                                <span>المالية (M5)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m5-finance/index.html">لوحة المالية</a></li>
+                            <li><a href="../../modules/m5-finance/invoices.html">الفواتير</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📈</span>
+                                <span>الإحصاء (M6)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m6-statistics-reports/index.html">لوحة الإحصاء</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🚨</span>
+                                <span>الطوارئ (M7)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m7-emergency-management/index.html">لوحة الطوارئ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🔐</span>
+                                <span>الأمن والمستخدمين (M8)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m8-authentication-users/index.html">المستخدمين</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة الأصول والمرافق</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">
+                            🔔
+                            <span class="badge">6</span>
+                        </button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير المدرسة</h4>
+                            <p>الإدارة</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">📅 حجز الأصول</h1>
+                        <p class="page-desc">إدارة حجوزات الأصول والمرافق</p>
+                    </div>
+                    <div class="page-actions">
+                        <button class="btn btn-primary" onclick="openModal('newReservationModal')">
+                            <span>➕ حجز جديد</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Calendar View (Simple) -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>التقويم</h3>
+                    </div>
+                    <div class="calendar-view" style="text-align: center; padding: 2rem;">
+                        <p>📅 عرض التقويم هنا</p>
+                    </div>
+                </div>
+                
+                <!-- Filter & Search -->
+                <div class="filter-bar" style="margin-top: 2rem;">
+                    <div class="search-box">
+                    <input type="text" placeholder="🔍 بحث عن الحجوزات...">
+                    </div>
+                    <div class="filter-selects">
+                    <select class="form-control">
+                        <option>جميع الحالات</option>
+                        <option>مؤكد</option>
+                        <option>قيد الانتظار</option>
+                        <option>ملغي</option>
+                        <option>مكتمل</option>
+                    </select>
+                    <select class="form-control">
+                        <option>هذا الأسبوع</option>
+                        <option>الأسبوع القادم</option>
+                        <option>هذا الشهر</option>
+                    </select>
+                    </div>
+                </div>
+
+                <!-- Reservations Table -->
+                <div class="card">
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>رقم الحجز</th>
+                                    <th>الأصل/المرافق</th>
+                                    <th>المستخدم</th>
+                                    <th>تاريخ البدء</th>
+                                    <th>تاريخ الانتهاء</th>
+                                    <th>الوقت</th>
+                                    <th>الحالة</th>
+                                    <th>إجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>RES-2024-001</td>
+                                    <td>مختبر الحاسوب</td>
+                                    <td>أحمد علي</td>
+                                    <td>20/05/2024</td>
+                                    <td>20/05/2024</td>
+                                    <td>09:00 - 11:00</td>
+                                    <td><span class="status-badge active">مؤكد</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" title="عرض">👁️</button>
+                                            <button class="btn-icon" title="تعديل">✏️</button>
+                                            <button class="btn-icon" title="إلغاء">❌</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>RES-2024-002</td>
+                                    <td>برجي عرض</td>
+                                    <td>فاطمة محمد</td>
+                                    <td>22/05/2024</td>
+                                    <td>25/05/2024</td>
+                                    <td>كل اليوم</td>
+                                    <td><span class="status-badge pending">قيد الانتظار</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" title="عرض">👁️</button>
+                                            <button class="btn-icon" title="موافقة">✅</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- New Reservation Modal -->
+    <div class="modal-overlay" id="newReservationModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>حجز جديد</h3>
+                <button class="close-btn" onclick="closeModal('newReservationModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="form-grid">
+                    <div class="form-group">
+                        <label>الأصل/المرافق</label>
+                        <select class="form-control">
+                            <option>اختر الأصل</option>
+                            <option>مختبر الحاسوب</option>
+                            <option>برجي عرض</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>المستخدم</label>
+                        <select class="form-control">
+                            <option>اختر المستخدم</option>
+                            <option>أحمد علي</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>تاريخ البدء</label>
+                        <input type="date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>تاريخ الانتهاء</label>
+                        <input type="date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>وقت البدء</label>
+                        <input type="time" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>وقت الانتهاء</label>
+                        <input type="time" class="form-control">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>الغرض</label>
+                        <textarea class="form-control" rows="3" placeholder="شرح الغرض من الحجز"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('newReservationModal')">إلغاء</button>
+                <button class="btn btn-primary">حجز</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+    </script>
+</body>
+</html>

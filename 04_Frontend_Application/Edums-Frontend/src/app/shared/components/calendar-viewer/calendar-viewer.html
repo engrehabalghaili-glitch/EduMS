@@ -1,0 +1,95 @@
+@if (loading()) {
+  <div class="cv-loading">
+    <p-skeleton width="100%" height="18rem" borderRadius="0.5rem" />
+    <p-skeleton width="60%" height="0.75rem" borderRadius="0.25rem" />
+  </div>
+} @else {
+  <div class="cv-wrap">
+    <p-datepicker
+      [inline]="true"
+      [(ngModel)]="selectedDate"
+      (onSelect)="dateSelect($event)"
+      [minDate]="minDate()"
+      [maxDate]="maxDate()"
+      [readonlyInput]="readonly()"
+      styleClass="cv-calendar"
+    >
+      <ng-template pTemplate="date" let-dateMeta>
+        <div
+          class="cv-day-cell"
+          [ngClass]="{ 'cv-has-events': hasEvents(dateMeta.day, dateMeta.month, dateMeta.year) }"
+        >
+          <span class="cv-day-num">{{ dateMeta.day }}</span>
+          @if (hasEvents(dateMeta.day, dateMeta.month, dateMeta.year)) {
+            <span class="cv-dot" [style.background]="eventDotColor(dateMeta.day, dateMeta.month, dateMeta.year)"></span>
+            <span class="cv-count">{{ eventCount(dateMeta.day, dateMeta.month, dateMeta.year) }}</span>
+          }
+        </div>
+      </ng-template>
+    </p-datepicker>
+
+    @if (selectedDate) {
+      @if (dayEvents().length > 0) {
+        <div class="cv-events-list">
+          <h4 class="cv-events-title">أحداث {{ selectedDate | date:'d MMMM yyyy':'':'ar-SA' }}</h4>
+          @for (evt of dayEvents(); track evt.id) {
+            <div class="cv-event-item" (click)="eventClick(evt)">
+              <span class="cv-event-color" [style.background]="evt.color ?? typeColor(evt.type)"></span>
+              <div class="cv-event-info">
+                <span class="cv-event-title">{{ evt.title }}</span>
+                @if (evt.description) {
+                  <p class="cv-event-desc">{{ evt.description }}</p>
+                }
+              </div>
+              <span class="cv-event-type">{{ typeLabel(evt.type) }}</span>
+            </div>
+          }
+        </div>
+      }
+    }
+  </div>
+}
+
+@if (showEventDetails() && selectedEvent) {
+  <p-dialog
+    [(visible)]="detailVisible"
+    [header]="selectedEvent.title"
+    [style]="{ width: '22rem' }"
+    [modal]="true"
+    [closable]="true"
+    [dismissableMask]="true"
+    [rtl]="true"
+  >
+    <div class="cv-detail">
+      <div class="cv-detail-row">
+        <span class="cv-detail-label">النوع</span>
+        <span class="cv-detail-value">
+          <i [class]="typeIcon(selectedEvent.type)" [style.color]="selectedEvent.color ?? typeColor(selectedEvent.type)"></i>
+          {{ typeLabel(selectedEvent.type) }}
+        </span>
+      </div>
+      <div class="cv-detail-row">
+        <span class="cv-detail-label">التاريخ</span>
+        <span class="cv-detail-value">{{ selectedEvent.date | date:'d MMMM yyyy':'':'ar-SA' }}</span>
+      </div>
+      @if (selectedEvent.endDate) {
+        <div class="cv-detail-row">
+          <span class="cv-detail-label">حتى</span>
+          <span class="cv-detail-value">{{ selectedEvent.endDate | date:'d MMMM yyyy':'':'ar-SA' }}</span>
+        </div>
+      }
+      @if (selectedEvent.allDay !== undefined) {
+        <div class="cv-detail-row">
+          <span class="cv-detail-label">طوال اليوم</span>
+          <span class="cv-detail-value">{{ selectedEvent.allDay ? 'نعم' : 'لا' }}</span>
+        </div>
+      }
+      @if (selectedEvent.description) {
+        <div class="cv-detail-desc">
+          <span class="cv-detail-label">الوصف</span>
+          <p>{{ selectedEvent.description }}</p>
+        </div>
+      }
+    </div>
+  </p-dialog>
+}

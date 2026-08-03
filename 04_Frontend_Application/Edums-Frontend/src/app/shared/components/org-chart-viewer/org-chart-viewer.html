@@ -1,0 +1,83 @@
+@if (loading()) {
+  <div class="ocv-loading">
+    <p-skeleton width="60%" height="1rem" borderRadius="0.25rem" />
+    <div class="ocv-loading-grid">
+      @for (_ of [0,1,2]; track _) {
+        <p-skeleton width="8rem" height="6rem" borderRadius="0.5rem" />
+      }
+    </div>
+  </div>
+} @else if (data().length === 0) {
+  <div class="ocv-empty">
+    <i class="pi pi-sitemap ocv-empty-icon"></i>
+    <span>{{ emptyMessage() }}</span>
+  </div>
+} @else {
+  <p-organizationChart
+    [value]="data()"
+    [selectionMode]="selectionMode()"
+    [collapsible]="collapsible()"
+    (onNodeSelect)="nodeSelect($event)"
+    (onNodeExpand)="nodeExpand($event)"
+    (onNodeCollapse)="nodeCollapse($event)"
+  >
+    <ng-template pTemplate="default" let-node>
+      <div class="ocv-node" [ngClass]="'ocv-type-' + node.type" [pTooltip]="node.data.title" tooltipPosition="top">
+        <div class="ocv-node-icon">
+          <i [class]="typeIcon(node.type)"></i>
+        </div>
+        <div class="ocv-node-info">
+          <span class="ocv-node-label">{{ node.label }}</span>
+          <span class="ocv-node-sub">{{ node.data.title }}</span>
+        </div>
+        @if (node.data.employeeCount !== undefined) {
+          <span class="ocv-node-count">{{ node.data.employeeCount }}</span>
+        }
+      </div>
+    </ng-template>
+  </p-organizationChart>
+}
+
+@if (showNodeDetails() && selectedNode) {
+  <p-dialog
+    [(visible)]="detailVisible"
+    [header]="selectedNode.label"
+    [style]="{ width: '24rem' }"
+    [modal]="true"
+    [closable]="true"
+    [dismissableMask]="true"
+    [rtl]="true"
+  >
+    <div class="ocv-detail">
+      <div class="ocv-detail-row">
+        <span class="ocv-detail-label">النوع</span>
+        <span class="ocv-detail-value">{{ typeLabel(selectedNode.type) }}</span>
+      </div>
+      <div class="ocv-detail-row">
+        <span class="ocv-detail-label">المسمى</span>
+        <span class="ocv-detail-value">{{ selectedNode.data.title }}</span>
+      </div>
+      @if (selectedNode.data.name) {
+        <div class="ocv-detail-row">
+          <span class="ocv-detail-label">الاسم</span>
+          <span class="ocv-detail-value">{{ selectedNode.data.name }}</span>
+        </div>
+      }
+      @if (selectedNode.data.employeeCount !== undefined) {
+        <div class="ocv-detail-row">
+          <span class="ocv-detail-label">عدد الموظفين</span>
+          <span class="ocv-detail-value">{{ selectedNode.data.employeeCount }}</span>
+        </div>
+      }
+      @if (selectedNode.data.status) {
+        <div class="ocv-detail-row">
+          <span class="ocv-detail-label">الحالة</span>
+          <span class="ocv-detail-value">
+            <span class="ocv-status-dot" [style.background]="statusColor(selectedNode.data.status)"></span>
+            {{ statusLabel(selectedNode.data.status) }}
+          </span>
+        </div>
+      }
+    </div>
+  </p-dialog>
+}

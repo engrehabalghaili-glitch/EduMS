@@ -5,6 +5,7 @@ dist/
 out/
 build/
 node_modules/
+.angular/
 
 # IDE and Editor files
 .vs/

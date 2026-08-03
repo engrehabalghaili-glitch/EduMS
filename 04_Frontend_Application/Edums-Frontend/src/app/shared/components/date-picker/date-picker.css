@@ -1,0 +1,25 @@
+:host {
+  display: block;
+}
+
+.datepicker-wrap ::ng-deep .p-datepicker {
+  width: 100%;
+  min-height: 2.25rem;
+}
+
+.datepicker-wrap ::ng-deep .p-datepicker .p-inputtext {
+  font-size: 0.8125rem;
+  color: #27272a;
+}
+
+.datepicker-wrap ::ng-deep .p-datepicker.p-invalid {
+  border-color: #e53e3e;
+}
+
+.datepicker-wrap ::ng-deep .p-datepicker .p-datepicker-input-icon-container {
+  color: #94a3b8;
+}
+
+.datepicker-wrap ::ng-deep .p-datepicker:not(.p-datepicker-inline) .p-datepicker-input {
+  font-size: 0.8125rem;
+}

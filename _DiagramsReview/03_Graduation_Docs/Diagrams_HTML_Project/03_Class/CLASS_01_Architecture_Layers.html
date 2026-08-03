@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Architecture Class Diagram — طبقات Clean Architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../00_Engine/academic-style.css">
+<style>:root{--accent:#1E3A8A}</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="crumb"><a href="../index.html">🏠 فهرس المكتبة</a> <span>/</span> <a href="../03_Class/index.html">C. مخططات الكلاسات</a> <span>/</span> <span>CLS-ARCH</span></div>
+
+  <div class="dg-head">
+    <h1>🏗️ Architecture Class Diagram — طبقات Clean Architecture</h1>
+    <div class="sub">البنية التقنية الفعلية: CQRS، MediatR، Repository، UnitOfWork، EF Core</div>
+    <div class="meta">
+      <span class="chip mono">CLS-ARCH</span>
+      <span class="chip">System-Level</span>
+      <span class="chip">233 repository</span><span class="chip">CQRS</span><span class="chip">MediatR</span><span class="chip">EF Core</span>
+    </div>
+  </div>
+
+  <div class="truth">
+    <b>✔ مُشتقّ من الكود الفعلي (Reverse-Engineered)</b> —
+    المصدر: <code>EduMS.Application/Common/CQRS/ + Interfaces/Repositories/</code>
+    
+  </div>
+
+  <div class="stat-row"><div class="stat"><div class="k">واجهات المستودعات</div><div class="v">233</div></div><div class="stat"><div class="k">عمليات المستودعات</div><div class="v">1069</div></div><div class="stat"><div class="k">المعالجات</div><div class="v">1022</div></div><div class="stat"><div class="k">المشاريع</div><div class="v">4</div></div></div>
+
+  <div class="toolbar">
+    <button class="btn" onclick="Z.in()">🔍+</button>
+    <button class="btn" onclick="Z.out()">🔍−</button>
+    <span class="zoomval" id="zv">100%</span>
+    <button class="btn ghost" onclick="Z.reset()">↺ 100%</button>
+    <button class="btn ghost" onclick="Z.fit()">⤢ ملء العرض</button>
+    <span class="sep"></span>
+    <button class="btn gold" onclick="DG.saveSVG('#svgHost svg','CLS-ARCH')">💾 Save as SVG</button>
+    <button class="btn gold" onclick="DG.savePNG('#svgHost svg','CLS-ARCH',3)">🖼 Save as PNG</button>
+    <span class="sep"></span>
+    <button class="btn ghost" onclick="window.print()">🖨 طباعة</button>
+  </div>
+
+  <div class="canvas-card grid-bg" id="canvas"><div id="svgHost"></div></div>
+
+  <div class="legend">
+    <div class="item">▭ كلاس بثلاثة أقسام: الاسم / الخصائص / العمليات</div>
+    <div class="item"><b style="color:#1d4ed8">+ PK</b> مفتاح رئيسي</div>
+    <div class="item"><b style="color:#b45309">+ FK</b> مفتاح خارجي</div>
+    <div class="item">◁— وراثة &nbsp; ◆— تركيب &nbsp; ◇— تجميع &nbsp; ⇢ اعتمادية</div>
+  </div>
+  <div class="note info"><h4>الطبقات الفعلية في المستودع</h4><ul><li><code>EduMS.Domain</code> — الكيانات وقواعد العمل (لا تعتمد على شيء).</li><li><code>EduMS.Application</code> — CQRS (Commands/Queries/Handlers) + واجهات المستودعات.</li><li><code>EduMS.Infrastructure</code> — EF Core، الـ DbContext، تنفيذ المستودعات (Oracle).</li><li><code>EduMS.WebApi</code> — المتحكمات، المصادقة، تحويل الطلبات إلى MediatR.</li><li>عدد واجهات المستودعات المكتشفة: <b>233</b> بإجمالي <b>1069</b> عملية.</li></ul></div>
+  
+
+  <div class="foot">EduMS Enterprise • Phase D Reverse-Engineering • مولَّد من <span class="mono">https://github.com/engrehabalghaili-glitch/EduMS.git</span></div>
+</div>
+
+<script src="../00_Engine/diagram-engine.js"></script>
+<script src="../00_Engine/renderers.js"></script>
+<script>
+const SPEC = {"title": "Architecture Class Diagram — Clean Architecture Layers", "subtitle": "233 repository interface • 1069 عملية • CQRS + MediatR", "width": 1660, "maxAttrs": 6, "maxMethods": 6, "maxBoxW": 330, "classes": [{"name": "EduMSDbContext", "ar": "Infrastructure", "stereo": "DbContext", "color": "#b45309", "attributes": [{"name": "Person", "type": "DbSet", "vis": "+"}, {"name": "Student", "type": "DbSet", "vis": "+"}, {"name": "Employee", "type": "DbSet", "vis": "+"}, {"name": "School", "type": "DbSet", "vis": "+"}, {"name": "Account", "type": "DbSet", "vis": "+"}, {"name": "JournalEntry", "type": "DbSet", "vis": "+"}], "methods": [{"name": "SaveChangesAsync", "ret": "Task<int>", "args": ["ct"], "vis": "+"}, {"name": "OnModelCreating", "ret": "void", "args": ["builder"], "vis": "#"}]}, {"name": "IUnitOfWork", "ar": "Application.Interfaces", "stereo": "interface", "color": "#1e3a8a", "attributes": [], "methods": [{"name": "SaveChangesAsync", "ret": "Task<int>", "args": ["ct"], "vis": "+"}, {"name": "BeginTransaction", "ret": "Task", "args": [], "vis": "+"}]}, {"name": "IGenericRepository", "ar": "Application.Interfaces", "stereo": "interface T", "color": "#1e3a8a", "attributes": [], "methods": [{"name": "GetByIdAsync", "ret": "Task<T>", "args": ["id"], "vis": "+"}, {"name": "AddAsync", "ret": "Task", "args": ["entity"], "vis": "+"}, {"name": "UpdateAsync", "ret": "Task", "args": ["entity"], "vis": "+"}, {"name": "DeleteAsync", "ret": "Task", "args": ["entity"], "vis": "+"}, {"name": "ListAsync", "ret": "Task<List<T>>", "args": [], "vis": "+"}]}, {"name": "ICommandHandler", "ar": "Application.Common.CQRS", "stereo": "interface", "color": "#059669", "attributes": [], "methods": [{"name": "HandleAsync", "ret": "Task<TResponse>", "args": ["command", "ct"], "vis": "+"}]}, {"name": "IQueryHandler", "ar": "Application.Common.CQRS", "stereo": "interface", "color": "#059669", "attributes": [], "methods": [{"name": "HandleAsync", "ret": "Task<TResponse>", "args": ["query", "ct"], "vis": "+"}]}, {"name": "ApiControllerBase", "ar": "WebApi", "stereo": "abstract", "color": "#7c3aed", "attributes": [{"name": "_mediator", "type": "IMediator", "vis": "#"}], "methods": [{"name": "Send", "ret": "Task<T>", "args": ["request"], "vis": "#"}]}, {"name": "IUnitOfWork", "ar": "Common", "stereo": "repository", "color": "#0891b2", "attributes": [], "methods": [{"name": "SaveChangesAsync", "ret": "int>", "args": [], "vis": "+"}, {"name": "BeginTransactionAsync", "ret": "Task", "args": [], "vis": "+"}, {"name": "CommitTransactionAsync", "ret": "Task", "args": [], "vis": "+"}, {"name": "RollbackTransactionAsync", "ret": "Task", "args": [], "vis": "+"}]}, {"name": "IAssetFinancialJournalLinkRepository", "ar": "Common", "stereo": "repository", "color": "#0891b2", "attributes": [], "methods": [{"name": "GetLinksByEntryTypeAsync", "ret": "IEnumerable<Asse", "args": [], "vis": "+"}, {"name": "GetLinksBySchoolAssetIdA", "ret": "IEnumerable<Asse", "args": [], "vis": "+"}, {"name": "GetLinksByJournalEntryId", "ret": "IEnumerable<Asse", "args": [], "vis": "+"}]}, {"name": "IAssetProcurementPaymentLinkRepository", "ar": "Common", "stereo": "repository", "color": "#0891b2", "attributes": [], "methods": [{"name": "GetLinksByPurchaseOrderI", "ret": "IEnumerable<Asse", "args": [], "vis": "+"}, {"name": "GetLinksByPaymentVoucher", "ret": "IEnumerable<Asse", "args": [], "vis": "+"}, {"name": "GetLinksBySchoolIdAsync", "ret": "IEnumerable<Asse", "args": [], "vis": "+"}]}, {"name": "IAuditableEntityRegistryRepository", "ar": "Common", "stereo": "repository", "color": "#0891b2", "attributes": [], "methods": [{"name": "GetActiveEntitiesAsync", "ret": "IEnumerable<Audi", "args": [], "vis": "+"}, {"name": "GetSensitiveEntitiesAsyn", "ret": "IEnumerable<Audi", "args": [], "vis": "+"}, {"name": "GetEntitiesByModuleAsync", "ret": "IEnumerable<Audi", "args": [], "vis": "+"}, {"name": "GetEntityByKeyAsync", "ret": "AuditableEntityR", "args": [], "vis": "+"}]}, {"name": "IEmergencyEmployeeSafetyRecordRepository", "ar": "Common", "stereo": "repository", "color": "#0891b2", "attributes": [], "methods": [{"name": "GetRecordsBySafetyStatus", "ret": "IEnumerable<Emer", "args": [], "vis": "+"}, {"name": "GetRecordsOnDutyAsync", "ret": "IEnumerable<Emer", "args": [], "vis": "+"}, {"name": "GetRecordsByIncidentIdAs", "ret": "IEnumerable<Emer", "args": [], "vis": "+"}, {"name": "GetRecordByEmployeeAndIn", "ret": "EmergencyEmploye", "args": [], "vis": "+"}]}, {"name": "IEmergencyFinancialExpenseLinkRepository", "ar": "Common", "stereo": "repository", "color": "#0891b2", "attributes": [], "methods": [{"name": "GetExpensesByCategoryAsy", "ret": "IEnumerable<Emer", "args": [], "vis": "+"}, {"name": "GetExpensesByIncidentIdA", "ret": "IEnumerable<Emer", "args": [], "vis": "+"}, {"name": "GetExpensesByHostingIdAs", "ret": "IEnumerable<Emer", "args": [], "vis": "+"}, {"name": "GetExpensesByClosureIdAs", "ret": "IEnumerable<Emer", "args": [], "vis": "+"}, {"name": "GetExpensesByJournalEntr", "ret": "IEnumerable<Emer", "args": [], "vis": "+"}]}, {"name": "IEmergencyHostingWarehouseLinkRepository", "ar": "Common", "stereo": "repository", "color": "#0891b2", "attributes": [], "methods": [{"name": "GetLinksByHostingIdAsync", "ret": "IEnumerable<Emer", "args": [], "vis": "+"}, {"name": "GetLinksByWarehouseIdAsy", "ret": "IEnumerable<Emer", "args": [], "vis": "+"}, {"name": "GetLinksBySchoolIdAsync", "ret": "IEnumerable<Emer", "args": [], "vis": "+"}]}, {"name": "IEmergencyIncidentAssetImpactRepository", "ar": "Common", "stereo": "repository", "color": "#0891b2", "attributes": [], "methods": [{"name": "GetImpactsByTypeAsync", "ret": "IEnumerable<Emer", "args": [], "vis": "+"}, {"name": "GetImpactsRequiringMaint", "ret": "IEnumerable<Emer", "args": [], "vis": "+"}, {"name": "GetImpactsByIncidentIdAs", "ret": "IEnumerable<Emer", "args": [], "vis": "+"}, {"name": "GetImpactsByAssetIdAsync", "ret": "IEnumerable<Emer", "args": [], "vis": "+"}]}, {"name": "IEmergencyStudentSafetyRecordRepository", "ar": "Common", "stereo": "repository", "color": "#0891b2", "attributes": [], "methods": [{"name": "GetRecordsBySafetyStatus", "ret": "IEnumerable<Emer", "args": [], "vis": "+"}, {"name": "GetRecordsNotNotifiedToP", "ret": "IEnumerable<Emer", "args": [], "vis": "+"}, {"name": "GetRecordsByIncidentIdAs", "ret": "IEnumerable<Emer", "args": [], "vis": "+"}, {"name": "GetRecordByStudentAndInc", "ret": "EmergencyStudent", "args": [], "vis": "+"}]}], "relations": [{"from": "IGenericRepository", "to": "IUnitOfWork", "kind": "dependency", "label": "uses"}, {"from": "ICommandHandler", "to": "IGenericRepository", "kind": "dependency", "label": "uses"}, {"from": "ICommandHandler", "to": "IUnitOfWork", "kind": "dependency", "label": "commits"}, {"from": "IQueryHandler", "to": "IGenericRepository", "kind": "dependency", "label": "reads"}, {"from": "ApiControllerBase", "to": "ICommandHandler", "kind": "dependency", "label": "MediatR"}, {"from": "ApiControllerBase", "to": "IQueryHandler", "kind": "dependency", "label": "MediatR"}, {"from": "EduMSDbContext", "to": "IUnitOfWork", "kind": "inheritance", "label": "implements"}, {"from": "IUnitOfWork", "to": "IGenericRepository", "kind": "inheritance", "label": "extends"}, {"from": "IAssetFinancialJournalLinkRepository", "to": "IGenericRepository", "kind": "inheritance", "label": "extends"}, {"from": "IAssetProcurementPaymentLinkRepository", "to": "IGenericRepository", "kind": "inheritance", "label": "extends"}, {"from": "IAuditableEntityRegistryRepository", "to": "IGenericRepository", "kind": "inheritance", "label": "extends"}, {"from": "IEmergencyEmployeeSafetyRecordRepository", "to": "IGenericRepository", "kind": "inheritance", "label": "extends"}, {"from": "IEmergencyFinancialExpenseLinkRepository", "to": "IGenericRepository", "kind": "inheritance", "label": "extends"}, {"from": "IEmergencyHostingWarehouseLinkRepository", "to": "IGenericRepository", "kind": "inheritance", "label": "extends"}, {"from": "IEmergencyIncidentAssetImpactRepository", "to": "IGenericRepository", "kind": "inheritance", "label": "extends"}, {"from": "IEmergencyStudentSafetyRecordRepository", "to": "IGenericRepository", "kind": "inheritance", "label": "extends"}]};
+DG.renderers.umlClass('#svgHost', SPEC);
+const Z = DG.attachZoom('#canvas', '#svgHost svg', '#zv');
+Z.fit();
+</script>
+</body>
+</html>

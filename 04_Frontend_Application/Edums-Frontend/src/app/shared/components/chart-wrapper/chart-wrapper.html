@@ -1,0 +1,12 @@
+@if (title()) {
+  <h3 class="chart-title">{{ title() }}</h3>
+}
+<div class="chart-container" [ngClass]="styleClass()">
+  <p-chart
+    [type]="type()"
+    [data]="data()"
+    [options]="mergedOptions"
+    [width]="width()"
+    [height]="height()"
+  />
+</div>

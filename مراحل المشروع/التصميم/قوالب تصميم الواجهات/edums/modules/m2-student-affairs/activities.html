@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - الأنشطة اللاصفية والفعاليات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span style="display: flex; align-items: center;">
+                            <span class="icon">📊</span>
+                            <span>لوحة التحكم</span>
+                        </span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">الوحدات الرئيسية</div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🏫</span>
+                                <span>إدارة المدرسة (M1)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m1-school-office/index.html">لوحة تحكم المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/school-profile.html">ملف المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/classes.html">الصفوف والفصول</a></li>
+                            <li><a href="../../modules/m1-school-office/timetable.html">الجدول الدراسي</a></li>
+                            <li><a href="../../modules/m1-school-office/academic-year.html">العام الدراسي</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🎓</span>
+                                <span>شؤون الطلاب (M2)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m2-student-affairs/index.html">لوحة تحكم الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/students.html">قاعدة الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/registration-requests.html">طلبات القيد</a></li>
+                            <li><a href="../../modules/m2-student-affairs/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🏫</span>
+                                <span>إدارة الموظفين (M3)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m3-employee-management/index.html">لوحة تحكم الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/employees.html">قائمة الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📦</span>
+                                <span>إدارة الأصول (M4)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m4-assets-logistics/index.html">لوحة تحكم الأصول</a></li>
+                            <li><a href="../../modules/m4-assets-logistics/inventory.html">المخزون</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">💰</span>
+                                <span>المالية (M5)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m5-finance/index.html">لوحة المالية</a></li>
+                            <li><a href="../../modules/m5-finance/invoices.html">الفواتير</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📈</span>
+                                <span>الإحصاء (M6)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m6-statistics-reports/index.html">لوحة الإحصاء</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🚨</span>
+                                <span>الطوارئ (M7)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m7-emergency-management/index.html">لوحة الطوارئ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🔐</span>
+                                <span>الأمن والمستخدمين (M8)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m8-authentication-users/index.html">المستخدمين</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة الطلاب - الأنشطة والفعاليات</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">
+                            🔔
+                            <span class="badge">2</span>
+                        </button>
+                        <button class="header-btn">💬</button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير المدرسة</h4>
+                            <p>الإدارة</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <h1 class="page-title">🏀 الأنشطة اللاصفية والفعاليات</h1>
+                            <div class="page-breadcrumb">
+                                <a href="../../index.html">الرئيسية</a>
+                                <span>/</span>
+                                <a href="index.html">إدارة الطلاب</a>
+                                <span>/</span>
+                                <span>الأنشطة</span>
+                            </div>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-primary" onclick="openModal('addActivityModal')">
+                                <span>➕</span>
+                                <span>إنشاء نشاط جديد</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon primary">🏆</div>
+                        <div class="stat-info">
+                            <h3>8</h3>
+                            <p>أندية طلابية</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon success">👥</div>
+                        <div class="stat-info">
+                            <h3>450</h3>
+                            <p>طلاب مشاركون</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon warning">📅</div>
+                        <div class="stat-info">
+                            <h3>15</h3>
+                            <p>فعالية قادمة</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon danger">⭐</div>
+                        <div class="stat-info">
+                            <h3>12</h3>
+                            <p>إنجازات وطنية</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Activity Tabs -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">إدارة الأنشطة والفعاليات</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="tabs">
+                            <button class="tab-btn active">الأندية الطلابية</button>
+                            <button class="tab-btn">الفعاليات المجدولة</button>
+                            <button class="tab-btn">سجل الإنجازات</button>
+                        </div>
+                        
+                        <div class="tab-content" style="margin-top: 24px;">
+                            <div class="grid-2">
+                                <div class="activity-club-card">
+                                    <div class="club-header">
+                                        <div class="club-icon">🔬</div>
+                                        <div class="club-title">
+                                            <h4>نادي العلوم والابتكار</h4>
+                                            <p>المشرف: أ. أحمد منصور</p>
+                                        </div>
+                                    </div>
+                                    <div class="club-body">
+                                        <p>يهدف النادي إلى تنمية مهارات البحث العلمي والابتكار لدى الطلاب.</p>
+                                        <div class="club-stats">
+                                            <span>👥 25 طالب</span>
+                                            <span>⏰ الاثنين - 1:00 م</span>
+                                        </div>
+                                    </div>
+                                    <div class="club-footer">
+                                        <button class="btn btn-outline btn-sm">إدارة الأعضاء</button>
+                                        <button class="btn btn-primary btn-sm">سجل الحضور</button>
+                                    </div>
+                                </div>
+                                <div class="activity-club-card">
+                                    <div class="club-header">
+                                        <div class="club-icon">⚽</div>
+                                        <div class="club-title">
+                                            <h4>النادي الرياضي</h4>
+                                            <p>المشرف: أ. ياسر القحطاني</p>
+                                        </div>
+                                    </div>
+                                    <div class="club-body">
+                                        <p>تدريبات كرة القدم، كرة السلة، وألعاب القوى والمنافسات المدرسية.</p>
+                                        <div class="club-stats">
+                                            <span>👥 80 طالب</span>
+                                            <span>⏰ يومياً - 2:00 م</span>
+                                        </div>
+                                    </div>
+                                    <div class="club-footer">
+                                        <button class="btn btn-outline btn-sm">إدارة الأعضاء</button>
+                                        <button class="btn btn-primary btn-sm">سجل الحضور</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Placeholder -->
+    <div id="addActivityModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>إنشاء نشاط/فعالية جديدة</h3>
+                <span class="close-modal" onclick="closeModal('addActivityModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">اسم النشاط</label>
+                        <input type="text" class="form-input" placeholder="مثلاً: دوري كرة القدم المدرسي">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">نوع النشاط</label>
+                            <select class="form-select">
+                                <option>نادي مستمر</option>
+                                <option>فعالية لمرة واحدة</option>
+                                <option>مسابقة</option>
+                                <option>رحلة مدرسية</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">المشرف المسؤول</label>
+                            <select class="form-select">
+                                <option>ابحث عن معلم...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">تاريخ البداية</label>
+                            <input type="date" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">المكان</label>
+                            <input type="text" class="form-input" placeholder="مثلاً: الملعب الرئيسي">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">وصف النشاط وأهدافه</label>
+                        <textarea class="form-textarea"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('addActivityModal')">إلغاء</button>
+                <button class="btn btn-primary">إنشاء النشاط</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .tabs { display: flex; gap: 10px; border-bottom: 1px solid #e5e7eb; padding-bottom: 10px; }
+        .tab-btn { padding: 10px 20px; border: none; background: none; font-weight: 600; color: #6b7280; cursor: pointer; border-radius: 8px; }
+        .tab-btn.active { background: #eff6ff; color: var(--primary); }
+
+        .activity-club-card { background: white; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+        .club-header { padding: 20px; background: #f8fafc; display: flex; gap: 15px; align-items: center; border-bottom: 1px solid #e5e7eb; }
+        .club-icon { font-size: 2em; width: 50px; height: 50px; background: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .club-title h4 { color: var(--primary); margin-bottom: 2px; }
+        .club-title p { font-size: 0.8em; color: var(--text-secondary); }
+        .club-body { padding: 20px; flex: 1; }
+        .club-body p { font-size: 0.9em; color: var(--text-secondary); margin-bottom: 15px; }
+        .club-stats { display: flex; gap: 20px; font-size: 0.85em; font-weight: 600; color: var(--primary); }
+        .club-footer { padding: 15px 20px; background: #f8fafc; border-top: 1px solid #e5e7eb; display: flex; gap: 10px; }
+
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+        .modal-content { background-color: white; margin: 5% auto; width: 600px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); overflow: hidden; animation: modalSlideDown 0.3s ease-out; }
+        .modal-header { padding: 20px 24px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; }
+        .modal-header h3 { color: #1e3a8a; }
+        .close-modal { font-size: 24px; font-weight: bold; cursor: pointer; color: #6b7280; }
+        .modal-body { padding: 24px; max-height: 70vh; overflow-y: auto; }
+        .modal-footer { padding: 16px 24px; border-top: 1px solid #e5e7eb; display: flex; justify-content: flex-end; gap: 12px; background: #f8fafc; }
+    </style>
+
+    <script>
+        function openModal(id) { document.getElementById(id).style.display = "block"; }
+        function closeModal(id) { document.getElementById(id).style.display = "none"; }
+    </script>
+</body>
+</html>

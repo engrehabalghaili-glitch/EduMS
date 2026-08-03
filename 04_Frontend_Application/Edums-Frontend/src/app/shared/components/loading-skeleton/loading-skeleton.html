@@ -1,0 +1,67 @@
+@switch (type()) {
+  @case ('card') {
+    <div class="ls-card-grid" [style.grid-template-columns]="cardGridColumns()">
+      @for (r of rowIndexes(); track r) {
+        <div class="ls-card">
+          <p-skeleton width="100%" height="8rem" [animation]="skeletonAnimation()" borderRadius="0.5rem" />
+          <p-skeleton width="70%" height="0.75rem" [animation]="skeletonAnimation()" borderRadius="0.25rem" />
+          <p-skeleton width="90%" height="0.75rem" [animation]="skeletonAnimation()" borderRadius="0.25rem" />
+          <p-skeleton width="40%" height="0.625rem" [animation]="skeletonAnimation()" borderRadius="0.25rem" />
+        </div>
+      }
+    </div>
+  }
+  @case ('table') {
+    <div class="ls-table">
+      <div class="ls-table-header">
+        @for (c of colIndexes(); track c) {
+          <p-skeleton width="100%" height="0.875rem" [animation]="skeletonAnimation()" borderRadius="0.25rem" />
+        }
+      </div>
+      @for (r of rowIndexes(); track r) {
+        <div class="ls-table-row">
+          @for (c of colIndexes(); track c) {
+            <p-skeleton width="100%" height="0.75rem" [animation]="skeletonAnimation()" borderRadius="0.25rem" />
+          }
+        </div>
+      }
+    </div>
+  }
+  @case ('form') {
+    <div class="ls-form">
+      @for (r of rowIndexes(); track r) {
+        <div class="ls-form-row">
+          <p-skeleton width="30%" height="0.625rem" [animation]="skeletonAnimation()" borderRadius="0.25rem" />
+          <p-skeleton width="100%" height="2rem" [animation]="skeletonAnimation()" borderRadius="0.25rem" />
+        </div>
+      }
+    </div>
+  }
+  @case ('text') {
+    <div class="ls-text">
+      @for (r of rowIndexes(); track r) {
+        <p-skeleton
+          [width]="(70 + (r % 3) * 10) + '%'"
+          height="0.75rem"
+          [animation]="skeletonAnimation()"
+          borderRadius="0.25rem"
+        />
+      }
+    </div>
+  }
+  @case ('circle') {
+    <div class="ls-circle-wrap">
+      @for (r of rowIndexes(); track r) {
+        <div class="ls-circle-item">
+          <p-skeleton width="3rem" height="3rem" [animation]="skeletonAnimation()" borderRadius="50%" />
+          <p-skeleton width="5rem" height="0.75rem" [animation]="skeletonAnimation()" borderRadius="0.25rem" />
+        </div>
+      }
+    </div>
+  }
+  @case ('custom') {
+    <div class="ls-custom">
+      <ng-content />
+    </div>
+  }
+}

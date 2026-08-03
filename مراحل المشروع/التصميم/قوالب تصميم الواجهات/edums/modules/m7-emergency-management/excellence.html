@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - معايير التميز والجودة المدرسية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span style="display: flex; align-items: center;">
+                            <span class="icon">📊</span>
+                            <span>لوحة التحكم</span>
+                        </span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">الوحدات الرئيسية</div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🏫</span>
+                                <span>إدارة المدرسة (M1)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m1-school-office/index.html">لوحة تحكم المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/school-profile.html">ملف المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/classes.html">الصفوف والفصول</a></li>
+                            <li><a href="../../modules/m1-school-office/timetable.html">الجدول الدراسي</a></li>
+                            <li><a href="../../modules/m1-school-office/academic-year.html">العام الدراسي</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🎓</span>
+                                <span>شؤون الطلاب (M2)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m2-student-affairs/index.html">لوحة تحكم الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/students.html">قاعدة الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/registration-requests.html">طلبات القيد</a></li>
+                            <li><a href="../../modules/m2-student-affairs/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🏫</span>
+                                <span>إدارة الموظفين (M3)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m3-employee-management/index.html">لوحة تحكم الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/employees.html">قائمة الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📦</span>
+                                <span>إدارة الأصول (M4)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m4-assets-logistics/index.html">لوحة تحكم الأصول</a></li>
+                            <li><a href="../../modules/m4-assets-logistics/inventory.html">المخزون</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">💰</span>
+                                <span>المالية (M5)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m5-finance/index.html">لوحة المالية</a></li>
+                            <li><a href="../../modules/m5-finance/invoices.html">الفواتير</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📈</span>
+                                <span>الإحصاء (M6)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m6-statistics-reports/index.html">لوحة الإحصاء</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🚨</span>
+                                <span>الطوارئ (M7)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m7-emergency-management/index.html">لوحة الطوارئ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🔐</span>
+                                <span>الأمن والمستخدمين (M8)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m8-authentication-users/index.html">المستخدمين</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة الطوارئ والتميز - معايير الجودة</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">
+                            🔔
+                            <span class="badge">1</span>
+                        </button>
+                        <button class="header-btn">💬</button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير المدرسة</h4>
+                            <p>الإدارة</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h1 class="page-title">🏆 معايير التميز والجودة المدرسية</h1>
+                    <div class="page-breadcrumb">
+                        <a href="../../index.html">الرئيسية</a>
+                        <span>/</span>
+                        <a href="index.html">الطوارئ والتميز</a>
+                        <span>/</span>
+                        <span>معايير التميز</span>
+                    </div>
+                </div>
+                
+                <!-- Excellence Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon warning">⭐</div>
+                        <div class="stat-info">
+                            <h3>94%</h3>
+                            <p>مؤشر جودة الأداء</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon primary">📜</div>
+                        <div class="stat-info">
+                            <h3>12</h3>
+                            <p>جوائز وشهادات شكر</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon success">🏅</div>
+                        <div class="stat-info">
+                            <h3>الفئة أ</h3>
+                            <p>تصنيف التميز</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Standards Sections -->
+                <div class="grid-2">
+                    <!-- Academic Excellence -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">التميز الأكاديمي والتعليمي</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="standard-item">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span>نسبة التفوق العام</span>
+                                    <span>88%</span>
+                                </div>
+                                <div class="progress-bar"><div class="progress" style="width: 88%; background: var(--success);"></div></div>
+                            </div>
+                            <div class="standard-item" style="margin-top: 15px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span>تطوير الكوادر التعليمية</span>
+                                    <span>95%</span>
+                                </div>
+                                <div class="progress-bar"><div class="progress" style="width: 95%; background: var(--success);"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Operational Excellence -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">التميز الإداري والتشغيلي</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="standard-item">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span>رقمنة العمليات</span>
+                                    <span>100%</span>
+                                </div>
+                                <div class="progress-bar"><div class="progress" style="width: 100%; background: var(--primary-light);"></div></div>
+                            </div>
+                            <div class="standard-item" style="margin-top: 15px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span>كفاءة استخدام الموارد</span>
+                                    <span>82%</span>
+                                </div>
+                                <div class="progress-bar"><div class="progress" style="width: 82%; background: var(--accent);"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Awards and Recognition -->
+                <div class="card" style="margin-top: 32px;">
+                    <div class="card-header">
+                        <h3 class="card-title">سجل الجوائز والتكريم</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="awards-grid">
+                            <div class="award-card">
+                                <div class="award-icon">🥇</div>
+                                <h4>جائزة المدرسة المتميزة</h4>
+                                <p>مكتب التربية والتعليم - 2024</p>
+                            </div>
+                            <div class="award-card">
+                                <div class="award-icon">🥈</div>
+                                <h4>التميز في الأنشطة الرياضية</h4>
+                                <p>بطولة المنطقة - 2024</p>
+                            </div>
+                            <div class="award-card">
+                                <div class="award-icon">🥉</div>
+                                <h4>أفضل بيئة مدرسية آمنة</h4>
+                                <p>الدفاع المدني - 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <style>
+        .standard-item span { font-size: 0.9em; font-weight: 600; color: #475569; }
+        .progress-bar { width: 100%; height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden; }
+        .progress { height: 100%; }
+
+        .awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .award-card { background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 12px; padding: 24px; text-align: center; transition: all 0.3s; }
+        .award-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .award-icon { font-size: 3em; margin-bottom: 15px; }
+        .award-card h4 { color: var(--primary); margin-bottom: 5px; }
+        .award-card p { font-size: 0.8em; color: var(--text-secondary); }
+    </style>
+</body>
+</html>

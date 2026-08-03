@@ -1,0 +1,21 @@
+<div class="error-wrap">
+  <i [class]="icon()"></i>
+  <h3 class="error-title">{{ title() }}</h3>
+  @if (description()) {
+    <p class="error-desc">{{ description() }}</p>
+  }
+  @if (errorCode()) {
+    <p class="error-code">رمز الخطأ: {{ errorCode() }}</p>
+  }
+  @if (showHome()) {
+    <div class="error-action">
+      <button
+        pButton
+        type="button"
+        icon="pi pi-fw pi-home"
+        label="العودة للرئيسية"
+        (click)="goHome()"
+      ></button>
+    </div>
+  }
+</div>

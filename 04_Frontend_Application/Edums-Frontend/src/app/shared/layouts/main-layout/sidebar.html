@@ -1,0 +1,48 @@
+<aside class="sidebar-shell">
+  <div class="sidebar-brand">
+    <span class="brand-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+        <path d="M2 17l10 5 10-5"/>
+        <path d="M2 12l10 5 10-5"/>
+      </svg>
+    </span>
+    <span class="brand-text">إدارة المدارس</span>
+  </div>
+
+  <nav class="sidebar-nav">
+    @for (section of filteredSections(); track section.key) {
+      <div class="nav-group">
+        <button
+          class="group-trigger"
+          [class.active]="isOpen(section.key)"
+          (click)="toggleSection(section.key)"
+        >
+          <i [class]="'nav-icon ' + section.iconClass"></i>
+          <span class="group-label">{{ section.label }}</span>
+          <svg class="group-chevron" [class.open]="isOpen(section.key)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+
+        <div class="group-children" [class.open]="isOpen(section.key)">
+          <div class="children-inner">
+            @for (child of section.children; track child.route) {
+              <a
+                [routerLink]="child.route"
+                routerLinkActive="child-active"
+                class="child-item"
+              >
+                {{ child.label }}
+              </a>
+            }
+          </div>
+        </div>
+      </div>
+    }
+  </nav>
+
+  <div class="sidebar-footer">
+    <span>v2026.1</span>
+  </div>
+</aside>

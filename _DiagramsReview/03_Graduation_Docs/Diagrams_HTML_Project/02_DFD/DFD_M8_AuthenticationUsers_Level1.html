@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DFD Level 1 — المصادقة والمستخدمين والصلاحيات</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../00_Engine/academic-style.css">
+<style>:root{--accent:#475569}</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="crumb"><a href="../index.html">🏠 فهرس المكتبة</a> <span>/</span> <a href="../02_DFD/index.html">B. مخططات تدفق البيانات</a> <span>/</span> <span>DFD-L1-M8</span></div>
+
+  <div class="dg-head">
+    <h1>🔐 DFD Level 1 — المصادقة والمستخدمين والصلاحيات</h1>
+    <div class="sub">Authentication &amp; Users • تفكيك تدفّق البيانات داخل الوحدة • مشتق من المتحكمات والمعالجات</div>
+    <div class="meta">
+      <span class="chip mono">DFD-L1-M8</span>
+      <span class="chip">Module-Level</span>
+      <span class="chip">23 controller</span><span class="chip">110 handler</span><span class="chip">22 جدول</span>
+    </div>
+  </div>
+
+  <div class="truth">
+    <b>✔ مُشتقّ من الكود الفعلي (Reverse-Engineered)</b> —
+    المصدر: <code>Controllers/v1/M8_AuthenticationUsers/ + Application/M8_AuthenticationUsers/</code>
+    
+  </div>
+
+  <div class="stat-row"><div class="stat"><div class="k">المتحكمات</div><div class="v">23</div></div><div class="stat"><div class="k">نقاط النهاية</div><div class="v">111</div></div><div class="stat"><div class="k">الأوامر</div><div class="v">66</div></div><div class="stat"><div class="k">الاستعلامات</div><div class="v">44</div></div><div class="stat"><div class="k">الجداول</div><div class="v">22</div></div></div>
+
+  <div class="toolbar">
+    <button class="btn" onclick="Z.in()">🔍+</button>
+    <button class="btn" onclick="Z.out()">🔍−</button>
+    <span class="zoomval" id="zv">100%</span>
+    <button class="btn ghost" onclick="Z.reset()">↺ 100%</button>
+    <button class="btn ghost" onclick="Z.fit()">⤢ ملء العرض</button>
+    <span class="sep"></span>
+    <button class="btn gold" onclick="DG.saveSVG('#svgHost svg','DFD-L1-M8')">💾 Save as SVG</button>
+    <button class="btn gold" onclick="DG.savePNG('#svgHost svg','DFD-L1-M8',3)">🖼 Save as PNG</button>
+    <span class="sep"></span>
+    <button class="btn ghost" onclick="window.print()">🖨 طباعة</button>
+  </div>
+
+  <div class="canvas-card grid-bg" id="canvas"><div id="svgHost"></div></div>
+
+  <div class="legend">
+    <div class="item"><span class="swatch proc"></span> عملية (Process) — مستطيل أكاديمي برأس أزرق داكن</div>
+    <div class="item"><span class="swatch ext"></span> كيان خارجي (External Entity)</div>
+    <div class="item"><span class="swatch store"></span> مخزن بيانات (Data Store)</div>
+    <div class="item">⟶ تدفّق بيانات — الأسهم المتقابلة مُزاحة لتجنّب التداخل</div>
+  </div>
+  <div class="note info"><h4>كيف اشتُقّ هذا المخطط</h4><ul><li>العمليات الفرعية = أكبر 8 متحكم من أصل <b>23</b> في <code>Controllers/v1/M8_AuthenticationUsers/</code>.</li><li>مخازن البيانات = أكثر جداول الوحدة ارتباطاً (حسب درجة المفاتيح الخارجية).</li><li>التدفّقات نحو MediatR مأخوذة من <b>110</b> handler فعلي (66 أوامر / 44 استعلامات).</li><li>أسماء العمليات على المخازن هي أسماء الدوال الحقيقية في الـ Repositories.</li></ul></div>
+  <div class='sec-title' style='font-size:17px'>العمليات الفرعية ← المتحكمات الفعلية<span class='cnt'>23 إجمالي</span></div><table class='dg'><thead><tr><th>#</th><th>Controller</th><th>Route</th><th>Endpoints</th></tr></thead><tbody><tr><td class='mono'>P8.1</td><td class='mono'>AccessPoliciesController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P8.2</td><td class='mono'>BehaviorPermissionMatrixesController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P8.3</td><td class='mono'>BehaviorPermissionRecordsController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P8.4</td><td class='mono'>BehaviorPermissionsController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P8.5</td><td class='mono'>GovernanceRbacRulesController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P8.6</td><td class='mono'>OfficePermissionsController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P8.7</td><td class='mono'>PermissionBaseModulesController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr><tr><td class='mono'>P8.8</td><td class='mono'>PermissionTypesController</td><td class='mono'>api/v1/[controller]</td><td>5</td></tr></tbody></table>
+
+  <div class="foot">EduMS Enterprise • Phase D Reverse-Engineering • مولَّد من <span class="mono">https://github.com/engrehabalghaili-glitch/EduMS.git</span></div>
+</div>
+
+<script src="../00_Engine/diagram-engine.js"></script>
+<script src="../00_Engine/renderers.js"></script>
+<script>
+const SPEC = {"title": "DFD Level 1 — Authentication & Users (M8_AuthenticationUsers)", "subtitle": "8 عملية فرعية • 6 مخزن • 110 handler فعلي", "width": 1620, "height": 1080, "procW": 214, "procH": 100, "extW": 180, "extH": 66, "storeW": 190, "storeH": 54, "processes": [{"id": "P8.1", "name": "Access Policies", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#475569"}, {"id": "P8.2", "name": "Behavior Permission Matrixes", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#475569"}, {"id": "P8.3", "name": "Behavior Permission Records", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#475569"}, {"id": "P8.4", "name": "Behavior Permissions", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#475569"}, {"id": "P8.5", "name": "Governance Rbac Rules", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#475569"}, {"id": "P8.6", "name": "Office Permissions", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#475569"}, {"id": "P8.7", "name": "Permission Base Modules", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#475569"}, {"id": "P8.8", "name": "Permission Types", "sub": "GET:2 POST:1 PUT:1 DELETE:1", "color": "#475569"}], "externals": [{"id": "EA", "name": "المستخدم المخوّل", "sub": "via JWT + RBAC"}, {"id": "EB", "name": "طبقة MediatR", "sub": "66 Cmd / 44 Qry"}, {"id": "EC", "name": "وحدات أخرى", "sub": "Cross-module FKs"}], "stores": [{"id": "D8.1", "name": "SystemUser", "sub": "SYSTEM_USER"}, {"id": "D8.2", "name": "SystemRole", "sub": "SYSTEM_ROLE"}, {"id": "D8.3", "name": "SystemPermission", "sub": "SYSTEM_PERMISSION"}, {"id": "D8.4", "name": "RolePermission", "sub": "ROLE_PERMISSION"}, {"id": "D8.5", "name": "UserDirectPermission", "sub": "USER_DIRECT_PERMISSION"}, {"id": "D8.6", "name": "UserRoleAssignment", "sub": "USER_ROLE_ASSIGNMENT"}], "flows": [{"from": "EA", "to": "P8.1", "label": "HTTP request"}, {"from": "P8.1", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P8.1", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "P8.1", "to": "D8.1", "label": "AddAsync / UpdateAsync", "color": "#b45309", "mono": true}, {"from": "D8.1", "to": "P8.1", "label": "GetByIdAsync", "color": "#0891b2", "mono": true}, {"from": "EA", "to": "P8.2", "label": "HTTP request"}, {"from": "P8.2", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P8.2", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "P8.2", "to": "D8.2", "label": "AddAsync / UpdateAsync", "color": "#b45309", "mono": true}, {"from": "D8.2", "to": "P8.2", "label": "GetByIdAsync", "color": "#0891b2", "mono": true}, {"from": "EA", "to": "P8.3", "label": "HTTP request"}, {"from": "P8.3", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P8.3", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "P8.3", "to": "D8.3", "label": "AddAsync / UpdateAsync", "color": "#b45309", "mono": true}, {"from": "D8.3", "to": "P8.3", "label": "GetByIdAsync", "color": "#0891b2", "mono": true}, {"from": "EA", "to": "P8.4", "label": "HTTP request"}, {"from": "P8.4", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P8.4", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "P8.4", "to": "D8.4", "label": "AddAsync / UpdateAsync", "color": "#b45309", "mono": true}, {"from": "D8.4", "to": "P8.4", "label": "GetByIdAsync", "color": "#0891b2", "mono": true}, {"from": "EA", "to": "P8.5", "label": "HTTP request"}, {"from": "P8.5", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P8.5", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "P8.5", "to": "D8.5", "label": "AddAsync / UpdateAsync", "color": "#b45309", "mono": true}, {"from": "D8.5", "to": "P8.5", "label": "GetByIdAsync", "color": "#0891b2", "mono": true}, {"from": "EA", "to": "P8.6", "label": "HTTP request"}, {"from": "P8.6", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P8.6", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "P8.6", "to": "D8.6", "label": "AddAsync / UpdateAsync", "color": "#b45309", "mono": true}, {"from": "D8.6", "to": "P8.6", "label": "GetByIdAsync", "color": "#0891b2", "mono": true}, {"from": "EA", "to": "P8.7", "label": "HTTP request"}, {"from": "P8.7", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P8.7", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "EA", "to": "P8.8", "label": "HTTP request"}, {"from": "P8.8", "to": "EA", "label": "DTO response", "color": "#059669"}, {"from": "P8.8", "to": "EB", "label": "Send()", "color": "#7c3aed", "mono": true}, {"from": "EC", "to": "D8.1", "label": "FK refs", "color": "#6b7280"}]};
+DG.renderers.dfd('#svgHost', SPEC);
+const Z = DG.attachZoom('#canvas', '#svgHost svg', '#zv');
+Z.fit();
+</script>
+</body>
+</html>

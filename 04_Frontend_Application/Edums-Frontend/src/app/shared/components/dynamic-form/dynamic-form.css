@@ -1,0 +1,95 @@
+:host {
+  display: block;
+}
+
+.df-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.df-grid {
+  display: grid;
+  gap: 0.875rem;
+}
+
+.df-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.df-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #3f3f46;
+  margin-bottom: 0.125rem;
+}
+
+.df-w-full {
+  width: 100%;
+}
+
+.df-w-full ::ng-deep .p-inputtext,
+.df-w-full ::ng-deep .p-select-label,
+.df-w-full ::ng-deep .p-multiselect-label {
+  width: 100%;
+}
+
+.df-hint {
+  font-size: 0.6875rem;
+  color: #a1a1aa;
+}
+
+.df-errors {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.df-error {
+  font-size: 0.6875rem;
+  color: #dc2626;
+}
+
+.df-checkbox-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.df-checkbox-label {
+  font-size: 0.8125rem;
+  color: #3f3f46;
+  cursor: pointer;
+}
+
+.df-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.df-radio-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.df-radio-label {
+  font-size: 0.8125rem;
+  color: #3f3f46;
+  cursor: pointer;
+}
+
+.df-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.df-editor ::ng-deep .p-editor-content {
+  min-height: 8rem;
+}

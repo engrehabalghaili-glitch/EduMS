@@ -1,0 +1,47 @@
+:host ::ng-deep .p-dialog {
+  border-radius: 0.625rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+:host ::ng-deep .p-dialog .p-dialog-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #f0f0f0;
+  background: #fafbfc;
+  border-radius: 0.625rem 0.625rem 0 0;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-header .p-dialog-title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-header .p-dialog-header-actions {
+  gap: 0.25rem;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-header .p-dialog-header-icon {
+  color: #94a3b8;
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-header .p-dialog-header-icon:hover {
+  background: #f0f0f0;
+  color: #27272a;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-content {
+  padding: 1.25rem;
+  font-size: 0.8125rem;
+  color: #52525b;
+  line-height: 1.6;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-footer {
+  padding: 0.75rem 1.25rem 1.25rem;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}

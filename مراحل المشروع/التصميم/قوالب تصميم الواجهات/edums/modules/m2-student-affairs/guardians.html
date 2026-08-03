@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - ربط الطلاب بأولياء الأمور</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span style="display: flex; align-items: center;">
+                            <span class="icon">📊</span>
+                            <span>لوحة التحكم</span>
+                        </span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">الوحدات الرئيسية</div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🏫</span>
+                                <span>إدارة المدرسة (M1)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m1-school-office/index.html">لوحة تحكم المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/school-profile.html">ملف المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/classes.html">الصفوف والفصول</a></li>
+                            <li><a href="../../modules/m1-school-office/timetable.html">الجدول الدراسي</a></li>
+                            <li><a href="../../modules/m1-school-office/academic-year.html">العام الدراسي</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🎓</span>
+                                <span>شؤون الطلاب (M2)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m2-student-affairs/index.html">لوحة تحكم الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/students.html">قاعدة الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/registration-requests.html">طلبات القيد</a></li>
+                            <li><a href="../../modules/m2-student-affairs/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🏫</span>
+                                <span>إدارة الموظفين (M3)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m3-employee-management/index.html">لوحة تحكم الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/employees.html">قائمة الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📦</span>
+                                <span>إدارة الأصول (M4)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m4-assets-logistics/index.html">لوحة تحكم الأصول</a></li>
+                            <li><a href="../../modules/m4-assets-logistics/inventory.html">المخزون</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">💰</span>
+                                <span>المالية (M5)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m5-finance/index.html">لوحة المالية</a></li>
+                            <li><a href="../../modules/m5-finance/invoices.html">الفواتير</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📈</span>
+                                <span>الإحصاء (M6)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m6-statistics-reports/index.html">لوحة الإحصاء</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🚨</span>
+                                <span>الطوارئ (M7)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m7-emergency-management/index.html">لوحة الطوارئ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🔐</span>
+                                <span>الأمن والمستخدمين (M8)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m8-authentication-users/index.html">المستخدمين</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة الطلاب - ربط أولياء الأمور</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">🔔<span class="badge">3</span></button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير التسجيل</h4>
+                            <p>قسم الشؤون الطلابية</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <h1 class="page-title">👨‍👩‍👧 إدارة أولياء الأمور والربط</h1>
+                            <div class="page-breadcrumb">
+                                <a href="../../index.html">الرئيسية</a>
+                                <span>/</span>
+                                <a href="index.html">إدارة الطلاب</a>
+                                <span>/</span>
+                                <span>أولياء الأمور</span>
+                            </div>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-primary" onclick="openModal('linkGuardianModal')">
+                                <span>🔗</span>
+                                <span>ربط ولي أمر بطالب</span>
+                            </button>
+                            <button class="btn btn-success" onclick="openModal('addGuardianModal')">
+                                <span>➕</span>
+                                <span>إضافة ولي أمر جديد</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Search & Filters -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-body">
+                        <div class="form-row" style="margin-bottom: 0;">
+                            <div class="form-group" style="flex: 2;">
+                                <label class="form-label">بحث عن طالب أو ولي أمر</label>
+                                <input type="text" class="form-input" placeholder="الاسم، الهوية، أو رقم الجوال...">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">تصنيف العلاقة</label>
+                                <select class="form-select">
+                                    <option>الكل</option>
+                                    <option>أب</option>
+                                    <option>أم</option>
+                                    <option>وصي قانوني</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Students & Guardians Grid -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">سجل علاقات الطلاب وأولياء الأمور</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>الطالب</th>
+                                        <th>أولياء الأمور المرتبطين</th>
+                                        <th>ولي الأمر الأساسي</th>
+                                        <th>رقم التواصل الأساسي</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 10px;">
+                                                <div class="avatar-sm">أ</div>
+                                                <div>
+                                                    <strong>أحمد فهد الحربي</strong>
+                                                    <p style="font-size: 0.75em; color: #64748b;">الأول الثانوي - أ</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="guardian-chips">
+                                                <span class="chip">فهد الحربي (أب)</span>
+                                                <span class="chip">منيرة العلي (أم)</span>
+                                            </div>
+                                        </td>
+                                        <td>فهد الحربي</td>
+                                        <td>050XXXXXXX</td>
+                                        <td>
+                                            <div class="action-btns">
+                                                <a href="edit-family.html" class="btn-icon" title="تعديل البيانات الأسرية">👨‍👩‍👧</a>
+                                                <a href="edit-guardian.html" class="btn-icon" title="تعديل بيانات ولي الأمر">✏️</a>
+                                                <button class="btn-icon" title="تعديل الربط">🔗</button>
+                                                <button class="btn-icon" title="فك الارتباط" style="color: var(--danger);">🗑️</button>
+                                                <button class="btn-icon" title="عرض الملف">👁️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 10px;">
+                                                <div class="avatar-sm">س</div>
+                                                <div>
+                                                    <strong>سارة يوسف القحطاني</strong>
+                                                    <p style="font-size: 0.75em; color: #64748b;">الرابع الابتدائي - ب</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="guardian-chips">
+                                                <span class="chip">يوسف القحطاني (أب)</span>
+                                            </div>
+                                        </td>
+                                        <td>يوسف القحطاني</td>
+                                        <td>055XXXXXXX</td>
+                                        <td>
+                                            <div class="action-btns">
+                                                <a href="edit-guardian.html" class="btn-icon" title="تعديل بيانات ولي الأمر">✏️</a>
+                                                <button class="btn-icon" title="تعديل الربط">🔗</button>
+                                                <button class="btn-icon" title="فك الارتباط" style="color: var(--danger);">🗑️</button>
+                                                <button class="btn-icon" title="عرض الملف">👁️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal: Link Guardian -->
+    <div id="linkGuardianModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>ربط ولي أمر بطالب</h3>
+                <span class="close-modal" onclick="closeModal('linkGuardianModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">اختر الطالب</label>
+                        <select class="form-select">
+                            <option>ابحث عن طالب بالاسم أو الرقم...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">اختر ولي الأمر</label>
+                        <select class="form-select">
+                            <option>ابحث عن ولي أمر موجود مسبقاً...</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">صلة القرابة</label>
+                            <select class="form-select">
+                                <option>أب</option>
+                                <option>أم</option>
+                                <option>أخ</option>
+                                <option>أخت</option>
+                                <option>عم/خال</option>
+                                <option>وصي قانوني</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="display: flex; align-items: flex-end; padding-bottom: 10px;">
+                            <label><input type="checkbox"> ولي أمر أساسي</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">مستند إثبات العلاقة (اختياري)</label>
+                        <input type="file" class="form-input">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('linkGuardianModal')">إلغاء</button>
+                <button class="btn btn-primary">تأكيد الربط</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Add Guardian -->
+    <div id="addGuardianModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>إضافة ولي أمر جديد للنظام</h3>
+                <span class="close-modal" onclick="closeModal('addGuardianModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">الاسم الكامل</label>
+                            <input type="text" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">رقم الهوية</label>
+                            <input type="text" class="form-input">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">رقم الجوال</label>
+                            <input type="tel" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">المهنة</label>
+                            <input type="text" class="form-input">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">البريد الإلكتروني</label>
+                        <input type="email" class="form-input">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('addGuardianModal')">إلغاء</button>
+                <button class="btn btn-primary">حفظ ولي الأمر</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .avatar-sm { width: 35px; height: 35px; background: #dbeafe; color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9em; }
+        .guardian-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+        .chip { background: #f1f5f9; padding: 4px 10px; border-radius: 15px; font-size: 0.75em; font-weight: 600; color: #475569; border: 1px solid #e2e8f0; }
+        
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+        .modal-content { background-color: white; margin: 5% auto; width: 600px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); overflow: hidden; animation: modalSlideDown 0.3s ease-out; }
+        .modal-header { padding: 20px 24px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; }
+        .modal-header h3 { color: #1e3a8a; }
+        .close-modal { font-size: 24px; font-weight: bold; cursor: pointer; color: #6b7280; }
+        .modal-body { padding: 24px; max-height: 70vh; overflow-y: auto; }
+        .modal-footer { padding: 16px 24px; border-top: 1px solid #e5e7eb; display: flex; justify-content: flex-end; gap: 12px; background: #f8fafc; }
+        
+        .action-btns { display: flex; gap: 5px; }
+        .btn-icon { width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e5e7eb; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    </style>
+
+    <script>
+        function toggleDropdown(element) {
+            const dropdown = element.parentElement;
+            dropdown.classList.toggle('active');
+        }
+
+        function openModal(id) { document.getElementById(id).style.display = "block"; }
+        function closeModal(id) { document.getElementById(id).style.display = "none"; }
+    </script>
+</body>
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - إدارة مكاتب التربية والتعليم</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span style="display: flex; align-items: center;">
+                            <span class="icon">📊</span>
+                            <span>لوحة التحكم</span>
+                        </span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">الوحدات الرئيسية</div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🏫</span>
+                                <span>إدارة المدرسة (M1)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m1-school-office/index.html">لوحة تحكم المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/school-profile.html">ملف المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/classes.html">الصفوف والفصول</a></li>
+                            <li><a href="../../modules/m1-school-office/timetable.html">الجدول الدراسي</a></li>
+                            <li><a href="../../modules/m1-school-office/academic-year.html">العام الدراسي</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🎓</span>
+                                <span>شؤون الطلاب (M2)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m2-student-affairs/index.html">لوحة تحكم الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/students.html">قاعدة الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/registration-requests.html">طلبات القيد</a></li>
+                            <li><a href="../../modules/m2-student-affairs/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🏫</span>
+                                <span>إدارة الموظفين (M3)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m3-employee-management/index.html">لوحة تحكم الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/employees.html">قائمة الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📦</span>
+                                <span>إدارة الأصول (M4)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m4-assets-logistics/index.html">لوحة تحكم الأصول</a></li>
+                            <li><a href="../../modules/m4-assets-logistics/inventory.html">المخزون</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">💰</span>
+                                <span>المالية (M5)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m5-finance/index.html">لوحة المالية</a></li>
+                            <li><a href="../../modules/m5-finance/invoices.html">الفواتير</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📈</span>
+                                <span>الإحصاء (M6)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m6-statistics-reports/index.html">لوحة الإحصاء</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🚨</span>
+                                <span>الطوارئ (M7)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m7-emergency-management/index.html">لوحة الطوارئ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🔐</span>
+                                <span>الأمن والمستخدمين (M8)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m8-authentication-users/index.html">المستخدمين</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة مكاتب التربية والتعليم</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">🔔</button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير المدرسة</h4>
+                            <p>الإدارة</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h1 class="page-title">🏢 إدارة مكاتب التربية والتعليم</h1>
+                    <div class="page-breadcrumb">
+                        <a href="../../index.html">الرئيسية</a>
+                        <span>/</span>
+                        <a href="index.html">إدارة المدرسة</a>
+                        <span>/</span>
+                        <span>مكاتب التربية</span>
+                    </div>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon primary">🏢</div>
+                        <div class="stat-info">
+                            <h3>6</h3>
+                            <p>إجمالي المكاتب</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon success">✅</div>
+                        <div class="stat-info">
+                            <h3>5</h3>
+                            <p>مكاتب نشطة</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon warning">🏫</div>
+                        <div class="stat-info">
+                            <h3>42</h3>
+                            <p>مدارس تابعة</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon danger">👥</div>
+                        <div class="stat-info">
+                            <h3>18</h3>
+                            <p>مستخدمين نشطين</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Filters & Actions -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-body">
+                        <div class="form-row" style="align-items: flex-end;">
+                            <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                                <label class="form-label">البحث</label>
+                                <input type="text" class="form-input" placeholder="ابحث بالاسم أو الرمز...">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label class="form-label">الحالة</label>
+                                <select class="form-select">
+                                    <option>الكل</option>
+                                    <option>نشط</option>
+                                    <option>موقوف</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label class="form-label">المستوى</label>
+                                <select class="form-select">
+                                    <option>الكل</option>
+                                    <option>محافظة</option>
+                                    <option>منطقة</option>
+                                    <option>مدينة</option>
+                                    <option>قطاع</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-primary">🔍 بحث</button>
+                            <button class="btn btn-success" onclick="openModal()">➕ إضافة مكتب</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Offices Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">قائمة مكاتب التربية والتعليم</h3>
+                        <button class="btn btn-outline btn-sm">📥 تصدير</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>الرمز</th>
+                                        <th>اسم المكتب</th>
+                                        <th>المستوى</th>
+                                        <th>المنطقة</th>
+                                        <th>المدير</th>
+                                        <th>عدد المدارس</th>
+                                        <th>الحالة</th>
+                                        <th>تاريخ الإنشاء</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">OFC-001</code></td>
+                                        <td style="font-weight: 600;">مكتب التربية والتعليم بالرياض</td>
+                                        <td>محافظة</td>
+                                        <td>الرياض</td>
+                                        <td>د. عبدالله محمد</td>
+                                        <td>15</td>
+                                        <td><span class="badge-status active">نشط</span></td>
+                                        <td>2020-01-15</td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="action-btn view" onclick="viewOffice(1)">👁️</button>
+                                                <button class="action-btn edit" onclick="editOffice(1)">✏️</button>
+                                                <button class="action-btn delete">🗑️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">OFC-002</code></td>
+                                        <td style="font-weight: 600;">مكتب التربية والتعليم بالملز</td>
+                                        <td>قطاع</td>
+                                        <td>الرياض - الملز</td>
+                                        <td>أ. أحمد سعيد</td>
+                                        <td>8</td>
+                                        <td><span class="badge-status active">نشط</span></td>
+                                        <td>2021-03-22</td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="action-btn view" onclick="viewOffice(2)">👁️</button>
+                                                <button class="action-btn edit" onclick="editOffice(2)">✏️</button>
+                                                <button class="action-btn delete">🗑️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">OFC-003</code></td>
+                                        <td style="font-weight: 600;">مكتب التربية والتعليم بجدة</td>
+                                        <td>محافظة</td>
+                                        <td>مكة المكرمة</td>
+                                        <td>د. محمد علي</td>
+                                        <td>12</td>
+                                        <td><span class="badge-status active">نشط</span></td>
+                                        <td>2019-08-10</td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="action-btn view" onclick="viewOffice(3)">👁️</button>
+                                                <button class="action-btn edit" onclick="editOffice(3)">✏️</button>
+                                                <button class="action-btn delete">🗑️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">OFC-004</code></td>
+                                        <td style="font-weight: 600;">مكتب التربية والتعليم بالدمام</td>
+                                        <td>منطقة</td>
+                                        <td>المنطقة الشرقية</td>
+                                        <td>أ. سارة خالد</td>
+                                        <td>7</td>
+                                        <td><span class="badge-status active">نشط</span></td>
+                                        <td>2022-01-05</td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="action-btn view" onclick="viewOffice(4)">👁️</button>
+                                                <button class="action-btn edit" onclick="editOffice(4)">✏️</button>
+                                                <button class="action-btn delete">🗑️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">OFC-005</code></td>
+                                        <td style="font-weight: 600;">مكتب التربية والتعليم بالمدينة</td>
+                                        <td>محافظة</td>
+                                        <td>المدينة المنورة</td>
+                                        <td>د. يوسف عبدالله</td>
+                                        <td>0</td>
+                                        <td><span class="badge-status pending">قيد التنشيط</span></td>
+                                        <td>2024-01-10</td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="action-btn view" onclick="viewOffice(5)">👁️</button>
+                                                <button class="action-btn edit" onclick="editOffice(5)">✏️</button>
+                                                <button class="action-btn delete">🗑️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="background: #dbeafe; padding: 4px 8px; border-radius: 4px; color: #1e40af; font-weight: 600;">OFC-006</code></td>
+                                        <td style="font-weight: 600;">مكتب التربية والتعليم بالشرقية</td>
+                                        <td>منطقة</td>
+                                        <td>المنطقة الشرقية</td>
+                                        <td>أ. نواف سالم</td>
+                                        <td>0</td>
+                                        <td><span class="badge-status inactive">موقوف</span></td>
+                                        <td>2018-05-20</td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="action-btn view" onclick="viewOffice(6)">👁️</button>
+                                                <button class="action-btn edit" onclick="editOffice(6)">✏️</button>
+                                                <button class="action-btn delete">🗑️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Add/Edit Office Modal -->
+    <div class="modal-overlay" id="officeModal">
+        <div class="modal" style="max-width: 900px;">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">➕ إضافة مكتب تربية وتعليم</h2>
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="officeForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">رمز المكتب *</label>
+                            <input type="text" class="form-input" id="officeCode" placeholder="مثال: OFC-007" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">مستوى المكتب *</label>
+                            <select class="form-select" id="officeLevel" required>
+                                <option value="">اختر المستوى</option>
+                                <option value="province">محافظة</option>
+                                <option value="region">منطقة</option>
+                                <option value="city">مدينة</option>
+                                <option value="sector">قطاع</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">اسم المكتب بالعربية *</label>
+                            <input type="text" class="form-input" id="officeNameAr" placeholder="اسم المكتب باللغة العربية" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">اسم المكتب بالإنجليزية</label>
+                            <input type="text" class="form-input" id="officeNameEn" placeholder="اسم المكتب باللغة الإنجليزية">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">المكتب الأعلى</label>
+                            <select class="form-select" id="parentOffice">
+                                <option value="">لا يوجد (مستوى عالي)</option>
+                                <option value="1">مكتب التربية والتعليم بالرياض</option>
+                                <option value="3">مكتب التربية والتعليم بجدة</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">المنطقة/المدينة</label>
+                            <input type="text" class="form-input" id="officeRegion" placeholder="اسم المنطقة أو المدينة">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">اسم المدير</label>
+                            <input type="text" class="form-input" id="managerName" placeholder="اسم مدير المكتب">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">البريد الإلكتروني للمدير</label>
+                            <input type="email" class="form-input" id="managerEmail" placeholder="manager@office.edu.sa">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">هاتف المدير</label>
+                            <input type="tel" class="form-input" id="managerPhone" placeholder="+966 50 123 4567">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">الهاتف الرسمي</label>
+                            <input type="tel" class="form-input" id="officePhone" placeholder="+966 11 234 5678">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">البريد الإلكتروني الرسمي</label>
+                        <input type="email" class="form-input" id="officeEmail" placeholder="info@office.edu.sa">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">العنوان الكامل</label>
+                        <textarea class="form-textarea" id="officeAddress" placeholder="العنوان التفصيلي للمكتب" rows="2"></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">تفعيل API الربط</label>
+                            <select class="form-select" id="apiEnabled">
+                                <option value="1">نعم</option>
+                                <option value="0">لا</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">رابط API</label>
+                            <input type="url" class="form-input" id="apiEndpoint" placeholder="https://api.office.edu.sa">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">تواتر المزامنة</label>
+                            <select class="form-select" id="syncFrequency">
+                                <option value="realtime">فوري</option>
+                                <option value="daily">يومي</option>
+                                <option value="weekly">أسبوعي</option>
+                                <option value="monthly">شهري</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">الحالة</label>
+                            <select class="form-select" id="officeStatus">
+                                <option value="active">نشط</option>
+                                <option value="pending">قيد التنشيط</option>
+                                <option value="inactive">موقوف</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">ملاحظات</label>
+                        <textarea class="form-textarea" id="officeNotes" placeholder="ملاحظات إضافية..." rows="2"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal()">إلغاء</button>
+                <button class="btn btn-primary" onclick="saveOffice()">💾 حفظ</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Modal Functions
+        function openModal() {
+            document.getElementById('modalTitle').textContent = '➕ إضافة مكتب تربية وتعليم';
+            document.getElementById('officeModal').classList.add('active');
+            document.getElementById('officeForm').reset();
+        }
+        
+        function closeModal() {
+            document.getElementById('officeModal').classList.remove('active');
+        }
+        
+        function editOffice(id) {
+            document.getElementById('modalTitle').textContent = '✏️ تعديل بيانات المكتب';
+            document.getElementById('officeModal').classList.add('active');
+            
+            // Populate with dummy data for demo
+            document.getElementById('officeCode').value = 'OFC-001';
+            document.getElementById('officeNameAr').value = 'مكتب التربية والتعليم بالرياض';
+            document.getElementById('officeNameEn').value = 'Riyadh Education Office';
+            document.getElementById('managerName').value = 'د. عبدالله محمد';
+            document.getElementById('managerEmail').value = 'a.mohammed@office.edu.sa';
+            document.getElementById('officeRegion').value = 'الرياض';
+        }
+        
+        function viewOffice(id) {
+            alert('عرض تفاصيل المكتب رقم ' + id);
+        }
+        
+        function saveOffice() {
+            alert('تم حفظ بيانات المكتب بنجاح!');
+            closeModal();
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('officeModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

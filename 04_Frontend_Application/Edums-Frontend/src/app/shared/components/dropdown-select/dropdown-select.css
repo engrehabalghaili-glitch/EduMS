@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+.dropdown-wrap ::ng-deep .p-select {
+  width: 100%;
+  min-height: 2.25rem;
+}
+
+.dropdown-wrap ::ng-deep .p-select .p-select-label {
+  font-size: 0.8125rem;
+  color: #27272a;
+}
+
+.dropdown-wrap ::ng-deep .p-select .p-select-placeholder {
+  color: #a1a1aa;
+}
+
+.dropdown-wrap ::ng-deep .p-select.p-invalid {
+  border-color: #e53e3e;
+}

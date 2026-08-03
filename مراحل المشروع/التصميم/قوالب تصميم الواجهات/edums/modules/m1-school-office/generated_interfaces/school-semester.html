@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - الفصل الدراسي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/main.css">
+    <style>
+        .action-btn { background:none; border:none; cursor:pointer; font-size:1.2em; margin:0 5px; transition:transform 0.2s; }
+        .action-btn:hover { transform:scale(1.2); }
+        .filter-section { display: flex; gap: 15px; margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee; }
+        .btn-outline { background: white; border: 1px solid #3b82f6; color: #3b82f6; }
+        .btn-outline:hover { background: #eff6ff; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <a href="../../m1-school-office/index.html" class="nav-item">
+                        <span class="icon">⬅️</span>
+                        <span>العودة للرئيسية</span>
+                    </a>
+                    <a href="index.html" class="nav-item">
+                        <span class="icon">📑</span>
+                        <span>فهرس الواجهات</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left"><h2>إدارة المدرسة - الفصل الدراسي</h2></div>
+            </header>
+            
+            <div class="content-area">
+                <div class="page-header" style="display:flex; justify-content:space-between; align-items:center;">
+                    <h1 class="page-title">📄 الفصل الدراسي</h1>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header" style="display: flex; flex-direction: column; gap: 15px; padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                            <h3 class="card-title" style="margin:0;">قائمة السجلات</h3>
+                            <div class="header-actions" style="display: flex; gap: 10px;">
+                                <button class="btn btn-outline" title="تصدير Excel">📥 تصدير</button>
+                                <button class="btn btn-outline" title="طباعة">🖨️ طباعة</button>
+                                <button class="btn btn-primary" onclick="openModal('addModal')">➕ إضافة جديد</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Search and Filter Bar -->
+                        <div class="search-filter-bar" style="display: flex; gap: 15px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 250px; position: relative;">
+                                <input type="text" class="form-input" placeholder="🔍 بحث سريع في السجلات..." style="width: 100%; padding: 10px 35px 10px 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
+                            </div>
+                            <select class="form-input" style="width: 200px; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
+                                <option value="">🔽 فلترة حسب الحالة...</option>
+                                <option value="active">النشطة فقط</option>
+                                <option value="inactive">غير النشطة</option>
+                            </select>
+                            <button class="btn btn-outline" style="padding: 10px 20px;">🔍 بحث متقدم</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table" style="width: 100%; text-align: right; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="background: #f8fafc; border-bottom: 2px solid #e2e8f0;">
+                                        <th>School Academic Year Id</th><th>Semester Number</th><th>Semester Type</th><th>Semester اسم بالعربية</th><th>Semester اسم بالإنجليزية</th><th>تاريخ البداية</th><th>تاريخ النهاية</th><th>Teaching Weeks Count</th><th>Exam Weeks Count</th><th>Registration Open تاريخ</th><th>Registration Close تاريخ</th><th>Add Drop Start تاريخ</th><th>Add Drop بالإنجليزيةd تاريخ</th><th>Exam Start تاريخ</th><th>Exam بالإنجليزيةd تاريخ</th><th>Grading Open تاريخ</th><th>Grading Close تاريخ</th><th>Closure تاريخ</th><th>Approval Status</th><th>الحالة (نشط/غير نشط)</th><th>العام الحالي؟</th><th>Notes</th>
+                                        <th style="text-align:center;">الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                                        <td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td>
+                                        <td style="text-align:center;">
+                                            <div class="table-actions" style="display:flex; justify-content:center; gap:10px;">
+                                                <button class="action-btn view" title="عرض التفاصيل">👁️</button>
+                                                <button class="action-btn edit" title="تعديل">✏️</button>
+                                                <button class="action-btn delete" title="حذف" style="color: #ef4444;">🗑️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <!-- Add a second dummy row for visuals -->
+                                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                                        <td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td>
+                                        <td style="text-align:center;">
+                                            <div class="table-actions" style="display:flex; justify-content:center; gap:10px;">
+                                                <button class="action-btn view" title="عرض التفاصيل">👁️</button>
+                                                <button class="action-btn edit" title="تعديل">✏️</button>
+                                                <button class="action-btn delete" title="حذف" style="color: #ef4444;">🗑️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Pagination Placeholder -->
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:20px; color:#64748b; font-size:0.9em;">
+                            <span>عرض 1 إلى 10 من أصل 50 سجل</span>
+                            <div style="display:flex; gap:5px;">
+                                <button class="btn btn-outline" style="padding:5px 10px;">السابق</button>
+                                <button class="btn btn-primary" style="padding:5px 10px;">1</button>
+                                <button class="btn btn-outline" style="padding:5px 10px;">2</button>
+                                <button class="btn btn-outline" style="padding:5px 10px;">التالي</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal-overlay" id="addModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; justify-content:center; align-items:center;">
+        <div class="modal" style="background:#fff; border-radius:8px; width:90%; max-width:600px; max-height:90vh; display:flex; flex-direction:column;">
+            <div class="modal-header" style="padding:20px; border-bottom:1px solid #eee; display:flex; justify-content:space-between; align-items:center;">
+                <h3 style="margin:0; color:#1e293b;">إضافة / تعديل الفصل الدراسي</h3>
+                <button class="close-btn" onclick="closeModal('addModal')" style="background:none; border:none; font-size:1.5em; cursor:pointer;">&times;</button>
+            </div>
+            <div class="modal-body" style="padding:20px; overflow-y:auto;">
+                <form class="form-group">
+                    
+            <div class="form-group" style="margin-bottom:15px;">
+                <label class="form-label" style="display:block; margin-bottom:5px;">School Academic Year Id</label>
+                <input type="number" class="form-input" placeholder="أدخل School Academic Year Id" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label class="form-label" style="display:block; margin-bottom:5px;">Semester Number</label>
+                <input type="number" class="form-input" placeholder="أدخل Semester Number" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label class="form-label" style="display:block; margin-bottom:5px;">Semester Type</label>
+                <input type="text" class="form-input" placeholder="أدخل Semester Type" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label class="form-label" style="display:block; margin-bottom:5px;">Semester اسم بالعربية</label>
+                <input type="text" class="form-input" placeholder="أدخل Semester اسم بالعربية" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label class="form-label" style="display:block; margin-bottom:5px;">Semester اسم بالإنجليزية</label>
+                <input type="text" class="form-input" placeholder="أدخل Semester اسم بالإنجليزية" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label class="form-label" style="display:block; margin-bottom:5px;">تاريخ البداية</label>
+                <input type="text" class="form-input" placeholder="أدخل تاريخ البداية" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label class="form-label" style="display:block; margin-bottom:5px;">تاريخ النهاية</label>
+                <input type="text" class="form-input" placeholder="أدخل تاريخ النهاية" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label class="form-label" style="display:block; margin-bottom:5px;">Teaching Weeks Count</label>
+                <input type="number" class="form-input" placeholder="أدخل Teaching Weeks Count" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label class="form-label" style="display:block; margin-bottom:5px;">Exam Weeks Count</label>
+                <input type="number" class="form-input" placeholder="أدخل Exam Weeks Count" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label class="form-label" style="display:block; margin-bottom:5px;">Registration Open تاريخ</label>
+                <input type="text" class="form-input" placeholder="أدخل Registration Open تاريخ" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label class="form-label" style="display:block; margin-bottom:5px;">Registration Close تاريخ</label>
+                <input type="text" class="form-input" placeholder="أدخل Registration Close تاريخ" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label class="form-label" style="display:block; margin-bottom:5px;">Add Drop Start تاريخ</label>
+                <input type="text" class="form-input" placeholder="أدخل Add Drop Start تاريخ" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label class="form-label" style="display:block; margin-bottom:5px;">Add Drop بالإنجليزيةd تاريخ</label>
+                <input type="text" class="form-input" placeholder="أدخل Add Drop بالإنجليزيةd تاريخ" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label class="form-label" style="display:block; margin-bottom:5px;">Exam Start تاريخ</label>
+                <input type="text" class="form-input" placeholder="أدخل Exam Start تاريخ" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label class="form-label" style="display:block; margin-bottom:5px;">Exam بالإنجليزيةd تاريخ</label>
+                <input type="text" class="form-input" placeholder="أدخل Exam بالإنجليزيةd تاريخ" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label class="form-label" style="display:block; margin-bottom:5px;">Grading Open تاريخ</label>
+                <input type="text" class="form-input" placeholder="أدخل Grading Open تاريخ" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label class="form-label" style="display:block; margin-bottom:5px;">Grading Close تاريخ</label>
+                <input type="text" class="form-input" placeholder="أدخل Grading Close تاريخ" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label class="form-label" style="display:block; margin-bottom:5px;">Closure تاريخ</label>
+                <input type="text" class="form-input" placeholder="أدخل Closure تاريخ" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label class="form-label" style="display:block; margin-bottom:5px;">Approval Status</label>
+                <input type="text" class="form-input" placeholder="أدخل Approval Status" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+            <div class="form-group" style="display:flex; align-items:center; gap:8px; margin-bottom:15px;">
+                <input type="checkbox" id="isActive" class="form-checkbox" style="width:20px;height:20px;">
+                <label for="isActive" class="form-label" style="margin:0;">الحالة (نشط/غير نشط)</label>
+            </div>
+            <div class="form-group" style="display:flex; align-items:center; gap:8px; margin-bottom:15px;">
+                <input type="checkbox" id="isCurrent" class="form-checkbox" style="width:20px;height:20px;">
+                <label for="isCurrent" class="form-label" style="margin:0;">العام الحالي؟</label>
+            </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label class="form-label" style="display:block; margin-bottom:5px;">Notes</label>
+                <input type="text" class="form-input" placeholder="أدخل Notes" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+            </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="padding:20px; border-top:1px solid #eee; display:flex; justify-content:flex-end; gap:10px;">
+                <button class="btn btn-outline" onclick="closeModal('addModal')">إلغاء</button>
+                <button class="btn btn-primary">💾 حفظ البيانات</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function openModal(id){ document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id){ document.getElementById(id).style.display = 'none'; }
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<div class="pi-wrap" [ngClass]="'pi-size-' + size()">
+  @if (label()) {
+    <div class="pi-header">
+      <span class="pi-label">{{ label() }}</span>
+      @if (showValue() && mode() === 'determinate') {
+        <span class="pi-value">{{ displayValue() }}</span>
+      }
+    </div>
+  }
+
+  @if (loading()) {
+    <p-skeleton width="100%" [style]="{ height: size() === 'small' ? '0.5rem' : size() === 'large' ? '1.25rem' : '0.75rem', borderRadius: '0.25rem' }" />
+  } @else {
+    <p-progressBar
+      [value]="mode() === 'determinate' ? value() : 0"
+      [mode]="mode()"
+      [style]="barStyle()"
+    >
+      <ng-template pTemplate="content">
+        <div class="pi-fill" [style]="fillStyle()" [style.width.%]="mode() === 'determinate' ? value() : 100"></div>
+      </ng-template>
+    </p-progressBar>
+  }
+
+  @if (!label() && showValue() && mode() === 'determinate') {
+    <span class="pi-value-inline">{{ displayValue() }}</span>
+  }
+</div>

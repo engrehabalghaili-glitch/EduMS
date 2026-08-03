@@ -1,0 +1,27 @@
+<div class="multiselect-wrap">
+  <p-multiSelect
+    [options]="options()"
+    [optionLabel]="optionLabel()"
+    [optionValue]="optionValue()"
+    [optionDisabled]="optionDisabled()"
+    [placeholder]="placeholder()"
+    [filter]="filter()"
+    [display]="display()"
+    [maxSelectedLabels]="maxSelectedLabels()"
+    [selectedItemsLabel]="selectedItemsLabel()"
+    [showToggleAll]="showToggleAll()"
+    [selectionLimit]="selectionLimit()"
+    [showClear]="showClear()"
+    [loading]="loading()"
+    [showHeader]="showHeader()"
+    [resetFilterOnHide]="resetFilterOnHide()"
+    [emptyMessage]="emptyMessage()"
+    [emptyFilterMessage]="emptyFilterMessage()"
+    [filterMatchMode]="filterMatchMode()"
+    [styleClass]="styleClass()"
+    [disabled]="disabled()"
+    [ngModel]="value()"
+    (ngModelChange)="onValueChange($event)"
+    (onBlur)="onBlur()"
+  />
+</div>

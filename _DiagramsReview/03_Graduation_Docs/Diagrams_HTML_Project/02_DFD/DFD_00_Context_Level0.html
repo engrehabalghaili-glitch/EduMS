@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Context Diagram — المخطط السياقي (المستوى صفر)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../00_Engine/academic-style.css">
+<style>:root{--accent:#1E3A8A}</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="crumb"><a href="../index.html">🏠 فهرس المكتبة</a> <span>/</span> <a href="../02_DFD/index.html">B. مخططات تدفق البيانات</a> <span>/</span> <span>DFD-L0</span></div>
+
+  <div class="dg-head">
+    <h1>🌐 Context Diagram — المخطط السياقي (المستوى صفر)</h1>
+    <div class="sub">حدود النظام والكيانات الخارجية المتفاعلة معه • مشتق من طبقة WebApi وأدوار RBAC</div>
+    <div class="meta">
+      <span class="chip mono">DFD-L0</span>
+      <span class="chip">Enterprise-Level</span>
+      <span class="chip">9 كيان خارجي</span><span class="chip">1016 endpoint</span>
+    </div>
+  </div>
+
+  <div class="truth">
+    <b>✔ مُشتقّ من الكود الفعلي (Reverse-Engineered)</b> —
+    المصدر: <code>EduMS.WebApi/Controllers/v1/</code>
+    — الأدوار مستخرجة من سمات <code>[Authorize]</code> ومسارات المتحكمات
+  </div>
+
+  <div class="stat-row"><div class="stat"><div class="k">الكيانات الخارجية</div><div class="v">9</div></div><div class="stat"><div class="k">Controllers</div><div class="v">207</div></div><div class="stat"><div class="k">نقاط النهاية</div><div class="v">1016</div></div><div class="stat"><div class="k">الوحدات</div><div class="v">8</div></div></div>
+
+  <div class="toolbar">
+    <button class="btn" onclick="Z.in()">🔍+</button>
+    <button class="btn" onclick="Z.out()">🔍−</button>
+    <span class="zoomval" id="zv">100%</span>
+    <button class="btn ghost" onclick="Z.reset()">↺ 100%</button>
+    <button class="btn ghost" onclick="Z.fit()">⤢ ملء العرض</button>
+    <span class="sep"></span>
+    <button class="btn gold" onclick="DG.saveSVG('#svgHost svg','DFD-L0')">💾 Save as SVG</button>
+    <button class="btn gold" onclick="DG.savePNG('#svgHost svg','DFD-L0',3)">🖼 Save as PNG</button>
+    <span class="sep"></span>
+    <button class="btn ghost" onclick="window.print()">🖨 طباعة</button>
+  </div>
+
+  <div class="canvas-card grid-bg" id="canvas"><div id="svgHost"></div></div>
+
+  <div class="legend">
+    <div class="item"><span class="swatch proc"></span> عملية (Process) — مستطيل أكاديمي برأس أزرق داكن</div>
+    <div class="item"><span class="swatch ext"></span> كيان خارجي (External Entity)</div>
+    <div class="item"><span class="swatch store"></span> مخزن بيانات (Data Store)</div>
+    <div class="item">⟶ تدفّق بيانات — الأسهم المتقابلة مُزاحة لتجنّب التداخل</div>
+  </div>
+  <div class="note info"><h4>قواعد الرسم الأكاديمية المطبّقة</h4><ul><li>العملية مرسومة <b>مستطيلاً أكاديمياً</b> برأس أزرق داكن وجسم أزرق فاتح — وليست دائرة.</li><li>الكيانات الخارجية مستطيلات رمادية بحافة علوية مزدوجة.</li><li>الأسهم المتقابلة (طلب/استجابة) <b>مُزاحة عمودياً</b> بمقدار ±18px فلا تتداخل.</li><li>عدد نقاط النهاية الفعلية المكتشفة في الكود: <b>1016</b> موزّعة على 207 Controller.</li></ul></div>
+  <div class='sec-title' style='font-size:17px'>الكيانات الخارجية (مشتقة من أدوار RBAC في الكود)<span class='cnt'>9</span></div><table class='dg'><thead><tr><th>المعرّف</th><th>الكيان الخارجي</th><th>الدور في الكود</th></tr></thead><tbody><tr><td class='mono'>EXT1</td><td>مدير المدرسة</td><td class='mono'>SchoolPrincipal</td></tr><tr><td class='mono'>EXT2</td><td>موظف شؤون الطلاب</td><td class='mono'>Registrar</td></tr><tr><td class='mono'>EXT3</td><td>المعلم</td><td class='mono'>Teacher</td></tr><tr><td class='mono'>EXT4</td><td>ولي الأمر / الطالب</td><td class='mono'>Guardian, Student</td></tr><tr><td class='mono'>EXT5</td><td>الموارد البشرية</td><td class='mono'>HRManager</td></tr><tr><td class='mono'>EXT6</td><td>المحاسب المالي</td><td class='mono'>Accountant</td></tr><tr><td class='mono'>EXT7</td><td>أمين المستودع</td><td class='mono'>WarehouseKeeper</td></tr><tr><td class='mono'>EXT8</td><td>مشرف المديرية</td><td class='mono'>DirectorateSupervisor</td></tr><tr><td class='mono'>EXT9</td><td>مدير النظام</td><td class='mono'>SystemAdmin</td></tr></tbody></table>
+
+  <div class="foot">EduMS Enterprise • Phase D Reverse-Engineering • مولَّد من <span class="mono">https://github.com/engrehabalghaili-glitch/EduMS.git</span></div>
+</div>
+
+<script src="../00_Engine/diagram-engine.js"></script>
+<script src="../00_Engine/renderers.js"></script>
+<script>
+const SPEC = {"title": "Context Diagram (DFD Level 0) — EduMS Enterprise", "subtitle": "9 كيان خارجي • نظام واحد • مشتق من 207 Controller", "width": 1620, "height": 1020, "procW": 250, "procH": 110, "extW": 186, "extH": 70, "processes": [{"id": "P0", "name": "نظام EduMS المؤسسي\nEduMS Enterprise System", "sub": "1016 API endpoints", "color": "#1E3A8A"}], "externals": [{"id": "EXT1", "name": "مدير المدرسة", "sub": "SchoolPrincipal"}, {"id": "EXT2", "name": "موظف شؤون الطلاب", "sub": "Registrar"}, {"id": "EXT3", "name": "المعلم", "sub": "Teacher"}, {"id": "EXT4", "name": "ولي الأمر / الطالب", "sub": "Guardian, Student"}, {"id": "EXT5", "name": "الموارد البشرية", "sub": "HRManager"}, {"id": "EXT6", "name": "المحاسب المالي", "sub": "Accountant"}, {"id": "EXT7", "name": "أمين المستودع", "sub": "WarehouseKeeper"}, {"id": "EXT8", "name": "مشرف المديرية", "sub": "DirectorateSupervisor"}, {"id": "EXT9", "name": "مدير النظام", "sub": "SystemAdmin"}, {"id": "EXT10", "name": "قاعدة بيانات Oracle", "sub": "EduMSDbContext"}], "stores": [], "flows": [{"from": "EXT1", "to": "P0", "label": "طلبات / بيانات", "color": "#1d4ed8"}, {"from": "P0", "to": "EXT1", "label": "استجابات / تقارير", "color": "#059669"}, {"from": "EXT2", "to": "P0", "label": "طلبات / بيانات", "color": "#1d4ed8"}, {"from": "P0", "to": "EXT2", "label": "استجابات / تقارير", "color": "#059669"}, {"from": "EXT3", "to": "P0", "label": "طلبات / بيانات", "color": "#1d4ed8"}, {"from": "P0", "to": "EXT3", "label": "استجابات / تقارير", "color": "#059669"}, {"from": "EXT4", "to": "P0", "label": "طلبات / بيانات", "color": "#1d4ed8"}, {"from": "P0", "to": "EXT4", "label": "استجابات / تقارير", "color": "#059669"}, {"from": "EXT5", "to": "P0", "label": "طلبات / بيانات", "color": "#1d4ed8"}, {"from": "P0", "to": "EXT5", "label": "استجابات / تقارير", "color": "#059669"}, {"from": "EXT6", "to": "P0", "label": "طلبات / بيانات", "color": "#1d4ed8"}, {"from": "P0", "to": "EXT6", "label": "استجابات / تقارير", "color": "#059669"}, {"from": "EXT7", "to": "P0", "label": "طلبات / بيانات", "color": "#1d4ed8"}, {"from": "P0", "to": "EXT7", "label": "استجابات / تقارير", "color": "#059669"}, {"from": "EXT8", "to": "P0", "label": "طلبات / بيانات", "color": "#1d4ed8"}, {"from": "P0", "to": "EXT8", "label": "استجابات / تقارير", "color": "#059669"}, {"from": "EXT9", "to": "P0", "label": "طلبات / بيانات", "color": "#1d4ed8"}, {"from": "P0", "to": "EXT9", "label": "استجابات / تقارير", "color": "#059669"}, {"from": "P0", "to": "EXT10", "label": "SaveChangesAsync", "color": "#b45309", "mono": true}, {"from": "EXT10", "to": "P0", "label": "Query results", "color": "#b45309", "mono": true}]};
+DG.renderers.dfd('#svgHost', SPEC);
+const Z = DG.attachZoom('#canvas', '#svgHost svg', '#zv');
+Z.fit();
+</script>
+</body>
+</html>

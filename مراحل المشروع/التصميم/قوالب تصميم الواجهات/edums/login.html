@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS Enterprise - تسجيل الدخول</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #8b5cf6 100%);
+            padding: 20px;
+        }
+        .login-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 480px;
+            overflow: hidden;
+        }
+        .login-header {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .login-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 8px;
+        }
+        .login-header p {
+            opacity: 0.9;
+            font-size: 1.05em;
+        }
+        .login-body {
+            padding: 40px 30px;
+        }
+        .login-form .form-group {
+            margin-bottom: 24px;
+        }
+        .login-form .form-label {
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+            color: #1f2937;
+        }
+        .login-form .form-input {
+            padding: 14px 18px;
+            font-size: 1em;
+        }
+        .login-form .btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .forgot-password {
+            color: #3b82f6;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        .role-selector {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .role-card {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .role-card:hover {
+            border-color: #3b82f6;
+            background: #dbeafe;
+        }
+        .role-card.active {
+            border-color: #1e3a8a;
+            background: #dbeafe;
+        }
+        .role-card .icon {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+        .role-card h4 {
+            font-size: 0.95em;
+            margin-bottom: 4px;
+        }
+        .role-card p {
+            font-size: 0.8em;
+            color: #6b7280;
+        }
+        .login-footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #e5e7eb;
+        }
+        .login-footer p {
+            color: #6b7280;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة العمليات التعليمية والإدارية</p>
+            </div>
+            <div class="login-body">
+                <form class="login-form" id="loginForm">
+                    <div class="form-group">
+                        <label class="form-label">الدخول كـ</label>
+                        <div class="role-selector">
+                            <div class="role-card active" data-role="admin">
+                                <div class="icon">🏫</div>
+                                <h4>مدير المدرسة</h4>
+                                <p>إدارة كاملة</p>
+                            </div>
+                            <div class="role-card" data-role="teacher">
+                                <div class="icon">👨‍🏫</div>
+                                <h4>معلم</h4>
+                                <p>شؤون أكاديمية</p>
+                            </div>
+                            <div class="role-card" data-role="employee">
+                                <div class="icon">👔</div>
+                                <h4>موظف إداري</h4>
+                                <p>إدارة يومية</p>
+                            </div>
+                            <div class="role-card" data-role="parent">
+                                <div class="icon">👨‍👩‍👧</div>
+                                <h4>ولي أمر</h4>
+                                <p>متابعة الطالب</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">اسم المستخدم</label>
+                        <input type="text" class="form-input" placeholder="أدخل اسم المستخدم" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">كلمة المرور</label>
+                        <input type="password" class="form-input" placeholder="أدخل كلمة المرور" required>
+                    </div>
+                    
+                    <div class="login-options">
+                        <label class="remember-me">
+                            <input type="checkbox">
+                            <span>تذكرني</span>
+                        </label>
+                        <a href="#" class="forgot-password">نسيت كلمة المرور؟</a>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        🚀 تسجيل الدخول
+                    </button>
+                </form>
+                
+                <div class="login-footer">
+                    <p>© 2024 EduMS Enterprise. جميع الحقوق محفوظة</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Role Selection
+        document.querySelectorAll('.role-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.role-card').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Login Form
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

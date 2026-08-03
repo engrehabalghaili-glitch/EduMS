@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - إدارة المدرسة والبيئة التنظيمية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">الرئيسية</div>
+                    <a href="../../index.html" class="nav-item">
+                        <span style="display: flex; align-items: center;">
+                            <span class="icon">📊</span>
+                            <span>لوحة التحكم</span>
+                        </span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">الوحدات الرئيسية</div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🏫</span>
+                                <span>إدارة المدرسة (M1)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m1-school-office/index.html">لوحة تحكم المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/school-profile.html">ملف المدرسة</a></li>
+                            <li><a href="../../modules/m1-school-office/classes.html">الصفوف والفصول</a></li>
+                            <li><a href="../../modules/m1-school-office/timetable.html">الجدول الدراسي</a></li>
+                            <li><a href="../../modules/m1-school-office/academic-year.html">العام الدراسي</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🎓</span>
+                                <span>شؤون الطلاب (M2)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m2-student-affairs/index.html">لوحة تحكم الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/students.html">قاعدة الطلاب</a></li>
+                            <li><a href="../../modules/m2-student-affairs/registration-requests.html">طلبات القيد</a></li>
+                            <li><a href="../../modules/m2-student-affairs/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">👨‍🏫</span>
+                                <span>إدارة الموظفين (M3)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m3-employee-management/index.html">لوحة تحكم الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/employees.html">قائمة الموظفين</a></li>
+                            <li><a href="../../modules/m3-employee-management/attendance.html">الحضور والغياب</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📦</span>
+                                <span>إدارة الأصول (M4)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m4-assets-logistics/index.html">لوحة تحكم الأصول</a></li>
+                            <li><a href="../../modules/m4-assets-logistics/inventory.html">المخزون</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">💰</span>
+                                <span>المالية (M5)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m5-finance/index.html">لوحة المالية</a></li>
+                            <li><a href="../../modules/m5-finance/invoices.html">الفواتير</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">📈</span>
+                                <span>الإحصاء (M6)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m6-statistics-reports/index.html">لوحة الإحصاء</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🚨</span>
+                                <span>الطوارئ (M7)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m7-emergency-management/index.html">لوحة الطوارئ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="nav-item-dropdown">
+                        <div class="nav-item" onclick="toggleDropdown(this)">
+                            <span style="display: flex; align-items: center;">
+                                <span class="icon">🔐</span>
+                                <span>الأمن والمستخدمين (M8)</span>
+                            </span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="../../modules/m8-authentication-users/index.html">المستخدمين</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>إدارة المدرسة والبيئة التنظيمية</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">
+                            🔔
+                            <span class="badge">5</span>
+                        </button>
+                        <button class="header-btn">💬</button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">م</div>
+                        <div class="user-info">
+                            <h4>مدير المدرسة</h4>
+                            <p>الإدارة</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h1 class="page-title">🏫 إدارة المدرسة</h1>
+                    <div class="page-breadcrumb">
+                        <a href="../../index.html">الرئيسية</a>
+                        <span>/</span>
+                        <span>إدارة المدرسة</span>
+                    </div>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon primary">🏫</div>
+                        <div class="stat-info">
+                            <h3>1</h3>
+                            <p>مدرسة نشطة</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon success">🏠</div>
+                        <div class="stat-info">
+                            <h3>48</h3>
+                            <p>صف دراسي</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon warning">📚</div>
+                        <div class="stat-info">
+                            <h3>4</h3>
+                            <p>مراحل دراسية</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon danger">👥</div>
+                        <div class="stat-info">
+                            <h3>6</h3>
+                            <p>مكتبات تربية</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="card" style="margin-bottom: 32px;">
+                    <div class="card-header">
+                        <h3 class="card-title">إجراءات سريعة</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="quick-actions">
+                            <a href="school-profile.html" class="quick-action">
+                                <div class="icon">📝</div>
+                                <h4>تحديث بيانات المدرسة</h4>
+                                <p>تعديل معلومات المدرسة</p>
+                            </a>
+                            <a href="classes.html" class="quick-action">
+                                <div class="icon">➕</div>
+                                <h4>إضافة صف جديد</h4>
+                                <p>إنشاء صف دراسي جديد</p>
+                            </a>
+                            <a href="academic-year.html" class="quick-action">
+                                <div class="icon">📅</div>
+                                <h4>إدارة السنة الدراسية</h4>
+                                <p>إعدادات السنة الحالية</p>
+                            </a>
+                            <a href="timetable.html" class="quick-action">
+                                <div class="icon">📋</div>
+                                <h4>إنشاء جدول دراسي</h4>
+                                <p>توزيع الحصص والجدول</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Grid -->
+                <div class="grid-2">
+                    <!-- School Profile Summary -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">بيانات المدرسة</h3>
+                            <a href="school-profile.html" class="btn btn-primary btn-sm">تعديل</a>
+                        </div>
+                        <div class="card-body">
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <div style="width: 100px; height: 100px; background: linear-gradient(135deg, #1e3a8a, #3b82f6); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 3em; color: white; margin-bottom: 16px;">🏫</div>
+                                <h3 style="color: #1e3a8a; margin-bottom: 4px;">مدرسة النموذجية المتوسطة والثانوية</h3>
+                                <p style="color: #6b7280;">Model School for Boys</p>
+                            </div>
+                            
+                            <div style="display: grid; gap: 12px;">
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e5e7eb;">
+                                    <span style="color: #6b7280;">رمز المدرسة</span>
+                                    <span style="font-weight: 600;">SCH-2024-001</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e5e7eb;">
+                                    <span style="color: #6b7280;">نوع المدرسة</span>
+                                    <span style="font-weight: 600;">حكومي</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e5e7eb;">
+                                    <span style="color: #6b7280;">الجنس</span>
+                                    <span style="font-weight: 600;">بنين</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e5e7eb;">
+                                    <span style="color: #6b7280;">المراحل</span>
+                                    <span style="font-weight: 600;">ابتدائي - متوسط - ثانوي</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e5e7eb;">
+                                    <span style="color: #6b7280;">المدير</span>
+                                    <span style="font-weight: 600;">د. محمد أحمد</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                    <span style="color: #6b7280;">الحالة</span>
+                                    <span class="badge-status active">نشطة</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Current Academic Year -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">السنة الدراسية الحالية</h3>
+                            <a href="academic-year.html" class="btn btn-primary btn-sm">إدارة</a>
+                        </div>
+                        <div class="card-body">
+                            <div style="background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; padding: 24px; border-radius: 12px; text-align: center; margin-bottom: 20px;">
+                                <h2 style="font-size: 2em; margin-bottom: 8px;">1445 / 1446</h2>
+                                <p style="opacity: 0.9;">العام الدراسي الحالي</p>
+                            </div>
+                            
+                            <div style="display: grid; gap: 16px;">
+                                <div style="display: flex; justify-content: space-between; padding: 12px; background: #f8fafc; border-radius: 8px;">
+                                    <div>
+                                        <p style="color: #6b7280; font-size: 0.85em;">تاريخ البداية</p>
+                                        <p style="font-weight: 600;">1 محرم 1445</p>
+                                        <p style="font-size: 0.8em; color: #6b7280;">18 أغسطس 2024</p>
+                                    </div>
+                                    <div style="text-align: left;">
+                                        <p style="color: #6b7280; font-size: 0.85em;">تاريخ النهاية</p>
+                                        <p style="font-weight: 600;">30 ذو الحجة 1445</p>
+                                        <p style="font-size: 0.8em; color: #6b7280;">15 يونيو 2025</p>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 style="margin-bottom: 12px; color: #1f2937;">الفصول الدراسية</h4>
+                                    <div style="display: grid; gap: 8px;">
+                                        <div style="display: flex; justify-content: space-between; padding: 10px 14px; background: #dcfce7; border-radius: 8px;">
+                                            <span style="font-weight: 600; color: #166534;">الفصل الأول</span>
+                                            <span style="color: #166534;">نشط الآن</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; padding: 10px 14px; background: #fef3c7; border-radius: 8px;">
+                                            <span style="font-weight: 600; color: #92400e;">الفصل الثاني</span>
+                                            <span style="color: #92400e;">قادم</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; padding: 10px 14px; background: #fef3c7; border-radius: 8px;">
+                                            <span style="font-weight: 600; color: #92400e;">الفصل الصيفي</span>
+                                            <span style="color: #92400e;">قادم</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Activity & Quick Links -->
+                <div class="grid-2" style="margin-top: 32px;">
+                    <!-- Recent Activity -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">النشاط الأخير</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="activity-list">
+                                <li class="activity-item">
+                                    <div class="activity-icon" style="background: #dbeafe; color: #1e40af;">✏️</div>
+                                    <div class="activity-content">
+                                        <h4>تم تحديث بيانات المدرسة</h4>
+                                        <p>تحديث رقم الهاتف والبريد الإلكتروني</p>
+                                        <div class="activity-time">منذ ساعتين</div>
+                                    </div>
+                                </li>
+                                <li class="activity-item">
+                                    <div class="activity-icon" style="background: #dcfce7; color: #166534;">➕</div>
+                                    <div class="activity-content">
+                                        <h4>إضافة شعبة جديدة</h4>
+                                        <p>تم إضافة شعبة 10/5 للصف العاشر</p>
+                                        <div class="activity-time">منذ يوم</div>
+                                    </div>
+                                </li>
+                                <li class="activity-item">
+                                    <div class="activity-icon" style="background: #fef3c7; color: #92400e;">📅</div>
+                                    <div class="activity-content">
+                                        <h4>تم تفعيل السنة الدراسية</h4>
+                                        <p>تفعيل العام الدراسي 1445/1446</p>
+                                        <div class="activity-time">منذ أسبوع</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Links -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">روابط سريعة</h3>
+                        </div>
+                        <div class="card-body">
+                            <div style="display: grid; gap: 12px;">
+                                <a href="school-profile.html" class="btn btn-outline" style="justify-content: flex-start; gap: 12px;">
+                                    📋 إدارة بيانات المدرسة
+                                </a>
+                                <a href="classes.html" class="btn btn-outline" style="justify-content: flex-start; gap: 12px;">
+                                    🏠 إدارة الصفوف والشعب
+                                </a>
+                                <a href="academic-year.html" class="btn btn-outline" style="justify-content: flex-start; gap: 12px;">
+                                    📅 إعدادات السنة الدراسية
+                                </a>
+                                <a href="timetable.html" class="btn btn-outline" style="justify-content: flex-start; gap: 12px;">
+                                    📋 الجداول الدراسية
+                                </a>
+                                <a href="calendar.html" class="btn btn-outline" style="justify-content: flex-start; gap: 12px;">
+                                    📅 التقويم الدراسي
+                                </a>
+                                <a href="audit-log.html" class="btn btn-outline" style="justify-content: flex-start; gap: 12px;">
+                                    📜 سجل التدقيق والمراجعة
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

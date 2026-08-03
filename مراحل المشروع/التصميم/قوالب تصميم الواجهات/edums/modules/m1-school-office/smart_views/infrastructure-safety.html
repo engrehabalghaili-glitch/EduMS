@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMS - المبنى والتجهيزات والسلامة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/main.css">
+    <style>
+        body { font-family: 'Cairo', sans-serif; background: #f1f5f9; margin: 0; padding: 0; }
+        .app-container { display: flex; min-height: 100vh; }
+        .sidebar { width: 280px; background: #ffffff; border-left: 1px solid #e2e8f0; display: flex; flex-direction: column; height: 100vh; position: sticky; top: 0; overflow-y: auto; box-shadow: -2px 0 10px rgba(0,0,0,0.05); }
+        .sidebar-header { padding: 20px; text-align: center; border-bottom: 1px solid #f1f5f9; }
+        .sidebar-header h1 { margin: 0; color: #1e3a8a; font-size: 24px; font-weight: 800; }
+        .sidebar-header p { margin: 5px 0 0; color: #64748b; font-size: 14px; }
+        .nav-item:hover { background: #f8fafc !important; }
+        .main-content { flex: 1; padding: 30px; overflow-x: hidden; }
+        .top-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; background: white; padding: 15px 25px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .top-header h2 { margin: 0; color: #334155; font-size: 18px; }
+        .card { background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 25px; margin-bottom: 25px; border: 1px solid #e2e8f0; }
+        .btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; font-family: 'Cairo', sans-serif; border: none; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-primary { background: #3b82f6; color: white; }
+        .btn-primary:hover { background: #2563eb; }
+        .btn-outline { background: white; border: 1px solid #cbd5e1; color: #475569; }
+        .btn-outline:hover { background: #f8fafc; border-color: #94a3b8; }
+        .form-input { padding: 12px 15px; border: 1px solid #cbd5e1; border-radius: 8px; font-family: 'Cairo', sans-serif; outline: none; transition: 0.2s; box-sizing: border-box; }
+        .form-input:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 20px; text-align: right; }
+        .data-table th { background: #f8fafc; padding: 15px; color: #475569; font-weight: 700; border-bottom: 2px solid #e2e8f0; white-space: nowrap; }
+        .data-table td { padding: 15px; border-bottom: 1px solid #e2e8f0; color: #334155; }
+        .data-table tr:hover td { background: #f8fafc; }
+        .action-btn { background: none; border: none; cursor: pointer; font-size: 18px; padding: 5px; transition: 0.2s; border-radius: 4px; }
+        .action-btn:hover { background: #e2e8f0; transform: scale(1.1); }
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.6); z-index: 1000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
+        .modal { background: white; width: 90%; max-width: 650px; border-radius: 16px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); display: flex; flex-direction: column; max-height: 90vh; overflow: hidden; }
+        .modal-header { padding: 20px 25px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; }
+        .modal-header h3 { margin: 0; color: #0f172a; font-size: 20px; }
+        .modal-body { padding: 25px; overflow-y: auto; flex: 1; }
+        .modal-footer { padding: 20px 25px; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 12px; background: #f8fafc; }
+        
+        .tab-btn:hover { background: #f8fafc !important; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>🏛️ EduMS</h1>
+                <p>نظام إدارة المدارس M1</p>
+            </div>
+            <nav style="padding: 15px;">
+                <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #f1f5f9;">
+                    <a href="../index.html" class="nav-item" style="display: flex; align-items: center; padding: 12px 15px; color: #64748b; text-decoration: none; border-radius: 6px;">
+                        <span class="icon" style="margin-left: 10px;">🏠</span>
+                        <span>العودة للقائمة القديمة</span>
+                    </a>
+                </div>
+                
+                    <a href="school-dashboard.html" class="nav-item " style="display: flex; align-items: center; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; transition: 0.3s; color: #475569; text-decoration: none;">
+                        <span class="icon" style="margin-left: 10px; font-size: 1.2em;">📊</span>
+                        <span style="font-size: 0.95em;">لوحة المعلومات الرئيسية</span>
+                    </a>
+                    <a href="onboarding-wizard.html" class="nav-item " style="display: flex; align-items: center; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; transition: 0.3s; color: #475569; text-decoration: none;">
+                        <span class="icon" style="margin-left: 10px; font-size: 1.2em;">🚀</span>
+                        <span style="font-size: 0.95em;">معالج بدء التهيئة</span>
+                    </a>
+                    <a href="profile-capacity.html" class="nav-item " style="display: flex; align-items: center; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; transition: 0.3s; color: #475569; text-decoration: none;">
+                        <span class="icon" style="margin-left: 10px; font-size: 1.2em;">🏫</span>
+                        <span style="font-size: 0.95em;">الملف التعريفي والطاقة</span>
+                    </a>
+                    <a href="calendar-plans.html" class="nav-item " style="display: flex; align-items: center; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; transition: 0.3s; color: #475569; text-decoration: none;">
+                        <span class="icon" style="margin-left: 10px; font-size: 1.2em;">📅</span>
+                        <span style="font-size: 0.95em;">التقويم الدراسي والخطط</span>
+                    </a>
+                    <a href="org-structure.html" class="nav-item " style="display: flex; align-items: center; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; transition: 0.3s; color: #475569; text-decoration: none;">
+                        <span class="icon" style="margin-left: 10px; font-size: 1.2em;">🏢</span>
+                        <span style="font-size: 0.95em;">الهيكل التنظيمي والقيادات</span>
+                    </a>
+                    <a href="staff-hr.html" class="nav-item " style="display: flex; align-items: center; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; transition: 0.3s; color: #475569; text-decoration: none;">
+                        <span class="icon" style="margin-left: 10px; font-size: 1.2em;">👥</span>
+                        <span style="font-size: 0.95em;">المتابعة التشغيلية للكادر</span>
+                    </a>
+                    <a href="accreditation-evaluation.html" class="nav-item " style="display: flex; align-items: center; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; transition: 0.3s; color: #475569; text-decoration: none;">
+                        <span class="icon" style="margin-left: 10px; font-size: 1.2em;">⭐</span>
+                        <span style="font-size: 0.95em;">الاعتماد المدرسي والتقييم</span>
+                    </a>
+                    <a href="statistics-analytics.html" class="nav-item " style="display: flex; align-items: center; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; transition: 0.3s; color: #475569; text-decoration: none;">
+                        <span class="icon" style="margin-left: 10px; font-size: 1.2em;">📈</span>
+                        <span style="font-size: 0.95em;">الإحصائيات والبيانات</span>
+                    </a>
+                    <a href="annual-strategic-planning.html" class="nav-item " style="display: flex; align-items: center; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; transition: 0.3s; color: #475569; text-decoration: none;">
+                        <span class="icon" style="margin-left: 10px; font-size: 1.2em;">🎯</span>
+                        <span style="font-size: 0.95em;">الخطط السنوية والتشغيلية</span>
+                    </a>
+                    <a href="budget-expenses.html" class="nav-item " style="display: flex; align-items: center; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; transition: 0.3s; color: #475569; text-decoration: none;">
+                        <span class="icon" style="margin-left: 10px; font-size: 1.2em;">💰</span>
+                        <span style="font-size: 0.95em;">الميزانية والعهدة المالية</span>
+                    </a>
+                    <a href="asset-custody-stock.html" class="nav-item " style="display: flex; align-items: center; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; transition: 0.3s; color: #475569; text-decoration: none;">
+                        <span class="icon" style="margin-left: 10px; font-size: 1.2em;">📦</span>
+                        <span style="font-size: 0.95em;">العهد والمخزون المدرسي</span>
+                    </a>
+                    <a href="infrastructure-safety.html" class="nav-item active" style="display: flex; align-items: center; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; transition: 0.3s; background: #e0e7ff; color: #1e40af; font-weight: bold; border-right: 4px solid #3b82f6;">
+                        <span class="icon" style="margin-left: 10px; font-size: 1.2em;">🛡️</span>
+                        <span style="font-size: 0.95em;">المبنى والتجهيزات والسلامة</span>
+                    </a>
+                    <a href="exams-management.html" class="nav-item " style="display: flex; align-items: center; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; transition: 0.3s; color: #475569; text-decoration: none;">
+                        <span class="icon" style="margin-left: 10px; font-size: 1.2em;">📝</span>
+                        <span style="font-size: 0.95em;">تنظيم الاختبارات والجاهزية</span>
+                    </a>
+                    <a href="circulars-memos.html" class="nav-item " style="display: flex; align-items: center; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; transition: 0.3s; color: #475569; text-decoration: none;">
+                        <span class="icon" style="margin-left: 10px; font-size: 1.2em;">📜</span>
+                        <span style="font-size: 0.95em;">التعاميم والمراسلات</span>
+                    </a>
+                    <a href="committees-meetings.html" class="nav-item " style="display: flex; align-items: center; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; transition: 0.3s; color: #475569; text-decoration: none;">
+                        <span class="icon" style="margin-left: 10px; font-size: 1.2em;">🤝</span>
+                        <span style="font-size: 0.95em;">اجتماعات اللجان والآباء</span>
+                    </a>
+                    <a href="achievements-awards.html" class="nav-item " style="display: flex; align-items: center; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; transition: 0.3s; color: #475569; text-decoration: none;">
+                        <span class="icon" style="margin-left: 10px; font-size: 1.2em;">🏆</span>
+                        <span style="font-size: 0.95em;">إنجازات وجوائز المدرسة</span>
+                    </a>
+                    <a href="emergency-operations.html" class="nav-item " style="display: flex; align-items: center; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; transition: 0.3s; color: #475569; text-decoration: none;">
+                        <span class="icon" style="margin-left: 10px; font-size: 1.2em;">🚨</span>
+                        <span style="font-size: 0.95em;">إدارة الطوارئ</span>
+                    </a>
+                    <a href="reports-bi.html" class="nav-item " style="display: flex; align-items: center; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; transition: 0.3s; color: #475569; text-decoration: none;">
+                        <span class="icon" style="margin-left: 10px; font-size: 1.2em;">📊</span>
+                        <span style="font-size: 0.95em;">التقارير ومركز BI</span>
+                    </a>
+                    <a href="dms.html" class="nav-item " style="display: flex; align-items: center; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; transition: 0.3s; color: #475569; text-decoration: none;">
+                        <span class="icon" style="margin-left: 10px; font-size: 1.2em;">📁</span>
+                        <span style="font-size: 0.95em;">المركز الوثائقي (DMS)</span>
+                    </a>
+                    <a href="notification-settings.html" class="nav-item " style="display: flex; align-items: center; padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; transition: 0.3s; color: #475569; text-decoration: none;">
+                        <span class="icon" style="margin-left: 10px; font-size: 1.2em;">⚙️</span>
+                        <span style="font-size: 0.95em;">إعدادات التنبيهات</span>
+                    </a>
+            </nav>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <header class="top-header">
+                <div class="header-left" style="display:flex; align-items:center; gap:15px;">
+                    <span style="font-size:24px;">🛡️</span>
+                    <h2>المبنى والتجهيزات والسلامة</h2>
+                </div>
+            </header>
+            
+            <div class="card" style="background: linear-gradient(135deg, #eff6ff 0%, #fff 100%); border-right: 4px solid #3b82f6;">
+                <h3 style="margin-top:0; color:#1e3a8a;">النطاق الوظيفي للشاشة</h3>
+                <p style="color:#475569; margin-bottom:0; font-size:16px;">صيانة وطلبات التجهيزات واشتراطات السلامة والنقل.</p>
+            </div>
+            
+            <div class="card" style="padding: 0; overflow: hidden;">
+                <!-- Tabs Header -->
+                <div style="display: flex; border-bottom: 1px solid #e2e8f0; background: #f8fafc; overflow-x: auto;">
+                    
+                        <button class="tab-btn active" onclick="openTab(event, 'tab_SchoolFacility')" style="padding: 12px 25px; border: none; background: transparent; cursor: pointer; font-size: 16px; font-family: 'Cairo'; font-weight: 700; color: #1e40af; border-bottom: 3px solid #3b82f6; transition: 0.3s;">
+                            المرافق المدرسية
+                        </button>
+                        <button class="tab-btn " onclick="openTab(event, 'tab_SchoolFacilityMaintenanceLog')" style="padding: 12px 25px; border: none; background: transparent; cursor: pointer; font-size: 16px; font-family: 'Cairo'; font-weight: 500; color: #64748b; border-bottom: 3px solid transparent; transition: 0.3s;">
+                            صيانة المرافق
+                        </button>
+                        <button class="tab-btn " onclick="openTab(event, 'tab_SchoolTransportationRoute')" style="padding: 12px 25px; border: none; background: transparent; cursor: pointer; font-size: 16px; font-family: 'Cairo'; font-weight: 500; color: #64748b; border-bottom: 3px solid transparent; transition: 0.3s;">
+                            مسارات النقل
+                        </button>
+                        <button class="tab-btn " onclick="openTab(event, 'tab_Classroom')" style="padding: 12px 25px; border: none; background: transparent; cursor: pointer; font-size: 16px; font-family: 'Cairo'; font-weight: 500; color: #64748b; border-bottom: 3px solid transparent; transition: 0.3s;">
+                            القاعات الدراسية
+                        </button>
+                        <button class="tab-btn " onclick="openTab(event, 'tab_ClassroomResourceAllocation')" style="padding: 12px 25px; border: none; background: transparent; cursor: pointer; font-size: 16px; font-family: 'Cairo'; font-weight: 500; color: #64748b; border-bottom: 3px solid transparent; transition: 0.3s;">
+                            تخصيص موارد القاعة
+                        </button>
+                        <button class="tab-btn " onclick="openTab(event, 'tab_ClassroomOperationalRule')" style="padding: 12px 25px; border: none; background: transparent; cursor: pointer; font-size: 16px; font-family: 'Cairo'; font-weight: 500; color: #64748b; border-bottom: 3px solid transparent; transition: 0.3s;">
+                            القاعدة التشغيلية للقاعة
+                        </button>
+                        <button class="tab-btn " onclick="openTab(event, 'tab_VisitorEntryLog')" style="padding: 12px 25px; border: none; background: transparent; cursor: pointer; font-size: 16px; font-family: 'Cairo'; font-weight: 500; color: #64748b; border-bottom: 3px solid transparent; transition: 0.3s;">
+                            سجل الزوار
+                        </button>
+                </div>
+                
+                <!-- Common Toolbar -->
+                <div style="padding: 20px; border-bottom: 1px solid #f1f5f9;">
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 300px;">
+                            <input type="text" class="form-input" placeholder="🔍 بحث في السجلات..." style="background: #fff;">
+                        </div>
+                        <select class="form-input" style="width: 200px;">
+                            <option value="">🔽 فلترة...</option>
+                            <option value="active">نشط</option>
+                            <option value="inactive">غير نشط</option>
+                        </select>
+                        <button class="btn btn-outline">📥 تصدير</button>
+                        <button class="btn btn-outline">🖨️ طباعة</button>
+                    </div>
+                </div>
+                
+                <!-- Tabs Content Area -->
+                <div style="padding: 20px;">
+                    
+                        <div id="tab_SchoolFacility" class="tab-content" style="display: block;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <h4 style="margin:0; color:#334155;">إدارة المرافق المدرسية</h4>
+                                <button class="btn btn-primary" onclick="openModal('modal_SchoolFacility')">➕ إضافة المرافق المدرسية</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>معرف المدرسة</th><th>Facility كود</th><th>Facility اسم بالعربية</th><th>Facility اسم بالإنجليزية</th><th>Facility Type</th><th>السعة الاستيعابية</th><th>Assigned Supervisor Id</th><th>هل هو Operational</th><th>Location Floor</th><th>Building اسم</th><th>Safety Inspection تاريخ</th><th>Maintenance Status</th>
+                                            <th style="text-align:center;">الإجراءات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td>
+                                            <td style="text-align:center;">
+                                                <div style="display:flex; justify-content:center; gap:5px;">
+                                                    <button class="action-btn view" title="عرض">👁️</button>
+                                                    <button class="action-btn edit" title="تعديل">✏️</button>
+                                                    <button class="action-btn delete" title="حذف" style="color: #ef4444;">🗑️</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="tab_SchoolFacilityMaintenanceLog" class="tab-content" style="display: none;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <h4 style="margin:0; color:#334155;">إدارة صيانة المرافق</h4>
+                                <button class="btn btn-primary" onclick="openModal('modal_SchoolFacilityMaintenanceLog')">➕ إضافة صيانة المرافق</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>School Facility Id</th><th>Maintenance كود</th><th>Scheduled تاريخ</th><th>Completed تاريخ</th><th>Maintenance Type</th><th>Description Details</th><th>Total Cost Amount</th><th>Responsible Employee Id</th><th>External Contractor اسم</th><th>Status</th><th>Inspection Remarks</th>
+                                            <th style="text-align:center;">الإجراءات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td>
+                                            <td style="text-align:center;">
+                                                <div style="display:flex; justify-content:center; gap:5px;">
+                                                    <button class="action-btn view" title="عرض">👁️</button>
+                                                    <button class="action-btn edit" title="تعديل">✏️</button>
+                                                    <button class="action-btn delete" title="حذف" style="color: #ef4444;">🗑️</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="tab_SchoolTransportationRoute" class="tab-content" style="display: none;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <h4 style="margin:0; color:#334155;">إدارة مسارات النقل</h4>
+                                <button class="btn btn-primary" onclick="openModal('modal_SchoolTransportationRoute')">➕ إضافة مسارات النقل</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>معرف المدرسة</th><th>Route كود</th><th>Route اسم بالعربية</th><th>Driver Employee Id</th><th>Bus Plate Number</th><th>Total Seats</th><th>Morning Start Hour</th><th>Evening Return Hour</th><th>Monthly Fee</th><th>Route اسم بالإنجليزية</th><th>Bus Supervisor Employee Id</th><th>Bus Model And Year</th><th>Total Subscribed Students</th><th>Gps Tracking Device Id</th><th>الحالة</th>
+                                            <th style="text-align:center;">الإجراءات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td>
+                                            <td style="text-align:center;">
+                                                <div style="display:flex; justify-content:center; gap:5px;">
+                                                    <button class="action-btn view" title="عرض">👁️</button>
+                                                    <button class="action-btn edit" title="تعديل">✏️</button>
+                                                    <button class="action-btn delete" title="حذف" style="color: #ef4444;">🗑️</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="tab_Classroom" class="tab-content" style="display: none;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <h4 style="margin:0; color:#334155;">إدارة القاعات الدراسية</h4>
+                                <button class="btn btn-primary" onclick="openModal('modal_Classroom')">➕ إضافة القاعات الدراسية</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>معرف المدرسة</th><th>Classroom كود</th><th>Classroom اسم بالعربية</th><th>Classroom اسم بالإنجليزية</th><th>المرحلة الدراسية</th><th>السعة الاستيعابية</th><th>Room Number</th><th>Floor Level</th><th>Building Section</th><th>Homeroom Teacher Employee Id</th><th>هل هو Smart Classroom</th><th>الحالة</th>
+                                            <th style="text-align:center;">الإجراءات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td>
+                                            <td style="text-align:center;">
+                                                <div style="display:flex; justify-content:center; gap:5px;">
+                                                    <button class="action-btn view" title="عرض">👁️</button>
+                                                    <button class="action-btn edit" title="تعديل">✏️</button>
+                                                    <button class="action-btn delete" title="حذف" style="color: #ef4444;">🗑️</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="tab_ClassroomResourceAllocation" class="tab-content" style="display: none;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <h4 style="margin:0; color:#334155;">إدارة تخصيص موارد القاعة</h4>
+                                <button class="btn btn-primary" onclick="openModal('modal_ClassroomResourceAllocation')">➕ إضافة تخصيص موارد القاعة</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Classroom Id</th><th>Resource اسم بالعربية</th><th>Resource كود</th><th>Resource Type</th><th>Quantity</th><th>Assigned تاريخ</th><th>Condition Status</th><th>Resource اسم بالإنجليزية</th><th>Asset Serial Number</th><th>Unit Purchase Cost</th><th>Last Inspection تاريخ</th><th>Next Maintenance تاريخ</th>
+                                            <th style="text-align:center;">الإجراءات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td>
+                                            <td style="text-align:center;">
+                                                <div style="display:flex; justify-content:center; gap:5px;">
+                                                    <button class="action-btn view" title="عرض">👁️</button>
+                                                    <button class="action-btn edit" title="تعديل">✏️</button>
+                                                    <button class="action-btn delete" title="حذف" style="color: #ef4444;">🗑️</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="tab_ClassroomOperationalRule" class="tab-content" style="display: none;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <h4 style="margin:0; color:#334155;">إدارة القاعدة التشغيلية للقاعة</h4>
+                                <button class="btn btn-primary" onclick="openModal('modal_ClassroomOperationalRule')">➕ إضافة القاعدة التشغيلية للقاعة</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Classroom Id</th><th>Rule كود</th><th>Rule عنوان بالعربية</th><th>Rule عنوان بالإنجليزية</th><th>Max Allowed Absence Percentage</th><th>Requires Daily Attendance Log</th><th>Allow Late بالعربيةrival Minutes</th><th>Max Allowed Consecutive Absence Days</th><th>Penalty Type For Exceeding Limit</th><th>Effective Start تاريخ</th><th>الحالة</th>
+                                            <th style="text-align:center;">الإجراءات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td>
+                                            <td style="text-align:center;">
+                                                <div style="display:flex; justify-content:center; gap:5px;">
+                                                    <button class="action-btn view" title="عرض">👁️</button>
+                                                    <button class="action-btn edit" title="تعديل">✏️</button>
+                                                    <button class="action-btn delete" title="حذف" style="color: #ef4444;">🗑️</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="tab_VisitorEntryLog" class="tab-content" style="display: none;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <h4 style="margin:0; color:#334155;">إدارة سجل الزوار</h4>
+                                <button class="btn btn-primary" onclick="openModal('modal_VisitorEntryLog')">➕ إضافة سجل الزوار</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>معرف المدرسة</th><th>Visitor Full اسم</th><th>National Id Or Passport</th><th>Visit Purpose</th><th>Host Employee Id</th><th>Check In Time</th><th>Check Out Time</th><th>Visitor Badge Number</th><th>Status</th><th>Visitor Phone Number</th><th>Visitor Organization</th><th>Security Gate Number</th><th>Security Officer Employee Id</th>
+                                            <th style="text-align:center;">الإجراءات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td>
+                                            <td style="text-align:center;">
+                                                <div style="display:flex; justify-content:center; gap:5px;">
+                                                    <button class="action-btn view" title="عرض">👁️</button>
+                                                    <button class="action-btn edit" title="تعديل">✏️</button>
+                                                    <button class="action-btn delete" title="حذف" style="color: #ef4444;">🗑️</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            
+        </main>
+    </div>
+    
+    <!-- Modals -->
+    
+    <div class="modal-overlay" id="modal_SchoolFacility">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>إضافة/تعديل - المرافق المدرسية</h3>
+                <button class="close-btn" onclick="closeModal('modal_SchoolFacility')" style="background:none; border:none; font-size:24px; cursor:pointer; color:#64748b;">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">معرف المدرسة</label>
+                    <input type="number" class="form-input" placeholder="أدخل معرف المدرسة" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Facility كود</label>
+                    <input type="text" class="form-input" placeholder="أدخل Facility كود" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Facility اسم بالعربية</label>
+                    <input type="text" class="form-input" placeholder="أدخل Facility اسم بالعربية" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Facility اسم بالإنجليزية</label>
+                    <input type="text" class="form-input" placeholder="أدخل Facility اسم بالإنجليزية" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Facility Type</label>
+                    <input type="text" class="form-input" placeholder="أدخل Facility Type" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">السعة الاستيعابية</label>
+                    <input type="number" class="form-input" placeholder="أدخل السعة الاستيعابية" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Assigned Supervisor Id</label>
+                    <input type="number" class="form-input" placeholder="أدخل Assigned Supervisor Id" style="width:100%;">
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px; padding:10px; background:#f8fafc; border-radius:6px; border:1px solid #e2e8f0;">
+                    <input type="checkbox" id="SchoolFacility_isOperational" style="width:20px;height:20px;">
+                    <label for="SchoolFacility_isOperational" style="font-weight:600; color:#334155; margin:0; cursor:pointer;">هل هو Operational</label>
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Location Floor</label>
+                    <input type="text" class="form-input" placeholder="أدخل Location Floor" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Building اسم</label>
+                    <input type="text" class="form-input" placeholder="أدخل Building اسم" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Safety Inspection تاريخ</label>
+                    <input type="text" class="form-input" placeholder="أدخل Safety Inspection تاريخ" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Maintenance Status</label>
+                    <input type="text" class="form-input" placeholder="أدخل Maintenance Status" style="width:100%;">
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" type="button" onclick="closeModal('modal_SchoolFacility')">إلغاء الأمر</button>
+                <button class="btn btn-primary" type="button" onclick="closeModal('modal_SchoolFacility'); alert('تم حفظ البيانات بنجاح!')">💾 حفظ البيانات</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modal_SchoolFacilityMaintenanceLog">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>إضافة/تعديل - صيانة المرافق</h3>
+                <button class="close-btn" onclick="closeModal('modal_SchoolFacilityMaintenanceLog')" style="background:none; border:none; font-size:24px; cursor:pointer; color:#64748b;">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">School Facility Id</label>
+                    <input type="number" class="form-input" placeholder="أدخل School Facility Id" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Maintenance كود</label>
+                    <input type="text" class="form-input" placeholder="أدخل Maintenance كود" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Scheduled تاريخ</label>
+                    <input type="text" class="form-input" placeholder="أدخل Scheduled تاريخ" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Completed تاريخ</label>
+                    <input type="text" class="form-input" placeholder="أدخل Completed تاريخ" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Maintenance Type</label>
+                    <input type="text" class="form-input" placeholder="أدخل Maintenance Type" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Description Details</label>
+                    <input type="text" class="form-input" placeholder="أدخل Description Details" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Total Cost Amount</label>
+                    <input type="number" class="form-input" placeholder="أدخل Total Cost Amount" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Responsible Employee Id</label>
+                    <input type="number" class="form-input" placeholder="أدخل Responsible Employee Id" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">External Contractor اسم</label>
+                    <input type="text" class="form-input" placeholder="أدخل External Contractor اسم" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Status</label>
+                    <input type="text" class="form-input" placeholder="أدخل Status" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Inspection Remarks</label>
+                    <input type="text" class="form-input" placeholder="أدخل Inspection Remarks" style="width:100%;">
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" type="button" onclick="closeModal('modal_SchoolFacilityMaintenanceLog')">إلغاء الأمر</button>
+                <button class="btn btn-primary" type="button" onclick="closeModal('modal_SchoolFacilityMaintenanceLog'); alert('تم حفظ البيانات بنجاح!')">💾 حفظ البيانات</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modal_SchoolTransportationRoute">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>إضافة/تعديل - مسارات النقل</h3>
+                <button class="close-btn" onclick="closeModal('modal_SchoolTransportationRoute')" style="background:none; border:none; font-size:24px; cursor:pointer; color:#64748b;">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">معرف المدرسة</label>
+                    <input type="number" class="form-input" placeholder="أدخل معرف المدرسة" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Route كود</label>
+                    <input type="text" class="form-input" placeholder="أدخل Route كود" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Route اسم بالعربية</label>
+                    <input type="text" class="form-input" placeholder="أدخل Route اسم بالعربية" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Driver Employee Id</label>
+                    <input type="number" class="form-input" placeholder="أدخل Driver Employee Id" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Bus Plate Number</label>
+                    <input type="text" class="form-input" placeholder="أدخل Bus Plate Number" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Total Seats</label>
+                    <input type="number" class="form-input" placeholder="أدخل Total Seats" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Morning Start Hour</label>
+                    <input type="text" class="form-input" placeholder="أدخل Morning Start Hour" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Evening Return Hour</label>
+                    <input type="text" class="form-input" placeholder="أدخل Evening Return Hour" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Monthly Fee</label>
+                    <input type="number" class="form-input" placeholder="أدخل Monthly Fee" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Route اسم بالإنجليزية</label>
+                    <input type="text" class="form-input" placeholder="أدخل Route اسم بالإنجليزية" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Bus Supervisor Employee Id</label>
+                    <input type="number" class="form-input" placeholder="أدخل Bus Supervisor Employee Id" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Bus Model And Year</label>
+                    <input type="text" class="form-input" placeholder="أدخل Bus Model And Year" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Total Subscribed Students</label>
+                    <input type="number" class="form-input" placeholder="أدخل Total Subscribed Students" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Gps Tracking Device Id</label>
+                    <input type="text" class="form-input" placeholder="أدخل Gps Tracking Device Id" style="width:100%;">
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px; padding:10px; background:#f8fafc; border-radius:6px; border:1px solid #e2e8f0;">
+                    <input type="checkbox" id="SchoolTransportationRoute_isActive" style="width:20px;height:20px;">
+                    <label for="SchoolTransportationRoute_isActive" style="font-weight:600; color:#334155; margin:0; cursor:pointer;">الحالة</label>
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" type="button" onclick="closeModal('modal_SchoolTransportationRoute')">إلغاء الأمر</button>
+                <button class="btn btn-primary" type="button" onclick="closeModal('modal_SchoolTransportationRoute'); alert('تم حفظ البيانات بنجاح!')">💾 حفظ البيانات</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modal_Classroom">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>إضافة/تعديل - القاعات الدراسية</h3>
+                <button class="close-btn" onclick="closeModal('modal_Classroom')" style="background:none; border:none; font-size:24px; cursor:pointer; color:#64748b;">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">معرف المدرسة</label>
+                    <input type="number" class="form-input" placeholder="أدخل معرف المدرسة" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Classroom كود</label>
+                    <input type="text" class="form-input" placeholder="أدخل Classroom كود" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Classroom اسم بالعربية</label>
+                    <input type="text" class="form-input" placeholder="أدخل Classroom اسم بالعربية" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Classroom اسم بالإنجليزية</label>
+                    <input type="text" class="form-input" placeholder="أدخل Classroom اسم بالإنجليزية" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">المرحلة الدراسية</label>
+                    <input type="number" class="form-input" placeholder="أدخل المرحلة الدراسية" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">السعة الاستيعابية</label>
+                    <input type="number" class="form-input" placeholder="أدخل السعة الاستيعابية" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Room Number</label>
+                    <input type="text" class="form-input" placeholder="أدخل Room Number" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Floor Level</label>
+                    <input type="number" class="form-input" placeholder="أدخل Floor Level" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Building Section</label>
+                    <input type="text" class="form-input" placeholder="أدخل Building Section" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Homeroom Teacher Employee Id</label>
+                    <input type="number" class="form-input" placeholder="أدخل Homeroom Teacher Employee Id" style="width:100%;">
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px; padding:10px; background:#f8fafc; border-radius:6px; border:1px solid #e2e8f0;">
+                    <input type="checkbox" id="Classroom_isSmartClassroom" style="width:20px;height:20px;">
+                    <label for="Classroom_isSmartClassroom" style="font-weight:600; color:#334155; margin:0; cursor:pointer;">هل هو Smart Classroom</label>
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px; padding:10px; background:#f8fafc; border-radius:6px; border:1px solid #e2e8f0;">
+                    <input type="checkbox" id="Classroom_isActive" style="width:20px;height:20px;">
+                    <label for="Classroom_isActive" style="font-weight:600; color:#334155; margin:0; cursor:pointer;">الحالة</label>
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" type="button" onclick="closeModal('modal_Classroom')">إلغاء الأمر</button>
+                <button class="btn btn-primary" type="button" onclick="closeModal('modal_Classroom'); alert('تم حفظ البيانات بنجاح!')">💾 حفظ البيانات</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modal_ClassroomResourceAllocation">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>إضافة/تعديل - تخصيص موارد القاعة</h3>
+                <button class="close-btn" onclick="closeModal('modal_ClassroomResourceAllocation')" style="background:none; border:none; font-size:24px; cursor:pointer; color:#64748b;">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Classroom Id</label>
+                    <input type="number" class="form-input" placeholder="أدخل Classroom Id" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Resource اسم بالعربية</label>
+                    <input type="text" class="form-input" placeholder="أدخل Resource اسم بالعربية" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Resource كود</label>
+                    <input type="text" class="form-input" placeholder="أدخل Resource كود" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Resource Type</label>
+                    <input type="text" class="form-input" placeholder="أدخل Resource Type" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Quantity</label>
+                    <input type="number" class="form-input" placeholder="أدخل Quantity" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Assigned تاريخ</label>
+                    <input type="text" class="form-input" placeholder="أدخل Assigned تاريخ" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Condition Status</label>
+                    <input type="text" class="form-input" placeholder="أدخل Condition Status" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Resource اسم بالإنجليزية</label>
+                    <input type="text" class="form-input" placeholder="أدخل Resource اسم بالإنجليزية" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Asset Serial Number</label>
+                    <input type="text" class="form-input" placeholder="أدخل Asset Serial Number" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Unit Purchase Cost</label>
+                    <input type="number" class="form-input" placeholder="أدخل Unit Purchase Cost" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Last Inspection تاريخ</label>
+                    <input type="text" class="form-input" placeholder="أدخل Last Inspection تاريخ" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Next Maintenance تاريخ</label>
+                    <input type="text" class="form-input" placeholder="أدخل Next Maintenance تاريخ" style="width:100%;">
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" type="button" onclick="closeModal('modal_ClassroomResourceAllocation')">إلغاء الأمر</button>
+                <button class="btn btn-primary" type="button" onclick="closeModal('modal_ClassroomResourceAllocation'); alert('تم حفظ البيانات بنجاح!')">💾 حفظ البيانات</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modal_ClassroomOperationalRule">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>إضافة/تعديل - القاعدة التشغيلية للقاعة</h3>
+                <button class="close-btn" onclick="closeModal('modal_ClassroomOperationalRule')" style="background:none; border:none; font-size:24px; cursor:pointer; color:#64748b;">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Classroom Id</label>
+                    <input type="number" class="form-input" placeholder="أدخل Classroom Id" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Rule كود</label>
+                    <input type="text" class="form-input" placeholder="أدخل Rule كود" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Rule عنوان بالعربية</label>
+                    <input type="text" class="form-input" placeholder="أدخل Rule عنوان بالعربية" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Rule عنوان بالإنجليزية</label>
+                    <input type="text" class="form-input" placeholder="أدخل Rule عنوان بالإنجليزية" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Max Allowed Absence Percentage</label>
+                    <input type="number" class="form-input" placeholder="أدخل Max Allowed Absence Percentage" style="width:100%;">
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px; padding:10px; background:#f8fafc; border-radius:6px; border:1px solid #e2e8f0;">
+                    <input type="checkbox" id="ClassroomOperationalRule_requiresDailyAttendanceLog" style="width:20px;height:20px;">
+                    <label for="ClassroomOperationalRule_requiresDailyAttendanceLog" style="font-weight:600; color:#334155; margin:0; cursor:pointer;">Requires Daily Attendance Log</label>
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Allow Late بالعربيةrival Minutes</label>
+                    <input type="number" class="form-input" placeholder="أدخل Allow Late بالعربيةrival Minutes" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Max Allowed Consecutive Absence Days</label>
+                    <input type="number" class="form-input" placeholder="أدخل Max Allowed Consecutive Absence Days" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Penalty Type For Exceeding Limit</label>
+                    <input type="text" class="form-input" placeholder="أدخل Penalty Type For Exceeding Limit" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Effective Start تاريخ</label>
+                    <input type="text" class="form-input" placeholder="أدخل Effective Start تاريخ" style="width:100%;">
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px; padding:10px; background:#f8fafc; border-radius:6px; border:1px solid #e2e8f0;">
+                    <input type="checkbox" id="ClassroomOperationalRule_isActive" style="width:20px;height:20px;">
+                    <label for="ClassroomOperationalRule_isActive" style="font-weight:600; color:#334155; margin:0; cursor:pointer;">الحالة</label>
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" type="button" onclick="closeModal('modal_ClassroomOperationalRule')">إلغاء الأمر</button>
+                <button class="btn btn-primary" type="button" onclick="closeModal('modal_ClassroomOperationalRule'); alert('تم حفظ البيانات بنجاح!')">💾 حفظ البيانات</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modal_VisitorEntryLog">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>إضافة/تعديل - سجل الزوار</h3>
+                <button class="close-btn" onclick="closeModal('modal_VisitorEntryLog')" style="background:none; border:none; font-size:24px; cursor:pointer; color:#64748b;">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">معرف المدرسة</label>
+                    <input type="number" class="form-input" placeholder="أدخل معرف المدرسة" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Visitor Full اسم</label>
+                    <input type="text" class="form-input" placeholder="أدخل Visitor Full اسم" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">National Id Or Passport</label>
+                    <input type="text" class="form-input" placeholder="أدخل National Id Or Passport" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Visit Purpose</label>
+                    <input type="text" class="form-input" placeholder="أدخل Visit Purpose" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Host Employee Id</label>
+                    <input type="number" class="form-input" placeholder="أدخل Host Employee Id" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Check In Time</label>
+                    <input type="text" class="form-input" placeholder="أدخل Check In Time" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Check Out Time</label>
+                    <input type="text" class="form-input" placeholder="أدخل Check Out Time" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Visitor Badge Number</label>
+                    <input type="text" class="form-input" placeholder="أدخل Visitor Badge Number" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Status</label>
+                    <input type="text" class="form-input" placeholder="أدخل Status" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Visitor Phone Number</label>
+                    <input type="text" class="form-input" placeholder="أدخل Visitor Phone Number" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Visitor Organization</label>
+                    <input type="text" class="form-input" placeholder="أدخل Visitor Organization" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Security Gate Number</label>
+                    <input type="text" class="form-input" placeholder="أدخل Security Gate Number" style="width:100%;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:600; color:#334155;">Security Officer Employee Id</label>
+                    <input type="number" class="form-input" placeholder="أدخل Security Officer Employee Id" style="width:100%;">
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" type="button" onclick="closeModal('modal_VisitorEntryLog')">إلغاء الأمر</button>
+                <button class="btn btn-primary" type="button" onclick="closeModal('modal_VisitorEntryLog'); alert('تم حفظ البيانات بنجاح!')">💾 حفظ البيانات</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+                tablinks[i].style.borderBottom = "3px solid transparent";
+                tablinks[i].style.color = "#64748b";
+                tablinks[i].style.fontWeight = "500";
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+            evt.currentTarget.style.borderBottom = "3px solid #3b82f6";
+            evt.currentTarget.style.color = "#1e40af";
+            evt.currentTarget.style.fontWeight = "700";
+        }
+        
+        function openModal(id){ document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id){ document.getElementById(id).style.display = 'none'; }
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<div class="upload-wrap" [ngClass]="{ 'has-files': hasFiles() }">
+  <p-fileUpload
+    [url]="url()"
+    [multiple]="multiple()"
+    [accept]="accept()"
+    [maxFileSize]="maxFileSize()"
+    [mode]="mode()"
+    [auto]="auto()"
+    [disabled]="disabledState()"
+    [chooseLabel]="chooseLabel()"
+    [uploadLabel]="uploadLabel()"
+    [cancelLabel]="cancelLabel()"
+    [chooseIcon]="chooseIcon()"
+    [uploadIcon]="uploadIcon()"
+    [cancelIcon]="cancelIcon()"
+    [showUploadButton]="showUploadButton()"
+    [showCancelButton]="showCancelButton()"
+    [customUpload]="customUpload()"
+    [fileLimit]="fileLimit()"
+    [invalidFileSizeMessageSummary]="invalidFileSizeMessageSummary()"
+    [invalidFileSizeMessageDetail]="invalidFileSizeMessageDetail()"
+    [invalidFileTypeMessageSummary]="invalidFileTypeMessageSummary()"
+    [invalidFileTypeMessageDetail]="invalidFileTypeMessageDetail()"
+    [styleClass]="styleClass()"
+    (onSelect)="onSelect($event)"
+    (onRemove)="onRemove($event)"
+    (onClear)="onClear()"
+    (onUpload)="onUpload()"
+    (onError)="onError()"
+  />
+
+  @if (existingFiles().length > 0) {
+    <div class="existing-files">
+      <h4 class="ef-title">الملفات المرفوعة سابقاً</h4>
+      @for (file of existingFiles(); track file.id ?? file.name) {
+        <div class="ef-item">
+          <i class="pi pi-file ef-icon"></i>
+          <div class="ef-info">
+            <span class="ef-name">{{ file.name }}</span>
+            <span class="ef-size">{{ formatSize(file.size) }}</span>
+          </div>
+          <div class="ef-actions">
+            @if (file.url) {
+              <a [href]="file.url" target="_blank" class="ef-preview" title="معاينة">
+                <i class="pi pi-eye"></i>
+              </a>
+            }
+            <button
+              pButton
+              type="button"
+              icon="pi pi-trash"
+              class="p-button-sm p-button-text p-button-danger ef-remove"
+              pTooltip="حذف"
+              (click)="removeExisting(file)"
+            ></button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>
